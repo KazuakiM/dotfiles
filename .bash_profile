@@ -12,6 +12,8 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 eval "$(rbenv init -)"
 export PATH
 export LD_LIBRARY_PATH
+# GitHub
+unset SSH_ASKPASS
 # alias
 #{{{
 # Regular
