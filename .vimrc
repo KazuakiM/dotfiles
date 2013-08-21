@@ -1,5 +1,12 @@
 " line number was showed
 set number
+" encode 
+set encoding=utf8
+set fileencoding=utf-8
+" no backup files 
+set noswapfile
+set nowritebackup
+set nobackup
 " NeoBundle
 " {{{
 set nocompatible
