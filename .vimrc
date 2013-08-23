@@ -22,7 +22,7 @@ set nowrap
 " MarkDown Folding
 set foldmethod=marker
 " encode 
-set encoding=utf8
+set encoding=utf-8
 set fileencoding=utf-8
 set fileformat=unix
 " no backup files 
@@ -40,7 +40,11 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 " vimproc
 "{{{
-NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimproc', {
+\   'build' : {
+\     'unix' : 'make -f make_unix.mak',
+\   },
+\ }
 "}}}
 filetype plugin indent on
 "}}}
