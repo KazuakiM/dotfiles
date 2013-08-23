@@ -6,10 +6,8 @@ if [ -f ~/.bashrc ]; then
 fi
 
 # User specific environment and startup programs
-export RBENV_ROOT=$HOME/.rbenv
-export PATH=$PATH:$HOME/bin:$RBENV_ROOT/bin
+export PATH=$PATH:$HOME/bin:$HOME/.rbenv/bin:$HOME/.phpenv/bin
 eval "$(rbenv init -)"
-export PATH=$HOME/.phpenv/bin:$PATH
 eval "$(phpenv init -)"
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 # GitHub
@@ -21,6 +19,9 @@ alias vi='vim'
 alias rm='rm -i'
 alias cp='cp -p'
 alias mv='mv -i'
+alias h='history'
+alias cl='clear'
+alias df='df -h'
 # Directory
 alias l='ls --color=auto'
 alias ls='ls -a --color=auto'
