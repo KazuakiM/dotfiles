@@ -58,6 +58,18 @@ au BufNewFile,BufRead *.rb  set tags+=$HOME/.vim/tags/rb.tags,$HOME/.vim/tags/.G
 "}}}
 " NeoComplete
 "{{{
+NeoBundleLazy 'Shougo/neocomplete', {
+\   'autoload' : {
+\     'insert' : 1,
+\   },
+\ }
+let g:neocomplete#enable_startup = 1
+let s:hooks = neobundle#get_hooks("neocomplete.vim")
+function! s:hooks.on_source(bundle)
+  let g:acp_enableAtStartup = 0
+  let g:neocomplete#enable_smart_case = 1
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
+endfunction
 "}}}
 filetype plugin indent on
 "}}}
