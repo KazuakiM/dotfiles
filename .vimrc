@@ -1,9 +1,13 @@
+" Common
 "{{{
 " vim visual 
 set number
 set ruler
+set vb t_vb= "
 set laststatus=2
 set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %F%=%l,%c%V%8P
+set t_Co=256
+colorscheme jellybeans
 syntax on
 " other version support
 set nocompatible
@@ -17,7 +21,9 @@ set expandtab
 set autoindent
 set smartindent
 set list
-set listchars=eol:\ ,tab:>\ 
+set listchars=eol:\ ,tab:>\
+highlight ZenkakuSpace cterm=underline ctermfg=red
+match ZenkakuSpace /　/
 " no wrap
 set textwidth=0
 set nowrap
@@ -73,6 +79,14 @@ function! s:hooks.on_source(bundle)
   let g:neocomplete#sources#syntax#min_keyword_length = 3
   let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 endfunction
+"}}}
+" vim-endwise
+"{{{
+NeoBundle 'tpope/vim-endwise'
+"}}}
+" jellybeans
+"{{{
+NeoBundle 'nanotech/jellybeans.vim'
 "}}}
 filetype plugin indent on
 "}}}
