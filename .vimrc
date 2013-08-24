@@ -1,46 +1,52 @@
 " Common
 "{{{
-" vim visual 
-set number
-set ruler
+set nocompatible
+" Encode 
+set encoding=utf-8
+set fileencoding=utf-8
+set fileformat=unix
+" Basic
+set textwidth=0
+set nowrap
+set backspace=indent,eol,start
 set vb t_vb= "
-set laststatus=2
-set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %F%=%l,%c%V%8P
+set foldmethod=marker
+" Color
+syntax on
 set t_Co=256
 colorscheme jellybeans
-syntax on
-" other version support
-set nocompatible
-" backspace support
-set backspace=indent,eol,start
-" indent
+" Show 
+set title
+set ruler
+set laststatus=2
+set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %F%=%l,%c%V%8P
+set number
+set list
+set listchars=eol:\ ,tab:>\
+highlight ZenkakuSpace cterm=reverse ctermfg=Yellow
+match ZenkakuSpace /　/
+set cursorline
+set cursorcolumn
+" Clipboard
+set clipboard+=autoselect,unnamed
+" Backup 
+set nobackup
+set noswapfile
+" Indentation
 set tabstop=8
 set softtabstop=2
 set shiftwidth=2
 set expandtab
 set autoindent
 set smartindent
-set list
-set listchars=eol:\ ,tab:>\
-highlight ZenkakuSpace cterm=underline ctermfg=red
-match ZenkakuSpace /　/
-" no wrap
-set textwidth=0
-set nowrap
-" MarkDown Folding
-set foldmethod=marker
-" encode 
-set encoding=utf-8
-set fileencoding=utf-8
-set fileformat=unix
-" no backup files 
-set noswapfile
-set nowritebackup
-set nobackup
+" Search
+set incsearch
+set ignorecase
+set smartcase
+set hlsearch
 "}}}
 " NeoBundle
 "{{{
-set nocompatible
 if has('vim_starting')
   set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
 endif
