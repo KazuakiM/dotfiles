@@ -34,9 +34,9 @@ set nobackup
 "{{{
 set nocompatible
 if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+  set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
 endif
-call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#rc(expand('$HOME/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 " vimproc
 "{{{
@@ -45,6 +45,19 @@ NeoBundle 'Shougo/vimproc', {
 \     'unix' : 'make -f make_unix.mak',
 \   },
 \ }
+"}}}
+" vim-tags
+"{{{
+NeoBundle 'szw/vim-tags'
+let g:vim_tags_auto_generate = 1
+au BufNewFile,BufRead *.php,*.ctp let g:vim_tags_project_tags_command = "ctags --languages=PHP:.php,.ctp -f $HOME/.vim/tags/php.tags `pwd` 2>/dev/null"
+au BufNewFile,BufRead *.php,*.ctp set tags+=$HOME/.vim/tags/php.tags 
+au BufNewFile,BufRead *.rb        let g:vim_tags_project_tags_command = "ctags --languages=Ruby:.rb -f $HOME/.vim/tags/rb.tags  `pwd` 2>/dev/null"
+let g:vim_tags_gems_tags_command = "ctags -f $HOME/.vim/tags/.Gemfile.lock.tags `bundle show --paths` 2>/dev/null &"
+au BufNewFile,BufRead *.rb  set tags+=$HOME/.vim/tags/rb.tags,$HOME/.vim/tags/.Gemfile.lock.tags
+"}}}
+" NeoComplete
+"{{{
 "}}}
 filetype plugin indent on
 "}}}

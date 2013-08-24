@@ -1,0 +1,5 @@
+--append=yes
+--recurse=yes
+--langmap=PHP:.php .ctp
+--PHP-kinds=cfd
+--langmap=Ruby:.rb
