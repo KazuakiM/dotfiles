@@ -15,9 +15,11 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 set autoindent
+set smartindent
 set list
 set listchars=eol:\ ,tab:>\ 
 " no wrap
+set textwidth=0
 set nowrap
 " MarkDown Folding
 set foldmethod=marker
@@ -40,7 +42,7 @@ call neobundle#rc(expand('$HOME/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 " vimproc
 "{{{
-NeoBundle 'Shougo/vimproc', {
+NeoBundle 'Shougo/vimproc.vim', {
 \   'build' : {
 \     'unix' : 'make -f make_unix.mak',
 \   },
@@ -58,17 +60,18 @@ au BufNewFile,BufRead *.rb  set tags+=$HOME/.vim/tags/rb.tags,$HOME/.vim/tags/.G
 "}}}
 " NeoComplete
 "{{{
-NeoBundleLazy 'Shougo/neocomplete', {
+NeoBundleLazy 'Shougo/neocomplete.vim', {
 \   'autoload' : {
 \     'insert' : 1,
 \   },
 \ }
-let g:neocomplete#enable_startup = 1
 let s:hooks = neobundle#get_hooks("neocomplete.vim")
 function! s:hooks.on_source(bundle)
   let g:acp_enableAtStartup = 0
+  let g:neocomplete#enable_at_startup = 1
   let g:neocomplete#enable_smart_case = 1
   let g:neocomplete#sources#syntax#min_keyword_length = 3
+  let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 endfunction
 "}}}
 filetype plugin indent on
