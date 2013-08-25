@@ -45,6 +45,13 @@ set ignorecase
 set smartcase
 set hlsearch
 "}}}
+" Language
+"{{{
+augroup PHP
+  autocmd FileType php set makeprg=php\ -l\ %
+  autocmd BufWritePost *.php,*.ctp silent make | if len(getqflist()) != 1 | copen | else | cclose | endif
+augroup END
+"}}}
 " NeoBundle
 "{{{
 if has('vim_starting')
