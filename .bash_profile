@@ -6,10 +6,8 @@ if [ -f ~/.bashrc ]; then
 fi
 
 # User specific environment and startup programs
-export PATH=$PATH:$HOME/bin:$HOME/.rbenv/bin:$HOME/.phpenv/bin:$HOME/.pyenv/bin
-eval "$(rbenv init -)"
-eval "$(phpenv init -)"
-eval "$(pyenv init -)"
+export PATH=$HOME/.anyenv/bin:$PATH:$HOME/bin
+eval "$(anyenv init -)"
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 # GitHub
 unset SSH_ASKPASS
