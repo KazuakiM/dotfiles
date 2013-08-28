@@ -71,11 +71,11 @@ NeoBundle 'Shougo/vimproc.vim', {
 "{{{
 NeoBundle 'szw/vim-tags'
 let g:vim_tags_auto_generate = 1
-au BufNewFile,BufRead *.php,*.ctp let g:vim_tags_project_tags_command = "ctags --languages=PHP:.php,.ctp -f $HOME/.vim/tags/php.tags `pwd` 2>/dev/null"
-au BufNewFile,BufRead *.php,*.ctp set tags+=$HOME/.vim/tags/php.tags 
-au BufNewFile,BufRead *.rb        let g:vim_tags_project_tags_command = "ctags --languages=Ruby:.rb -f $HOME/.vim/tags/rb.tags  `pwd` 2>/dev/null"
+au BufNewFile,BufRead *.php,*.ctp,*.inc let g:vim_tags_project_tags_command = "ctags --languages=PHP -f $HOME/.vim/tags/php.tags `pwd` 2>/dev/null"
+au BufNewFile,BufRead *.php,*.ctp,*.inc set tags+=$HOME/.vim/tags/php.tags 
+au BufNewFile,BufRead *.rb              let g:vim_tags_project_tags_command = "ctags --languages=Ruby:.rb -f $HOME/.vim/tags/rb.tags  `pwd` 2>/dev/null"
 let g:vim_tags_gems_tags_command = "ctags -f $HOME/.vim/tags/.Gemfile.lock.tags `bundle show --paths` 2>/dev/null &"
-au BufNewFile,BufRead *.rb  set tags+=$HOME/.vim/tags/rb.tags,$HOME/.vim/tags/.Gemfile.lock.tags
+au BufNewFile,BufRead *.rb              set tags+=$HOME/.vim/tags/rb.tags,$HOME/.vim/tags/.Gemfile.lock.tags
 "}}}
 " NeoComplete
 "{{{

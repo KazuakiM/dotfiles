@@ -1,5 +1,4 @@
 --append=yes
 --recurse=yes
---langmap=PHP:.php .ctp
+--langmap=PHP:+.ctp+.inc
 --PHP-kinds=cfd
---langmap=Ruby:.rb
