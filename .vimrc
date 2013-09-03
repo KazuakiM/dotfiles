@@ -19,7 +19,6 @@ colorscheme jellybeans
 set title
 set ruler
 set laststatus=2
-set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %F%=%l,%c%V%8P
 set number
 set list
 set listchars=eol:\ ,tab:>\
@@ -96,6 +95,12 @@ endfunction
 " vim-endwise
 "{{{
 NeoBundle 'tpope/vim-endwise'
+"}}}
+" powerline
+"{{{
+NeoBundle 'Lokaltog/powerline', {
+\   'rtp' : 'powerline/bindings/vim'
+\ }
 "}}}
 " jellybeans
 "{{{
