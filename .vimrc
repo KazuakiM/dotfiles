@@ -100,6 +100,10 @@ let g:ref_phpmanual_path=$HOME.'/.vim/ref/php-chunked-xhtml'
 "{{{
 NeoBundle 'tpope/vim-endwise'
 "}}}
+" vim-surround
+"{{{
+NeoBundle 'tpope/vim-surround'
+"}}}
 " vim-fugitive
 " landscape
 " lightline
