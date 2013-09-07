@@ -91,6 +91,11 @@ function! s:hooks.on_source(bundle)
   let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 endfunction
 "}}}
+" vim-ref
+"{{{
+NeoBundle 'thinca/vim-ref'
+let g:ref_phpmanual_path=$HOME.'/.vim/ref/php-chunked-xhtml'
+"}}}
 " vim-endwise
 "{{{
 NeoBundle 'tpope/vim-endwise'
