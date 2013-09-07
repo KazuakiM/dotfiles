@@ -6,11 +6,17 @@ if [ -f ~/.bashrc ]; then
 fi
 
 # User specific environment and startup programs
+#{{{
 export PATH=$HOME/.anyenv/bin:$PATH:$HOME/bin
 eval "$(anyenv init -)"
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+cd
+clear
+#}}}
 # GitHub
+#{{{
 unset SSH_ASKPASS
+#}}}
 # alias
 #{{{
 # Common

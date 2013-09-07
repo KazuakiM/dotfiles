@@ -61,10 +61,10 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " vimproc
 "{{{
 NeoBundle 'Shougo/vimproc.vim', {
-\   'build' : {
-\     'unix' : 'make -f make_unix.mak',
-\   },
-\ }
+      \   'build' : {
+      \     'unix' : 'make -f make_unix.mak',
+      \   },
+      \ }
 "}}}
 " vim-tags
 "{{{
@@ -79,10 +79,10 @@ au BufNewFile,BufRead *.rb              set tags+=$HOME/.vim/tags/rb.tags,$HOME/
 " NeoComplete
 "{{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {
-\   'autoload' : {
-\     'insert' : 1,
-\   },
-\ }
+      \   'autoload' : {
+      \     'insert' : 1,
+      \   },
+      \ }
 let s:hooks = neobundle#get_hooks("neocomplete.vim")
 function! s:hooks.on_source(bundle)
   let g:acp_enableAtStartup = 0
@@ -96,11 +96,61 @@ endfunction
 "{{{
 NeoBundle 'tpope/vim-endwise'
 "}}}
-" powerline
+" vim-fugitive
+" landscape
+" lightline
 "{{{
-NeoBundle 'Lokaltog/powerline', {
-\   'rtp' : 'powerline/bindings/vim'
-\ }
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'itchyny/landscape.vim'
+NeoBundle 'itchyny/lightline.vim'
+let g:lightline = {
+      \   'colorscheme': 'landscape',
+      \   'mode_map': { 'c': 'NORMAL' },
+      \   'active': {
+      \     'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+      \   },
+      \   'component_function': {
+      \     'modified': 'MyModified',
+      \     'readonly': 'MyReadonly',
+      \     'fugitive': 'MyFugitive',
+      \     'filename': 'MyFilename',
+      \     'fileformat': 'MyFileformat',
+      \     'filetype': 'MyFiletype',
+      \     'fileencoding': 'MyFileencoding',
+      \     'mode': 'MyMode',
+      \   },
+      \   'separator': { 'left': '', 'right': '' },
+      \   'subseparator': { 'left': '|', 'right': '|' }
+      \ }
+function! MyModified()
+  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+function! MyReadonly()
+  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
+endfunction
+function! MyFilename()
+  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \  &ft == 'unite' ? unite#get_status_string() :
+        \  &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+        \ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
+function! MyFugitive()
+  return exists('*fugitive#head') ? fugitive#head() : ''
+endfunction
+function! MyFileformat()
+  return winwidth('.') > 70 ? &fileformat : ''
+endfunction
+function! MyFiletype()
+  return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+function! MyFileencoding()
+  return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+function! MyMode()
+  return winwidth('.') > 60 ? lightline#mode() : ''
+endfunction
 "}}}
 " jellybeans
 "{{{
