@@ -44,13 +44,6 @@ set ignorecase
 set smartcase
 set hlsearch
 "}}}
-" Language
-"{{{
-augroup PHP
-  autocmd FileType php set makeprg=php\ -l\ %
-  autocmd BufWritePost *.php,*.ctp silent make | if len(getqflist()) != 1 | copen | else | cclose | endif
-augroup END
-"}}}
 " NeoBundle
 "{{{
 if has('vim_starting')
@@ -65,6 +58,12 @@ NeoBundle 'Shougo/vimproc.vim', {
       \     'unix' : 'make -f make_unix.mak',
       \   },
       \ }
+"}}}
+" syntastic'
+"{{{
+NeoBundle 'scrooloose/syntastic'
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=2
 "}}}
 " vim-tags
 "{{{
