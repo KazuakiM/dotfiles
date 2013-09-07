@@ -75,6 +75,10 @@ au BufNewFile,BufRead *.php,*.ctp,*.tol,*.inc set tags+=$HOME/.vim/tags/php.tags
 au BufNewFile,BufRead *.rb let g:vim_tags_project_tags_command = "ctags --languages=Ruby:.rb -f $HOME/.vim/tags/rb.tags  `pwd` 2>/dev/null"
 au BufNewFile,BufRead *.rb set tags+=$HOME/.vim/tags/rb.tags,$HOME/.vim/tags/.Gemfile.lock.tags
 "}}}
+" taglist.vim
+"{{{
+NeoBundle 'vim-scripts/taglist.vim'
+"}}}
 " NeoComplete
 "{{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {
