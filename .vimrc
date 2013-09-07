@@ -95,6 +95,11 @@ function! s:hooks.on_source(bundle)
   let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 endfunction
 "}}}
+" Align
+"{{{
+NeoBundle 'vim-scripts/Align'
+let g:Align_xstrlen=3
+"}}}
 " vim-ref
 "{{{
 NeoBundle 'thinca/vim-ref'
