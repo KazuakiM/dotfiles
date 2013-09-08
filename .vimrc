@@ -6,6 +6,7 @@ set encoding=utf-8
 set fileencoding=utf-8
 set fileformat=unix
 " Basic
+let mapleader=","
 set scrolloff=5
 set textwidth=0
 set autoread
@@ -83,10 +84,10 @@ let g:syntastic_auto_loc_list=2
 " vim-tags
 "{{{
 "# command memo
-"* TagsGenerate :Remake tags.
-"* <C-]>        :Jump target file
-"* <C-t>        :Return before file
-"* ts           :Jump target file list
+"* :TagsGenerate :Remake tags.
+"* <C-]>         :Jump target file
+"* <C-t>         :Return before file
+"* :ts           :Jump target file list
 NeoBundle 'szw/vim-tags'
 nnoremap <C-]> g<C-]>
 let g:vim_tags_auto_generate = 1
@@ -99,7 +100,7 @@ au BufNewFile,BufRead *.rb set tags+=$HOME/.vim/tags/rb.tags,$HOME/.vim/tags/.Ge
 " taglist.vim
 "{{{
 "# command memo
-"* Tlist :Show class, function and etc at left menu.
+"* :Tlist :Show class, function and etc at left menu.
 NeoBundle 'vim-scripts/taglist.vim'
 let Tlist_Use_Right_Window = 1
 let Tlist_Exit_OnlyWindow = 1
@@ -123,18 +124,22 @@ endfunction
 " Align
 "{{{
 "# command memo
-"* \t=   :Align base action
-"* \acom :Align action only commentout
+"* ,t=   :Align base action
+"* ,acom :Align action only commentout
 NeoBundle 'vim-scripts/Align'
 let g:Align_xstrlen=3
 "}}}
 " vim-ref
 "{{{
+"# command memo
+"* <S-k> :Show mabual
 NeoBundle 'thinca/vim-ref'
 let g:ref_phpmanual_path=$HOME.'/.vim/ref/php-chunked-xhtml'
 "}}}
 " vim-endwise
 "{{{
+"# command memo
+"* % :Move from start to end or end to start
 NeoBundle 'tpope/vim-endwise'
 "}}}
 " vim-surround
