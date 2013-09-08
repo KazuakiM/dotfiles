@@ -24,13 +24,13 @@ augroup AdditionalHighlights
   autocmd VimEnter,WinEnter,ColorScheme * highlight TabString     cterm=reverse ctermfg=lightyellow
   autocmd VimEnter,WinEnter * let w:m1 = matchadd("TabString",     '\t')
   autocmd VimEnter,WinEnter,ColorScheme * highlight CrString      cterm=reverse ctermfg=darkred
-  autocmd VimEnter,WinEnter * let w:m1 = matchadd("CrString",      '\r')
+  autocmd VimEnter,WinEnter * let w:m2 = matchadd("CrString",      '\r')
   autocmd VimEnter,WinEnter,ColorScheme * highlight CrlfString    cterm=reverse ctermfg=darkmagenta
-  autocmd VimEnter,WinEnter * let w:m1 = matchadd("CrlfString",    '\r\n')
+  autocmd VimEnter,WinEnter * let w:m3 = matchadd("CrlfString",    '\r\n')
   autocmd VimEnter,WinEnter,ColorScheme * highlight WhitespaceEOL cterm=reverse ctermfg=lightmagenta
-  autocmd VimEnter,WinEnter * let w:m1 = matchadd("WhitespaceEOL", '\s\+$')
+  autocmd VimEnter,WinEnter * let w:m4 = matchadd("WhitespaceEOL", '\s\+$')
   autocmd VimEnter,WinEnter,ColorScheme * highlight ZenkakuSpace  cterm=reverse ctermfg=lightred
-  autocmd VimEnter,WinEnter * let w:m3 = matchadd("ZenkakuSpace",  '　')
+  autocmd VimEnter,WinEnter * let w:m5 = matchadd("ZenkakuSpace",  '　')
 augroup END
 set cursorline
 set cursorcolumn
