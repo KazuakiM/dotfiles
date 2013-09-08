@@ -1,13 +1,12 @@
 " Common
 "{{{
 set nocompatible
-" Encode 
+" Encode
 set encoding=utf-8
 set fileencoding=utf-8
 set fileformat=unix
 " Basic
 set textwidth=0
-set nowrap
 set backspace=indent,eol,start
 set vb t_vb= "
 set foldmethod=marker
@@ -15,20 +14,29 @@ set foldmethod=marker
 syntax on
 set t_Co=256
 colorscheme jellybeans
-" Show 
+" Show
 set title
 set ruler
 set laststatus=2
 set number
-set list
-set listchars=eol:\ ,tab:>\
-highlight ZenkakuSpace cterm=reverse ctermfg=Yellow
-match ZenkakuSpace /　/
+augroup AdditionalHighlights
+  autocmd!
+  autocmd VimEnter,WinEnter,ColorScheme * highlight TabString     cterm=reverse ctermfg=lightyellow
+  autocmd VimEnter,WinEnter * let w:m1 = matchadd("TabString",     '\t')
+  autocmd VimEnter,WinEnter,ColorScheme * highlight CrString      cterm=reverse ctermfg=darkred
+  autocmd VimEnter,WinEnter * let w:m1 = matchadd("CrString",      '\r')
+  autocmd VimEnter,WinEnter,ColorScheme * highlight CrlfString    cterm=reverse ctermfg=darkmagenta
+  autocmd VimEnter,WinEnter * let w:m1 = matchadd("CrlfString",    '\r\n')
+  autocmd VimEnter,WinEnter,ColorScheme * highlight WhitespaceEOL cterm=reverse ctermfg=lightmagenta
+  autocmd VimEnter,WinEnter * let w:m1 = matchadd("WhitespaceEOL", '\s\+$')
+  autocmd VimEnter,WinEnter,ColorScheme * highlight ZenkakuSpace  cterm=reverse ctermfg=lightred
+  autocmd VimEnter,WinEnter * let w:m3 = matchadd("ZenkakuSpace",  '　')
+augroup END
 set cursorline
 set cursorcolumn
 " Clipboard
 set clipboard+=autoselect,unnamed
-" Backup 
+" Backup
 set nobackup
 set noswapfile
 " Indentation
