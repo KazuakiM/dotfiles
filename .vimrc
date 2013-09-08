@@ -70,6 +70,10 @@ NeoBundle 'Shougo/vimproc.vim', {
       \   },
       \ }
 "}}}
+" unite.vim
+"{{{
+NeoBundle 'Shougo/unite.vim'
+"}}}
 " syntastic'
 "{{{
 NeoBundle 'scrooloose/syntastic'
@@ -78,7 +82,13 @@ let g:syntastic_auto_loc_list=2
 "}}}
 " vim-tags
 "{{{
+"# command memo
+"* TagsGenerate :Remake tags.
+"* <C-]>        :Jump target file
+"* <C-t>        :Return before file
+"* ts           :Jump target file list
 NeoBundle 'szw/vim-tags'
+nnoremap <C-]> g<C-]>
 let g:vim_tags_auto_generate = 1
 let g:vim_tags_gems_tags_command = "ctags -f $HOME/.vim/tags/.Gemfile.lock.tags `bundle show --paths` 2>/dev/null &"
 au BufNewFile,BufRead *.php,*.ctp,*.tol,*.inc let g:vim_tags_project_tags_command = "ctags --languages=PHP -f $HOME/.vim/tags/php.tags `pwd` 2>/dev/null"
@@ -88,7 +98,11 @@ au BufNewFile,BufRead *.rb set tags+=$HOME/.vim/tags/rb.tags,$HOME/.vim/tags/.Ge
 "}}}
 " taglist.vim
 "{{{
+"# command memo
+"* Tlist :Show class, function and etc at left menu.
 NeoBundle 'vim-scripts/taglist.vim'
+let Tlist_Use_Right_Window = 1
+let Tlist_Exit_OnlyWindow = 1
 "}}}
 " NeoComplete
 "{{{
@@ -109,8 +123,8 @@ endfunction
 " Align
 "{{{
 "# command memo
-"* \t=    :Align base action
-"* \acom  :Align action only commentout
+"* \t=   :Align base action
+"* \acom :Align action only commentout
 NeoBundle 'vim-scripts/Align'
 let g:Align_xstrlen=3
 "}}}
