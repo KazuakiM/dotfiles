@@ -97,6 +97,9 @@ endfunction
 "}}}
 " Align
 "{{{
+"# command memo
+"* \t=    :Align base action
+"* \acom  :Align action only commentout
 NeoBundle 'vim-scripts/Align'
 let g:Align_xstrlen=3
 "}}}
@@ -111,7 +114,16 @@ NeoBundle 'tpope/vim-endwise'
 "}}}
 " vim-surround
 "{{{
+"# command memo
+"* cs"'   :Change From  " to '
+"* cs'<p> :Change From  ' to <p>
+"* ds'    :Delete '
 NeoBundle 'tpope/vim-surround'
+"}}}
+" nerdtree
+"{{{
+NeoBundle 'scrooloose/nerdtree'
+nmap <C-n> :NERDTree<CR>
 "}}}
 " vim-fugitive
 " landscape
