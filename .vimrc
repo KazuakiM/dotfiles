@@ -6,7 +6,10 @@ set encoding=utf-8
 set fileencoding=utf-8
 set fileformat=unix
 " Basic
+set scrolloff=5
 set textwidth=0
+set autoread
+set hidden
 set backspace=indent,eol,start
 set vb t_vb= "
 set foldmethod=marker
