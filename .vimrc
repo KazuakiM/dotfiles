@@ -18,17 +18,17 @@
 "-----------------------------------------------------------------------------------------------------------
 "                                        modes:
 " commands:                              Normal Visual Select Operator-pending Insert Command-line Lang-Arg
-" :map   :noremap   :unmap   :mapclear     yes   yes    yes          yes         -         -          -
-" :nmap  :nnoremap  :nunmap  :nmapclear    yes    -      -            -          -         -          -
-" :vmap  :vnoremap  :vunmap  :vmapclear     -    yes    yes           -          -         -          -
-" :omap  :onoremap  :ounmap  :omapclear     -     -      -           yes         -         -          -
-" :vmap  :vnoremap  :vunmap  :vmapclear     -    yes    yes           -          -         -          -
-" :xmap  :xnoremap  :xunmap  :xmapclear     -    yes     -            -          -         -          -
-" :smap  :snoremap  :sunmap  :smapclear     -     -     yes           -          -         -          -
-" :map!  :noremap!  :unmap!  :mapclear!     -     -      -            -         yes       yes         -
-" :imap  :inoremap  :iunmap  :imapclear     -     -      -            -         yes        -          -
-" :cmap  :cnoremap  :cunmap  :cmapclear     -     -      -            -          -        yes         -
-" :lmap  :lnoremap  :lunmap  :lmapclear     -     -      -            -         yes*      yes*       yes*
+" :map   :noremap   :unmap   :mapclear    yes    yes    yes         yes          -         -          -
+" :nmap  :nnoremap  :nunmap  :nmapclear   yes     -      -           -           -         -          -
+" :vmap  :vnoremap  :vunmap  :vmapclear    -     yes    yes          -           -         -          -
+" :omap  :onoremap  :ounmap  :omapclear    -      -      -          yes          -         -          -
+" :vmap  :vnoremap  :vunmap  :vmapclear    -     yes    yes          -           -         -          -
+" :xmap  :xnoremap  :xunmap  :xmapclear    -     yes     -           -           -         -          -
+" :smap  :snoremap  :sunmap  :smapclear    -      -     yes          -           -         -          -
+" :map!  :noremap!  :unmap!  :mapclear!    -      -      -           -          yes       yes         -
+" :imap  :inoremap  :iunmap  :imapclear    -      -      -           -          yes        -          -
+" :cmap  :cnoremap  :cunmap  :cmapclear    -      -      -           -           -        yes         -
+" :lmap  :lnoremap  :lunmap  :lmapclear    -      -      -           -          yes*      yes*       yes*
 "-----------------------------------------------------------------------------------------------------------
 "}}}
 "}}}
