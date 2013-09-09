@@ -1,3 +1,37 @@
+" Memo
+"{{{
+"   :help internal-variables
+"{{{
+"-----------------------------------------------------------------------------------------------------------
+" buffer-variable    b:   Local to the current buffer.
+" window-variable    w:   Local to the current window.
+" tabpage-variable   t:   Local to the current tab page.
+" global-variable    g:   Global.
+" local-variable     l:   Local to a function.
+" script-variable    s:   Local to a :source'ed Vim script.
+" function-argument  a:   Function argument (only inside a function).
+" vim-variable       v:   Global, predefined by Vim.
+"-----------------------------------------------------------------------------------------------------------
+"}}}
+"   :help map
+"{{{
+"-----------------------------------------------------------------------------------------------------------
+"                                        modes:
+" commands:                              Normal Visual Select Operator-pending Insert Command-line Lang-Arg
+" :map   :noremap   :unmap   :mapclear     yes   yes    yes          yes         -         -          -
+" :nmap  :nnoremap  :nunmap  :nmapclear    yes    -      -            -          -         -          -
+" :vmap  :vnoremap  :vunmap  :vmapclear     -    yes    yes           -          -         -          -
+" :omap  :onoremap  :ounmap  :omapclear     -     -      -           yes         -         -          -
+" :vmap  :vnoremap  :vunmap  :vmapclear     -    yes    yes           -          -         -          -
+" :xmap  :xnoremap  :xunmap  :xmapclear     -    yes     -            -          -         -          -
+" :smap  :snoremap  :sunmap  :smapclear     -     -     yes           -          -         -          -
+" :map!  :noremap!  :unmap!  :mapclear!     -     -      -            -         yes       yes         -
+" :imap  :inoremap  :iunmap  :imapclear     -     -      -            -         yes        -          -
+" :cmap  :cnoremap  :cunmap  :cmapclear     -     -      -            -          -        yes         -
+" :lmap  :lnoremap  :lunmap  :lmapclear     -     -      -            -         yes*      yes*       yes*
+"-----------------------------------------------------------------------------------------------------------
+"}}}
+"}}}
 " Common
 "{{{
 set nocompatible
@@ -119,6 +153,33 @@ function! s:hooks.on_source(bundle)
   let g:neocomplete#enable_smart_case = 1
   let g:neocomplete#sources#syntax#min_keyword_length = 3
   let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+endfunction
+"}}}
+" neosnippet.vim
+" vim-snippets
+"{{{
+NeoBundleLazy "Shougo/neosnippet.vim", {
+      \   "depends": ["honza/vim-snippets"],
+      \   "autoload": {
+      \     "insert": 1,
+      \   },
+      \ }
+let s:hooks = neobundle#get_hooks("neosnippet.vim")
+function! s:hooks.on_source(bundle)
+  imap <C-k> <Plug>(neosnippet_expand_or_jump)
+  smap <C-k> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k> <Plug>(neosnippet_expand_target)
+  imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+        \ "\<Plug>(neosnippet_expand_or_jump)"
+        \: pumvisible() ? "\<C-n>" : "\<TAB>"
+  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+        \ "\<Plug>(neosnippet_expand_or_jump)"
+        \: "\<TAB>"
+  if has('conceal')
+    set conceallevel=2 concealcursor=i
+  endif
+  let g:neosnippet#enable_snipmate_compatibility = 1
+  let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/vim-snippets/snippets'
 endfunction
 "}}}
 " Align
