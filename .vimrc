@@ -197,10 +197,12 @@ let g:Align_xstrlen=3
 NeoBundle 'thinca/vim-ref'
 let g:ref_phpmanual_path=$HOME.'/.vim/ref/php-chunked-xhtml'
 "}}}
+" matchit.zip
 " vim-endwise
 "{{{
 "# command memo
 "* % :Move from start to end or end to start
+NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'tpope/vim-endwise'
 "}}}
 " vim-surround
