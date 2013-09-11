@@ -31,6 +31,13 @@
 " :lmap  :lnoremap  :lunmap  :lmapclear    -      -      -           -          yes*      yes*       yes*
 "-----------------------------------------------------------------------------------------------------------
 "}}}
+"   color
+"{{{
+" confirm the definition of color
+"   :so $VIMRUNTIME/syntax/colortest.vim
+" check the status of the current Vim
+"   :so $VIMRUNTIME/syntax/hitest.vim
+"}}}
 "}}}
 " Common
 "{{{
