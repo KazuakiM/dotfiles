@@ -85,9 +85,9 @@ set clipboard+=autoselect,unnamed
 set nobackup
 set noswapfile
 " Indentation
-set tabstop=8
-set softtabstop=2
-set shiftwidth=2
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 set expandtab
 set autoindent
 set smartindent
