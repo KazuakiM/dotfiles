@@ -66,7 +66,7 @@ set laststatus=2
 set number
 augroup AdditionalHighlights
   autocmd!
-  autocmd VimEnter,WinEnter,ColorScheme * highlight TabString     cterm=reverse ctermfg=lightyellow
+  autocmd VimEnter,WinEnter,ColorScheme * highlight TabString     cterm=reverse ctermfg=darkgray
   autocmd VimEnter,WinEnter * let w:m1 = matchadd("TabString",     '\t')
   autocmd VimEnter,WinEnter,ColorScheme * highlight CrString      cterm=reverse ctermfg=darkred
   autocmd VimEnter,WinEnter * let w:m2 = matchadd("CrString",      '\r')
