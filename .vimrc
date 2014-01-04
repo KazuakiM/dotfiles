@@ -132,11 +132,9 @@ let g:syntastic_auto_loc_list=2
 NeoBundle 'szw/vim-tags'
 nnoremap <C-]> g<C-]>
 let g:vim_tags_auto_generate = 1
-let g:vim_tags_gems_tags_command = "ctags -f $HOME/.vim/tags/.Gemfile.lock.tags `bundle show --paths` 2>/dev/null &"
-au BufNewFile,BufRead *.php,*.ctp,*.tol,*.inc let g:vim_tags_project_tags_command = "ctags --languages=PHP -f $HOME/.vim/tags/php.tags `pwd` 2>/dev/null"
-au BufNewFile,BufRead *.php,*.ctp,*.tol,*.inc set tags+=$HOME/.vim/tags/php.tags
-au BufNewFile,BufRead *.rb let g:vim_tags_project_tags_command = "ctags --languages=Ruby:.rb -f $HOME/.vim/tags/rb.tags  `pwd` 2>/dev/null"
-au BufNewFile,BufRead *.rb set tags+=$HOME/.vim/tags/rb.tags,$HOME/.vim/tags/.Gemfile.lock.tags
+if filereadable(expand('~/.vimrc.local'))
+    source ~/.vimrc.local
+endif
 "}}}
 " taglist.vim
 "{{{
