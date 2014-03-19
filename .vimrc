@@ -127,7 +127,7 @@ let g:syntastic_auto_loc_list=2
 "# command memo
 "* :TagsGenerate :Remake tags.
 "* <C-]>         :Jump target file
-"* <C-t>         :Return before file
+"* <C-o>         :Return before file
 "* :ts           :Jump target file list
 NeoBundle 'szw/vim-tags'
 nnoremap <C-]> g<C-]>
@@ -143,6 +143,7 @@ endif
 NeoBundle 'vim-scripts/taglist.vim'
 let Tlist_Use_Right_Window = 1
 let Tlist_Exit_OnlyWindow = 1
+nmap <C-t> :Tlist<CR>
 "}}}
 " NeoComplete
 "{{{
