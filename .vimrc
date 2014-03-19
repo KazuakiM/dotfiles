@@ -130,7 +130,8 @@ let g:syntastic_auto_loc_list=2
 "* <C-o>         :Return before file
 "* :ts           :Jump target file list
 NeoBundle 'szw/vim-tags'
-nnoremap <C-]> g<C-]>
+nnoremap <Leader>] :g<C-]>
+nnoremap <Leader>[ :<C-o>
 let g:vim_tags_auto_generate = 1
 if filereadable(expand('~/.vimrc.local'))
     source ~/.vimrc.local
@@ -143,7 +144,7 @@ endif
 NeoBundle 'vim-scripts/taglist.vim'
 let Tlist_Use_Right_Window = 1
 let Tlist_Exit_OnlyWindow = 1
-nmap <C-t> :Tlist<CR>
+nmap <Leader>t :Tlist<CR>
 "}}}
 " NeoComplete
 "{{{
@@ -222,7 +223,7 @@ NeoBundle 'tpope/vim-surround'
 " nerdtree
 "{{{
 NeoBundle 'scrooloose/nerdtree'
-nmap <C-n> :NERDTree<CR>
+nmap <Leader>n :NERDTree<CR>
 "}}}
 " vim-fugitive
 " landscape
@@ -279,6 +280,14 @@ endfunction
 function! MyMode()
   return winwidth('.') > 60 ? lightline#mode() : ''
 endfunction
+"}}}
+" memolist.vim
+"{{{
+NeoBundle 'glidenote/memolist.vim'
+let g:memolist_path = '$HOME/.vim/memo'
+nmap <Leader>mn  :MemoNew<CR>
+nmap <Leader>ml  :MemoList<CR>
+nmap <Leader>mg  :MemoGrep<CR>
 "}}}
 " jellybeans
 "{{{
