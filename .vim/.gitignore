@@ -1,0 +1,7 @@
+# Regularly update & git NG files.
+/bundle/*
+/colors/*
+/ref/*
+/tags/*
+
+# Memos file manage.
