@@ -130,8 +130,9 @@ let g:syntastic_auto_loc_list=2
 "* <C-o>         :Return before file
 "* :ts           :Jump target file list
 NeoBundle 'szw/vim-tags'
-nnoremap <Leader>] :g<C-]>
-nnoremap <Leader>[ :<C-o>
+nnoremap <Leader>] <C-]>
+nnoremap <Leader>[ <C-o>
+nmap     <Leader>ts :ts<CR>
 let g:vim_tags_auto_generate = 1
 if filereadable(expand('~/.vimrc.local'))
     source ~/.vimrc.local
@@ -281,6 +282,47 @@ function! MyMode()
   return winwidth('.') > 60 ? lightline#mode() : ''
 endfunction
 "}}}
+"" Markdown with Vim
+""  vim-quickrun
+""  w3m.vim
+""  vim-markdown
+""{{{
+"NeoBundle 'thinca/vim-quickrun'
+"NeoBundle 'yuratomo/w3m.vim'
+"NeoBundle 'plasticboy/vim-markdown'
+"let g:quickrun_config = {}
+"let g:quickrun_config['markdown'] = {}
+"let g:quickrun_config['markdown']['outputter'] = '/tmp'
+"let g:quickrun_config['markdown']['outputter/name'] = tempname().'.html'
+"let g:quickrun_config['mkd'] = copy(g:quickrun_config['markdown'])
+"let t:outputter_w3m_vim_bufname = ''
+"let s:hook = {
+"\   'name': 'outputer_w3m_vim',
+"\   'kind': 'hook',
+"\   'is_success': 0,
+"\   'config': { 'enable': 1 },
+"\   '_bufname': 'bufhook'
+"\}
+"function! s:hook.on_success(session, context)
+"    if a:session.config.outputter != 'file' || !match(a:session.config['outputter/name'], '.html$\c')
+"        return
+"    endif
+"    let mode = g:w3m#OPEN_SPLIT
+"    let target = 'local'
+"    let fname = a:session.outputter._file
+"    let bufname = t:outputter_w3m_vim_bufname
+"    if bufname != '' && bufwinnr(bufname) != -1
+"        execute bufwinnr(bufname) 'wincmd w'
+"        let mode = g:w3m#OPEN_NORMAL
+"        silent call w3m#Open( mode, target, fname )
+"    else
+"        silent call w3m#Open( mode, target, fname )
+"        let t:outputter_w3m_vim_bufname = b:w3m_bufname
+"    endif
+"endfunction
+"call quickrun#module#register(s:hook, 1)
+"unlet s:hook
+""}}}
 " memolist.vim
 "{{{
 NeoBundle 'glidenote/memolist.vim'

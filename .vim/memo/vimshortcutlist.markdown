@@ -4,5 +4,7 @@ date: 2014-03-19 23:08
 tags: []
 categories: []
 - - -
-* Original Vim ShortCut List
-
+* vim-tags
+|nnoremap <Leader>] |<C-]>  |Jump target file    |
+|nnoremap <Leader>[ |<C-o>  |Return before file  |
+|nmap     <Leader>ts|:ts<CR>|Jump target file lis|
