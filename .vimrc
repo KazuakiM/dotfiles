@@ -96,9 +96,6 @@ set incsearch
 set ignorecase
 set smartcase
 set hlsearch
-" FileType
-autocmd BufRead,BufNewFile .mkd setfiletype mkd
-autocmd BufRead,BufNewFile .md  setfiletype mkd
 "}}}
 " NeoBundle
 "{{{
@@ -342,5 +339,9 @@ nmap <Leader>mg  :MemoGrep<CR>
 NeoBundle 'nanotech/jellybeans.vim'
 "}}}
 filetype plugin indent on
+" FileType
+"{{{
+autocmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} set filetype=markdown
+"}}}
 "}}}
 
