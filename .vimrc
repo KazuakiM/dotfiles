@@ -58,25 +58,27 @@ set foldmethod=marker
 " Color
 syntax on
 set t_Co=256
+augroup AdditionalHighlights
+  autocmd!
+  autocmd ColorScheme * highlight TabString     cterm=reverse ctermfg=darkgray
+  autocmd VimEnter,WinEnter * let w:m1 = matchadd("TabString",     '\t')
+  autocmd ColorScheme * highlight CrString      cterm=reverse ctermfg=darkred
+  autocmd VimEnter,WinEnter * let w:m2 = matchadd("CrString",      '\r')
+  autocmd ColorScheme * highlight CrlfString    cterm=reverse ctermfg=darkmagenta
+  autocmd VimEnter,WinEnter * let w:m3 = matchadd("CrlfString",    '\r\n')
+  autocmd ColorScheme * highlight WhitespaceEOL cterm=reverse ctermfg=lightmagenta
+  autocmd VimEnter,WinEnter * let w:m4 = matchadd("WhitespaceEOL", '\s\+$')
+  autocmd ColorScheme * highlight ZenkakuSpace  cterm=reverse ctermfg=lightred
+  autocmd VimEnter,WinEnter * let w:m5 = matchadd("ZenkakuSpace",  '　')
+
+  autocmd ColorScheme * highlight Visual cterm=reverse ctermfg=lightgreen
+augroup END
 colorscheme jellybeans
 " Show
 set title
 set ruler
 set laststatus=2
 set number
-augroup AdditionalHighlights
-  autocmd!
-  autocmd VimEnter,WinEnter,ColorScheme * highlight TabString     cterm=reverse ctermfg=darkgray
-  autocmd VimEnter,WinEnter * let w:m1 = matchadd("TabString",     '\t')
-  autocmd VimEnter,WinEnter,ColorScheme * highlight CrString      cterm=reverse ctermfg=darkred
-  autocmd VimEnter,WinEnter * let w:m2 = matchadd("CrString",      '\r')
-  autocmd VimEnter,WinEnter,ColorScheme * highlight CrlfString    cterm=reverse ctermfg=darkmagenta
-  autocmd VimEnter,WinEnter * let w:m3 = matchadd("CrlfString",    '\r\n')
-  autocmd VimEnter,WinEnter,ColorScheme * highlight WhitespaceEOL cterm=reverse ctermfg=lightmagenta
-  autocmd VimEnter,WinEnter * let w:m4 = matchadd("WhitespaceEOL", '\s\+$')
-  autocmd VimEnter,WinEnter,ColorScheme * highlight ZenkakuSpace  cterm=reverse ctermfg=lightred
-  autocmd VimEnter,WinEnter * let w:m5 = matchadd("ZenkakuSpace",  '　')
-augroup END
 set cursorline
 set cursorcolumn
 " Clipboard
