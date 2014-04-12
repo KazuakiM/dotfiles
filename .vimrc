@@ -106,8 +106,10 @@ call neobundle#rc(expand('$HOME/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 " vimproc
 "{{{
-NeoBundle 'Shougo/vimproc.vim', {
+NeoBundle 'Shougo/vimproc', {
       \   'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'cygwin' : 'make -f make_cygwin.mak',
       \     'mac' : 'make -f make_mac.mak',
       \     'unix' : 'make -f make_unix.mak',
       \   },
@@ -122,6 +124,25 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'scrooloose/syntastic'
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=2
+"}}}
+" vim-php-cs-fixer
+"{{{
+NeoBundle 'stephpy/vim-php-cs-fixer'
+" If php-cs-fixer is in $PATH, you don't need to define line below
+if has('mac')
+else
+    let g:php_cs_fixer_path = '$HOME/.vim/phpCsFixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
+endif
+let g:php_cs_fixer_level = 'all'              " which level ?
+let g:php_cs_fixer_config = 'default'         " configuration
+let g:php_cs_fixer_php_path = 'php'           " Path to PHP
+" If you want to define specific fixers:
+"let g:php_cs_fixer_fixers_list = 'linefeed,short_tag,indentation'
+let g:php_cs_fixer_enable_default_mapping = 1 " Enable the mapping by default (<leader>pcd)
+let g:php_cs_fixer_dry_run = 0                " Call command with dry-run option
+let g:php_cs_fixer_verbose = 0                " Return the output of command if 1, else an inline information.
+nnoremap <silent><leader>pcd :call PhpCsFixerFixDirectory()<CR>
+nnoremap <silent><leader>pcf :call PhpCsFixerFixFile()<CR>
 "}}}
 " vim-tags
 "{{{
