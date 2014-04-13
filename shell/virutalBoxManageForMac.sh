@@ -25,10 +25,13 @@ serverStatus=`VBoxManage showvminfo ${serverName} | grep State | awk -F " " '{pr
 case ${serverStatus} in
     'running')
         echo "\nServer name '${serverName}' is running."
-        echo "Request next:\n\t1:non action\n\t2:pause VirtualBox"
+        echo "Request next:\n\t1:non action\n\t2:shutdown VirtualBox\n\t3:pause VirtualBox"
         read runningNext
         case ${runningNext} in
             2)
+                VBoxManage controlvm ${serverName} acpipowerbutton
+                echo "\nServer name '${serverName}' is ACPI shutdown starting";;
+            3)
                 VBoxManage controlvm ${serverName} pause
                 echo "\nServer name '${serverName}' is pause";;
             *)
