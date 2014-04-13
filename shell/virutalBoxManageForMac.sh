@@ -21,18 +21,27 @@ if [ $? -ne 0 ]; then
     echo "\nServer name '${serverName}' is not exists."
     exit 1
 fi
-VBoxManage list runningvms | grep '"'${serverName}'"' >/dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "\nServer name '${serverName}' is running."
-    exit 0
-fi
 serverStatus=`VBoxManage showvminfo ${serverName} | grep State | awk -F " " '{print $2}'`
 case ${serverStatus} in
+    'running')
+        echo "\nServer name '${serverName}' is running."
+        echo "Request next:\n\t1:non action\n\t2:pause VirtualBox"
+        read runningNext
+        case ${runningNext} in
+            2)
+                VBoxManage controlvm ${serverName} pause
+                echo "\nServer name '${serverName}' is pause";;
+            *)
+                exit 0;;
+        esac;;
+    'paused')
+        VBoxManage controlvm ${serverName} resume
+        echo "\nServer name '${serverName}' is resume";;
     'powered') # powered is 'powered off'
-        VBoxManage startvm ${serverName} --type=headless;
-        echo "Server name '${serverName}' is started";;
+        VBoxManage startvm ${serverName} --type=headless
+        echo "\nServer name '${serverName}' is started";;
     *)
-        echo "Exception:Server name '${serverName}', Server status '${serverStatus}'";;
+        echo "\nException:Server name '${serverName}', Server status '${serverStatus}'";;
 esac
 
 # Finish
