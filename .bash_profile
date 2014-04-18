@@ -36,7 +36,7 @@ case "${OSTYPE}" in
         alias ll='ls -Gla'
         alias vi='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
         alias vim='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-        export LSCOLORS=DxgxcxdxbxCxfxBxFxhxGx
+        export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
         ;;
     linux*)
         alias l='ls --color=auto'
