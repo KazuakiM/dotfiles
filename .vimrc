@@ -93,11 +93,13 @@ set shiftwidth=4
 set expandtab
 set autoindent
 set smartindent
+set smarttab
 " Search
 set incsearch
 set ignorecase
 set smartcase
 set hlsearch
+set wrapscan
 "}}}
 " NeoBundle
 "{{{
