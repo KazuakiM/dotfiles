@@ -278,6 +278,11 @@ nmap <Leader>n :NERDTree<CR>
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'itchyny/landscape.vim'
 NeoBundle 'itchyny/lightline.vim'
+nmap <Leader>gitstatus :Gstatus<CR>
+nmap <Leader>gitadd :Gwrite<CR>
+nmap <Leader>gitrm :Gremove<CR>
+nmap <Leader>gitdiff :Gdiff<CR>
+nmap <Leader>gitcommit :Gcommit<CR>
 let g:lightline = {
       \   'colorscheme': 'landscape',
       \   'mode_map': { 'c': 'NORMAL' },
