@@ -100,6 +100,13 @@ set ignorecase
 set smartcase
 set hlsearch
 set wrapscan
+" Grep
+set grepprg=internal
+nmap <Leader>g :vimgrep /\<'.expand('<cword>').'\>/j **/*.'.expand('%:e')
+augroup Grep
+  autocmd!
+  autocmd QuickfixCmdPost *grep* cwindow
+augroup END
 "}}}
 " NeoBundle
 "{{{
@@ -193,6 +200,7 @@ function! s:hooks.on_source(bundle)
 endfunction
 "}}}
 " neosnippet.vim
+" neosnippet-snippets
 " vim-snippets
 "{{{
 NeoBundleLazy "Shougo/neosnippet.vim", {
@@ -201,6 +209,7 @@ NeoBundleLazy "Shougo/neosnippet.vim", {
       \     "insert": 1,
       \   },
       \ }
+NeoBundle "Shougo/neosnippet-snippets"
 let s:hooks = neobundle#get_hooks("neosnippet.vim")
 function! s:hooks.on_source(bundle)
   imap <C-k> <Plug>(neosnippet_expand_or_jump)
