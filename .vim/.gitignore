@@ -4,5 +4,6 @@
 /ref/*
 /tags/*
 /phpCsFixer/*
+/qfixgrep/*
 
 # Memos file manage.
