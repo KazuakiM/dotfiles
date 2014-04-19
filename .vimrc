@@ -100,13 +100,6 @@ set ignorecase
 set smartcase
 set hlsearch
 set wrapscan
-" Grep
-set grepprg=internal
-nmap <Leader>g :vimgrep /\<'.expand('<cword>').'\>/j **/*.'.expand('%:e')
-augroup Grep
-  autocmd!
-  autocmd QuickfixCmdPost *grep* cwindow
-augroup END
 "}}}
 " NeoBundle
 "{{{
@@ -258,6 +251,20 @@ NeoBundle 'tpope/vim-endwise'
 "* cs'<p> :Change From  ' to <p>
 "* ds'    :Delete '
 NeoBundle 'tpope/vim-surround'
+"}}}
+" Grep
+"  vim-qfreplace
+"{{{
+NeoBundle 'thinca/vim-qfreplace'
+set grepprg=internal
+set runtimepath+=$HOME/.vim/qfixapp/
+let QFixWin_EnableMode = 1
+let QFix_UseLocationList = 1
+nmap <Leader>g :vimgrep /\<'.expand('<cword>').'\>/j **/*.'.expand('%:e')
+augroup Grep
+  autocmd!
+  autocmd QuickfixCmdPost *grep* cwindow
+augroup END
 "}}}
 " nerdtree
 "{{{
