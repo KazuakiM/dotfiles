@@ -163,9 +163,7 @@ nmap <Leader>] <C-]>
 nmap <Leader>[ <C-o>
 nmap <Leader>ts :ts<CR>
 let g:vim_tags_auto_generate = 1
-if filereadable(expand('~/.vimrc.local'))
-    source ~/.vimrc.local
-endif
+" add .vimrc.local
 "}}}
 " taglist.vim
 "{{{
@@ -261,8 +259,6 @@ set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
 set runtimepath+=$HOME/.vim/qfixapp/
 let QFixWin_EnableMode = 1
 let QFix_UseLocationList = 1
-nmap <Leader>g ':sil grep! ' . expand('<cword>') . ' *'
-nmap <Leader>G :vimgrep /\<'.expand('<cword>').'\>/j **/*.'.expand('%:e')
 augroup Grep
   autocmd!
   autocmd QuickfixCmdPost *grep* cwindow
@@ -271,6 +267,7 @@ augroup END
 " nerdtree
 "{{{
 NeoBundle 'scrooloose/nerdtree'
+let NERDTreeShowHidden=1
 nmap <Leader>n :NERDTree<CR>
 "}}}
 " vim-fugitive
@@ -395,6 +392,12 @@ filetype plugin indent on
 " FileType
 "{{{
 autocmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} set filetype=markdown
+"}}}
+" Extra local setting
+"{{{
+if filereadable(expand($HOME.'/.vimrc.local'))
+    source ~/.vimrc.local
+endif
 "}}}
 "}}}
 
