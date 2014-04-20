@@ -123,6 +123,10 @@ NeoBundle 'Shougo/vimproc', {
 "{{{
 NeoBundle 'Shougo/unite.vim'
 "}}}
+" vital.vim
+"{{{
+NeoBundle 'vim-jp/vital.vim'
+"}}}
 " syntastic'
 "{{{
 NeoBundle 'scrooloose/syntastic'
@@ -259,6 +263,12 @@ set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
 set runtimepath+=$HOME/.vim/qfixapp/
 let QFixWin_EnableMode = 1
 let QFix_UseLocationList = 1
+
+"
+" 下記命令でプロジェクトルートディレクトリの取得が可能.grepに組み込む
+" echo vital#of("vital").import("Prelude").path2project_directory("%")
+nmap <Leader>g ':sil grep! ' . expand('<cword>') . ' *'
+nmap <Leader>G :vimgrep /\<'.expand('<cword>').'\>/j **/*.'.expand('%:e')
 augroup Grep
   autocmd!
   autocmd QuickfixCmdPost *grep* cwindow
