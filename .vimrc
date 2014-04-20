@@ -256,11 +256,13 @@ NeoBundle 'tpope/vim-surround'
 "  vim-qfreplace
 "{{{
 NeoBundle 'thinca/vim-qfreplace'
-set grepprg=internal
+set grepprg=grep\ -rnIH\ --color=auto\ --exclude-dir=.svn\ --exclude-dir=.git
+set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
 set runtimepath+=$HOME/.vim/qfixapp/
 let QFixWin_EnableMode = 1
 let QFix_UseLocationList = 1
-nmap <Leader>g :vimgrep /\<'.expand('<cword>').'\>/j **/*.'.expand('%:e')
+nmap <Leader>g ':sil grep! ' . expand('<cword>') . ' *'
+nmap <Leader>G :vimgrep /\<'.expand('<cword>').'\>/j **/*.'.expand('%:e')
 augroup Grep
   autocmd!
   autocmd QuickfixCmdPost *grep* cwindow
@@ -279,6 +281,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'itchyny/landscape.vim'
 NeoBundle 'itchyny/lightline.vim'
 nmap <Leader>gitstatus :Gstatus<CR>
+nmap <Leader>glog :Glog<CR>
 nmap <Leader>gitadd :Gwrite<CR>
 nmap <Leader>gitrm :Gremove<CR>
 nmap <Leader>gitdiff :Gdiff<CR>
