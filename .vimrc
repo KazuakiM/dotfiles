@@ -193,6 +193,7 @@ function! s:hooks.on_source(bundle)
 endfunction
 "}}}
 " neosnippet.vim
+" neosnippet-snippets
 " vim-snippets
 "{{{
 NeoBundleLazy "Shougo/neosnippet.vim", {
@@ -201,6 +202,7 @@ NeoBundleLazy "Shougo/neosnippet.vim", {
       \     "insert": 1,
       \   },
       \ }
+NeoBundle "Shougo/neosnippet-snippets"
 let s:hooks = neobundle#get_hooks("neosnippet.vim")
 function! s:hooks.on_source(bundle)
   imap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -250,6 +252,22 @@ NeoBundle 'tpope/vim-endwise'
 "* ds'    :Delete '
 NeoBundle 'tpope/vim-surround'
 "}}}
+" Grep
+"  vim-qfreplace
+"{{{
+NeoBundle 'thinca/vim-qfreplace'
+set grepprg=grep\ -rnIH\ --color=auto\ --exclude-dir=.svn\ --exclude-dir=.git
+set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
+set runtimepath+=$HOME/.vim/qfixapp/
+let QFixWin_EnableMode = 1
+let QFix_UseLocationList = 1
+nmap <Leader>g ':sil grep! ' . expand('<cword>') . ' *'
+nmap <Leader>G :vimgrep /\<'.expand('<cword>').'\>/j **/*.'.expand('%:e')
+augroup Grep
+  autocmd!
+  autocmd QuickfixCmdPost *grep* cwindow
+augroup END
+"}}}
 " nerdtree
 "{{{
 NeoBundle 'scrooloose/nerdtree'
@@ -262,6 +280,12 @@ nmap <Leader>n :NERDTree<CR>
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'itchyny/landscape.vim'
 NeoBundle 'itchyny/lightline.vim'
+nmap <Leader>gitstatus :Gstatus<CR>
+nmap <Leader>glog :Glog<CR>
+nmap <Leader>gitadd :Gwrite<CR>
+nmap <Leader>gitrm :Gremove<CR>
+nmap <Leader>gitdiff :Gdiff<CR>
+nmap <Leader>gitcommit :Gcommit<CR>
 let g:lightline = {
       \   'colorscheme': 'landscape',
       \   'mode_map': { 'c': 'NORMAL' },

@@ -4,5 +4,6 @@
 /ref/*
 /tags/*
 /phpCsFixer/*
+/qfixapp/*
 
 # Memos file manage.
