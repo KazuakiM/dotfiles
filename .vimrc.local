@@ -1,6 +1,7 @@
-" vim-tags
-"
 "" sample project ($HOME/sample)
-"au BufNewFile,BufRead $HOME/sample/*.php let g:vim_tags_project_tags_command = 'ctags --languages=php -f $HOME/.vim/tags/sample.tags `pwd` >/dev/null 2>&1'
-"au BufNewFile,BufRead $HOME/sample/*.php set tags+=$HOME/.vim/tags/sample.tags
+"augroup vimProject
+"    autocmd!
+"    autocmd BufNewFile,BufRead $HOME/sample/*.php let g:vim_tags_project_tags_command = 'ctags --languages=php -f $HOME/.vim/tags/sample.tags `pwd` >/dev/null 2>&1'
+"    autocmd BufNewFile,BufRead $HOME/sample/*.php set tags+=$HOME/.vim/tags/sample.tags
+"augroup END
 
