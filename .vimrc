@@ -257,18 +257,21 @@ NeoBundle 'tpope/vim-surround'
 " Grep
 "  vim-qfreplace
 "{{{
+"# command memo
+"* ,grep  :Cursor word grep
+"* ,cn    :grep results next jump
+"* ,cb    :grep results previous(before) jump
+"* ,ccXX  :grep XX lines jump
 NeoBundle 'thinca/vim-qfreplace'
-set grepprg=grep\ -rnIH\ --color=auto\ --exclude-dir=.svn\ --exclude-dir=.git
+set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git
 set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
 set runtimepath+=$HOME/.vim/qfixapp/
 let QFixWin_EnableMode = 1
 let QFix_UseLocationList = 1
-
-"
-" 下記命令でプロジェクトルートディレクトリの取得が可能.grepに組み込む
-" echo vital#of("vital").import("Prelude").path2project_directory("%")
-nmap <Leader>g ':sil grep! ' . expand('<cword>') . ' *'
-nmap <Leader>G :vimgrep /\<'.expand('<cword>').'\>/j **/*.'.expand('%:e')
+nmap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
+nmap <Leader>cn :cnext<CR>
+nmap <Leader>cb :cprevious<CR>
+nmap <Leader>cc :cc
 augroup Grep
   autocmd!
   autocmd QuickfixCmdPost *grep* cwindow
