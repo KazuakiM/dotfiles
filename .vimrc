@@ -127,6 +127,11 @@ NeoBundle 'Shougo/unite.vim'
 "{{{
 NeoBundle 'vim-jp/vital.vim'
 "}}}
+" vimdoc-ja
+"{{{
+NeoBundle 'vim-jp/vimdoc-ja'
+helptags $HOME/.vim/bundle/vimdoc-ja/doc/
+"}}}
 " syntastic'
 "{{{
 NeoBundle 'scrooloose/syntastic'
