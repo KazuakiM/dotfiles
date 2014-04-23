@@ -127,6 +127,11 @@ NeoBundle 'Shougo/unite.vim'
 "{{{
 NeoBundle 'vim-jp/vital.vim'
 "}}}
+" vimdoc-ja
+"{{{
+NeoBundle 'vim-jp/vimdoc-ja'
+helptags $HOME/.vim/bundle/vimdoc-ja/doc/
+"}}}
 " syntastic'
 "{{{
 NeoBundle 'scrooloose/syntastic'
@@ -149,11 +154,6 @@ let g:php_cs_fixer_php_path = 'php'           " Path to PHP
 let g:php_cs_fixer_enable_default_mapping = 1 " Enable the mapping by default (<leader>pcd)
 let g:php_cs_fixer_dry_run = 0                " Call command with dry-run option
 let g:php_cs_fixer_verbose = 0                " Return the output of command if 1, else an inline information.
-"nnoremap <silent><leader>pcd :call PhpCsFixerFixDirectory()<CR>
-augroup phpCsFixer
-  autocmd!
-  autocmd BufWritePost *.php :call PhpCsFixerFixFile()<CR>
-augroup END
 "}}}
 " vim-tags
 "{{{
