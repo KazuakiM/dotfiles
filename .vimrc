@@ -111,21 +111,21 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " vimproc
 "{{{
 NeoBundle 'Shougo/vimproc', {
-      \   'build' : {
-      \     'windows' : 'make -f make_mingw32.mak',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \   },
-      \ }
+            \    'build' : {
+            \        'windows' : 'make -f make_mingw32.mak',
+            \        'cygwin'  : 'make -f make_cygwin.mak',
+            \        'mac'     : 'make -f make_mac.mak',
+            \        'unix'    : 'make -f make_unix.mak',
+            \    },
+            \}
 "}}}
 " unite.vim
 "{{{
 NeoBundleLazy "Shougo/unite.vim", {
-      \   "autoload" : {
-      \     "commands" : [ "Unite" ],
-      \   },
-      \ }
+            \    "autoload" : {
+            \        "commands" : ["Unite"],
+            \    },
+            \}
 "}}}
 " vital.vim
 "{{{
@@ -134,10 +134,10 @@ NeoBundle 'vim-jp/vital.vim'
 " vimdoc-ja
 "{{{
 NeoBundleLazy "vim-jp/vimdoc-ja", {
-      \   "autoload" : {
-      \     "commands" : [ "help" ],
-      \   },
-      \ }
+            \    "autoload" : {
+            \        "commands" : ["help"],
+            \    },
+            \}
 let s:hooks = neobundle#get_hooks("vimdoc-ja")
 function! s:hooks.on_source(bundle)
   helptags $HOME/.vim/bundle/vimdoc-ja/doc/
@@ -145,26 +145,40 @@ endfunction
 "}}}
 " syntastic'
 "{{{
-NeoBundle 'scrooloose/syntastic'
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=2
+NeoBundleLazy 'scrooloose/syntastic', {
+            \    'autoload' : {
+            \        'insert' : 1,
+            \    },
+            \}
+let s:hooks = neobundle#get_hooks("syntastic")
+function! s:hooks.on_source(bundle)
+    let g:syntastic_enable_signs=1
+    let g:syntastic_auto_loc_list=2
+endfunction
 "}}}
 " vim-php-cs-fixer
 "{{{
-NeoBundle 'stephpy/vim-php-cs-fixer'
-" If php-cs-fixer is in $PATH, you don't need to define line below
-if has('mac')
-else
+NeoBundleLazy 'stephpy/vim-php-cs-fixer', {
+      \   'autoload' : {
+      \     'filetypes': 'php',
+      \   },
+      \ }
+let s:hooks = neobundle#get_hooks("vim-php-cs-fixer")
+function! s:hooks.on_source(bundle)
+  " If php-cs-fixer is in $PATH, you don't need to define line below
+  if has('mac')
+  else
     let g:php_cs_fixer_path = '$HOME/.vim/phpCsFixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
-endif
-let g:php_cs_fixer_level = 'all'              " which level ?
-let g:php_cs_fixer_config = 'default'         " configuration
-let g:php_cs_fixer_php_path = 'php'           " Path to PHP
-" If you want to define specific fixers:
-"let g:php_cs_fixer_fixers_list = 'linefeed,short_tag,indentation'
-let g:php_cs_fixer_enable_default_mapping = 1 " Enable the mapping by default (<leader>pcd)
-let g:php_cs_fixer_dry_run = 0                " Call command with dry-run option
-let g:php_cs_fixer_verbose = 0                " Return the output of command if 1, else an inline information.
+  endif
+  let g:php_cs_fixer_level = 'all'              " which level ?
+  let g:php_cs_fixer_config = 'default'         " configuration
+  let g:php_cs_fixer_php_path = 'php'           " Path to PHP
+  " If you want to define specific fixers:
+  "let g:php_cs_fixer_fixers_list = 'linefeed,short_tag,indentation'
+  let g:php_cs_fixer_enable_default_mapping = 1 " Enable the mapping by default (<leader>pcd)
+  let g:php_cs_fixer_dry_run = 0                " Call command with dry-run option
+  let g:php_cs_fixer_verbose = 0                " Return the output of command if 1, else an inline information.
+endfunction
 "}}}
 " vim-tags
 "{{{
