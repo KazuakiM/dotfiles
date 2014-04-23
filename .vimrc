@@ -47,7 +47,7 @@ set encoding=utf-8
 set fileencoding=utf-8
 set fileformat=unix
 " Basic
-let mapleader=","
+let mapleader=','
 set scrolloff=5
 set textwidth=0
 set autoread
@@ -61,15 +61,15 @@ set t_Co=256
 augroup AdditionalHighlights
   autocmd!
   autocmd ColorScheme * highlight TabString     cterm=reverse ctermfg=darkgray
-  autocmd VimEnter,WinEnter * let w:m1 = matchadd("TabString",     '\t')
+  autocmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     '\t')
   autocmd ColorScheme * highlight CrString      cterm=reverse ctermfg=darkred
-  autocmd VimEnter,WinEnter * let w:m2 = matchadd("CrString",      '\r')
+  autocmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      '\r')
   autocmd ColorScheme * highlight CrlfString    cterm=reverse ctermfg=darkmagenta
-  autocmd VimEnter,WinEnter * let w:m3 = matchadd("CrlfString",    '\r\n')
+  autocmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    '\r\n')
   autocmd ColorScheme * highlight WhitespaceEOL cterm=reverse ctermfg=lightmagenta
-  autocmd VimEnter,WinEnter * let w:m4 = matchadd("WhitespaceEOL", '\s\+$')
+  autocmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', '\s\+$')
   autocmd ColorScheme * highlight ZenkakuSpace  cterm=reverse ctermfg=lightred
-  autocmd VimEnter,WinEnter * let w:m5 = matchadd("ZenkakuSpace",  '　')
+  autocmd VimEnter,WinEnter * let w:m5 = matchadd('ZenkakuSpace',  '　')
 
   autocmd ColorScheme * highlight Visual cterm=reverse ctermfg=lightgreen
 augroup END
@@ -121,9 +121,9 @@ NeoBundle 'Shougo/vimproc', {
 "}}}
 " unite.vim
 "{{{
-NeoBundleLazy "Shougo/unite.vim", {
-            \    "autoload" : {
-            \        "commands" : ["Unite"],
+NeoBundleLazy 'Shougo/unite.vim', {
+            \    'autoload' : {
+            \        'commands' : ['Unite'],
             \    },
             \}
 "}}}
@@ -133,12 +133,12 @@ NeoBundle 'vim-jp/vital.vim'
 "}}}
 " vimdoc-ja
 "{{{
-NeoBundleLazy "vim-jp/vimdoc-ja", {
-            \    "autoload" : {
-            \        "commands" : ["help"],
+NeoBundleLazy 'vim-jp/vimdoc-ja', {
+            \    'autoload' : {
+            \        'commands' : ['help'],
             \    },
             \}
-let s:hooks = neobundle#get_hooks("vimdoc-ja")
+let s:hooks = neobundle#get_hooks('vimdoc-ja')
 function! s:hooks.on_source(bundle)
   helptags $HOME/.vim/bundle/vimdoc-ja/doc/
 endfunction
@@ -150,7 +150,7 @@ NeoBundleLazy 'scrooloose/syntastic', {
             \        'insert' : 1,
             \    },
             \}
-let s:hooks = neobundle#get_hooks("syntastic")
+let s:hooks = neobundle#get_hooks('syntastic')
 function! s:hooks.on_source(bundle)
     let g:syntastic_enable_signs=1
     let g:syntastic_auto_loc_list=2
@@ -163,7 +163,7 @@ NeoBundleLazy 'stephpy/vim-php-cs-fixer', {
       \     'filetypes': 'php',
       \   },
       \ }
-let s:hooks = neobundle#get_hooks("vim-php-cs-fixer")
+let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
 function! s:hooks.on_source(bundle)
   " If php-cs-fixer is in $PATH, you don't need to define line below
   if has('mac')
@@ -210,7 +210,7 @@ NeoBundleLazy 'Shougo/neocomplete.vim', {
       \     'insert' : 1,
       \   },
       \ }
-let s:hooks = neobundle#get_hooks("neocomplete.vim")
+let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle)
   let g:acp_enableAtStartup = 0
   let g:neocomplete#enable_at_startup = 1
@@ -223,24 +223,24 @@ endfunction
 " neosnippet-snippets
 " vim-snippets
 "{{{
-NeoBundleLazy "Shougo/neosnippet.vim", {
-      \   "depends": ["honza/vim-snippets"],
-      \   "autoload": {
-      \     "insert": 1,
+NeoBundleLazy 'Shougo/neosnippet.vim', {
+      \   'depends': ['honza/vim-snippets'],
+      \   'autoload': {
+      \     'insert': 1,
       \   },
       \ }
-NeoBundle "Shougo/neosnippet-snippets"
-let s:hooks = neobundle#get_hooks("neosnippet.vim")
+NeoBundle 'Shougo/neosnippet-snippets'
+let s:hooks = neobundle#get_hooks('neosnippet.vim')
 function! s:hooks.on_source(bundle)
   imap <C-k> <Plug>(neosnippet_expand_or_jump)
   smap <C-k> <Plug>(neosnippet_expand_or_jump)
   xmap <C-k> <Plug>(neosnippet_expand_target)
   imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-        \ "\<Plug>(neosnippet_expand_or_jump)"
-        \: pumvisible() ? "\<C-n>" : "\<TAB>"
+        \ '\<Plug>(neosnippet_expand_or_jump)'
+        \: pumvisible() ? '\<C-n>' : '\<TAB>'
   smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-        \ "\<Plug>(neosnippet_expand_or_jump)"
-        \: "\<TAB>"
+        \ '\<Plug>(neosnippet_expand_or_jump)'
+        \: '\<TAB>'
   if has('conceal')
     set conceallevel=2 concealcursor=i
   endif
