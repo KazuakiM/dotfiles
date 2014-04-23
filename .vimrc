@@ -121,7 +121,11 @@ NeoBundle 'Shougo/vimproc', {
 "}}}
 " unite.vim
 "{{{
-NeoBundle 'Shougo/unite.vim'
+NeoBundleLazy "Shougo/unite.vim", {
+      \   "autoload" : {
+      \     "commands" : [ "Unite" ],
+      \   },
+      \ }
 "}}}
 " vital.vim
 "{{{
