@@ -133,8 +133,15 @@ NeoBundle 'vim-jp/vital.vim'
 "}}}
 " vimdoc-ja
 "{{{
-NeoBundle 'vim-jp/vimdoc-ja'
-helptags $HOME/.vim/bundle/vimdoc-ja/doc/
+NeoBundleLazy "vim-jp/vimdoc-ja", {
+      \   "autoload" : {
+      \     "commands" : [ "help" ],
+      \   },
+      \ }
+let s:hooks = neobundle#get_hooks("vimdoc-ja")
+function! s:hooks.on_source(bundle)
+  helptags $HOME/.vim/bundle/vimdoc-ja/doc/
+endfunction
 "}}}
 " syntastic'
 "{{{
