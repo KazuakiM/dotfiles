@@ -180,6 +180,24 @@ function! s:hooks.on_source(bundle)
   let g:php_cs_fixer_verbose = 0                " Return the output of command if 1, else an inline information.
 endfunction
 "}}}
+" vdebug
+"{{{
+"# command memo
+"* <F5>  : start/run (to next breakpoint/end of script)
+"* <F2>  : step over
+"* <F3>  : step into
+"* <F4>  : step out
+"* <F6>  : stop debugging
+"* <F7>  : detach script from debugger
+"* <F9>  : run to cursor
+"* <F10> : set line breakpoint
+"* <F11> : show context variables (e.g. after "eval")
+"* <F12> : evaluate variable under cursor
+"* :Breakpoint <type> <args>: set a breakpoint of any type (see :help VdebugBreakpoints)
+"* :VdebugEval <code>: evaluate some code and display the result
+"* <Leader>e: evaluate the expression under visual highlight and display the result
+NeoBundle 'joonty/vdebug'
+"}}}
 " vim-tags
 "{{{
 "# command memo
