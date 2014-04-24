@@ -140,7 +140,7 @@ NeoBundleLazy 'vim-jp/vimdoc-ja', {
             \}
 let s:hooks = neobundle#get_hooks('vimdoc-ja')
 function! s:hooks.on_source(bundle)
-  helptags $HOME/.vim/bundle/vimdoc-ja/doc/
+    helptags $HOME/.vim/bundle/vimdoc-ja/doc/
 endfunction
 "}}}
 " syntastic'
@@ -159,25 +159,25 @@ endfunction
 " vim-php-cs-fixer
 "{{{
 NeoBundleLazy 'stephpy/vim-php-cs-fixer', {
-      \   'autoload' : {
-      \     'filetypes': 'php',
-      \   },
-      \ }
+            \    'autoload' : {
+            \        'filetypes': 'php',
+            \    },
+            \}
 let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
 function! s:hooks.on_source(bundle)
-  " If php-cs-fixer is in $PATH, you don't need to define line below
-  if has('mac')
-  else
-    let g:php_cs_fixer_path = '$HOME/.vim/phpCsFixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
-  endif
-  let g:php_cs_fixer_level = 'all'              " which level ?
-  let g:php_cs_fixer_config = 'default'         " configuration
-  let g:php_cs_fixer_php_path = 'php'           " Path to PHP
-  " If you want to define specific fixers:
-  "let g:php_cs_fixer_fixers_list = 'linefeed,short_tag,indentation'
-  let g:php_cs_fixer_enable_default_mapping = 1 " Enable the mapping by default (<leader>pcd)
-  let g:php_cs_fixer_dry_run = 0                " Call command with dry-run option
-  let g:php_cs_fixer_verbose = 0                " Return the output of command if 1, else an inline information.
+    " If php-cs-fixer is in $PATH, you don't need to define line below
+    if has('mac')
+    else
+        let g:php_cs_fixer_path = '$HOME/.vim/phpCsFixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
+    endif
+    let g:php_cs_fixer_level = 'all'              " which level ?
+    let g:php_cs_fixer_config = 'default'         " configuration
+    let g:php_cs_fixer_php_path = 'php'           " Path to PHP
+    " If you want to define specific fixers:
+    "let g:php_cs_fixer_fixers_list = 'linefeed,short_tag,indentation'
+    let g:php_cs_fixer_enable_default_mapping = 1 " Enable the mapping by default (<leader>pcd)
+    let g:php_cs_fixer_dry_run = 0                " Call command with dry-run option
+    let g:php_cs_fixer_verbose = 0                " Return the output of command if 1, else an inline information.
 endfunction
 "}}}
 " vdebug
@@ -224,17 +224,17 @@ nmap <Leader>t :Tlist<CR>
 " NeoComplete
 "{{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {
-      \   'autoload' : {
-      \     'insert' : 1,
-      \   },
-      \ }
+            \    'autoload' : {
+            \        'insert' : 1,
+            \    },
+            \}
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle)
-  let g:acp_enableAtStartup = 0
-  let g:neocomplete#enable_at_startup = 1
-  let g:neocomplete#enable_smart_case = 1
-  let g:neocomplete#sources#syntax#min_keyword_length = 3
-  let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+    let g:acp_enableAtStartup = 0
+    let g:neocomplete#enable_at_startup = 1
+    let g:neocomplete#enable_smart_case = 1
+    let g:neocomplete#sources#syntax#min_keyword_length = 3
+    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 endfunction
 "}}}
 " neosnippet.vim
@@ -242,28 +242,27 @@ endfunction
 " vim-snippets
 "{{{
 NeoBundleLazy 'Shougo/neosnippet.vim', {
-      \   'depends': ['honza/vim-snippets'],
-      \   'autoload': {
-      \     'insert': 1,
-      \   },
-      \ }
-NeoBundle 'Shougo/neosnippet-snippets'
+            \    'depends': ['honza/vim-snippets','shougo/neosnippet-snippets'],
+            \    'autoload': {
+            \        'insert': 1,
+            \    },
+            \}
 let s:hooks = neobundle#get_hooks('neosnippet.vim')
 function! s:hooks.on_source(bundle)
-  imap <C-k> <Plug>(neosnippet_expand_or_jump)
-  smap <C-k> <Plug>(neosnippet_expand_or_jump)
-  xmap <C-k> <Plug>(neosnippet_expand_target)
-  imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-        \ '\<Plug>(neosnippet_expand_or_jump)'
-        \: pumvisible() ? '\<C-n>' : '\<TAB>'
-  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-        \ '\<Plug>(neosnippet_expand_or_jump)'
-        \: '\<TAB>'
-  if has('conceal')
-    set conceallevel=2 concealcursor=i
-  endif
-  let g:neosnippet#enable_snipmate_compatibility = 1
-  let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/vim-snippets/snippets'
+    imap <C-k> <Plug>(neosnippet_expand_or_jump)
+    smap <C-k> <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k> <Plug>(neosnippet_expand_target)
+    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+                \ '\<Plug>(neosnippet_expand_or_jump)'
+                \: pumvisible() ? '\<C-n>' : '\<TAB>'
+    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+                \ '\<Plug>(neosnippet_expand_or_jump)'
+                \: '\<TAB>'
+    if has('conceal')
+        set conceallevel=2 concealcursor=i
+    endif
+    let g:neosnippet#enable_snipmate_compatibility = 1
+    let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/vim-snippets/snippets'
 endfunction
 "}}}
 " Align
@@ -316,15 +315,22 @@ nmap <Leader>cn :cnext<CR>
 nmap <Leader>cb :cprevious<CR>
 nmap <Leader>cc :cc
 augroup Grep
-  autocmd!
-  autocmd QuickfixCmdPost *grep* cwindow
+    autocmd!
+    autocmd QuickfixCmdPost *grep* cwindow
 augroup END
 "}}}
 " nerdtree
 "{{{
-NeoBundle 'scrooloose/nerdtree'
-let NERDTreeShowHidden=1
+NeoBundleLazy 'scrooloose/nerdtree', {
+            \    'autoload' : {
+            \        'commands' : ['NERDTree'],
+            \    },
+            \}
 nmap <Leader>n :NERDTree<CR>
+let s:hooks = neobundle#get_hooks('nerdtree')
+function! s:hooks.on_source(bundle)
+    let NERDTreeShowHidden=1
+endfunction
 "}}}
 " vim-fugitive
 " landscape
@@ -340,52 +346,52 @@ nmap <Leader>grm :Gremove<CR>
 nmap <Leader>gdiff :Gdiff<CR>
 nmap <Leader>gcommit :Gcommit
 let g:lightline = {
-      \   'colorscheme': 'landscape',
-      \   'mode_map': { 'c': 'NORMAL' },
-      \   'active': {
-      \     'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
-      \   },
-      \   'component_function': {
-      \     'modified': 'MyModified',
-      \     'readonly': 'MyReadonly',
-      \     'fugitive': 'MyFugitive',
-      \     'filename': 'MyFilename',
-      \     'fileformat': 'MyFileformat',
-      \     'filetype': 'MyFiletype',
-      \     'fileencoding': 'MyFileencoding',
-      \     'mode': 'MyMode',
-      \   },
-      \   'separator': { 'left': '', 'right': '' },
-      \   'subseparator': { 'left': '|', 'right': '|' }
-      \ }
+            \    'colorscheme': 'landscape',
+            \    'mode_map': { 'c': 'NORMAL' },
+            \    'active': {
+            \        'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+            \    },
+            \    'component_function': {
+            \        'modified': 'MyModified',
+            \        'readonly': 'MyReadonly',
+            \        'fugitive': 'MyFugitive',
+            \        'filename': 'MyFilename',
+            \        'fileformat': 'MyFileformat',
+            \        'filetype': 'MyFiletype',
+            \        'fileencoding': 'MyFileencoding',
+            \        'mode': 'MyMode',
+            \    },
+            \    'separator': { 'left': '', 'right': '' },
+            \    'subseparator': { 'left': '|', 'right': '|' }
+            \}
 function! MyModified()
-  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+    return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
 function! MyReadonly()
-  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
+    return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
 endfunction
 function! MyFilename()
-  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \  &ft == 'unite' ? unite#get_status_string() :
-        \  &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-        \ ('' != MyModified() ? ' ' . MyModified() : '')
+    return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+                \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+                \  &ft == 'unite' ? unite#get_status_string() :
+                \  &ft == 'vimshell' ? vimshell#get_status_string() :
+                \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+                \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 function! MyFugitive()
-  return exists('*fugitive#head') ? fugitive#head() : ''
+    return exists('*fugitive#head') ? fugitive#head() : ''
 endfunction
 function! MyFileformat()
-  return winwidth('.') > 70 ? &fileformat : ''
+    return winwidth('.') > 70 ? &fileformat : ''
 endfunction
 function! MyFiletype()
-  return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+    return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
 endfunction
 function! MyFileencoding()
-  return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+    return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
 endfunction
 function! MyMode()
-  return winwidth('.') > 60 ? lightline#mode() : ''
+    return winwidth('.') > 60 ? lightline#mode() : ''
 endfunction
 "}}}
 " Markdown with Vim
