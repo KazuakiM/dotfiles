@@ -59,19 +59,19 @@ set foldmethod=marker
 syntax on
 set t_Co=256
 augroup AdditionalHighlights
-  autocmd!
-  autocmd ColorScheme * highlight TabString     cterm=reverse ctermfg=darkgray
-  autocmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     '\t')
-  autocmd ColorScheme * highlight CrString      cterm=reverse ctermfg=darkred
-  autocmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      '\r')
-  autocmd ColorScheme * highlight CrlfString    cterm=reverse ctermfg=darkmagenta
-  autocmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    '\r\n')
-  autocmd ColorScheme * highlight WhitespaceEOL cterm=reverse ctermfg=lightmagenta
-  autocmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', '\s\+$')
-  autocmd ColorScheme * highlight ZenkakuSpace  cterm=reverse ctermfg=lightred
-  autocmd VimEnter,WinEnter * let w:m5 = matchadd('ZenkakuSpace',  '　')
+    autocmd!
+    autocmd ColorScheme * highlight TabString     cterm=reverse ctermfg=darkgray
+    autocmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     '\t')
+    autocmd ColorScheme * highlight CrString      cterm=reverse ctermfg=darkred
+    autocmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      '\r')
+    autocmd ColorScheme * highlight CrlfString    cterm=reverse ctermfg=darkmagenta
+    autocmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    '\r\n')
+    autocmd ColorScheme * highlight WhitespaceEOL cterm=reverse ctermfg=lightmagenta
+    autocmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', '\s\+$')
+    autocmd ColorScheme * highlight ZenkakuSpace  cterm=reverse ctermfg=lightred
+    autocmd VimEnter,WinEnter * let w:m5 = matchadd('ZenkakuSpace',  '　')
 
-  autocmd ColorScheme * highlight Visual cterm=reverse ctermfg=lightgreen
+    autocmd ColorScheme * highlight Visual cterm=reverse ctermfg=lightgreen
 augroup END
 colorscheme jellybeans
 " Show
@@ -179,6 +179,7 @@ function! s:hooks.on_source(bundle)
     let g:php_cs_fixer_dry_run = 0                " Call command with dry-run option
     let g:php_cs_fixer_verbose = 0                " Return the output of command if 1, else an inline information.
 endfunction
+" add .vimrc.local
 "}}}
 " vdebug
 "{{{
@@ -206,10 +207,11 @@ NeoBundle 'joonty/vdebug'
 "* <C-o>         :Return before file
 "* :ts           :Jump target file list
 NeoBundle 'szw/vim-tags'
+let g:vim_tags_auto_generate = 1
+nmap <Leader>tags :TagsGenerate
 nmap <Leader>] <C-]>
 nmap <Leader>[ <C-o>
 nmap <Leader>ts :ts<CR>
-let g:vim_tags_auto_generate = 1
 " add .vimrc.local
 "}}}
 " taglist.vim
