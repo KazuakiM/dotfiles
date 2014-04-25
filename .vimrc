@@ -267,13 +267,16 @@ function! s:hooks.on_source(bundle)
     let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/vim-snippets/snippets'
 endfunction
 "}}}
-" Align
+" vim-easy-align
 "{{{
 "# command memo
-"* ,t=   :Align base action
-"* ,acom :Align action only commentout
-NeoBundle 'vim-scripts/Align'
-let g:Align_xstrlen=3
+"* :EasyAlign :Align base action
+NeoBundleLazy 'junegunn/vim-easy-align', {
+            \    'autoload': {
+            \        'commands' : ['EasyAlign']
+            \    }
+            \}
+vmap <silent> <Enter> :EasyAlign<cr>
 "}}}
 " vim-ref
 "{{{
