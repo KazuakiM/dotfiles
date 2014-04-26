@@ -122,6 +122,7 @@ NeoBundle 'Shougo/vimproc', {
 " unite.vim
 "{{{
 NeoBundleLazy 'Shougo/unite.vim', {
+            \    'depends': ['zhaocai/unite-scriptnames'],
             \    'autoload' : {
             \        'commands' : ['Unite'],
             \    },
@@ -218,10 +219,17 @@ nmap <Leader>ts :ts<CR>
 "{{{
 "# command memo
 "* :Tlist :Show class, function and etc at left menu.
-NeoBundle 'vim-scripts/taglist.vim'
-let Tlist_Use_Right_Window = 1
-let Tlist_Exit_OnlyWindow = 1
+NeoBundleLazy 'vim-scripts/taglist.vim', {
+            \    'autoload' : {
+            \        'insert' : 1,
+            \    },
+            \}
 nmap <Leader>t :Tlist<CR>
+let s:hooks = neobundle#get_hooks('taglist.vim')
+function! s:hooks.on_source(bundle)
+    let Tlist_Use_Right_Window = 1
+    let Tlist_Exit_OnlyWindow = 1
+endfunction
 "}}}
 " NeoComplete
 "{{{
@@ -267,10 +275,22 @@ function! s:hooks.on_source(bundle)
     let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/vim-snippets/snippets'
 endfunction
 "}}}
+" gundo.vim
+"{{{
+NeoBundleLazy 'sjl/gundo.vim', {
+            \    'autoload' : {
+            \        'insert' : 1,
+            \    },
+            \}
+nmap u g-
+nmap <C-r> g+
+""}}}
 " vim-easy-align
 "{{{
 "# command memo
-"* :EasyAlign :Align base action
+"* Virtual mode selected range.
+"* exsamp:  And <Enter>*|
+"*     or:  And <Enter>*=
 NeoBundleLazy 'junegunn/vim-easy-align', {
             \    'autoload': {
             \        'commands' : ['EasyAlign']
