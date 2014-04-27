@@ -54,6 +54,7 @@ set hidden
 set backspace=indent,eol,start
 set vb t_vb= "
 set foldmethod=marker
+set matchpairs+=<:>
 " Color
 syntax on
 set t_Co=256
@@ -103,6 +104,8 @@ set ignorecase
 set smartcase
 set hlsearch
 set wrapscan
+cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
+cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 "}}}
 " NeoBundle
 "{{{
@@ -196,7 +199,7 @@ endfunction
 "* <F7>  : detach script from debugger
 "* <F9>  : run to cursor
 "* <F10> : set line breakpoint
-"* <F11> : show context variables (e.g. after "eval")
+"* <F11> : show context variables (e.g. after 'eval')
 "* <F12> : evaluate variable under cursor
 "* :Breakpoint <type> <args>: set a breakpoint of any type (see :help VdebugBreakpoints)
 "* :VdebugEval <code>: evaluate some code and display the result
@@ -234,7 +237,7 @@ function! s:hooks.on_source(bundle)
     let Tlist_Exit_OnlyWindow = 1
 endfunction
 "}}}
-" NeoComplete
+" neocomplete.vim
 "{{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {
             \    'autoload' : {
@@ -314,11 +317,20 @@ let g:ref_phpmanual_path=$HOME.'/.vim/ref/php-chunked-xhtml'
 "}}}
 " matchit.zip
 " vim-endwise
+" wildfire.vim
 "{{{
 "# command memo
 "* % :Move from start to end or end to start
+"* (Normal)Enter after Enter :Range up selected words.
+"* (Normal)S-Enter           :Range down selected words.
 NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'tpope/vim-endwise'
+NeoBundle 'gcmt/wildfire.vim'
+let g:wildfire_water_map = '<S-Enter>'
+let g:wildfire_objects = {
+            \    '*' : ["i'", 'i"', 'i)', 'i]', 'i}', 'ip'],
+            \    'html,xml' : ['at'],
+            \}
 "}}}
 " vim-surround
 "{{{
