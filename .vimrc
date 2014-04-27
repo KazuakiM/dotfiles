@@ -2,7 +2,7 @@
 "{{{
 "   :help internal-variables
 "{{{
-"-----------------------------------------------------------------------------------------------------------
+"----------------------------------------------------------------------------------------------------------------------------------
 " buffer-variable    b:   Local to the current buffer.
 " window-variable    w:   Local to the current window.
 " tabpage-variable   t:   Local to the current tab page.
@@ -11,25 +11,24 @@
 " script-variable    s:   Local to a :source'ed Vim script.
 " function-argument  a:   Function argument (only inside a function).
 " vim-variable       v:   Global, predefined by Vim.
-"-----------------------------------------------------------------------------------------------------------
+"----------------------------------------------------------------------------------------------------------------------------------
 "}}}
 "   :help map
 "{{{
-"-----------------------------------------------------------------------------------------------------------
-"                                        modes:
-" commands:                              Normal Visual Select Operator-pending Insert Command-line Lang-Arg
-" :map   :noremap   :unmap   :mapclear    yes    yes    yes         yes          -         -          -
-" :nmap  :nnoremap  :nunmap  :nmapclear   yes     -      -           -           -         -          -
-" :vmap  :vnoremap  :vunmap  :vmapclear    -     yes    yes          -           -         -          -
-" :omap  :onoremap  :ounmap  :omapclear    -      -      -          yes          -         -          -
-" :vmap  :vnoremap  :vunmap  :vmapclear    -     yes    yes          -           -         -          -
-" :xmap  :xnoremap  :xunmap  :xmapclear    -     yes     -           -           -         -          -
-" :smap  :snoremap  :sunmap  :smapclear    -      -     yes          -           -         -          -
-" :map!  :noremap!  :unmap!  :mapclear!    -      -      -           -          yes       yes         -
-" :imap  :inoremap  :iunmap  :imapclear    -      -      -           -          yes        -          -
-" :cmap  :cnoremap  :cunmap  :cmapclear    -      -      -           -           -        yes         -
-" :lmap  :lnoremap  :lunmap  :lmapclear    -      -      -           -          yes*      yes*       yes*
-"-----------------------------------------------------------------------------------------------------------
+"----------------------------------------------------------------------------------------------------------------------------------
+" |commands:                                     |modes:                                                                          |
+" | Variables | Constants |  Unset  |  Destroy   | Normal | Visual | Select | Operator-pending | Insert | Command-line | Lang-Arg |
+" |   :map    | :noremap  | :unmap  | :mapclear  |  yes   |  yes   |  yes   |       yes        |   -    |      -       |    -     |
+" |   :nmap   | :nnoremap | :nunmap | :nmapclear |  yes   |   -    |   -    |        -         |   -    |      -       |    -     |
+" |   :vmap   | :vnoremap | :vunmap | :vmapclear |   -    |  yes   |  yes   |        -         |   -    |      -       |    -     |
+" |   :omap   | :onoremap | :ounmap | :omapclear |   -    |   -    |   -    |       yes        |   -    |      -       |    -     |
+" |   :xmap   | :xnoremap | :xunmap | :xmapclear |   -    |  yes   |   -    |        -         |   -    |      -       |    -     |
+" |   :smap   | :snoremap | :sunmap | :smapclear |   -    |   -    |  yes   |        -         |   -    |      -       |    -     |
+" |   :map!   | :noremap! | :unmap! | :mapclear! |   -    |   -    |   -    |        -         |  yes   |     yes      |    -     |
+" |   :imap   | :inoremap | :iunmap | :imapclear |   -    |   -    |   -    |        -         |  yes   |      -       |    -     |
+" |   :cmap   | :cnoremap | :cunmap | :cmapclear |   -    |   -    |   -    |        -         |   -    |     yes      |    -     |
+" |   :lmap   | :lnoremap | :lunmap | :lmapclear |   -    |   -    |   -    |        -         |  yes*  |     yes*     |   yes*   |
+"----------------------------------------------------------------------------------------------------------------------------------
 "}}}
 "   color
 "{{{
@@ -209,10 +208,10 @@ NeoBundle 'joonty/vdebug'
 "* :ts           :Jump target file list
 NeoBundle 'szw/vim-tags'
 let g:vim_tags_auto_generate = 1
-nmap <Leader>tags :TagsGenerate
-nmap <Leader>] <C-]>
-nmap <Leader>[ <C-o>
-nmap <Leader>ts :ts<CR>
+nnoremap <Leader>tags :TagsGenerate
+nnoremap <Leader>] <C-]>
+nnoremap <Leader>[ <C-o>
+nnoremap <Leader>ts :ts<CR>
 " add .vimrc.local
 "}}}
 " taglist.vim
@@ -224,7 +223,7 @@ NeoBundleLazy 'vim-scripts/taglist.vim', {
             \        'insert' : 1,
             \    },
             \}
-nmap <Leader>t :Tlist<CR>
+nnoremap <Leader>t :Tlist<CR>
 let s:hooks = neobundle#get_hooks('taglist.vim')
 function! s:hooks.on_source(bundle)
     let Tlist_Use_Right_Window = 1
@@ -282,8 +281,12 @@ NeoBundleLazy 'sjl/gundo.vim', {
             \        'insert' : 1,
             \    },
             \}
-nmap u g-
-nmap <C-r> g+
+let s:hooks = neobundle#get_hooks('gundo.vim')
+function! s:hooks.on_source(bundle)
+    nnoremap u g-
+    nnoremap <C-r> g+
+    nnoremap <Leader>g :GundoToggle<CR>
+endfunction
 ""}}}
 " vim-easy-align
 "{{{
@@ -296,7 +299,7 @@ NeoBundleLazy 'junegunn/vim-easy-align', {
             \        'commands' : ['EasyAlign']
             \    }
             \}
-vmap <silent> <Enter> :EasyAlign<cr>
+vnoremap <silent> <Enter> :EasyAlign<CR>
 "}}}
 " vim-ref
 "{{{
@@ -335,10 +338,10 @@ set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
 set runtimepath+=$HOME/.vim/qfixapp/
 let QFixWin_EnableMode = 1
 let QFix_UseLocationList = 1
-nmap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
-nmap <Leader>cn :cnext<CR>
-nmap <Leader>cb :cprevious<CR>
-nmap <Leader>cc :cc
+nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
+nnoremap <Leader>cn :cnext<CR>
+nnoremap <Leader>cb :cprevious<CR>
+nnoremap <Leader>cc :cc
 augroup Grep
     autocmd!
     autocmd QuickfixCmdPost *grep* cwindow
@@ -351,7 +354,7 @@ NeoBundleLazy 'scrooloose/nerdtree', {
             \        'commands' : ['NERDTree'],
             \    },
             \}
-nmap <Leader>n :NERDTree<CR>
+nnoremap <Leader>n :NERDTree<CR>
 let s:hooks = neobundle#get_hooks('nerdtree')
 function! s:hooks.on_source(bundle)
     let NERDTreeShowHidden=1
@@ -364,12 +367,12 @@ endfunction
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'itchyny/landscape.vim'
 NeoBundle 'itchyny/lightline.vim'
-nmap <Leader>gstatus :Gstatus<CR>
-nmap <Leader>glog :Glog<CR>
-nmap <Leader>gadd :Gwrite<CR>
-nmap <Leader>grm :Gremove<CR>
-nmap <Leader>gdiff :Gdiff<CR>
-nmap <Leader>gcommit :Gcommit
+nnoremap <Leader>gstatus :Gstatus<CR>
+nnoremap <Leader>glog :Glog<CR>
+nnoremap <Leader>gadd :Gwrite<CR>
+nnoremap <Leader>grm :Gremove<CR>
+nnoremap <Leader>gdiff :Gdiff<CR>
+nnoremap <Leader>gcommit :Gcommit
 let g:lightline = {
             \    'colorscheme': 'landscape',
             \    'mode_map': { 'c': 'NORMAL' },
@@ -429,7 +432,7 @@ endfunction
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'yuratomo/w3m.vim'
 NeoBundle 'plasticboy/vim-markdown'
-nmap <Leader>r :QuickRun<CR>
+nnoremap <Leader>r :QuickRun<CR>
 let g:quickrun_config = {}
 let g:quickrun_config['markdown'] = {
             \    'outputter' : 'file',
@@ -467,9 +470,9 @@ unlet s:hook
 "{{{
 NeoBundle 'glidenote/memolist.vim'
 let g:memolist_path = '$HOME/.vim/memo'
-nmap <Leader>mn  :MemoNew<CR>
-nmap <Leader>ml  :MemoList<CR>
-nmap <Leader>mg  :MemoGrep<CR>
+nnoremap <Leader>mn  :MemoNew<CR>
+nnoremap <Leader>ml  :MemoList<CR>
+nnoremap <Leader>mg  :MemoGrep<CR>
 "}}}
 " jellybeans
 "{{{
