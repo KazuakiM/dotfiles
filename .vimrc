@@ -83,8 +83,12 @@ set cursorcolumn
 " Clipboard
 set clipboard+=autoselect,unnamed
 " Backup
-set nobackup
-set noswapfile
+set backup
+set backupdir=$HOME/.vim/backup
+set swapfile
+set directory=$HOME/.vim/swap
+set undofile
+set undodir=$HOME/.vim/gundo
 " Indentation
 set tabstop=4
 set softtabstop=4

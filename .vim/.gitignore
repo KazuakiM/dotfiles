@@ -1,10 +1,12 @@
 # Regularly update & git NG files.
+/backup/*
 /bundle/*
 /colors/*
-/ref/*
-/tags/*
+/gundo/*
 /phpCsFixer/*
 /qfixapp/*
-/gundo/*
+/ref/*
+/swap/*
+/tags/*
 
 # Memos file manage.
