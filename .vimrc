@@ -231,13 +231,14 @@ nnoremap <Leader>ts :ts<CR>
 "* :Tlist :Show class, function and etc at left menu.
 NeoBundleLazy 'vim-scripts/taglist.vim', {
             \    'autoload' : {
+            \        'commands' : ['Tlist'],
             \        'insert' : 1,
             \    },
             \}
+let Tlist_Use_Right_Window = 1
 nnoremap <Leader>t :Tlist<CR>
 let s:hooks = neobundle#get_hooks('taglist.vim')
 function! s:hooks.on_source(bundle)
-    let Tlist_Use_Right_Window = 1
     let Tlist_Exit_OnlyWindow = 1
 endfunction
 "}}}
