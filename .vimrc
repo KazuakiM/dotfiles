@@ -130,13 +130,28 @@ NeoBundle 'Shougo/vimproc', {
             \}
 "}}}
 " unite.vim
+" unite-scriptnames
 "{{{
 NeoBundleLazy 'Shougo/unite.vim', {
-            \    'depends': ['zhaocai/unite-scriptnames'],
             \    'autoload' : {
-            \        'commands' : ['Unite'],
+            \        'commands' : ['Unite', 'UniteWithBufferDir'],
             \    },
             \}
+NeoBundleLazy 'zhaocai/unite-scriptnames', {
+            \    'autoload': {
+            \        'unite_sources': ['scriptnames'],
+            \    },
+            \}
+nnoremap [unite] <Nop>
+nmap <Leader>f [unite]
+nnoremap <silent> [unite]f  :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> [unite]b  :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]r  :<C-u>Unite register<CR>
+nnoremap <silent> [unite]m  :<C-u>Unite file_mru<CR>
+nnoremap <silent> [unite]c  :<C-u>Unite bookmark<CR>
+nnoremap <silent> [unite]sn :<C-u>Unite scriptnames<CR>
+nnoremap <silent> [unite]t  :<C-u>Unite tab<CR>
+nnoremap <silent> [unite]w  :<C-u>Unite window<CR>
 "}}}
 " vital.vim
 "{{{
