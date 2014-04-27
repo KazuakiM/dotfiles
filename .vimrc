@@ -55,24 +55,28 @@ set backspace=indent,eol,start
 set vb t_vb= "
 set foldmethod=marker
 set matchpairs+=<:>
+augroup MyAutoCmd
+    autocmd!
+augroup END
+
+vnoremap jj <Esc>
+inoremap jj <Esc>
 " Color
 syntax on
 set t_Co=256
-augroup AdditionalHighlights
-    autocmd!
-    autocmd ColorScheme * highlight TabString     cterm=reverse ctermfg=darkgray
-    autocmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     '\t')
-    autocmd ColorScheme * highlight CrString      cterm=reverse ctermfg=darkred
-    autocmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      '\r')
-    autocmd ColorScheme * highlight CrlfString    cterm=reverse ctermfg=darkmagenta
-    autocmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    '\r\n')
-    autocmd ColorScheme * highlight WhitespaceEOL cterm=reverse ctermfg=lightmagenta
-    autocmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', '\s\+$')
-    autocmd ColorScheme * highlight ZenkakuSpace  cterm=reverse ctermfg=lightred
-    autocmd VimEnter,WinEnter * let w:m5 = matchadd('ZenkakuSpace',  '　')
-
-    autocmd ColorScheme * highlight Visual cterm=reverse ctermfg=lightgreen
-augroup END
+" Check space and newLineCode.
+autocmd MyAutoCmd ColorScheme * highlight TabString     cterm=reverse ctermfg=darkgray
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     '\t')
+autocmd MyAutoCmd ColorScheme * highlight CrString      cterm=reverse ctermfg=darkred
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      '\r')
+autocmd MyAutoCmd ColorScheme * highlight CrlfString    cterm=reverse ctermfg=darkmagenta
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    '\r\n')
+autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL cterm=reverse ctermfg=lightmagenta
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', '\s\+$')
+autocmd MyAutoCmd ColorScheme * highlight ZenkakuSpace  cterm=reverse ctermfg=lightred
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m5 = matchadd('ZenkakuSpace',  '　')
+" Update Visual mode target colorScheme.
+autocmd MyAutoCmd ColorScheme * highlight Visual cterm=reverse ctermfg=lightgreen
 colorscheme jellybeans
 " Show
 set title
@@ -358,10 +362,7 @@ nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of("vi
 nnoremap <Leader>cn :cnext<CR>
 nnoremap <Leader>cb :cprevious<CR>
 nnoremap <Leader>cc :cc
-augroup Grep
-    autocmd!
-    autocmd QuickfixCmdPost *grep* cwindow
-augroup END
+autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 "}}}
 " nerdtree
 "{{{
@@ -371,10 +372,7 @@ NeoBundleLazy 'scrooloose/nerdtree', {
             \    },
             \}
 nnoremap <Leader>n :NERDTree<CR>
-let s:hooks = neobundle#get_hooks('nerdtree')
-function! s:hooks.on_source(bundle)
-    let NERDTreeShowHidden=1
-endfunction
+let NERDTreeShowHidden=1
 "}}}
 " vim-fugitive
 " landscape
@@ -497,7 +495,7 @@ NeoBundle 'nanotech/jellybeans.vim'
 filetype plugin indent on
 " FileType
 "{{{
-autocmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} set filetype=markdown
+autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} set filetype=markdown
 "}}}
 " Extra local setting
 "{{{
