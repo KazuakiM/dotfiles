@@ -326,7 +326,7 @@ let g:ref_phpmanual_path=$HOME.'/.vim/ref/php-chunked-xhtml'
 NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'tpope/vim-endwise'
 NeoBundle 'gcmt/wildfire.vim'
-let g:wildfire_water_map = '<S-Enter>'
+let g:wildfire_water_map = '<BS>'
 let g:wildfire_objects = {
             \    '*' : ["i'", 'i"', 'i)', 'i]', 'i}', 'ip'],
             \    'html,xml' : ['at'],
