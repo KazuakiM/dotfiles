@@ -315,6 +315,24 @@ function! s:hooks.on_source(bundle)
     nnoremap <Leader>g :GundoToggle<CR>
 endfunction
 ""}}}
+" sudo.vim
+"{{{
+"# command memo
+"* ':w sudo:%'          :sudo save
+"* ':w sudo:<filename>' :sudo another name save
+"* ':e sudo:%'          :sudo open
+NeoBundleLazy 'vim-scripts/sudo.vim', {
+            \    'autoload' : {
+            \        'insert' : 1,
+            \    },
+            \}
+let s:hooks = neobundle#get_hooks('sudo.vim')
+function! s:hooks.on_source(bundle)
+    nnoremap <Leader>sudow :w<Space>sudo:%<CR>
+    nnoremap <Leader>sudoa :w<Space>sudo:
+    nnoremap <Leader>sudor :e<Space>sudo:%<CR>
+endfunction
+"}}}
 " vim-easy-align
 "{{{
 "# command memo
