@@ -142,16 +142,26 @@ NeoBundleLazy 'zhaocai/unite-scriptnames', {
             \        'unite_sources': ['scriptnames'],
             \    },
             \}
+NeoBundleLazy 'pasela/unite-webcolorname', {
+            \    'autoload': {
+            \        'unite_sources': ['webcolorname'],
+            \    },
+            \}
+
+let g:unite_enable_start_insert=1
 nnoremap [unite] <Nop>
-nmap <Leader>f [unite]
-nnoremap <silent> [unite]f  :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> [unite]b  :<C-u>Unite buffer<CR>
-nnoremap <silent> [unite]r  :<C-u>Unite register<CR>
-nnoremap <silent> [unite]m  :<C-u>Unite file_mru<CR>
-nnoremap <silent> [unite]c  :<C-u>Unite bookmark<CR>
-nnoremap <silent> [unite]sn :<C-u>Unite scriptnames<CR>
-nnoremap <silent> [unite]t  :<C-u>Unite tab<CR>
-nnoremap <silent> [unite]w  :<C-u>Unite window<CR>
+nmap <Leader>u [unite]
+nnoremap <silent> [unite]f   :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> [unite]b   :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]r   :<C-u>Unite register<CR>
+nnoremap <silent> [unite]m   :<C-u>Unite file_mru<CR>
+nnoremap <silent> [unite]c   :<C-u>Unite bookmark<CR>
+nnoremap <silent> [unite]t   :<C-u>Unite tab<CR>
+nnoremap <silent> [unite]w   :<C-u>Unite window<CR>
+nnoremap <silent> [unite]sn  :<C-u>Unite scriptnames<CR>
+nnoremap <silent> [unite]web :<C-u>Unite webcolorname<CR>
+autocmd MyAutoCmd FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+autocmd MyAutoCmd FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 "}}}
 " vital.vim
 "{{{
