@@ -55,24 +55,28 @@ set backspace=indent,eol,start
 set vb t_vb= "
 set foldmethod=marker
 set matchpairs+=<:>
+augroup MyAutoCmd
+    autocmd!
+augroup END
+
+vnoremap jj <Esc>
+inoremap jj <Esc>
 " Color
 syntax on
 set t_Co=256
-augroup AdditionalHighlights
-    autocmd!
-    autocmd ColorScheme * highlight TabString     cterm=reverse ctermfg=darkgray
-    autocmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     '\t')
-    autocmd ColorScheme * highlight CrString      cterm=reverse ctermfg=darkred
-    autocmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      '\r')
-    autocmd ColorScheme * highlight CrlfString    cterm=reverse ctermfg=darkmagenta
-    autocmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    '\r\n')
-    autocmd ColorScheme * highlight WhitespaceEOL cterm=reverse ctermfg=lightmagenta
-    autocmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', '\s\+$')
-    autocmd ColorScheme * highlight ZenkakuSpace  cterm=reverse ctermfg=lightred
-    autocmd VimEnter,WinEnter * let w:m5 = matchadd('ZenkakuSpace',  '　')
-
-    autocmd ColorScheme * highlight Visual cterm=reverse ctermfg=lightgreen
-augroup END
+" Check space and newLineCode.
+autocmd MyAutoCmd ColorScheme * highlight TabString     cterm=reverse ctermfg=darkgray
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     '\t')
+autocmd MyAutoCmd ColorScheme * highlight CrString      cterm=reverse ctermfg=darkred
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      '\r')
+autocmd MyAutoCmd ColorScheme * highlight CrlfString    cterm=reverse ctermfg=darkmagenta
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    '\r\n')
+autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL cterm=reverse ctermfg=lightmagenta
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', '\s\+$')
+autocmd MyAutoCmd ColorScheme * highlight ZenkakuSpace  cterm=reverse ctermfg=lightred
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m5 = matchadd('ZenkakuSpace',  '　')
+" Update Visual mode target colorScheme.
+autocmd MyAutoCmd ColorScheme * highlight Visual cterm=reverse ctermfg=lightgreen
 colorscheme jellybeans
 " Show
 set title
@@ -126,13 +130,38 @@ NeoBundle 'Shougo/vimproc', {
             \}
 "}}}
 " unite.vim
+" unite-scriptnames
 "{{{
 NeoBundleLazy 'Shougo/unite.vim', {
-            \    'depends': ['zhaocai/unite-scriptnames'],
             \    'autoload' : {
-            \        'commands' : ['Unite'],
+            \        'commands' : ['Unite', 'UniteWithBufferDir'],
             \    },
             \}
+NeoBundleLazy 'zhaocai/unite-scriptnames', {
+            \    'autoload': {
+            \        'unite_sources': ['scriptnames'],
+            \    },
+            \}
+NeoBundleLazy 'pasela/unite-webcolorname', {
+            \    'autoload': {
+            \        'unite_sources': ['webcolorname'],
+            \    },
+            \}
+
+let g:unite_enable_start_insert=1
+nnoremap [unite] <Nop>
+nmap <Leader>u [unite]
+nnoremap <silent> [unite]f   :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> [unite]b   :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]r   :<C-u>Unite register<CR>
+nnoremap <silent> [unite]m   :<C-u>Unite file_mru<CR>
+nnoremap <silent> [unite]c   :<C-u>Unite bookmark<CR>
+nnoremap <silent> [unite]t   :<C-u>Unite tab<CR>
+nnoremap <silent> [unite]w   :<C-u>Unite window<CR>
+nnoremap <silent> [unite]sn  :<C-u>Unite scriptnames<CR>
+nnoremap <silent> [unite]web :<C-u>Unite webcolorname<CR>
+autocmd MyAutoCmd FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+autocmd MyAutoCmd FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 "}}}
 " vital.vim
 "{{{
@@ -227,13 +256,14 @@ nnoremap <Leader>ts :ts<CR>
 "* :Tlist :Show class, function and etc at left menu.
 NeoBundleLazy 'vim-scripts/taglist.vim', {
             \    'autoload' : {
+            \        'commands' : ['Tlist'],
             \        'insert' : 1,
             \    },
             \}
+let Tlist_Use_Right_Window = 1
 nnoremap <Leader>t :Tlist<CR>
 let s:hooks = neobundle#get_hooks('taglist.vim')
 function! s:hooks.on_source(bundle)
-    let Tlist_Use_Right_Window = 1
     let Tlist_Exit_OnlyWindow = 1
 endfunction
 "}}}
@@ -295,6 +325,24 @@ function! s:hooks.on_source(bundle)
     nnoremap <Leader>g :GundoToggle<CR>
 endfunction
 ""}}}
+" sudo.vim
+"{{{
+"# command memo
+"* ':w sudo:%'          :sudo save
+"* ':w sudo:<filename>' :sudo another name save
+"* ':e sudo:%'          :sudo open
+NeoBundleLazy 'vim-scripts/sudo.vim', {
+            \    'autoload' : {
+            \        'insert' : 1,
+            \    },
+            \}
+let s:hooks = neobundle#get_hooks('sudo.vim')
+function! s:hooks.on_source(bundle)
+    nnoremap <Leader>sudow :w<Space>sudo:%<CR>
+    nnoremap <Leader>sudoa :w<Space>sudo:
+    nnoremap <Leader>sudor :e<Space>sudo:%<CR>
+endfunction
+"}}}
 " vim-easy-align
 "{{{
 "# command memo
@@ -358,10 +406,7 @@ nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of("vi
 nnoremap <Leader>cn :cnext<CR>
 nnoremap <Leader>cb :cprevious<CR>
 nnoremap <Leader>cc :cc
-augroup Grep
-    autocmd!
-    autocmd QuickfixCmdPost *grep* cwindow
-augroup END
+autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 "}}}
 " nerdtree
 "{{{
@@ -371,10 +416,7 @@ NeoBundleLazy 'scrooloose/nerdtree', {
             \    },
             \}
 nnoremap <Leader>n :NERDTree<CR>
-let s:hooks = neobundle#get_hooks('nerdtree')
-function! s:hooks.on_source(bundle)
-    let NERDTreeShowHidden=1
-endfunction
+let NERDTreeShowHidden=1
 "}}}
 " vim-fugitive
 " landscape
@@ -497,7 +539,7 @@ NeoBundle 'nanotech/jellybeans.vim'
 filetype plugin indent on
 " FileType
 "{{{
-autocmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} set filetype=markdown
+autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} set filetype=markdown
 "}}}
 " Extra local setting
 "{{{
