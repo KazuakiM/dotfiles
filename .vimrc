@@ -58,7 +58,6 @@ set matchpairs+=<:>
 augroup MyAutoCmd
     autocmd!
 augroup END
-
 vnoremap jj <Esc>
 inoremap jj <Esc>
 " Color
@@ -147,7 +146,11 @@ NeoBundleLazy 'pasela/unite-webcolorname', {
             \        'unite_sources': ['webcolorname'],
             \    },
             \}
-
+NeoBundleLazy 'ujihisa/unite-colorscheme', {
+            \    'autoload': {
+            \        'unite_sources': ['colorscheme'],
+            \    },
+            \}
 let g:unite_enable_start_insert=1
 nnoremap [unite] <Nop>
 nmap <Leader>u [unite]
@@ -160,6 +163,7 @@ nnoremap <silent> [unite]t   :<C-u>Unite tab<CR>
 nnoremap <silent> [unite]w   :<C-u>Unite window<CR>
 nnoremap <silent> [unite]sn  :<C-u>Unite scriptnames<CR>
 nnoremap <silent> [unite]web :<C-u>Unite webcolorname<CR>
+nnoremap <silent> [unite]cs  :<C-u>Unite -auto-preview colorscheme<CR>
 autocmd MyAutoCmd FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 "}}}
@@ -532,9 +536,11 @@ nnoremap <Leader>mn  :MemoNew<CR>
 nnoremap <Leader>ml  :MemoList<CR>
 nnoremap <Leader>mg  :MemoGrep<CR>
 "}}}
-" jellybeans
+" ColorScheme
 "{{{
 NeoBundle 'nanotech/jellybeans.vim'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'tomasr/molokai'
 "}}}
 filetype plugin indent on
 " FileType
