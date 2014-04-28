@@ -3,14 +3,14 @@
 "   :help internal-variables
 "{{{
 "----------------------------------------------------------------------------------------------------------------------------------
-" buffer-variable    b:   Local to the current buffer.
-" window-variable    w:   Local to the current window.
-" tabpage-variable   t:   Local to the current tab page.
-" global-variable    g:   Global.
-" local-variable     l:   Local to a function.
-" script-variable    s:   Local to a :source'ed Vim script.
-" function-argument  a:   Function argument (only inside a function).
-" vim-variable       v:   Global, predefined by Vim.
+"| b: | buffer-variable   | Local to the current buffer.                |
+"| w: | window-variable   | Local to the current window.                |
+"| t: | tabpage-variable  | Local to the current tab page.              |
+"| g: | global-variable   | Global.                                     |
+"| l: | local-variable    | Local to a function.                        |
+"| s: | script-variable   | Local to a :source'ed Vim script.           |
+"| a: | function-argument | Function argument (only inside a function). |
+"| v: | vim-variable      | Global, predefined by Vim.                  |
 "----------------------------------------------------------------------------------------------------------------------------------
 "}}}
 "   :help map
@@ -91,8 +91,8 @@ set backup
 set backupdir=$HOME/.vim/backup
 set swapfile
 set directory=$HOME/.vim/swap
-set undofile
-set undodir=$HOME/.vim/gundo
+"set undofile
+"set undodir=$HOME/.vim/gundo
 " Indentation
 set tabstop=4
 set softtabstop=4
@@ -124,9 +124,7 @@ NeoBundle 'Shougo/vimproc', {
             \        'windows' : 'make -f make_mingw32.mak',
             \        'cygwin'  : 'make -f make_cygwin.mak',
             \        'mac'     : 'make -f make_mac.mak',
-            \        'unix'    : 'make -f make_unix.mak',
-            \    },
-            \}
+            \        'unix'    : 'make -f make_unix.mak',},}
 "}}}
 " unite.vim
 " unite-scriptnames
@@ -135,29 +133,21 @@ NeoBundle 'Shougo/vimproc', {
 "{{{
 NeoBundleLazy 'Shougo/unite.vim', {
             \    'autoload' : {
-            \        'commands' : ['Unite', 'UniteWithBufferDir'],
-            \    },
-            \}
+            \        'commands' : ['Unite', 'UniteWithBufferDir'],},}
 NeoBundleLazy 'zhaocai/unite-scriptnames', {
             \    'autoload': {
-            \        'unite_sources': ['scriptnames'],
-            \    },
-            \}
+            \        'unite_sources': ['scriptnames'],},}
 NeoBundleLazy 'pasela/unite-webcolorname', {
             \    'autoload': {
-            \        'unite_sources': ['webcolorname'],
-            \    },
-            \}
+            \        'unite_sources': ['webcolorname'],},}
 NeoBundleLazy 'ujihisa/unite-colorscheme', {
             \    'autoload': {
-            \        'unite_sources': ['colorscheme'],
-            \    },
-            \}
+            \        'unite_sources': ['colorscheme'],},}
 let g:unite_enable_start_insert=1
-let g:unite_source_grep_command = 'ag'
-let g:unite_source_grep_default_opts = '--nocolor --nogroup'
-let g:unite_source_grep_recursive_opt = ''
-let g:unite_source_grep_max_candidates = 200
+let g:unite_source_grep_command='ag'
+let g:unite_source_grep_default_opts='--nocolor --nogroup'
+let g:unite_source_grep_recursive_opt=''
+let g:unite_source_grep_max_candidates=200
 nnoremap [unite] <Nop>
 nmap <Leader>u [unite]
 " default plugins
@@ -184,10 +174,8 @@ NeoBundle 'vim-jp/vital.vim'
 "{{{
 NeoBundleLazy 'vim-jp/vimdoc-ja', {
             \    'autoload' : {
-            \        'commands' : ['help'],
-            \    },
-            \}
-let s:hooks = neobundle#get('vimdoc-ja')
+            \        'commands' : ['help'],},}
+let s:hooks = neobundle#get_hooks('vimdoc-ja')
 function! s:hooks.on_source(bundle)
     helptags $HOME/.vim/bundle/vimdoc-ja/doc/
 endfunction
@@ -196,10 +184,8 @@ endfunction
 "{{{
 NeoBundleLazy 'scrooloose/syntastic', {
             \    'autoload' : {
-            \        'insert' : 1,
-            \    },
-            \}
-let s:hooks = neobundle#get('syntastic')
+            \        'insert' : 1,},}
+let s:hooks = neobundle#get_hooks('syntastic')
 function! s:hooks.on_source(bundle)
     let g:syntastic_enable_signs=1
     let g:syntastic_auto_loc_list=2
@@ -209,24 +195,22 @@ endfunction
 "{{{
 NeoBundleLazy 'stephpy/vim-php-cs-fixer', {
             \    'autoload' : {
-            \        'filetypes': 'php',
-            \    },
-            \}
-let s:hooks = neobundle#get('vim-php-cs-fixer')
+            \        'filetypes': 'php',},}
+let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
 function! s:hooks.on_source(bundle)
     " If php-cs-fixer is in $PATH, you don't need to define line below
     if has('mac')
     else
         let g:php_cs_fixer_path = '$HOME/.vim/phpCsFixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
     endif
-    let g:php_cs_fixer_level = 'all'              " which level ?
-    let g:php_cs_fixer_config = 'default'         " configuration
-    let g:php_cs_fixer_php_path = 'php'           " Path to PHP
+    let g:php_cs_fixer_level='all'              " which level ?
+    let g:php_cs_fixer_config='default'         " configuration
+    let g:php_cs_fixer_php_path='php'           " Path to PHP
     " If you want to define specific fixers:
     "let g:php_cs_fixer_fixers_list = 'linefeed,short_tag,indentation'
-    let g:php_cs_fixer_enable_default_mapping = 1 " Enable the mapping by default (<leader>pcd)
-    let g:php_cs_fixer_dry_run = 0                " Call command with dry-run option
-    let g:php_cs_fixer_verbose = 0                " Return the output of command if 1, else an inline information.
+    let g:php_cs_fixer_enable_default_mapping=1 " Enable the mapping by default (<leader>pcd)
+    let g:php_cs_fixer_dry_run=0                " Call command with dry-run option
+    let g:php_cs_fixer_verbose=0                " Return the output of command if 1, else an inline information.
 endfunction
 " add .vimrc.local
 "}}}
@@ -269,12 +253,10 @@ nnoremap <Leader>ts :ts<CR>
 "* :Tlist :Show class, function and etc at left menu.
 NeoBundleLazy 'vim-scripts/taglist.vim', {
             \    'autoload' : {
-            \        'commands' : ['Tlist'],
-            \    },
-            \}
+            \        'commands' : ['Tlist'],},}
 let Tlist_Use_Right_Window = 1
 nnoremap <Leader>t :Tlist<CR>
-let s:hooks = neobundle#get('taglist.vim')
+let s:hooks = neobundle#get_hooks('taglist.vim')
 function! s:hooks.on_source(bundle)
     let Tlist_Exit_OnlyWindow = 1
 endfunction
@@ -283,16 +265,14 @@ endfunction
 "{{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {
             \    'autoload' : {
-            \        'insert' : 1,
-            \    },
-            \}
-let s:hooks = neobundle#get('neocomplete.vim')
+            \        'insert' : 1,},}
+let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle)
-    let g:acp_enableAtStartup = 0
-    let g:neocomplete#enable_at_startup = 1
-    let g:neocomplete#enable_smart_case = 1
-    let g:neocomplete#sources#syntax#min_keyword_length = 3
-    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+    let g:acp_enableAtStartup=0
+    let g:neocomplete#enable_at_startup=1
+    let g:neocomplete#enable_smart_case=1
+    let g:neocomplete#sources#syntax#min_keyword_length=3
+    let g:neocomplete#lock_buffer_name_pattern='\*ku\*'
 endfunction
 "}}}
 " neosnippet.vim
@@ -302,10 +282,8 @@ endfunction
 NeoBundleLazy 'Shougo/neosnippet.vim', {
             \    'depends': ['honza/vim-snippets','shougo/neosnippet-snippets'],
             \    'autoload': {
-            \        'insert': 1,
-            \    },
-            \}
-let s:hooks = neobundle#get('neosnippet.vim')
+            \        'insert': 1,},}
+let s:hooks = neobundle#get_hooks('neosnippet.vim')
 function! s:hooks.on_source(bundle)
     imap <C-k> <Plug>(neosnippet_expand_or_jump)
     smap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -327,10 +305,8 @@ endfunction
 "{{{
 NeoBundleLazy 'sjl/gundo.vim', {
             \    'autoload' : {
-            \        'insert' : 1,
-            \    },
-            \}
-let s:hooks = neobundle#get('gundo.vim')
+            \        'insert' : 1,},}
+let s:hooks = neobundle#get_hooks('gundo.vim')
 function! s:hooks.on_source(bundle)
     nnoremap u g-
     nnoremap <C-r> g+
@@ -345,10 +321,8 @@ endfunction
 "* ':e sudo:%'          :sudo open
 NeoBundleLazy 'vim-scripts/sudo.vim', {
             \    'autoload' : {
-            \        'insert' : 1,
-            \    },
-            \}
-let s:hooks = neobundle#get('sudo.vim')
+            \        'insert' : 1,},}
+let s:hooks = neobundle#get_hooks('sudo.vim')
 function! s:hooks.on_source(bundle)
     nnoremap <Leader>sudow :w<Space>sudo:%<CR>
     nnoremap <Leader>sudoa :w<Space>sudo:
@@ -363,10 +337,8 @@ endfunction
 "*     or:  And <Enter>*=
 NeoBundleLazy 'junegunn/vim-easy-align', {
             \    'autoload': {
-            \        'commands' : ['EasyAlign']
-            \    }
-            \}
-vnoremap <silent> <Enter> :EasyAlign<CR>
+            \        'commands' : ['EasyAlign'],},}
+vnoremap <silent> <Leader>a :EasyAlign<CR>
 "}}}
 " vim-ref
 "{{{
@@ -424,9 +396,7 @@ autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 "{{{
 NeoBundleLazy 'scrooloose/nerdtree', {
             \    'autoload' : {
-            \        'commands' : ['NERDTree'],
-            \    },
-            \}
+            \        'commands' : ['NERDTree'],},}
 nnoremap <Leader>n :NERDTree<CR>
 let NERDTreeShowHidden=1
 "}}}
