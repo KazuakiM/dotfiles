@@ -160,13 +160,16 @@ let g:unite_source_grep_recursive_opt = ''
 let g:unite_source_grep_max_candidates = 200
 nnoremap [unite] <Nop>
 nmap <Leader>u [unite]
-nnoremap <silent> [unite]f   :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+" default plugins
 nnoremap <silent> [unite]b   :<C-u>Unite buffer<CR>
-nnoremap <silent> [unite]r   :<C-u>Unite register<CR>
-nnoremap <silent> [unite]m   :<C-u>Unite file_mru<CR>
 nnoremap <silent> [unite]c   :<C-u>Unite bookmark<CR>
+nnoremap <silent> [unite]f   :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> [unite]mru :<C-u>Unite file_mru<CR>
+nnoremap <silent> [unite]map :<C-u>Unite mapping<CR>
+nnoremap <silent> [unite]r   :<C-u>Unite register<CR>
 nnoremap <silent> [unite]t   :<C-u>Unite tab<CR>
 nnoremap <silent> [unite]w   :<C-u>Unite window<CR>
+" add plugins
 nnoremap <silent> [unite]sn  :<C-u>Unite scriptnames<CR>
 nnoremap <silent> [unite]web :<C-u>Unite webcolorname<CR>
 nnoremap <silent> [unite]cs  :<C-u>Unite -auto-preview colorscheme<CR>
@@ -184,7 +187,7 @@ NeoBundleLazy 'vim-jp/vimdoc-ja', {
             \        'commands' : ['help'],
             \    },
             \}
-let s:hooks = neobundle#get_hooks('vimdoc-ja')
+let s:hooks = neobundle#get('vimdoc-ja')
 function! s:hooks.on_source(bundle)
     helptags $HOME/.vim/bundle/vimdoc-ja/doc/
 endfunction
@@ -196,7 +199,7 @@ NeoBundleLazy 'scrooloose/syntastic', {
             \        'insert' : 1,
             \    },
             \}
-let s:hooks = neobundle#get_hooks('syntastic')
+let s:hooks = neobundle#get('syntastic')
 function! s:hooks.on_source(bundle)
     let g:syntastic_enable_signs=1
     let g:syntastic_auto_loc_list=2
@@ -209,7 +212,7 @@ NeoBundleLazy 'stephpy/vim-php-cs-fixer', {
             \        'filetypes': 'php',
             \    },
             \}
-let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
+let s:hooks = neobundle#get('vim-php-cs-fixer')
 function! s:hooks.on_source(bundle)
     " If php-cs-fixer is in $PATH, you don't need to define line below
     if has('mac')
@@ -271,7 +274,7 @@ NeoBundleLazy 'vim-scripts/taglist.vim', {
             \}
 let Tlist_Use_Right_Window = 1
 nnoremap <Leader>t :Tlist<CR>
-let s:hooks = neobundle#get_hooks('taglist.vim')
+let s:hooks = neobundle#get('taglist.vim')
 function! s:hooks.on_source(bundle)
     let Tlist_Exit_OnlyWindow = 1
 endfunction
@@ -283,7 +286,7 @@ NeoBundleLazy 'Shougo/neocomplete.vim', {
             \        'insert' : 1,
             \    },
             \}
-let s:hooks = neobundle#get_hooks('neocomplete.vim')
+let s:hooks = neobundle#get('neocomplete.vim')
 function! s:hooks.on_source(bundle)
     let g:acp_enableAtStartup = 0
     let g:neocomplete#enable_at_startup = 1
@@ -302,7 +305,7 @@ NeoBundleLazy 'Shougo/neosnippet.vim', {
             \        'insert': 1,
             \    },
             \}
-let s:hooks = neobundle#get_hooks('neosnippet.vim')
+let s:hooks = neobundle#get('neosnippet.vim')
 function! s:hooks.on_source(bundle)
     imap <C-k> <Plug>(neosnippet_expand_or_jump)
     smap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -327,7 +330,7 @@ NeoBundleLazy 'sjl/gundo.vim', {
             \        'insert' : 1,
             \    },
             \}
-let s:hooks = neobundle#get_hooks('gundo.vim')
+let s:hooks = neobundle#get('gundo.vim')
 function! s:hooks.on_source(bundle)
     nnoremap u g-
     nnoremap <C-r> g+
@@ -345,7 +348,7 @@ NeoBundleLazy 'vim-scripts/sudo.vim', {
             \        'insert' : 1,
             \    },
             \}
-let s:hooks = neobundle#get_hooks('sudo.vim')
+let s:hooks = neobundle#get('sudo.vim')
 function! s:hooks.on_source(bundle)
     nnoremap <Leader>sudow :w<Space>sudo:%<CR>
     nnoremap <Leader>sudoa :w<Space>sudo:
