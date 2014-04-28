@@ -130,6 +130,8 @@ NeoBundle 'Shougo/vimproc', {
 "}}}
 " unite.vim
 " unite-scriptnames
+" unite-webcolorname
+" unite-colorscheme
 "{{{
 NeoBundleLazy 'Shougo/unite.vim', {
             \    'autoload' : {
@@ -152,6 +154,10 @@ NeoBundleLazy 'ujihisa/unite-colorscheme', {
             \    },
             \}
 let g:unite_enable_start_insert=1
+let g:unite_source_grep_command = 'ag'
+let g:unite_source_grep_default_opts = '--nocolor --nogroup'
+let g:unite_source_grep_recursive_opt = ''
+let g:unite_source_grep_max_candidates = 200
 nnoremap [unite] <Nop>
 nmap <Leader>u [unite]
 nnoremap <silent> [unite]f   :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
@@ -261,7 +267,6 @@ nnoremap <Leader>ts :ts<CR>
 NeoBundleLazy 'vim-scripts/taglist.vim', {
             \    'autoload' : {
             \        'commands' : ['Tlist'],
-            \        'insert' : 1,
             \    },
             \}
 let Tlist_Use_Right_Window = 1
