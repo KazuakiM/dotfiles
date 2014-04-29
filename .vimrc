@@ -1,4 +1,6 @@
+"----------------------------------------------------------------------------------------------------------------------------------
 " Memo
+"----------------------------------------------------------------------------------------------------------------------------------
 "{{{
 "   :help internal-variables
 "{{{
@@ -38,9 +40,14 @@
 "   :so $VIMRUNTIME/syntax/hitest.vim
 "}}}
 "}}}
+"----------------------------------------------------------------------------------------------------------------------------------
 " Common
+"----------------------------------------------------------------------------------------------------------------------------------
 "{{{
 set nocompatible
+" Valiable
+"let b:localtime=localtime()
+"let b:now=strftime('%Y%m%d%H%M%S',b:localtime)
 " Encode
 set encoding=utf-8
 set fileencoding=utf-8
@@ -93,6 +100,7 @@ set swapfile
 set directory=$HOME/.vim/swap
 "set undofile
 "set undodir=$HOME/.vim/gundo
+"set undodir=$HOME.'/.vim/gundo'.b:now.'/'
 " Indentation
 set tabstop=4
 set softtabstop=4
@@ -110,7 +118,9 @@ set wrapscan
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 "}}}
+"----------------------------------------------------------------------------------------------------------------------------------
 " NeoBundle
+"----------------------------------------------------------------------------------------------------------------------------------
 "{{{
 if has('vim_starting')
   set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
@@ -126,8 +136,16 @@ NeoBundle 'Shougo/vimproc', {
             \        'mac'     : 'make -f make_mac.mak',
             \        'unix'    : 'make -f make_unix.mak',},}
 "}}}
+" vital.vim
+"{{{
+NeoBundle 'vim-jp/vital.vim'
+"}}}
+"}}}
+"----------------------------------------------------------------------------------------------------------------------------------
+" NeoBundleLazy
+"----------------------------------------------------------------------------------------------------------------------------------
+"{{{
 " unite.vim
-" unite-scriptnames
 " unite-webcolorname
 " unite-colorscheme
 " unite-help
@@ -135,9 +153,6 @@ NeoBundle 'Shougo/vimproc', {
 NeoBundleLazy 'Shougo/unite.vim', {
             \    'autoload' : {
             \        'commands' : ['Unite', 'UniteWithBufferDir', 'UniteWithCursorWord'],},}
-NeoBundleLazy 'zhaocai/unite-scriptnames', {
-            \    'autoload': {
-            \        'unite_sources': ['scriptnames'],},}
 NeoBundleLazy 'pasela/unite-webcolorname', {
             \    'autoload': {
             \        'unite_sources': ['webcolorname'],},}
@@ -163,18 +178,24 @@ nnoremap <silent> [unite]mru  :<C-u>Unite file_mru<CR>
 nnoremap <silent> [unite]map  :<C-u>Unite output:map\|map!\|lmap<CR>
 nnoremap <silent> [unite]nmap :<C-u>Unite mapping<CR>
 nnoremap <silent> [unite]r    :<C-u>Unite register<CR>
+nnoremap <silent> [unite]s    :<C-u>Unite output:scriptnames<CR>
 nnoremap <silent> [unite]t    :<C-u>Unite tab<CR>
 nnoremap <silent> [unite]w    :<C-u>Unite window<CR>
 " add plugins
-nnoremap <silent> [unite]sn  :<C-u>Unite scriptnames<CR>
 nnoremap <silent> [unite]web :<C-u>Unite webcolorname<CR>
 nnoremap <silent> [unite]cs  :<C-u>Unite -auto-preview colorscheme<CR>
 autocmd MyAutoCmd FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 "}}}
-" vital.vim
+" vimdoc-ja
 "{{{
-NeoBundle 'vim-jp/vital.vim'
+NeoBundleLazy 'vim-jp/vimdoc-ja', {
+            \    'autoload' : {
+            \        'commands' : ['help'],},}
+let s:hooks = neobundle#get('vimdoc-ja')
+function! s:hooks.on_source(bundle)
+    helptags $HOME/.vim/bundle/vimdoc-ja/doc/
+endfunction
 "}}}
 " syntastic'
 "{{{
@@ -186,6 +207,7 @@ function! s:hooks.on_source(bundle)
     let g:syntastic_enable_signs=1
     let g:syntastic_auto_loc_list=2
 endfunction
+"}}}
 "}}}
 " vim-php-cs-fixer
 "{{{
@@ -519,11 +541,6 @@ NeoBundleFetch 'nanotech/jellybeans.vim'
 NeoBundleFetch 'altercation/vim-colors-solarized'
 NeoBundleFetch 'tomasr/molokai'
 "}}}
-" vimdoc-ja
-"{{{
-NeoBundleFetch 'vim-jp/vimdoc-ja'
-helptags $HOME/.vim/bundle/vimdoc-ja/doc/
-"}}}
 "}}}
 filetype plugin indent on
 " FileType
@@ -537,8 +554,8 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} set filetype=mar
 "* URL: http://qiita.com/rbtnn/items/39d9ba817329886e626b
 "* NoFormattings :echo neobundle#config#get_neobundles()
 "* Formattings   :QuickRunPP neobundle#config#get_neobundles()
-"* Formatting    :neobundle#get('vim-markdown')
-"* Formatting    :neobundle#get_hooks('vim-markdown')
+"* Formatting    :echo neobundle#get('vim-markdown')
+"* Formatting    :echo neobundle#get_hooks('vim-markdown')
 function! s:quickrun_pp(q_args)
     let dict = { 'type' : 'vim', 'runner' : 'vimscript', 'outputter' : 'buffer',
                 \   'outputter/buffer/filetype' : 'vim', 'hook/eval/enable' : 1,
