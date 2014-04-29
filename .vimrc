@@ -61,12 +61,16 @@ set hidden
 set backspace=indent,eol,start
 set vb t_vb= "
 set foldmethod=marker
+"set line head left arrow
+"nnoremap  :<C-U>%foldclose<CR>
 set matchpairs+=<:>
 augroup MyAutoCmd
     autocmd!
 augroup END
-vnoremap jj <Esc>
 inoremap jj <Esc>
+inoremap kk <Esc>
+nnoremap 0 $
+nnoremap 1 ^
 " Color
 syntax on
 set t_Co=256
