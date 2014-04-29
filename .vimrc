@@ -130,10 +130,11 @@ NeoBundle 'Shougo/vimproc', {
 " unite-scriptnames
 " unite-webcolorname
 " unite-colorscheme
+" unite-help
 "{{{
 NeoBundleLazy 'Shougo/unite.vim', {
             \    'autoload' : {
-            \        'commands' : ['Unite', 'UniteWithBufferDir'],},}
+            \        'commands' : ['Unite', 'UniteWithBufferDir', 'UniteWithCursorWord'],},}
 NeoBundleLazy 'zhaocai/unite-scriptnames', {
             \    'autoload': {
             \        'unite_sources': ['scriptnames'],},}
@@ -143,6 +144,9 @@ NeoBundleLazy 'pasela/unite-webcolorname', {
 NeoBundleLazy 'ujihisa/unite-colorscheme', {
             \    'autoload': {
             \        'unite_sources': ['colorscheme'],},}
+NeoBundleLazy 'Shougo/unite-help', {
+            \    'autoload': {
+            \        'unite_sources': ['help'],},}
 let g:unite_enable_start_insert=1
 let g:unite_source_grep_command='ag'
 let g:unite_source_grep_default_opts='--nocolor --nogroup'
@@ -151,14 +155,16 @@ let g:unite_source_grep_max_candidates=200
 nnoremap [unite] <Nop>
 nmap <Leader>u [unite]
 " default plugins
-nnoremap <silent> [unite]b   :<C-u>Unite buffer<CR>
-nnoremap <silent> [unite]c   :<C-u>Unite bookmark<CR>
-nnoremap <silent> [unite]f   :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> [unite]mru :<C-u>Unite file_mru<CR>
-nnoremap <silent> [unite]map :<C-u>Unite mapping<CR>
-nnoremap <silent> [unite]r   :<C-u>Unite register<CR>
-nnoremap <silent> [unite]t   :<C-u>Unite tab<CR>
-nnoremap <silent> [unite]w   :<C-u>Unite window<CR>
+nnoremap <silent> [unite]b    :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]c    :<C-u>Unite bookmark<CR>
+nnoremap <silent> [unite]f    :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> [unite]h    :<C-u>Unite help<CR>
+nnoremap <silent> [unite]mru  :<C-u>Unite file_mru<CR>
+nnoremap <silent> [unite]map  :<C-u>Unite output:map\|map!\|lmap<CR>
+nnoremap <silent> [unite]nmap :<C-u>Unite mapping<CR>
+nnoremap <silent> [unite]r    :<C-u>Unite register<CR>
+nnoremap <silent> [unite]t    :<C-u>Unite tab<CR>
+nnoremap <silent> [unite]w    :<C-u>Unite window<CR>
 " add plugins
 nnoremap <silent> [unite]sn  :<C-u>Unite scriptnames<CR>
 nnoremap <silent> [unite]web :<C-u>Unite webcolorname<CR>
@@ -169,16 +175,6 @@ autocmd MyAutoCmd FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<C
 " vital.vim
 "{{{
 NeoBundle 'vim-jp/vital.vim'
-"}}}
-" vimdoc-ja
-"{{{
-NeoBundleLazy 'vim-jp/vimdoc-ja', {
-            \    'autoload' : {
-            \        'commands' : ['help'],},}
-let s:hooks = neobundle#get_hooks('vimdoc-ja')
-function! s:hooks.on_source(bundle)
-    helptags $HOME/.vim/bundle/vimdoc-ja/doc/
-endfunction
 "}}}
 " syntastic'
 "{{{
@@ -514,11 +510,19 @@ nnoremap <Leader>mn  :MemoNew<CR>
 nnoremap <Leader>ml  :MemoList<CR>
 nnoremap <Leader>mg  :MemoGrep<CR>
 "}}}
+" NeoBundleFetch
+"{{{
 " ColorScheme
 "{{{
-NeoBundle 'nanotech/jellybeans.vim'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'tomasr/molokai'
+NeoBundleFetch 'nanotech/jellybeans.vim'
+NeoBundleFetch 'altercation/vim-colors-solarized'
+NeoBundleFetch 'tomasr/molokai'
+"}}}
+" vimdoc-ja
+"{{{
+NeoBundleFetch 'vim-jp/vimdoc-ja'
+helptags $HOME/.vim/bundle/vimdoc-ja/doc/
+"}}}
 "}}}
 filetype plugin indent on
 " FileType
