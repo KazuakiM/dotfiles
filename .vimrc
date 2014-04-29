@@ -251,11 +251,8 @@ NeoBundleLazy 'vim-scripts/taglist.vim', {
             \    'autoload' : {
             \        'commands' : ['Tlist'],},}
 let Tlist_Use_Right_Window = 1
+let Tlist_Exit_OnlyWindow = 1
 nnoremap <Leader>t :Tlist<CR>
-let s:hooks = neobundle#get_hooks('taglist.vim')
-function! s:hooks.on_source(bundle)
-    let Tlist_Exit_OnlyWindow = 1
-endfunction
 "}}}
 " neocomplete.vim
 "{{{
@@ -350,7 +347,7 @@ let g:ref_phpmanual_path=$HOME.'/.vim/ref/php-chunked-xhtml'
 "# command memo
 "* % :Move from start to end or end to start
 "* (Normal)Enter after Enter :Range up selected words.
-"* (Normal)S-Enter           :Range down selected words.
+"* (Normal)Backspace         :Range down selected words.
 NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'tpope/vim-endwise'
 NeoBundle 'gcmt/wildfire.vim'
@@ -510,6 +507,10 @@ nnoremap <Leader>mn  :MemoNew<CR>
 nnoremap <Leader>ml  :MemoList<CR>
 nnoremap <Leader>mg  :MemoGrep<CR>
 "}}}
+" vim-prettyprint
+"{{{
+NeoBundle 'thinca/vim-prettyprint'
+"}}}
 " NeoBundleFetch
 "{{{
 " ColorScheme
@@ -529,11 +530,27 @@ filetype plugin indent on
 "{{{
 autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} set filetype=markdown
 "}}}
+"}}}
+" Extra local functions
+"{{{
+"# function memo
+"* URL: http://qiita.com/rbtnn/items/39d9ba817329886e626b
+"* NoFormattings :echo neobundle#config#get_neobundles()
+"* Formattings   :QuickRunPP neobundle#config#get_neobundles()
+"* Formatting    :neobundle#get('vim-markdown')
+"* Formatting    :neobundle#get_hooks('vim-markdown')
+function! s:quickrun_pp(q_args)
+    let dict = { 'type' : 'vim', 'runner' : 'vimscript', 'outputter' : 'buffer',
+                \   'outputter/buffer/filetype' : 'vim', 'hook/eval/enable' : 1,
+                \   'hook/eval/template' : 'echo PP(%s)', 'src' : a:q_args,}
+    call quickrun#run(dict)
+endfunction
+command! -nargs=1 -complete=expression QuickRunPP :call <sid>quickrun_pp(<q-args>)
+"}}}
 " Extra local setting
 "{{{
 if filereadable(expand($HOME.'/.vimrc.local'))
     source ~/.vimrc.local
 endif
-"}}}
 "}}}
 
