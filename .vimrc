@@ -166,6 +166,28 @@ NeoBundle 'mattn/webapi-vim'
 "* <Leader>e: evaluate the expression under visual highlight and display the result
 NeoBundle 'joonty/vdebug'
 "}}}
+" vim-ref
+"{{{
+"# command memo
+"* <S-k> :Show mabual
+NeoBundle 'thinca/vim-ref'
+let g:ref_phpmanual_path=$HOME.'/.vim/ref/php-chunked-xhtml'
+"}}}
+" vim-tags
+"{{{
+"# command memo
+"* :TagsGenerate :Remake tags.
+"* <C-]>         :Jump target file
+"* <C-o>         :Return before file
+"* :ts           :Jump target file list
+NeoBundle 'szw/vim-tags'
+let g:vim_tags_auto_generate = 1
+nnoremap <Leader>tags :TagsGenerate
+nnoremap <Leader>] <C-]>
+nnoremap <Leader>[ <C-o>
+nnoremap <Leader>ts :ts<CR>
+" add .vimrc.local
+"}}}
 "}}}
 "----------------------------------------------------------------------------------------------------------------------------------
 " NeoBundleLazy
@@ -223,6 +245,28 @@ function! s:hooks.on_source(bundle)
     helptags $HOME/.vim/bundle/vimdoc-ja/doc/
 endfunction
 "}}}
+" taglist.vim
+"{{{
+"# command memo
+"* :Tlist :Show class, function and etc at left menu.
+NeoBundleLazy 'vim-scripts/taglist.vim', {
+            \    'autoload' : {
+            \        'commands' : ['Tlist'],},}
+let Tlist_Use_Right_Window = 1
+let Tlist_Exit_OnlyWindow = 1
+nnoremap <Leader>t :Tlist<CR>
+"}}}
+" vim-easy-align
+"{{{
+"# command memo
+"* Virtual mode selected range.
+"* exsamp:  And <Enter>*|
+"*     or:  And <Enter>*=
+NeoBundleLazy 'junegunn/vim-easy-align', {
+            \    'autoload': {
+            \        'commands' : ['EasyAlign'],},}
+vnoremap <silent> <Leader>a :EasyAlign<CR>
+"}}}
 " syntastic'
 "{{{
 NeoBundleLazy 'scrooloose/syntastic', {
@@ -234,6 +278,33 @@ function! s:hooks.on_source(bundle)
     let g:syntastic_auto_loc_list=2
 endfunction
 "}}}
+" gundo.vim
+"{{{
+NeoBundleLazy 'sjl/gundo.vim', {
+            \    'autoload' : {
+            \        'insert' : 1,},}
+let s:hooks = neobundle#get_hooks('gundo.vim')
+function! s:hooks.on_source(bundle)
+    nnoremap u g-
+    nnoremap <C-r> g+
+    nnoremap <Leader>g :GundoToggle<CR>
+endfunction
+""}}}
+" sudo.vim
+"{{{
+"# command memo
+"* ':w sudo:%'          :sudo save
+"* ':w sudo:<filename>' :sudo another name save
+"* ':e sudo:%'          :sudo open
+NeoBundleLazy 'vim-scripts/sudo.vim', {
+            \    'autoload' : {
+            \        'insert' : 1,},}
+let s:hooks = neobundle#get_hooks('sudo.vim')
+function! s:hooks.on_source(bundle)
+    nnoremap <Leader>sudow :w<Space>sudo:%<CR>
+    nnoremap <Leader>sudoa :w<Space>sudo:
+    nnoremap <Leader>sudor :e<Space>sudo:%<CR>
+endfunction
 "}}}
 " vim-php-cs-fixer
 "{{{
@@ -258,31 +329,6 @@ function! s:hooks.on_source(bundle)
 endfunction
 " add .vimrc.local
 "}}}
-" vim-tags
-"{{{
-"# command memo
-"* :TagsGenerate :Remake tags.
-"* <C-]>         :Jump target file
-"* <C-o>         :Return before file
-"* :ts           :Jump target file list
-NeoBundle 'szw/vim-tags'
-let g:vim_tags_auto_generate = 1
-nnoremap <Leader>tags :TagsGenerate
-nnoremap <Leader>] <C-]>
-nnoremap <Leader>[ <C-o>
-nnoremap <Leader>ts :ts<CR>
-" add .vimrc.local
-"}}}
-" taglist.vim
-"{{{
-"# command memo
-"* :Tlist :Show class, function and etc at left menu.
-NeoBundleLazy 'vim-scripts/taglist.vim', {
-            \    'autoload' : {
-            \        'commands' : ['Tlist'],},}
-let Tlist_Use_Right_Window = 1
-let Tlist_Exit_OnlyWindow = 1
-nnoremap <Leader>t :Tlist<CR>
 "}}}
 " neocomplete.vim
 "{{{
@@ -323,52 +369,6 @@ function! s:hooks.on_source(bundle)
     let g:neosnippet#enable_snipmate_compatibility = 1
     let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/vim-snippets/snippets'
 endfunction
-"}}}
-" gundo.vim
-"{{{
-NeoBundleLazy 'sjl/gundo.vim', {
-            \    'autoload' : {
-            \        'insert' : 1,},}
-let s:hooks = neobundle#get_hooks('gundo.vim')
-function! s:hooks.on_source(bundle)
-    nnoremap u g-
-    nnoremap <C-r> g+
-    nnoremap <Leader>g :GundoToggle<CR>
-endfunction
-""}}}
-" sudo.vim
-"{{{
-"# command memo
-"* ':w sudo:%'          :sudo save
-"* ':w sudo:<filename>' :sudo another name save
-"* ':e sudo:%'          :sudo open
-NeoBundleLazy 'vim-scripts/sudo.vim', {
-            \    'autoload' : {
-            \        'insert' : 1,},}
-let s:hooks = neobundle#get_hooks('sudo.vim')
-function! s:hooks.on_source(bundle)
-    nnoremap <Leader>sudow :w<Space>sudo:%<CR>
-    nnoremap <Leader>sudoa :w<Space>sudo:
-    nnoremap <Leader>sudor :e<Space>sudo:%<CR>
-endfunction
-"}}}
-" vim-easy-align
-"{{{
-"# command memo
-"* Virtual mode selected range.
-"* exsamp:  And <Enter>*|
-"*     or:  And <Enter>*=
-NeoBundleLazy 'junegunn/vim-easy-align', {
-            \    'autoload': {
-            \        'commands' : ['EasyAlign'],},}
-vnoremap <silent> <Leader>a :EasyAlign<CR>
-"}}}
-" vim-ref
-"{{{
-"# command memo
-"* <S-k> :Show mabual
-NeoBundle 'thinca/vim-ref'
-let g:ref_phpmanual_path=$HOME.'/.vim/ref/php-chunked-xhtml'
 "}}}
 " matchit.zip
 " vim-endwise
