@@ -283,6 +283,11 @@ NeoBundle 'vim-scripts/matchit.zip'
 "{{{
 NeoBundle 'tpope/vim-endwise'
 "}}}
+" vim-over
+"{{{
+NeoBundle 'osyo-manga/vim-over'
+nnoremap <expr><Leader>s ':OverCommandLine<CR>%s/'.expand('<cword>').'/'
+"}}}
 " vim-qfreplace
 "{{{
 "# command memo
