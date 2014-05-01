@@ -315,6 +315,27 @@ nnoremap <Leader>mn  :MemoNew<CR>
 nnoremap <Leader>ml  :MemoList<CR>
 nnoremap <Leader>mg  :MemoGrep<CR>
 "}}}
+" vim-quickrun
+"{{{
+"# command memo
+"* :QuickRun :execute quickrun.
+NeoBundle 'thinca/vim-quickrun'
+nnoremap <Leader>r :QuickRun<CR>
+let g:quickrun_config = {
+            \   '_' : {
+            \       'outputter/buffer/split' : ':botright',
+            \       'outputter/buffer/close_on_empty' : 1,},}
+"}}}
+"" previm
+""{{{
+"NeoBundle 'kannokanno/previm'
+"let g:previm_open_cmd='open -a Safari'
+"nnoremap <Leader>pre :PrevimOpen<CR>
+""}}}
+" vim-markdown
+"{{{
+NeoBundle 'plasticboy/vim-markdown'
+"}}}
 " vim-prettyprint
 "{{{
 NeoBundle 'thinca/vim-prettyprint'
@@ -509,50 +530,6 @@ function! s:hooks.on_source(bundle)
     let g:neosnippet#enable_snipmate_compatibility = 1
     let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/vim-snippets/snippets'
 endfunction
-"}}}
-" Markdown with Vim
-"  vim-quickrun
-"  w3m.vim
-"  vim-markdown
-"{{{
-"# command memo
-"* :QuickRun :execute quickrun.
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'yuratomo/w3m.vim'
-NeoBundle 'plasticboy/vim-markdown'
-nnoremap <Leader>r :QuickRun<CR>
-let g:quickrun_config = {}
-let g:quickrun_config['markdown'] = {
-            \    'outputter' : 'file',
-            \    'outputter/name' : tempname().'.html'
-            \}
-let t:outputter_w3m_vim_bufname = ''
-let s:hook = {
-            \   'name': 'outputer_w3m_vim',
-            \   'kind': 'hook',
-            \   'is_success': 0,
-            \   'config': { 'enable': 1 },
-            \   '_bufname': 'bufhook'
-            \}
-function! s:hook.on_success(session, context)
-    if a:session.config.outputter != 'file' || !match(a:session.config['outputter/name'], '.html$\c')
-        return
-    endif
-    let mode = g:w3m#OPEN_SPLIT
-    let target = 'local'
-    let fname = a:session.outputter._file
-    let bufname = t:outputter_w3m_vim_bufname
-    if bufname != '' && bufwinnr(bufname) != -1
-        execute bufwinnr(bufname) 'wincmd w'
-        let mode = g:w3m#OPEN_NORMAL
-        silent call w3m#Open( mode, target, fname )
-    else
-        silent call w3m#Open( mode, target, fname )
-        let t:outputter_w3m_vim_bufname = b:w3m_bufname
-    endif
-endfunction
-call quickrun#module#register(s:hook, 1)
-unlet s:hook
 "}}}
 "
 "
