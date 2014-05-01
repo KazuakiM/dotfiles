@@ -1,10 +1,11 @@
-"----------------------------------------------------------------------------------------------------------------------------------
+"
+"
 " Memo
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
 "   :help internal-variables
 "{{{
-"----------------------------------------------------------------------------------------------------------------------------------
+"------------------------------------------------------------------------
 "| b: | buffer-variable   | Local to the current buffer.                |
 "| w: | window-variable   | Local to the current window.                |
 "| t: | tabpage-variable  | Local to the current tab page.              |
@@ -13,7 +14,7 @@
 "| s: | script-variable   | Local to a :source'ed Vim script.           |
 "| a: | function-argument | Function argument (only inside a function). |
 "| v: | vim-variable      | Global, predefined by Vim.                  |
-"----------------------------------------------------------------------------------------------------------------------------------
+"------------------------------------------------------------------------
 "}}}
 "   :help map
 "{{{
@@ -40,7 +41,8 @@
 "   :so $VIMRUNTIME/syntax/hitest.vim
 "}}}
 "}}}
-"----------------------------------------------------------------------------------------------------------------------------------
+"
+"
 " Common
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
@@ -122,7 +124,8 @@ set wrapscan
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 "}}}
-"----------------------------------------------------------------------------------------------------------------------------------
+"
+"
 " NeoBundle
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
@@ -147,6 +150,70 @@ NeoBundle 'vim-jp/vital.vim'
 " webapi-vim
 "{{{
 NeoBundle 'mattn/webapi-vim'
+"}}}
+" vim-fugitive
+"{{{
+NeoBundle 'tpope/vim-fugitive'
+nnoremap <Leader>gstatus :Gstatus<CR>
+nnoremap <Leader>glog :Glog<CR>
+nnoremap <Leader>gadd :Gwrite<CR>
+nnoremap <Leader>grm :Gremove<CR>
+nnoremap <Leader>gdiff :Gdiff<CR>
+nnoremap <Leader>gcommit :Gcommit
+"}}}
+" landscape
+" lightline
+"{{{
+NeoBundle 'itchyny/landscape.vim'
+NeoBundle 'itchyny/lightline.vim'
+let g:lightline = {
+            \    'colorscheme': 'landscape',
+            \    'mode_map': { 'c': 'NORMAL' },
+            \    'active': {
+            \        'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+            \    },
+            \    'component_function': {
+            \        'modified': 'MyModified',
+            \        'readonly': 'MyReadonly',
+            \        'fugitive': 'MyFugitive',
+            \        'filename': 'MyFilename',
+            \        'fileformat': 'MyFileformat',
+            \        'filetype': 'MyFiletype',
+            \        'fileencoding': 'MyFileencoding',
+            \        'mode': 'MyMode',
+            \    },
+            \    'separator': { 'left': '', 'right': '' },
+            \    'subseparator': { 'left': '|', 'right': '|' }
+            \}
+function! MyModified()
+    return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+function! MyReadonly()
+    return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
+endfunction
+function! MyFilename()
+    return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+                \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+                \  &ft == 'unite' ? unite#get_status_string() :
+                \  &ft == 'vimshell' ? vimshell#get_status_string() :
+                \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+                \ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
+function! MyFugitive()
+    return exists('*fugitive#head') ? fugitive#head() : ''
+endfunction
+function! MyFileformat()
+    return winwidth('.') > 70 ? &fileformat : ''
+endfunction
+function! MyFiletype()
+    return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+function! MyFileencoding()
+    return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+function! MyMode()
+    return winwidth('.') > 60 ? lightline#mode() : ''
+endfunction
 "}}}
 " vdebug
 "{{{
@@ -188,8 +255,68 @@ nnoremap <Leader>[ <C-o>
 nnoremap <Leader>ts :ts<CR>
 " add .vimrc.local
 "}}}
+" vim-surround
+"{{{
+"# command memo
+"* cs"'   :Change From  " to '
+"* cs'<p> :Change From  ' to <p>
+"* ds'    :Delete '
+NeoBundle 'tpope/vim-surround'
 "}}}
-"----------------------------------------------------------------------------------------------------------------------------------
+" wildfire.vim
+"{{{
+"# command memo
+"* (Normal)Enter after Enter :Range up selected words.
+"* (Normal)Backspace         :Range down selected words.
+NeoBundle 'gcmt/wildfire.vim'
+let g:wildfire_water_map = '<BS>'
+let g:wildfire_objects = {
+            \    '*' : ["i'", 'i"', 'i)', 'i]', 'i}', 'ip'],
+            \    'html,xml' : ['at'],
+            \}
+"}}}
+" matchit.zip
+"{{{
+NeoBundle 'vim-scripts/matchit.zip'
+"}}}
+" vim-endwise
+"{{{
+NeoBundle 'tpope/vim-endwise'
+"}}}
+" vim-qfreplace
+"{{{
+"# command memo
+"* ,grep  :Cursor word grep
+"* ,cn    :grep results next jump
+"* ,cb    :grep results previous(before) jump
+"* ,ccXX  :grep XX lines jump
+NeoBundle 'thinca/vim-qfreplace'
+set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git
+set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
+set runtimepath+=$HOME/.vim/qfixapp/
+let QFixWin_EnableMode = 1
+let QFix_UseLocationList = 1
+nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
+nnoremap <Leader>cn :cnext<CR>
+nnoremap <Leader>cb :cprevious<CR>
+nnoremap <Leader>cc :cc
+autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
+"}}}
+" memolist.vim
+"{{{
+NeoBundle 'glidenote/memolist.vim'
+let g:memolist_path = '$HOME/.vim/memo'
+nnoremap <Leader>mn  :MemoNew<CR>
+nnoremap <Leader>ml  :MemoList<CR>
+nnoremap <Leader>mg  :MemoGrep<CR>
+"}}}
+" vim-prettyprint
+"{{{
+NeoBundle 'thinca/vim-prettyprint'
+"}}}
+"}}}
+"
+"
 " NeoBundleLazy
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
@@ -255,6 +382,14 @@ NeoBundleLazy 'vim-scripts/taglist.vim', {
 let Tlist_Use_Right_Window = 1
 let Tlist_Exit_OnlyWindow = 1
 nnoremap <Leader>t :Tlist<CR>
+"}}}
+" nerdtree
+"{{{
+NeoBundleLazy 'scrooloose/nerdtree', {
+            \    'autoload' : {
+            \        'commands' : ['NERDTree'],},}
+nnoremap <Leader>n :NERDTree<CR>
+let NERDTreeShowHidden=1
 "}}}
 " vim-easy-align
 "{{{
@@ -370,121 +505,6 @@ function! s:hooks.on_source(bundle)
     let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/vim-snippets/snippets'
 endfunction
 "}}}
-" matchit.zip
-" vim-endwise
-" wildfire.vim
-"{{{
-"# command memo
-"* % :Move from start to end or end to start
-"* (Normal)Enter after Enter :Range up selected words.
-"* (Normal)Backspace         :Range down selected words.
-NeoBundle 'vim-scripts/matchit.zip'
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'gcmt/wildfire.vim'
-let g:wildfire_water_map = '<BS>'
-let g:wildfire_objects = {
-            \    '*' : ["i'", 'i"', 'i)', 'i]', 'i}', 'ip'],
-            \    'html,xml' : ['at'],
-            \}
-"}}}
-" vim-surround
-"{{{
-"# command memo
-"* cs"'   :Change From  " to '
-"* cs'<p> :Change From  ' to <p>
-"* ds'    :Delete '
-NeoBundle 'tpope/vim-surround'
-"}}}
-" Grep
-"  vim-qfreplace
-"{{{
-"# command memo
-"* ,grep  :Cursor word grep
-"* ,cn    :grep results next jump
-"* ,cb    :grep results previous(before) jump
-"* ,ccXX  :grep XX lines jump
-NeoBundle 'thinca/vim-qfreplace'
-set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git
-set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
-set runtimepath+=$HOME/.vim/qfixapp/
-let QFixWin_EnableMode = 1
-let QFix_UseLocationList = 1
-nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
-nnoremap <Leader>cn :cnext<CR>
-nnoremap <Leader>cb :cprevious<CR>
-nnoremap <Leader>cc :cc
-autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
-"}}}
-" nerdtree
-"{{{
-NeoBundleLazy 'scrooloose/nerdtree', {
-            \    'autoload' : {
-            \        'commands' : ['NERDTree'],},}
-nnoremap <Leader>n :NERDTree<CR>
-let NERDTreeShowHidden=1
-"}}}
-" vim-fugitive
-" landscape
-" lightline
-"{{{
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'itchyny/landscape.vim'
-NeoBundle 'itchyny/lightline.vim'
-nnoremap <Leader>gstatus :Gstatus<CR>
-nnoremap <Leader>glog :Glog<CR>
-nnoremap <Leader>gadd :Gwrite<CR>
-nnoremap <Leader>grm :Gremove<CR>
-nnoremap <Leader>gdiff :Gdiff<CR>
-nnoremap <Leader>gcommit :Gcommit
-let g:lightline = {
-            \    'colorscheme': 'landscape',
-            \    'mode_map': { 'c': 'NORMAL' },
-            \    'active': {
-            \        'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
-            \    },
-            \    'component_function': {
-            \        'modified': 'MyModified',
-            \        'readonly': 'MyReadonly',
-            \        'fugitive': 'MyFugitive',
-            \        'filename': 'MyFilename',
-            \        'fileformat': 'MyFileformat',
-            \        'filetype': 'MyFiletype',
-            \        'fileencoding': 'MyFileencoding',
-            \        'mode': 'MyMode',
-            \    },
-            \    'separator': { 'left': '', 'right': '' },
-            \    'subseparator': { 'left': '|', 'right': '|' }
-            \}
-function! MyModified()
-    return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-function! MyReadonly()
-    return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
-endfunction
-function! MyFilename()
-    return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-                \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-                \  &ft == 'unite' ? unite#get_status_string() :
-                \  &ft == 'vimshell' ? vimshell#get_status_string() :
-                \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-                \ ('' != MyModified() ? ' ' . MyModified() : '')
-endfunction
-function! MyFugitive()
-    return exists('*fugitive#head') ? fugitive#head() : ''
-endfunction
-function! MyFileformat()
-    return winwidth('.') > 70 ? &fileformat : ''
-endfunction
-function! MyFiletype()
-    return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-endfunction
-function! MyFileencoding()
-    return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-endfunction
-function! MyMode()
-    return winwidth('.') > 60 ? lightline#mode() : ''
-endfunction
-"}}}
 " Markdown with Vim
 "  vim-quickrun
 "  w3m.vim
@@ -529,19 +549,8 @@ endfunction
 call quickrun#module#register(s:hook, 1)
 unlet s:hook
 "}}}
-" memolist.vim
-"{{{
-NeoBundle 'glidenote/memolist.vim'
-let g:memolist_path = '$HOME/.vim/memo'
-nnoremap <Leader>mn  :MemoNew<CR>
-nnoremap <Leader>ml  :MemoList<CR>
-nnoremap <Leader>mg  :MemoGrep<CR>
-"}}}
-" vim-prettyprint
-"{{{
-NeoBundle 'thinca/vim-prettyprint'
-"}}}
-"----------------------------------------------------------------------------------------------------------------------------------
+"
+"
 " NeoBundleFetch
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
@@ -552,13 +561,18 @@ NeoBundleFetch 'altercation/vim-colors-solarized'
 NeoBundleFetch 'tomasr/molokai'
 "}}}
 "}}}
-filetype plugin indent on
+"
+"
 " FileType
+"----------------------------------------------------------------------------------------------------------------------------------
 "{{{
+filetype plugin indent on
 autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} set filetype=markdown
 "}}}
-"}}}
+"
+"
 " Extra local functions
+"----------------------------------------------------------------------------------------------------------------------------------
 "{{{
 "# function memo
 "* URL: http://qiita.com/rbtnn/items/39d9ba817329886e626b
@@ -574,7 +588,10 @@ function! s:quickrun_pp(q_args)
 endfunction
 command! -nargs=1 -complete=expression QuickRunPP :call <sid>quickrun_pp(<q-args>)
 "}}}
+"
+"
 " Extra local setting
+"----------------------------------------------------------------------------------------------------------------------------------
 "{{{
 if filereadable(expand($HOME.'/.vimrc.local'))
     source ~/.vimrc.local
