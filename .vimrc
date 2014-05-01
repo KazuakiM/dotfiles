@@ -418,6 +418,20 @@ function! s:hooks.on_source(bundle)
     let g:syntastic_auto_loc_list=2
 endfunction
 "}}}
+" neocomplete.vim
+"{{{
+NeoBundleLazy 'Shougo/neocomplete.vim', {
+            \    'autoload' : {
+            \        'insert' : 1,},}
+let s:hooks = neobundle#get_hooks('neocomplete.vim')
+function! s:hooks.on_source(bundle)
+    let g:acp_enableAtStartup=0
+    let g:neocomplete#enable_at_startup=1
+    let g:neocomplete#enable_smart_case=1
+    let g:neocomplete#sources#syntax#min_keyword_length=3
+    let g:neocomplete#lock_buffer_name_pattern='\*ku\*'
+endfunction
+"}}}
 " gundo.vim
 "{{{
 NeoBundleLazy 'sjl/gundo.vim', {
@@ -469,20 +483,6 @@ function! s:hooks.on_source(bundle)
 endfunction
 " add .vimrc.local
 "}}}
-"}}}
-" neocomplete.vim
-"{{{
-NeoBundleLazy 'Shougo/neocomplete.vim', {
-            \    'autoload' : {
-            \        'insert' : 1,},}
-let s:hooks = neobundle#get_hooks('neocomplete.vim')
-function! s:hooks.on_source(bundle)
-    let g:acp_enableAtStartup=0
-    let g:neocomplete#enable_at_startup=1
-    let g:neocomplete#enable_smart_case=1
-    let g:neocomplete#sources#syntax#min_keyword_length=3
-    let g:neocomplete#lock_buffer_name_pattern='\*ku\*'
-endfunction
 "}}}
 " neosnippet.vim
 " neosnippet-snippets
@@ -579,6 +579,8 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} set filetype=mar
 " Extra local functions
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
+" quickrun - prettyprint
+"{{{
 "# function memo
 "* URL: http://qiita.com/rbtnn/items/39d9ba817329886e626b
 "* NoFormattings :echo neobundle#config#get_neobundles()
@@ -592,6 +594,7 @@ function! s:quickrun_pp(q_args)
     call quickrun#run(dict)
 endfunction
 command! -nargs=1 -complete=expression QuickRunPP :call <sid>quickrun_pp(<q-args>)
+"}}}
 "}}}
 "
 "
