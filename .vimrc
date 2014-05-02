@@ -78,15 +78,15 @@ syntax on
 set t_Co=256
 " Check space and newLineCode.
 autocmd MyAutoCmd ColorScheme * highlight TabString     cterm=reverse ctermfg=darkgray
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     '\t')
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     "\t")
 autocmd MyAutoCmd ColorScheme * highlight CrString      cterm=reverse ctermfg=darkred
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      '\r')
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      "\r")
 autocmd MyAutoCmd ColorScheme * highlight CrlfString    cterm=reverse ctermfg=darkmagenta
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    '\r\n')
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    "\r\n")
 autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL cterm=reverse ctermfg=lightmagenta
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', '\s\+$')
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', "\s\+$")
 autocmd MyAutoCmd ColorScheme * highlight ZenkakuSpace  cterm=reverse ctermfg=lightred
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m5 = matchadd('ZenkakuSpace',  '　')
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m5 = matchadd('ZenkakuSpace',  "　")
 " Update Visual mode target colorScheme.
 autocmd MyAutoCmd ColorScheme * highlight Visual cterm=reverse ctermfg=lightgreen
 colorscheme jellybeans
@@ -324,14 +324,18 @@ nnoremap <Leader>r :QuickRun<CR>
 let g:quickrun_config = {
             \   '_' : {
             \       'outputter/buffer/split' : ':botright',
-            \       'outputter/buffer/close_on_empty' : 1,},}
+            \       'outputter/buffer/close_on_empty' : 1,},
+            \   'markdown' : {
+            \       'outputter' : 'browser',},}
 "}}}
-"" previm
-""{{{
-"NeoBundle 'kannokanno/previm'
-"let g:previm_open_cmd='open -a Safari'
-"nnoremap <Leader>pre :PrevimOpen<CR>
-""}}}
+" previm
+"{{{
+if has('mac')
+    NeoBundle 'kannokanno/previm'
+    let g:previm_open_cmd = 'open -a Firefox'
+    nnoremap <silent>pre :PrevimOpen<CR>
+endif
+"}}}
 " vim-markdown
 "{{{
 NeoBundle 'plasticboy/vim-markdown'
@@ -397,6 +401,16 @@ let s:hooks = neobundle#get('vimdoc-ja')
 function! s:hooks.on_source(bundle)
     helptags $HOME/.vim/bundle/vimdoc-ja/doc/
 endfunction
+unlet s:hooks
+"}}}
+" open-browser.vim
+"{{{
+NeoBundleLazy 'tyru/open-browser.vim', {
+            \   'autoload' : {
+            \       'functions' : 'OpenBrowser',
+            \       'commands'  : ['OpenBrowser', 'OpenBrowserSearch'],
+            \       'mappings'  : '<Plug>(openbrowser-smart-search)',},}
+nnoremap <Leader>op  <Plug>(openbrowser-smart-search)
 "}}}
 " taglist.vim
 "{{{
@@ -438,6 +452,7 @@ function! s:hooks.on_source(bundle)
     let g:syntastic_enable_signs=1
     let g:syntastic_auto_loc_list=2
 endfunction
+unlet s:hooks
 "}}}
 " neocomplete.vim
 "{{{
@@ -452,6 +467,7 @@ function! s:hooks.on_source(bundle)
     let g:neocomplete#sources#syntax#min_keyword_length=3
     let g:neocomplete#lock_buffer_name_pattern='\*ku\*'
 endfunction
+unlet s:hooks
 "}}}
 " gundo.vim
 "{{{
@@ -464,7 +480,8 @@ function! s:hooks.on_source(bundle)
     nnoremap <C-r> g+
     nnoremap <Leader>g :GundoToggle<CR>
 endfunction
-""}}}
+unlet s:hooks
+"}}}
 " sudo.vim
 "{{{
 "# command memo
@@ -480,6 +497,7 @@ function! s:hooks.on_source(bundle)
     nnoremap <Leader>sudoa :w<Space>sudo:
     nnoremap <Leader>sudor :e<Space>sudo:%<CR>
 endfunction
+unlet s:hooks
 "}}}
 " vim-php-cs-fixer
 "{{{
@@ -502,6 +520,7 @@ function! s:hooks.on_source(bundle)
     let g:php_cs_fixer_dry_run=0                " Call command with dry-run option
     let g:php_cs_fixer_verbose=0                " Return the output of command if 1, else an inline information.
 endfunction
+unlet s:hooks
 " add .vimrc.local
 "}}}
 "}}}
@@ -530,6 +549,7 @@ function! s:hooks.on_source(bundle)
     let g:neosnippet#enable_snipmate_compatibility = 1
     let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/vim-snippets/snippets'
 endfunction
+unlet s:hooks
 "}}}
 "
 "
@@ -562,8 +582,8 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} set filetype=mar
 "* URL: http://qiita.com/rbtnn/items/39d9ba817329886e626b
 "* NoFormattings :echo neobundle#config#get_neobundles()
 "* Formattings   :QuickRunPP neobundle#config#get_neobundles()
-"* Formatting    :echo neobundle#get('vim-markdown')
-"* Formatting    :echo neobundle#get_hooks('vim-markdown')
+"* Formatting    :QuickRunPP neobundle#get('vim-markdown')
+"* Formatting    :QuickRunPP neobundle#get_hooks('vim-markdown')
 function! s:quickrun_pp(q_args)
     let dict = { 'type' : 'vim', 'runner' : 'vimscript', 'outputter' : 'buffer',
                 \   'outputter/buffer/filetype' : 'vim', 'hook/eval/enable' : 1,
