@@ -61,7 +61,8 @@ set textwidth=0
 set autoread
 set hidden
 set backspace=indent,eol,start
-set vb t_vb= "
+set visualbell t_vb=
+set noerrorbells
 set foldmethod=marker
 "set line head left arrow
 "nnoremap  :<C-U>%foldclose<CR>
@@ -123,6 +124,13 @@ set hlsearch
 set wrapscan
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
+" PHP
+let php_sql_query = 1
+let php_baselib = 1
+let php_htmlInStrings = 1
+let php_noShortTags = 1
+let php_parent_error_close = 1
+let php_folding = 1
 "}}}
 "
 "
