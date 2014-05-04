@@ -162,12 +162,14 @@ NeoBundle 'mattn/webapi-vim'
 " vim-fugitive
 "{{{
 NeoBundle 'tpope/vim-fugitive'
-nnoremap <Leader>gstatus :Gstatus<CR>
-nnoremap <Leader>glog :Glog<CR>
-nnoremap <Leader>gadd :Gwrite<CR>
-nnoremap <Leader>grm :Gremove<CR>
-nnoremap <Leader>gdiff :Gdiff<CR>
-nnoremap <Leader>gcommit :Gcommit
+nnoremap [vim-fugitive] <Nop>
+nmap <Leader>git [vim-fugitive]
+nnoremap [vim-fugitive]status :Gstatus<CR>
+nnoremap [vim-fugitive]log :Glog<CR>
+nnoremap [vim-fugitive]add :Gwrite<CR>
+nnoremap [vim-fugitive]rm :Gremove<CR>
+nnoremap [vim-fugitive]diff :Gdiff<CR>
+nnoremap [vim-fugitive]commit :Gcommit -m ''
 "}}}
 " landscape
 " lightline
@@ -244,7 +246,7 @@ NeoBundle 'joonty/vdebug'
 " vim-ref
 "{{{
 "# command memo
-"* <S-k> :Show mabual
+"* <S-k> :Show manual
 NeoBundle 'thinca/vim-ref'
 let g:ref_phpmanual_path=$HOME.'/.vim/ref/php-chunked-xhtml'
 "}}}
@@ -319,9 +321,11 @@ autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 "{{{
 NeoBundle 'glidenote/memolist.vim'
 let g:memolist_path = '$HOME/.vim/memo'
-nnoremap <Leader>mn  :MemoNew<CR>
-nnoremap <Leader>ml  :MemoList<CR>
-nnoremap <Leader>mg  :MemoGrep<CR>
+nnoremap [memolist] <Nop>
+nmap <Leader>m [memolist]
+nnoremap [memolist]n :MemoNew<CR>
+nnoremap [memolist]l :MemoList<CR>
+nnoremap [memolist]g :MemoGrep<CR>
 "}}}
 " vim-quickrun
 "{{{
@@ -486,7 +490,7 @@ let s:hooks = neobundle#get_hooks('gundo.vim')
 function! s:hooks.on_source(bundle)
     nnoremap u g-
     nnoremap <C-r> g+
-    nnoremap <Leader>g :GundoToggle<CR>
+    nnoremap <Leader>gundo :GundoToggle<CR>
 endfunction
 unlet s:hooks
 "}}}
@@ -501,9 +505,11 @@ NeoBundleLazy 'vim-scripts/sudo.vim', {
             \        'insert' : 1,},}
 let s:hooks = neobundle#get_hooks('sudo.vim')
 function! s:hooks.on_source(bundle)
-    nnoremap <Leader>sudow :w<Space>sudo:%<CR>
-    nnoremap <Leader>sudoa :w<Space>sudo:
-    nnoremap <Leader>sudor :e<Space>sudo:%<CR>
+    nnoremap [sudo] <Nop>
+    nmap <Leader>sudo [sudo]
+    nnoremap <silent> [sudo]w :w<Space>sudo:%<CR>
+    nnoremap <silent> [sudo]a :w<Space>sudo:
+    nnoremap <silent> [sudo]r :e<Space>sudo:%<CR>
 endfunction
 unlet s:hooks
 "}}}
