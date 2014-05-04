@@ -7,8 +7,11 @@ fi
 # User specific environment and startup programs
 #{{{
 if [ -d $HOME/.anyenv ]; then
-    export PATH=$HOME/.anyenv/bin:$PATH
+    export PATH="$HOME/.anyenv/bin:$PATH"
     eval "$(anyenv init -)"
+fi
+if [ -d /usr/local/heroku ]; then
+    export PATH="/usr/local/heroku/bin:$PATH"
 fi
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 export LANG=ja_JP.UTF-8
