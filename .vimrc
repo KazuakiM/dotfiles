@@ -85,9 +85,9 @@ autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      "\r")
 autocmd MyAutoCmd ColorScheme * highlight CrlfString    cterm=reverse ctermfg=darkmagenta
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    "\r\n")
 autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL cterm=reverse ctermfg=lightmagenta
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', "\s\+$")
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', '\s\+$')
 autocmd MyAutoCmd ColorScheme * highlight ZenkakuSpace  cterm=reverse ctermfg=lightred
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m5 = matchadd('ZenkakuSpace',  "　")
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m5 = matchadd('ZenkakuSpace',  '　')
 " Update Visual mode target colorScheme.
 autocmd MyAutoCmd ColorScheme * highlight Visual cterm=reverse ctermfg=lightgreen
 colorscheme jellybeans
