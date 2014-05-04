@@ -465,6 +465,9 @@ unlet s:hooks
 " vim-snippets
 " neosnippet-snippets (Warning Support )
 "{{{
+"# command memo
+"* ':NeoSnippetEdit' don't use. it's non-function.
+"  Check:neosnippet.vim/autoload/neosnippet/commands.vim : L78
 NeoBundleLazy 'Shougo/neosnippet.vim', {
 \    'depends': ['honza/vim-snippets', 'Shougo/neosnippet-snippets'],
 \    'autoload': {
