@@ -180,8 +180,7 @@ let g:lightline = {
             \    'colorscheme': 'landscape',
             \    'mode_map': { 'c': 'NORMAL' },
             \    'active': {
-            \        'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
-            \    },
+            \        'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]},
             \    'component_function': {
             \        'modified': 'MyModified',
             \        'readonly': 'MyReadonly',
@@ -190,11 +189,9 @@ let g:lightline = {
             \        'fileformat': 'MyFileformat',
             \        'filetype': 'MyFiletype',
             \        'fileencoding': 'MyFileencoding',
-            \        'mode': 'MyMode',
-            \    },
+            \        'mode': 'MyMode',},
             \    'separator': { 'left': '', 'right': '' },
-            \    'subseparator': { 'left': '|', 'right': '|' }
-            \}
+            \    'subseparator': { 'left': '|', 'right': '|' }}
 function! MyModified()
     return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
@@ -460,6 +457,32 @@ function! s:hooks.on_source(bundle)
 endfunction
 unlet s:hooks
 "}}}
+" neosnippet.vim
+" vim-snippets
+"{{{
+NeoBundleLazy 'Shougo/neosnippet.vim', {
+            \    'depends': ['honza/vim-snippets'],
+            \    'autoload': {
+            \        'insert': 1,},}
+let s:hooks = neobundle#get_hooks('neosnippet.vim')
+function! s:hooks.on_source(bundle)
+    imap <C-k> <Plug>(neosnippet_expand_or_jump)
+    smap <C-k> <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k> <Plug>(neosnippet_expand_target)
+    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+                \ '\<Plug>(neosnippet_expand_or_jump)'
+                \: pumvisible() ? '\<C-n>' : '\<TAB>'
+    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+                \ '\<Plug>(neosnippet_expand_or_jump)'
+                \: '\<TAB>'
+    if has('conceal')
+        set conceallevel=2 concealcursor=i
+    endif
+    let g:neosnippet#enable_snipmate_compatibility = 1
+    let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/vim-snippets/snippets'
+endfunction
+unlet s:hooks
+"}}}
 " neocomplete.vim
 "{{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {
@@ -542,33 +565,6 @@ if has('mac')
     nnoremap <silent> <Leader>pre :PrevimOpen<CR>
 endif
 "}}}
-"}}}
-" neosnippet.vim
-" neosnippet-snippets
-" vim-snippets
-"{{{
-NeoBundleLazy 'Shougo/neosnippet.vim', {
-            \    'depends': ['honza/vim-snippets','shougo/neosnippet-snippets'],
-            \    'autoload': {
-            \        'insert': 1,},}
-let s:hooks = neobundle#get_hooks('neosnippet.vim')
-function! s:hooks.on_source(bundle)
-    imap <C-k> <Plug>(neosnippet_expand_or_jump)
-    smap <C-k> <Plug>(neosnippet_expand_or_jump)
-    xmap <C-k> <Plug>(neosnippet_expand_target)
-    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-                \ '\<Plug>(neosnippet_expand_or_jump)'
-                \: pumvisible() ? '\<C-n>' : '\<TAB>'
-    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-                \ '\<Plug>(neosnippet_expand_or_jump)'
-                \: '\<TAB>'
-    if has('conceal')
-        set conceallevel=2 concealcursor=i
-    endif
-    let g:neosnippet#enable_snipmate_compatibility = 1
-    let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/vim-snippets/snippets'
-endfunction
-unlet s:hooks
 "}}}
 "
 "
