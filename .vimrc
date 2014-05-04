@@ -463,9 +463,10 @@ unlet s:hooks
 "}}}
 " neosnippet.vim
 " vim-snippets
+" neosnippet-snippets (Warning Support )
 "{{{
 NeoBundleLazy 'Shougo/neosnippet.vim', {
-\    'depends': ['honza/vim-snippets'],
+\    'depends': ['honza/vim-snippets', 'Shougo/neosnippet-snippets'],
 \    'autoload': {
 \        'insert': 1,},}
 let s:hooks = neobundle#get_hooks('neosnippet.vim')
@@ -575,10 +576,6 @@ endif
 " NeoBundleFetch
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
-" Warning Support @ neosnippet.vim
-"{{{
-NeoBundleFetch 'Shougo/neosnippet-snippets'
-"}}}
 " ColorScheme
 "{{{
 NeoBundleFetch 'nanotech/jellybeans.vim'
