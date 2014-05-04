@@ -18,20 +18,20 @@
 "}}}
 "   :help map
 "{{{
-"----------------------------------------------------------------------------------------------------------------------------------
-" |commands:                                     |modes:                                                                          |
-" | Variables | Constants |  Unset  |  Destroy   | Normal | Visual | Select | Operator-pending | Insert | Command-line | Lang-Arg |
-" |   :map    | :noremap  | :unmap  | :mapclear  |  yes   |  yes   |  yes   |       yes        |   -    |      -       |    -     |
-" |   :nmap   | :nnoremap | :nunmap | :nmapclear |  yes   |   -    |   -    |        -         |   -    |      -       |    -     |
-" |   :vmap   | :vnoremap | :vunmap | :vmapclear |   -    |  yes   |  yes   |        -         |   -    |      -       |    -     |
-" |   :omap   | :onoremap | :ounmap | :omapclear |   -    |   -    |   -    |       yes        |   -    |      -       |    -     |
-" |   :xmap   | :xnoremap | :xunmap | :xmapclear |   -    |  yes   |   -    |        -         |   -    |      -       |    -     |
-" |   :smap   | :snoremap | :sunmap | :smapclear |   -    |   -    |  yes   |        -         |   -    |      -       |    -     |
-" |   :map!   | :noremap! | :unmap! | :mapclear! |   -    |   -    |   -    |        -         |  yes   |     yes      |    -     |
-" |   :imap   | :inoremap | :iunmap | :imapclear |   -    |   -    |   -    |        -         |  yes   |      -       |    -     |
-" |   :cmap   | :cnoremap | :cunmap | :cmapclear |   -    |   -    |   -    |        -         |   -    |     yes      |    -     |
-" |   :lmap   | :lnoremap | :lunmap | :lmapclear |   -    |   -    |   -    |        -         |  yes*  |     yes*     |   yes*   |
-"----------------------------------------------------------------------------------------------------------------------------------
+"---------------------------------------------------------------------------------------------------------------------------------
+"|commands:                                     |modes:                                                                          |
+"| Variables | Constants |  Unset  |  Destroy   | Normal | Visual | Select | Operator-pending | Insert | Command-line | Lang-Arg |
+"|   :map    | :noremap  | :unmap  | :mapclear  |  yes   |  yes   |  yes   |       yes        |   -    |      -       |    -     |
+"|   :nmap   | :nnoremap | :nunmap | :nmapclear |  yes   |   -    |   -    |        -         |   -    |      -       |    -     |
+"|   :vmap   | :vnoremap | :vunmap | :vmapclear |   -    |  yes   |  yes   |        -         |   -    |      -       |    -     |
+"|   :omap   | :onoremap | :ounmap | :omapclear |   -    |   -    |   -    |       yes        |   -    |      -       |    -     |
+"|   :xmap   | :xnoremap | :xunmap | :xmapclear |   -    |  yes   |   -    |        -         |   -    |      -       |    -     |
+"|   :smap   | :snoremap | :sunmap | :smapclear |   -    |   -    |  yes   |        -         |   -    |      -       |    -     |
+"|   :map!   | :noremap! | :unmap! | :mapclear! |   -    |   -    |   -    |        -         |  yes   |     yes      |    -     |
+"|   :imap   | :inoremap | :iunmap | :imapclear |   -    |   -    |   -    |        -         |  yes   |      -       |    -     |
+"|   :cmap   | :cnoremap | :cunmap | :cmapclear |   -    |   -    |   -    |        -         |   -    |     yes      |    -     |
+"|   :lmap   | :lnoremap | :lunmap | :lmapclear |   -    |   -    |   -    |        -         |  yes*  |     yes*     |   yes*   |
+"---------------------------------------------------------------------------------------------------------------------------------
 "}}}
 "   color
 "{{{
@@ -145,11 +145,11 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " vimproc
 "{{{
 NeoBundle 'Shougo/vimproc', {
-            \    'build' : {
-            \        'windows' : 'make -f make_mingw32.mak',
-            \        'cygwin'  : 'make -f make_cygwin.mak',
-            \        'mac'     : 'make -f make_mac.mak',
-            \        'unix'    : 'make -f make_unix.mak',},}
+\    'build' : {
+\        'windows' : 'make -f make_mingw32.mak',
+\        'cygwin'  : 'make -f make_cygwin.mak',
+\        'mac'     : 'make -f make_mac.mak',
+\        'unix'    : 'make -f make_unix.mak',},}
 "}}}
 " vital.vim
 "{{{
@@ -177,21 +177,21 @@ nnoremap [vim-fugitive]commit :Gcommit -m ''
 NeoBundle 'itchyny/landscape.vim'
 NeoBundle 'itchyny/lightline.vim'
 let g:lightline = {
-            \    'colorscheme': 'landscape',
-            \    'mode_map': { 'c': 'NORMAL' },
-            \    'active': {
-            \        'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]},
-            \    'component_function': {
-            \        'modified': 'MyModified',
-            \        'readonly': 'MyReadonly',
-            \        'fugitive': 'MyFugitive',
-            \        'filename': 'MyFilename',
-            \        'fileformat': 'MyFileformat',
-            \        'filetype': 'MyFiletype',
-            \        'fileencoding': 'MyFileencoding',
-            \        'mode': 'MyMode',},
-            \    'separator': { 'left': '', 'right': '' },
-            \    'subseparator': { 'left': '|', 'right': '|' }}
+\    'colorscheme': 'landscape',
+\    'mode_map': { 'c': 'NORMAL' },
+\    'active': {
+\        'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]},
+\    'component_function': {
+\        'modified': 'MyModified',
+\        'readonly': 'MyReadonly',
+\        'fugitive': 'MyFugitive',
+\        'filename': 'MyFilename',
+\        'fileformat': 'MyFileformat',
+\        'filetype': 'MyFiletype',
+\        'fileencoding': 'MyFileencoding',
+\        'mode': 'MyMode',},
+\    'separator': { 'left': '', 'right': '' },
+\    'subseparator': { 'left': '|', 'right': '|' }}
 function! MyModified()
     return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
@@ -222,6 +222,11 @@ function! MyMode()
     return winwidth('.') > 60 ? lightline#mode() : ''
 endfunction
 "}}}
+" indentLine
+"{{
+NeoBundle 'Yggdroot/indentLine'
+set list listchars=tab:\¦\
+"}}
 " vdebug
 "{{{
 "# command memo
@@ -278,9 +283,9 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'gcmt/wildfire.vim'
 let g:wildfire_water_map = '<BS>'
 let g:wildfire_objects = {
-            \    '*' : ["i'", 'i"', 'i)', 'i]', 'i}', 'ip'],
-            \    'html,xml' : ['at'],
-            \}
+\        '*' : ["i'", 'i"', 'i)', 'i]', 'i}', 'ip'],
+\        'html,xml' : ['at'],
+\    }
 "}}}
 " matchit.zip
 "{{{
@@ -331,11 +336,11 @@ nnoremap [memolist]g :MemoGrep<CR>
 NeoBundle 'thinca/vim-quickrun'
 nnoremap <Leader>r :QuickRun<CR>
 let g:quickrun_config = {
-            \   '_' : {
-            \       'outputter/buffer/split' : ':botright',
-            \       'outputter/buffer/close_on_empty' : 1,},
-            \   'markdown' : {
-            \       'outputter' : 'browser',},}
+\    '_' : {
+\        'outputter/buffer/split' : ':botright',
+\        'outputter/buffer/close_on_empty' : 1,},
+\    'markdown' : {
+\        'outputter' : 'browser',},}
 "}}}
 " vim-markdown
 "{{{
@@ -357,17 +362,17 @@ NeoBundle 'thinca/vim-prettyprint'
 " unite-help
 "{{{
 NeoBundleLazy 'Shougo/unite.vim', {
-            \    'autoload' : {
-            \        'commands' : ['Unite', 'UniteWithBufferDir', 'UniteWithCursorWord'],},}
+\    'autoload' : {
+\        'commands' : ['Unite', 'UniteWithBufferDir', 'UniteWithCursorWord'],},}
 NeoBundleLazy 'pasela/unite-webcolorname', {
-            \    'autoload': {
-            \        'unite_sources': ['webcolorname'],},}
+\    'autoload': {
+\        'unite_sources': ['webcolorname'],},}
 NeoBundleLazy 'ujihisa/unite-colorscheme', {
-            \    'autoload': {
-            \        'unite_sources': ['colorscheme'],},}
+\    'autoload': {
+\        'unite_sources': ['colorscheme'],},}
 NeoBundleLazy 'Shougo/unite-help', {
-            \    'autoload': {
-            \        'unite_sources': ['help'],},}
+\    'autoload': {
+\        'unite_sources': ['help'],},}
 let g:unite_enable_start_insert=1
 let g:unite_source_grep_command='ag'
 let g:unite_source_grep_default_opts='--nocolor --nogroup'
@@ -396,8 +401,8 @@ autocmd MyAutoCmd FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<C
 " vimdoc-ja
 "{{{
 NeoBundleLazy 'vim-jp/vimdoc-ja', {
-            \    'autoload' : {
-            \        'commands' : ['help'],},}
+\    'autoload' : {
+\        'commands' : ['help'],},}
 let s:hooks = neobundle#get('vimdoc-ja')
 function! s:hooks.on_source(bundle)
     helptags $HOME/.vim/bundle/vimdoc-ja/doc/
@@ -407,10 +412,10 @@ unlet s:hooks
 " open-browser.vim
 "{{{
 NeoBundleLazy 'tyru/open-browser.vim', {
-            \   'autoload' : {
-            \       'functions' : 'OpenBrowser',
-            \       'commands'  : ['OpenBrowser', 'OpenBrowserSearch'],
-            \       'mappings'  : '<Plug>(openbrowser-smart-search)',},}
+\    'autoload' : {
+\        'functions' : 'OpenBrowser',
+\        'commands'  : ['OpenBrowser', 'OpenBrowserSearch'],
+\        'mappings'  : '<Plug>(openbrowser-smart-search)',},}
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
 nmap <Leader>gx <Plug>(openbrowser-smart-search)
 vmap <Leader>gx <Plug>(openbrowser-smart-search)
@@ -420,8 +425,8 @@ vmap <Leader>gx <Plug>(openbrowser-smart-search)
 "# command memo
 "* :Tlist :Show class, function and etc at left menu.
 NeoBundleLazy 'vim-scripts/taglist.vim', {
-            \    'autoload' : {
-            \        'commands' : ['Tlist'],},}
+\    'autoload' : {
+\        'commands' : ['Tlist'],},}
 let Tlist_Use_Right_Window = 1
 let Tlist_Exit_OnlyWindow = 1
 nnoremap <Leader>t :Tlist<CR>
@@ -429,8 +434,8 @@ nnoremap <Leader>t :Tlist<CR>
 " nerdtree
 "{{{
 NeoBundleLazy 'scrooloose/nerdtree', {
-            \    'autoload' : {
-            \        'commands' : ['NERDTree'],},}
+\    'autoload' : {
+\        'commands' : ['NERDTree'],},}
 nnoremap <Leader>n :NERDTree<CR>
 let NERDTreeShowHidden=1
 "}}}
@@ -441,15 +446,15 @@ let NERDTreeShowHidden=1
 "* exsamp:  And <Enter>*|
 "*     or:  And <Enter>*=
 NeoBundleLazy 'junegunn/vim-easy-align', {
-            \    'autoload': {
-            \        'commands' : ['EasyAlign'],},}
+\    'autoload': {
+\        'commands' : ['EasyAlign'],},}
 vnoremap <silent> <Leader>a :EasyAlign<CR>
 "}}}
 " syntastic'
 "{{{
 NeoBundleLazy 'scrooloose/syntastic', {
-            \    'autoload' : {
-            \        'insert' : 1,},}
+\    'autoload' : {
+\        'insert' : 1,},}
 let s:hooks = neobundle#get_hooks('syntastic')
 function! s:hooks.on_source(bundle)
     let g:syntastic_enable_signs=1
@@ -461,9 +466,9 @@ unlet s:hooks
 " vim-snippets
 "{{{
 NeoBundleLazy 'Shougo/neosnippet.vim', {
-            \    'depends': ['honza/vim-snippets'],
-            \    'autoload': {
-            \        'insert': 1,},}
+\    'depends': ['honza/vim-snippets'],
+\    'autoload': {
+\        'insert': 1,},}
 let s:hooks = neobundle#get_hooks('neosnippet.vim')
 function! s:hooks.on_source(bundle)
     imap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -486,8 +491,8 @@ unlet s:hooks
 " neocomplete.vim
 "{{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {
-            \    'autoload' : {
-            \        'insert' : 1,},}
+\    'autoload' : {
+\        'insert' : 1,},}
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle)
     let g:acp_enableAtStartup=0
@@ -501,8 +506,8 @@ unlet s:hooks
 " gundo.vim
 "{{{
 NeoBundleLazy 'sjl/gundo.vim', {
-            \    'autoload' : {
-            \        'insert' : 1,},}
+\    'autoload' : {
+\        'insert' : 1,},}
 let s:hooks = neobundle#get_hooks('gundo.vim')
 function! s:hooks.on_source(bundle)
     nnoremap u g-
@@ -518,8 +523,8 @@ unlet s:hooks
 "* ':w sudo:<filename>' :sudo another name save
 "* ':e sudo:%'          :sudo open
 NeoBundleLazy 'vim-scripts/sudo.vim', {
-            \    'autoload' : {
-            \        'insert' : 1,},}
+\    'autoload' : {
+\        'insert' : 1,},}
 let s:hooks = neobundle#get_hooks('sudo.vim')
 function! s:hooks.on_source(bundle)
     nnoremap [sudo] <Nop>
@@ -533,8 +538,8 @@ unlet s:hooks
 " vim-php-cs-fixer
 "{{{
 NeoBundleLazy 'stephpy/vim-php-cs-fixer', {
-            \    'autoload' : {
-            \        'filetypes': 'php',},}
+\    'autoload' : {
+\        'filetypes': 'php',},}
 let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
 function! s:hooks.on_source(bundle)
     " If php-cs-fixer is in $PATH, you don't need to define line below
@@ -558,9 +563,9 @@ unlet s:hooks
 "{{{
 if has('mac')
     NeoBundleLazy 'kannokanno/previm', {
-                \   'depends': ['open-browser.vim'],
-                \   'autoload' : {
-                \        'filetypes': 'markdown',},}
+    \    'depends': ['open-browser.vim'],
+    \    'autoload' : {
+    \        'filetypes': 'markdown',},}
     "let g:previm_open_cmd = 'open -a Firefox'
     nnoremap <silent> <Leader>pre :PrevimOpen<CR>
 endif
