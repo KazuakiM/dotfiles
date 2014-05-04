@@ -340,14 +340,6 @@ let g:quickrun_config = {
             \   'markdown' : {
             \       'outputter' : 'browser',},}
 "}}}
-" previm
-"{{{
-if has('mac')
-    NeoBundle 'kannokanno/previm'
-    let g:previm_open_cmd = 'open -a Firefox'
-    nnoremap <silent>pre :PrevimOpen<CR>
-endif
-"}}}
 " vim-markdown
 "{{{
 NeoBundle 'plasticboy/vim-markdown'
@@ -422,7 +414,9 @@ NeoBundleLazy 'tyru/open-browser.vim', {
             \       'functions' : 'OpenBrowser',
             \       'commands'  : ['OpenBrowser', 'OpenBrowserSearch'],
             \       'mappings'  : '<Plug>(openbrowser-smart-search)',},}
-nnoremap <Leader>op  <Plug>(openbrowser-smart-search)
+let g:netrw_nogx = 1 " disable netrw's gx mapping.
+nnoremap <Leader>gx <Plug>(openbrowser-smart-search)
+vnoremap <Leader>gx <Plug>(openbrowser-smart-search)
 "}}}
 " taglist.vim
 "{{{
@@ -536,6 +530,17 @@ function! s:hooks.on_source(bundle)
 endfunction
 unlet s:hooks
 " add .vimrc.local
+"}}}
+" previm
+"{{{
+if has('mac')
+    NeoBundleLazy 'kannokanno/previm', {
+                \   'depends': ['open-browser.vim'],
+                \   'autoload' : {
+                \        'filetypes': 'markdown',},}
+    "let g:previm_open_cmd = 'open -a Firefox'
+    nnoremap <silent> <Leader>pre :PrevimOpen<CR>
+endif
 "}}}
 "}}}
 " neosnippet.vim
