@@ -415,8 +415,8 @@ NeoBundleLazy 'tyru/open-browser.vim', {
             \       'commands'  : ['OpenBrowser', 'OpenBrowserSearch'],
             \       'mappings'  : '<Plug>(openbrowser-smart-search)',},}
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
-nnoremap <Leader>gx <Plug>(openbrowser-smart-search)
-vnoremap <Leader>gx <Plug>(openbrowser-smart-search)
+nmap <Leader>gx <Plug>(openbrowser-smart-search)
+vmap <Leader>gx <Plug>(openbrowser-smart-search)
 "}}}
 " taglist.vim
 "{{{
