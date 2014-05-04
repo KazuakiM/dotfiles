@@ -225,7 +225,6 @@ endfunction
 " indentLine
 "{{
 NeoBundle 'Yggdroot/indentLine'
-set list listchars=tab:\¦\
 "}}
 " vdebug
 "{{{
@@ -576,6 +575,10 @@ endif
 " NeoBundleFetch
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
+" Warning Support @ neosnippet.vim
+"{{{
+NeoBundleFetch 'Shougo/neosnippet-snippets'
+"}}}
 " ColorScheme
 "{{{
 NeoBundleFetch 'nanotech/jellybeans.vim'
