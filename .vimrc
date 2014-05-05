@@ -298,7 +298,7 @@ NeoBundle 'tpope/vim-endwise'
 " vim-over
 "{{{
 NeoBundle 'osyo-manga/vim-over'
-nnoremap <expr><Leader>s ':OverCommandLine<CR>%s/'.expand('<cword>').'/'
+nnoremap <expr><Leader>%s ':OverCommandLine<CR>%s/'.expand('<cword>').'/'
 "}}}
 " vim-qfreplace
 "{{{

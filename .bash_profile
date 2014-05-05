@@ -10,10 +10,13 @@ if [ -d $HOME/.anyenv ]; then
     export PATH="$HOME/.anyenv/bin:$PATH"
     eval "$(anyenv init -)"
 fi
+if [ -d /usr/local/opt/perl518 ]; then
+    export PATH="/usr/local/opt/perl518/bin:$PATH"
+fi
 if [ -d /usr/local/heroku ]; then
     export PATH="/usr/local/heroku/bin:$PATH"
 fi
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
 export LANG=ja_JP.UTF-8
 cd
 clear
