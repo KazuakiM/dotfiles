@@ -8,5 +8,6 @@
 /ref/*
 /swap/*
 /tags/*
+.netrwhist
 
 # Memos file manage.
