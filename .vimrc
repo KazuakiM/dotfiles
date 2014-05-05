@@ -534,7 +534,7 @@ NeoBundleLazy 'vim-scripts/sudo.vim', {
 let s:hooks = neobundle#get_hooks('sudo.vim')
 function! s:hooks.on_source(bundle)
     nnoremap [sudo] <Nop>
-    nmap <Leader>sudo [sudo]
+    nmap <Leader>su [sudo]
     nnoremap <silent> [sudo]w :w<Space>sudo:%<CR>
     nnoremap <silent> [sudo]a :w<Space>sudo:
     nnoremap <silent> [sudo]r :e<Space>sudo:%<CR>
