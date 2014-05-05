@@ -65,6 +65,7 @@ case "${OSTYPE}" in
         alias VM='open -a virtualbox'
         alias MV='open -a virtualbox'
         export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
+        export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
         ;;
     linux*)
         alias l='ls --color=auto'
