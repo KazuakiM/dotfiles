@@ -324,6 +324,8 @@ autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 "}}}
 " memolist.vim
 "{{{
+"# command memo
+"* Don't NeoBundleLazy. ':MemoList' is non-function at first request.
 NeoBundle 'glidenote/memolist.vim'
 let g:memolist_path = '$HOME/.vim/memo'
 nnoremap [memolist] <Nop>
