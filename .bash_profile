@@ -13,6 +13,9 @@ fi
 if [ -d /usr/local/opt/perl518 ]; then
     export PATH="/usr/local/opt/perl518/bin:$PATH"
 fi
+if [ -d /usr/local/opt/gnu-tar ]; then
+    export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
+fi
 if [ -d /usr/local/heroku ]; then
     export PATH="/usr/local/heroku/bin:$PATH"
 fi
@@ -42,6 +45,7 @@ case "${OSTYPE}" in
         alias ll='ls -Gla'
         alias vi='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
         alias vim='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+        alias top='htop'
         alias FF='open -a firefox'
         alias GG='open -a firefox'
         alias MAIL='open -a thunderbird'
