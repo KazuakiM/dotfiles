@@ -225,6 +225,7 @@ endfunction
 " indentLine
 "{{
 NeoBundle 'Yggdroot/indentLine'
+let g:indentLine_faster = 1
 "}}
 " vdebug
 "{{{
@@ -313,9 +314,11 @@ set runtimepath+=$HOME/.vim/qfixapp/
 let QFixWin_EnableMode = 1
 let QFix_UseLocationList = 1
 nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
-nnoremap <Leader>cn :cnext<CR>
-nnoremap <Leader>cb :cprevious<CR>
-nnoremap <Leader>cc :cc
+nnoremap [vim-qfreplace] <Nop>
+nmap <Leader>c [vim-qfreplace]
+nnoremap [vim-qfreplace]n :cnext<CR>
+nnoremap [vim-qfreplace]b :cprevious<CR>
+nnoremap [vim-qfreplace]c :cc
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 "}}}
 " memolist.vim
