@@ -105,6 +105,7 @@ set backup
 set backupdir=$HOME/.vim/backup
 set swapfile
 set directory=$HOME/.vim/swap
+set noundofile
 "set undofile
 "set undodir=$HOME/.vim/gundo
 "set undodir=$HOME.'/.vim/gundo'.b:now.'/'
