@@ -392,6 +392,7 @@ nnoremap <silent> [unite]f    :<C-u>UniteWithBufferDir -buffer-name=files file<C
 nnoremap <silent> [unite]h    :<C-u>Unite help<CR>
 nnoremap <silent> [unite]mru  :<C-u>Unite file_mru<CR>
 nnoremap <silent> [unite]map  :<C-u>Unite output:map\|map!\|lmap<CR>
+nnoremap <silent> [unite]msg  :<C-u>Unite output:message<CR>
 nnoremap <silent> [unite]nmap :<C-u>Unite mapping<CR>
 nnoremap <silent> [unite]r    :<C-u>Unite register<CR>
 nnoremap <silent> [unite]s    :<C-u>Unite output:scriptnames<CR>
