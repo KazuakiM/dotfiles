@@ -224,10 +224,10 @@ function! MyMode()
 endfunction
 "}}}
 " indentLine
-"{{
+"{{{
 NeoBundle 'Yggdroot/indentLine'
 let g:indentLine_faster = 1
-"}}
+"}}}
 " vdebug
 "{{{
 "# command memo
