@@ -1,5 +1,5 @@
 "" sample project ($HOME/sample)
-"autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*.php let g:vim_tags_project_tags_command = 'ctags --sort=yes --exclude=*.js --langmap=PHP:.php --php-types=c+f+d+v --apend=yes --recurse -f $HOME/.vim/tags/sample.tags `pwd` >/dev/null 2>&1'
+"autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*.php let g:vim_tags_project_tags_command = 'ctags --sort=yes --exclude=*.js --langmap=PHP:.php --php-types=c+f+d+v --append=yes --recurse -f $HOME/.vim/tags/sample.tags `pwd` >/dev/null 2>&1'
 "autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*.php set tags+=$HOME/.vim/tags/sample.tags
 "autocmd MyAutoCmd QuitPre $HOME/sample/*.php :call PhpCsFixerFixFile()<CR>
 
