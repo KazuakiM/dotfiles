@@ -48,6 +48,7 @@ case "${OSTYPE}" in
         alias top='htop'
         alias FF='open -a firefox'
         alias GG='open -a firefox'
+        alias MM='open -a thunderbird'
         alias MAIL='open -a thunderbird'
         alias TT='open -a yorufukurou'
         alias RR='open -a yorufukurou'
@@ -60,10 +61,14 @@ case "${OSTYPE}" in
         alias FTP='open -a FileZilla'
         alias SFTP='open -a FileZilla'
         alias FTPS='open -a FileZilla'
+        alias VPN='open -a tunnelblick'
+        alias VNC='open -a "Chicken of the VNC"'
         alias VB='open -a virtualbox'
         alias BV='open -a virtualbox'
         alias VM='open -a virtualbox'
         alias MV='open -a virtualbox'
+        alias KOBO='open -a kobo'
+        alias KINDLE='open -a kindle'
         export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
         export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
         ;;

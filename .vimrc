@@ -74,6 +74,7 @@ inoremap jj <Esc>
 inoremap kk <Esc>
 nnoremap 0 $
 nnoremap 1 ^
+nnoremap gr gT
 " Color
 syntax on
 set t_Co=256
