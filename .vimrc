@@ -126,12 +126,21 @@ set wrapscan
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 " PHP
+" URL: http://stackoverflow.com/questions/9684806/real-sql-syntax-highlighting-in-php-scripts-with-vim
+"{{{
+" Enclosing the query in a heredoc with an identifier of 'SQL' triggers Vim to do SQL syntax highlighting in the block.
+" e.g.:
+" > $sql = <<<SQL
+" > SELECT `foo`
+" > FROM `db`.`table`
+" > WHERE `foo` = 'bar'
+" > SQL;
+"}}}
 let php_sql_query = 1
 let php_baselib = 1
 let php_htmlInStrings = 1
 let php_noShortTags = 1
 let php_parent_error_close = 1
-let php_folding = 1
 "}}}
 "
 "
