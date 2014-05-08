@@ -582,16 +582,24 @@ unlet s:hooks
 " emmet-vim
 "{{{
 "# command memo
+"* URL: http://docs.emmet.io/cheat-sheet/
 "* <C+y>,  :execute trigger key
 "* html:5 <=入力後に<C+y>,
 "* div>ul>li.class#id_$$*5 <=入力後に<C+y>,
+"# TODO
+"* extends, filters の用途理解不足解消
+"* 下記URLでxml, hamlの設定をhtmlまで拡張みたいな記載があるが、
+"  自動起動にxmlとhamlが加わっていないのが謎。
+"  http://threetreeslight.com/post/60845475628/emmet
 NeoBundleLazy 'mattn/emmet-vim', {
 \    'autoload' : {
 \        'filetypes': ['html','css','php'],},}
 let s:hooks = neobundle#get_hooks('emmet-vim')
 function! s:hooks.on_source(bundle)
     let g:user_emmet_settings = {
-    \    'lang' : 'ja',}
+    \    'lang' : 'ja',
+    \    'php' : {
+    \        'extends' : 'html',},}
     let g:user_emmet_mode='in'
     "let g:user_emmet_leader_key=''
 endfunction
@@ -601,13 +609,13 @@ unlet s:hooks
 "{{{
 NeoBundleLazy 'othree/html5.vim', {
 \    'autoload' : {
-\        'filetypes': 'html',},}
+\        'filetypes': ['html', 'php'],},}
 "}}}
 " vim-css3-syntax
 "{{{
 NeoBundleLazy 'hail2u/vim-css3-syntax', {
 \    'autoload' : {
-\        'filetypes': 'css',},}
+\        'filetypes': ['html', 'css'],},}
 "}}}
 " vim-javascript
 "{{{
