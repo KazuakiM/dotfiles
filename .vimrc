@@ -579,6 +579,54 @@ endfunction
 unlet s:hooks
 " add .vimrc.local
 "}}}
+" emmet-vim
+"{{{
+"# command memo
+"* <C+y>,  :execute trigger key
+"* html:5 <=入力後に<C+y>,
+"* div>ul>li.class#id_$$*5 <=入力後に<C+y>,
+NeoBundleLazy 'mattn/emmet-vim', {
+\    'autoload' : {
+\        'filetypes': ['html','css','php'],},}
+let s:hooks = neobundle#get_hooks('emmet-vim')
+function! s:hooks.on_source(bundle)
+    let g:user_emmet_settings = {
+    \    'lang' : 'ja',}
+    let g:user_emmet_mode='in'
+    "let g:user_emmet_leader_key=''
+endfunction
+unlet s:hooks
+"}}}
+" html5.vim
+"{{{
+NeoBundleLazy 'othree/html5.vim', {
+\    'autoload' : {
+\        'filetypes': 'html',},}
+"}}}
+" vim-css3-syntax
+"{{{
+NeoBundleLazy 'hail2u/vim-css3-syntax', {
+\    'autoload' : {
+\        'filetypes': 'css',},}
+"}}}
+" vim-javascript
+"{{{
+NeoBundleLazy 'pangloss/vim-javascript', {
+\    'autoload' : {
+\        'filetypes': ['html', 'javascript'],},}
+"}}}
+"" sass-compile.vim
+""{{{
+"NeoBundleLazy 'AtsushiM/sass-compile.vim', {
+"\    'autoload' : {
+"\        'filetypes': '',},}
+""}}}
+"" vim-coffee-script
+""{{{
+"NeoBundleLazy 'kchmck/vim-coffee-script', {
+"\    'autoload' : {
+"\        'filetypes': '',},}
+""}}}
 " previm
 "{{{
 if has('mac')
