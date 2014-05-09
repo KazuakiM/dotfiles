@@ -60,6 +60,7 @@ set scrolloff=5
 set textwidth=0
 set autoread
 set hidden
+set ambiwidth=double
 set backspace=indent,eol,start
 set visualbell t_vb=
 set noerrorbells
@@ -399,7 +400,6 @@ nmap <Leader>u [unite]
 nnoremap <silent> [unite]b    :<C-u>Unite buffer<CR>
 nnoremap <silent> [unite]c    :<C-u>Unite bookmark<CR>
 nnoremap <silent> [unite]f    :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> [unite]h    :<C-u>Unite help<CR>
 nnoremap <silent> [unite]mru  :<C-u>Unite file_mru<CR>
 nnoremap <silent> [unite]map  :<C-u>Unite output:map\|map!\|lmap<CR>
 nnoremap <silent> [unite]msg  :<C-u>Unite output:message<CR>
@@ -411,6 +411,7 @@ nnoremap <silent> [unite]w    :<C-u>Unite window<CR>
 " add plugins
 nnoremap <silent> [unite]web :<C-u>Unite webcolorname<CR>
 nnoremap <silent> [unite]cs  :<C-u>Unite -auto-preview colorscheme<CR>
+nnoremap <silent> [unite]h   :<C-u>Unite help<CR>
 autocmd MyAutoCmd FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 "}}}
@@ -586,21 +587,21 @@ unlet s:hooks
 "* <C+y>,  :execute trigger key
 "* html:5 <=入力後に<C+y>,
 "* div>ul>li.class#id_$$*5 <=入力後に<C+y>,
-"# TODO
-"* extends, filters の用途理解不足解消
-"* 下記URLでxml, hamlの設定をhtmlまで拡張みたいな記載があるが、
-"  自動起動にxmlとhamlが加わっていないのが謎。
-"  http://threetreeslight.com/post/60845475628/emmet
 NeoBundleLazy 'mattn/emmet-vim', {
 \    'autoload' : {
-\        'filetypes': ['html','css','php'],},}
+\        'filetypes': ['html','php','css'],},}
 let s:hooks = neobundle#get_hooks('emmet-vim')
 function! s:hooks.on_source(bundle)
     let g:user_emmet_settings = {
     \    'lang' : 'ja',
-    \    'php' : {
+    \    'indentation' : '    ',
+    \    'html' : { 'filters' : 'html',},
+    \    'css'  : { 'filters' : 'fc',},
+    \    'php'  : {
+    \        'filters' : 'html',
     \        'extends' : 'html',},}
-    let g:user_emmet_mode='in'
+    let g:user_emmet_mode='a'
+    let g:use_emmet_complete_tag = 1
     "let g:user_emmet_leader_key=''
 endfunction
 unlet s:hooks
@@ -609,26 +610,36 @@ unlet s:hooks
 "{{{
 NeoBundleLazy 'othree/html5.vim', {
 \    'autoload' : {
-\        'filetypes': ['html', 'php'],},}
+\        'filetypes': ['html','php'],},}
 "}}}
 " vim-css3-syntax
 "{{{
 NeoBundleLazy 'hail2u/vim-css3-syntax', {
 \    'autoload' : {
-\        'filetypes': ['html', 'css'],},}
+\        'filetypes': ['html','php','css'],},}
 "}}}
 " vim-javascript
 "{{{
 NeoBundleLazy 'pangloss/vim-javascript', {
 \    'autoload' : {
-\        'filetypes': ['html', 'javascript'],},}
+\        'filetypes': ['html','php','javascript'],},}
 "}}}
-"" sass-compile.vim
-""{{{
-"NeoBundleLazy 'AtsushiM/sass-compile.vim', {
-"\    'autoload' : {
-"\        'filetypes': '',},}
-""}}}
+" sass-compile.vim
+"{{{
+NeoBundleLazy 'AtsushiM/sass-compile.vim', {
+\    'autoload' : {
+\        'filetypes': ['sass','scss']},}
+let s:hooks = neobundle#get_hooks('sass-compile.vim')
+function! s:hooks.on_source(bundle)
+    let g:sass_compile_cdloop = 5
+    let g:sass_compile_auto = 1
+    let g:sass_compile_file = ['sass', 'scss']
+    let g:sass_compile_cssdir = ['css', 'stylesheet']
+    autocmd MyAutoCmd BufWritePost *.sass,*.scss SassCompile
+    "let $PATH=$PATH."path_to_compass"
+endfunction
+unlet s:hooks
+"}}}
 "" vim-coffee-script
 ""{{{
 "NeoBundleLazy 'kchmck/vim-coffee-script', {
