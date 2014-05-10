@@ -636,16 +636,20 @@ function! s:hooks.on_source(bundle)
     let g:sass_compile_file = ['sass', 'scss']
     let g:sass_compile_cssdir = ['css', 'stylesheet']
     autocmd MyAutoCmd BufWritePost *.sass,*.scss SassCompile
-    "let $PATH=$PATH."path_to_compass"
 endfunction
 unlet s:hooks
 "}}}
-"" vim-coffee-script
-""{{{
-"NeoBundleLazy 'kchmck/vim-coffee-script', {
-"\    'autoload' : {
-"\        'filetypes': '',},}
-""}}}
+" vim-coffee-script
+"{{{
+NeoBundleLazy 'kchmck/vim-coffee-script', {
+\    'autoload' : {
+\        'filetypes': 'coffee',},}
+let s:hooks = neobundle#get_hooks('vim-coffee-script')
+function! s:hooks.on_source(bundle)
+    autocmd MyAutoCmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
+endfunction
+unlet s:hooks
+"}}}
 " previm
 "{{{
 if has('mac')
@@ -677,6 +681,7 @@ NeoBundleFetch 'tomasr/molokai'
 "{{{
 filetype plugin indent on
 autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} set filetype=markdown
+autocmd MyAutoCmd BufNewFile,BufRead *.coffee set filetype=coffee
 "}}}
 "
 "
