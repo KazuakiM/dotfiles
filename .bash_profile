@@ -69,6 +69,7 @@ case "${OSTYPE}" in
         alias MV='open -a virtualbox'
         alias KOBO='open -a kobo'
         alias KINDLE='open -a kindle'
+        alias LINGR='open -a LimeChat;nohup ruby $HOME/.vim/bundle/lingr-irc/lig.rb > /dev/null 2>&1 &'
         export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
         export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
         ;;

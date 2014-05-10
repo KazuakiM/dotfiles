@@ -667,11 +667,17 @@ endif
 " NeoBundleFetch
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
+"# function memo
+"* New Install 'NeoBundle'. And Update 'NeoBundle' to 'NeoBundleFetch'.
 " ColorScheme
 "{{{
 NeoBundleFetch 'nanotech/jellybeans.vim'
 NeoBundleFetch 'altercation/vim-colors-solarized'
 NeoBundleFetch 'tomasr/molokai'
+"}}}
+" Lingr (none-Vimplugin but there is vim-users.jp room.)
+"{{{
+NeoBundleFetch 'psychs/lingr-irc'
 "}}}
 "}}}
 "
