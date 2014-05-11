@@ -481,6 +481,19 @@ NeoBundleLazy 'scrooloose/nerdtree', {
 nnoremap <Leader>n :NERDTree<CR>
 let NERDTreeShowHidden=1
 "}}}
+" vimshell.vim
+"{{{
+NeoBundleLazy 'Shougo/vimshell.vim', {
+\    'depends' : 'Shougo/vimproc.vim',
+\    'autoload' : {
+\        'commands' : ['VimShell', 'VimShellPop', 'VimShellInteractive'],},}
+nnoremap [vimshell.vim] <Nop>
+nmap <Leader>sh [vimshell.vim]
+nnoremap <silent> [vimshell.vim]s :<C-u>VimShell<CR>
+nnoremap <silent> [vimshell.vim]p :<C-u>VimShellPop<CR>
+nnoremap <silent> [vimshell.vim]i :<C-u>VimShellInteractive
+
+"}}}
 " vim-easy-align
 "{{{
 "# command memo
