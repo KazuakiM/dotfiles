@@ -61,6 +61,8 @@ set textwidth=0
 set autoread
 set hidden
 set ambiwidth=double
+"set spelllang+=cjk
+"set spell
 set backspace=indent,eol,start
 set visualbell t_vb=
 set noerrorbells
@@ -97,6 +99,8 @@ colorscheme jellybeans
 set title
 set ruler
 set laststatus=2
+set wildmenu
+set wildmode=longest:full,full
 set number
 set cursorline
 set cursorcolumn
@@ -183,11 +187,11 @@ nnoremap [vim-fugitive]rm :Gremove<CR>
 nnoremap [vim-fugitive]diff :Gdiff<CR>
 nnoremap [vim-fugitive]commit :Gcommit -m ''
 "}}}
-" landscape
 " lightline
+" landscape
 "{{{
-NeoBundle 'itchyny/landscape.vim'
-NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'itchyny/lightline.vim', {
+\    'depends': 'itchyny/landscape.vim'}
 let g:lightline = {
 \    'colorscheme': 'landscape',
 \    'mode_map': { 'c': 'NORMAL' },
@@ -238,6 +242,27 @@ endfunction
 "{{{
 NeoBundle 'Yggdroot/indentLine'
 let g:indentLine_faster = 1
+"}}}
+" vim-precious
+" context_filetype.vim
+"{{{
+NeoBundle 'osyo-manga/vim-precious', {
+\    'depends': 'Shougo/context_filetype.vim'}
+" Not support PHP. So Another mehotd thinking.
+"  1. PHP support PR
+"  2. php file default html filetype. This plugin update from html to php.
+"let g:context_filetype#filetypes = {
+"\    'php': [
+"\        {
+"\            'start': '<script\%( [^>]*\)\? type="text/javascript"\%( [^>]*\)\?>',
+"\            'end': '</script>', 'filetype': 'javascript',},
+"\        {
+"\            'start': '<style\%( [^>]*\)\? type="text/css"\%( [^>]*\)\?>',
+"\            'end': '</style>', 'filetype': 'css',},
+"" file_type 'php' is not trueth at this setting.
+""\        {
+""\            'start': '<?php\?',
+""\            'end': '?>', 'filetype': 'php',},],}
 "}}}
 " vdebug
 "{{{
@@ -512,6 +537,7 @@ unlet s:hooks
 " neocomplete.vim
 "{{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {
+\    'depends': ['Shougo/neosnippet.vim', 'Shougo/context_filetype.vim'],
 \    'autoload' : {
 \        'insert' : 1,},}
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
