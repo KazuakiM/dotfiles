@@ -191,7 +191,7 @@ nnoremap [vim-fugitive]commit :Gcommit -m ''
 " landscape
 "{{{
 NeoBundle 'itchyny/lightline.vim', {
-\    'depends': 'itchyny/landscape.vim'}
+\    'depends': ['itchyny/landscape.vim', 'tpope/vim-fugitive',],}
 let g:lightline = {
 \    'colorscheme': 'landscape',
 \    'mode_map': { 'c': 'NORMAL' },
@@ -406,12 +406,15 @@ NeoBundleLazy 'Shougo/unite.vim', {
 \    'autoload' : {
 \        'commands' : ['Unite', 'UniteWithBufferDir', 'UniteWithCursorWord'],},}
 NeoBundleLazy 'pasela/unite-webcolorname', {
+\    'depends': 'Shougo/unite.vim',
 \    'autoload': {
 \        'unite_sources': ['webcolorname'],},}
 NeoBundleLazy 'ujihisa/unite-colorscheme', {
+\    'depends': 'Shougo/unite.vim',
 \    'autoload': {
 \        'unite_sources': ['colorscheme'],},}
 NeoBundleLazy 'Shougo/unite-help', {
+\    'depends': 'Shougo/unite.vim',
 \    'autoload': {
 \        'unite_sources': ['help'],},}
 let g:unite_enable_start_insert=1
