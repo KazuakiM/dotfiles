@@ -67,8 +67,7 @@ set backspace=indent,eol,start
 set visualbell t_vb=
 set noerrorbells
 set foldmethod=marker
-"set line head left arrow
-"nnoremap  :<C-U>%foldclose<CR>
+nnoremap zx :<C-U>%foldopen<CR>
 set matchpairs+=<:>
 augroup MyAutoCmd
     autocmd!
