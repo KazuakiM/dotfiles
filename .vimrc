@@ -416,6 +416,10 @@ NeoBundleLazy 'Shougo/unite-help', {
 \    'depends': 'Shougo/unite.vim',
 \    'autoload': {
 \        'unite_sources': ['help'],},}
+NeoBundleLazy 'Shougo/unite-outline', {
+\    'depends': 'Shougo/unite.vim',
+\    'autoload': {
+\        'unite_sources': ['outline'],},}
 let g:unite_enable_start_insert=1
 let g:unite_source_grep_command='ag'
 let g:unite_source_grep_default_opts='--nocolor --nogroup'
@@ -439,6 +443,7 @@ nnoremap <silent> [unite]w    :<C-u>Unite window<CR>
 nnoremap <silent> [unite]web :<C-u>Unite webcolorname<CR>
 nnoremap <silent> [unite]cs  :<C-u>Unite -auto-preview colorscheme<CR>
 nnoremap <silent> [unite]h   :<C-u>Unite help<CR>
+nnoremap <silent> [unite]ol  :<C-u>Unite outline<CR>
 autocmd MyAutoCmd FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 "}}}
