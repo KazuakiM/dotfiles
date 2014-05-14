@@ -504,13 +504,43 @@ nnoremap <silent> [vimshell.vim]i :<C-u>VimShellInteractive
 " vim-easy-align
 "{{{
 "# command memo
-"* Virtual mode selected range.
-"* exsamp:  And <Enter>*|
-"*     or:  And <Enter>*=
+"* Don't hooks. 'g:easy_align_delimiters' is non-function.
 NeoBundleLazy 'junegunn/vim-easy-align', {
 \    'autoload': {
 \        'commands' : ['EasyAlign'],},}
 vnoremap <silent> <Leader>a :EasyAlign<CR>
+if !exists('g:easy_align_delimiters')
+    let g:easy_align_delimiters = {}
+endif
+let g:easy_align_delimiters = {
+\    '>': {
+\        'pattern': '>>\|=>\|>', },
+\    '/': {
+\        'pattern':       '//\+\|/\*\|\*/',
+\        'ignore_groups': ['String'], },
+\    '#': {
+\        'pattern':         '#\+',
+\        'ignore_groups':   ['String'],
+\        'delimiter_align': 'l', },
+\    '$': {
+\        'pattern':         '$\+',
+\        'ignore_groups':   ['String'],
+\        'right_margin':  0,
+\        'delimiter_align': 'l', },
+\    ']': {
+\        'pattern':       '[[\]]',
+\        'left_margin':   0,
+\        'right_margin':  0,
+\        'stick_to_left': 0, },
+\    ')': {
+\        'pattern':       '[()]',
+\        'left_margin':   0,
+\        'right_margin':  0,
+\        'stick_to_left': 0, },
+\    'd': {
+\        'pattern':      ' \(\S\+\s*[;=]\)\@=',
+\        'left_margin':  0,
+\        'right_margin': 0, }, }
 "}}}
 " syntastic'
 "{{{
