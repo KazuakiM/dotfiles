@@ -523,7 +523,7 @@ let g:easy_align_delimiters = {
 \        'ignore_groups':   ['String'],
 \        'delimiter_align': 'l', },
 \    '$': {
-\        'pattern':         '$\+',
+\        'pattern':         '\((.*\)\@!$\(.*)\)\@!',
 \        'ignore_groups':   ['String'],
 \        'right_margin':  0,
 \        'delimiter_align': 'l', },
