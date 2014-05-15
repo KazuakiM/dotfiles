@@ -537,6 +537,9 @@ let g:easy_align_delimiters = {
 \        'left_margin':   0,
 \        'right_margin':  0,
 \        'stick_to_left': 0, },
+\    'r': {
+\        'pattern':      'param\|return\|continue\|break',
+\        'left_margin':  1 },
 \    'd': {
 \        'pattern':      ' \(\S\+\s*[;=]\)\@=',
 \        'left_margin':  0,
