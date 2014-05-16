@@ -335,6 +335,8 @@ NeoBundle 'tpope/vim-endwise'
 "}}}
 " vim-over
 "{{{
+" TODO:gc置換時に'n'でキャンセルするとキャンセルした部分がバグる。
+"      設定の見直しが求められる。
 NeoBundle 'osyo-manga/vim-over'
 nnoremap <expr><Leader>%s ':OverCommandLine<CR>%s/'.expand('<cword>').'/'
 "}}}
