@@ -283,10 +283,12 @@ NeoBundle 'joonty/vdebug'
 "}}}
 " vim-ref
 "{{{
-"# command memo
-"* <S-k> :Show manual
 NeoBundle 'thinca/vim-ref'
+let g:ref_cache_dir=$HOME.'/.vim/refCache'
 let g:ref_phpmanual_path=$HOME.'/.vim/ref/php-chunked-xhtml'
+" TODO:複数ファイルタイプ時の動作確認
+"let g:ref_detect_filetype={'laravel.php': 'php'}
+"codeIgniter.php', 'fuelphp.php', 'yii.php'
 "}}}
 " vim-tags
 "{{{
