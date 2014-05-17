@@ -36,6 +36,14 @@ alias df='df -h'
 export GREP_OPTIONS='--color=auto -I'
 export GREP_COLOR='1;33'
 #}}}
+# PS1(primary prompt string)
+#{{{
+lc='\[\e[1;'
+ps1StartCyan=${lc}36m
+ps1EndNormal=${lc}0m
+export PS1="${ps1StartCyan}\]\h@\W \$ ${ps1EndNormal}\]"
+#export PS1='\u@\h \$ '
+#}}}
 # OS Type
 #{{{
 case "${OSTYPE}" in
