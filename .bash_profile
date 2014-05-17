@@ -33,16 +33,17 @@ alias h='history'
 alias cl='clear'
 alias lc='clear'
 alias df='df -h'
-alias grep='grep --color=auto'
+export GREP_OPTIONS='--color=auto -I'
+export GREP_COLOR='1;33'
 #}}}
 # OS Type
 #{{{
 case "${OSTYPE}" in
     darwin*)
-        alias l='ls -Ga'
-        alias ls='ls -Ga'
-        alias sl='ls -Ga'
-        alias ll='ls -Gla'
+        alias l='ls -aGh'
+        alias ls='ls -aGh'
+        alias sl='ls -aGh'
+        alias ll='ls -aGhl'
         alias vi='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
         alias vim='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
         alias top='htop'
@@ -76,10 +77,10 @@ case "${OSTYPE}" in
         export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
         ;;
     linux*)
-        alias l='ls --color=auto'
-        alias ls='ls -a --color=auto'
-        alias sl='ls -a --color=auto'
-        alias ll='ls -a -l --color=auto'
+        alias l='ls -ahX --color=auto'
+        alias ls='ls -ahX --color=auto'
+        alias sl='ls -ahX --color=auto'
+        alias ll='ls -ahXl --color=auto'
         alias vi='vim'
         # export LS_COLORS
         #{{{
