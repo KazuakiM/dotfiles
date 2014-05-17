@@ -33,13 +33,6 @@
 "|   :lmap   | :lnoremap | :lunmap | :lmapclear |   -    |   -    |   -    |        -         |  yes*  |     yes*     |   yes*   |
 "---------------------------------------------------------------------------------------------------------------------------------
 "}}}
-"   color
-"{{{
-" confirm the definition of color
-"   :so $VIMRUNTIME/syntax/colortest.vim
-" check the status of the current Vim
-"   :so $VIMRUNTIME/syntax/hitest.vim
-"}}}
 "}}}
 "
 "
@@ -132,15 +125,6 @@ cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 " PHP
 " URL: http://stackoverflow.com/questions/9684806/real-sql-syntax-highlighting-in-php-scripts-with-vim
-"{{{
-" Enclosing the query in a heredoc with an identifier of 'SQL' triggers Vim to do SQL syntax highlighting in the block.
-" e.g.:
-" > $sql = <<<SQL
-" > SELECT `foo`
-" > FROM `db`.`table`
-" > WHERE `foo` = 'bar'
-" > SQL;
-"}}}
 let php_sql_query = 1
 let php_baselib = 1
 let php_htmlInStrings = 1
@@ -286,9 +270,11 @@ NeoBundle 'joonty/vdebug'
 NeoBundle 'thinca/vim-ref'
 let g:ref_cache_dir=$HOME.'/.vim/refCache'
 let g:ref_phpmanual_path=$HOME.'/.vim/ref/php-chunked-xhtml'
-" TODO:複数ファイルタイプ時の動作確認
-"let g:ref_detect_filetype={'laravel.php': 'php'}
-"codeIgniter.php', 'fuelphp.php', 'yii.php'
+let g:ref_detect_filetype={
+\    'laravel.php':     'phpmanual',
+\    'codeigniter.php': 'phpmanual',
+\    'fuel.php':        'phpmanual',
+\    'yii.php':         'phpmanual',}
 "}}}
 " vim-tags
 "{{{
@@ -322,8 +308,7 @@ NeoBundle 'gcmt/wildfire.vim'
 let g:wildfire_water_map = '<BS>'
 let g:wildfire_objects = {
 \        '*' : ["i'", 'i"', 'i)', 'i]', 'i}', 'ip'],
-\        'html,xml' : ['at'],
-\    }
+\        'html,xml' : ['at'],}
 "}}}
 " matchit.zip
 "{{{
