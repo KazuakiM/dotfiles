@@ -3,8 +3,7 @@
 " Memo
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
-"   :help internal-variables
-"{{{
+"  :help internal-variables {{{
 "------------------------------------------------------------------------
 "| b: | buffer-variable   | Local to the current buffer.                |
 "| w: | window-variable   | Local to the current window.                |
@@ -14,10 +13,8 @@
 "| s: | script-variable   | Local to a :source'ed Vim script.           |
 "| a: | function-argument | Function argument (only inside a function). |
 "| v: | vim-variable      | Global, predefined by Vim.                  |
-"------------------------------------------------------------------------
-"}}}
-"   :help map
-"{{{
+"------------------------------------------------------------------------ }}}
+"  :help map {{{
 "---------------------------------------------------------------------------------------------------------------------------------
 "|commands:                                     |modes:                                                                          |
 "| Variables | Constants |  Unset  |  Destroy   | Normal | Visual | Select | Operator-pending | Insert | Command-line | Lang-Arg |
@@ -31,8 +28,7 @@
 "|   :imap   | :inoremap | :iunmap | :imapclear |   -    |   -    |   -    |        -         |  yes   |      -       |    -     |
 "|   :cmap   | :cnoremap | :cunmap | :cmapclear |   -    |   -    |   -    |        -         |   -    |     yes      |    -     |
 "|   :lmap   | :lnoremap | :lunmap | :lmapclear |   -    |   -    |   -    |        -         |  yes*  |     yes*     |   yes*   |
-"---------------------------------------------------------------------------------------------------------------------------------
-"}}}
+"--------------------------------------------------------------------------------------------------------------------------------- }}}
 "}}}
 "
 "
@@ -41,8 +37,9 @@
 "{{{
 set nocompatible
 " Valiable
-"let b:localtime=localtime()
-"let b:now=strftime('%Y%m%d%H%M%S',b:localtime)
+"let g:localtime=localtime()
+""let g:time=strftime('%Y%m%d%H%M%S',g:localtime)
+"let g:date_hour=strftime('%Y%m%d%H',g:localtime)
 " Encode
 set encoding=utf-8
 set fileencoding=utf-8
@@ -60,6 +57,7 @@ set backspace=indent,eol,start
 set visualbell t_vb=
 set noerrorbells
 set foldmethod=marker
+set viminfo+=n~/.vim/viminfo/.viminfo
 nnoremap zx :<C-U>%foldopen<CR>
 set matchpairs+=<:>
 augroup MyAutoCmd
@@ -104,9 +102,9 @@ set backupdir=$HOME/.vim/backup
 set swapfile
 set directory=$HOME/.vim/swap
 set noundofile
+"autocmd MyAutoCmd VimEnter * call s:auto_mkdir($HOME.'/.vim/gundo/'.g:date_hour.'/', 1)
 "set undofile
-"set undodir=$HOME/.vim/gundo
-"set undodir=$HOME.'/.vim/gundo'.b:now.'/'
+"set undodir=eval("$HOME.'/.vim/gundo/'.g:date_hour.'/'")
 " Indentation
 set tabstop=4
 set softtabstop=4
@@ -141,8 +139,7 @@ if has('vim_starting')
 endif
 call neobundle#rc(expand('$HOME/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
-" vimproc
-"{{{
+" vimproc {{{
 NeoBundle 'Shougo/vimproc', {
 \    'build' : {
 \        'windows' : 'make -f make_mingw32.mak',
@@ -150,16 +147,13 @@ NeoBundle 'Shougo/vimproc', {
 \        'mac'     : 'make -f make_mac.mak',
 \        'unix'    : 'make -f make_unix.mak',},}
 "}}}
-" vital.vim
-"{{{
+" vital.vim {{{
 NeoBundle 'vim-jp/vital.vim'
 "}}}
-" webapi-vim
-"{{{
+" webapi-vim {{{
 NeoBundle 'mattn/webapi-vim'
 "}}}
-" vim-fugitive
-"{{{
+" vim-fugitive {{{
 NeoBundle 'tpope/vim-fugitive'
 nnoremap [vim-fugitive] <Nop>
 nmap <Leader>git [vim-fugitive]
@@ -171,8 +165,7 @@ nnoremap [vim-fugitive]diff :Gdiff<CR>
 nnoremap [vim-fugitive]commit :Gcommit -m ''
 "}}}
 " lightline
-" landscape
-"{{{
+" landscape {{{
 NeoBundle 'itchyny/lightline.vim', {
 \    'depends': ['itchyny/landscape.vim', 'tpope/vim-fugitive',],}
 let g:lightline = {
@@ -221,14 +214,12 @@ function! MyMode()
     return winwidth('.') > 60 ? lightline#mode() : ''
 endfunction
 "}}}
-" indentLine
-"{{{
+" indentLine {{{
 NeoBundle 'Yggdroot/indentLine'
 let g:indentLine_faster = 1
 "}}}
 " vim-precious
-" context_filetype.vim
-"{{{
+" context_filetype.vim {{{
 NeoBundle 'osyo-manga/vim-precious', {
 \    'depends': 'Shougo/context_filetype.vim'}
 " Not support PHP. So Another mehotd thinking.
@@ -247,8 +238,7 @@ NeoBundle 'osyo-manga/vim-precious', {
 ""\            'start': '<?php\?',
 ""\            'end': '?>', 'filetype': 'php',},],}
 "}}}
-" vdebug
-"{{{
+" vdebug {{{
 "# command memo
 "* <F5>  : start/run (to next breakpoint/end of script)
 "* <F2>  : step over
@@ -265,8 +255,7 @@ NeoBundle 'osyo-manga/vim-precious', {
 "* <Leader>e: evaluate the expression under visual highlight and display the result
 NeoBundle 'joonty/vdebug'
 "}}}
-" vim-ref
-"{{{
+" vim-ref {{{
 NeoBundle 'thinca/vim-ref'
 let g:ref_cache_dir=$HOME.'/.vim/refCache'
 let g:ref_phpmanual_path=$HOME.'/.vim/ref/php-chunked-xhtml'
@@ -276,8 +265,7 @@ let g:ref_detect_filetype={
 \    'fuel.php':        'phpmanual',
 \    'yii.php':         'phpmanual',}
 "}}}
-" vim-tags
-"{{{
+" vim-tags {{{
 "# command memo
 "* :TagsGenerate :Remake tags.
 "* <C-]>         :Jump target file
@@ -291,16 +279,14 @@ nnoremap <Leader>[ <C-o>
 nnoremap <Leader>ts :ts<CR>
 " add .vimrc.local
 "}}}
-" vim-surround
-"{{{
+" vim-surround {{{
 "# command memo
 "* cs"'   :Change From  " to '
 "* cs'<p> :Change From  ' to <p>
 "* ds'    :Delete '
 NeoBundle 'tpope/vim-surround'
 "}}}
-" wildfire.vim
-"{{{
+" wildfire.vim {{{
 "# command memo
 "* (Normal)Enter after Enter :Range up selected words.
 "* (Normal)Backspace         :Range down selected words.
@@ -310,16 +296,13 @@ let g:wildfire_objects = {
 \        '*' : ["i'", 'i"', 'i)', 'i]', 'i}', 'ip'],
 \        'html,xml' : ['at'],}
 "}}}
-" matchit.zip
-"{{{
+" matchit.zip {{{
 NeoBundle 'vim-scripts/matchit.zip'
 "}}}
-" vim-endwise
-"{{{
+" vim-endwise {{{
 NeoBundle 'tpope/vim-endwise'
 "}}}
-" vim-qfreplace
-"{{{
+" vim-qfreplace {{{
 "# command memo
 "* ,grep  :Cursor word grep
 "* ,cn    :grep results next jump
@@ -339,8 +322,7 @@ nnoremap [vim-qfreplace]b :cprevious<CR>
 nnoremap [vim-qfreplace]c :cc
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 "}}}
-" memolist.vim
-"{{{
+" memolist.vim {{{
 "# command memo
 "* Don't NeoBundleLazy. ':MemoList' is non-function at first request.
 NeoBundle 'glidenote/memolist.vim'
@@ -351,8 +333,7 @@ nnoremap [memolist]n :MemoNew<CR>
 nnoremap [memolist]l :MemoList<CR>
 nnoremap [memolist]g :MemoGrep<CR>
 "}}}
-" vim-quickrun
-"{{{
+" vim-quickrun {{{
 "# command memo
 "* :QuickRun :execute quickrun.
 NeoBundle 'thinca/vim-quickrun'
@@ -364,12 +345,10 @@ let g:quickrun_config = {
 \    'markdown' : {
 \        'outputter' : 'browser',},}
 "}}}
-" vim-markdown
-"{{{
+" vim-markdown {{{
 NeoBundle 'plasticboy/vim-markdown'
 "}}}
-" vim-prettyprint
-"{{{
+" vim-prettyprint {{{
 NeoBundle 'thinca/vim-prettyprint'
 "}}}
 "}}}
@@ -381,8 +360,7 @@ NeoBundle 'thinca/vim-prettyprint'
 " unite.vim
 " unite-webcolorname
 " unite-colorscheme
-" unite-help
-"{{{
+" unite-help {{{
 NeoBundleLazy 'Shougo/unite.vim', {
 \    'autoload' : {
 \        'commands' : ['Unite', 'UniteWithBufferDir', 'UniteWithCursorWord'],},}
@@ -429,8 +407,7 @@ nnoremap <silent> [unite]ol  :<C-u>Unite outline<CR>
 autocmd MyAutoCmd FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 "}}}
-" vimdoc-ja
-"{{{
+" vimdoc-ja {{{
 NeoBundleLazy 'vim-jp/vimdoc-ja', {
 \    'autoload' : {
 \        'commands' : ['help'],},}
@@ -440,8 +417,7 @@ function! s:hooks.on_source(bundle)
 endfunction
 unlet s:hooks
 "}}}
-" open-browser.vim
-"{{{
+" open-browser.vim {{{
 NeoBundleLazy 'tyru/open-browser.vim', {
 \    'autoload' : {
 \        'functions' : 'OpenBrowser',
@@ -451,8 +427,7 @@ let g:netrw_nogx = 1 " disable netrw's gx mapping.
 nmap <Leader>gx <Plug>(openbrowser-smart-search)
 vmap <Leader>gx <Plug>(openbrowser-smart-search)
 "}}}
-" taglist.vim
-"{{{
+" taglist.vim {{{
 "# command memo
 "* :Tlist :Show class, function and etc at left menu.
 NeoBundleLazy 'vim-scripts/taglist.vim', {
@@ -462,16 +437,14 @@ let Tlist_Use_Right_Window = 1
 let Tlist_Exit_OnlyWindow = 1
 nnoremap <Leader>t :Tlist<CR>
 "}}}
-" nerdtree
-"{{{
+" nerdtree {{{
 NeoBundleLazy 'scrooloose/nerdtree', {
 \    'autoload' : {
 \        'commands' : ['NERDTree'],},}
 nnoremap <Leader>n :NERDTree<CR>
 let NERDTreeShowHidden=1
 "}}}
-" vimshell.vim
-"{{{
+" vimshell.vim {{{
 NeoBundleLazy 'Shougo/vimshell.vim', {
 \    'depends' : 'Shougo/vimproc.vim',
 \    'autoload' : {
@@ -481,10 +454,8 @@ nmap <Leader>sh [vimshell.vim]
 nnoremap <silent> [vimshell.vim]s :<C-u>VimShell<CR>
 nnoremap <silent> [vimshell.vim]p :<C-u>VimShellPop<CR>
 nnoremap <silent> [vimshell.vim]i :<C-u>VimShellInteractive
-
 "}}}
-" vim-easy-align
-"{{{
+" vim-easy-align {{{
 "# command memo
 "* Don't hooks. 'g:easy_align_delimiters' is non-function.
 NeoBundleLazy 'junegunn/vim-easy-align', {
@@ -520,15 +491,19 @@ let g:easy_align_delimiters = {
 \        'right_margin':  0,
 \        'stick_to_left': 0, },
 \    'r': {
-\        'pattern':      'param\|return\|continue\|break',
+\        'pattern':      'return\|continue\|break',
 \        'left_margin':  1 },
 \    'd': {
 \        'pattern':      ' \(\S\+\s*[;=]\)\@=',
 \        'left_margin':  0,
 \        'right_margin': 0, }, }
 "}}}
-" syntastic'
-"{{{
+" emoji-vim {{{
+NeoBundleLazy 'mattn/emoji-vim', {
+\    'autoload' : {
+\        'commands' : ['Emoji'],},}
+"}}}
+" syntastic {{{
 NeoBundleLazy 'scrooloose/syntastic', {
 \    'autoload' : {
 \        'insert' : 1,},}
@@ -541,8 +516,7 @@ unlet s:hooks
 "}}}
 " neosnippet.vim
 " vim-snippets
-" neosnippet-snippets (Warning Support )
-"{{{
+" neosnippet-snippets (Warning Support ) {{{
 "# command memo
 "* ':NeoSnippetEdit' don't use. it's non-function.
 "  Check:neosnippet.vim/autoload/neosnippet/commands.vim : L78
@@ -569,8 +543,7 @@ function! s:hooks.on_source(bundle)
 endfunction
 unlet s:hooks
 "}}}
-" neocomplete.vim
-"{{{
+" neocomplete.vim {{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {
 \    'depends': ['Shougo/neosnippet.vim', 'Shougo/context_filetype.vim'],
 \    'autoload' : {
@@ -585,8 +558,7 @@ function! s:hooks.on_source(bundle)
 endfunction
 unlet s:hooks
 "}}}
-" gundo.vim
-"{{{
+" gundo.vim {{{
 NeoBundleLazy 'sjl/gundo.vim', {
 \    'autoload' : {
 \        'insert' : 1,},}
@@ -598,8 +570,7 @@ function! s:hooks.on_source(bundle)
 endfunction
 unlet s:hooks
 "}}}
-" sudo.vim
-"{{{
+" sudo.vim {{{
 "# command memo
 "* ':w sudo:%'          :sudo save
 "* ':w sudo:<filename>' :sudo another name save
@@ -617,8 +588,7 @@ function! s:hooks.on_source(bundle)
 endfunction
 unlet s:hooks
 "}}}
-" vim-php-cs-fixer
-"{{{
+" vim-php-cs-fixer {{{
 NeoBundleLazy 'stephpy/vim-php-cs-fixer', {
 \    'autoload' : {
 \        'filetypes': 'php',},}
@@ -642,8 +612,7 @@ endfunction
 unlet s:hooks
 " add .vimrc.local
 "}}}
-" emmet-vim
-"{{{
+" emmet-vim {{{
 "# command memo
 "* URL: http://docs.emmet.io/cheat-sheet/
 "* <C+y>,  :execute trigger key
@@ -668,26 +637,22 @@ function! s:hooks.on_source(bundle)
 endfunction
 unlet s:hooks
 "}}}
-" html5.vim
-"{{{
+" html5.vim {{{
 NeoBundleLazy 'othree/html5.vim', {
 \    'autoload' : {
 \        'filetypes': ['html','php'],},}
 "}}}
-" vim-css3-syntax
-"{{{
+" vim-css3-syntax {{{
 NeoBundleLazy 'hail2u/vim-css3-syntax', {
 \    'autoload' : {
 \        'filetypes': ['html','php','css'],},}
 "}}}
-" vim-javascript
-"{{{
+" vim-javascript {{{
 NeoBundleLazy 'pangloss/vim-javascript', {
 \    'autoload' : {
 \        'filetypes': ['html','php','javascript'],},}
 "}}}
-" sass-compile.vim
-"{{{
+" sass-compile.vim {{{
 NeoBundleLazy 'AtsushiM/sass-compile.vim', {
 \    'autoload' : {
 \        'filetypes': ['sass','scss']},}
@@ -701,8 +666,7 @@ function! s:hooks.on_source(bundle)
 endfunction
 unlet s:hooks
 "}}}
-" vim-coffee-script
-"{{{
+" vim-coffee-script {{{
 NeoBundleLazy 'kchmck/vim-coffee-script', {
 \    'autoload' : {
 \        'filetypes': 'coffee',},}
@@ -712,8 +676,7 @@ function! s:hooks.on_source(bundle)
 endfunction
 unlet s:hooks
 "}}}
-" previm
-"{{{
+" previm {{{
 if has('mac')
     NeoBundleLazy 'kannokanno/previm', {
     \    'depends': ['open-browser.vim'],
@@ -731,14 +694,12 @@ endif
 "{{{
 "# function memo
 "* New Install 'NeoBundle'. And Update 'NeoBundle' to 'NeoBundleFetch'.
-" ColorScheme
-"{{{
+" ColorScheme {{{
 NeoBundleFetch 'nanotech/jellybeans.vim'
 NeoBundleFetch 'altercation/vim-colors-solarized'
 NeoBundleFetch 'tomasr/molokai'
 "}}}
-" Lingr (none-Vimplugin but there is vim-users.jp room.)
-"{{{
+" Lingr (none-Vimplugin but there is vim-users.jp room.) {{{
 NeoBundleFetch 'psychs/lingr-irc'
 "}}}
 "}}}
@@ -756,8 +717,7 @@ autocmd MyAutoCmd BufNewFile,BufRead *.coffee set filetype=coffee
 " Extra local functions
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
-" quickrun - prettyprint
-"{{{
+" quickrun - prettyprint {{{
 "# function memo
 "* URL: http://qiita.com/rbtnn/items/39d9ba817329886e626b
 "* NoFormattings :echo neobundle#config#get_neobundles()
@@ -771,6 +731,14 @@ function! s:quickrun_pp(q_args)
     call quickrun#run(dict)
 endfunction
 command! -nargs=1 -complete=expression QuickRunPP :call <sid>quickrun_pp(<q-args>)
+"}}}
+" Auto DirectoryMake {{{
+"function! s:auto_mkdir(dir, force)
+"    if !isdirectory(a:dir) && (a:force ||
+"                \   input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
+"    call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
+"  endif
+"endfunction
 "}}}
 "}}}
 "

@@ -8,6 +8,7 @@
 /ref/*
 /swap/*
 /tags/*
+/viminfo/*
 .netrwhist
 
 # Memos file manage.
