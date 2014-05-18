@@ -41,6 +41,7 @@ set nocompatible
 ""let g:time=strftime('%Y%m%d%H%M%S',g:localtime)
 "let g:date_hour=strftime('%Y%m%d%H',g:localtime)
 " Encode
+scriptencoding utf-8
 set encoding=utf-8
 set fileencoding=utf-8
 set fileformat=unix
@@ -184,6 +185,8 @@ let g:lightline = {
 \        'mode': 'MyMode',},
 \    'separator': { 'left': '', 'right': '' },
 \    'subseparator': { 'left': '|', 'right': '|' }}
+"\    'separator': { 'left': '\u2b80', 'right': '\u2b82' },
+"\    'subseparator': { 'left': '\u2b81', 'right': '\u2b83' }}
 function! MyModified()
     return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
@@ -199,7 +202,13 @@ function! MyFilename()
                 \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 function! MyFugitive()
-    return exists('*fugitive#head') ? fugitive#head() : ''
+    try
+        if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+            return fugitive#head()
+        endif
+    catch
+    endtry
+    return ''
 endfunction
 function! MyFileformat()
     return winwidth('.') > 70 ? &fileformat : ''
@@ -344,9 +353,6 @@ let g:quickrun_config = {
 \        'outputter/buffer/close_on_empty' : 1,},
 \    'markdown' : {
 \        'outputter' : 'browser',},}
-"}}}
-" vim-markdown {{{
-NeoBundle 'plasticboy/vim-markdown'
 "}}}
 " vim-prettyprint {{{
 NeoBundle 'thinca/vim-prettyprint'
@@ -682,6 +688,11 @@ function! s:hooks.on_source(bundle)
     autocmd MyAutoCmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
 endfunction
 unlet s:hooks
+"}}}
+" vim-markdown {{{
+NeoBundleLazy 'plasticboy/vim-markdown', {
+\    'autoload' : {
+\        'filetypes': 'markdown',},}
 "}}}
 " previm {{{
 if has('mac')
