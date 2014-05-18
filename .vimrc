@@ -360,7 +360,8 @@ NeoBundle 'thinca/vim-prettyprint'
 " unite.vim
 " unite-webcolorname
 " unite-colorscheme
-" unite-help {{{
+" unite-help
+" vim-editvar {{{
 NeoBundleLazy 'Shougo/unite.vim', {
 \    'autoload' : {
 \        'commands' : ['Unite', 'UniteWithBufferDir', 'UniteWithCursorWord'],},}
@@ -380,6 +381,10 @@ NeoBundleLazy 'Shougo/unite-outline', {
 \    'depends': 'Shougo/unite.vim',
 \    'autoload': {
 \        'unite_sources': ['outline'],},}
+NeoBundleLazy 'thinca/vim-editvar', {
+\    'depends': ['thinca/vim-prettyprint', 'Shougo/unite.vim'],
+\    'autoload': {
+\        'unite_sources': ['variable'],},}
 let g:unite_enable_start_insert=1
 let g:unite_source_grep_command='ag'
 let g:unite_source_grep_default_opts='--nocolor --nogroup'
@@ -401,10 +406,11 @@ nnoremap <silent> [unite]s    :<C-u>Unite output:scriptnames<CR>
 nnoremap <silent> [unite]t    :<C-u>Unite tab<CR>
 nnoremap <silent> [unite]w    :<C-u>Unite window<CR>
 " add plugins
-nnoremap <silent> [unite]web :<C-u>Unite webcolorname<CR>
 nnoremap <silent> [unite]cs  :<C-u>Unite -auto-preview colorscheme<CR>
 nnoremap <silent> [unite]h   :<C-u>Unite help<CR>
 nnoremap <silent> [unite]ol  :<C-u>Unite outline<CR>
+nnoremap <silent> [unite]v   :<C-u>Unite -auto-preview variable<CR>
+nnoremap <silent> [unite]web :<C-u>Unite webcolorname<CR>
 autocmd MyAutoCmd FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 "}}}
