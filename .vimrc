@@ -395,7 +395,8 @@ nnoremap <silent> [unite]mru  :<C-u>Unite file_mru<CR>
 nnoremap <silent> [unite]map  :<C-u>Unite output:map\|map!\|lmap<CR>
 nnoremap <silent> [unite]msg  :<C-u>Unite output:message<CR>
 nnoremap <silent> [unite]nmap :<C-u>Unite mapping<CR>
-nnoremap <silent> [unite]r    :<C-u>Unite register<CR>
+nnoremap <silent> [unite]rec  :<C-u>Unite file_rec/async:!<CR>
+nnoremap <silent> [unite]reg  :<C-u>Unite register<CR>
 nnoremap <silent> [unite]s    :<C-u>Unite output:scriptnames<CR>
 nnoremap <silent> [unite]t    :<C-u>Unite tab<CR>
 nnoremap <silent> [unite]w    :<C-u>Unite window<CR>
