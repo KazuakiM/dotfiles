@@ -33,8 +33,21 @@ alias h='history'
 alias cl='clear'
 alias lc='clear'
 alias df='df -h'
+alias diff='colordiff'
 export GREP_OPTIONS='--color=auto -I'
 export GREP_COLOR='1;33'
+export MANPAGER='less -R'
+man() {
+    env \
+        LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+        LESS_TERMCAP_md=$(printf "\e[1;32m") \
+        LESS_TERMCAP_me=$(printf "\e[0m") \
+        LESS_TERMCAP_se=$(printf "\e[1;34m") \
+        LESS_TERMCAP_so=$(printf "\e[1;35m") \
+        LESS_TERMCAP_ue=$(printf "\e[0m") \
+        LESS_TERMCAP_us=$(printf "\e[1;33m") \
+        man "$@"
+}
 #}}}
 # PS1(primary prompt string)
 #{{{
@@ -42,7 +55,6 @@ lc='\[\e[1;'
 ps1StartCyan=${lc}36m
 ps1EndNormal=${lc}0m
 export PS1="${ps1StartCyan}\]\h@\W \$ ${ps1EndNormal}\]"
-#export PS1='\u@\h \$ '
 #}}}
 # OS Type
 #{{{
