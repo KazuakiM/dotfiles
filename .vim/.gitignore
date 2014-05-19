@@ -6,9 +6,13 @@
 /phpCsFixer/*
 /qfixapp/*
 /ref/*
+/neocomplete/*
+/neosnippet/*
 /swap/*
 /tags/*
+/unite/*
 /viminfo/*
+/vimshell/*
 .netrwhist
 
 # Memos file manage.

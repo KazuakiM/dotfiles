@@ -173,7 +173,14 @@ let g:lightline = {
 \    'colorscheme': 'landscape',
 \    'mode_map': { 'c': 'NORMAL' },
 \    'active': {
-\        'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]},
+\        'left':  [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
+\        'right': [ [ 'lineinfo',  'syntastic' ],
+\                   [ 'percent' ],
+\                   [ 'fileformat', 'fileencoding', 'filetype' ] ],},
+\    'component_expand': {
+\        'syntastic': 'SyntasticStatuslineFlag',},
+\    'component_type': {
+\        'syntastic': 'error',},
 \    'component_function': {
 \        'modified': 'MyModified',
 \        'readonly': 'MyReadonly',
@@ -185,8 +192,8 @@ let g:lightline = {
 \        'mode': 'MyMode',},
 \    'separator': { 'left': '', 'right': '' },
 \    'subseparator': { 'left': '|', 'right': '|' }}
-"\    'separator': { 'left': '\u2b80', 'right': '\u2b82' },
-"\    'subseparator': { 'left': '\u2b81', 'right': '\u2b83' }}
+let g:syntastic_mode_map = { 'mode': 'passive' }
+autocmd MyAutoCmd BufWritePost * call s:syntastic()
 function! MyModified()
     return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
@@ -221,6 +228,10 @@ function! MyFileencoding()
 endfunction
 function! MyMode()
     return winwidth('.') > 60 ? lightline#mode() : ''
+endfunction
+function! s:syntastic()
+  SyntasticCheck
+  call lightline#update()
 endfunction
 "}}}
 " indentLine {{{
@@ -391,6 +402,7 @@ NeoBundleLazy 'thinca/vim-editvar', {
 \    'depends': ['thinca/vim-prettyprint', 'Shougo/unite.vim'],
 \    'autoload': {
 \        'unite_sources': ['variable'],},}
+let g:unite_data_directory=$HOME.'/.vim/unite'
 let g:unite_enable_start_insert=1
 let g:unite_source_grep_command='ag'
 let g:unite_source_grep_default_opts='--nocolor --nogroup'
@@ -462,6 +474,7 @@ NeoBundleLazy 'Shougo/vimshell.vim', {
 \    'depends' : 'Shougo/vimproc.vim',
 \    'autoload' : {
 \        'commands' : ['VimShell', 'VimShellPop', 'VimShellInteractive'],},}
+let g:vimshell_data_directory=$HOME.'/.vim/vimshell'
 nnoremap [vimshell.vim] <Nop>
 nmap <Leader>sh [vimshell.vim]
 nnoremap <silent> [vimshell.vim]s :<C-u>VimShell<CR>
@@ -537,6 +550,7 @@ NeoBundleLazy 'Shougo/neosnippet.vim', {
 \    'depends': ['honza/vim-snippets', 'Shougo/neosnippet-snippets'],
 \    'autoload': {
 \        'insert': 1,},}
+let g:neosnippet_data_directory=$HOME.'/.vim/neosnippet'
 let s:hooks = neobundle#get_hooks('neosnippet.vim')
 function! s:hooks.on_source(bundle)
     imap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -564,6 +578,7 @@ NeoBundleLazy 'Shougo/neocomplete.vim', {
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle)
     let g:acp_enableAtStartup=0
+    let g:neocomplete#data_directory=$HOME.'/.vim/neocomplete'
     let g:neocomplete#enable_at_startup=1
     let g:neocomplete#enable_smart_case=1
     let g:neocomplete#sources#syntax#min_keyword_length=3
