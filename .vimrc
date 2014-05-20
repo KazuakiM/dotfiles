@@ -258,6 +258,11 @@ NeoBundle 'osyo-manga/vim-precious', {
 ""\            'start': '<?php\?',
 ""\            'end': '?>', 'filetype': 'php',},],}
 "}}}
+" syntastic {{{
+NeoBundle 'scrooloose/syntastic'
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=2
+"}}}
 " vdebug {{{
 "# command memo
 "* <F5>  : start/run (to next breakpoint/end of script)
@@ -528,17 +533,6 @@ let g:easy_align_delimiters = {
 NeoBundleLazy 'mattn/emoji-vim', {
 \    'autoload' : {
 \        'commands' : ['Emoji'],},}
-"}}}
-" syntastic {{{
-NeoBundleLazy 'scrooloose/syntastic', {
-\    'autoload' : {
-\        'insert' : 1,},}
-let s:hooks = neobundle#get_hooks('syntastic')
-function! s:hooks.on_source(bundle)
-    let g:syntastic_enable_signs=1
-    let g:syntastic_auto_loc_list=2
-endfunction
-unlet s:hooks
 "}}}
 " neosnippet.vim
 " vim-snippets
