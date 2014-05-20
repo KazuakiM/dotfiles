@@ -64,7 +64,7 @@ function prompt_command
     tput sc
     # backwash is where to set cursor (upper right side)
     # to write CWD [col=screen width - (CWD +2) for brackets]
-    let backwash=$(tput cols)-$(echo $(pwd) | wc -m | tr -d ' ')-2
+    let backwash=$(tput cols)-$(echo $(pwd)@$USER | wc -m | tr -d ' ')-2
     #position cursor at Y=0, X=calculated columr (see above)
     tput cup 0 ${backwash}
     #Wrap path in brackets
@@ -73,6 +73,8 @@ function prompt_command
     # show path
     tput setaf 6
     echo -n "$(pwd)"
+    tput setaf 8
+    echo -n "@$USER"
     #show closing bracket
     tput setaf 4
     echo -n "]"
@@ -87,7 +89,7 @@ PROMPT_COMMAND=prompt_command
 lc='\[\e[1;'
 ps1StartCyan=${lc}36m
 ps1EndNormal=${lc}0m
-export PS1="${ps1StartCyan}\]\h@\u \$ ${ps1EndNormal}\]"
+export PS1="${ps1StartCyan}\]\h \$ ${ps1EndNormal}\]"
 #}}}
 # OS Type
 #{{{
