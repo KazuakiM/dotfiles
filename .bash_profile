@@ -1,5 +1,8 @@
 # .bash_profile
 # Get the aliases and functions
+if [ -f ~/.bash_profile.local ]; then
+    . ~/.bash_profile.local
+fi
 if [ -f ~/.bashrc ]; then
     . ~/.bashrc
 fi
@@ -33,10 +36,14 @@ alias h='history'
 alias cl='clear'
 alias lc='clear'
 alias df='df -h'
-alias diff='colordiff'
+if [[ -x `which colordiff` ]]; then
+    alias diff='colordiff -u'
+else
+    alias diff='diff -u'
+fi
 export GREP_OPTIONS='--color=auto -I'
 export GREP_COLOR='1;33'
-export MANPAGER='less -R'
+export LESS='-R'
 man() {
     env \
         LESS_TERMCAP_mb=$(printf "\e[1;31m") \

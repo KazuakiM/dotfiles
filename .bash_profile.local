@@ -1,0 +1,16 @@
+## Application Directory
+#alias APP='cd /srv/sample'
+## ctags
+#tagsCmd='ctags --languages=php -f'
+#tagsValiable=''
+#tagsValiable=$tagsValiable"cd /srv/sample;$tagsCmd $HOME/.vim/tags/sample.tags;"
+#alias TAGS=$tagsValiable
+## git pull
+#gitPullValiable=''
+#gitPullValiable=$gitPullValiable"echo 'Sample';cd /srv/sample;git pull;"
+#alias PULL=$gitPullValiable
+## git status
+#gitStatusValiable=''
+#gitStatusValiable=$gitStatusValiale"echo 'Sample';cd /srv/sample;git stat;"
+#alias STAT=$gitStatusValiable
+
