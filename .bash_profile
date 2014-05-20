@@ -56,12 +56,38 @@ man() {
         man "$@"
 }
 #}}}
+# Linux Desktop Hacks Custopm prompt
+#{{{
+function prompt_command
+{
+    # Save current cursor position
+    tput sc
+    # backwash is where to set cursor (upper right side)
+    # to write CWD [col=screen width - (CWD +2) for brackets]
+    let backwash=$(tput cols)-$(echo $(pwd) | wc -m | tr -d ' ')-2
+    #position cursor at Y=0, X=calculated columr (see above)
+    tput cup 0 ${backwash}
+    #Wrap path in brackets
+    tput setaf 4
+    echo -n "["
+    # show path
+    tput setaf 6
+    echo -n "$(pwd)"
+    #show closing bracket
+    tput setaf 4
+    echo -n "]"
+    #return cursor to saved position
+    tput rc
+}
+# Set prompt via function above
+PROMPT_COMMAND=prompt_command
+#}}}
 # PS1(primary prompt string)
 #{{{
 lc='\[\e[1;'
 ps1StartCyan=${lc}36m
 ps1EndNormal=${lc}0m
-export PS1="${ps1StartCyan}\]\h@\W \$ ${ps1EndNormal}\]"
+export PS1="${ps1StartCyan}\]\h@\u \$ ${ps1EndNormal}\]"
 #}}}
 # OS Type
 #{{{
