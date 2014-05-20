@@ -464,7 +464,9 @@ NeoBundleLazy 'vim-scripts/taglist.vim', {
 \    'autoload' : {
 \        'commands' : ['Tlist'],},}
 let Tlist_Use_Right_Window = 1
+let Tlist_Show_One_File = 1
 let Tlist_Exit_OnlyWindow = 1
+let g:tlist_php_settings = 'php;c:class;f:function;d:constant'
 nnoremap <Leader>t :Tlist<CR>
 "}}}
 " nerdtree {{{
