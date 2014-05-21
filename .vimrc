@@ -138,7 +138,7 @@ let php_parent_error_close = 1
 if has('vim_starting')
   set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
 endif
-call neobundle#rc(expand('$HOME/.vim/bundle/'))
+call neobundle#begin(expand('$HOME/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 " vimproc {{{
 NeoBundle 'Shougo/vimproc', {
@@ -731,6 +731,7 @@ NeoBundleFetch 'tomasr/molokai'
 " Lingr (none-Vimplugin but there is vim-users.jp room.) {{{
 NeoBundleFetch 'psychs/lingr-irc'
 "}}}
+call neobundle#end()
 "}}}
 "
 "
