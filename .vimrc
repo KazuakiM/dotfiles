@@ -537,13 +537,13 @@ NeoBundleLazy 'mattn/emoji-vim', {
 \        'commands' : ['Emoji'],},}
 "}}}
 " neosnippet.vim
-" vim-snippets
+" vim-snippets @ honza's fork. Anded add folding function.
 " neosnippet-snippets (Warning Support ) {{{
 "# command memo
 "* ':NeoSnippetEdit' don't use. it's non-function.
 "  Check:neosnippet.vim/autoload/neosnippet/commands.vim : L78
 NeoBundleLazy 'Shougo/neosnippet.vim', {
-\    'depends': ['honza/vim-snippets', 'Shougo/neosnippet-snippets'],
+\    'depends': ['KazuakiM/vim-snippets', 'Shougo/neosnippet-snippets'],
 \    'autoload': {
 \        'insert': 1,},}
 let s:hooks = neobundle#get_hooks('neosnippet.vim')
