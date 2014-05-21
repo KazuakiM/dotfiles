@@ -36,6 +36,7 @@ alias h='history'
 alias cl='clear'
 alias lc='clear'
 alias df='df -h'
+alias tree='tree -af'
 if type python >/dev/null 2>&1; then
     alias diff='colordiff -u'
 else
