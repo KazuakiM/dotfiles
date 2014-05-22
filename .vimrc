@@ -537,13 +537,9 @@ NeoBundleLazy 'mattn/emoji-vim', {
 \        'commands' : ['Emoji'],},}
 "}}}
 " neosnippet.vim
-" vim-snippets @ honza's fork. Anded add folding function.
-" neosnippet-snippets (Warning Support ) {{{
-"# command memo
-"* ':NeoSnippetEdit' don't use. it's non-function.
-"  Check:neosnippet.vim/autoload/neosnippet/commands.vim : L78
+" vim-snippets @ honza's fork. Anded add folding function. {{{
 NeoBundleLazy 'Shougo/neosnippet.vim', {
-\    'depends': ['KazuakiM/vim-snippets', 'Shougo/neosnippet-snippets'],
+\    'depends': 'KazuakiM/vim-snippets',
 \    'autoload': {
 \        'insert': 1,},}
 let s:hooks = neobundle#get_hooks('neosnippet.vim')
@@ -560,6 +556,8 @@ function! s:hooks.on_source(bundle)
     if has('conceal')
         set conceallevel=2 concealcursor=i
     endif
+    let g:neosnippet#disable_runtime_snippets = {
+    \    '_' : 1,}
     let g:neosnippet#data_directory=$HOME.'/.vim/neosnippet'
     let g:neosnippet#enable_snipmate_compatibility = 1
     let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/vim-snippets/snippets'
