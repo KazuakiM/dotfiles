@@ -289,6 +289,7 @@ let g:ref_detect_filetype={
 \    'codeigniter.php': 'phpmanual',
 \    'fuel.php':        'phpmanual',
 \    'yii.php':         'phpmanual',}
+autocmd MyAutoCmd FileType ref-phpmanual nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 "}}}
 " vim-tags {{{
 "# command memo
