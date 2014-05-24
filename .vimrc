@@ -240,22 +240,24 @@ let g:indentLine_faster = 1
 "}}}
 " vim-precious
 " context_filetype.vim {{{
-NeoBundle 'osyo-manga/vim-precious', {
-\    'depends': 'Shougo/context_filetype.vim'}
-let g:context_filetype#filetypes = {
-\    'php': [
-\        {
-\            'start': '<html>',
-\            'end': '</html>', 'filetype': 'html',},
-\        {
-\            'start': '<script\%( [^>]*\)\? type="text/javascript"\%( [^>]*\)\?>',
-\            'end': '</script>', 'filetype': 'javascript',},
-\        {
-\            'start': '<style\%( [^>]*\)\? type="text/css"\%( [^>]*\)\?>',
-\            'end': '</style>', 'filetype': 'css',},
-\       {
-\            'start': '<?php\?',
-\            'end': '?>', 'filetype': 'php',}],}
+"# plugin memo
+"* Non supported PHP
+"NeoBundle 'osyo-manga/vim-precious', {
+"\    'depends': 'Shougo/context_filetype.vim'}
+"let g:context_filetype#filetypes = {
+"\    'php': [
+"\        {
+"\            'start': '<html>',
+"\            'end': '</html>', 'filetype': 'html',},
+"\        {
+"\            'start': '<script\%( [^>]*\)\? type="text/javascript"\%( [^>]*\)\?>',
+"\            'end': '</script>', 'filetype': 'javascript',},
+"\        {
+"\            'start': '<style\%( [^>]*\)\? type="text/css"\%( [^>]*\)\?>',
+"\            'end': '</style>', 'filetype': 'css',},
+"\       {
+"\            'start': '<?php\?',
+"\            'end': '?>', 'filetype': 'php',}],}
 "}}}
 " syntastic {{{
 NeoBundle 'scrooloose/syntastic'
