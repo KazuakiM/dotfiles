@@ -242,21 +242,20 @@ let g:indentLine_faster = 1
 " context_filetype.vim {{{
 NeoBundle 'osyo-manga/vim-precious', {
 \    'depends': 'Shougo/context_filetype.vim'}
-" Not support PHP. So Another mehotd thinking.
-"  1. PHP support PR
-"  2. php file default html filetype. This plugin update from html to php.
-"let g:context_filetype#filetypes = {
-"\    'php': [
-"\        {
-"\            'start': '<script\%( [^>]*\)\? type="text/javascript"\%( [^>]*\)\?>',
-"\            'end': '</script>', 'filetype': 'javascript',},
-"\        {
-"\            'start': '<style\%( [^>]*\)\? type="text/css"\%( [^>]*\)\?>',
-"\            'end': '</style>', 'filetype': 'css',},
-"" file_type 'php' is not trueth at this setting.
-""\        {
-""\            'start': '<?php\?',
-""\            'end': '?>', 'filetype': 'php',},],}
+let g:context_filetype#filetypes = {
+\    'php': [
+\        {
+\            'start': '<html>',
+\            'end': '</html>', 'filetype': 'html',},
+\        {
+\            'start': '<script\%( [^>]*\)\? type="text/javascript"\%( [^>]*\)\?>',
+\            'end': '</script>', 'filetype': 'javascript',},
+\        {
+\            'start': '<style\%( [^>]*\)\? type="text/css"\%( [^>]*\)\?>',
+\            'end': '</style>', 'filetype': 'css',},
+\       {
+\            'start': '<?php\?',
+\            'end': '?>', 'filetype': 'php',}],}
 "}}}
 " syntastic {{{
 NeoBundle 'scrooloose/syntastic'
