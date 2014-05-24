@@ -444,7 +444,7 @@ NeoBundleLazy 'vim-jp/vimdoc-ja', {
 \    'autoload' : {
 \        'commands' : ['help'],},}
 autocmd MyAutoCmd FileType help nmap <silent> <buffer> <ESC><ESC> :q<CR>
-let s:hooks = neobundle#get('vimdoc-ja')
+let s:hooks = neobundle#get_hooks('vimdoc-ja')
 function! s:hooks.on_source(bundle)
     helptags $HOME/.vim/bundle/vimdoc-ja/doc/
 endfunction
