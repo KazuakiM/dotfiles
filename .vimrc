@@ -290,7 +290,7 @@ let g:ref_detect_filetype={
 \    'codeigniter.php': 'phpmanual',
 \    'fuel.php':        'phpmanual',
 \    'yii.php':         'phpmanual',}
-autocmd MyAutoCmd FileType ref-phpmanual nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+autocmd MyAutoCmd FileType ref-phpmanual nmap <silent> <buffer> <ESC><ESC> :q<CR>
 "}}}
 " vim-tags {{{
 "# command memo
@@ -436,8 +436,8 @@ nnoremap <silent> [unite]h   :<C-u>Unite help<CR>
 nnoremap <silent> [unite]ol  :<C-u>Unite outline<CR>
 nnoremap <silent> [unite]v   :<C-u>Unite -auto-preview variable<CR>
 nnoremap <silent> [unite]web :<C-u>Unite webcolorname<CR>
-autocmd MyAutoCmd FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-autocmd MyAutoCmd FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+autocmd MyAutoCmd FileType unite nmap <silent> <buffer> <ESC><ESC> :q<CR>
+autocmd MyAutoCmd FileType unite imap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 "}}}
 " vimdoc-ja {{{
 NeoBundleLazy 'vim-jp/vimdoc-ja', {
