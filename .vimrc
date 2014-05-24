@@ -443,6 +443,7 @@ autocmd MyAutoCmd FileType unite imap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 NeoBundleLazy 'vim-jp/vimdoc-ja', {
 \    'autoload' : {
 \        'commands' : ['help'],},}
+autocmd MyAutoCmd FileType help nmap <silent> <buffer> <ESC><ESC> :q<CR>
 let s:hooks = neobundle#get('vimdoc-ja')
 function! s:hooks.on_source(bundle)
     helptags $HOME/.vim/bundle/vimdoc-ja/doc/
