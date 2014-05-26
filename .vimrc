@@ -348,6 +348,7 @@ nnoremap [vim-qfreplace]n :cnext<CR>
 nnoremap [vim-qfreplace]b :cprevious<CR>
 nnoremap [vim-qfreplace]c :cc
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
+autocmd MyAutoCmd FileType qf nmap <silent> <buffer> <ESC><ESC> :q<CR>
 "}}}
 " memolist.vim {{{
 "# command memo
@@ -471,6 +472,7 @@ let Tlist_Show_One_File = 1
 let Tlist_Exit_OnlyWindow = 1
 let g:tlist_php_settings = 'php;c:class;f:function;d:constant'
 nnoremap <Leader>t :Tlist<CR>
+autocmd MyAutoCmd FileType taglist nmap <silent> <buffer> <ESC><ESC> :q<CR>
 "}}}
 " nerdtree {{{
 NeoBundleLazy 'scrooloose/nerdtree', {
@@ -478,6 +480,7 @@ NeoBundleLazy 'scrooloose/nerdtree', {
 \        'commands' : ['NERDTree'],},}
 nnoremap <Leader>n :NERDTree<CR>
 let NERDTreeShowHidden=1
+autocmd MyAutoCmd FileType nerdtree nmap <silent> <buffer> <ESC><ESC> :q<CR>
 "}}}
 " vimshell.vim {{{
 NeoBundleLazy 'Shougo/vimshell.vim', {
