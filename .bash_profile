@@ -29,6 +29,7 @@ clear
 #}}}
 # Common
 #{{{
+shopt -s cdspell
 alias rm='rm -i'
 alias cp='cp -i -p'
 alias mv='mv -i'
@@ -38,7 +39,7 @@ alias lc='clear'
 alias df='df -h'
 alias snip='rm -f $HOME/.vim/neosnippet/* $HOME/.vim/viminfo/*'
 alias tree='tree -af'
-if type python >/dev/null 2>&1; then
+if type colordiff >/dev/null 2>&1; then
     alias diff='colordiff -u'
 else
     alias diff='diff -u'
@@ -97,10 +98,10 @@ export PS1="${ps1StartCyan}\]\h \$ ${ps1EndNormal}\]"
 #{{{
 case "${OSTYPE}" in
     darwin*)
-        alias l='ls -aGh'
-        alias ls='ls -aGh'
-        alias sl='ls -aGh'
-        alias ll='ls -aGhl'
+        alias l='ls -AGh'
+        alias ls='ls -AGh'
+        alias sl='ls -AGh'
+        alias ll='ls -AGhl'
         alias vi='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
         alias vim='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
         alias top='htop'
@@ -132,12 +133,15 @@ case "${OSTYPE}" in
         alias WIRESHARK='/usr/local/bin/wireshark'
         export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
         export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+        #if [ -f /usr/local/share/bash-completion/bash_completion ]; then
+        #    /usr/local/share/bash-completion/bash_completion
+        #fi
         ;;
     linux*)
-        alias l='ls -ahX --color=auto'
-        alias ls='ls -ahX --color=auto'
-        alias sl='ls -ahX --color=auto'
-        alias ll='ls -ahXl --color=auto'
+        alias l='ls -AhX --color=auto'
+        alias ls='ls -AhX --color=auto'
+        alias sl='ls -AhX --color=auto'
+        alias ll='ls -AhXl --color=auto'
         alias vi='vim'
         # export LS_COLORS
         #{{{
