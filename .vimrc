@@ -238,6 +238,12 @@ endfunction
 NeoBundle 'Yggdroot/indentLine'
 let g:indentLine_faster = 1
 "}}}
+" ultisnips {{{
+NeoBundle 'SirVer/ultisnips', {
+\    'depends': 'KazuakiM/vim-snippets',}
+let g:UltiSnipsEditSplit='vertical'
+let g:UltiSnipsSnippetsDir=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
+"}}}
 " vim-precious
 " context_filetype.vim {{{
 "# plugin memo
@@ -542,37 +548,9 @@ NeoBundleLazy 'mattn/emoji-vim', {
 \    'autoload' : {
 \        'commands' : ['Emoji'],},}
 "}}}
-" neosnippet.vim
-" vim-snippets @ honza's fork. Anded add folding function. {{{
-NeoBundleLazy 'Shougo/neosnippet.vim', {
-\    'depends': 'KazuakiM/vim-snippets',
-\    'autoload': {
-\        'insert': 1,},}
-let s:hooks = neobundle#get_hooks('neosnippet.vim')
-function! s:hooks.on_source(bundle)
-    imap <C-k> <Plug>(neosnippet_expand_or_jump)
-    smap <C-k> <Plug>(neosnippet_expand_or_jump)
-    xmap <C-k> <Plug>(neosnippet_expand_target)
-    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-                \ "\<Plug>(neosnippet_expand_or_jump)"
-                \: pumvisible() ? "\<C-n>" : "\<TAB>"
-    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-                \ "\<Plug>(neosnippet_expand_or_jump)"
-                \: "\<TAB>"
-    if has('conceal')
-        set conceallevel=2 concealcursor=i
-    endif
-    let g:neosnippet#disable_runtime_snippets = {
-    \    '_' : 1,}
-    let g:neosnippet#data_directory=$HOME.'/.vim/neosnippet'
-    let g:neosnippet#enable_snipmate_compatibility = 1
-    let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/vim-snippets/snippets'
-endfunction
-unlet s:hooks
-"}}}
 " neocomplete.vim {{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {
-\    'depends': ['Shougo/neosnippet.vim', 'Shougo/context_filetype.vim'],
+\    'depends': ['SirVer/ultisnips', 'Shougo/context_filetype.vim'],
 \    'autoload' : {
 \        'insert' : 1,},}
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
