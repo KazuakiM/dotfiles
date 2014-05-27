@@ -723,6 +723,7 @@ call neobundle#end()
 filetype plugin indent on
 autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} set filetype=markdown
 autocmd MyAutoCmd BufNewFile,BufRead *.coffee set filetype=coffee
+autocmd MyAutoCmd BufNewFile,BufRead *.{snip*} set filetype=snippets
 "}}}
 "
 "
