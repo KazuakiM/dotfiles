@@ -37,7 +37,6 @@ alias h='history'
 alias cl='clear'
 alias lc='clear'
 alias df='df -h'
-alias snip='rm -f $HOME/.vim/neosnippet/* $HOME/.vim/viminfo/*'
 alias tree='tree -af'
 if type colordiff >/dev/null 2>&1; then
     alias diff='colordiff -u'
