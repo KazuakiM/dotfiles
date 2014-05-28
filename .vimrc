@@ -64,8 +64,6 @@ set matchpairs+=<:>
 augroup MyAutoCmd
     autocmd!
 augroup END
-inoremap jj <Esc>
-inoremap kk <Esc>
 nnoremap 0 $
 nnoremap 1 ^
 nnoremap gr gT
@@ -129,6 +127,11 @@ let php_baselib = 1
 let php_htmlInStrings = 1
 let php_noShortTags = 1
 let php_parent_error_close = 1
+" Vimrc
+nnoremap [vimrc] <Nop>
+nmap <Leader>f [vimrc]
+nnoremap [vimrc]e :tabnew $MYVIMRC<CR>
+nnoremap [vimrc]s :source $MYVIMRC<CR>
 "}}}
 "
 "
@@ -244,10 +247,8 @@ NeoBundle 'SirVer/ultisnips', {
 let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsSnippetsDir=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
 "}}}
-" vim-precious
-" context_filetype.vim {{{
-"# plugin memo
-"* Non supported PHP
+"" vim-precious
+"" context_filetype.vim {{{
 "NeoBundle 'osyo-manga/vim-precious', {
 "\    'depends': 'Shougo/context_filetype.vim'}
 "let g:context_filetype#filetypes = {
@@ -263,8 +264,17 @@ let g:UltiSnipsSnippetsDir=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
 "\            'end': '</style>', 'filetype': 'css',},
 "\       {
 "\            'start': '<?php\?',
-"\            'end': '?>', 'filetype': 'php',}],}
-"}}}
+"\            'end': '?>', 'filetype': 'php',},],}
+"let g:precious_enable_switch_CursorMoved = {
+"\    '*' : 0,}
+"let g:precious_enable_switch_CursorMoved_i = {
+"\    '*' : 0,}
+"nnoremap [vim-precious] <Nop>
+"nmap <Leader>pre [vim-precious]
+"" default plugins
+"nnoremap <silent> [vim-precious]s :PreciousSwitch<CR>
+"nnoremap <silent> [vim-precious]r :PreciousReset<CR>
+""}}}
 " syntastic {{{
 NeoBundle 'scrooloose/syntastic'
 let g:syntastic_enable_signs=1
@@ -385,6 +395,13 @@ NeoBundle 'thinca/vim-prettyprint'
 " vim-over {{{
 NeoBundle 'osyo-manga/vim-over'
 nnoremap <expr><Leader>%s ':OverCommandLine<CR>%s/'.expand('<cword>').'/'
+"}}}
+" html5.vim {{{
+NeoBundle 'othree/html5.vim'
+let g:html5_event_handler_attributes_complete = 1
+let g:html5_rdfa_attributes_complete = 1
+let g:html5_microdata_attributes_complete = 1
+let g:html5_aria_attributes_complete = 1
 "}}}
 "}}}
 "
@@ -646,11 +663,6 @@ function! s:hooks.on_source(bundle)
     "let g:user_emmet_leader_key=''
 endfunction
 unlet s:hooks
-"}}}
-" html5.vim {{{
-NeoBundleLazy 'othree/html5.vim', {
-\    'autoload' : {
-\        'filetypes': ['html','php'],},}
 "}}}
 " vim-css3-syntax {{{
 NeoBundleLazy 'hail2u/vim-css3-syntax', {
