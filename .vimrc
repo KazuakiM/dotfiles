@@ -244,6 +244,8 @@ let g:indentLine_faster = 1
 " ultisnips {{{
 NeoBundle 'SirVer/ultisnips', {
 \    'depends': 'KazuakiM/vim-snippets',}
+let g:UltiSnipsJumpForwardTrigger='<tab>'
+let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsSnippetsDir=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
 "}}}
