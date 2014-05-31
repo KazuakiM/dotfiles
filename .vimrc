@@ -35,11 +35,14 @@
 " Common
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
-set nocompatible
+if has('vim_starting')
+    set nocompatible
+    set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
+endif
 " Valiable
-"let g:localtime=localtime()
-""let g:time=strftime('%Y%m%d%H%M%S',g:localtime)
-"let g:date_hour=strftime('%Y%m%d%H',g:localtime)
+let s:localtime=localtime()
+let s:time=strftime('%Y%m%d%H%M%S',s:localtime)
+let s:date_hour=strftime('%Y%m%d%H',s:localtime)
 " Encode
 scriptencoding utf-8
 set encoding=utf-8
@@ -101,9 +104,10 @@ set backupdir=$HOME/.vim/backup
 set swapfile
 set directory=$HOME/.vim/swap
 set noundofile
-"autocmd MyAutoCmd VimEnter * call s:auto_mkdir($HOME.'/.vim/gundo/'.g:date_hour.'/', 1)
 "set undofile
-"set undodir=eval("$HOME.'/.vim/gundo/'.g:date_hour.'/'")
+"autocmd MyAutoCmd VimEnter * call s:auto_mkdir($HOME.'/.vim/gundo/'.s:date_hour.'/', 1)
+"let g:undodir_path=$HOME.'/.vim/gundo/'.s:date_hour.'/'
+"set undodir=eval(g:undodir_path)
 " Indentation
 set tabstop=4
 set softtabstop=4
@@ -138,9 +142,6 @@ nnoremap [vimrc]s :source $MYVIMRC<CR>
 " NeoBundle
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
-if has('vim_starting')
-  set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
-endif
 call neobundle#begin(expand('$HOME/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 " vimproc {{{
@@ -256,26 +257,28 @@ let g:UltiSnipsSnippetsDir=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
 "let g:context_filetype#filetypes = {
 "\    'php': [
 "\        {
-"\            'start': '<html>',
-"\            'end': '</html>', 'filetype': 'html',},
+"\            'start': '<script>',
+"\            'end': '</script>', 'filetype': 'javascript',},
+"\        {
+"\            'start': '<script\%( [^>]*\)charset="[^\"]*"\%( [^>]*\)\?>',
+"\            'end': '</script>', 'filetype': 'javascript',},
 "\        {
 "\            'start': '<script\%( [^>]*\)\? type="text/javascript"\%( [^>]*\)\?>',
 "\            'end': '</script>', 'filetype': 'javascript',},
 "\        {
 "\            'start': '<style\%( [^>]*\)\? type="text/css"\%( [^>]*\)\?>',
 "\            'end': '</style>', 'filetype': 'css',},
-"\       {
-"\            'start': '<?php\?',
-"\            'end': '?>', 'filetype': 'php',},],}
+"\        {
+"\            'start': '<?',
+"\            'end': '?>', 'filetype': 'php',},
+"\        {
+"\            'start': '<html>',
+"\            'end': '</html>', 'filetype': 'html',},],}
 "let g:precious_enable_switch_CursorMoved = {
 "\    '*' : 0,}
 "let g:precious_enable_switch_CursorMoved_i = {
 "\    '*' : 0,}
-"nnoremap [vim-precious] <Nop>
-"nmap <Leader>pre [vim-precious]
-"" default plugins
-"nnoremap <silent> [vim-precious]s :PreciousSwitch<CR>
-"nnoremap <silent> [vim-precious]r :PreciousReset<CR>
+"autocmd MyAutoCmd InsertEnter * :PreciousSwitch
 ""}}}
 " syntastic {{{
 NeoBundle 'scrooloose/syntastic'
@@ -649,7 +652,7 @@ unlet s:hooks
 "* div>ul>li.class#id_$$*5 <=入力後に<C+y>,
 NeoBundleLazy 'mattn/emmet-vim', {
 \    'autoload' : {
-\        'filetypes': ['html','php','css'],},}
+\        'filetypes': ['html', 'php', 'css', 'sass', 'scss', 'less'],},}
 let s:hooks = neobundle#get_hooks('emmet-vim')
 function! s:hooks.on_source(bundle)
     let g:user_emmet_settings = {
@@ -669,17 +672,17 @@ unlet s:hooks
 " vim-css3-syntax {{{
 NeoBundleLazy 'hail2u/vim-css3-syntax', {
 \    'autoload' : {
-\        'filetypes': ['html','php','css'],},}
+\        'filetypes': ['html', 'php', 'css', 'sass', 'scss', 'less'],},}
 "}}}
 " vim-javascript {{{
 NeoBundleLazy 'pangloss/vim-javascript', {
 \    'autoload' : {
-\        'filetypes': ['html','php','javascript'],},}
+\        'filetypes': ['html', 'php', 'javascript'],},}
 "}}}
 " sass-compile.vim {{{
 NeoBundleLazy 'AtsushiM/sass-compile.vim', {
 \    'autoload' : {
-\        'filetypes': ['sass','scss']},}
+\        'filetypes': ['sass', 'scss']},}
 let s:hooks = neobundle#get_hooks('sass-compile.vim')
 function! s:hooks.on_source(bundle)
     let g:sass_compile_cdloop = 5
@@ -753,7 +756,6 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{snip*} set filetype=snippets
 "* URL: http://qiita.com/rbtnn/items/39d9ba817329886e626b
 "* NoFormattings :echo neobundle#config#get_neobundles()
 "* Formattings   :QuickRunPP neobundle#config#get_neobundles()
-"* Formatting    :QuickRunPP neobundle#get('vim-markdown')
 "* Formatting    :QuickRunPP neobundle#get_hooks('vim-markdown')
 function! s:quickrun_pp(q_args)
     let dict = { 'type' : 'vim', 'runner' : 'vimscript', 'outputter' : 'buffer',
@@ -764,12 +766,12 @@ endfunction
 command! -nargs=1 -complete=expression QuickRunPP :call <sid>quickrun_pp(<q-args>)
 "}}}
 " Auto DirectoryMake {{{
-"function! s:auto_mkdir(dir, force)
-"    if !isdirectory(a:dir) && (a:force ||
-"                \   input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
-"    call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
-"  endif
-"endfunction
+function! s:auto_mkdir(dir, force)
+    if !isdirectory(a:dir) && (a:force ||
+                \   input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
+    call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
+  endif
+endfunction
 "}}}
 "}}}
 "
