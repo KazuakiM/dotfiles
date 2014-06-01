@@ -70,6 +70,10 @@ augroup END
 nnoremap 0 $
 nnoremap 1 ^
 nnoremap gr gT
+nnoremap fa <C-w>+
+nnoremap j; <C-w>-
+nnoremap fd <C-w>>
+nnoremap jk <C-d><
 " Color
 syntax on
 set t_Co=256
@@ -131,11 +135,12 @@ let php_baselib = 1
 let php_htmlInStrings = 1
 let php_noShortTags = 1
 let php_parent_error_close = 1
-" Vimrc
-nnoremap [vimrc] <Nop>
-nmap <Leader>f [vimrc]
-nnoremap [vimrc]e :tabnew $MYVIMRC<CR>
-nnoremap [vimrc]s :source $MYVIMRC<CR>
+" Vim
+nnoremap [vim] <Nop>
+nmap <Leader>f [vim]
+nnoremap [vim]e :tabnew $MYVIMRC<CR>
+nnoremap [vim]s :source $MYVIMRC<CR>
+nnoremap [vim]h :source $VIMRUNTIME/syntax/colortest.vim<CR>
 "}}}
 "
 "
@@ -171,72 +176,115 @@ nnoremap [vim-fugitive]commit :Gcommit -m ''
 "}}}
 " lightline
 " landscape {{{
+" TODO:watchdogs error status output
 NeoBundle 'itchyny/lightline.vim', {
 \    'depends': ['itchyny/landscape.vim', 'tpope/vim-fugitive',],}
 let g:lightline = {
 \    'colorscheme': 'landscape',
-\    'mode_map': { 'c': 'NORMAL' },
 \    'active': {
-\        'left':  [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
-\        'right': [ [ 'lineinfo',  'syntastic' ],
-\                   [ 'percent' ],
-\                   [ 'fileformat', 'fileencoding', 'filetype' ] ],},
-\    'component_expand': {
-\        'syntastic': 'SyntasticStatuslineFlag',},
-\    'component_type': {
-\        'syntastic': 'error',},
+\        'left':  [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
+\        'right': [ [ 'watchdogs', 'lineinfo' ], [ 'percent' ], [ 'fileformat', 'fileencoding', 'filetype' ] ],},
 \    'component_function': {
-\        'modified': 'MyModified',
-\        'readonly': 'MyReadonly',
 \        'fugitive': 'MyFugitive',
 \        'filename': 'MyFilename',
 \        'fileformat': 'MyFileformat',
 \        'filetype': 'MyFiletype',
 \        'fileencoding': 'MyFileencoding',
-\        'mode': 'MyMode',},
-\    'separator': { 'left': '', 'right': '' },
-\    'subseparator': { 'left': '|', 'right': '|' }}
+\        'mode': 'MyMode',
+\        'ctrlpmark': 'CtrlPMark',},
+\    'component_expand': {
+\        'watchdogs': 'SyntasticStatuslineFlag',},
+\    'component_type': {
+\        'watchdogs': 'error',},
+\    'subseparator': {
+\        'left': '|',
+\        'right': '|',},}
 let g:syntastic_mode_map = { 'mode': 'passive' }
-autocmd MyAutoCmd BufWritePost * call s:syntastic()
+autocmd MyAutoCmd BufWritePost *.{php,js,rb} call s:lightline_watchdogs()
 function! MyModified()
-    return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+    return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
 function! MyReadonly()
-    return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
+    return &ft !~? 'help' && &readonly ? 'x' : ''
 endfunction
 function! MyFilename()
-    return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-                \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-                \  &ft == 'unite' ? unite#get_status_string() :
-                \  &ft == 'vimshell' ? vimshell#get_status_string() :
-                \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-                \ ('' != MyModified() ? ' ' . MyModified() : '')
+    let fname = expand('%:t')
+    return fname == 'ControlP' ? g:lightline.ctrlp_item :
+        \ fname == '__Tagbar__' ? g:lightline.fname :
+        \ fname =~ '__Gundo\|NERD_tree' ? '' :
+        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \ &ft == 'unite' ? unite#get_status_string() :
+        \ &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+        \ ('' != fname ? fname : '[No Name]') .
+        \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 function! MyFugitive()
     try
-        if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
-            return fugitive#head()
+        if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+            let mark = ''  " edit here for cool mark
+            let _ = fugitive#head()
+            return strlen(_) ? mark._ : ''
         endif
     catch
     endtry
     return ''
 endfunction
 function! MyFileformat()
-    return winwidth('.') > 70 ? &fileformat : ''
+    return winwidth(0) > 70 ? &fileformat : ''
 endfunction
 function! MyFiletype()
-    return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
 endfunction
 function! MyFileencoding()
-    return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+    return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
 endfunction
 function! MyMode()
-    return winwidth('.') > 60 ? lightline#mode() : ''
+    let fname = expand('%:t')
+    return fname == '__Tagbar__' ? 'Tagbar' :
+        \ fname == 'ControlP' ? 'CtrlP' :
+        \ fname == '__Gundo__' ? 'Gundo' :
+        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+        \ fname =~ 'NERD_tree' ? 'NERDTree' :
+        \ &ft == 'unite' ? 'Unite' :
+        \ &ft == 'vimfiler' ? 'VimFiler' :
+        \ &ft == 'vimshell' ? 'VimShell' :
+        \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
-function! s:syntastic()
-  SyntasticCheck
+function! CtrlPMark()
+    if expand('%:t') =~ 'ControlP'
+        call lightline#link('iR'[g:lightline.ctrlp_regex])
+        return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+            \ , g:lightline.ctrlp_next], 0)
+    else
+        return ''
+    endif
+endfunction
+let g:ctrlp_status_func = {
+\    'main': 'CtrlPStatusFunc_1',
+\    'prog': 'CtrlPStatusFunc_2',}
+function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+    let g:lightline.ctrlp_regex = a:regex
+    let g:lightline.ctrlp_prev = a:prev
+    let g:lightline.ctrlp_item = a:item
+    let g:lightline.ctrlp_next = a:next
+    return lightline#statusline(0)
+endfunction
+function! CtrlPStatusFunc_2(str)
+    return lightline#statusline(0)
+endfunction
+let g:tagbar_status_func = 'TagbarStatusFunc'
+function! TagbarStatusFunc(current, sort, fname, ...) abort
+    let g:lightline.fname = a:fname
+    return lightline#statusline(0)
+endfunction
+function! s:lightline_watchdogs()
+  WatchdogsRun
   call lightline#update()
 endfunction
+let g:unite_force_overwrite_statusline = 0
+let g:vimfiler_force_overwrite_statusline = 0
+let g:vimshell_force_overwrite_statusline = 0
 "}}}
 " indentLine {{{
 NeoBundle 'Yggdroot/indentLine'
@@ -280,11 +328,6 @@ let g:UltiSnipsSnippetsDir=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
 "\    '*' : 0,}
 "autocmd MyAutoCmd InsertEnter * :PreciousSwitch
 ""}}}
-" syntastic {{{
-NeoBundle 'scrooloose/syntastic'
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=2
-"}}}
 " vdebug {{{
 "# command memo
 "* <F5>  : start/run (to next breakpoint/end of script)
@@ -328,16 +371,9 @@ nnoremap <Leader>ts :ts<CR>
 " add .vimrc.local
 "}}}
 " vim-surround {{{
-"# command memo
-"* cs"'   :Change From  " to '
-"* cs'<p> :Change From  ' to <p>
-"* ds'    :Delete '
 NeoBundle 'tpope/vim-surround'
 "}}}
 " wildfire.vim {{{
-"# command memo
-"* (Normal)Enter after Enter :Range up selected words.
-"* (Normal)Backspace         :Range down selected words.
 NeoBundle 'gcmt/wildfire.vim'
 let g:wildfire_water_map = '<BS>'
 let g:wildfire_objects = {
@@ -369,7 +405,6 @@ nnoremap [vim-qfreplace]n :cnext<CR>
 nnoremap [vim-qfreplace]b :cprevious<CR>
 nnoremap [vim-qfreplace]c :cc
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
-autocmd MyAutoCmd FileType qf nmap <silent> <buffer> <ESC><ESC> :q<CR>
 "}}}
 " memolist.vim {{{
 "# command memo
@@ -389,10 +424,24 @@ NeoBundle 'thinca/vim-quickrun'
 nnoremap <Leader>r :QuickRun<CR>
 let g:quickrun_config = {
 \    '_' : {
+\        'hook/close_buffer/enable_failure' : 1,
+\        'hook/close_buffer/enable_empty_data' : 1,
+\        'runner' : 'vimproc',
+\        'runner/vimproc/updatetime' : 40,
+\        'outputter' : 'multi:buffer:quickfix',
 \        'outputter/buffer/split' : ':botright',
 \        'outputter/buffer/close_on_empty' : 1,},
+\    'watchdogs_checker/_' : {
+\        'hook/close_quickfix/enable_exit' : 1,
+\        'hook/back_window/enable_exit': 0,
+\        'hook/back_window/priority_exit': 1,
+\        'hook/quickfix_status_enable/enable_exit': 1,
+\        'hook/quickfix_status_enable/priority_exit': 2,
+\        'hook/hier_update/enable_exit': 1,
+\        'hook/hier_update/priority_exit': 3,},
 \    'markdown' : {
 \        'outputter' : 'browser',},}
+autocmd MyAutoCmd FileType qf nmap <silent> <buffer> <ESC><ESC> :q<CR>
 "}}}
 " vim-prettyprint {{{
 NeoBundle 'thinca/vim-prettyprint'
@@ -454,8 +503,8 @@ nmap <Leader>u [unite]
 nnoremap <silent> [unite]b    :<C-u>Unite buffer<CR>
 nnoremap <silent> [unite]c    :<C-u>Unite bookmark<CR>
 nnoremap <silent> [unite]f    :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> [unite]mru  :<C-u>Unite file_mru<CR>
 nnoremap <silent> [unite]map  :<C-u>Unite output:map\|map!\|lmap<CR>
+nnoremap <silent> [unite]mru  :<C-u>Unite file_mru<CR>
 nnoremap <silent> [unite]msg  :<C-u>Unite output:message<CR>
 nnoremap <silent> [unite]nmap :<C-u>Unite mapping<CR>
 nnoremap <silent> [unite]rec  :<C-u>Unite file_rec/async:!<CR>
@@ -643,6 +692,36 @@ function! s:hooks.on_source(bundle)
 endfunction
 unlet s:hooks
 " add .vimrc.local
+"}}}
+" shabadou.vim
+" vim-hier
+" quickfixstatus
+" vim-watchdogs {{{
+NeoBundleLazy 'osyo-manga/vim-watchdogs', {
+\    'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'jceb/vim-hier', 'dannyob/quickfixstatus'],
+\    'autoload' : {
+\        'filetypes': ['php', 'javascript', 'ruby'],},}
+let s:hooks = neobundle#get_hooks('vim-watchdogs')
+function! s:hooks.on_source(bundle)
+    " vim-hier
+    " TODO: highlight LineNr
+    execute "highlight qf_error_ucurl cterm=reverse ctermfg=red"
+    let g:hier_highlight_group_qf = "qf_error_ucurl"
+    execute "highlight qf_warning_ucurl cterm=reverse ctermfg=yellow"
+    let g:hier_highlight_group_qfw = "qf_warning_ucurl"
+    " vim-watchdogs
+    let g:watchdogs_check_BufWritePost_enable = 0
+    let g:watchdogs_check_BufWritePost_enables = {
+    \   'php' : 1,
+    \   'javascript': 1,
+    \   'ruby' : 1,}
+    let g:watchdogs_check_CursorHold_enable = 1
+    "let g:watchdogs_check_CursorHold_enables = {
+    "\   'php' : 1,
+    "\   'javascript': 1,
+    "\   'ruby' : 1,}
+endfunction
+unlet s:hooks
 "}}}
 " emmet-vim {{{
 "# command memo

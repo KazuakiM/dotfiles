@@ -38,6 +38,7 @@ alias cl='clear'
 alias lc='clear'
 alias df='df -h'
 alias tree='tree -af'
+alias gdiff='git diff -w'
 if type colordiff >/dev/null 2>&1; then
     alias diff='colordiff -u'
 else
