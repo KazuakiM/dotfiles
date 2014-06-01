@@ -467,7 +467,9 @@ let g:html5_aria_attributes_complete = 1
 " unite-webcolorname
 " unite-colorscheme
 " unite-help
-" vim-editvar {{{
+" vim-editvar
+" codic-vim
+" unite-codic.vim {{{
 NeoBundleLazy 'Shougo/unite.vim', {
 \    'autoload' : {
 \        'commands' : ['Unite', 'UniteWithBufferDir', 'UniteWithCursorWord'],},}
@@ -491,6 +493,10 @@ NeoBundleLazy 'thinca/vim-editvar', {
 \    'depends': ['thinca/vim-prettyprint', 'Shougo/unite.vim'],
 \    'autoload': {
 \        'unite_sources': ['variable'],},}
+NeoBundleLazy 'rhysd/unite-codic.vim', {
+\    'depends': ['koron/codic-vim', 'Shougo/unite.vim'],
+\    'autoload': {
+\        'unite_sources': ['codic'],},}
 let g:unite_data_directory=$HOME.'/.vim/unite'
 let g:unite_enable_start_insert=1
 let g:unite_source_grep_command='ag'
@@ -501,7 +507,7 @@ nnoremap [unite] <Nop>
 nmap <Leader>u [unite]
 " default plugins
 nnoremap <silent> [unite]b    :<C-u>Unite buffer<CR>
-nnoremap <silent> [unite]c    :<C-u>Unite bookmark<CR>
+nnoremap <silent> [unite]bm   :<C-u>Unite bookmark<CR>
 nnoremap <silent> [unite]f    :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 nnoremap <silent> [unite]map  :<C-u>Unite output:map\|map!\|lmap<CR>
 nnoremap <silent> [unite]mru  :<C-u>Unite file_mru<CR>
@@ -514,6 +520,7 @@ nnoremap <silent> [unite]t    :<C-u>Unite tab<CR>
 nnoremap <silent> [unite]w    :<C-u>Unite window<CR>
 " add plugins
 nnoremap <silent> [unite]cs  :<C-u>Unite -auto-preview colorscheme<CR>
+nnoremap <silent> [unite]dic :<C-u>Unite codic<CR>
 nnoremap <silent> [unite]h   :<C-u>Unite help<CR>
 nnoremap <silent> [unite]ol  :<C-u>Unite outline<CR>
 nnoremap <silent> [unite]v   :<C-u>Unite -auto-preview variable<CR>
