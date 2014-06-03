@@ -469,7 +469,8 @@ let g:html5_aria_attributes_complete = 1
 " unite-help
 " vim-editvar
 " codic-vim
-" unite-codic.vim {{{
+" unite-codic.vim
+" unite-highlight {{{
 NeoBundleLazy 'Shougo/unite.vim', {
 \    'autoload' : {
 \        'commands' : ['Unite', 'UniteWithBufferDir', 'UniteWithCursorWord'],},}
@@ -497,6 +498,10 @@ NeoBundleLazy 'rhysd/unite-codic.vim', {
 \    'depends': ['koron/codic-vim', 'Shougo/unite.vim'],
 \    'autoload': {
 \        'unite_sources': ['codic'],},}
+NeoBundleLazy 'osyo-manga/unite-highlight', {
+\    'depends': 'Shougo/unite.vim',
+\    'autoload': {
+\        'unite_sources': ['highlight'],},}
 let g:unite_data_directory=$HOME.'/.vim/unite'
 let g:unite_enable_start_insert=1
 let g:unite_source_grep_command='ag'
@@ -522,6 +527,7 @@ nnoremap <silent> [unite]w    :<C-u>Unite window<CR>
 nnoremap <silent> [unite]cs  :<C-u>Unite -auto-preview colorscheme<CR>
 nnoremap <silent> [unite]dic :<C-u>Unite codic<CR>
 nnoremap <silent> [unite]h   :<C-u>Unite help<CR>
+nnoremap <silent> [unite]hl  :<C-u>Unite highlight<CR>
 nnoremap <silent> [unite]ol  :<C-u>Unite outline<CR>
 nnoremap <silent> [unite]v   :<C-u>Unite -auto-preview variable<CR>
 nnoremap <silent> [unite]web :<C-u>Unite webcolorname<CR>
@@ -710,13 +716,6 @@ NeoBundleLazy 'osyo-manga/vim-watchdogs', {
 \        'filetypes': ['php', 'javascript', 'ruby'],},}
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle)
-    " vim-hier
-    " TODO: highlight LineNr
-    execute "highlight qf_error_ucurl cterm=reverse ctermfg=red"
-    let g:hier_highlight_group_qf = "qf_error_ucurl"
-    execute "highlight qf_warning_ucurl cterm=reverse ctermfg=yellow"
-    let g:hier_highlight_group_qfw = "qf_warning_ucurl"
-    " vim-watchdogs
     let g:watchdogs_check_BufWritePost_enable = 0
     let g:watchdogs_check_BufWritePost_enables = {
     \   'php' : 1,
