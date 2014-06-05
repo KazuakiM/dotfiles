@@ -67,6 +67,8 @@ set matchpairs+=<:>
 augroup MyAutoCmd
     autocmd!
 augroup END
+nnoremap i I
+nnoremap v V
 nnoremap 0 $
 nnoremap 1 ^
 nnoremap gr gT
