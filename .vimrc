@@ -424,21 +424,25 @@ NeoBundle 'thinca/vim-quickrun'
 nnoremap <Leader>r :QuickRun<CR>
 let g:quickrun_config = {
 \    '_' : {
-\        'hook/close_buffer/enable_failure' : 1,
-\        'hook/close_buffer/enable_empty_data' : 1,
-\        'runner' : 'vimproc',
-\        'runner/vimproc/updatetime' : 40,
-\        'outputter' : 'multi:buffer:quickfix',
-\        'outputter/buffer/split' : ':botright',
-\        'outputter/buffer/close_on_empty' : 1,},
+\        'hook/close_buffer/enable_failure':    1,
+\        'hook/close_buffer/enable_empty_data': 1,
+\        'runner':                              'vimproc',
+\        'runner/vimproc/updatetime':           40,
+\        'outputter':                           'multi:buffer:quickfix',
+\        'outputter/buffer/split':              ':botright',
+\        'outputter/buffer/close_on_empty':     1,},
 \    'watchdogs_checker/_' : {
-\        'hook/close_quickfix/enable_exit' : 1,
-\        'hook/back_window/enable_exit': 0,
-\        'hook/back_window/priority_exit': 1,
-\        'hook/quickfix_status_enable/enable_exit': 1,
+\        'hook/close_quickfix/enable_exit':           1,
+\        'hook/back_window/enable_exit':              0,
+\        'hook/back_window/priority_exit':            1,
+\        'hook/quickfix_status_enable/enable_exit':   1,
 \        'hook/quickfix_status_enable/priority_exit': 2,
-\        'hook/hier_update/enable_exit': 1,
-\        'hook/hier_update/priority_exit': 3,},
+\        'hook/qfsings_update/enable_exit':           1,
+\        'hook/qfsings_update/priority_exit':         3,},
+\    'watchdogs_checker/php' : {
+\        'command':     'php',
+\        'exec':        '%c -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0 -l %o %s:p',
+\        'errorformat': '%m\ in\ %f\ on\ line\ %l',},
 \    'markdown' : {
 \        'outputter' : 'browser',},}
 autocmd MyAutoCmd FileType qf nmap <silent> <buffer> <ESC><ESC> :q<CR>
@@ -707,11 +711,11 @@ unlet s:hooks
 " add .vimrc.local
 "}}}
 " shabadou.vim
-" vim-hier
+" vim-qfsigns
 " quickfixstatus
 " vim-watchdogs {{{
 NeoBundleLazy 'osyo-manga/vim-watchdogs', {
-\    'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'jceb/vim-hier', 'dannyob/quickfixstatus'],
+\    'depends': ['thinca/vim-quickrun', 'KazuakiM/shabadou.vim', 'KazuakiM/vim-qfsigns', 'dannyob/quickfixstatus'],
 \    'autoload' : {
 \        'filetypes': ['php', 'javascript', 'ruby'],},}
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
