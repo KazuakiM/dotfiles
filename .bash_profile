@@ -9,17 +9,21 @@ fi
 
 # User specific environment and startup programs
 #{{{
-if [ -d $HOME/.anyenv ]; then
-    export PATH="$HOME/.anyenv/bin:$PATH"
-    eval "$(anyenv init -)"
-fi
-if [ -d /usr/local/opt/perl518 ]; then
+# Using homebrew.
+#if [ -d $HOME/.anyenv ]; then
+#    export PATH="$HOME/.anyenv/bin:$PATH"
+#    eval "$(anyenv init -)"
+#fi
+if [ -d /usr/local/opt/perl518/bin ]; then
     export PATH="/usr/local/opt/perl518/bin:$PATH"
 fi
-if [ -d /usr/local/opt/gnu-tar ]; then
+if [ -d /usr/local/opt/gnu-tar/libexec/gnubin ]; then
     export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
 fi
-if [ -d /usr/local/heroku ]; then
+if [ -d /usr/local/Cellar/ruby/2.1.2/bin ]; then
+    export PATH="/usr/local//Cellar/ruby/2.1.2/bin:$PATH"
+fi
+if [ -d /usr/local/heroku/bin ]; then
     export PATH="/usr/local/heroku/bin:$PATH"
 fi
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
