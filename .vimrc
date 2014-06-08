@@ -437,8 +437,8 @@ let g:quickrun_config = {
 \        'hook/back_window/priority_exit':            1,
 \        'hook/quickfix_status_enable/enable_exit':   1,
 \        'hook/quickfix_status_enable/priority_exit': 2,
-\        'hook/qfsings_update/enable_exit':           1,
-\        'hook/qfsings_update/priority_exit':         3,},
+\        'hook/qfsigns_update/enable_exit':           1,
+\        'hook/qfsigns_update/priority_exit':         3,},
 \    'watchdogs_checker/php' : {
 \        'command':     'php',
 \        'exec':        '%c -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0 -l %o %s:p',
