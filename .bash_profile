@@ -14,18 +14,6 @@ fi
 #    export PATH="$HOME/.anyenv/bin:$PATH"
 #    eval "$(anyenv init -)"
 #fi
-if [ -d /usr/local/opt/perl518/bin ]; then
-    export PATH="/usr/local/opt/perl518/bin:$PATH"
-fi
-if [ -d /usr/local/opt/gnu-tar/libexec/gnubin ]; then
-    export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
-fi
-if [ -d /usr/local/Cellar/ruby/2.1.2/bin ]; then
-    export PATH="/usr/local//Cellar/ruby/2.1.2/bin:$PATH"
-fi
-if [ -d /usr/local/heroku/bin ]; then
-    export PATH="/usr/local/heroku/bin:$PATH"
-fi
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
 export LANG=ja_JP.UTF-8
 cd
@@ -137,9 +125,18 @@ case "${OSTYPE}" in
         alias WIRESHARK='/usr/local/bin/wireshark'
         export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
         export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
-        #if [ -f /usr/local/share/bash-completion/bash_completion ]; then
-        #    /usr/local/share/bash-completion/bash_completion
-        #fi
+        if [ -d /usr/local/opt/perl518/bin ]; then
+            export PATH="/usr/local/opt/perl518/bin:$PATH"
+        fi
+        if [ -d /usr/local/opt/gnu-tar/libexec/gnubin ]; then
+            export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
+        fi
+        if [ -d $(brew --prefix ruby) ]; then
+            export PATH="$(brew --prefix ruby)/bin:$PATH"
+        fi
+        if [ -d /usr/local/heroku/bin ]; then
+            export PATH="/usr/local/heroku/bin:$PATH"
+        fi
         ;;
     linux*)
         alias l='ls -AhX --color=auto'

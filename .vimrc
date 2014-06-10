@@ -176,14 +176,13 @@ nnoremap [vim-fugitive]commit :Gcommit -m ''
 "}}}
 " lightline
 " landscape {{{
-" TODO:watchdogs error status output
 NeoBundle 'itchyny/lightline.vim', {
 \    'depends': ['itchyny/landscape.vim', 'tpope/vim-fugitive',],}
 let g:lightline = {
 \    'colorscheme': 'landscape',
 \    'active': {
 \        'left':  [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
-\        'right': [ [ 'watchdogs', 'lineinfo' ], [ 'percent' ], [ 'fileformat', 'fileencoding', 'filetype' ] ],},
+\        'right': [ [ 'qfstatusline', 'lineinfo' ], [ 'percent' ], [ 'fileformat', 'fileencoding', 'filetype' ] ],},
 \    'component_function': {
 \        'fugitive': 'MyFugitive',
 \        'filename': 'MyFilename',
@@ -193,14 +192,12 @@ let g:lightline = {
 \        'mode': 'MyMode',
 \        'ctrlpmark': 'CtrlPMark',},
 \    'component_expand': {
-\        'watchdogs': 'SyntasticStatuslineFlag',},
+\        'qfstatusline': 'qfstatusline#Update',},
 \    'component_type': {
-\        'watchdogs': 'error',},
+\        'qfstatusline': 'error',},
 \    'subseparator': {
 \        'left': '|',
 \        'right': '|',},}
-let g:syntastic_mode_map = { 'mode': 'passive' }
-autocmd MyAutoCmd BufWritePost *.{php,js,rb} call s:lightline_watchdogs()
 function! MyModified()
     return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
@@ -277,10 +274,6 @@ let g:tagbar_status_func = 'TagbarStatusFunc'
 function! TagbarStatusFunc(current, sort, fname, ...) abort
     let g:lightline.fname = a:fname
     return lightline#statusline(0)
-endfunction
-function! s:lightline_watchdogs()
-  WatchdogsRun
-  call lightline#update()
 endfunction
 let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
@@ -438,7 +431,9 @@ let g:quickrun_config = {
 \        'hook/quickfix_status_enable/enable_exit':   1,
 \        'hook/quickfix_status_enable/priority_exit': 2,
 \        'hook/qfsigns_update/enable_exit':           1,
-\        'hook/qfsigns_update/priority_exit':         3,},
+\        'hook/qfsigns_update/priority_exit':         3,
+\        'hook/qfstatusline_update/enable_exit':      1,
+\        'hook/qfstatusline_update/priority_exit':    4,},
 \    'watchdogs_checker/php' : {
 \        'command':     'php',
 \        'exec':        '%c -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0 -l %o %s:p',
@@ -712,12 +707,14 @@ unlet s:hooks
 "}}}
 " shabadou.vim
 " vim-qfsigns
+" vim-qfstatusline
 " quickfixstatus
 " vim-watchdogs {{{
 NeoBundleLazy 'osyo-manga/vim-watchdogs', {
-\    'depends': ['thinca/vim-quickrun', 'KazuakiM/shabadou.vim', 'KazuakiM/vim-qfsigns', 'dannyob/quickfixstatus'],
+\    'depends': ['thinca/vim-quickrun', 'KazuakiM/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline', 'dannyob/quickfixstatus'],
 \    'autoload' : {
 \        'filetypes': ['php', 'javascript', 'ruby'],},}
+let g:Qfstatusline#UpdateCmd = function('lightline#update')
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle)
     let g:watchdogs_check_BufWritePost_enable = 0
