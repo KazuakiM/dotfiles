@@ -350,11 +350,6 @@ let g:ref_detect_filetype={
 autocmd MyAutoCmd FileType ref-phpmanual nmap <silent> <buffer> <ESC><ESC> :q<CR>
 "}}}
 " vim-tags {{{
-"# command memo
-"* :TagsGenerate :Remake tags.
-"* <C-]>         :Jump target file
-"* <C-o>         :Return before file
-"* :ts           :Jump target file list
 NeoBundle 'szw/vim-tags'
 let g:vim_tags_auto_generate = 1
 nnoremap <Leader>tags :TagsGenerate
@@ -381,7 +376,6 @@ NeoBundle 'tpope/vim-endwise'
 "}}}
 " vim-qfreplace {{{
 "# command memo
-"* ,grep  :Cursor word grep
 "* ,cn    :grep results next jump
 "* ,cb    :grep results previous(before) jump
 "* ,ccXX  :grep XX lines jump
@@ -555,8 +549,6 @@ nmap <Leader>gx <Plug>(openbrowser-smart-search)
 vmap <Leader>gx <Plug>(openbrowser-smart-search)
 "}}}
 " taglist.vim {{{
-"# command memo
-"* :Tlist :Show class, function and etc at left menu.
 NeoBundleLazy 'vim-scripts/taglist.vim', {
 \    'autoload' : {
 \        'commands' : ['Tlist'],},}
@@ -714,9 +706,11 @@ NeoBundleLazy 'osyo-manga/vim-watchdogs', {
 \    'depends': ['thinca/vim-quickrun', 'KazuakiM/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline', 'dannyob/quickfixstatus'],
 \    'autoload' : {
 \        'filetypes': ['php', 'javascript', 'ruby'],},}
-let g:Qfstatusline#UpdateCmd = function('lightline#update')
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle)
+    "vim-qfstatusline
+    let g:Qfstatusline#UpdateCmd = function('lightline#update')
+    "vim-watchdogs
     let g:watchdogs_check_BufWritePost_enable = 0
     let g:watchdogs_check_BufWritePost_enables = {
     \   'php' : 1,
