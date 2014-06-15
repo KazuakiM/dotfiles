@@ -703,7 +703,7 @@ unlet s:hooks
 " quickfixstatus
 " vim-watchdogs {{{
 NeoBundleLazy 'osyo-manga/vim-watchdogs', {
-\    'depends': ['thinca/vim-quickrun', 'KazuakiM/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline', 'dannyob/quickfixstatus'],
+\    'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline', 'dannyob/quickfixstatus'],
 \    'autoload' : {
 \        'filetypes': ['php', 'javascript', 'ruby'],},}
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
