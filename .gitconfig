@@ -1,0 +1,12 @@
+[include]
+    path = ~/.gitconfig.local
+[merge]
+    ff = false
+[push]
+    default = simple
+[core]
+    precomposeunicode = true
+    editor = vim
+    autocrlf = input
+[color]
+    ui = auto
