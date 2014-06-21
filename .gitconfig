@@ -1,11 +1,12 @@
-[include]
-    path = ~/.gitconfig.local
+# Git version 1.7.10 over
+#[include]
+#    path = ~/.gitconfig.local
 [merge]
     ff = false
 [push]
     default = simple
 [core]
-    precomposeunicode = true
+#    precomposeunicode = true
     editor = vim
     autocrlf = input
 [color]
