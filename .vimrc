@@ -463,7 +463,8 @@ let g:html5_aria_attributes_complete = 1
 " vim-editvar
 " codic-vim
 " unite-codic.vim
-" unite-highlight {{{
+" unite-highlight
+" jazzradio.vim {{{
 NeoBundleLazy 'Shougo/unite.vim', {
 \    'autoload' : {
 \        'commands' : ['Unite', 'UniteWithBufferDir', 'UniteWithCursorWord'],},}
@@ -495,6 +496,17 @@ NeoBundleLazy 'osyo-manga/unite-highlight', {
 \    'depends': 'Shougo/unite.vim',
 \    'autoload': {
 \        'unite_sources': ['highlight'],},}
+NeoBundleLazy 'supermomonga/jazzradio.vim', {
+\    'depends' : 'Shougo/unite.vim',
+\    'autoload' : {
+\        'unite_sources': ['jazzradio'],
+\        'commands' : [
+\            'JazzradioUpdateChannels',
+\            'JazzradioStop',
+\            {
+\                'name' : 'JazzradioPlay',
+\                'complete' : 'customlist,jazzradio#channel_id_complete'},],
+\        'function_prefix' : 'jazzradio',},}
 let g:unite_data_directory=$HOME.'/.vim/unite'
 let g:unite_enable_start_insert=1
 let g:unite_source_grep_command='ag'
@@ -521,11 +533,19 @@ nnoremap <silent> [unite]cs  :<C-u>Unite -auto-preview colorscheme<CR>
 nnoremap <silent> [unite]dic :<C-u>Unite codic<CR>
 nnoremap <silent> [unite]h   :<C-u>Unite help<CR>
 nnoremap <silent> [unite]hl  :<C-u>Unite highlight<CR>
+nnoremap <silent> [unite]j   :<C-u>Unite jazzradio<CR>
 nnoremap <silent> [unite]ol  :<C-u>Unite outline<CR>
+nnoremap <silent> [unite]rad :<C-u>Unite jazzradio<CR>
 nnoremap <silent> [unite]v   :<C-u>Unite -auto-preview variable<CR>
 nnoremap <silent> [unite]web :<C-u>Unite webcolorname<CR>
 autocmd MyAutoCmd FileType unite nmap <silent> <buffer> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd FileType unite imap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+" jazzradio
+nnoremap [jazzradio] <Nop>
+nmap <Leader>j [jazzradio]
+nnoremap [jazzradio]p :JazzradioPlay<Space>CurrentJazz<CR>
+nnoremap [jazzradio]o :JazzradioStop<CR>
+nnoremap [jazzradio]l :<C-u>Unite jazzradio<CR>
 "}}}
 " vimdoc-ja {{{
 NeoBundleLazy 'vim-jp/vimdoc-ja', {
