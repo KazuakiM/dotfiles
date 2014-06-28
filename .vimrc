@@ -141,6 +141,15 @@ nmap <Leader>f [vim]
 nnoremap [vim]e :tabnew $MYVIMRC<CR>
 nnoremap [vim]s :source $MYVIMRC<CR>
 nnoremap [vim]h :source $VIMRUNTIME/syntax/colortest.vim<CR>
+" Programming language
+if has('mac')
+    " Perl and Python3 aren't functioned!! try again.
+    "let $PERL_DLL    = '/usr/local/Cellar/perl518/5.18.2/lib/5.18.2/darwin-thread-multi-2level/CORE/libperl.dylib'
+    let $PYTHON_DLL  = '/usr/lib/libpython.dylib'
+    "let $PYTHON3_DLL = '/usr/local/Cellar/python3/3.4.1/Frameworks/Python.framework/Versions/3.4/lib/libpython3.4.dylib'
+    let $RUBY_DLL    = '/usr/local/lib/libruby.dylib'
+    let $LUA_DLL     = '/usr/local/lib/liblua.dylib'
+endif
 "}}}
 "
 "
@@ -449,6 +458,10 @@ let g:html5_event_handler_attributes_complete = 1
 let g:html5_rdfa_attributes_complete = 1
 let g:html5_microdata_attributes_complete = 1
 let g:html5_aria_attributes_complete = 1
+"}}}
+" vimisawa {{{
+NeoBundle 'june29/horesase-boys'
+NeoBundle 'KazuakiM/vimisawa'
 "}}}
 "}}}
 "
