@@ -142,15 +142,15 @@ nmap <Leader>f [vim]
 nnoremap [vim]e :tabnew $MYVIMRC<CR>
 nnoremap [vim]s :source $MYVIMRC<CR>
 nnoremap [vim]h :source $VIMRUNTIME/syntax/colortest.vim<CR>
-"" Programming language
-"if has('mac')
-"    let $PYTHON_DLL  = '/usr/local/Cellar/python/2.7.7_2/Frameworks/Python.framework/Versions/2.7/lib/libpython2.7.dylib'
-"    let $PYTHON3_DLL = '/usr/local/Cellar/python3/3.4.1/Frameworks/Python.framework/Versions/3.4/lib/libpython3.4.dylib'
-"    "let $PERL_DLL    = '/usr/local/Cellar/perl518/5.18.2/lib/5.18.2/darwin-thread-multi-2level/CORE/libperl.dylib'
-"    "let $RUBY_DLL    = '/usr/local/lib/libruby.dylib'
-"    "let $LUA_DLL     = '/usr/local/lib/liblua.dylib'
-"endif
-""}}}
+" Programming language
+if has('mac')
+    let $PYTHON_DLL  = '/usr/local/Cellar/python/2.7.7_2/Frameworks/Python.framework/Versions/2.7/lib/libpython2.7.dylib'
+    "let $PYTHON3_DLL = '/usr/local/Cellar/python3/3.4.1/Frameworks/Python.framework/Versions/3.4/lib/libpython3.4.dylib'
+    let $PERL_DLL    = '/usr/local/Cellar/perl518/5.18.2/lib/5.18.2/darwin-thread-multi-2level/CORE/libperl.dylib'
+    let $RUBY_DLL    = '/usr/local/lib/libruby.dylib'
+    let $LUA_DLL     = '/usr/local/lib/liblua.dylib'
+endif
+"}}}
 "
 "
 " NeoBundle
