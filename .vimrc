@@ -300,36 +300,37 @@ let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsSnippetsDir=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
 "}}}
-"" vim-precious
-"" context_filetype.vim {{{
-"NeoBundle 'osyo-manga/vim-precious', {
-"\    'depends': 'Shougo/context_filetype.vim'}
-"let g:context_filetype#filetypes = {
-"\    'php': [
-"\        {
-"\            'start': '<script>',
-"\            'end': '</script>', 'filetype': 'javascript',},
-"\        {
-"\            'start': '<script\%( [^>]*\)charset="[^\"]*"\%( [^>]*\)\?>',
-"\            'end': '</script>', 'filetype': 'javascript',},
-"\        {
-"\            'start': '<script\%( [^>]*\)\? type="text/javascript"\%( [^>]*\)\?>',
-"\            'end': '</script>', 'filetype': 'javascript',},
-"\        {
-"\            'start': '<style\%( [^>]*\)\? type="text/css"\%( [^>]*\)\?>',
-"\            'end': '</style>', 'filetype': 'css',},
-"\        {
-"\            'start': '<?',
-"\            'end': '?>', 'filetype': 'php',},
-"\        {
-"\            'start': '<html>',
-"\            'end': '</html>', 'filetype': 'html',},],}
-"let g:precious_enable_switch_CursorMoved = {
-"\    '*' : 0,}
-"let g:precious_enable_switch_CursorMoved_i = {
-"\    '*' : 0,}
-"autocmd MyAutoCmd InsertEnter * :PreciousSwitch
-""}}}
+" vim-precious
+" context_filetype.vim {{{
+NeoBundle 'osyo-manga/vim-precious', {
+\    'depends': 'Shougo/context_filetype.vim'}
+let g:context_filetype#filetypes = {
+\    'php': [
+\        {
+\            'start': '<script>',
+\            'end': '</script>', 'filetype': 'javascript',},
+\        {
+\            'start': '<script\%( [^>]*\)charset="[^\"]*"\%( [^>]*\)\?>',
+\            'end': '</script>', 'filetype': 'javascript',},
+\        {
+\            'start': '<script\%( [^>]*\)\? type="text/javascript"\%( [^>]*\)\?>',
+\            'end': '</script>', 'filetype': 'javascript',},
+\        {
+\            'start': '<style\%( [^>]*\)\? type="text/css"\%( [^>]*\)\?>',
+\            'end': '</style>', 'filetype': 'css',},
+\        {
+\            'start': '<?',
+\            'end': '?>', 'filetype': 'php',},
+\        {
+\            'start': '<html>',
+\            'end': '</html>', 'filetype': 'html',},],}
+let g:precious_enable_switch_CursorMoved = {
+\    '*' : 0,}
+let g:precious_enable_switch_CursorMoved_i = {
+\    '*' : 0,}
+autocmd MyAutoCmd InsertEnter * :PreciousSwitch
+autocmd MyAutoCmd InsertEnter * :PreciousReset
+"}}}
 " vdebug {{{
 "# command memo
 "* <F5>  : start/run (to next breakpoint/end of script)
