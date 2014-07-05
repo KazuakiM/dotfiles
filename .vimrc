@@ -329,7 +329,7 @@ let g:precious_enable_switch_CursorMoved = {
 let g:precious_enable_switch_CursorMoved_i = {
 \    '*' : 0,}
 autocmd MyAutoCmd InsertEnter * :PreciousSwitch
-autocmd MyAutoCmd InsertEnter * :PreciousReset
+autocmd MyAutoCmd InsertLeave * :PreciousReset
 "}}}
 " vdebug {{{
 "# command memo
