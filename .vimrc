@@ -304,26 +304,27 @@ let g:UltiSnipsSnippetsDir=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
 " context_filetype.vim {{{
 NeoBundle 'osyo-manga/vim-precious', {
 \    'depends': 'Shougo/context_filetype.vim'}
+" HTML default_filetype + PHP
 let g:context_filetype#filetypes = {
 \    'php': [
 \        {
+\            'start': '<html>',
+\            'end':   '</html>', 'filetype': 'html',},
+\        {
 \            'start': '<script>',
-\            'end': '</script>', 'filetype': 'javascript',},
+\            'end':   '</script>', 'filetype': 'javascript',},
 \        {
 \            'start': '<script\%( [^>]*\)charset="[^\"]*"\%( [^>]*\)\?>',
-\            'end': '</script>', 'filetype': 'javascript',},
+\            'end':   '</script>', 'filetype': 'javascript',},
 \        {
 \            'start': '<script\%( [^>]*\)\? type="text/javascript"\%( [^>]*\)\?>',
-\            'end': '</script>', 'filetype': 'javascript',},
+\            'end':   '</script>', 'filetype': 'javascript',},
 \        {
-\            'start': '<style\%( [^>]*\)\? type="text/css"\%( [^>]*\)\?>',
-\            'end': '</style>', 'filetype': 'css',},
+\            'start': '<script\%( [^>]*\)\? type="text/coffeescript"\%( [^>]*\)\?>',
+\            'end':   '</script>', 'filetype': 'coffee',},
 \        {
-\            'start': '<?',
-\            'end': '?>', 'filetype': 'php',},
-\        {
-\            'start': '<html>',
-\            'end': '</html>', 'filetype': 'html',},],}
+\           'start': '<style\%( [^>]*\)\? type="text/css"\%( [^>]*\)\?>',
+\           'end':   '</style>', 'filetype': 'css',},],}
 let g:precious_enable_switch_CursorMoved = {
 \    '*' : 0,}
 let g:precious_enable_switch_CursorMoved_i = {
