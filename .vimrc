@@ -78,16 +78,16 @@ nnoremap jk <C-d><
 syntax on
 set t_Co=256
 " Check space and newLineCode.
-autocmd MyAutoCmd ColorScheme * highlight TabString     cterm=reverse ctermfg=darkgray
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     "\t")
-autocmd MyAutoCmd ColorScheme * highlight CrString      cterm=reverse ctermfg=darkred
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      "\r")
-autocmd MyAutoCmd ColorScheme * highlight CrlfString    cterm=reverse ctermfg=darkmagenta
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    "\r\n")
-autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL cterm=reverse ctermfg=lightmagenta
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', '\s\+$')
-autocmd MyAutoCmd ColorScheme * highlight ZenkakuSpace  cterm=reverse ctermfg=lightred
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m5 = matchadd('ZenkakuSpace',  '　')
+autocmd MyAutoCmd ColorScheme * highlight TabString        cterm=reverse ctermfg=darkgray
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',        "\t")
+autocmd MyAutoCmd ColorScheme * highlight CrString         cterm=reverse ctermfg=darkred
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',         "\r")
+autocmd MyAutoCmd ColorScheme * highlight CrlfString       cterm=reverse ctermfg=darkmagenta
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',       "\r\n")
+autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL    cterm=reverse ctermfg=lightmagenta
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL',    '\s\+$')
+autocmd MyAutoCmd ColorScheme * highlight IdeographicSpace cterm=reverse ctermfg=lightred
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m5 = matchadd('IdeographicSpace', '　')
 " Update Visual mode target colorScheme.
 autocmd MyAutoCmd ColorScheme * highlight Visual cterm=reverse ctermfg=lightgreen
 colorscheme jellybeans
@@ -97,6 +97,11 @@ set ruler
 set laststatus=2
 set wildmenu
 set wildmode=longest:full,full
+" [memo]
+" q:  command history
+" q/  downward search
+" q?  upward search
+set history=1000
 set number
 set cursorline
 set cursorcolumn
@@ -150,6 +155,18 @@ if has('mac')
     let $RUBY_DLL    = '/usr/local/lib/libruby.dylib'
     let $LUA_DLL     = '/usr/local/lib/liblua.dylib'
 endif
+" Close sub window
+autocmd MyAutoCmd FileType help          nmap <silent> <buffer> <ESC><ESC> :q<CR>
+autocmd MyAutoCmd FileType ref-phpmanual nmap <silent> <buffer> <ESC><ESC> :q<CR>
+autocmd MyAutoCmd FileType qf            nmap <silent> <buffer> <ESC><ESC> :q<CR>
+autocmd MyAutoCmd FileType unite         nmap <silent> <buffer> <ESC><ESC> :q<CR>
+autocmd MyAutoCmd FileType unite         imap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+autocmd MyAutoCmd FileType taglist       nmap <silent> <buffer> <ESC><ESC> :q<CR>
+autocmd MyAutoCmd FileType nerdtree      nmap <silent> <buffer> <ESC><ESC> :q<CR>
+autocmd MyAutoCmd CmdwinEnter * nmap <ESC><ESC> :q<CR>
+autocmd MyAutoCmd CmdwinEnter * imap <ESC><ESC> <ESC>:q<CR>
+autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
+autocmd MyAutoCmd CmdwinLeave * iunmap <ESC><ESC>
 "}}}
 "
 "
@@ -353,12 +370,10 @@ NeoBundle 'joonty/vdebug'
 NeoBundle 'thinca/vim-ref'
 let g:ref_cache_dir=$HOME.'/.vim/refCache'
 let g:ref_phpmanual_path=$HOME.'/.vim/ref/php-chunked-xhtml'
-let g:ref_detect_filetype={
-\    'laravel.php':     'phpmanual',
-\    'codeigniter.php': 'phpmanual',
-\    'fuel.php':        'phpmanual',
-\    'yii.php':         'phpmanual',}
-autocmd MyAutoCmd FileType ref-phpmanual nmap <silent> <buffer> <ESC><ESC> :q<CR>
+" Don't use multi file type.
+"let g:ref_detect_filetype={
+"\    'laravel.php':     'phpmanual',
+"\    'yii.php':         'phpmanual',}
 "}}}
 " vim-tags {{{
 NeoBundle 'szw/vim-tags'
@@ -445,7 +460,6 @@ let g:quickrun_config = {
 \        'errorformat': '%m\ in\ %f\ on\ line\ %l',},
 \    'markdown' : {
 \        'outputter' : 'browser',},}
-autocmd MyAutoCmd FileType qf nmap <silent> <buffer> <ESC><ESC> :q<CR>
 "}}}
 " vim-prettyprint {{{
 NeoBundle 'thinca/vim-prettyprint'
@@ -549,8 +563,6 @@ nnoremap <silent> [unite]ol  :<C-u>Unite outline<CR>
 nnoremap <silent> [unite]rad :<C-u>Unite jazzradio<CR>
 nnoremap <silent> [unite]v   :<C-u>Unite -auto-preview variable<CR>
 nnoremap <silent> [unite]web :<C-u>Unite webcolorname<CR>
-autocmd MyAutoCmd FileType unite nmap <silent> <buffer> <ESC><ESC> :q<CR>
-autocmd MyAutoCmd FileType unite imap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 " jazzradio
 nnoremap [jazzradio] <Nop>
 nmap <Leader>j [jazzradio]
@@ -562,12 +574,7 @@ nnoremap [jazzradio]l :<C-u>Unite jazzradio<CR>
 NeoBundleLazy 'vim-jp/vimdoc-ja', {
 \    'autoload' : {
 \        'commands' : ['help'],},}
-autocmd MyAutoCmd FileType help nmap <silent> <buffer> <ESC><ESC> :q<CR>
-let s:hooks = neobundle#get_hooks('vimdoc-ja')
-function! s:hooks.on_source(bundle)
-    helptags $HOME/.vim/bundle/vimdoc-ja/doc/
-endfunction
-unlet s:hooks
+"helptags $HOME/.vim/bundle/vimdoc-ja/doc/
 "}}}
 " open-browser.vim {{{
 NeoBundleLazy 'tyru/open-browser.vim', {
@@ -588,7 +595,6 @@ let Tlist_Show_One_File = 1
 let Tlist_Exit_OnlyWindow = 1
 let g:tlist_php_settings = 'php;c:class;f:function;d:constant'
 nnoremap <Leader>t :Tlist<CR>
-autocmd MyAutoCmd FileType taglist nmap <silent> <buffer> <ESC><ESC> :q<CR>
 "}}}
 " nerdtree {{{
 NeoBundleLazy 'scrooloose/nerdtree', {
@@ -596,7 +602,6 @@ NeoBundleLazy 'scrooloose/nerdtree', {
 \        'commands' : ['NERDTree'],},}
 nnoremap <Leader>n :NERDTree<CR>
 let NERDTreeShowHidden=1
-autocmd MyAutoCmd FileType nerdtree nmap <silent> <buffer> <ESC><ESC> :q<CR>
 "}}}
 " vimshell.vim {{{
 NeoBundleLazy 'Shougo/vimshell.vim', {
@@ -853,9 +858,9 @@ call neobundle#end()
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
 filetype plugin indent on
-autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} set filetype=markdown
-autocmd MyAutoCmd BufNewFile,BufRead *.coffee set filetype=coffee
-autocmd MyAutoCmd BufNewFile,BufRead *.{snip*} set filetype=snippets
+autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} setlocal filetype=markdown
+autocmd MyAutoCmd BufNewFile,BufRead *.coffee                   setlocal filetype=coffee
+autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}                  setlocal filetype=snippets
 "}}}
 "
 "
