@@ -163,8 +163,8 @@ autocmd MyAutoCmd FileType unite         nmap <silent> <buffer> <ESC><ESC> :q<CR
 autocmd MyAutoCmd FileType unite         imap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 autocmd MyAutoCmd FileType taglist       nmap <silent> <buffer> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd FileType nerdtree      nmap <silent> <buffer> <ESC><ESC> :q<CR>
-autocmd MyAutoCmd CmdwinEnter * nmap <ESC><ESC> :q<CR>
-autocmd MyAutoCmd CmdwinEnter * imap <ESC><ESC> <ESC>:q<CR>
+autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
+autocmd MyAutoCmd CmdwinEnter * imap <silent> <ESC><ESC> <ESC>:q<CR>
 autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 autocmd MyAutoCmd CmdwinLeave * iunmap <ESC><ESC>
 "}}}
