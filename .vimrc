@@ -134,6 +134,8 @@ set hlsearch
 set wrapscan
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
+" SQL
+let g:sql_type_default='mysql'
 " PHP
 " URL: http://stackoverflow.com/questions/9684806/real-sql-syntax-highlighting-in-php-scripts-with-vim
 let php_sql_query = 1
