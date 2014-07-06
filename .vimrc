@@ -540,6 +540,7 @@ let g:unite_source_grep_command='ag'
 let g:unite_source_grep_default_opts='--nocolor --nogroup'
 let g:unite_source_grep_recursive_opt=''
 let g:unite_source_grep_max_candidates=200
+let g:jazzradio#cache_dir=$HOME.'/.vim/jazzradioCache'
 nnoremap [unite] <Nop>
 nmap <Leader>u [unite]
 " default plugins
@@ -568,6 +569,7 @@ nnoremap <silent> [unite]web :<C-u>Unite webcolorname<CR>
 " jazzradio
 nnoremap [jazzradio] <Nop>
 nmap <Leader>j [jazzradio]
+nnoremap [jazzradio]u :JazzradioUpdateChannels<CR>
 nnoremap [jazzradio]p :JazzradioPlay<Space>CurrentJazz<CR>
 nnoremap [jazzradio]o :JazzradioStop<CR>
 nnoremap [jazzradio]l :<C-u>Unite jazzradio<CR>
