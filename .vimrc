@@ -612,7 +612,8 @@ NeoBundleLazy 'Shougo/vimshell.vim', {
 \    'depends' : 'Shougo/vimproc.vim',
 \    'autoload' : {
 \        'commands' : ['VimShell', 'VimShellPop', 'VimShellInteractive'],},}
-let g:vimshell_data_directory=$HOME.'/.vim/vimshell'
+let g:vimshell_data_directory = $HOME.'/.vim/vimshellData'
+let g:vimshell_vimshrc_path   = $HOME.'/.vim/vimshellVimshrc/.vimshrc'
 nnoremap [vimshell.vim] <Nop>
 nmap <Leader>sh [vimshell.vim]
 nnoremap <silent> [vimshell.vim]s :<C-u>VimShell<CR>

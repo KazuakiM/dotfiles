@@ -13,7 +13,7 @@
 /tags/*
 /unite/*
 /viminfo/*
-/vimshell/*
+/vimshellData/*
 .netrwhist
 
 # Memos file manage.

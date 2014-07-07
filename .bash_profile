@@ -1,5 +1,8 @@
 # .bash_profile
 # Get the aliases and functions
+if [ -f ~/.vim/vimshellVimshrc/.vimshrc ]; then
+    . ~/.vim/vimshellVimshrc/.vimshrc
+fi
 if [ -f ~/.bash_profile.local ]; then
     . ~/.bash_profile.local
 fi
@@ -22,15 +25,6 @@ clear
 # Common
 #{{{
 shopt -s cdspell
-alias rm='rm -i'
-alias cp='cp -i -p'
-alias mv='mv -i'
-alias h='history'
-alias cl='clear'
-alias lc='clear'
-alias df='df -h'
-alias tree='tree -af'
-alias gdiff='git diff -w'
 if type colordiff >/dev/null 2>&1; then
     alias diff='colordiff -u'
 else
