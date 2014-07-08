@@ -612,13 +612,17 @@ NeoBundleLazy 'Shougo/vimshell.vim', {
 \    'depends' : 'Shougo/vimproc.vim',
 \    'autoload' : {
 \        'commands' : ['VimShell', 'VimShellPop', 'VimShellInteractive'],},}
-let g:vimshell_data_directory = $HOME.'/.vim/vimshellData'
-let g:vimshell_vimshrc_path   = $HOME.'/.vim/vimshellVimshrc/.vimshrc'
 nnoremap [vimshell.vim] <Nop>
 nmap <Leader>sh [vimshell.vim]
 nnoremap <silent> [vimshell.vim]s :<C-u>VimShell<CR>
 nnoremap <silent> [vimshell.vim]p :<C-u>VimShellPop<CR>
 nnoremap <silent> [vimshell.vim]i :<C-u>VimShellInteractive
+let s:hooks = neobundle#get_hooks('vimshell.vim')
+function! s:hooks.on_source(bundle)
+    let g:vimshell_data_directory = $HOME.'/.vim/vimshellData'
+    let g:vimshell_vimshrc_path   = $HOME.'/.vim/vimshellVimshrc/.vimshrc'
+endfunction
+unlet s:hooks
 "}}}
 " vim-easy-align {{{
 "# command memo
