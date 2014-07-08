@@ -421,6 +421,18 @@ nnoremap [vim-qfreplace]b :cprevious<CR>
 nnoremap [vim-qfreplace]c :cc
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 "}}}
+" yankround.vim {{{
+NeoBundle 'LeafCage/yankround.vim'
+let g:yankround_dir=$HOME.'/.vim/refCache'
+nmap p <Plug>(yankround-p)
+xmap p <Plug>(yankround-p)
+nmap P <Plug>(yankround-P)
+nmap gp <Plug>(yankround-gp)
+xmap gp <Plug>(yankround-gp)
+nmap gP <Plug>(yankround-gP)
+nmap <C-p> <Plug>(yankround-prev)
+nmap <C-n> <Plug>(yankround-next)
+"}}}
 " memolist.vim {{{
 "# command memo
 "* Don't NeoBundleLazy. ':MemoList' is non-function at first request.
@@ -566,6 +578,7 @@ nnoremap <silent> [unite]ol  :<C-u>Unite outline<CR>
 nnoremap <silent> [unite]rad :<C-u>Unite jazzradio<CR>
 nnoremap <silent> [unite]v   :<C-u>Unite -auto-preview variable<CR>
 nnoremap <silent> [unite]web :<C-u>Unite webcolorname<CR>
+nnoremap <silent> [unite]y   :<C-u>Unite yankround<CR>
 " jazzradio
 nnoremap [jazzradio] <Nop>
 nmap <Leader>j [jazzradio]
