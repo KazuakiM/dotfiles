@@ -432,6 +432,9 @@ xmap gp <Plug>(yankround-gp)
 nmap gP <Plug>(yankround-gP)
 nmap <C-p> <Plug>(yankround-prev)
 nmap <C-n> <Plug>(yankround-next)
+let g:yankround_use_region_hl = 1
+highlight YankRoundRegion cterm=reverse ctermfg=lightyellow
+let g:yankround_region_hl_groupname = 'YankRoundRegion'
 "}}}
 " memolist.vim {{{
 "# command memo
