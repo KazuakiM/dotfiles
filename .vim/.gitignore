@@ -6,14 +6,15 @@
 /jazzradioCache/*
 /phpCsFixer/*
 /qfixapp/*
-/ref/*
+/ref/cache/*
+/ref/php-chunked-xhtml/*
 /neocomplete/*
 /neosnippet/*
 /swap/*
 /tags/*
 /unite/*
 /viminfo/*
-/vimshellData/*
+/vimshell/cache/*
 .netrwhist
 
 # Memos file manage.

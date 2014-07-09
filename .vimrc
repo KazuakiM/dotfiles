@@ -370,7 +370,7 @@ NeoBundle 'joonty/vdebug'
 "}}}
 " vim-ref {{{
 NeoBundle 'thinca/vim-ref'
-let g:ref_cache_dir=$HOME.'/.vim/refCache'
+let g:ref_cache_dir=$HOME.'/.vim/ref/cache'
 let g:ref_phpmanual_path=$HOME.'/.vim/ref/php-chunked-xhtml'
 " Don't use multi file type.
 "let g:ref_detect_filetype={
@@ -635,8 +635,8 @@ nnoremap <silent> [vimshell.vim]p :<C-u>VimShellPop<CR>
 nnoremap <silent> [vimshell.vim]i :<C-u>VimShellInteractive
 let s:hooks = neobundle#get_hooks('vimshell.vim')
 function! s:hooks.on_source(bundle)
-    let g:vimshell_data_directory = $HOME.'/.vim/vimshellData'
-    let g:vimshell_vimshrc_path   = $HOME.'/.vim/vimshellVimshrc/.vimshrc'
+    let g:vimshell_data_directory = $HOME.'/.vim/vimshell/cache'
+    let g:vimshell_vimshrc_path   = $HOME.'/.vim/vimshell/vimshrc/.vimshrc'
 endfunction
 unlet s:hooks
 "}}}
