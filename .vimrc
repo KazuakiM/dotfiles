@@ -40,9 +40,9 @@ if has('vim_starting')
     set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
 endif
 " Valiable
-let s:localtime=localtime()
-let s:time=strftime('%Y%m%d%H%M%S',s:localtime)
-let s:date_hour=strftime('%Y%m%d%H',s:localtime)
+"let s:localtime=localtime()
+"let s:time=strftime('%Y%m%d%H%M%S',s:localtime)
+"let s:date_hour=strftime('%Y%m%d%H',s:localtime)
 " Encode
 scriptencoding utf-8
 set encoding=utf-8
@@ -114,8 +114,8 @@ set swapfile
 set directory=$HOME/.vim/swap
 set noundofile
 "set undofile
-"autocmd MyAutoCmd VimEnter * call s:auto_mkdir($HOME.'/.vim/gundo/'.s:date_hour.'/', 1)
-"let g:undodir_path=$HOME.'/.vim/gundo/'.s:date_hour.'/'
+"autocmd MyAutoCmd VimEnter * call s:auto_mkdir($HOME.'/.vim/undo/'.s:date_hour.'/', 1)
+"let g:undodir_path=$HOME.'/.vim/undo/'.s:date_hour.'/'
 "set undodir=eval(g:undodir_path)
 " Indentation
 set tabstop=4
@@ -137,7 +137,6 @@ cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 " SQL
 let g:sql_type_default='mysql'
 " PHP
-" URL: http://stackoverflow.com/questions/9684806/real-sql-syntax-highlighting-in-php-scripts-with-vim
 let php_sql_query = 1
 let php_baselib = 1
 let php_htmlInStrings = 1
@@ -370,8 +369,8 @@ NeoBundle 'joonty/vdebug'
 "}}}
 " vim-ref {{{
 NeoBundle 'thinca/vim-ref'
-let g:ref_cache_dir=$HOME.'/.vim/ref/cache'
-let g:ref_phpmanual_path=$HOME.'/.vim/ref/php-chunked-xhtml'
+let g:ref_cache_dir=$HOME.'/.vim/vim-ref/cache'
+let g:ref_phpmanual_path=$HOME.'/.vim/vim-ref/php-chunked-xhtml'
 " Don't use multi file type.
 "let g:ref_detect_filetype={
 "\    'laravel.php':     'phpmanual',
@@ -402,15 +401,16 @@ NeoBundle 'vim-scripts/matchit.zip'
 " vim-endwise {{{
 NeoBundle 'tpope/vim-endwise'
 "}}}
-" vim-qfreplace {{{
+" vim-qfreplace
+" fuenor/qfixgrep {{{
 "# command memo
 "* ,cn    :grep results next jump
 "* ,cb    :grep results previous(before) jump
 "* ,ccXX  :grep XX lines jump
-NeoBundle 'thinca/vim-qfreplace'
+NeoBundle 'thinca/vim-qfreplace', {
+\    'depends': 'fuenor/qfixgrep',}
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git
 set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
-set runtimepath+=$HOME/.vim/qfixapp/
 let QFixWin_EnableMode = 1
 let QFix_UseLocationList = 1
 nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
@@ -423,7 +423,7 @@ autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 "}}}
 " yankround.vim {{{
 NeoBundle 'LeafCage/yankround.vim'
-let g:yankround_dir=$HOME.'/.vim/refCache'
+let g:yankround_dir=$HOME.'/.vim/yankround.vim'
 nmap p <Plug>(yankround-p)
 xmap p <Plug>(yankround-p)
 nmap P <Plug>(yankround-P)
@@ -433,14 +433,14 @@ nmap gP <Plug>(yankround-gP)
 nmap <C-p> <Plug>(yankround-prev)
 nmap <C-n> <Plug>(yankround-next)
 let g:yankround_use_region_hl = 1
-highlight YankRoundRegion cterm=reverse ctermfg=lightyellow
+highlight YankRoundRegion cterm=underline ctermfg=magenta
 let g:yankround_region_hl_groupname = 'YankRoundRegion'
 "}}}
 " memolist.vim {{{
 "# command memo
 "* Don't NeoBundleLazy. ':MemoList' is non-function at first request.
 NeoBundle 'glidenote/memolist.vim'
-let g:memolist_path = '$HOME/.vim/memo'
+let g:memolist_path = '$HOME/.vim/memolist.vim'
 nnoremap [memolist] <Nop>
 nmap <Leader>m [memolist]
 nnoremap [memolist]n :MemoNew<CR>
@@ -549,13 +549,13 @@ NeoBundleLazy 'supermomonga/jazzradio.vim', {
 \                'name' : 'JazzradioPlay',
 \                'complete' : 'customlist,jazzradio#channel_id_complete'},],
 \        'function_prefix' : 'jazzradio',},}
-let g:unite_data_directory=$HOME.'/.vim/unite'
+let g:unite_data_directory=$HOME.'/.vim/unite.vim'
 let g:unite_enable_start_insert=1
 let g:unite_source_grep_command='ag'
 let g:unite_source_grep_default_opts='--nocolor --nogroup'
 let g:unite_source_grep_recursive_opt=''
 let g:unite_source_grep_max_candidates=200
-let g:jazzradio#cache_dir=$HOME.'/.vim/jazzradioCache'
+let g:jazzradio#cache_dir=$HOME.'/.vim/jazzradio.vim'
 nnoremap [unite] <Nop>
 nmap <Leader>u [unite]
 " default plugins
@@ -635,8 +635,8 @@ nnoremap <silent> [vimshell.vim]p :<C-u>VimShellPop<CR>
 nnoremap <silent> [vimshell.vim]i :<C-u>VimShellInteractive
 let s:hooks = neobundle#get_hooks('vimshell.vim')
 function! s:hooks.on_source(bundle)
-    let g:vimshell_data_directory = $HOME.'/.vim/vimshell/cache'
-    let g:vimshell_vimshrc_path   = $HOME.'/.vim/vimshell/vimshrc/.vimshrc'
+    let g:vimshell_data_directory = $HOME.'/.vim/vimshell.vim/cache'
+    let g:vimshell_vimshrc_path   = $HOME.'/.vim/vimshell.vim/vimshrc/.vimshrc'
 endfunction
 unlet s:hooks
 "}}}
@@ -696,7 +696,7 @@ NeoBundleLazy 'Shougo/neocomplete.vim', {
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle)
     let g:acp_enableAtStartup=0
-    let g:neocomplete#data_directory=$HOME.'/.vim/neocomplete'
+    let g:neocomplete#data_directory=$HOME.'/.vim/neocomplete.vim'
     let g:neocomplete#enable_at_startup=1
     let g:neocomplete#enable_smart_case=1
     let g:neocomplete#sources#syntax#min_keyword_length=3
@@ -743,7 +743,7 @@ function! s:hooks.on_source(bundle)
     " If php-cs-fixer is in $PATH, you don't need to define line below
     if has('mac')
     else
-        let g:php_cs_fixer_path = '$HOME/.vim/phpCsFixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
+        let g:php_cs_fixer_path = '$HOME/.vim/vim-php-cs-fixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
     endif
     let g:php_cs_fixer_level='all'              " which level ?
     let g:php_cs_fixer_config='default'         " configuration

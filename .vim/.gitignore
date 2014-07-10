@@ -2,19 +2,19 @@
 /backup/*
 /bundle/*
 /colors/*
-/gundo/*
-/jazzradioCache/*
-/phpCsFixer/*
-/qfixapp/*
-/ref/cache/*
-/ref/php-chunked-xhtml/*
-/neocomplete/*
-/neosnippet/*
+/undo/*
+/jazzradio.vim/*
+/vim-php-cs-fixer/*
+/vim-ref/cache/*
+/vim-ref/php-chunked-xhtml/*
+/neocomplete.vim/*
+/neosnippet.vim/*
 /swap/*
 /tags/*
-/unite/*
+/unite.vim/*
 /viminfo/*
-/vimshell/cache/*
+/vimshell.vim/cache/*
+/yankround.vim/*
 .netrwhist
 
 # Memos file manage.
