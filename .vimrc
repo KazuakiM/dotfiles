@@ -310,14 +310,6 @@ let g:vimshell_force_overwrite_statusline = 0
 NeoBundle 'Yggdroot/indentLine'
 let g:indentLine_faster = 1
 "}}}
-" ultisnips {{{
-NeoBundle 'SirVer/ultisnips', {
-\    'depends': 'KazuakiM/vim-snippets',}
-let g:UltiSnipsJumpForwardTrigger='<tab>'
-let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
-let g:UltiSnipsEditSplit='vertical'
-let g:UltiSnipsSnippetsDir=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
-"}}}
 " vim-precious
 " context_filetype.vim {{{
 NeoBundle 'osyo-manga/vim-precious', {
@@ -688,13 +680,21 @@ NeoBundleLazy 'mattn/emoji-vim', {
 \    'autoload' : {
 \        'commands' : ['Emoji'],},}
 "}}}
+" vim-snippets
+" ultisnips
 " neocomplete.vim {{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {
-\    'depends': ['SirVer/ultisnips', 'Shougo/context_filetype.vim'],
+\    'depends': ['KazuakiM/vim-snippets', 'SirVer/ultisnips', 'Shougo/context_filetype.vim'],
 \    'autoload' : {
 \        'insert' : 1,},}
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle)
+    "ultisnips
+    let g:UltiSnipsJumpForwardTrigger='<tab>'
+    let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
+    let g:UltiSnipsEditSplit='vertical'
+    let g:UltiSnipsSnippetsDir=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
+    "neocomplete.vim
     let g:acp_enableAtStartup=0
     let g:neocomplete#data_directory=$HOME.'/.vim/neocomplete.vim'
     let g:neocomplete#enable_at_startup=1
