@@ -58,6 +58,7 @@ set ambiwidth=double
 "set spelllang+=cjk
 "set spell
 set backspace=indent,eol,start
+set virtualedit+=block
 set visualbell t_vb=
 set noerrorbells
 set foldmethod=marker
@@ -160,6 +161,8 @@ endif
 autocmd MyAutoCmd FileType help          nmap <silent> <buffer> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd FileType ref-phpmanual nmap <silent> <buffer> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd FileType qf            nmap <silent> <buffer> <ESC><ESC> :q<CR>
+autocmd MyAutoCmd FileType quickrun      nmap <silent> <buffer> <ESC><ESC> :q<CR>
+autocmd MyAutoCmd FileType qfreplace     nmap <silent> <buffer> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd FileType unite         nmap <silent> <buffer> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd FileType unite         imap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 autocmd MyAutoCmd FileType taglist       nmap <silent> <buffer> <ESC><ESC> :q<CR>
@@ -394,11 +397,12 @@ NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'tpope/vim-endwise'
 "}}}
 " vim-qfreplace
-" fuenor/qfixgrep {{{
+" qfixgrep {{{
 "# command memo
 "* ,cn    :grep results next jump
 "* ,cb    :grep results previous(before) jump
 "* ,ccXX  :grep XX lines jump
+"* ,cr    :replace all files.
 NeoBundle 'thinca/vim-qfreplace', {
 \    'depends': 'fuenor/qfixgrep',}
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git
@@ -411,6 +415,7 @@ nmap <Leader>c [vim-qfreplace]
 nnoremap [vim-qfreplace]n :cnext<CR>
 nnoremap [vim-qfreplace]b :cprevious<CR>
 nnoremap [vim-qfreplace]c :cc
+nnoremap [vim-qfreplace]r :Qfreplace<CR>
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 "}}}
 " yankround.vim {{{
@@ -473,10 +478,6 @@ let g:quickrun_config = {
 " vim-prettyprint {{{
 NeoBundle 'thinca/vim-prettyprint'
 "}}}
-" vim-over {{{
-NeoBundle 'osyo-manga/vim-over'
-nnoremap <expr><Leader>%s ':OverCommandLine<CR>%s/'.expand('<cword>').'/'
-"}}}
 " html5.vim {{{
 NeoBundle 'othree/html5.vim'
 let g:html5_event_handler_attributes_complete = 1
@@ -505,35 +506,35 @@ NeoBundleLazy 'Shougo/unite.vim', {
 NeoBundleLazy 'pasela/unite-webcolorname', {
 \    'depends': 'Shougo/unite.vim',
 \    'autoload': {
-\        'unite_sources': ['webcolorname'],},}
+\        'unite_sources': 'webcolorname',},}
 NeoBundleLazy 'ujihisa/unite-colorscheme', {
 \    'depends': 'Shougo/unite.vim',
 \    'autoload': {
-\        'unite_sources': ['colorscheme'],},}
+\        'unite_sources': 'colorscheme',},}
 NeoBundleLazy 'Shougo/unite-help', {
 \    'depends': 'Shougo/unite.vim',
 \    'autoload': {
-\        'unite_sources': ['help'],},}
+\        'unite_sources': 'help',},}
 NeoBundleLazy 'Shougo/unite-outline', {
 \    'depends': 'Shougo/unite.vim',
 \    'autoload': {
-\        'unite_sources': ['outline'],},}
+\        'unite_sources': 'outline',},}
 NeoBundleLazy 'thinca/vim-editvar', {
 \    'depends': ['thinca/vim-prettyprint', 'Shougo/unite.vim'],
 \    'autoload': {
-\        'unite_sources': ['variable'],},}
+\        'unite_sources': 'variable',},}
 NeoBundleLazy 'rhysd/unite-codic.vim', {
 \    'depends': ['koron/codic-vim', 'Shougo/unite.vim'],
 \    'autoload': {
-\        'unite_sources': ['codic'],},}
+\        'unite_sources': 'codic',},}
 NeoBundleLazy 'osyo-manga/unite-highlight', {
 \    'depends': 'Shougo/unite.vim',
 \    'autoload': {
-\        'unite_sources': ['highlight'],},}
+\        'unite_sources': 'highlight',},}
 NeoBundleLazy 'supermomonga/jazzradio.vim', {
 \    'depends' : 'Shougo/unite.vim',
 \    'autoload' : {
-\        'unite_sources': ['jazzradio'],
+\        'unite_sources': 'jazzradio',
 \        'commands' : [
 \            'JazzradioUpdateChannels',
 \            'JazzradioStop',
@@ -585,7 +586,7 @@ nnoremap [jazzradio]l :<C-u>Unite jazzradio<CR>
 " vimdoc-ja {{{
 NeoBundleLazy 'vim-jp/vimdoc-ja', {
 \    'autoload' : {
-\        'commands' : ['help'],},}
+\        'commands' : 'help',},}
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc/
 "}}}
 " open-browser.vim {{{
@@ -601,7 +602,7 @@ vmap <Leader>gx <Plug>(openbrowser-smart-search)
 " taglist.vim {{{
 NeoBundleLazy 'vim-scripts/taglist.vim', {
 \    'autoload' : {
-\        'commands' : ['Tlist'],},}
+\        'commands' : 'Tlist',},}
 let Tlist_Use_Right_Window = 1
 let Tlist_Show_One_File = 1
 let Tlist_Exit_OnlyWindow = 1
@@ -611,7 +612,7 @@ nnoremap <Leader>t :Tlist<CR>
 " nerdtree {{{
 NeoBundleLazy 'scrooloose/nerdtree', {
 \    'autoload' : {
-\        'commands' : ['NERDTree'],},}
+\        'commands' : 'NERDTree',},}
 nnoremap <Leader>n :NERDTree<CR>
 let NERDTreeShowHidden=1
 "}}}
@@ -637,7 +638,7 @@ unlet s:hooks
 "* Don't hooks. 'g:easy_align_delimiters' is non-function.
 NeoBundleLazy 'junegunn/vim-easy-align', {
 \    'autoload': {
-\        'commands' : ['EasyAlign'],},}
+\        'commands' : 'EasyAlign',},}
 vnoremap <silent> <Leader>a :EasyAlign<CR>
 if !exists('g:easy_align_delimiters')
     let g:easy_align_delimiters = {}
@@ -675,10 +676,16 @@ let g:easy_align_delimiters = {
 \        'left_margin':  0,
 \        'right_margin': 0, }, }
 "}}}
+" vim-over {{{
+NeoBundleLazy 'osyo-manga/vim-over', {
+\    'autoload' : {
+\        'commands' : 'OverCommandLine',},}
+nnoremap <expr><Leader>%s ':OverCommandLine<CR>%s/'.expand('<cword>').'/'
+"}}}
 " emoji-vim {{{
 NeoBundleLazy 'mattn/emoji-vim', {
 \    'autoload' : {
-\        'commands' : ['Emoji'],},}
+\        'commands' : 'Emoji',},}
 "}}}
 " vim-snippets
 " ultisnips
