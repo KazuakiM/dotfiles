@@ -693,6 +693,7 @@ NeoBundleLazy 'mattn/emoji-vim', {
 NeoBundleLazy 'Shougo/neocomplete.vim', {
 \    'depends': ['KazuakiM/vim-snippets', 'SirVer/ultisnips', 'Shougo/context_filetype.vim'],
 \    'autoload' : {
+\        'functions' : 'UltiSnips#FileTypeChanged',
 \        'insert' : 1,},}
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle)
@@ -859,7 +860,7 @@ NeoBundleLazy 'plasticboy/vim-markdown', {
 " previm {{{
 if has('mac')
     NeoBundleLazy 'kannokanno/previm', {
-    \    'depends': ['open-browser.vim'],
+    \    'depends': 'open-browser.vim',
     \    'autoload' : {
     \        'filetypes': 'markdown',},}
     "let g:previm_open_cmd = 'open -a Firefox'
