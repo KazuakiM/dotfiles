@@ -383,13 +383,6 @@ nnoremap <Leader>ts :ts<CR>
 " vim-surround {{{
 NeoBundle 'tpope/vim-surround'
 "}}}
-" wildfire.vim {{{
-NeoBundle 'gcmt/wildfire.vim'
-let g:wildfire_water_map = '<BS>'
-let g:wildfire_objects = {
-\        '*' : ["i'", 'i"', 'i)', 'i]', 'i}', 'ip'],
-\        'html,xml' : ['at'],}
-"}}}
 " matchit.zip {{{
 NeoBundle 'vim-scripts/matchit.zip'
 "}}}
@@ -699,6 +692,20 @@ function! s:hooks.on_source(bundle)
     let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
     let g:UltiSnipsEditSplit='vertical'
     let g:UltiSnipsSnippetsDir=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
+endfunction
+unlet s:hooks
+"}}}
+" wildfire.vim {{{
+NeoBundleLazy 'gcmt/wildfire.vim', {
+\    'autoload' : {
+\        'mappings'  : '<Plug>(wildfire-fuel)',},}
+map <ENTER> <Plug>(wildfire-fuel)
+let s:hooks = neobundle#get_hooks('wildfire.vim')
+function! s:hooks.on_source(bundle)
+    map <BS> <Plug>(wildfire-water)
+    let g:wildfire_objects = {
+    \        '*' : ["i'", 'i"', 'i)', 'i]', 'i}', 'ip',],
+    \        'html,xml' : ['at',],}
 endfunction
 unlet s:hooks
 "}}}
