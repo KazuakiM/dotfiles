@@ -39,6 +39,9 @@ if has('vim_starting')
     set nocompatible
     set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
 endif
+augroup MyAutoCmd
+    autocmd!
+augroup END
 " Valiable
 "let s:localtime=localtime()
 "let s:time=strftime('%Y%m%d%H%M%S',s:localtime)
@@ -65,9 +68,6 @@ set foldmethod=marker
 set viminfo+=n~/.vim/viminfo/.viminfo
 nnoremap zx :<C-U>%foldopen<CR>
 set matchpairs+=<:>
-augroup MyAutoCmd
-    autocmd!
-augroup END
 nnoremap 0 $
 nnoremap 1 ^
 nnoremap gr gT
@@ -126,7 +126,6 @@ set expandtab
 set autoindent
 set smartindent
 set smarttab
-autocmd MyAutoCmd FileType ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2
 " Search
 set incsearch
 set ignorecase
@@ -158,15 +157,6 @@ if has('mac')
     let $LUA_DLL     = '/usr/local/lib/liblua.dylib'
 endif
 " Close sub window
-autocmd MyAutoCmd FileType help          nmap <silent> <buffer> <ESC><ESC> :q<CR>
-autocmd MyAutoCmd FileType ref-phpmanual nmap <silent> <buffer> <ESC><ESC> :q<CR>
-autocmd MyAutoCmd FileType qf            nmap <silent> <buffer> <ESC><ESC> :q<CR>
-autocmd MyAutoCmd FileType quickrun      nmap <silent> <buffer> <ESC><ESC> :q<CR>
-autocmd MyAutoCmd FileType qfreplace     nmap <silent> <buffer> <ESC><ESC> :q<CR>
-autocmd MyAutoCmd FileType unite         nmap <silent> <buffer> <ESC><ESC> :q<CR>
-autocmd MyAutoCmd FileType unite         imap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
-autocmd MyAutoCmd FileType taglist       nmap <silent> <buffer> <ESC><ESC> :q<CR>
-autocmd MyAutoCmd FileType nerdtree      nmap <silent> <buffer> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd CmdwinEnter * imap <silent> <ESC><ESC> <ESC>:q<CR>
 autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
@@ -321,9 +311,6 @@ NeoBundle 'osyo-manga/vim-precious', {
 let g:context_filetype#filetypes = {
 \    'php': [
 \        {
-\            'start': '<html>',
-\            'end':   '</html>', 'filetype': 'html',},
-\        {
 \            'start': '<script>',
 \            'end':   '</script>', 'filetype': 'javascript',},
 \        {
@@ -338,6 +325,7 @@ let g:context_filetype#filetypes = {
 \        {
 \           'start': '<style\%( [^>]*\)\? type="text/css"\%( [^>]*\)\?>',
 \           'end':   '</style>', 'filetype': 'css',},],}
+let g:context_filetype#search_offset = 100
 let g:precious_enable_switch_CursorMoved = {
 \    '*' : 0,}
 let g:precious_enable_switch_CursorMoved_i = {
@@ -938,11 +926,10 @@ endfunction
 "}}}
 "
 "
-" Extra local setting
+" Other setting files
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
-if filereadable(expand($HOME.'/.vimrc.local'))
-    source ~/.vimrc.local
-endif
+" Environment setting file
+source ~/.vimrc.local
 "}}}
 
