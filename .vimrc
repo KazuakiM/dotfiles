@@ -135,6 +135,8 @@ set hlsearch
 set wrapscan
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
+" JSON
+command! Json :execute '%!python -m json.tool'
 " SQL
 let g:sql_type_default='mysql'
 " PHP
