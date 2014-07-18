@@ -887,6 +887,11 @@ NeoBundleFetch 'tomasr/molokai'
 " Lingr (none-Vimplugin but there is vim-users.jp room.) {{{
 NeoBundleFetch 'psychs/lingr-irc'
 "}}}
+" PHP {{{
+"* URL: https://github.com/ziadoz/awesome-php
+NeoBundleFetch 'ziadoz/awesome-php'
+nnoremap <Leader>awe :tabnew $HOME/.vim/bundle/awesome-php/README.md<CR>
+"}}}
 call neobundle#end()
 "}}}
 "
