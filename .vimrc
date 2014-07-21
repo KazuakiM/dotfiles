@@ -3,7 +3,7 @@
 " Memo
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
-"  :help internal-variables {{{
+" :help internal-variables {{{
 "------------------------------------------------------------------------
 "| b: | buffer-variable   | Local to the current buffer.                |
 "| w: | window-variable   | Local to the current window.                |
@@ -14,7 +14,7 @@
 "| a: | function-argument | Function argument (only inside a function). |
 "| v: | vim-variable      | Global, predefined by Vim.                  |
 "------------------------------------------------------------------------ }}}
-"  :help map {{{
+" :help map {{{
 "---------------------------------------------------------------------------------------------------------------------------------
 "|commands:                                     |modes:                                                                          |
 "| Variables | Constants |  Unset  |  Destroy   | Normal | Visual | Select | Operator-pending | Insert | Command-line | Lang-Arg |
@@ -172,22 +172,66 @@ autocmd MyAutoCmd CmdwinLeave * iunmap <ESC><ESC>
 "{{{
 call neobundle#begin(expand('$HOME/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
-" vimproc {{{
-NeoBundle 'Shougo/vimproc', {
-\    'build' : {
-\        'windows' : 'make -f make_mingw32.mak',
-\        'cygwin'  : 'make -f make_cygwin.mak',
-\        'mac'     : 'make -f make_mac.mak',
-\        'unix'    : 'make -f make_unix.mak',},}
-"}}}
-" vital.vim {{{
-NeoBundle 'vim-jp/vital.vim'
-"}}}
-" webapi-vim {{{
-NeoBundle 'mattn/webapi-vim'
-"}}}
+let g:neobundle#log_filename = $HOME.'/.vim/neobundle.vim/neobundle.log'
+if neobundle#has_cache()
+    NeoBundleLoadCache
+else
+    " vimproc {{{
+    NeoBundle 'Shougo/vimproc', {
+    \    'build' : {
+    \        'windows' : 'make -f make_mingw32.mak',
+    \        'cygwin'  : 'make -f make_cygwin.mak',
+    \        'mac'     : 'make -f make_mac.mak',
+    \        'unix'    : 'make -f make_unix.mak',},} "}}}
+    NeoBundle 'vim-jp/vital.vim'
+    NeoBundle 'mattn/webapi-vim'
+    NeoBundle 'tpope/vim-fugitive'
+    NeoBundle 'itchyny/landscape.vim'
+    NeoBundle 'itchyny/lightline.vim'
+    NeoBundle 'Yggdroot/indentLine'
+    NeoBundle 'Shougo/context_filetype.vim'
+    NeoBundle 'osyo-manga/vim-precious'
+    " vdebug {{{
+    " # command memo
+    " * <F5>  : start/run (to next breakpoint/end of script)
+    " * <F2>  : step over
+    " * <F3>  : step into
+    " * <F4>  : step out
+    " * <F6>  : stop debugging
+    " * <F7>  : detach script from debugger
+    " * <F9>  : run to cursor
+    " * <F10> : set line breakpoint
+    " * <F11> : show context variables (e.g. after 'eval')
+    " * <F12> : evaluate variable under cursor
+    " * :Breakpoint <type> <args>: set a breakpoint of any type (see :help VdebugBreakpoints)
+    " * :VdebugEval <code>: evaluate some code and display the result
+    " * <Leader>e: evaluate the expression under visual highlight and display the result
+    NeoBundle 'joonty/vdebug' "}}}
+    NeoBundle 'thinca/vim-ref'
+    NeoBundle 'szw/vim-tags'
+    NeoBundle 'tpope/vim-surround'
+    NeoBundle 'vim-scripts/matchit.zip'
+    NeoBundle 'tpope/vim-endwise'
+    NeoBundle 'fuenor/qfixgrep'
+    " vim-qfreplace {{{
+    " # command memo
+    " * ,cn    :grep results next jump
+    " * ,cb    :grep results previous(before) jump
+    " * ,ccXX  :grep XX lines jump
+    " * ,cr    :replace all files.
+    NeoBundle 'thinca/vim-qfreplace' "}}}
+    NeoBundle 'LeafCage/yankround.vim'
+    NeoBundle 'glidenote/memolist.vim'
+    " vim-quickrun {{{
+    " # command memo
+    " * :QuickRun :execute quickrun.
+    NeoBundle 'thinca/vim-quickrun' "}}}
+    NeoBundle 'thinca/vim-prettyprint'
+    NeoBundle 'othree/html5.vim'
+
+    NeoBundleSaveCache
+endif
 " vim-fugitive {{{
-NeoBundle 'tpope/vim-fugitive'
 nnoremap [vim-fugitive] <Nop>
 nmap <Leader>git [vim-fugitive]
 nnoremap [vim-fugitive]status :Gstatus<CR>
@@ -197,10 +241,7 @@ nnoremap [vim-fugitive]rm :Gremove<CR>
 nnoremap [vim-fugitive]diff :Gdiff<CR>
 nnoremap [vim-fugitive]commit :Gcommit -m ''
 "}}}
-" lightline
-" landscape {{{
-NeoBundle 'itchyny/lightline.vim', {
-\    'depends': ['itchyny/landscape.vim', 'tpope/vim-fugitive',],}
+" lightline {{{
 let g:lightline = {
 \    'colorscheme': 'landscape',
 \    'active': {
@@ -303,13 +344,9 @@ let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
 "}}}
 " indentLine {{{
-NeoBundle 'Yggdroot/indentLine'
 let g:indentLine_faster = 1
 "}}}
-" vim-precious
 " context_filetype.vim {{{
-NeoBundle 'osyo-manga/vim-precious', {
-\    'depends': 'Shougo/context_filetype.vim'}
 " HTML default_filetype + PHP
 let g:context_filetype#filetypes = {
 \    'php': [
@@ -329,6 +366,8 @@ let g:context_filetype#filetypes = {
 \           'start': '<style\%( [^>]*\)\? type="text/css"\%( [^>]*\)\?>',
 \           'end':   '</style>', 'filetype': 'css',},],}
 let g:context_filetype#search_offset = 100
+"}}}
+" vim-precious {{{
 let g:precious_enable_switch_CursorMoved = {
 \    '*' : 0,}
 let g:precious_enable_switch_CursorMoved_i = {
@@ -336,34 +375,11 @@ let g:precious_enable_switch_CursorMoved_i = {
 autocmd MyAutoCmd InsertEnter * :PreciousSwitch
 autocmd MyAutoCmd InsertLeave * :PreciousReset
 "}}}
-" vdebug {{{
-"# command memo
-"* <F5>  : start/run (to next breakpoint/end of script)
-"* <F2>  : step over
-"* <F3>  : step into
-"* <F4>  : step out
-"* <F6>  : stop debugging
-"* <F7>  : detach script from debugger
-"* <F9>  : run to cursor
-"* <F10> : set line breakpoint
-"* <F11> : show context variables (e.g. after 'eval')
-"* <F12> : evaluate variable under cursor
-"* :Breakpoint <type> <args>: set a breakpoint of any type (see :help VdebugBreakpoints)
-"* :VdebugEval <code>: evaluate some code and display the result
-"* <Leader>e: evaluate the expression under visual highlight and display the result
-NeoBundle 'joonty/vdebug'
-"}}}
 " vim-ref {{{
-NeoBundle 'thinca/vim-ref'
 let g:ref_cache_dir=$HOME.'/.vim/vim-ref/cache'
 let g:ref_phpmanual_path=$HOME.'/.vim/vim-ref/php-chunked-xhtml'
-" Don't use multi file type.
-"let g:ref_detect_filetype={
-"\    'laravel.php':     'phpmanual',
-"\    'yii.php':         'phpmanual',}
 "}}}
 " vim-tags {{{
-NeoBundle 'szw/vim-tags'
 let g:vim_tags_auto_generate = 1
 nnoremap <Leader>tags :TagsGenerate
 nnoremap <Leader>] <C-]>
@@ -371,24 +387,7 @@ nnoremap <Leader>[ <C-o>
 nnoremap <Leader>ts :ts<CR>
 " add .vimrc.local
 "}}}
-" vim-surround {{{
-NeoBundle 'tpope/vim-surround'
-"}}}
-" matchit.zip {{{
-NeoBundle 'vim-scripts/matchit.zip'
-"}}}
-" vim-endwise {{{
-NeoBundle 'tpope/vim-endwise'
-"}}}
-" vim-qfreplace
-" qfixgrep {{{
-"# command memo
-"* ,cn    :grep results next jump
-"* ,cb    :grep results previous(before) jump
-"* ,ccXX  :grep XX lines jump
-"* ,cr    :replace all files.
-NeoBundle 'thinca/vim-qfreplace', {
-\    'depends': 'fuenor/qfixgrep',}
+" vim-qfreplace {{{
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git
 set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
 let QFixWin_EnableMode = 1
@@ -403,14 +402,10 @@ nnoremap [vim-qfreplace]r :Qfreplace<CR>
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 "}}}
 " yankround.vim {{{
-NeoBundle 'LeafCage/yankround.vim'
 let g:yankround_dir=$HOME.'/.vim/yankround.vim'
 nmap p <Plug>(yankround-p)
 xmap p <Plug>(yankround-p)
 nmap P <Plug>(yankround-P)
-nmap gp <Plug>(yankround-gp)
-xmap gp <Plug>(yankround-gp)
-nmap gP <Plug>(yankround-gP)
 nmap <C-p> <Plug>(yankround-prev)
 nmap <C-n> <Plug>(yankround-next)
 let g:yankround_use_region_hl = 1
@@ -418,9 +413,6 @@ highlight YankRoundRegion cterm=underline ctermfg=magenta
 let g:yankround_region_hl_groupname = 'YankRoundRegion'
 "}}}
 " memolist.vim {{{
-"# command memo
-"* Don't NeoBundleLazy. ':MemoList' is non-function at first request.
-NeoBundle 'glidenote/memolist.vim'
 let g:memolist_path = '$HOME/.vim/memolist.vim'
 nnoremap [memolist] <Nop>
 nmap <Leader>m [memolist]
@@ -429,9 +421,6 @@ nnoremap [memolist]l :MemoList<CR>
 nnoremap [memolist]g :MemoGrep<CR>
 "}}}
 " vim-quickrun {{{
-"# command memo
-"* :QuickRun :execute quickrun.
-NeoBundle 'thinca/vim-quickrun'
 nnoremap <Leader>r :QuickRun<CR>
 let g:quickrun_config = {
 \    '_' : {
@@ -459,11 +448,7 @@ let g:quickrun_config = {
 \    'markdown' : {
 \        'outputter' : 'browser',},}
 "}}}
-" vim-prettyprint {{{
-NeoBundle 'thinca/vim-prettyprint'
-"}}}
 " html5.vim {{{
-NeoBundle 'othree/html5.vim'
 let g:html5_event_handler_attributes_complete = 1
 let g:html5_rdfa_attributes_complete = 1
 let g:html5_microdata_attributes_complete = 1

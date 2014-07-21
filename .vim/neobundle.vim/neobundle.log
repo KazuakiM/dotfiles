@@ -1,0 +1,552 @@
+[neobundle/install] All clean!
+[neobundle/install] Update started: (2014/07/20 23:36:45)
+[neobundle/install] ( 1/66): |vim-editvar| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] ( 2/66): |vimproc| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] ( 3/66): |vimproc.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] ( 4/66): |lingr-irc| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] ( 1/66): |vim-editvar| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] Building...
+[neobundle/install] make: Nothing to be done for `all'.
+[neobundle/install] ( 2/66): |vimproc| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] ( 3/66): |vimproc.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] ( 4/66): |lingr-irc| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] ( 5/66): |context_filetype.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] ( 6/66): |unite.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] ( 7/66): |emmet-vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] ( 8/66): |vital.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] ( 5/66): |context_filetype.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] ( 7/66): |emmet-vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] ( 8/66): |vital.vim| Updated
+[neobundle/install] |vital.vim| * e8bdc5c [27 hours ago] Merge pull request #182 from cohama/add-group_by
+[neobundle/install] |vital.vim| * ba01649 [6 days ago] Data.List: Allow the use of Funcref
+[neobundle/install] |vital.vim| * 13c3cd4 [7 days ago] Data.List: Add unlet
+[neobundle/install] |vital.vim| * 5510931 [7 days ago] Data.List: Fix group_by for non-string type
+[neobundle/install] |vital.vim| * f7dc7ab [7 days ago] Data.List: Add group_by function
+[neobundle/install] ( 9/66): |vim-surround| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (10/66): |vim-qfstatusline| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (11/66): |vim-over| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] ( 6/66): |unite.vim| Updated
+[neobundle/install] |unite.vim| * 46b1a27 [2 days ago] Fix #653 resume bug
+[neobundle/install] |unite.vim| * fc35e6d [2 days ago] Fix #653 resume bug
+[neobundle/install] |unite.vim| * dd147e7 [2 days ago] Fix #651 ignore_pattern problem
+[neobundle/install] |unite.vim| * d2dd420 [2 days ago] Improve find args
+[neobundle/install] |unite.vim| * 636be3e [2 days ago] Fix #653 find options
+[neobundle/install] (12/66): |matchit.zip| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] ( 9/66): |vim-surround| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (10/66): |vim-qfstatusline| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (11/66): |vim-over| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (13/66): |ultisnips| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (14/66): |sudo.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (15/66): |nerdtree| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (12/66): |matchit.zip| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (13/66): |ultisnips| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (14/66): |sudo.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (15/66): |nerdtree| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (16/66): |unite-help| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (17/66): |unite-codic.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (18/66): |vim-qfreplace| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (19/66): |vim-tags| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (19/66): |vim-tags| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (20/66): |vim-css3-syntax| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (16/66): |unite-help| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (17/66): |unite-codic.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (18/66): |vim-qfreplace| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (21/66): |taglist.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (22/66): |open-browser.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (23/66): |indentLine| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (23/66): |indentLine| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (24/66): |vim-php-cs-fixer| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (20/66): |vim-css3-syntax| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (21/66): |taglist.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (22/66): |open-browser.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (25/66): |vim-fugitive| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (26/66): |jazzradio.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (27/66): |webapi-vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (27/66): |webapi-vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (28/66): |codic-vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (24/66): |vim-php-cs-fixer| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (26/66): |jazzradio.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (29/66): |yankround.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (30/66): |vim-markdown| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (25/66): |vim-fugitive| Updated
+[neobundle/install] |vim-fugitive| * 5d1c219 [3 days ago] Fix load order issue
+[neobundle/install] |vim-fugitive| * a739112 [3 days ago] Experimentally expose browse API
+[neobundle/install] |vim-fugitive| * d376506 [3 days ago] Try including helptags instructions in README
+[neobundle/install] (31/66): |vim-quickrun| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (28/66): |codic-vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (29/66): |yankround.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (30/66): |vim-markdown| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (32/66): |quickfixstatus| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (33/66): |previm| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (34/66): |molokai| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (31/66): |vim-quickrun| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (34/66): |molokai| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (35/66): |vim-javascript| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (36/66): |vim-colors-solarized| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (32/66): |quickfixstatus| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (33/66): |previm| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (37/66): |unite-highlight| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (38/66): |unite-webcolorname| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (35/66): |vim-javascript| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (36/66): |vim-colors-solarized| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (39/66): |vim-precious| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (40/66): |vimdoc-ja| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (37/66): |unite-highlight| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (38/66): |unite-webcolorname| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (41/66): |memolist.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (42/66): |unite-outline| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (39/66): |vim-precious| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (40/66): |vimdoc-ja| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (43/66): |vim-watchdogs| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (44/66): |neobundle.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (41/66): |memolist.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (42/66): |unite-outline| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (45/66): |vim-endwise| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (46/66): |neocomplete.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (43/66): |vim-watchdogs| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (44/66): |neobundle.vim| Updated
+[neobundle/install] |neobundle.vim| * ec1af8f [7 hours ago] Fix #293 for <Leader> mappings
+[neobundle/install] |neobundle.vim| * e9883d5 [2 days ago] Fix #292 helptags problem
+[neobundle/install] (45/66): |vim-endwise| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (47/66): |vdebug| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (48/66): |wildfire.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (49/66): |vim-qfsigns| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (46/66): |neocomplete.vim| Updated
+[neobundle/install] |neocomplete.vim| * 94e7c78 [28 hours ago] Fix #267 buffer cache behavior
+[neobundle/install] |neocomplete.vim| * 7ebe586 [2 days ago] Fix #268 on_insert_char_pre()
+[neobundle/install] |neocomplete.vim| * 836540a [4 days ago] Improve async_load()
+[neobundle/install] |neocomplete.vim| * 874ff44 [4 days ago] Merge branch 'complete'
+[neobundle/install] |neocomplete.vim| * ebcb4e3 [6 days ago] Merge branch 'master' into complete
+[neobundle/install] |neocomplete.vim| * 4f35e64 [6 days ago] Update vital
+[neobundle/install] (50/66): |vim-easy-align| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (47/66): |vdebug| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (49/66): |vim-qfsigns| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (51/66): |qfixgrep| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (52/66): |vim-coffee-script| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (48/66): |wildfire.vim| Updated
+[neobundle/install] |wildfire.vim| * 57dddb3 [2 days ago] Don't replace already displayed marks
+[neobundle/install] (50/66): |vim-easy-align| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (53/66): |html5.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (54/66): |landscape.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (52/66): |vim-coffee-script| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (55/66): |jellybeans.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (51/66): |qfixgrep| Updated
+[neobundle/install] |qfixgrep| * 1a28259 [22 hours ago] Fix ignore recursive flag
+[neobundle/install] (53/66): |html5.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (54/66): |landscape.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (56/66): |vim-prettyprint| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (57/66): |vim-ref| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (58/66): |vimshell.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (58/66): |vimshell.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (59/66): |shabadou.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (55/66): |jellybeans.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (56/66): |vim-prettyprint| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (57/66): |vim-ref| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (60/66): |vim-snippets| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (61/66): |sass-compile.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (62/66): |lightline.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (59/66): |shabadou.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (60/66): |vim-snippets| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (61/66): |sass-compile.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (62/66): |lightline.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (63/66): |awesome-php| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (64/66): |unite-colorscheme| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (65/66): |gundo.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (66/66): |emoji-vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (66/66): |emoji-vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (63/66): |awesome-php| Updated
+[neobundle/install] |awesome-php| * cf838a6 [2 days ago] Tweak CI category description and move over library.
+[neobundle/install] |awesome-php| * b345ccd [2 days ago] Merge pull request #166 from corpsee/feature-added-category-ci
+[neobundle/install] |awesome-php| * fcaa9a4 [6 days ago] Typo fix
+[neobundle/install] |awesome-php| * 2339231 [6 days ago] Added Continuous Integration category to top navigation
+[neobundle/install] |awesome-php| * ccc5ae1 [7 days ago] Added Continuous Integration category (separated from Testing)
+[neobundle/install] (64/66): |unite-colorscheme| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (65/66): |gundo.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] Helptags: done. 44 bundles processed
+[neobundle/install] Installed/Updated bundles:
+vital.vim
+unite.vim
+vim-fugitive
+neobundle.vim
+neocomplete.vim
+wildfire.vim
+qfixgrep
+awesome-php
+[neobundle/install] Update done: (2014/07/20 23:37:33)
+[neobundle/install] Update started: (2014/07/21 09:19:48)
+[neobundle/install] ( 1/66): |vim-editvar| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] ( 2/66): |vimproc| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] ( 3/66): |vimproc.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] ( 4/66): |lingr-irc| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] ( 5/66): |context_filetype.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] ( 6/66): |unite.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] ( 7/66): |emmet-vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] ( 8/66): |vital.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] ( 5/66): |context_filetype.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] ( 6/66): |unite.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] ( 7/66): |emmet-vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] ( 8/66): |vital.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] ( 9/66): |vim-surround| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (10/66): |vim-qfstatusline| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (11/66): |vim-over| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (12/66): |matchit.zip| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (13/66): |ultisnips| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (14/66): |sudo.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (15/66): |nerdtree| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (16/66): |unite-help| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (17/66): |unite-codic.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (18/66): |vim-qfreplace| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (19/66): |vim-tags| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (20/66): |vim-css3-syntax| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (21/66): |taglist.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (22/66): |open-browser.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (23/66): |indentLine| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (24/66): |vim-php-cs-fixer| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (25/66): |vim-fugitive| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (11/66): |vim-over| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (15/66): |nerdtree| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (22/66): |open-browser.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (25/66): |vim-fugitive| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (26/66): |jazzradio.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (27/66): |webapi-vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (28/66): |codic-vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (29/66): |yankround.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (30/66): |vim-markdown| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (31/66): |vim-quickrun| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (32/66): |quickfixstatus| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (33/66): |previm| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (34/66): |molokai| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (35/66): |vim-javascript| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (36/66): |vim-colors-solarized| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (37/66): |unite-highlight| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (38/66): |unite-webcolorname| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (39/66): |vim-precious| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (40/66): |vimdoc-ja| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (41/66): |memolist.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (42/66): |unite-outline| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (43/66): |vim-watchdogs| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (44/66): |neobundle.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (45/66): |vim-endwise| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (45/66): |vim-endwise| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (46/66): |neocomplete.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (31/66): |vim-quickrun| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (40/66): |vimdoc-ja| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (47/66): |vdebug| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (48/66): |wildfire.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (49/66): |vim-qfsigns| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (50/66): |vim-easy-align| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (51/66): |qfixgrep| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (44/66): |neobundle.vim| Updated
+[neobundle/install] |neobundle.vim| * 6906d95 [36 minutes ago] Change cache filename
+[neobundle/install] |neobundle.vim| * e4b525b [51 minutes ago] Merge pull request #294 from thinca/add-argument-to-has_fresh_cache
+[neobundle/install] |neobundle.vim| * dd41501 [9 hours ago] Add {vimrc} argument to neobundle#has_fresh_cache()
+[neobundle/install] (52/66): |vim-coffee-script| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (53/66): |html5.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (54/66): |landscape.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (55/66): |jellybeans.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (56/66): |vim-prettyprint| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (57/66): |vim-ref| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (46/66): |neocomplete.vim| Updated
+[neobundle/install] |neocomplete.vim| * a76b511 [35 minutes ago] Merge pull request #270 from juggernaut-/patch-1
+[neobundle/install] |neocomplete.vim| * 435002d [39 minutes ago] Fix for tags
+[neobundle/install] (48/66): |wildfire.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (51/66): |qfixgrep| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (58/66): |vimshell.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (59/66): |shabadou.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (60/66): |vim-snippets| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (61/66): |sass-compile.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (62/66): |lightline.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (63/66): |awesome-php| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (57/66): |vim-ref| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (64/66): |unite-colorscheme| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (65/66): |gundo.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (66/66): |emoji-vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (58/66): |vimshell.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (60/66): |vim-snippets| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (63/66): |awesome-php| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] Helptags: done. 44 bundles processed
+[neobundle/install] Installed/Updated bundles:
+neobundle.vim
+neocomplete.vim
+[neobundle/install] Update done: (2014/07/21 09:20:02)
+[neobundle/install] All clean!
+[neobundle/install] Target bundles not found.
+[neobundle/install] You may have used the wrong bundle name, or all of the bundles are already installed.
+[neobundle/install] Update started: (2014/07/21 09:59:36)
+[neobundle/install] ( 1/66): |vim-editvar| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] ( 2/66): |vimproc| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] ( 3/66): |vimproc.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] ( 4/66): |lingr-irc| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] ( 5/66): |context_filetype.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] ( 6/66): |unite.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] ( 7/66): |emmet-vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] ( 8/66): |vital.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] ( 8/66): |vital.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] ( 9/66): |vim-surround| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (10/66): |vim-qfstatusline| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (11/66): |vim-over| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] ( 5/66): |context_filetype.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] ( 6/66): |unite.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] ( 7/66): |emmet-vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (12/66): |matchit.zip| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (13/66): |ultisnips| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (14/66): |sudo.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (15/66): |nerdtree| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (16/66): |unite-help| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (17/66): |unite-codic.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (18/66): |vim-qfreplace| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (19/66): |vim-tags| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (20/66): |vim-css3-syntax| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (21/66): |taglist.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (22/66): |open-browser.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (23/66): |indentLine| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (24/66): |vim-php-cs-fixer| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (25/66): |vim-fugitive| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (11/66): |vim-over| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (15/66): |nerdtree| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (22/66): |open-browser.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (25/66): |vim-fugitive| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (26/66): |jazzradio.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (27/66): |webapi-vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (28/66): |codic-vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (29/66): |yankround.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (30/66): |vim-markdown| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (31/66): |vim-quickrun| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (32/66): |quickfixstatus| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (33/66): |previm| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (34/66): |molokai| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (35/66): |vim-javascript| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (36/66): |vim-colors-solarized| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (37/66): |unite-highlight| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (38/66): |unite-webcolorname| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (39/66): |vim-precious| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (40/66): |vimdoc-ja| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (41/66): |memolist.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (42/66): |unite-outline| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (43/66): |vim-watchdogs| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (44/66): |neobundle.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (45/66): |vim-endwise| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (45/66): |vim-endwise| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (46/66): |neocomplete.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (31/66): |vim-quickrun| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (40/66): |vimdoc-ja| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (44/66): |neobundle.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (47/66): |vdebug| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (48/66): |wildfire.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (49/66): |vim-qfsigns| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (50/66): |vim-easy-align| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (51/66): |qfixgrep| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (52/66): |vim-coffee-script| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (53/66): |html5.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (54/66): |landscape.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (55/66): |jellybeans.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (56/66): |vim-prettyprint| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (57/66): |vim-ref| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (57/66): |vim-ref| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (58/66): |vimshell.vim| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (46/66): |neocomplete.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (48/66): |wildfire.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (51/66): |qfixgrep| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (59/66): |shabadou.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (60/66): |vim-snippets| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (61/66): |sass-compile.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (62/66): |lightline.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (63/66): |awesome-php| git pull --rebase && git submodule update --init --recursive
+[neobundle/install] (64/66): |unite-colorscheme| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (65/66): |gundo.vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (66/66): |emoji-vim| Skipped
+[neobundle/install] Outdated plugin.
+[neobundle/install] (58/66): |vimshell.vim| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (60/66): |vim-snippets| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] (63/66): |awesome-php| Skipped
+[neobundle/install] Same revision.
+[neobundle/install] Helptags: done. 44 bundles processed
+[neobundle/install] Installed/Updated bundles:
+no new bundles installed
+[neobundle/install] Update done: (2014/07/21 09:59:50)
