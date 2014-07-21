@@ -7,20 +7,13 @@ if [ -f ~/.bashrc ]; then
     . ~/.bashrc
 fi
 
-# User specific environment and startup programs
-#{{{
-# Using homebrew.
-#if [ -d $HOME/.anyenv ]; then
-#    export PATH="$HOME/.anyenv/bin:$PATH"
-#    eval "$(anyenv init -)"
-#fi
+#User specific environment and startup programs {{{
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
 export LANG=ja_JP.UTF-8
 cd
 clear
 #}}}
-# Common
-#{{{
+#Common {{{
 shopt -s cdspell
 alias rm='rm -i'
 alias cp='cp -i -p'
@@ -51,8 +44,7 @@ man() {
         man "$@"
 }
 #}}}
-# Linux Desktop Hacks Custopm prompt
-#{{{
+#Linux Desktop Hacks Custopm prompt {{{
 function prompt_command
 {
     # Save current cursor position
@@ -79,15 +71,13 @@ function prompt_command
 # Set prompt via function above
 PROMPT_COMMAND=prompt_command
 #}}}
-# PS1(primary prompt string)
-#{{{
+#PS1(primary prompt string) {{{
 lc='\[\e[1;'
 ps1StartCyan=${lc}36m
 ps1EndNormal=${lc}0m
 export PS1="${ps1StartCyan}\]\h \$ ${ps1EndNormal}\]"
 #}}}
-# OS Type
-#{{{
+#OS Type {{{
 case "${OSTYPE}" in
     darwin*)
         alias l='ls -AGh'
@@ -97,6 +87,7 @@ case "${OSTYPE}" in
         alias vi='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
         alias vim='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
         alias top='htop'
+        alias composer='php -d memory_limit=1G /usr/local/opt/composer/libexec/composer.phar'
         alias FF='open -a firefox'
         alias GG='open -a firefox'
         alias MM='open -a thunderbird'
