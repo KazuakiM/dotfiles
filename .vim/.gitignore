@@ -7,6 +7,7 @@
 /vim-php-cs-fixer/*
 /vim-ref/cache/*
 /vim-ref/php-chunked-xhtml/*
+/neobundle.vim/*
 /neocomplete.vim/*
 /neosnippet.vim/*
 /swap/*
