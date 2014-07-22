@@ -228,6 +228,8 @@ else
     NeoBundle 'thinca/vim-quickrun' "}}}
     NeoBundle 'thinca/vim-prettyprint'
     NeoBundle 'othree/html5.vim'
+    NeoBundle 'KazuakiM/vim-snippets'
+    NeoBundle 'SirVer/ultisnips'
 
     NeoBundleSaveCache
 endif
@@ -454,6 +456,12 @@ let g:html5_rdfa_attributes_complete = 1
 let g:html5_microdata_attributes_complete = 1
 let g:html5_aria_attributes_complete = 1
 "}}}
+" ultisnips {{{
+let g:UltiSnipsJumpForwardTrigger='<tab>'
+let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
+let g:UltiSnipsEditSplit='vertical'
+let g:UltiSnipsSnippetsDir=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
+"}}}
 "}}}
 "
 "
@@ -655,21 +663,6 @@ nnoremap <expr><Leader>%s ':OverCommandLine<CR>%s/'.expand('<cword>').'/'
 NeoBundleLazy 'mattn/emoji-vim', {
 \    'autoload' : {
 \        'commands' : 'Emoji',},}
-"}}}
-" vim-snippets
-" ultisnips {{{
-NeoBundleLazy 'SirVer/ultisnips', {
-\    'depends': 'KazuakiM/vim-snippets',
-\    'autoload' : {
-\        'functions' : 'UltiSnips#FileTypeChanged',},}
-let s:hooks = neobundle#get_hooks('ultisnips')
-function! s:hooks.on_source(bundle)
-    let g:UltiSnipsJumpForwardTrigger='<tab>'
-    let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
-    let g:UltiSnipsEditSplit='vertical'
-    let g:UltiSnipsSnippetsDir=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
-endfunction
-unlet s:hooks
 "}}}
 " wildfire.vim {{{
 NeoBundleLazy 'gcmt/wildfire.vim', {
