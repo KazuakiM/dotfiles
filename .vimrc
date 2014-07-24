@@ -55,7 +55,8 @@ set fileformat=unix
 let mapleader=','
 set scrolloff=5
 set textwidth=0
-autocm MyAutoCmd FileType * setlocal formatoptions-=cb
+autocmd MyAutoCmd FileType * setlocal textwidth=0
+autocmd MyAutoCmd FileType * setlocal formatoptions-=cb
 set autoread
 set hidden
 set ambiwidth=double
