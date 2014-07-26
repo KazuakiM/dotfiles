@@ -50,8 +50,8 @@ augroup END
 "let s:time=strftime('%Y%m%d%H%M%S',s:localtime)
 "let s:date_hour=strftime('%Y%m%d%H',s:localtime)
 " Encode
-scriptencoding utf-8
 set encoding=utf-8
+scriptencoding utf-8
 set fileencoding=utf-8
 set fileformat=unix
 " Basic
@@ -101,6 +101,7 @@ colorscheme jellybeans
 set title
 set ruler
 set laststatus=2
+set wildignore+=.git,.svn
 set wildmenu
 set wildmode=longest:full,full
 " [memo]
@@ -373,7 +374,7 @@ let g:context_filetype#filetypes = {
 \           'end':   '</style>', 'filetype': 'css',},
 \        {
 \           'start': '<\a\{-}',
-\           'end':   '(>\|</.\{-}+>)', 'filetype': 'html',},],}
+\           'end':   '(>\|</.\{-}>)', 'filetype': 'html',},],}
 let g:context_filetype#search_offset = 100
 "}}}
 " vim-precious {{{
