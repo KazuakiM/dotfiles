@@ -367,7 +367,10 @@ let g:context_filetype#filetypes = {
 \            'end':   '</script>', 'filetype': 'coffee',},
 \        {
 \           'start': '<style\%( [^>]*\)\? type="text/css"\%( [^>]*\)\?>',
-\           'end':   '</style>', 'filetype': 'css',},],}
+\           'end':   '</style>', 'filetype': 'css',},
+\        {
+\           'start': '<\a\{-}',
+\           'end':   '(>\|</.\{-}+>', 'filetype': 'html',},],}
 let g:context_filetype#search_offset = 100
 "}}}
 " vim-precious {{{
