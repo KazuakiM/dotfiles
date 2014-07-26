@@ -42,6 +42,9 @@ endif
 augroup MyAutoCmd
     autocmd!
 augroup END
+augroup precious-indentline
+    autocmd!
+augroup END
 " Valiable
 "let s:localtime=localtime()
 "let s:time=strftime('%Y%m%d%H%M%S',s:localtime)
@@ -370,7 +373,7 @@ let g:context_filetype#filetypes = {
 \           'end':   '</style>', 'filetype': 'css',},
 \        {
 \           'start': '<\a\{-}',
-\           'end':   '(>\|</.\{-}+>', 'filetype': 'html',},],}
+\           'end':   '(>\|</.\{-}+>)', 'filetype': 'html',},],}
 let g:context_filetype#search_offset = 100
 "}}}
 " vim-precious {{{
@@ -380,6 +383,7 @@ let g:precious_enable_switch_CursorMoved_i = {
 \    '*' : 0,}
 autocmd MyAutoCmd InsertEnter * :PreciousSwitch
 autocmd MyAutoCmd InsertLeave * :PreciousReset
+autocmd precious-indentline User PreciousFileType IndentLinesReset
 "}}}
 " vim-ref {{{
 let g:ref_cache_dir=$HOME.'/.vim/vim-ref/cache'
