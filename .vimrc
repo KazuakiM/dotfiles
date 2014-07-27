@@ -71,6 +71,7 @@ set visualbell t_vb=
 set noerrorbells
 set foldmethod=marker
 set viminfo+=n~/.vim/viminfo/.viminfo
+set updatetime=1000
 nnoremap zx :<C-U>%foldopen<CR>
 set matchpairs+=<:>
 nnoremap 0 $
@@ -916,8 +917,8 @@ command! -nargs=1 -complete=expression QuickRunPP :call <sid>quickrun_pp(<q-args
 function! s:auto_mkdir(dir, force)
     if !isdirectory(a:dir) && (a:force ||
                 \   input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
-    call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
-  endif
+        call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
+    endif
 endfunction
 "}}}
 "}}}
