@@ -1,7 +1,7 @@
 ## Application Directory
 #alias APP='cd /srv/sample'
 ## ctags
-#tagsCmd='ctags --languages=php -F'
+#tagsCmd='ctags --languages=php -f'
 #tagsValiable=''
 #tagsValiable=$tagsValiable"cd /srv/sample;$tagsCmd $HOME/.vim/tags/sample.tags /srv/sample;"
 #alias TAGS=$tagsValiable
