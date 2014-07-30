@@ -15,15 +15,16 @@ clear
 #}}}
 #Common {{{
 shopt -s cdspell
-alias rm='rm -i'
-alias cp='cp -i -p'
-alias mv='mv -i'
-alias h='history'
 alias cl='clear'
 alias lc='clear'
+alias cp='cp -i -p'
 alias df='df -h'
-alias tree='tree -af'
 alias gdiff='git diff -w'
+alias h='history'
+alias mv='mv -i'
+alias rm='rm -i'
+alias tail='tail -F'
+alias tree='tree -af'
 if type colordiff >/dev/null 2>&1; then
     alias diff='colordiff -u'
 else
@@ -47,28 +48,19 @@ man() {
 #Linux Desktop Hacks Custopm prompt {{{
 function prompt_command
 {
-    # Save current cursor position
     tput sc
-    # backwash is where to set cursor (upper right side)
-    # to write CWD [col=screen width - (CWD +2) for brackets]
     let backwash=$(tput cols)-$(echo $(pwd)@$USER | wc -m | tr -d ' ')-2
-    #position cursor at Y=0, X=calculated columr (see above)
     tput cup 0 ${backwash}
-    #Wrap path in brackets
     tput setaf 4
     echo -n "["
-    # show path
     tput setaf 6
     echo -n "$(pwd)"
     tput setaf 8
     echo -n "@$USER"
-    #show closing bracket
     tput setaf 4
     echo -n "]"
-    #return cursor to saved position
     tput rc
 }
-# Set prompt via function above
 PROMPT_COMMAND=prompt_command
 #}}}
 #PS1(primary prompt string) {{{

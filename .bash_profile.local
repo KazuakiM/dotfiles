@@ -1,5 +1,6 @@
 ## Application Directory
 #alias APP='cd /srv/sample'
+#alias LOG='tail -F ...'
 ## ctags
 #tagsCmd='ctags --languages=php -f'
 #tagsValiable=''
