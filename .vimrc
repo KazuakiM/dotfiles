@@ -169,9 +169,7 @@ if has('mac')
 endif
 " Close sub window
 autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
-autocmd MyAutoCmd CmdwinEnter * imap <silent> <ESC><ESC> <ESC>:q<CR>
 autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
-autocmd MyAutoCmd CmdwinLeave * iunmap <ESC><ESC>
 "}}}
 "
 "
