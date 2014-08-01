@@ -142,7 +142,7 @@ set wrapscan
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 " pretty print
-nnoremap <Leader>xml  :execute '%!xmllint --format %'<CR>
+nnoremap <Leader>xml  :execute '%!xmllint --noblanks --nowrap --encode UTF-8 --format %'<CR>
 nnoremap <Leader>json :execute '%!python -m json.tool'<CR>
 " SQL
 let g:sql_type_default='mysql'

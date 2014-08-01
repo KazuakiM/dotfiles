@@ -32,6 +32,9 @@ else
 fi
 export GREP_OPTIONS='--color=auto -I'
 export GREP_COLOR='1;33'
+export XMLLINT_INDENT='    '
+#}}}
+# Less {{{
 export LESS='-R'
 man() {
     env \
