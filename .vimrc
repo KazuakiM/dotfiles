@@ -141,10 +141,9 @@ set hlsearch
 set wrapscan
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
-" XML Fix
-"command! Xml :execute '%!python -m BeautifulSoup'
-" JSON Fix
-command! Json :execute '%!python -m json.tool'
+" pretty print
+nnoremap <Leader>xml  :execute '%!xmllint --format %'<CR>
+nnoremap <Leader>json :execute '%!python -m json.tool'<CR>
 " SQL
 let g:sql_type_default='mysql'
 " PHP
@@ -185,10 +184,8 @@ else
     " vimproc {{{
     NeoBundle 'Shougo/vimproc', {
     \    'build' : {
-    \        'windows' : 'make -f make_mingw32.mak',
-    \        'cygwin'  : 'make -f make_cygwin.mak',
-    \        'mac'     : 'make -f make_mac.mak',
-    \        'unix'    : 'make -f make_unix.mak',},} "}}}
+    \        'mac'  : 'make -f make_mac.mak',
+    \        'unix' : 'make -f make_unix.mak',},} "}}}
     NeoBundle 'vim-jp/vital.vim'
     NeoBundle 'mattn/webapi-vim'
     NeoBundle 'tpope/vim-fugitive'
@@ -703,8 +700,8 @@ let s:hooks = neobundle#get_hooks('wildfire.vim')
 function! s:hooks.on_source(bundle)
     map <BS> <Plug>(wildfire-water)
     let g:wildfire_objects = {
-    \        '*' : ["i'", 'i"', 'i)', 'i]', 'i}', 'ip',],
-    \        'html,xml' : ['at',],}
+    \        '*' : ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it',],
+    \        'html,xml' : ['at', 'it',],}
 endfunction
 unlet s:hooks
 "}}}
@@ -773,7 +770,7 @@ function! s:hooks.on_source(bundle)
     let g:php_cs_fixer_enable_default_mapping=1 " Enable the mapping by default (<leader>pcd)
     let g:php_cs_fixer_dry_run=0                " Call command with dry-run option
     let g:php_cs_fixer_verbose=0                " Return the output of command if 1, else an inline information.
-    nnoremap <silent><Leader>php :call PhpCsFixerFixFile()<CR>
+    nnoremap <Leader>php :call PhpCsFixerFixFile()<CR>
 endfunction
 unlet s:hooks
 " add .vimrc.local
