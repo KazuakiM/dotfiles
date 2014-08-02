@@ -774,7 +774,7 @@ let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle)
     "vim-qfsigns
     nnoremap <Leader>sy :QfsingsJunmp<CR>
-    "let g:qfsigns#AutoJump = 1
+    let g:qfsigns#AutoJump = 1
     "vim-qfstatusline
     let g:Qfstatusline#UpdateCmd = function('lightline#update')
     "vim-watchdogs
