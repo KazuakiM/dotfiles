@@ -233,6 +233,8 @@ else
     NeoBundle 'othree/html5.vim'
     NeoBundle 'KazuakiM/vim-snippets'
     NeoBundle 'SirVer/ultisnips'
+    NeoBundle 'vim-scripts/Align'
+    NeoBundle 'vim-scripts/SQLUtilities'
 
     NeoBundleSaveCache
 endif
@@ -456,6 +458,10 @@ let g:quickrun_config = {
 \        'errorformat': '%m\ in\ %f\ on\ line\ %l',},
 \    'markdown' : {
 \        'outputter' : 'browser',},}
+"}}}
+" SQLUtilities {{{
+let g:sqlutil_align_comma = 1
+nnoremap <Leader>sql :SQLUFormatter<CR>
 "}}}
 " html5.vim {{{
 let g:html5_event_handler_attributes_complete = 1
