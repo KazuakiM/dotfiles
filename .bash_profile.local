@@ -1,17 +1,20 @@
 ## Application Directory
-#alias APP='cd /srv/sample'
+#alias APP='cd $HOME/sample'
 #alias LOG='tail -F ...'
+
 ## ctags
-#tagsCmd='ctags --languages=php --exclude=*.js -f'
+#tagsCmd='ctags --languages=php -f'
 #tagsValiable=''
-#tagsValiable=$tagsValiable"cd /srv/sample;$tagsCmd $HOME/.vim/tags/sample.tags /srv/sample;"
+#tagsValiable=$tagsValiable"cd $HOME/sample;$tagsCmd $HOME/.vim/tags/sample.tags $HOME/sample;"
 #alias TAGS=$tagsValiable
+
 ## git pull
 #gitPullValiable=''
-#gitPullValiable=$gitPullValiable"echo 'Sample';cd /srv/sample;git pull;"
+#gitPullValiable=$gitPullValiable"echo 'Sample';cd $HOME/sample;git pull;"
 #alias PULL=$gitPullValiable
+
 ## git status
 #gitStatusValiable=''
-#gitStatusValiable=$gitStatusValiale"echo 'Sample';cd /srv/sample;git stat;"
+#gitStatusValiable=$gitStatusValiale"echo 'Sample';cd $HOME/sample;git stat;"
 #alias STAT=$gitStatusValiable
 

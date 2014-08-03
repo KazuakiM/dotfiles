@@ -1,6 +1,9 @@
 --sort=yes
 --recurse=yes
---exclude=*.git
---exclude=*.svn
+--exclude=.git
+--exclude=.svn
+--exclude=*.js
+--exclude=*Test.php
+--exclude=*TestCase.php
 --langmap=PHP:+.inc.tpl
 --php-types=cfd
