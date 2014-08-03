@@ -1,4 +1,6 @@
 --sort=yes
 --recurse=yes
---langmap=PHP:+.inc
+--exclude=*.git
+--exclude=*.svn
+--langmap=PHP:+.inc.tpl
 --php-types=cfd

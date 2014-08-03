@@ -57,13 +57,12 @@ set fileformat=unix
 " Basic
 let mapleader=','
 set scrolloff=5
-set textwidth=0
 autocmd MyAutoCmd FileType * setlocal textwidth=0
 autocmd MyAutoCmd FileType * setlocal formatoptions-=cb
 set autoread
 set hidden
 set ambiwidth=double
-"set spelllang+=cjk
+set spelllang+=cjk
 "set spell
 set backspace=indent,eol,start
 set virtualedit+=block
@@ -238,16 +237,6 @@ else
 
     NeoBundleSaveCache
 endif
-" vim-fugitive {{{
-nnoremap [vim-fugitive] <Nop>
-nmap <Leader>git [vim-fugitive]
-nnoremap [vim-fugitive]status :Gstatus<CR>
-nnoremap [vim-fugitive]log :Glog<CR>
-nnoremap [vim-fugitive]add :Gwrite<CR>
-nnoremap [vim-fugitive]rm :Gremove<CR>
-nnoremap [vim-fugitive]diff :Gdiff<CR>
-nnoremap [vim-fugitive]commit :Gcommit -m ''
-"}}}
 " lightline {{{
 let g:lightline = {
 \    'colorscheme': 'landscape',
@@ -319,36 +308,36 @@ function! MyMode()
         \ &ft == 'vimshell' ? 'VimShell' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
-function! CtrlPMark()
-    if expand('%:t') =~ 'ControlP'
-        call lightline#link('iR'[g:lightline.ctrlp_regex])
-        return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-            \ , g:lightline.ctrlp_next], 0)
-    else
-        return ''
-    endif
-endfunction
-let g:ctrlp_status_func = {
-\    'main': 'CtrlPStatusFunc_1',
-\    'prog': 'CtrlPStatusFunc_2',}
-function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
-    let g:lightline.ctrlp_regex = a:regex
-    let g:lightline.ctrlp_prev = a:prev
-    let g:lightline.ctrlp_item = a:item
-    let g:lightline.ctrlp_next = a:next
-    return lightline#statusline(0)
-endfunction
-function! CtrlPStatusFunc_2(str)
-    return lightline#statusline(0)
-endfunction
-let g:tagbar_status_func = 'TagbarStatusFunc'
-function! TagbarStatusFunc(current, sort, fname, ...) abort
-    let g:lightline.fname = a:fname
-    return lightline#statusline(0)
-endfunction
+"function! CtrlPMark()
+"    if expand('%:t') =~ 'ControlP'
+"        call lightline#link('iR'[g:lightline.ctrlp_regex])
+"        return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+"            \ , g:lightline.ctrlp_next], 0)
+"    else
+"        return ''
+"    endif
+"endfunction
+"let g:ctrlp_status_func = {
+"\    'main': 'CtrlPStatusFunc_1',
+"\    'prog': 'CtrlPStatusFunc_2',}
+"function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+"    let g:lightline.ctrlp_regex = a:regex
+"    let g:lightline.ctrlp_prev = a:prev
+"    let g:lightline.ctrlp_item = a:item
+"    let g:lightline.ctrlp_next = a:next
+"    return lightline#statusline(0)
+"endfunction
+"function! CtrlPStatusFunc_2(str)
+"    return lightline#statusline(0)
+"endfunction
+"let g:tagbar_status_func = 'TagbarStatusFunc'
+"function! TagbarStatusFunc(current, sort, fname, ...) abort
+"    let g:lightline.fname = a:fname
+"    return lightline#statusline(0)
+"endfunction
 let g:unite_force_overwrite_statusline = 0
-let g:vimfiler_force_overwrite_statusline = 0
-let g:vimshell_force_overwrite_statusline = 0
+"let g:vimfiler_force_overwrite_statusline = 0
+"let g:vimshell_force_overwrite_statusline = 0
 "}}}
 " indentLine {{{
 let g:indentLine_faster = 1
@@ -489,6 +478,7 @@ let g:UltiSnipsSnippetsDir=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
 " codic-vim
 " unite-codic.vim
 " unite-highlight
+" unite-tag
 " jazzradio.vim {{{
 NeoBundleLazy 'Shougo/unite.vim', {
 \    'autoload' : {
@@ -505,10 +495,6 @@ NeoBundleLazy 'Shougo/unite-help', {
 \    'depends': 'Shougo/unite.vim',
 \    'autoload': {
 \        'unite_sources': 'help',},}
-NeoBundleLazy 'Shougo/unite-outline', {
-\    'depends': 'Shougo/unite.vim',
-\    'autoload': {
-\        'unite_sources': 'outline',},}
 NeoBundleLazy 'thinca/vim-editvar', {
 \    'depends': ['thinca/vim-prettyprint', 'Shougo/unite.vim'],
 \    'autoload': {
@@ -521,6 +507,10 @@ NeoBundleLazy 'osyo-manga/unite-highlight', {
 \    'depends': 'Shougo/unite.vim',
 \    'autoload': {
 \        'unite_sources': 'highlight',},}
+NeoBundleLazy 'tsukkee/unite-tag' , {
+\    'depends': 'Shougo/unite.vim',
+\    'autoload': {
+\        'unite_sources': 'tag',},}
 NeoBundleLazy 'supermomonga/jazzradio.vim', {
 \    'depends' : 'Shougo/unite.vim',
 \    'autoload' : {
@@ -532,36 +522,20 @@ NeoBundleLazy 'supermomonga/jazzradio.vim', {
 \                'name' : 'JazzradioPlay',
 \                'complete' : 'customlist,jazzradio#channel_id_complete'},],
 \        'function_prefix' : 'jazzradio',},}
-let g:unite_data_directory=$HOME.'/.vim/unite.vim'
-let g:unite_enable_start_insert=1
-let g:unite_source_grep_command='ag'
-let g:unite_source_grep_default_opts='--nocolor --nogroup'
-let g:unite_source_grep_recursive_opt=''
-let g:unite_source_grep_max_candidates=200
-let g:jazzradio#cache_dir=$HOME.'/.vim/jazzradio.vim'
 nnoremap [unite] <Nop>
 nmap <Leader>u [unite]
 " default plugins
-nnoremap <silent> [unite]b    :<C-u>Unite buffer<CR>
-nnoremap <silent> [unite]bm   :<C-u>Unite bookmark<CR>
-nnoremap <silent> [unite]f    :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 nnoremap <silent> [unite]map  :<C-u>Unite output:map\|map!\|lmap<CR>
-nnoremap <silent> [unite]mru  :<C-u>Unite file_mru<CR>
 nnoremap <silent> [unite]msg  :<C-u>Unite output:message<CR>
-nnoremap <silent> [unite]nmap :<C-u>Unite mapping<CR>
-nnoremap <silent> [unite]rec  :<C-u>Unite file_rec/async:!<CR>
-nnoremap <silent> [unite]reg  :<C-u>Unite register<CR>
 nnoremap <silent> [unite]s    :<C-u>Unite output:scriptnames<CR>
-nnoremap <silent> [unite]t    :<C-u>Unite tab<CR>
-nnoremap <silent> [unite]w    :<C-u>Unite window<CR>
 " add plugins
 nnoremap <silent> [unite]cs  :<C-u>Unite -auto-preview colorscheme<CR>
 nnoremap <silent> [unite]dic :<C-u>Unite codic<CR>
 nnoremap <silent> [unite]h   :<C-u>Unite help<CR>
 nnoremap <silent> [unite]hl  :<C-u>Unite highlight<CR>
 nnoremap <silent> [unite]j   :<C-u>Unite jazzradio<CR>
-nnoremap <silent> [unite]ol  :<C-u>Unite outline<CR>
 nnoremap <silent> [unite]rad :<C-u>Unite jazzradio<CR>
+nnoremap <silent> [unite]t   :<C-u>Unite tag<CR>
 nnoremap <silent> [unite]v   :<C-u>Unite -auto-preview variable<CR>
 nnoremap <silent> [unite]web :<C-u>Unite webcolorname<CR>
 nnoremap <silent> [unite]y   :<C-u>Unite yankround<CR>
@@ -572,6 +546,28 @@ nnoremap [jazzradio]u :JazzradioUpdateChannels<CR>
 nnoremap [jazzradio]p :JazzradioPlay<Space>CurrentJazz<CR>
 nnoremap [jazzradio]o :JazzradioStop<CR>
 nnoremap [jazzradio]l :<C-u>Unite jazzradio<CR>
+let s:hooks = neobundle#get_hooks('unite.vim')
+function! s:hooks.on_source(bundle)
+    let g:unite_data_directory=$HOME.'/.vim/unite.vim'
+    let g:unite_enable_start_insert=1
+    let g:unite_source_grep_command='ag'
+    let g:unite_source_grep_default_opts='--nocolor --nogroup'
+    let g:unite_source_grep_recursive_opt=''
+    let g:unite_source_grep_max_candidates=200
+endfunction
+unlet s:hooks
+let s:hooks = neobundle#get_hooks('unite-tag')
+function! s:hooks.on_source(bundle)
+    let g:unite_source_tag_max_name_length=30
+    let g:unite_source_tag_max_fname_length=128
+    let g:unite_source_tag_show_location=0
+endfunction
+unlet s:hooks
+let s:hooks = neobundle#get_hooks('jazzradio.vim')
+function! s:hooks.on_source(bundle)
+    let g:jazzradio#cache_dir=$HOME.'/.vim/jazzradio.vim'
+endfunction
+unlet s:hooks
 "}}}
 " vimdoc-ja {{{
 NeoBundleLazy 'vim-jp/vimdoc-ja', {
@@ -624,8 +620,6 @@ endfunction
 unlet s:hooks
 "}}}
 " vim-easy-align {{{
-"# command memo
-"* Don't hooks. 'g:easy_align_delimiters' is non-function.
 NeoBundleLazy 'junegunn/vim-easy-align', {
 \    'autoload': {
 \        'commands' : 'EasyAlign',},}
@@ -671,11 +665,6 @@ NeoBundleLazy 'osyo-manga/vim-over', {
 \    'autoload' : {
 \        'commands' : 'OverCommandLine',},}
 nnoremap <expr><Leader>%s ':OverCommandLine<CR>%s/'.expand('<cword>').'/'
-"}}}
-" emoji-vim {{{
-NeoBundleLazy 'mattn/emoji-vim', {
-\    'autoload' : {
-\        'commands' : 'Emoji',},}
 "}}}
 " wildfire.vim {{{
 NeoBundleLazy 'gcmt/wildfire.vim', {
