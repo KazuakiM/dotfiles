@@ -433,7 +433,6 @@ let g:quickrun_config = {
 \        'outputter/buffer/close_on_empty':     1,},
 \    'watchdogs_checker/_' : {
 \        'hook/close_quickfix/enable_exit':           1,
-\        'hook/shebang/enable':                       0,
 \        'hook/back_window/enable_exit':              0,
 \        'hook/back_window/priority_exit':            1,
 \        'hook/quickfix_status_enable/enable_exit':   1,
