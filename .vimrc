@@ -80,6 +80,11 @@ nnoremap fa <C-w>+
 nnoremap j; <C-w>-
 nnoremap fd <C-w>>
 nnoremap jk <C-d><
+if has('mac')
+else
+    nnoremap ; :
+    nnoremap : ;
+endif
 " Color
 syntax on
 set t_Co=256
