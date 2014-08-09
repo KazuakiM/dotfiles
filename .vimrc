@@ -80,11 +80,6 @@ nnoremap fa <C-w>+
 nnoremap j; <C-w>-
 nnoremap fd <C-w>>
 nnoremap jk <C-d><
-if has('mac')
-else
-    nnoremap ; :
-    nnoremap : ;
-endif
 " Color
 syntax on
 set t_Co=256
@@ -162,26 +157,24 @@ nmap <Leader>f [vim]
 nnoremap [vim]e :tabnew $MYVIMRC<CR>
 nnoremap [vim]s :source $MYVIMRC<CR>
 nnoremap [vim]h :source $VIMRUNTIME/syntax/colortest.vim<CR>
-" Programming language
-if has('mac')
-    let $PYTHON_DLL  = '/usr/local/Cellar/python/2.7.7_2/Frameworks/Python.framework/Versions/2.7/lib/libpython2.7.dylib'
-    "let $PYTHON3_DLL = '/usr/local/Cellar/python3/3.4.1/Frameworks/Python.framework/Versions/3.4/lib/libpython3.4.dylib'
-    let $PERL_DLL    = '/usr/local/Cellar/perl518/5.18.2/lib/5.18.2/darwin-thread-multi-2level/CORE/libperl.dylib'
-    let $RUBY_DLL    = '/usr/local/lib/libruby.dylib'
-    let $LUA_DLL     = '/usr/local/lib/liblua.dylib'
-endif
 " Close sub window
 autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 "}}}
 "
 "
-" NeoBundle
+" Neobundle START
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
 call neobundle#begin(expand('$HOME/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 let g:neobundle#log_filename = $HOME.'/.vim/neobundle.vim/neobundle.log'
+"}}}
+"
+"
+" NeoBundle
+"----------------------------------------------------------------------------------------------------------------------------------
+"{{{
 if neobundle#has_cache()
     NeoBundleLoadCache
 else
@@ -432,7 +425,7 @@ let g:quickrun_config = {
 \        'hook/close_buffer/enable_failure':    1,
 \        'hook/close_buffer/enable_empty_data': 1,
 \        'runner':                              'vimproc',
-\        'runner/vimproc/updatetime':           40,
+\        'runner/vimproc/updatetime':           60,
 \        'outputter':                           'multi:buffer:quickfix',
 \        'outputter/buffer/split':              ':botright',
 \        'outputter/buffer/close_on_empty':     1,},
@@ -530,7 +523,11 @@ NeoBundleLazy 'supermomonga/jazzradio.vim', {
 nnoremap [unite] <Nop>
 nmap <Leader>u [unite]
 " default plugins
+nnoremap <silent> [unite]b    :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]bm   :<C-u>Unite bookmark<CR>
+nnoremap <silent> [unite]f    :<C-u>UniteWithBufferDir -default-action=tabopen file<CR>
 nnoremap <silent> [unite]map  :<C-u>Unite output:map\|map!\|lmap<CR>
+nnoremap <silent> [unite]mru  :<C-u>Unite file_mru<CR>
 nnoremap <silent> [unite]msg  :<C-u>Unite output:message<CR>
 nnoremap <silent> [unite]s    :<C-u>Unite output:scriptnames<CR>
 " add plugins
@@ -737,11 +734,8 @@ NeoBundleLazy 'stephpy/vim-php-cs-fixer', {
 \        'filetypes': 'php',},}
 let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
 function! s:hooks.on_source(bundle)
-    " If php-cs-fixer is in $PATH, you don't need to define line below
-    if has('mac')
-    else
-        let g:php_cs_fixer_path = '$HOME/.vim/vim-php-cs-fixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
-    endif
+    " If php-cs-fixer is in $PATH, you don't need to define 'let g:php_cs_fixer_path=/path/to/file'.
+    " And this setting is moved at OS type category.
     let g:php_cs_fixer_level='all'              " which level ?
     let g:php_cs_fixer_config='default'         " configuration
     let g:php_cs_fixer_php_path='php'           " Path to PHP
@@ -768,7 +762,7 @@ let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle)
     "vim-qfsigns
     nnoremap <Leader>sy :QfsingsJunmp<CR>
-    let g:qfsigns#AutoJump = 1
+    "let g:qfsigns#AutoJump = 2
     "vim-qfstatusline
     let g:Qfstatusline#UpdateCmd = function('lightline#update')
     "vim-watchdogs
@@ -850,14 +844,12 @@ NeoBundleLazy 'plasticboy/vim-markdown', {
 \        'filetypes': 'markdown',},}
 "}}}
 " previm {{{
-if has('mac')
-    NeoBundleLazy 'kannokanno/previm', {
-    \    'depends': 'open-browser.vim',
-    \    'autoload' : {
-    \        'filetypes': 'markdown',},}
-    "let g:previm_open_cmd = 'open -a Firefox'
-    nnoremap <silent> <Leader>pre :PrevimOpen<CR>
-endif
+NeoBundleLazy 'kannokanno/previm', {
+\    'depends': 'open-browser.vim',
+\    'autoload' : {
+\        'filetypes': 'markdown',},}
+"let g:previm_open_cmd = 'open -a Firefox'
+nnoremap <silent> <Leader>pre :PrevimOpen<CR>
 "}}}
 "}}}
 "
@@ -880,6 +872,37 @@ NeoBundleFetch 'psychs/lingr-irc'
 NeoBundleFetch 'ziadoz/awesome-php'
 nnoremap <Leader>awe :tabnew $HOME/.vim/bundle/awesome-php/README.md<CR>
 "}}}
+"}}}
+"
+"
+" OS type
+"----------------------------------------------------------------------------------------------------------------------------------
+"{{{
+if has('mac')
+    " paste
+    nnoremap <Leader>v :r<Space>!pbpaste<CR>
+    " Programming language
+    let $PYTHON_DLL  = '/usr/local/Cellar/python/2.7.7_2/Frameworks/Python.framework/Versions/2.7/lib/libpython2.7.dylib'
+    "let $PYTHON3_DLL = '/usr/local/Cellar/python3/3.4.1/Frameworks/Python.framework/Versions/3.4/lib/libpython3.4.dylib'
+    let $PERL_DLL    = '/usr/local/Cellar/perl518/5.18.2/lib/5.18.2/darwin-thread-multi-2level/CORE/libperl.dylib'
+    let $RUBY_DLL    = '/usr/local/lib/libruby.dylib'
+    let $LUA_DLL     = '/usr/local/lib/liblua.dylib'
+else
+    " paste
+    "xsel で代用出来そう。Linux機での動作検証した後に追記
+    "nnoremap <expr><Leader>v ':set<Space>paste<CR><Insert><C-r>_+'
+    " US keyboard
+    nnoremap ; :
+    nnoremap : ;
+    " php setting.
+    let g:php_cs_fixer_path = '$HOME/.vim/vim-php-cs-fixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
+endif
+"}}}
+"
+"
+" Neobundle END
+"----------------------------------------------------------------------------------------------------------------------------------
+"{{{
 call neobundle#end()
 "}}}
 "
