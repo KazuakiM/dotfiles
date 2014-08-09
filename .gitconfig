@@ -5,6 +5,5 @@
     ff = false
 [core]
     precomposeunicode = true
-    editor = vim
 [color]
     ui = auto

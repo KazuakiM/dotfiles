@@ -889,9 +889,6 @@ if has('mac')
     let $RUBY_DLL    = '/usr/local/lib/libruby.dylib'
     let $LUA_DLL     = '/usr/local/lib/liblua.dylib'
 else
-    " paste
-    "xsel で代用出来そう。Linux機での動作検証した後に追記
-    "nnoremap <expr><Leader>v ':set<Space>paste<CR><Insert><C-r>_+'
     " US keyboard
     nnoremap ; :
     nnoremap : ;
