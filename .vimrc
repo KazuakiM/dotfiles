@@ -79,7 +79,10 @@ nnoremap gr gT
 nnoremap fa <C-w>+
 nnoremap j; <C-w>-
 nnoremap fd <C-w>>
-nnoremap jk <C-d><
+nnoremap jk <C-w><
+"paste
+nnoremap <silent><expr><Leader>v  ':set<Space>paste<CR><Insert><C-r>+<ESC>:set<Space>nopaste<CR>'
+inoremap <silent><expr><C-v> '<ESC>:set<Space>paste<CR><Insert><C-r>+<ESC>:set<Space>nopaste<CR><Insert>'
 " Color
 syntax on
 set t_Co=256
@@ -879,8 +882,6 @@ nnoremap <Leader>awe :tabnew $HOME/.vim/bundle/awesome-php/README.md<CR>
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
 if has('mac')
-    " paste
-    nnoremap <Leader>v :r<Space>!pbpaste<CR>
     " Programming language
     let $PYTHON_DLL  = '/usr/local/Cellar/python/2.7.7_2/Frameworks/Python.framework/Versions/2.7/lib/libpython2.7.dylib'
     "let $PYTHON3_DLL = '/usr/local/Cellar/python3/3.4.1/Frameworks/Python.framework/Versions/3.4/lib/libpython3.4.dylib'
