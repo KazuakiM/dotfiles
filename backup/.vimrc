@@ -86,5 +86,11 @@ function! s:hooks.on_source(bundle)
 endfunction
 unlet s:hooks
 "}}}
+" vim-over {{{
+NeoBundleLazy 'osyo-manga/vim-over', {
+\    'autoload' : {
+\        'commands' : 'OverCommandLine',},}
+nnoremap <expr><Leader>%s ':OverCommandLine<CR>%s/'.expand('<cword>').'/'
+"}}}
 "}}}
 

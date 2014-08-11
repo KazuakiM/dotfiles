@@ -104,7 +104,7 @@ colorscheme jellybeans
 set title
 set ruler
 set laststatus=2
-set wildignore+=.git,.svn
+set wildignore+=.git,.svn,.log,.jpg,.png,.bmp
 set wildmenu
 set wildmode=longest:full,full
 " [memo]
@@ -141,6 +141,7 @@ set ignorecase
 set smartcase
 set hlsearch
 set wrapscan
+nnoremap <expr><Leader>%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 " pretty print
@@ -528,7 +529,7 @@ nmap <Leader>u [unite]
 " default plugins
 nnoremap <silent> [unite]b    :<C-u>Unite buffer<CR>
 nnoremap <silent> [unite]bm   :<C-u>Unite bookmark<CR>
-nnoremap <silent> [unite]f    :<C-u>UniteWithBufferDir -default-action=tabopen file<CR>
+nnoremap <silent> [unite]f    :<C-u>Unite -default-action=tabopen file_rec/async:!<CR>
 nnoremap <silent> [unite]map  :<C-u>Unite output:map\|map!\|lmap<CR>
 nnoremap <silent> [unite]mru  :<C-u>Unite file_mru<CR>
 nnoremap <silent> [unite]msg  :<C-u>Unite output:message<CR>
@@ -664,12 +665,6 @@ let g:easy_align_delimiters = {
 \        'pattern':      ' \(\S\+\s*[;=]\)\@=',
 \        'left_margin':  0,
 \        'right_margin': 0, }, }
-"}}}
-" vim-over {{{
-NeoBundleLazy 'osyo-manga/vim-over', {
-\    'autoload' : {
-\        'commands' : 'OverCommandLine',},}
-nnoremap <expr><Leader>%s ':OverCommandLine<CR>%s/'.expand('<cword>').'/'
 "}}}
 " wildfire.vim {{{
 NeoBundleLazy 'gcmt/wildfire.vim', {
