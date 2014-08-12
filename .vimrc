@@ -104,7 +104,7 @@ colorscheme jellybeans
 set title
 set ruler
 set laststatus=2
-set wildignore+=.git,.svn,.log,.jpg,.png,.bmp
+set wildignore+=*.git,*.svn,*.log,*.bmp,*.gif,*.ico,*.jpg,*.png,.DS_Store
 set wildmenu
 set wildmode=longest:full,full
 " [memo]
@@ -232,7 +232,13 @@ else
     NeoBundle 'thinca/vim-quickrun' "}}}
     NeoBundle 'thinca/vim-prettyprint'
     NeoBundle 'othree/html5.vim'
-    NeoBundle 'KazuakiM/vim-snippets'
+    if has('mac')
+        NeoBundle 'KazuakiM/vim-snippets', {
+        \    'build' : {
+        \        'mac'  : 'git fetch fork_master;git merge fork_master/master;git push origin master',},}
+    else
+        NeoBundle 'KazuakiM/vim-snippets'
+    endif
     NeoBundle 'SirVer/ultisnips'
     NeoBundle 'vim-scripts/Align'
     NeoBundle 'vim-scripts/SQLUtilities'

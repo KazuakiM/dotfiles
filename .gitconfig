@@ -7,3 +7,5 @@
     precomposeunicode = true
 [color]
     ui = auto
+[branch "master"]
+    mergeoptions = --no-edit
