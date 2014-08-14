@@ -232,14 +232,24 @@ else
     NeoBundle 'thinca/vim-quickrun' "}}}
     NeoBundle 'thinca/vim-prettyprint'
     NeoBundle 'othree/html5.vim'
+    " vim-snippets {{{
     if has('mac')
         NeoBundle 'KazuakiM/vim-snippets', {
         \    'build' : {
         \        'mac'  : 'git fetch fork_master;git merge fork_master/master;git push origin master',},}
     else
         NeoBundle 'KazuakiM/vim-snippets'
-    endif
+    endif "}}}
     NeoBundle 'SirVer/ultisnips'
+    " neosnippet-snippets {{{
+    "if has('mac')
+    "    NeoBundle 'KazuakiM/neosnippet-snippets', {
+    "    \    'build' : {
+    "    \        'mac'  : 'git fetch fork_master;git merge fork_master/master;git push origin master',},}
+    "else
+    "    NeoBundle 'KazuakiM/neosnippet-snippets'
+    "endif }}}
+    "NeoBundle 'Shougo/neosnippet.vim'
     NeoBundle 'vim-scripts/Align'
     NeoBundle 'vim-scripts/SQLUtilities'
 
@@ -249,22 +259,21 @@ endif
 let g:lightline = {
 \    'colorscheme': 'landscape',
 \    'active': {
-\        'left':  [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
-\        'right': [ [ 'qfstatusline', 'lineinfo' ], [ 'percent' ], [ 'fileformat', 'fileencoding', 'filetype' ] ],},
+\        'left':  [['mode','paste',],['fugitive','filename',],],
+\        'right': [['qfstatusline','lineinfo',],['percent',],['fileformat','fileencoding','filetype',],],},
 \    'component_function': {
-\        'fugitive': 'MyFugitive',
-\        'filename': 'MyFilename',
-\        'fileformat': 'MyFileformat',
-\        'filetype': 'MyFiletype',
+\        'fugitive':     'MyFugitive',
+\        'filename':     'MyFilename',
+\        'fileformat':   'MyFileformat',
+\        'filetype':     'MyFiletype',
 \        'fileencoding': 'MyFileencoding',
-\        'mode': 'MyMode',
-\        'ctrlpmark': 'CtrlPMark',},
+\        'mode':         'MyMode',},
 \    'component_expand': {
 \        'qfstatusline': 'qfstatusline#Update',},
 \    'component_type': {
 \        'qfstatusline': 'error',},
 \    'subseparator': {
-\        'left': '|',
+\        'left':  '|',
 \        'right': '|',},}
 function! MyModified()
     return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
@@ -274,10 +283,7 @@ function! MyReadonly()
 endfunction
 function! MyFilename()
     let fname = expand('%:t')
-    return fname == 'ControlP' ? g:lightline.ctrlp_item :
-        \ fname == '__Tagbar__' ? g:lightline.fname :
-        \ fname =~ '__Gundo\|NERD_tree' ? '' :
-        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+    return fname =~ '__Gundo\|NERD_tree' ? '' :
         \ &ft == 'unite' ? unite#get_status_string() :
         \ &ft == 'vimshell' ? vimshell#get_status_string() :
         \ ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
@@ -286,7 +292,7 @@ function! MyFilename()
 endfunction
 function! MyFugitive()
     try
-        if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+        if expand('%:t') !~? 'Gundo\|NERD' && exists('*fugitive#head')
             let mark = ''  " edit here for cool mark
             let _ = fugitive#head()
             return strlen(_) ? mark._ : ''
@@ -306,46 +312,14 @@ function! MyFileencoding()
 endfunction
 function! MyMode()
     let fname = expand('%:t')
-    return fname == '__Tagbar__' ? 'Tagbar' :
-        \ fname == 'ControlP' ? 'CtrlP' :
-        \ fname == '__Gundo__' ? 'Gundo' :
+    return fname == '__Gundo__' ? 'Gundo' :
         \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
         \ fname =~ 'NERD_tree' ? 'NERDTree' :
         \ &ft == 'unite' ? 'Unite' :
-        \ &ft == 'vimfiler' ? 'VimFiler' :
         \ &ft == 'vimshell' ? 'VimShell' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
-"function! CtrlPMark()
-"    if expand('%:t') =~ 'ControlP'
-"        call lightline#link('iR'[g:lightline.ctrlp_regex])
-"        return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-"            \ , g:lightline.ctrlp_next], 0)
-"    else
-"        return ''
-"    endif
-"endfunction
-"let g:ctrlp_status_func = {
-"\    'main': 'CtrlPStatusFunc_1',
-"\    'prog': 'CtrlPStatusFunc_2',}
-"function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
-"    let g:lightline.ctrlp_regex = a:regex
-"    let g:lightline.ctrlp_prev = a:prev
-"    let g:lightline.ctrlp_item = a:item
-"    let g:lightline.ctrlp_next = a:next
-"    return lightline#statusline(0)
-"endfunction
-"function! CtrlPStatusFunc_2(str)
-"    return lightline#statusline(0)
-"endfunction
-"let g:tagbar_status_func = 'TagbarStatusFunc'
-"function! TagbarStatusFunc(current, sort, fname, ...) abort
-"    let g:lightline.fname = a:fname
-"    return lightline#statusline(0)
-"endfunction
 let g:unite_force_overwrite_statusline = 0
-"let g:vimfiler_force_overwrite_statusline = 0
-"let g:vimshell_force_overwrite_statusline = 0
 "}}}
 " indentLine {{{
 let g:indentLine_faster = 1
@@ -466,6 +440,26 @@ let g:html5_rdfa_attributes_complete = 1
 let g:html5_microdata_attributes_complete = 1
 let g:html5_aria_attributes_complete = 1
 "}}}
+"" neosnippet.vim {{{
+"imap <C-k> <Plug>(neosnippet_expand_or_jump)
+"smap <C-k> <Plug>(neosnippet_expand_or_jump)
+"xmap <C-k> <Plug>(neosnippet_expand_target)
+"imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+"            \ '\<Plug>(neosnippet_expand_or_jump)'
+"            \: pumvisible() ? '\<C-n>' : '\<TAB>'
+"smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+"            \ '\<Plug>(neosnippet_expand_or_jump)'
+"            \: '\<TAB>'
+"if has('conceal')
+"    set conceallevel=2 concealcursor=i
+"endif
+"let g:neosnippet#disable_runtime_snippets = {
+"\    '_' : 1,}
+"let g:neosnippet#data_directory=$HOME.'/.vim/neosnippet.vim'
+""let g:neosnippet#enable_snipmate_compatibility = 1
+""let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/vim-snippets/snippets'
+"let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/neosnippet-snippets/neosnippets'
+""}}}
 " ultisnips {{{
 let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
@@ -687,6 +681,10 @@ endfunction
 unlet s:hooks
 "}}}
 " neocomplete.vim {{{
+"NeoBundleLazy 'Shougo/neocomplete.vim', {
+"\    'depends': ['KazuakiM/neosnippet-snippets', 'Shougo/neosnippet.vim', 'Shougo/context_filetype.vim'],
+"\    'autoload' : {
+"\        'insert' : 1,},}
 NeoBundleLazy 'Shougo/neocomplete.vim', {
 \    'depends': ['KazuakiM/vim-snippets', 'SirVer/ultisnips', 'Shougo/context_filetype.vim'],
 \    'autoload' : {
