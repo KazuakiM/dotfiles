@@ -2,11 +2,9 @@
 /backup/*
 /bundle/*
 /colors/*
+/dict/*
 /undo/*
 /jazzradio.vim/*
-/vim-php-cs-fixer/*
-/vim-ref/cache/*
-/vim-ref/php-chunked-xhtml/*
 /neobundle.vim/*
 /neocomplete.vim/*
 /neosnippet.vim/*
@@ -14,6 +12,9 @@
 /tags/*
 /unite.vim/*
 /unite.vimtag/*
+/vim-php-cs-fixer/*
+/vim-ref/cache/*
+/vim-ref/php-chunked-xhtml/*
 /viminfo/*
 /vimshell.vim/cache/*
 /yankround.vim/*

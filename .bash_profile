@@ -111,18 +111,27 @@ case "${OSTYPE}" in
         alias WIRESHARK='/usr/local/bin/wireshark'
         export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
         export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+        localPath=''
+        #brew --prefix perl518
         if [ -d /usr/local/opt/perl518/bin ]; then
-            export PATH="/usr/local/opt/perl518/bin:$PATH"
+            localPath="/usr/local/opt/perl518/bin:$localPath"
         fi
+        #brew --prefix gnu-tar
         if [ -d /usr/local/opt/gnu-tar/libexec/gnubin ]; then
-            export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
+            localPath="/usr/local/opt/gnu-tar/libexec/gnubin:$localPath"
         fi
-        if [ -d $(brew --prefix ruby) ]; then
-            export PATH="$(brew --prefix ruby)/bin:$PATH"
+        #brew --prefix svn
+        if [ -d /usr/local/opt/subversion/bin ]; then
+            localPath="/usr/local/opt/subversion/bin:$localPath"
+        fi
+        #brew --prefix ruby
+        if [ -d /usr/local/opt/ruby/bin ]; then
+            localPath="/usr/local/opt/ruby/bin:$localPath"
         fi
         if [ -d /usr/local/heroku/bin ]; then
-            export PATH="/usr/local/heroku/bin:$PATH"
+            localPath="/usr/local/heroku/bin:$localPath"
         fi
+        export PATH=$localPath$PATH
         ;;
     linux*)
         alias l='ls -AhX --color=auto'

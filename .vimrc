@@ -219,10 +219,7 @@ else
     NeoBundle 'fuenor/qfixgrep'
     " vim-qfreplace {{{
     " # command memo
-    " * ,cn    :grep results next jump
-    " * ,cb    :grep results previous(before) jump
-    " * ,ccXX  :grep XX lines jump
-    " * ,cr    :replace all files.
+    " * ,qr    :replace all files.
     NeoBundle 'thinca/vim-qfreplace' "}}}
     NeoBundle 'LeafCage/yankround.vim'
     NeoBundle 'glidenote/memolist.vim'
@@ -375,12 +372,7 @@ set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
 let QFixWin_EnableMode = 1
 let QFix_UseLocationList = 1
 nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
-nnoremap [vim-qfreplace] <Nop>
-nmap <Leader>c [vim-qfreplace]
-nnoremap [vim-qfreplace]n :cnext<CR>
-nnoremap [vim-qfreplace]b :cprevious<CR>
-nnoremap [vim-qfreplace]c :cc
-nnoremap [vim-qfreplace]r :Qfreplace<CR>
+nnoremap <Leader>qr :Qfreplace<CR>
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 "}}}
 " yankround.vim {{{
@@ -691,12 +683,22 @@ NeoBundleLazy 'Shougo/neocomplete.vim', {
 \        'insert' : 1,},}
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle)
-    let g:acp_enableAtStartup=0
-    let g:neocomplete#data_directory=$HOME.'/.vim/neocomplete.vim'
-    let g:neocomplete#enable_at_startup=1
-    let g:neocomplete#enable_smart_case=1
-    let g:neocomplete#sources#syntax#min_keyword_length=3
-    let g:neocomplete#lock_buffer_name_pattern='\*ku\*'
+    let g:acp_enableAtStartup                  = 0
+    let g:neocomplete#data_directory           = $HOME.'/.vim/neocomplete.vim'
+    let g:neocomplete#enable_at_startup        = 1
+    let g:neocomplete#enable_smart_case        = 1
+    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+    let g:neocomplete#same_filetypes           = {
+    \   'html': 'html,css,javascript,php',}
+    let g:neocomplete#sources = {
+    \   '_':    ['file', 'ultisnips', 'buffer', 'tag', 'dictionary',],
+    \   'html': ['file', 'ultisnips', 'buffer', 'tag', 'dictionary', 'syntax',],}
+    let g:neocomplete#sources#dictionary#dictionaries = {
+    \   'default':  '',
+    \   'php':      $HOME.'/.vim/dict/php.dict',}
+    let g:neocomplete#sources#syntax#min_keyword_length = 3
+    let g:neocomplete#sources#tags#cache_limit_size     = 10000000
+    inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 endfunction
 unlet s:hooks
 "}}}
