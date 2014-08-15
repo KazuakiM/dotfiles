@@ -439,8 +439,8 @@ let g:html5_aria_attributes_complete = 1
 "let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/neosnippet-snippets/neosnippets'
 ""}}}
 " ultisnips {{{
-let g:UltiSnipsJumpForwardTrigger='<tab>'
-let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
+let g:UltiSnipsJumpForwardTrigger='<TAB>'
+"let g:UltiSnipsJumpBackwardTrigger=''
 let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsSnippetsDir=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
 "}}}
@@ -678,12 +678,13 @@ function! s:hooks.on_source(bundle)
     \   'html': 'html,css,javascript,php',}
     let g:neocomplete#sources = {
     \   '_':    ['file', 'ultisnips', 'buffer', 'member', 'dictionary',],
+    \   'vim':  ['file', 'ultisnips', 'buffer', 'member', 'dictionary', 'syntax', 'vim'],
     \   'html': ['file', 'ultisnips', 'buffer', 'member', 'dictionary', 'syntax',],}
     let g:neocomplete#sources#dictionary#dictionaries = {
     \   'default':  '',
     \   'php':      $HOME.'/.vim/dict/php.dict',}
     let g:neocomplete#sources#syntax#min_keyword_length = 3
-    inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+    inoremap <expr><C-c> pumvisible() ? "\<C-n>" : "\<C-c>"
     " tags using.
     "let g:neocomplete#sources = {
     "\   '_':    ['file', 'ultisnips', 'buffer', 'dictionary', 'tag',],
