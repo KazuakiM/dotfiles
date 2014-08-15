@@ -229,23 +229,9 @@ else
     NeoBundle 'thinca/vim-quickrun' "}}}
     NeoBundle 'thinca/vim-prettyprint'
     NeoBundle 'othree/html5.vim'
-    " vim-snippets {{{
-    if has('mac')
-        NeoBundle 'KazuakiM/vim-snippets', {
-        \    'build' : {
-        \        'mac'  : 'git fetch fork_master;git merge fork_master/master;git push origin master',},}
-    else
-        NeoBundle 'KazuakiM/vim-snippets'
-    endif "}}}
+    NeoBundle 'KazuakiM/vim-snippets'
     NeoBundle 'SirVer/ultisnips'
-    " neosnippet-snippets {{{
-    "if has('mac')
-    "    NeoBundle 'KazuakiM/neosnippet-snippets', {
-    "    \    'build' : {
-    "    \        'mac'  : 'git fetch fork_master;git merge fork_master/master;git push origin master',},}
-    "else
-    "    NeoBundle 'KazuakiM/neosnippet-snippets'
-    "endif }}}
+    "NeoBundle 'KazuakiM/neosnippet-snippets'
     "NeoBundle 'Shougo/neosnippet.vim'
     NeoBundle 'vim-scripts/Align'
     NeoBundle 'vim-scripts/SQLUtilities'
@@ -691,14 +677,18 @@ function! s:hooks.on_source(bundle)
     let g:neocomplete#same_filetypes           = {
     \   'html': 'html,css,javascript,php',}
     let g:neocomplete#sources = {
-    \   '_':    ['file', 'ultisnips', 'buffer', 'tag', 'dictionary',],
-    \   'html': ['file', 'ultisnips', 'buffer', 'tag', 'dictionary', 'syntax',],}
+    \   '_':    ['file', 'ultisnips', 'buffer', 'member', 'dictionary',],
+    \   'html': ['file', 'ultisnips', 'buffer', 'member', 'dictionary', 'syntax',],}
     let g:neocomplete#sources#dictionary#dictionaries = {
     \   'default':  '',
     \   'php':      $HOME.'/.vim/dict/php.dict',}
     let g:neocomplete#sources#syntax#min_keyword_length = 3
-    let g:neocomplete#sources#tags#cache_limit_size     = 10000000
     inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+    " tags using.
+    "let g:neocomplete#sources = {
+    "\   '_':    ['file', 'ultisnips', 'buffer', 'dictionary', 'tag',],
+    "\   'html': ['file', 'ultisnips', 'buffer', 'dictionary', 'tag', 'syntax',],}
+    "let g:neocomplete#sources#tags#cache_limit_size     = 10000000
 endfunction
 unlet s:hooks
 "}}}
