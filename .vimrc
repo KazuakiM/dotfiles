@@ -45,7 +45,7 @@ augroup END
 augroup precious-indentline
     autocmd!
 augroup END
-" Valiable
+" Variable
 "let s:localtime=localtime()
 "let s:time=strftime('%Y%m%d%H%M%S',s:localtime)
 "let s:date_hour=strftime('%Y%m%d%H',s:localtime)
@@ -167,7 +167,7 @@ autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 "}}}
 "
 "
-" Neobundle START
+" NeoBundle START
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
 call neobundle#begin(expand('$HOME/.vim/bundle/'))
@@ -862,6 +862,9 @@ NeoBundleFetch 'tomasr/molokai'
 " Lingr (none-Vimplugin but there is vim-users.jp room.) {{{
 NeoBundleFetch 'psychs/lingr-irc'
 "}}}
+" neosnippet-snippets {{{
+NeoBundleFetch 'KazuakiM/neosnippet-snippets'
+"}}}
 " PHP {{{
 "* URL: https://github.com/ziadoz/awesome-php
 NeoBundleFetch 'ziadoz/awesome-php'
@@ -890,7 +893,7 @@ endif
 "}}}
 "
 "
-" Neobundle END
+" NeoBundle END
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
 call neobundle#end()
