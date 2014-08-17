@@ -758,7 +758,7 @@ NeoBundleLazy 'osyo-manga/vim-watchdogs', {
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle)
     "vim-qfsigns
-    nnoremap <Leader>sy :QfsingsJunmp<CR>
+    nnoremap <Leader>sy :QfsignsJunmp<CR>
     "let g:qfsigns#AutoJump = 2
     "vim-qfstatusline
     let g:Qfstatusline#UpdateCmd = function('lightline#update')

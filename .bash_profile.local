@@ -4,17 +4,17 @@
 
 ## ctags
 #tagsCmd='ctags --languages=php -f'
-#tagsValiable=''
-#tagsValiable=$tagsValiable"cd $HOME/sample;$tagsCmd $HOME/.vim/tags/sample.tags $HOME/sample;"
-#alias TAGS=$tagsValiable
+#tagsVariable=''
+#tagsVariable=$tagsVariable"cd $HOME/sample;$tagsCmd $HOME/.vim/tags/sample.tags $HOME/sample;"
+#alias TAGS=$tagsVariable
 
 ## git pull
-#gitPullValiable=''
-#gitPullValiable=$gitPullValiable"echo 'Sample';cd $HOME/sample;git pull;"
-#alias PULL=$gitPullValiable
+#gitPullVariable=''
+#gitPullVariable=$gitPullVariable"echo 'Sample';cd $HOME/sample;git pull;"
+#alias PULL=$gitPullVariable
 
 ## git status
-#gitStatusValiable=''
-#gitStatusValiable=$gitStatusValiale"echo 'Sample';cd $HOME/sample;git stat;"
-#alias STAT=$gitStatusValiable
+#gitStatusVariable=''
+#gitStatusVariable=$gitStatusValiale"echo 'Sample';cd $HOME/sample;git stat;"
+#alias STAT=$gitStatusVariable
 
