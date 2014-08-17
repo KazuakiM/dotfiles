@@ -437,6 +437,7 @@ let g:html5_aria_attributes_complete = 1
 ""let g:neosnippet#enable_snipmate_compatibility = 1
 ""let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/vim-snippets/snippets'
 "let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/neosnippet-snippets/neosnippets'
+"snoremap <ESC> <ESC>:NeoSnippetClearMarkers<CR>
 ""}}}
 " ultisnips {{{
 let g:UltiSnipsJumpForwardTrigger='<TAB>'
@@ -584,7 +585,9 @@ NeoBundleLazy 'scrooloose/nerdtree', {
 \    'autoload' : {
 \        'commands' : 'NERDTree',},}
 nnoremap <Leader>n :NERDTree<CR>
-let NERDTreeShowHidden=1
+let g:NERDTreeMinimalUI         = 1
+let g:NERDTreeRespectWildIgnore = 1
+let g:NERDTreeShowHidden        = 1
 "}}}
 " vimshell.vim {{{
 NeoBundleLazy 'Shougo/vimshell.vim', {
@@ -742,7 +745,6 @@ function! s:hooks.on_source(bundle)
     nnoremap <Leader>php :call PhpCsFixerFixFile()<CR>
 endfunction
 unlet s:hooks
-" add .vimrc.local
 "}}}
 " shabadou.vim
 " vim-qfsigns
