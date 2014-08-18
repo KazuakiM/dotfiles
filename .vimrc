@@ -887,7 +887,6 @@ if has('mac')
     let $LUA_DLL     = '/usr/local/lib/liblua.dylib'
 else
     " US keyboard
-    nnoremap ; :
     nnoremap : ;
     " php setting.
     let g:php_cs_fixer_path = '$HOME/.vim/vim-php-cs-fixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
