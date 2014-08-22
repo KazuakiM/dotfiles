@@ -611,9 +611,6 @@ NeoBundleLazy 'junegunn/vim-easy-align', {
 \    'autoload': {
 \        'commands' : 'EasyAlign',},}
 vnoremap <silent> <Leader>a :EasyAlign<CR>
-if !exists('g:easy_align_delimiters')
-    let g:easy_align_delimiters = {}
-endif
 let g:easy_align_delimiters = {
 \    '>': {
 \        'pattern': '>>\|=>\|>', },
@@ -691,6 +688,7 @@ function! s:hooks.on_source(bundle)
     " tags using.
     "let g:neocomplete#sources = {
     "\   '_':    ['file', 'ultisnips', 'buffer', 'dictionary', 'tag',],
+    "\   'vim':  ['file', 'ultisnips', 'buffer', 'dictionary', 'tag', 'syntax', 'vim'],
     "\   'html': ['file', 'ultisnips', 'buffer', 'dictionary', 'tag', 'syntax',],}
     "let g:neocomplete#sources#tags#cache_limit_size     = 10000000
 endfunction
@@ -919,17 +917,17 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}                  setlocal filetyp
 "* Formattings   :QuickRunPP neobundle#config#get_neobundles()
 "* Formatting    :QuickRunPP neobundle#get_hooks('vim-markdown')
 function! s:quickrun_pp(q_args)
-    let dict = { 'type' : 'vim', 'runner' : 'vimscript', 'outputter' : 'buffer',
-                \   'outputter/buffer/filetype' : 'vim', 'hook/eval/enable' : 1,
-                \   'hook/eval/template' : 'echo PP(%s)', 'src' : a:q_args,}
+    let dict = {
+    \    'type':                      'vim', 'runner':           'vimscript', 'outputter':          'buffer',
+    \    'outputter/buffer/filetype': 'vim', 'hook/eval/enable': 1,           'hook/eval/template': 'echo PP(%s)',
+    \    'src':                       a:q_args, }
     call quickrun#run(dict)
 endfunction
 command! -nargs=1 -complete=expression QuickRunPP :call <sid>quickrun_pp(<q-args>)
 "}}}
 " Auto DirectoryMake {{{
 function! s:auto_mkdir(dir, force)
-    if !isdirectory(a:dir) && (a:force ||
-                \   input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
+    if !isdirectory(a:dir) && (a:force || input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
         call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
     endif
 endfunction
