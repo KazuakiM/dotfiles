@@ -588,6 +588,7 @@ nnoremap <Leader>n :NERDTree<CR>
 let g:NERDTreeMinimalUI         = 1
 let g:NERDTreeRespectWildIgnore = 1
 let g:NERDTreeShowHidden        = 1
+autocmd MyAutoCmd BufEnter * if (winnr('$') == 1 && exists('b:NERDTreeType') && b:NERDTreeType == 'primary') | q | endif
 "}}}
 " vimshell.vim {{{
 NeoBundleLazy 'Shougo/vimshell.vim', {
