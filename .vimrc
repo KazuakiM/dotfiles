@@ -885,6 +885,7 @@ if has('mac')
     let $RUBY_DLL    = '/usr/local/lib/libruby.dylib'
     let $LUA_DLL     = '/usr/local/lib/liblua.dylib'
 else
+    autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
     " php setting.
     let g:php_cs_fixer_path = '$HOME/.vim/vim-php-cs-fixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
 endif
