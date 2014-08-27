@@ -233,8 +233,6 @@ else
     NeoBundle 'SirVer/ultisnips'
     "NeoBundle 'KazuakiM/neosnippet-snippets'
     "NeoBundle 'Shougo/neosnippet.vim'
-    NeoBundle 'vim-scripts/Align'
-    NeoBundle 'vim-scripts/SQLUtilities'
 
     NeoBundleSaveCache
 endif
@@ -348,6 +346,7 @@ let g:ref_phpmanual_path=$HOME.'/.vim/vim-ref/php-chunked-xhtml'
 let g:vim_tags_auto_generate = 1
 nnoremap <Leader>tags :TagsGenerate
 nnoremap <Leader>] <C-]>
+nnoremap <Leader>: :<C-u>tab<Space>stj<Space><C-R>=expand('<cword>')<CR><CR>
 nnoremap <Leader>[ <C-o>
 nnoremap <Leader>ts :ts<CR>
 " add .vimrc.local
