@@ -111,6 +111,7 @@ case "${OSTYPE}" in
         alias WIRESHARK='/usr/local/bin/wireshark'
         export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
         export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+        export PERL5LIB=$HOME/.vim/SQL-Beautify/lib:$HOME/perl5/lib/perl5
         localPath=''
         #brew --prefix perl518
         if [ -d /usr/local/opt/perl518/bin ]; then

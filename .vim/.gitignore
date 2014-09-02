@@ -1,4 +1,4 @@
-# Regularly update & git NG files.
+# Regularly update & git NG files. {{{
 /backup/*
 /bundle/*
 /colors/*
@@ -8,6 +8,7 @@
 /neobundle.vim/*
 /neocomplete.vim/*
 /neosnippet.vim/*
+/SQL-Beautify/*
 /swap/*
 /tags/*
 /unite.vim/*
@@ -19,5 +20,5 @@
 /vimshell.vim/cache/*
 /yankround.vim/*
 .netrwhist
-
+#}}}
 # Memos file manage.

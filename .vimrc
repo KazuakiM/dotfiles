@@ -147,6 +147,8 @@ cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 " pretty print
 nnoremap <Leader>xml  :execute '%!xmllint --noblanks --nowrap --encode UTF-8 --format %'<CR>
 nnoremap <Leader>json :execute '%!python -m json.tool'<CR>
+command! -range SqlPrettyPrint :'<,'>!$HOME/.vim/shell/sql-beautify.pl
+nnoremap <Leader>sql  :SqlPrettyPrint<CR>
 " SQL
 let g:sql_type_default='mysql'
 " PHP
@@ -406,10 +408,6 @@ let g:quickrun_config = {
 \        'errorformat': '%m\ in\ %f\ on\ line\ %l',},
 \    'markdown' : {
 \        'outputter' : 'browser',},}
-"}}}
-" SQLUtilities {{{
-let g:sqlutil_align_comma = 1
-nnoremap <Leader>sql :SQLUFormatter<CR>
 "}}}
 " html5.vim {{{
 let g:html5_event_handler_attributes_complete = 1

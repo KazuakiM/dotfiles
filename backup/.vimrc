@@ -52,6 +52,11 @@ let g:context_filetype#filetypes = {
 \            'start': '<?',
 \            'end':   '?>', 'filetype': 'php',},],}
 "}}}
+" vim-sqlfix(local file refer) {{{
+NeoBundle 'vim-sqlfix', {
+\    'base': '/srv/vim-plugin',
+\    'type': 'nosync',}
+"}}}
 "}}}
 "
 "
