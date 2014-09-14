@@ -150,8 +150,8 @@ nnoremap <Leader>json :execute '%!python -m json.tool'<CR>
 command! -range SqlPrettyPrint :'<,'>!$HOME/.vim/shell/sql-beautify.pl
 nnoremap <Leader>sql  :SqlPrettyPrint<CR>
 " register
-vnoremap <C-w> "ayy
-vnoremap <C-e> "byy
+vnoremap <C-w> "ay
+vnoremap <C-e> "by
 nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
 " SQL
 let g:sql_type_default='mysql'
