@@ -8,8 +8,6 @@
 /neobundle.vim/*
 /neocomplete.vim/*
 /neosnippet.vim/*
-/SQL-Beautify/*
-/SQL-Tokenizer/*
 /swap/*
 /tags/*
 /unite.vim/*

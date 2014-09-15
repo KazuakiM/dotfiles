@@ -147,8 +147,6 @@ cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 " pretty print
 nnoremap <Leader>xml  :execute '%!xmllint --noblanks --nowrap --encode UTF-8 --format %'<CR>
 nnoremap <Leader>json :execute '%!python -m json.tool'<CR>
-command! -range SqlPrettyPrint :'<,'>!$HOME/.vim/shell/sql-beautify.pl
-nnoremap <Leader>sql  :SqlPrettyPrint<CR>
 " register
 vnoremap <C-w> "ay
 vnoremap <C-e> "by
@@ -648,6 +646,15 @@ let g:easy_align_delimiters = {
 \        'pattern':      ' \(\S\+\s*[;=]\)\@=',
 \        'left_margin':  0,
 \        'right_margin': 0, }, }
+"}}}
+" Align
+" SQLUtilities {{{
+NeoBundleLazy 'vim-scripts/SQLUtilities', {
+\    'depends': 'vim-scripts/Align',
+\    'autoload': {
+\        'commands' : 'SQLUFormatter',},}
+let g:sqlutil_align_comma = 1
+nnoremap <Leader>sql :SQLUFormatter<CR>
 "}}}
 " wildfire.vim {{{
 NeoBundleLazy 'gcmt/wildfire.vim', {
