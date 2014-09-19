@@ -752,6 +752,7 @@ function! s:hooks.on_source(bundle)
     let g:php_cs_fixer_enable_default_mapping=1 " Enable the mapping by default (<leader>pcd)
     let g:php_cs_fixer_dry_run=0                " Call command with dry-run option
     let g:php_cs_fixer_verbose=0                " Return the output of command if 1, else an inline information.
+    let g:php_cs_fixer_enable_default_mapping=0
     nnoremap <Leader>php :call PhpCsFixerFixFile()<CR>
 endfunction
 unlet s:hooks
