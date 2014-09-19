@@ -415,27 +415,6 @@ let g:html5_rdfa_attributes_complete = 1
 let g:html5_microdata_attributes_complete = 1
 let g:html5_aria_attributes_complete = 1
 "}}}
-"" neosnippet.vim {{{
-"imap <C-k> <Plug>(neosnippet_expand_or_jump)
-"smap <C-k> <Plug>(neosnippet_expand_or_jump)
-"xmap <C-k> <Plug>(neosnippet_expand_target)
-"imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-"            \ '\<Plug>(neosnippet_expand_or_jump)'
-"            \: pumvisible() ? '\<C-n>' : '\<TAB>'
-"smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-"            \ '\<Plug>(neosnippet_expand_or_jump)'
-"            \: '\<TAB>'
-"if has('conceal')
-"    set conceallevel=2 concealcursor=i
-"endif
-"let g:neosnippet#disable_runtime_snippets = {
-"\    '_' : 1,}
-"let g:neosnippet#data_directory=$HOME.'/.vim/neosnippet.vim'
-""let g:neosnippet#enable_snipmate_compatibility = 1
-""let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/vim-snippets/snippets'
-"let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/neosnippet-snippets/neosnippets'
-"snoremap <ESC> <ESC>:NeoSnippetClearMarkers<CR>
-""}}}
 " ultisnips {{{
 let g:UltiSnipsJumpForwardTrigger='<TAB>'
 "let g:UltiSnipsJumpBackwardTrigger=''
