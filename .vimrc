@@ -57,8 +57,8 @@ set fileformat=unix
 " Basic
 let mapleader=','
 set scrolloff=5
-autocmd MyAutoCmd FileType * setlocal textwidth=0
-autocmd MyAutoCmd FileType * setlocal formatoptions-=cb
+autocmd MyAutoCmd FileType * set textwidth=0
+autocmd MyAutoCmd FileType * set formatoptions-=cb
 set autoread
 set hidden
 set ambiwidth=double
@@ -384,7 +384,7 @@ nnoremap [memolist]g :MemoGrep<CR>
 " vim-quickrun {{{
 nnoremap <Leader>r :QuickRun<CR>
 let g:quickrun_config = {
-\    '_' : {
+\    '_': {
 \        'hook/close_buffer/enable_failure':    1,
 \        'hook/close_buffer/enable_empty_data': 1,
 \        'runner':                              'vimproc',
@@ -392,7 +392,7 @@ let g:quickrun_config = {
 \        'outputter':                           'multi:buffer:quickfix',
 \        'outputter/buffer/split':              ':botright',
 \        'outputter/buffer/close_on_empty':     1,},
-\    'watchdogs_checker/_' : {
+\    'watchdogs_checker/_': {
 \        'hook/close_quickfix/enable_exit':           1,
 \        'hook/back_window/enable_exit':              0,
 \        'hook/back_window/priority_exit':            1,
@@ -402,12 +402,17 @@ let g:quickrun_config = {
 \        'hook/qfsigns_update/priority_exit':         3,
 \        'hook/qfstatusline_update/enable_exit':      1,
 \        'hook/qfstatusline_update/priority_exit':    4,},
-\    'watchdogs_checker/php' : {
+\    'watchdogs_checker/php': {
 \        'command':     'php',
 \        'exec':        '%c -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0 -l %o %s:p',
 \        'errorformat': '%m\ in\ %f\ on\ line\ %l',},
-\    'markdown' : {
-\        'outputter' : 'browser',},}
+\    'markdown': {
+\        'outputter': 'browser',},
+\    'php': {
+\        'command': 'phpunit',},
+\    'phpunit': {
+\        'command': 'phpunit',
+\        'exec':    '%c %o %s',},}
 "}}}
 " html5.vim {{{
 let g:html5_event_handler_attributes_complete = 1
@@ -897,6 +902,7 @@ filetype plugin indent on
 autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} setlocal filetype=markdown
 autocmd MyAutoCmd BufNewFile,BufRead *.coffee                   setlocal filetype=coffee
 autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}                  setlocal filetype=snippets
+autocmd MyAutoCmd BufNewFile,BufRead *Test.php                  setlocal filetype=phpunit
 "}}}
 "
 "
