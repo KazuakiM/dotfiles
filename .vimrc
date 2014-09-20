@@ -409,10 +409,8 @@ let g:quickrun_config = {
 \    'markdown': {
 \        'outputter': 'browser',},
 \    'php': {
-\        'command': 'phpunit',},
-\    'phpunit': {
-\        'command': 'phpunit',
-\        'exec':    '%c %o %s',},}
+\        'command':                          'phpunit',
+\        'hook/close_buffer/enable_failure': 0,},}
 "}}}
 " html5.vim {{{
 let g:html5_event_handler_attributes_complete = 1
@@ -840,8 +838,12 @@ NeoBundleLazy 'kannokanno/previm', {
 \    'depends': 'open-browser.vim',
 \    'autoload' : {
 \        'filetypes': 'markdown',},}
-"let g:previm_open_cmd = 'open -a Firefox'
 nnoremap <silent> <Leader>pre :PrevimOpen<CR>
+let s:hooks = neobundle#get_hooks('previm')
+function! s:hooks.on_source(bundle)
+    let g:previm_open_cmd = 'open -a firefox'
+endfunction
+unlet s:hooks
 "}}}
 "}}}
 "
@@ -902,7 +904,6 @@ filetype plugin indent on
 autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} setlocal filetype=markdown
 autocmd MyAutoCmd BufNewFile,BufRead *.coffee                   setlocal filetype=coffee
 autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}                  setlocal filetype=snippets
-autocmd MyAutoCmd BufNewFile,BufRead *Test.php                  setlocal filetype=phpunit
 "}}}
 "
 "

@@ -1,3 +1,6 @@
 "autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*.php setlocal tags=$HOME/.vim/tags/sample.tags
+
 "autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/app/views/*.php setlocal filetype=html
-"autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*.php let g:quickrun_config['php']['exec'] = '%c $HOME/sample/app/tests'
+
+"Laravel
+"autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*.php let g:quickrun_config['php']['exec'] = '%c --no-configuration --bootstrap 'bootstrap/autoload.php' $HOME/sample/app/tests'
