@@ -3,4 +3,4 @@
 "autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/app/views/*.php setlocal filetype=html
 
 "Laravel
-"autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*.php let g:quickrun_config['php']['exec'] = '%c --no-configuration --bootstrap 'bootstrap/autoload.php' $HOME/sample/app/tests'
+"autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*.php let g:quickrun_config['php']['exec'] = '%c %o --bootstrap 'bootstrap/autoload.php' $HOME/sample/app/tests'

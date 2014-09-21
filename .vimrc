@@ -410,7 +410,9 @@ let g:quickrun_config = {
 \        'outputter': 'browser',},
 \    'php': {
 \        'command':                          'phpunit',
-\        'hook/close_buffer/enable_failure': 0,},}
+\        'cmdopt':                           '--no-configuration',
+\        'hook/close_buffer/enable_failure': 0,
+\        'outputter/buffer/split':           ':botright 7sp',},}
 "}}}
 " html5.vim {{{
 let g:html5_event_handler_attributes_complete = 1
