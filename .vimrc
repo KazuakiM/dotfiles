@@ -412,12 +412,7 @@ let g:quickrun_config = {
 \        'command':                          'phpunit',
 \        'cmdopt':                           '--no-configuration',
 \        'hook/close_buffer/enable_failure': 0,
-\        'outputter/buffer/split':           ':botright 7sp',},
-\    'php.unit': {
-\        'command':                          'phpunit',
-\        'exec':                             '%c %o %s',
-\        'hook/close_buffer/enable_failure': 0,
-\        'outputter/buffer/split':           ':botright 9sp',},}
+\        'outputter/buffer/split':           ':botright 7sp',},}
 "}}}
 " html5.vim {{{
 let g:html5_event_handler_attributes_complete = 1
@@ -911,7 +906,6 @@ filetype plugin indent on
 autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} setlocal filetype=markdown
 autocmd MyAutoCmd BufNewFile,BufRead *.coffee                   setlocal filetype=coffee
 autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}                  setlocal filetype=snippets
-autocmd MyAutoCmd BufNewFile,BufRead *Test.php                  setlocal filetype=php.unit
 "}}}
 "
 "
