@@ -106,7 +106,7 @@ case "${OSTYPE}" in
         alias MV='open -a virtualbox'
         alias KOBO='open -a kobo'
         alias KINDLE='open -a kindle'
-        alias LINGR="open -a LimeChat;nohup ruby $HOME/.vim/bundle/lingr-irc/lig.rb > /dev/null 2>&1 & tail /temp/#vim/`date +%Y-%m-%d`_Lingr.txt|perl -e 'system \"growlnotify\", \"-m\",  \$_ while(<STDIN>);' &"
+        alias LINGR="sh $HOME/work/mySettingFiles/shell/lingrStarter.sh"
         alias WIRE='/usr/local/bin/wireshark'
         alias WIRESHARK='/usr/local/bin/wireshark'
         export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
