@@ -346,7 +346,9 @@ autocmd precious-indentline User PreciousFileType IndentLinesReset
 let g:ref_cache_dir=$HOME.'/.vim/vim-ref/cache'
 let g:ref_phpmanual_path=$HOME.'/.vim/vim-ref/php-chunked-xhtml'
 let g:ref_detect_filetype={
-\    'html': 'phpmanual',}
+\    'html':       'phpmanual',
+\    'javascript': 'phpmanual',
+\    'css':        'phpmanual',}
 inoremap <silent><C-k> <C-o>:call<space>ref#K("normal")<CR><ESC>
 "}}}
 " vim-tags {{{
