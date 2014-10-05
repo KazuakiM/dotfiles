@@ -197,8 +197,6 @@ else
     NeoBundle 'itchyny/landscape.vim'
     NeoBundle 'itchyny/lightline.vim'
     NeoBundle 'Yggdroot/indentLine'
-    NeoBundle 'Shougo/context_filetype.vim'
-    NeoBundle 'osyo-manga/vim-precious'
     " vdebug {{{
     " # command memo
     " * <F5>  : start/run (to next breakpoint/end of script)
@@ -306,39 +304,6 @@ let g:unite_force_overwrite_statusline = 0
 "}}}
 " indentLine {{{
 let g:indentLine_faster = 1
-"}}}
-" context_filetype.vim {{{
-" setlocal html filetype at .vimrc.local (views/*.php is html filetype).
-let g:context_filetype#filetypes = {
-\    'html': [
-\        {
-\            'start': '<script>',
-\            'end':   '</script>', 'filetype': 'javascript',},
-\        {
-\            'start': '<script\%( [^>]*\)charset="[^\"]*"\%( [^>]*\)\?>',
-\            'end':   '</script>', 'filetype': 'javascript',},
-\        {
-\            'start': '<script\%( [^>]*\)\? type="text/javascript"\%( [^>]*\)\?>',
-\            'end':   '</script>', 'filetype': 'javascript',},
-\        {
-\            'start': '<script\%( [^>]*\)\? type="text/coffeescript"\%( [^>]*\)\?>',
-\            'end':   '</script>', 'filetype': 'coffee',},
-\        {
-\            'start': '<style\%( [^>]*\)\? type="text/css"\%( [^>]*\)\?>',
-\            'end':   '</style>', 'filetype': 'css',},
-\        {
-\            'start': '<?',
-\            'end':   '?>', 'filetype': 'php',},],}
-let g:context_filetype#search_offset = 100
-"}}}
-" vim-precious {{{
-let g:precious_enable_switch_CursorMoved = {
-\    '*' : 0,}
-let g:precious_enable_switch_CursorMoved_i = {
-\    '*' : 0,}
-autocmd MyAutoCmd InsertEnter * :PreciousSwitch
-autocmd MyAutoCmd InsertLeave * :PreciousReset
-autocmd precious-indentline User PreciousFileType IndentLinesReset
 "}}}
 " vim-ref {{{
 let g:ref_cache_dir=$HOME.'/.vim/vim-ref/cache'
@@ -637,6 +602,48 @@ function! s:hooks.on_source(bundle)
     let g:wildfire_objects = {
     \        '*' : ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it',],
     \        'html,xml' : ['at', 'it',],}
+endfunction
+unlet s:hooks
+"}}}
+" context_filetype.vim
+" vim-precious {{{
+" setlocal html filetype at .vimrc.local (views/*.php is html filetype).
+NeoBundleLazy 'osyo-manga/vim-precious', {
+\    'depends': 'Shougo/context_filetype.vim',
+\    'insert':  1,}
+let s:hooks = neobundle#get_hooks('vim-precious')
+function! s:hooks.on_source(bundle)
+    " context_filetype.vim
+    let g:context_filetype#filetypes = {
+    \    'html': [
+    \        {
+    \            'start': '<script>',
+    \            'end':   '</script>', 'filetype': 'javascript',},
+    \        {
+    \            'start': '<script\%( [^>]*\)charset="[^\"]*"\%( [^>]*\)\?>',
+    \            'end':   '</script>', 'filetype': 'javascript',},
+    \        {
+    \            'start': '<script\%( [^>]*\)\? type="text/javascript"\%( [^>]*\)\?>',
+    \            'end':   '</script>', 'filetype': 'javascript',},
+    \        {
+    \            'start': '<script\%( [^>]*\)\? type="text/coffeescript"\%( [^>]*\)\?>',
+    \            'end':   '</script>', 'filetype': 'coffee',},
+    \        {
+    \            'start': '<style\%( [^>]*\)\? type="text/css"\%( [^>]*\)\?>',
+    \            'end':   '</style>', 'filetype': 'css',},
+    \        {
+    \            'start': '<?',
+    \            'end':   '?>', 'filetype': 'php',},],}
+    let g:context_filetype#search_offset = 100
+
+    " vim-precious
+    let g:precious_enable_switch_CursorMoved = {
+    \    '*' : 0,}
+    let g:precious_enable_switch_CursorMoved_i = {
+    \    '*' : 0,}
+    autocmd MyAutoCmd InsertEnter * :PreciousSwitch
+    autocmd MyAutoCmd InsertLeave * :PreciousReset
+    autocmd precious-indentline User PreciousFileType IndentLinesReset
 endfunction
 unlet s:hooks
 "}}}
