@@ -235,8 +235,6 @@ else
     NeoBundle 'othree/html5.vim'
     NeoBundle 'KazuakiM/vim-snippets'
     NeoBundle 'SirVer/ultisnips'
-    "NeoBundle 'KazuakiM/neosnippet-snippets'
-    "NeoBundle 'Shougo/neosnippet.vim'
 
     NeoBundleSaveCache
 endif
@@ -448,47 +446,38 @@ let g:UltiSnipsSnippetsDir=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
 " unite-tag
 " jazzradio.vim {{{
 NeoBundleLazy 'Shougo/unite.vim', {
-\    'autoload' : {
-\        'commands' : ['Unite', 'UniteWithBufferDir', 'UniteWithCursorWord'],},}
+\    'commands' : ['Unite', 'UniteWithBufferDir', 'UniteWithCursorWord'],}
 NeoBundleLazy 'pasela/unite-webcolorname', {
-\    'depends': 'Shougo/unite.vim',
-\    'autoload': {
-\        'unite_sources': 'webcolorname',},}
+\    'depends':       'Shougo/unite.vim',
+\    'unite_sources': 'webcolorname',}
 NeoBundleLazy 'ujihisa/unite-colorscheme', {
-\    'depends': 'Shougo/unite.vim',
-\    'autoload': {
-\        'unite_sources': 'colorscheme',},}
+\    'depends':       'Shougo/unite.vim',
+\    'unite_sources': 'colorscheme',}
 NeoBundleLazy 'Shougo/unite-help', {
-\    'depends': 'Shougo/unite.vim',
-\    'autoload': {
-\        'unite_sources': 'help',},}
+\    'depends':       'Shougo/unite.vim',
+\    'unite_sources': 'help',}
 NeoBundleLazy 'thinca/vim-editvar', {
-\    'depends': ['thinca/vim-prettyprint', 'Shougo/unite.vim'],
-\    'autoload': {
-\        'unite_sources': 'variable',},}
+\    'depends':       ['thinca/vim-prettyprint', 'Shougo/unite.vim'],
+\    'unite_sources': 'variable',}
 NeoBundleLazy 'rhysd/unite-codic.vim', {
-\    'depends': ['koron/codic-vim', 'Shougo/unite.vim'],
-\    'autoload': {
-\        'unite_sources': 'codic',},}
+\    'depends':       ['koron/codic-vim', 'Shougo/unite.vim'],
+\    'unite_sources': 'codic',}
 NeoBundleLazy 'osyo-manga/unite-highlight', {
-\    'depends': 'Shougo/unite.vim',
-\    'autoload': {
-\        'unite_sources': 'highlight',},}
+\    'depends':       'Shougo/unite.vim',
+\    'unite_sources': 'highlight',}
 NeoBundleLazy 'tsukkee/unite-tag' , {
-\    'depends': 'Shougo/unite.vim',
-\    'autoload': {
-\        'unite_sources': 'tag',},}
+\    'depends':       'Shougo/unite.vim',
+\    'unite_sources': 'tag',}
 NeoBundleLazy 'supermomonga/jazzradio.vim', {
-\    'depends' : 'Shougo/unite.vim',
-\    'autoload' : {
-\        'unite_sources': 'jazzradio',
-\        'commands' : [
-\            'JazzradioUpdateChannels',
-\            'JazzradioStop',
-\            {
-\                'name' : 'JazzradioPlay',
-\                'complete' : 'customlist,jazzradio#channel_id_complete'},],
-\        'function_prefix' : 'jazzradio',},}
+\    'depends':       'Shougo/unite.vim',
+\    'unite_sources': 'jazzradio',
+\    'commands':      [
+\        'JazzradioUpdateChannels',
+\        'JazzradioStop',
+\        {
+\            'name':     'JazzradioPlay',
+\            'complete': 'customlist,jazzradio#channel_id_complete'},],
+\    'function_prefix' : 'jazzradio',}
 nnoremap [unite] <Nop>
 nmap <Leader>u [unite]
 " default plugins
@@ -542,24 +531,21 @@ unlet s:hooks
 "}}}
 " vimdoc-ja {{{
 NeoBundleLazy 'vim-jp/vimdoc-ja', {
-\    'autoload' : {
-\        'commands' : 'help',},}
+\    'commands' : 'help',}
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc/
 "}}}
 " open-browser.vim {{{
 NeoBundleLazy 'tyru/open-browser.vim', {
-\    'autoload' : {
-\        'functions' : 'OpenBrowser',
-\        'commands'  : ['OpenBrowser', 'OpenBrowserSearch'],
-\        'mappings'  : '<Plug>(openbrowser-smart-search)',},}
+\    'functions' : 'OpenBrowser',
+\    'commands'  : ['OpenBrowser', 'OpenBrowserSearch'],
+\    'mappings'  : '<Plug>(openbrowser-smart-search)',}
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
 nmap <Leader>gx <Plug>(openbrowser-smart-search)
 vmap <Leader>gx <Plug>(openbrowser-smart-search)
 "}}}
 " taglist.vim {{{
 NeoBundleLazy 'vim-scripts/taglist.vim', {
-\    'autoload' : {
-\        'commands' : 'Tlist',},}
+\    'commands' : 'Tlist',}
 let Tlist_Use_Right_Window = 1
 let Tlist_Show_One_File = 1
 let Tlist_Exit_OnlyWindow = 1
@@ -568,8 +554,7 @@ nnoremap <Leader>t :Tlist<CR>
 "}}}
 " nerdtree {{{
 NeoBundleLazy 'scrooloose/nerdtree', {
-\    'autoload' : {
-\        'commands' : 'NERDTree',},}
+\    'commands' : 'NERDTree',}
 nnoremap <Leader>n :NERDTree<CR>
 let g:NERDTreeMinimalUI         = 1
 let g:NERDTreeRespectWildIgnore = 1
@@ -578,9 +563,8 @@ autocmd MyAutoCmd BufEnter * if (winnr('$') == 1 && exists('b:NERDTreeType') && 
 "}}}
 " vimshell.vim {{{
 NeoBundleLazy 'Shougo/vimshell.vim', {
-\    'depends' : 'Shougo/vimproc.vim',
-\    'autoload' : {
-\        'commands' : ['VimShell', 'VimShellPop', 'VimShellInteractive'],},}
+\    'depends':  'Shougo/vimproc.vim',
+\    'commands': ['VimShell', 'VimShellPop', 'VimShellInteractive'],}
 nnoremap [vimshell.vim] <Nop>
 nmap <Leader>sh [vimshell.vim]
 nnoremap <silent> [vimshell.vim]s :<C-u>VimShell<CR>
@@ -595,8 +579,7 @@ unlet s:hooks
 "}}}
 " vim-easy-align {{{
 NeoBundleLazy 'junegunn/vim-easy-align', {
-\    'autoload': {
-\        'commands' : 'EasyAlign',},}
+\    'commands' : 'EasyAlign',}
 vnoremap <silent> <Leader>a :EasyAlign<CR>
 let g:easy_align_delimiters = {
 \    '=': {
@@ -639,16 +622,14 @@ let g:easy_align_delimiters = {
 " Align
 " SQLUtilities {{{
 NeoBundleLazy 'vim-scripts/SQLUtilities', {
-\    'depends': 'vim-scripts/Align',
-\    'autoload': {
-\        'commands' : 'SQLUFormatter',},}
+\    'depends':  'vim-scripts/Align',
+\    'commands': 'SQLUFormatter',}
 let g:sqlutil_align_comma = 1
 nnoremap <Leader>sql :SQLUFormatter<CR>
 "}}}
 " wildfire.vim {{{
 NeoBundleLazy 'gcmt/wildfire.vim', {
-\    'autoload' : {
-\        'mappings'  : '<Plug>(wildfire-fuel)',},}
+\    'mappings' : '<Plug>(wildfire-fuel)',}
 map <ENTER> <Plug>(wildfire-fuel)
 let s:hooks = neobundle#get_hooks('wildfire.vim')
 function! s:hooks.on_source(bundle)
@@ -660,14 +641,9 @@ endfunction
 unlet s:hooks
 "}}}
 " neocomplete.vim {{{
-"NeoBundleLazy 'Shougo/neocomplete.vim', {
-"\    'depends': ['KazuakiM/neosnippet-snippets', 'Shougo/neosnippet.vim', 'Shougo/context_filetype.vim'],
-"\    'autoload' : {
-"\        'insert' : 1,},}
 NeoBundleLazy 'Shougo/neocomplete.vim', {
-\    'depends': ['KazuakiM/vim-snippets', 'SirVer/ultisnips', 'Shougo/context_filetype.vim'],
-\    'autoload' : {
-\        'insert' : 1,},}
+\    'depends': ['SirVer/ultisnips', 'KazuakiM/vim-snippets', 'Shougo/context_filetype.vim'],
+\    'insert':  1,}
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle)
     let g:acp_enableAtStartup                  = 0
@@ -697,8 +673,7 @@ unlet s:hooks
 "}}}
 " gundo.vim {{{
 NeoBundleLazy 'sjl/gundo.vim', {
-\    'autoload' : {
-\        'insert' : 1,},}
+\    'insert' : 1,}
 let s:hooks = neobundle#get_hooks('gundo.vim')
 function! s:hooks.on_source(bundle)
     nnoremap u g-
@@ -713,8 +688,7 @@ unlet s:hooks
 "* ':w sudo:<filename>' :sudo another name save
 "* ':e sudo:%'          :sudo open
 NeoBundleLazy 'vim-scripts/sudo.vim', {
-\    'autoload' : {
-\        'insert' : 1,},}
+\    'insert' : 1,}
 let s:hooks = neobundle#get_hooks('sudo.vim')
 function! s:hooks.on_source(bundle)
     nnoremap [sudo] <Nop>
@@ -727,8 +701,7 @@ unlet s:hooks
 "}}}
 " vim-php-cs-fixer {{{
 NeoBundleLazy 'stephpy/vim-php-cs-fixer', {
-\    'autoload' : {
-\        'filetypes': 'php',},}
+\    'filetypes': 'php',}
 let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
 function! s:hooks.on_source(bundle)
     " If php-cs-fixer is in $PATH, you don't need to define 'let g:php_cs_fixer_path=/path/to/file'.
@@ -752,16 +725,17 @@ unlet s:hooks
 " quickfixstatus
 " vim-watchdogs {{{
 NeoBundleLazy 'osyo-manga/vim-watchdogs', {
-\    'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline', 'dannyob/quickfixstatus'],
-\    'autoload' : {
-\        'filetypes': ['php', 'javascript', 'ruby'],},}
+\    'depends':   ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline', 'dannyob/quickfixstatus'],
+\    'filetypes': ['php', 'javascript', 'ruby'],}
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle)
     "vim-qfsigns
     nnoremap <Leader>sy :QfsignsJunmp<CR>
     "let g:qfsigns#AutoJump = 2
+
     "vim-qfstatusline
     let g:Qfstatusline#UpdateCmd = function('lightline#update')
+
     "vim-watchdogs
     let g:watchdogs_check_BufWritePost_enable = 0
     let g:watchdogs_check_BufWritePost_enables = {
@@ -783,8 +757,7 @@ unlet s:hooks
 "* html:5 <=入力後に<C+y>,
 "* div>ul>li.class#id_$$*5 <=入力後に<C+y>,
 NeoBundleLazy 'mattn/emmet-vim', {
-\    'autoload' : {
-\        'filetypes': ['html', 'php', 'css', 'sass', 'scss', 'less'],},}
+\    'filetypes': ['html', 'php', 'css', 'sass', 'scss', 'less'],}
 let s:hooks = neobundle#get_hooks('emmet-vim')
 function! s:hooks.on_source(bundle)
     let g:user_emmet_settings = {
@@ -803,18 +776,15 @@ unlet s:hooks
 "}}}
 " vim-css3-syntax {{{
 NeoBundleLazy 'hail2u/vim-css3-syntax', {
-\    'autoload' : {
-\        'filetypes': ['html', 'php', 'css', 'sass', 'scss', 'less'],},}
+\    'filetypes': ['html', 'php', 'css', 'sass', 'scss', 'less'],}
 "}}}
 " vim-javascript {{{
 NeoBundleLazy 'pangloss/vim-javascript', {
-\    'autoload' : {
-\        'filetypes': ['html', 'php', 'javascript'],},}
+\    'filetypes': ['html', 'php', 'javascript'],}
 "}}}
 " sass-compile.vim {{{
 NeoBundleLazy 'AtsushiM/sass-compile.vim', {
-\    'autoload' : {
-\        'filetypes': ['sass', 'scss']},}
+\    'filetypes': ['sass', 'scss',],}
 let s:hooks = neobundle#get_hooks('sass-compile.vim')
 function! s:hooks.on_source(bundle)
     let g:sass_compile_cdloop = 5
@@ -827,8 +797,7 @@ unlet s:hooks
 "}}}
 " vim-coffee-script {{{
 NeoBundleLazy 'kchmck/vim-coffee-script', {
-\    'autoload' : {
-\        'filetypes': 'coffee',},}
+\    'filetypes': 'coffee',}
 let s:hooks = neobundle#get_hooks('vim-coffee-script')
 function! s:hooks.on_source(bundle)
     autocmd MyAutoCmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
@@ -837,14 +806,12 @@ unlet s:hooks
 "}}}
 " vim-markdown {{{
 NeoBundleLazy 'plasticboy/vim-markdown', {
-\    'autoload' : {
-\        'filetypes': 'markdown',},}
+\    'filetypes': 'markdown',}
 "}}}
 " previm {{{
 NeoBundleLazy 'kannokanno/previm', {
-\    'depends': 'open-browser.vim',
-\    'autoload' : {
-\        'filetypes': 'markdown',},}
+\    'depends':   'open-browser.vim',
+\    'filetypes': 'markdown',}
 nnoremap <silent> <Leader>pre :PrevimOpen<CR>
 let s:hooks = neobundle#get_hooks('previm')
 function! s:hooks.on_source(bundle)
