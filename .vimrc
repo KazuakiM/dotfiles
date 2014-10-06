@@ -77,9 +77,9 @@ nnoremap 0 $
 nnoremap 1 ^
 nnoremap gr gT
 nnoremap fa <C-w>+
-nnoremap j; <C-w>-
-nnoremap fd <C-w>>
-nnoremap jk <C-w><
+nnoremap fs <C-w>-
+nnoremap rq <C-w>>
+nnoremap rw <C-w><
 "paste
 nnoremap <silent><expr><Leader>v  ':set<Space>paste<CR><Insert><C-r>+<ESC>:set<Space>nopaste<CR>'
 inoremap <silent><expr><C-v> '<ESC>:set<Space>paste<CR><Insert><C-r>+<ESC>:set<Space>nopaste<CR><Insert>'

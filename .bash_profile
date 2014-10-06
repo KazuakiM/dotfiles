@@ -71,6 +71,8 @@ lc='\[\e[1;'
 ps1StartCyan=${lc}36m
 ps1EndNormal=${lc}0m
 export PS1="${ps1StartCyan}\]\h \$ ${ps1EndNormal}\]"
+export MYSQL_PS1='\d@\h> '
+#export MYSQL_PS1='\u@\d[\h]> '
 #}}}
 #OS Type {{{
 case "${OSTYPE}" in
