@@ -84,6 +84,7 @@ case "${OSTYPE}" in
         alias vi='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
         alias vim='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
         alias top='htop'
+        alias httpd='sudo apachectl'
         alias composer='php -d memory_limit=1G /usr/local/opt/composer/libexec/composer.phar'
         alias mysql='mysql.server'
         alias FF='open -a firefox'
