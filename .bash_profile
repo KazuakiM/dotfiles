@@ -86,7 +86,7 @@ case "${OSTYPE}" in
         alias top='htop'
         alias httpd='sudo apachectl'
         alias composer='php -d memory_limit=1G /usr/local/opt/composer/libexec/composer.phar'
-        alias mysql='mysql.server'
+        alias MYSQL='mysql.server'
         alias FF='open -a firefox'
         alias GG='open -a firefox'
         alias MM='open -a thunderbird'
