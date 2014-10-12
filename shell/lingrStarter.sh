@@ -4,10 +4,10 @@
 #
 # @author kazuakiM
 #--------------------------------
-logFile="/temp/#vim/`date +%Y-%m-%d`_Lingr.txt"
+logFile="/Trashes/#vim/`date +%Y-%m-%d`_Lingr.txt"
 
 # Log file delete
-rm -f /temp/#vim/`date -v-4d +%Y-%m-%d`_Lingr.txt
+rm -f /Trashes/#vim/`date -v-4d +%Y-%m-%d`_Lingr.txt
 # Log file make
 touch $logFile
 # LimeChat Start
