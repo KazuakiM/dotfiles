@@ -111,6 +111,8 @@ case "${OSTYPE}" in
         alias KOBO='open -a kobo'
         alias KINDLE='open -a kindle'
         alias LINGR="sh $HOME/work/mySettingFiles/shell/lingrStarter.sh"
+        alias DEV="sh $HOME/work/mySettingFiles/shell/virutalBoxManageForMac.sh devmabu"
+        alias MABU="ssh -l mabulog -p 2222 localhost"
         alias WIRE='/usr/local/bin/wireshark'
         alias WIRESHARK='/usr/local/bin/wireshark'
         export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
