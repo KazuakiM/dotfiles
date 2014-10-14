@@ -355,13 +355,13 @@ nnoremap [memolist]g :MemoGrep<CR>
 nnoremap <Leader>r :QuickRun<CR>
 let g:quickrun_config = {
 \    '_': {
-\        'hook/close_buffer/enable_failure':    1,
 \        'hook/close_buffer/enable_empty_data': 1,
-\        'runner':                              'vimproc',
-\        'runner/vimproc/updatetime':           60,
+\        'hook/close_buffer/enable_failure':    1,
 \        'outputter':                           'multi:buffer:quickfix',
+\        'outputter/buffer/close_on_empty':     1,
 \        'outputter/buffer/split':              ':botright',
-\        'outputter/buffer/close_on_empty':     1,},
+\        'runner':                              'vimproc',
+\        'runner/vimproc/updatetime':           60,},
 \    'watchdogs_checker/_': {
 \        'hook/close_quickfix/enable_exit':           1,
 \        'hook/back_window/enable_exit':              0,
@@ -371,7 +371,8 @@ let g:quickrun_config = {
 \        'hook/qfsigns_update/enable_exit':           1,
 \        'hook/qfsigns_update/priority_exit':         3,
 \        'hook/qfstatusline_update/enable_exit':      1,
-\        'hook/qfstatusline_update/priority_exit':    4,},
+\        'hook/qfstatusline_update/priority_exit':    4,
+\        'outputter/quickfix/open_cmd':               '',},
 \    'watchdogs_checker/php': {
 \        'command':     'php',
 \        'exec':        '%c -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0 -l %o %s:p',
@@ -737,16 +738,8 @@ function! s:hooks.on_source(bundle)
     let g:Qfstatusline#UpdateCmd = function('lightline#update')
 
     "vim-watchdogs
-    let g:watchdogs_check_BufWritePost_enable = 0
-    let g:watchdogs_check_BufWritePost_enables = {
-    \   'php' : 1,
-    \   'javascript': 1,
-    \   'ruby' : 1,}
+    let g:watchdogs_check_BufWritePost_enable = 1
     let g:watchdogs_check_CursorHold_enable = 1
-    "let g:watchdogs_check_CursorHold_enables = {
-    "\   'php' : 1,
-    "\   'javascript': 1,
-    "\   'ruby' : 1,}
 endfunction
 unlet s:hooks
 "}}}
