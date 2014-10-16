@@ -197,32 +197,12 @@ else
     NeoBundle 'itchyny/landscape.vim'
     NeoBundle 'itchyny/lightline.vim'
     NeoBundle 'Yggdroot/indentLine'
-    " vdebug {{{
-    " # command memo
-    " * <F5>  : start/run (to next breakpoint/end of script)
-    " * <F2>  : step over
-    " * <F3>  : step into
-    " * <F4>  : step out
-    " * <F6>  : stop debugging
-    " * <F7>  : detach script from debugger
-    " * <F9>  : run to cursor
-    " * <F10> : set line breakpoint
-    " * <F11> : show context variables (e.g. after 'eval')
-    " * <F12> : evaluate variable under cursor
-    " * :Breakpoint <type> <args>: set a breakpoint of any type (see :help VdebugBreakpoints)
-    " * :VdebugEval <code>: evaluate some code and display the result
-    " * <Leader>e: evaluate the expression under visual highlight and display the result
-    NeoBundle 'joonty/vdebug' "}}}
     NeoBundle 'thinca/vim-ref'
     NeoBundle 'szw/vim-tags'
     NeoBundle 'tpope/vim-surround'
     NeoBundle 'vim-scripts/matchit.zip'
     NeoBundle 'tpope/vim-endwise'
     NeoBundle 'fuenor/qfixgrep'
-    " vim-qfreplace {{{
-    " # command memo
-    " * ,qr    :replace all files.
-    NeoBundle 'thinca/vim-qfreplace' "}}}
     NeoBundle 'LeafCage/yankround.vim'
     NeoBundle 'glidenote/memolist.vim'
     " vim-quickrun {{{
@@ -230,7 +210,6 @@ else
     " * :QuickRun :execute quickrun.
     NeoBundle 'thinca/vim-quickrun' "}}}
     NeoBundle 'thinca/vim-prettyprint'
-    NeoBundle 'othree/html5.vim'
     NeoBundle 'Shougo/context_filetype.vim'
     NeoBundle 'osyo-manga/vim-precious'
     NeoBundle 'KazuakiM/vim-snippets'
@@ -325,13 +304,12 @@ nnoremap <Leader>[ <C-o>
 nnoremap <Leader>ts :ts<CR>
 " add .vimrc.local
 "}}}
-" vim-qfreplace {{{
+" qfixgrep {{{
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git
 set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
 let QFixWin_EnableMode = 1
 let QFix_UseLocationList = 1
 nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
-nnoremap <Leader>qr :Qfreplace<CR>
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 "}}}
 " yankround.vim {{{
@@ -385,12 +363,6 @@ let g:quickrun_config = {
 \        'hook/close_buffer/enable_failure': 0,
 \        'outputter/buffer/split':           ':botright 7sp',},}
 "}}}
-" html5.vim {{{
-let g:html5_event_handler_attributes_complete = 1
-let g:html5_rdfa_attributes_complete = 1
-let g:html5_microdata_attributes_complete = 1
-let g:html5_aria_attributes_complete = 1
-"}}}
 " context_filetype.vim {{{
 " setlocal html filetype at .vimrc.local (views/*.php is html filetype).
 let g:context_filetype#filetypes = {
@@ -438,22 +410,17 @@ let g:UltiSnipsSnippetsDir=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
 "{{{
 " unite.vim
 " unite-webcolorname
-" unite-colorscheme
 " unite-help
 " vim-editvar
 " codic-vim
 " unite-codic.vim
-" unite-highlight
 " unite-tag
 " jazzradio.vim {{{
 NeoBundleLazy 'Shougo/unite.vim', {
-\    'commands' : ['Unite', 'UniteWithBufferDir', 'UniteWithCursorWord'],}
+\    'commands' : 'Unite',}
 NeoBundleLazy 'pasela/unite-webcolorname', {
 \    'depends':       'Shougo/unite.vim',
 \    'unite_sources': 'webcolorname',}
-NeoBundleLazy 'ujihisa/unite-colorscheme', {
-\    'depends':       'Shougo/unite.vim',
-\    'unite_sources': 'colorscheme',}
 NeoBundleLazy 'Shougo/unite-help', {
 \    'depends':       'Shougo/unite.vim',
 \    'unite_sources': 'help',}
@@ -463,9 +430,6 @@ NeoBundleLazy 'thinca/vim-editvar', {
 NeoBundleLazy 'rhysd/unite-codic.vim', {
 \    'depends':       ['koron/codic-vim', 'Shougo/unite.vim'],
 \    'unite_sources': 'codic',}
-NeoBundleLazy 'osyo-manga/unite-highlight', {
-\    'depends':       'Shougo/unite.vim',
-\    'unite_sources': 'highlight',}
 NeoBundleLazy 'tsukkee/unite-tag' , {
 \    'depends':       'Shougo/unite.vim',
 \    'unite_sources': 'tag',}
@@ -490,10 +454,8 @@ nnoremap <silent> [unite]mru  :<C-u>Unite file_mru<CR>
 nnoremap <silent> [unite]msg  :<C-u>Unite output:message<CR>
 nnoremap <silent> [unite]s    :<C-u>Unite output:scriptnames<CR>
 " add plugins
-nnoremap <silent> [unite]cs  :<C-u>Unite -auto-preview colorscheme<CR>
 nnoremap <silent> [unite]dic :<C-u>Unite codic<CR>
 nnoremap <silent> [unite]h   :<C-u>Unite help<CR>
-nnoremap <silent> [unite]hl  :<C-u>Unite highlight<CR>
 nnoremap <silent> [unite]j   :<C-u>Unite jazzradio<CR>
 nnoremap <silent> [unite]rad :<C-u>Unite jazzradio<CR>
 nnoremap <silent> [unite]t   :<C-u>Unite tag<CR>
@@ -562,22 +524,6 @@ let g:NERDTreeRespectWildIgnore = 1
 let g:NERDTreeShowHidden        = 1
 autocmd MyAutoCmd BufEnter * if (winnr('$') == 1 && exists('b:NERDTreeType') && b:NERDTreeType == 'primary') | q | endif
 "}}}
-" vimshell.vim {{{
-NeoBundleLazy 'Shougo/vimshell.vim', {
-\    'depends':  'Shougo/vimproc.vim',
-\    'commands': ['VimShell', 'VimShellPop', 'VimShellInteractive'],}
-nnoremap [vimshell.vim] <Nop>
-nmap <Leader>sh [vimshell.vim]
-nnoremap <silent> [vimshell.vim]s :<C-u>VimShell<CR>
-nnoremap <silent> [vimshell.vim]p :<C-u>VimShellPop<CR>
-nnoremap <silent> [vimshell.vim]i :<C-u>VimShellInteractive
-let s:hooks = neobundle#get_hooks('vimshell.vim')
-function! s:hooks.on_source(bundle)
-    let g:vimshell_data_directory = $HOME.'/.vim/vimshell.vim/cache'
-    let g:vimshell_vimshrc_path   = $HOME.'/.vim/vimshell.vim/vimshrc/.vimshrc'
-endfunction
-unlet s:hooks
-"}}}
 " vim-easy-align {{{
 NeoBundleLazy 'junegunn/vim-easy-align', {
 \    'commands' : 'EasyAlign',}
@@ -643,7 +589,7 @@ unlet s:hooks
 "}}}
 " neocomplete.vim {{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {
-\    'depends': ['SirVer/ultisnips', 'KazuakiM/vim-snippets', 'Shougo/context_filetype.vim'],
+\    'depends': ['SirVer/ultisnips', 'KazuakiM/vim-snippets',],
 \    'insert':  1,}
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle)
@@ -740,60 +686,6 @@ function! s:hooks.on_source(bundle)
     "vim-watchdogs
     let g:watchdogs_check_BufWritePost_enable = 1
     let g:watchdogs_check_CursorHold_enable = 1
-endfunction
-unlet s:hooks
-"}}}
-" emmet-vim {{{
-"# command memo
-"* URL: http://docs.emmet.io/cheat-sheet/
-"* <C+y>,  :execute trigger key
-"* html:5 <=入力後に<C+y>,
-"* div>ul>li.class#id_$$*5 <=入力後に<C+y>,
-NeoBundleLazy 'mattn/emmet-vim', {
-\    'filetypes': ['html', 'php', 'css', 'sass', 'scss', 'less'],}
-let s:hooks = neobundle#get_hooks('emmet-vim')
-function! s:hooks.on_source(bundle)
-    let g:user_emmet_settings = {
-    \    'lang' : 'ja',
-    \    'indentation' : '    ',
-    \    'html' : { 'filters' : 'html',},
-    \    'css'  : { 'filters' : 'fc',},
-    \    'php'  : {
-    \        'filters' : 'html',
-    \        'extends' : 'html',},}
-    let g:user_emmet_mode='a'
-    let g:use_emmet_complete_tag = 1
-    "let g:user_emmet_leader_key=''
-endfunction
-unlet s:hooks
-"}}}
-" vim-css3-syntax {{{
-NeoBundleLazy 'hail2u/vim-css3-syntax', {
-\    'filetypes': ['html', 'php', 'css', 'sass', 'scss', 'less'],}
-"}}}
-" vim-javascript {{{
-NeoBundleLazy 'pangloss/vim-javascript', {
-\    'filetypes': ['html', 'php', 'javascript'],}
-"}}}
-" sass-compile.vim {{{
-NeoBundleLazy 'AtsushiM/sass-compile.vim', {
-\    'filetypes': ['sass', 'scss',],}
-let s:hooks = neobundle#get_hooks('sass-compile.vim')
-function! s:hooks.on_source(bundle)
-    let g:sass_compile_cdloop = 5
-    let g:sass_compile_auto = 1
-    let g:sass_compile_file = ['sass', 'scss']
-    let g:sass_compile_cssdir = ['css', 'stylesheet']
-    autocmd MyAutoCmd BufWritePost *.sass,*.scss SassCompile
-endfunction
-unlet s:hooks
-"}}}
-" vim-coffee-script {{{
-NeoBundleLazy 'kchmck/vim-coffee-script', {
-\    'filetypes': 'coffee',}
-let s:hooks = neobundle#get_hooks('vim-coffee-script')
-function! s:hooks.on_source(bundle)
-    autocmd MyAutoCmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
 endfunction
 unlet s:hooks
 "}}}
