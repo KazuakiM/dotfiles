@@ -43,6 +43,41 @@ let g:html5_aria_attributes_complete = 1
 NeoBundle 'thinca/vim-qfreplace'
 nnoremap <Leader>qr :Qfreplace<CR>
 "}}}
+" context_filetype.vim {{{
+" setlocal html filetype at .vimrc.local (views/*.php is html filetype).
+NeoBundle 'Shougo/context_filetype.vim'
+let g:context_filetype#filetypes = {
+\    'html': [
+\        {
+\            'start': '<script>',
+\            'end':   '</script>', 'filetype': 'javascript',},
+\        {
+\            'start': '<script\%( [^>]*\)charset="[^\"]*"\%( [^>]*\)\?>',
+\            'end':   '</script>', 'filetype': 'javascript',},
+\        {
+\            'start': '<script\%( [^>]*\)\? type="text/javascript"\%( [^>]*\)\?>',
+\            'end':   '</script>', 'filetype': 'javascript',},
+\        {
+\            'start': '<script\%( [^>]*\)\? type="text/coffeescript"\%( [^>]*\)\?>',
+\            'end':   '</script>', 'filetype': 'coffee',},
+\        {
+\            'start': '<style\%( [^>]*\)\? type="text/css"\%( [^>]*\)\?>',
+\            'end':   '</style>', 'filetype': 'css',},
+\        {
+\            'start': '<?',
+\            'end':   '?>', 'filetype': 'php',},],}
+let g:context_filetype#search_offset = 100
+"}}}
+" vim-precious {{{
+NeoBundle 'osyo-manga/vim-precious'
+let g:precious_enable_switch_CursorMoved = {
+\    '*' : 0,}
+let g:precious_enable_switch_CursorMoved_i = {
+\    '*' : 0,}
+autocmd MyAutoCmd InsertEnter * :PreciousSwitch
+autocmd MyAutoCmd InsertLeave * :PreciousReset
+autocmd precious-indentline User PreciousFileType IndentLinesReset
+"}}}
 "}}}
 "
 "
