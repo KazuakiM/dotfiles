@@ -30,6 +30,9 @@ if type colordiff >/dev/null 2>&1; then
 else
     alias diff='diff -u'
 fi
+if type htop >/dev/null 2>&1; then
+    alias top='htop'
+fi
 export GREP_OPTIONS='--color=auto -I'
 export GREP_COLOR='1;33'
 export XMLLINT_INDENT='    '
@@ -83,7 +86,6 @@ case "${OSTYPE}" in
         alias ll='ls -AGhl'
         alias vi='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
         alias vim='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-        alias top='htop'
         alias httpd='sudo apachectl'
         alias composer='php -d memory_limit=1G /usr/local/opt/composer/libexec/composer.phar'
         alias MYSQL='mysql.server'
