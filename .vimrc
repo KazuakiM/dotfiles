@@ -566,9 +566,9 @@ function! s:hooks.on_source(bundle)
     let g:neocomplete#same_filetypes           = {
     \   'html': 'html,css,javascript,php',}
     let g:neocomplete#sources = {
-    \   '_':    ['file', 'ultisnips', 'buffer', 'member', 'dictionary',],
-    \   'vim':  ['file', 'ultisnips', 'buffer', 'member', 'dictionary', 'syntax', 'vim'],
-    \   'html': ['file', 'ultisnips', 'buffer', 'member', 'dictionary', 'syntax',],}
+    \   '_':    ['file', 'ultisnips', 'buffer', 'dictionary',],
+    \   'vim':  ['file', 'ultisnips', 'buffer', 'dictionary', 'syntax', 'vim'],
+    \   'html': ['file', 'ultisnips', 'buffer', 'dictionary', 'syntax',],}
     let g:neocomplete#sources#dictionary#dictionaries = {
     \   'default':  '',
     \   'php':      $HOME.'/.vim/dict/php.dict',}
