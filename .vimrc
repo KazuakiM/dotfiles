@@ -74,7 +74,9 @@ set updatetime=1000
 nnoremap zx :<C-U>%foldopen<CR>
 set matchpairs+=<:>
 nnoremap 0 $
+onoremap 0 $
 nnoremap 1 ^
+onoremap 1 ^
 nnoremap gr gT
 nnoremap fa <C-w>+
 nnoremap fs <C-w>-
@@ -245,7 +247,6 @@ function! MyFilename()
     let fname = expand('%:t')
     return fname =~ '__Gundo\|NERD_tree' ? '' :
         \ &ft == 'unite' ? unite#get_status_string() :
-        \ &ft == 'vimshell' ? vimshell#get_status_string() :
         \ ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
         \ ('' != fname ? fname : '[No Name]') .
         \ ('' != MyModified() ? ' ' . MyModified() : '')
@@ -276,7 +277,6 @@ function! MyMode()
         \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
         \ fname =~ 'NERD_tree' ? 'NERDTree' :
         \ &ft == 'unite' ? 'Unite' :
-        \ &ft == 'vimshell' ? 'VimShell' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 let g:unite_force_overwrite_statusline = 0
@@ -566,9 +566,9 @@ function! s:hooks.on_source(bundle)
     let g:neocomplete#same_filetypes           = {
     \   'html': 'html,css,javascript,php',}
     let g:neocomplete#sources = {
-    \   '_':    ['file', 'ultisnips', 'buffer', 'member', 'dictionary',],
-    \   'vim':  ['file', 'ultisnips', 'buffer', 'member', 'dictionary', 'syntax', 'vim'],
-    \   'html': ['file', 'ultisnips', 'buffer', 'member', 'dictionary', 'syntax',],}
+    \   '_':    ['file', 'ultisnips', 'buffer', 'dictionary',],
+    \   'vim':  ['file', 'ultisnips', 'buffer', 'dictionary', 'syntax', 'vim'],
+    \   'html': ['file', 'ultisnips', 'buffer', 'dictionary', 'syntax',],}
     let g:neocomplete#sources#dictionary#dictionaries = {
     \   'default':  '',
     \   'php':      $HOME.'/.vim/dict/php.dict',}
