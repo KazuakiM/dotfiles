@@ -189,8 +189,9 @@ else
     " vimproc {{{
     NeoBundle 'Shougo/vimproc', {
     \    'build' : {
-    \        'mac'  : 'make -f make_mac.mak',
-    \        'unix' : 'make -f make_unix.mak',},} "}}}
+    \        'mac'    : 'make -f make_mac.mak',
+    \        'unix'   : 'make -f make_unix.mak',
+    \        'cygwin' : 'make -f make_cygwin.mak',},} "}}}
     NeoBundle 'vim-jp/vital.vim'
     NeoBundle 'mattn/webapi-vim'
     NeoBundle 'tpope/vim-fugitive'
