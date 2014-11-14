@@ -5,7 +5,7 @@ Files are setting my development environments.
 
 # Mac
 
-```
+```zsh
 $ cd $HOME
 $ mkdir -p work
 $ git clone git@github.com:KazuakiM/dotfiles.git work/dotfiles
@@ -21,7 +21,7 @@ $ exit
 
 # Linux
 
-```
+```bash
 $ cd $HOME
 $ mkdir -p work
 $ git clone git@github.com:KazuakiM/dotfiles.git work/dotfiles
@@ -37,13 +37,13 @@ $ vi
 $ exit
 ```
 
-# Cygwin for Windows
+# Cygwin @ Windows
 
 Environment variables
 * HOME
 * xxxxxx
 
-```
+```bash
 $ cd $HOME
 $ cd ..
 $ ls
@@ -63,7 +63,7 @@ $ php $HOME/shell/phpDict.php
 $ exit
 ```
 
-```
+```bash
 $ vi
  :NeoBundleInstall
 
