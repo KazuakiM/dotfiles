@@ -5,18 +5,18 @@ Files are setting my development environments.
 
 # Mac
 
-```
-cd $HOME
-mkdir -p work
-git clone git@github.com:KazuakiM/dotfiles.git work/dotfiles
-git clone git@github.com:Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
-wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp
-tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
-php $HOME/work/shell/phpDict.php
-vi
+```bash
+$ cd $HOME
+$ mkdir -p work
+$ git clone git@github.com:KazuakiM/dotfiles.git work/dotfiles
+$ git clone git@github.com:Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
+$ wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp
+$ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
+$ php $HOME/work/shell/phpDict.php
+$ vi
  :NeoBundleInstall
 
-exit
+$ exit
 ```
 
 # Linux
