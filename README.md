@@ -1,4 +1,8 @@
 dotfiles
 ==============
 
-Files are setting Linux and Mac development environments.
+Files are setting my development environments.
+
+# Mac & Linux
+
+# Windows
