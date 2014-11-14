@@ -68,6 +68,7 @@ set ambiwidth=double
 set spelllang+=cjk
 set guifont=Source_Code_Pro:h11:cANSI
 set antialias
+set iminsert=0
 "set spell
 set backspace=indent,eol,start
 set virtualedit+=block
