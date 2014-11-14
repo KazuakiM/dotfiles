@@ -5,7 +5,7 @@ Files are setting my development environments.
 
 # Mac
 
-```sh
+```
 cd $HOME
 mkdir -p work
 git clone git@github.com:KazuakiM/dotfiles.git work/dotfiles
