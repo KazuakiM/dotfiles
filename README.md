@@ -7,7 +7,7 @@ Files are setting my development environments.
 
 ```zsh
 $ cd $HOME
-$ mkdir -p work
+$ /bin/mkdir -p work
 $ git clone git@github.com:KazuakiM/dotfiles.git work/dotfiles
 $ git clone git@github.com:Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
 $ wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp
