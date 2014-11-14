@@ -532,6 +532,11 @@ let g:easy_align_delimiters = {
 \        'left_margin':  0,
 \        'right_margin': 0, }, }
 "}}}
+" vim-regexper {{{
+NeoBundle 'vim-regexper', {
+\    'base': '/srv/vim-plugin',
+\    'type': 'nosync',}
+"}}}
 " Align
 " SQLUtilities {{{
 NeoBundleLazy 'vim-scripts/SQLUtilities', {
