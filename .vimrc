@@ -74,6 +74,7 @@ set visualbell
 set t_vb=
 set noerrorbells
 set foldmethod=marker
+set foldopen-=search
 set viminfo+=n~/.vim/viminfo/.viminfo
 set updatetime=1000
 nnoremap zx :<C-U>%foldopen<CR>
@@ -111,7 +112,7 @@ colorscheme jellybeans
 set title
 set ruler
 set laststatus=2
-set wildignore+=*.git,*.svn,*.log,*.bmp,*.gif,*.ico,*.jpg,*.png,.DS_Store
+set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,.DS_Store
 set wildmenu
 set wildmode=longest:full,full
 " [memo]
