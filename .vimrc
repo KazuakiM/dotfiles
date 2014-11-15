@@ -496,7 +496,7 @@ nnoremap <Leader>t :Tlist<CR>
 " nerdtree {{{
 NeoBundleLazy 'scrooloose/nerdtree', {
 \    'commands' : 'NERDTree',}
-nnoremap <Leader>n :NERDTree<CR>
+nnoremap <expr><Leader>n ':NERDTree '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
 let g:NERDTreeMinimalUI         = 1
 let g:NERDTreeRespectWildIgnore = 1
 let g:NERDTreeShowHidden        = 1
