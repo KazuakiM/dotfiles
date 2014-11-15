@@ -220,6 +220,13 @@ else
     NeoBundle 'thinca/vim-prettyprint'
     NeoBundle 'KazuakiM/vim-snippets'
     NeoBundle 'SirVer/ultisnips'
+    if has('mac')
+        " vim-regexper {{{
+        NeoBundle 'vim-regexper', {
+        \    'base': '/srv/vim-plugin',
+        \    'type': 'nosync',}
+        "}}}
+    endif
 
     NeoBundleSaveCache
 endif
@@ -536,11 +543,6 @@ let g:easy_align_delimiters = {
 \        'pattern':      ' \(\S\+\s*[;=]\)\@=',
 \        'left_margin':  0,
 \        'right_margin': 0, }, }
-"}}}
-" vim-regexper {{{
-NeoBundle 'vim-regexper', {
-\    'base': '/srv/vim-plugin',
-\    'type': 'nosync',}
 "}}}
 " Align
 " SQLUtilities {{{
