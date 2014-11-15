@@ -222,11 +222,7 @@ else
     NeoBundle 'KazuakiM/vim-snippets'
     NeoBundle 'SirVer/ultisnips'
     if has('mac')
-        " vim-regexper {{{
-        NeoBundle 'vim-regexper', {
-        \    'base': '/srv/vim-plugin',
-        \    'type': 'nosync',}
-        "}}}
+        NeoBundle 'KazuakiM/vim-regexper'
     endif
 
     NeoBundleSaveCache
