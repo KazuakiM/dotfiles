@@ -37,7 +37,10 @@
 "{{{
 if has('vim_starting')
     set nocompatible
-    set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
+    if (has("win32") || has ("win64"))
+        set runtimepath+=$HOME/.vim,$HOME/.vim/after
+    endif
+    set runtimepath+=$HOME/.vim/bundle/neobundle.vim
 endif
 augroup MyAutoCmd
     autocmd!
@@ -63,12 +66,15 @@ set autoread
 set hidden
 set ambiwidth=double
 set spelllang+=cjk
+set iminsert=0
 "set spell
 set backspace=indent,eol,start
 set virtualedit+=block
-set visualbell t_vb=
+set visualbell
+set t_vb=
 set noerrorbells
 set foldmethod=marker
+set foldopen-=search
 set viminfo+=n~/.vim/viminfo/.viminfo
 set updatetime=1000
 nnoremap zx :<C-U>%foldopen<CR>
@@ -106,7 +112,7 @@ colorscheme jellybeans
 set title
 set ruler
 set laststatus=2
-set wildignore+=*.git,*.svn,*.log,*.bmp,*.gif,*.ico,*.jpg,*.png,.DS_Store
+set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,.DS_Store
 set wildmenu
 set wildmode=longest:full,full
 " [memo]
@@ -191,8 +197,9 @@ else
     " vimproc {{{
     NeoBundle 'Shougo/vimproc', {
     \    'build' : {
-    \        'mac'  : 'make -f make_mac.mak',
-    \        'unix' : 'make -f make_unix.mak',},} "}}}
+    \        'mac'    : 'make -f make_mac.mak',
+    \        'unix'   : 'make -f make_unix.mak',
+    \        'cygwin' : 'make -f make_cygwin.mak',},} "}}}
     NeoBundle 'vim-jp/vital.vim'
     NeoBundle 'mattn/webapi-vim'
     NeoBundle 'tpope/vim-fugitive'
@@ -214,6 +221,9 @@ else
     NeoBundle 'thinca/vim-prettyprint'
     NeoBundle 'KazuakiM/vim-snippets'
     NeoBundle 'SirVer/ultisnips'
+    if has('mac')
+        NeoBundle 'KazuakiM/vim-regexper'
+    endif
 
     NeoBundleSaveCache
 endif
@@ -483,7 +493,7 @@ nnoremap <Leader>t :Tlist<CR>
 " nerdtree {{{
 NeoBundleLazy 'scrooloose/nerdtree', {
 \    'commands' : 'NERDTree',}
-nnoremap <Leader>n :NERDTree<CR>
+nnoremap <expr><Leader>n ':NERDTree '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
 let g:NERDTreeMinimalUI         = 1
 let g:NERDTreeRespectWildIgnore = 1
 let g:NERDTreeShowHidden        = 1
@@ -788,6 +798,10 @@ nnoremap <F3> :call<Space>BufferInfo()<CR>
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
 " Environment setting file
-source ~/.vimrc.local
+if (has("win32") || has ("win64"))
+    source ~/.vimrc.win
+else
+    source ~/.vimrc.local
+endif
 "}}}
 
