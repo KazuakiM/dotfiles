@@ -66,14 +66,12 @@ set autoread
 set hidden
 set ambiwidth=double
 set spelllang+=cjk
-set guifont=Source_Code_Pro:h11:cANSI
-set antialias
 set iminsert=0
 "set spell
 set backspace=indent,eol,start
 set virtualedit+=block
 set visualbell
-autocmd MyAutoCmd FileType * set t_vb=
+set t_vb=
 set noerrorbells
 set foldmethod=marker
 set viminfo+=n~/.vim/viminfo/.viminfo
@@ -108,7 +106,6 @@ autocmd MyAutoCmd ColorScheme * highlight IdeographicSpace cterm=reverse ctermfg
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m5 = matchadd('IdeographicSpace', '　')
 " Update Visual mode target colorScheme.
 autocmd MyAutoCmd ColorScheme * highlight Visual cterm=reverse ctermfg=lightgreen
-autocmd MyAutoCmd ColorScheme * highlight Comment ctermfg=darkgray gui=NONE guifg=darkgray
 colorscheme jellybeans
 " Show
 set title
