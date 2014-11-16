@@ -1,13 +1,29 @@
 dotfiles
 ==========
-
 Files are setting my development environments.
-
 # Mac
+### Install packages
+homebrew
+```bash
+...
+```
+### Set dotfiles
 ```bash
 $ cd $HOME
 $ mkdir -p work
 $ git clone git@github.com:KazuakiM/dotfiles.git work/dotfiles
+$ ln -sf $HOME/work/dotfiles/.bash_logout  .bash_logout
+$ ln -sf $HOME/work/dotfiles/.bash_profile .bash_profile
+$ cp $HOME/work/dotfiles/.bash_profile.local .
+$ ln -sf $HOME/work/dotfiles/.ctags        .ctags
+$ ln -sf $HOME/work/dotfiles/.gitconfig    .gitconfig
+$ cp $HOME/work/dotfiles/.gitconfig.local .
+$ ln -sf $HOME/work/dotfiles/.gvimrc       .gvimrc
+$ ln -sf $HOME/work/dotfiles/.mplayer      .mplayer
+$ ln -sf $HOME/work/dotfiles/.vim          .vim
+$ ln -sf $HOME/work/dotfiles/.vimrc        .vimrc
+$ cp $HOME/work/dotfiles/.vimrc.local .
+$ ln -sf $HOME/work/dotfiles/.w3m          .w3m
 $ git clone git@github.com:Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
 $ wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp
 $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
@@ -82,7 +98,7 @@ $ which ruby
  /usr/bin/ruby
 $ which python
  /usr/bin/python
-$ find / -name "config.c" 2>&1 |grep config.c
+$ find / -name "config.c" 2>&1|grep config.c
  /usr/lib64/python2.7/config/config.c
 $ which perl
  /usr/bin/perl
@@ -118,11 +134,27 @@ $ ./configure \
     --with-luajit
 $ make && make install
 ```
+Composer
+```bash
+$ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin
+```
 ### Set dotfiles
 ```bash
 $ cd $HOME
 $ mkdir -p work
 $ git clone git@github.com:KazuakiM/dotfiles.git work/dotfiles
+$ ln -sf $HOME/work/dotfiles/.bash_logout  .bash_logout
+$ ln -sf $HOME/work/dotfiles/.bash_profile .bash_profile
+$ cp $HOME/work/dotfiles/.bash_profile.local .
+$ ln -sf $HOME/work/dotfiles/.ctags        .ctags
+$ ln -sf $HOME/work/dotfiles/.gitconfig    .gitconfig
+$ cp $HOME/work/dotfiles/.gitconfig.local .
+$ ln -sf $HOME/work/dotfiles/.gvimrc       .gvimrc
+$ ln -sf $HOME/work/dotfiles/.mplayer      .mplayer
+$ ln -sf $HOME/work/dotfiles/.vim          .vim
+$ ln -sf $HOME/work/dotfiles/.vimrc        .vimrc
+$ cp $HOME/work/dotfiles/.vimrc.local .
+$ ln -sf $HOME/work/dotfiles/.w3m          .w3m
 $ git clone git@github.com:Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
 $ wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp
 $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
@@ -169,5 +201,4 @@ $ cp $HOME/.vim/colors/jellybeans.vim /cygwin/c/path/to/path/Vim/colors/
 # TODO
 * Add Windows detail
 * Add Brewfile
-* Add yum management file
 * Try Chocolatey
