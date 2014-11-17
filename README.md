@@ -3,9 +3,18 @@ dotfiles
 Files are setting my development environments.
 # Mac
 ### Install packages
+
+AppStore
+* [Xcode](https://developer.apple.com/jp/xcode/downloads/)
+
 homebrew
 ```bash
-...
+$ xcode-select --install
+$ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+$ brew doctor
+$ brew update
+$ brew upgrade
+$ brew doctor
 ```
 ### Set dotfiles
 ```bash
@@ -38,12 +47,12 @@ $ exit
 ```bash
 $ sudo chown -R <Account>:<AccountGroup> /usr/local
 ```
-### Install key
+### Install key & RPM
 Check key
-* [epel:RPM-GPG-KEY-EPEL-x](http://ftp.riken.jp/Linux/fedora/epel)
-* [ius:IUS-COMMUNITY-GPG-KEY](http://dl.iuscommunity.org/pub/ius/IUS-COMMUNITY-GPG-KEY)
-* [remi:RPM-GPG-KEY-remi](http://rpms.famillecollet.com/RPM-GPG-KEY-remi)
-* [rpmforge:RPM-GPG-KEY.dag.txt](http://apt.sw.be/RPM-GPG-KEY.dag.txt)
+* [epel](http://ftp.riken.jp/Linux/fedora/epel)
+* [ius](http://dl.iuscommunity.org/pub/ius/IUS-COMMUNITY-GPG-KEY)
+* [remi](http://rpms.famillecollet.com/RPM-GPG-KEY-remi)
+* [rpmforge](http://apt.sw.be/RPM-GPG-KEY.dag.txt)
 
 Usage
 > example CentOS7.
