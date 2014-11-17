@@ -4,9 +4,9 @@
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
 if (has("win32") || has ("win64"))
-    set guifont=Source_Code_Pro:h16:cANSI
-    set lines=45
-    set columns=100
+    set guifont=Source_Code_Pro:h12:cANSI
+    set lines=50
+    set columns=87
 else
     set guifont=Ricty_Discord_Regular:h16
     set lines=47
