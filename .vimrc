@@ -66,16 +66,15 @@ set autoread
 set hidden
 set ambiwidth=double
 set spelllang+=cjk
-set guifont=Source_Code_Pro:h11:cANSI
-set antialias
 set iminsert=0
 "set spell
 set backspace=indent,eol,start
 set virtualedit+=block
 set visualbell
-autocmd MyAutoCmd FileType * set t_vb=
+set t_vb=
 set noerrorbells
 set foldmethod=marker
+set foldopen-=search
 set viminfo+=n~/.vim/viminfo/.viminfo
 set updatetime=1000
 nnoremap zx :<C-U>%foldopen<CR>
@@ -108,13 +107,12 @@ autocmd MyAutoCmd ColorScheme * highlight IdeographicSpace cterm=reverse ctermfg
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m5 = matchadd('IdeographicSpace', '　')
 " Update Visual mode target colorScheme.
 autocmd MyAutoCmd ColorScheme * highlight Visual cterm=reverse ctermfg=lightgreen
-autocmd MyAutoCmd ColorScheme * highlight Comment ctermfg=darkgray gui=NONE guifg=darkgray
 colorscheme jellybeans
 " Show
 set title
 set ruler
 set laststatus=2
-set wildignore+=*.git,*.svn,*.log,*.bmp,*.gif,*.ico,*.jpg,*.png,.DS_Store
+set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,.DS_Store
 set wildmenu
 set wildmode=longest:full,full
 " [memo]
@@ -223,6 +221,9 @@ else
     NeoBundle 'thinca/vim-prettyprint'
     NeoBundle 'KazuakiM/vim-snippets'
     NeoBundle 'SirVer/ultisnips'
+    if has('mac')
+        NeoBundle 'KazuakiM/vim-regexper'
+    endif
 
     NeoBundleSaveCache
 endif
@@ -492,7 +493,7 @@ nnoremap <Leader>t :Tlist<CR>
 " nerdtree {{{
 NeoBundleLazy 'scrooloose/nerdtree', {
 \    'commands' : 'NERDTree',}
-nnoremap <Leader>n :NERDTree<CR>
+nnoremap <expr><Leader>n ':NERDTree '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
 let g:NERDTreeMinimalUI         = 1
 let g:NERDTreeRespectWildIgnore = 1
 let g:NERDTreeShowHidden        = 1

@@ -86,6 +86,7 @@ case "${OSTYPE}" in
         alias ll='ls -AGhl'
         alias vi='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
         alias vim='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+        alias gvim='open -a MacVim "$@"'
         alias httpd='sudo apachectl'
         alias composer='php -d memory_limit=1G /usr/local/opt/composer/libexec/composer.phar'
         alias MYSQL='mysql.server'
@@ -157,6 +158,7 @@ case "${OSTYPE}" in
         alias ls='ls -Ak --color=auto'
         alias sl='ls -Ak --color=auto'
         alias ll='ls -Akl --color=auto'
-        alias vi="$HOME/shell/vimStarter.sh"
+        alias vi='vim'
+        alias gvim="$HOME/shell/vimStarter.sh"
 esac
 #}}}
