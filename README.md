@@ -175,10 +175,12 @@ $ vi
 
 $ exit
 ```
-# Cygwin @ Windows
+# Windows
+### Install packages
+Cygwin
 ### Set environment variables
 * HOME
-* xxxxxx
+* C:\cygwin64\home\<Account>
 
 ### Operate Cygwin
 ```bash
