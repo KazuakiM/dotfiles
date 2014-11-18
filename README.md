@@ -2,6 +2,7 @@ dotfiles
 ==========
 Files are setting my development environments.
 # Mac
+
 ### Install packages
 
 AppStore
@@ -12,6 +13,7 @@ homebrew
 $ xcode-select --install
 $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 $ brew doctor
+$ brew install git
 $ brew update
 $ brew upgrade
 $ brew doctor
@@ -43,6 +45,7 @@ $ vi
 $ exit
 ```
 # Linux
+
 ### Setting
 ```bash
 $ sudo chown -R <Account>:<AccountGroup> /usr/local
@@ -176,7 +179,9 @@ $ vi
 $ exit
 ```
 # Windows
+
 ### Install packages
+
 Cygwin
 ### Set environment variables
 * HOME
