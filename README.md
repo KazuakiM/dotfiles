@@ -207,7 +207,7 @@ $ cp $HOME/.vimrc.local $HOME/.vimrc.win
 $ php $HOME/shell/phpDict.php
 $ exit
 ```
-
+alias, export情報を読み込ませるため、一旦ターミナルを閉じる
 ```bash
 $ vi
  :NeoBundleInstall
@@ -215,6 +215,5 @@ $ vi
 $ cp $HOME/.vim/colors/jellybeans.vim /cygwin/c/path/to/path/Vim/colors/
 ```
 # TODO
-* Add Windows detail
 * Add Brewfile
 * Try Chocolatey
