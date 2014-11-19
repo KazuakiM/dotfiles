@@ -8,7 +8,6 @@ Gitのケーススタディ
 
 ## branch 作成
 ```
-NAME=<リビジョン番号>
 pwd
 git status
 
@@ -16,9 +15,9 @@ git checkout master
 git pull
 git branch
 
-git branch `date +'%y%m%d'`-dev-$NAME
-git checkout `date +'%y%m%d'`-dev-$NAME
-git push origin `date +'%y%m%d'`-dev-$NAME
+git branch xxxxx
+git checkout xxxxx
+git push origin xxxxx
 ```
 
 ## merge master to branch
