@@ -8,7 +8,7 @@ Gitのケーススタディ
 
 ## branch 作成
 ```
-NAME=3508
+NAME=<リビジョン番号>
 pwd
 git status
 
