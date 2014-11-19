@@ -673,11 +673,6 @@ NeoBundleLazy 'kannokanno/previm', {
 \    'depends':   'open-browser.vim',
 \    'filetypes': 'markdown',}
 nnoremap <silent> <Leader>pre :PrevimOpen<CR>
-let s:hooks = neobundle#get_hooks('previm')
-function! s:hooks.on_source(bundle)
-    let g:previm_open_cmd = 'open -a firefox'
-endfunction
-unlet s:hooks
 "}}}
 "}}}
 "
@@ -716,6 +711,7 @@ if has('mac')
     let $PERL_DLL    = '/usr/local/Cellar/perl518/5.18.2/lib/5.18.2/darwin-thread-multi-2level/CORE/libperl.dylib'
     let $RUBY_DLL    = '/usr/local/lib/libruby.dylib'
     let $LUA_DLL     = '/usr/local/lib/liblua.dylib'
+    let g:previm_open_cmd = 'open -a firefox'
 else
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
     " php setting.
