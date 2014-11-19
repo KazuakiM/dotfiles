@@ -158,7 +158,9 @@ case "${OSTYPE}" in
         alias ls='ls -Ak --color=auto'
         alias sl='ls -Ak --color=auto'
         alias ll='ls -Akl --color=auto'
-        alias vi='vim'
+        alias vi="$HOME/shell/vimStarter.sh"
+        alias vim="$HOME/shell/vimStarter.sh"
         alias gvim="$HOME/shell/vimStarter.sh"
+        ;;
 esac
 #}}}
