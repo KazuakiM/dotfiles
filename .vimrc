@@ -95,15 +95,15 @@ inoremap <silent><expr><C-v> '<ESC>:set<Space>paste<CR><Insert><C-r>+<ESC>:set<S
 syntax on
 set t_Co=256
 " Check space and newLineCode.
-autocmd MyAutoCmd ColorScheme * highlight TabString        cterm=reverse ctermfg=darkgray
+autocmd MyAutoCmd ColorScheme * highlight TabString        cterm=reverse ctermfg=darkgray     guibg=darkgray
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',        "\t")
-autocmd MyAutoCmd ColorScheme * highlight CrString         cterm=reverse ctermfg=darkred
+autocmd MyAutoCmd ColorScheme * highlight CrString         cterm=reverse ctermfg=darkred      guibg=darkred
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',         "\r")
-autocmd MyAutoCmd ColorScheme * highlight CrlfString       cterm=reverse ctermfg=darkmagenta
+autocmd MyAutoCmd ColorScheme * highlight CrlfString       cterm=reverse ctermfg=darkmagenta  guibg=darkmagenta
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',       "\r\n")
-autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL    cterm=reverse ctermfg=lightmagenta
+autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL    cterm=reverse ctermfg=lightmagenta guibg=lightmagenta
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL',    '\s\+$')
-autocmd MyAutoCmd ColorScheme * highlight IdeographicSpace cterm=reverse ctermfg=lightred
+autocmd MyAutoCmd ColorScheme * highlight IdeographicSpace cterm=reverse ctermfg=lightred     guibg=lightred
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m5 = matchadd('IdeographicSpace', '　')
 " Update Visual mode target colorScheme.
 autocmd MyAutoCmd ColorScheme * highlight Visual cterm=reverse ctermfg=lightgreen
