@@ -120,6 +120,10 @@ case "${OSTYPE}" in
         alias WIRESHARK='/usr/local/bin/wireshark'
         export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
         export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+        if type rbenv >/dev/null 2>&1; then
+            export RBENV_ROOT=/usr/local/bin
+            eval "$(rbenv init -)";
+        fi
         localPath=''
         #brew --prefix perl518
         if [ -d /usr/local/opt/perl518/bin ]; then
@@ -132,10 +136,6 @@ case "${OSTYPE}" in
         #brew --prefix svn
         if [ -d /usr/local/opt/subversion/bin ]; then
             localPath="/usr/local/opt/subversion/bin:$localPath"
-        fi
-        #brew --prefix ruby
-        if [ -d /usr/local/opt/ruby/bin ]; then
-            localPath="/usr/local/opt/ruby/bin:$localPath"
         fi
         if [ -d /usr/local/heroku/bin ]; then
             localPath="/usr/local/heroku/bin:$localPath"

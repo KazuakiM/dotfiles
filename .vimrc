@@ -338,7 +338,7 @@ nnoremap [memolist]l :MemoList<CR>
 nnoremap [memolist]g :MemoGrep<CR>
 "}}}
 " vim-quickrun {{{
-nnoremap <Leader>r :QuickRun<CR>
+nnoremap <Leader>run :QuickRun<CR>
 let g:quickrun_config = {
 \    '_': {
 \        'hook/close_buffer/enable_empty_data': 1,
@@ -712,6 +712,7 @@ if has('mac')
     let $RUBY_DLL    = '/usr/local/lib/libruby.dylib'
     let $LUA_DLL     = '/usr/local/lib/liblua.dylib'
     let g:previm_open_cmd = 'open -a firefox'
+    nnoremap <Leader>reg :RegexperExecute
 else
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
     " php setting.
