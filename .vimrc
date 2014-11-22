@@ -214,10 +214,7 @@ else
     NeoBundle 'fuenor/qfixgrep'
     NeoBundle 'LeafCage/yankround.vim'
     NeoBundle 'glidenote/memolist.vim'
-    " vim-quickrun {{{
-    " # command memo
-    " * :QuickRun :execute quickrun.
-    NeoBundle 'thinca/vim-quickrun' "}}}
+    NeoBundle 'thinca/vim-quickrun'
     NeoBundle 'thinca/vim-prettyprint'
     NeoBundle 'KazuakiM/vim-snippets'
     NeoBundle 'SirVer/ultisnips'
@@ -331,6 +328,7 @@ let g:yankround_region_hl_groupname = 'YankRoundRegion'
 "}}}
 " memolist.vim {{{
 let g:memolist_path = '$HOME/.vim/memolist.vim'
+let g:memolist_filename_prefix_none = 1
 nnoremap [memolist] <Nop>
 nmap <Leader>m [memolist]
 nnoremap [memolist]n :MemoNew<CR>
