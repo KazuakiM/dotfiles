@@ -74,7 +74,7 @@ set visualbell
 set t_vb=
 set noerrorbells
 set foldmethod=marker
-set foldopen-=search
+"set foldopen-=search
 set viminfo+=n~/.vim/viminfo/.viminfo
 set updatetime=1000
 nnoremap zx :<C-U>%foldopen<CR>
@@ -327,13 +327,15 @@ highlight YankRoundRegion cterm=underline ctermfg=magenta
 let g:yankround_region_hl_groupname = 'YankRoundRegion'
 "}}}
 " memolist.vim {{{
-let g:memolist_path = '$HOME/.vim/memolist.vim'
+let g:memolist_path                 = '$HOME/.vim/memolist.vim'
 let g:memolist_filename_prefix_none = 1
+let g:memolist_unite                = 1
+let g:memolist_unite_source         = "file_rec"
+let g:memolist_unite_option         = "-start-insert"
 nnoremap [memolist] <Nop>
 nmap <Leader>m [memolist]
 nnoremap [memolist]n :MemoNew<CR>
 nnoremap [memolist]l :MemoList<CR>
-nnoremap [memolist]g :MemoGrep<CR>
 "}}}
 " vim-quickrun {{{
 nnoremap <Leader>run :QuickRun<CR>
@@ -374,6 +376,10 @@ let g:UltiSnipsJumpForwardTrigger='<TAB>'
 "let g:UltiSnipsJumpBackwardTrigger=''
 let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsSnippetsDir=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
+"}}}
+" vim-regexper {{{
+let g:regexper#OpenCmd='open -a firefox'
+nnoremap <Leader>reg :RegexperExecute
 "}}}
 "}}}
 "
@@ -710,7 +716,6 @@ if has('mac')
     let $RUBY_DLL    = '/usr/local/lib/libruby.dylib'
     let $LUA_DLL     = '/usr/local/lib/liblua.dylib'
     let g:previm_open_cmd = 'open -a firefox'
-    nnoremap <Leader>reg :RegexperExecute
 else
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
     " php setting.
