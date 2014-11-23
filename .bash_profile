@@ -25,7 +25,6 @@ alias gdiff='git diff -b'
 alias h='history'
 alias mv='mv -i'
 alias rm='rm -i'
-alias tail='tail -F'
 alias tree='tree -af'
 if type colordiff >/dev/null 2>&1; then
     alias diff='colordiff -u'

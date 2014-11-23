@@ -5,10 +5,36 @@ tags: []
 categories: []
 - - -
 
+# Grep
 file grep
 ```
-find ./ -type f -exec grep 'keyword' {} /dev/null \;
+find ./ -type f -exec grep "keyword" {} /dev/null \;
 ```
+
+# Network
+All network interface
+```
+ifconfig -a
+```
+5 request
+```
+ping -d -c 5 <host>
+```
+Trace route
+```
+traceroute -d -p <port> <host>
+```
+Tcpdump
+```
+#dst/src host
+tcpdump -s0 -A -w /tmp/tcpdump_%Y%m%d_%H%M.cap port <port> host <host>
+#dst host
+tcpdump -s0 -A -w /tmp/tcpdump_%Y%m%d_%H%M.cap port <port> dst host <host>
+#src host
+tcpdump -s0 -A -w /tmp/tcpdump_%Y%m%d_%H%M.cap port <port> src host <host>
+```
+
+# File size
 disc file system size
 ```
 df -h
