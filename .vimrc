@@ -485,16 +485,18 @@ vmap <Leader>gx <Plug>(openbrowser-smart-search)
 " taglist.vim {{{
 NeoBundleLazy 'vim-scripts/taglist.vim', {
 \    'commands' : 'Tlist',}
-let Tlist_Use_Right_Window = 1
-let Tlist_Show_One_File    = 1
-let Tlist_Exit_OnlyWindow  = 1
-let g:tlist_php_settings   = 'php;c:class;f:function;d:constant'
+let g:Tlist_Use_Right_Window = 1
+let g:Tlist_Show_One_File    = 1
+let g:Tlist_Exit_OnlyWindow  = 1
+let g:Tlist_WinWidth         = 20
+let g:tlist_php_settings     = 'php;c:class;f:function;d:constant'
 nnoremap <Leader>t :Tlist<CR>
 "}}}
 " nerdtree {{{
 NeoBundleLazy 'scrooloose/nerdtree', {
 \    'commands' : 'NERDTree',}
 nnoremap <expr><Leader>n ':NERDTree '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
+let g:NERDTreeWinSize           = 20
 let g:NERDTreeMinimalUI         = 1
 let g:NERDTreeRespectWildIgnore = 1
 let g:NERDTreeShowHidden        = 1
