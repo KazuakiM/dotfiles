@@ -286,9 +286,9 @@ let g:unite_force_overwrite_statusline = 0
 let g:indentLine_faster = 1
 "}}}
 " vim-ref {{{
-let g:ref_cache_dir=$HOME.'/.vim/vim-ref/cache'
-let g:ref_phpmanual_path=$HOME.'/.vim/vim-ref/php-chunked-xhtml'
-let g:ref_detect_filetype={
+let g:ref_cache_dir       = $HOME.'/.vim/vim-ref/cache'
+let g:ref_phpmanual_path  = $HOME.'/.vim/vim-ref/php-chunked-xhtml'
+let g:ref_detect_filetype = {
 \    'html':       'phpmanual',
 \    'javascript': 'phpmanual',
 \    'css':        'phpmanual',}
@@ -306,8 +306,8 @@ nnoremap <Leader>ts :ts<CR>
 " qfixgrep {{{
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git
 set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
-let QFixWin_EnableMode = 1
-let QFix_UseLocationList = 1
+let g:QFixWin_EnableMode   = 1
+let g:QFix_UseLocationList = 1
 nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 "}}}
@@ -316,8 +316,8 @@ let g:yankround_dir=$HOME.'/.vim/yankround.vim'
 nmap p <Plug>(yankround-p)
 nmap <C-p> <Plug>(yankround-prev)
 nmap <C-n> <Plug>(yankround-next)
-let g:yankround_use_region_hl = 1
 highlight YankRoundRegion cterm=underline ctermfg=magenta
+let g:yankround_use_region_hl       = 1
 let g:yankround_region_hl_groupname = 'YankRoundRegion'
 "}}}
 " memolist.vim {{{
@@ -366,13 +366,12 @@ let g:quickrun_config = {
 \        'outputter/buffer/split':           ':botright 7sp',},}
 "}}}
 " ultisnips {{{
-let g:UltiSnipsJumpForwardTrigger='<TAB>'
+let g:UltiSnipsJumpForwardTrigger = '<TAB>'
 "let g:UltiSnipsJumpBackwardTrigger=''
-let g:UltiSnipsEditSplit='vertical'
-let g:UltiSnipsSnippetsDir=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
+let g:UltiSnipsEditSplit          = 'vertical'
+let g:UltiSnipsSnippetsDir        = $HOME.'/.vim/bundle/vim-snippets/UltiSnips'
 "}}}
 " vim-regexper {{{
-let g:regexper#OpenCmd='open -a firefox'
 nnoremap <Leader>reg :RegexperExecute
 "}}}
 "}}}
@@ -711,7 +710,8 @@ if has('mac')
     let $PERL_DLL   = '/usr/local/Cellar/perl518/5.18.2/lib/5.18.2/darwin-thread-multi-2level/CORE/libperl.dylib'
     let $RUBY_DLL   = '/usr/local/lib/libruby.dylib'
     let $LUA_DLL    = '/usr/local/lib/liblua.dylib'
-    let g:previm_open_cmd = 'open -a firefox'
+    let g:previm_open_cmd  = 'open -a firefox'
+    let g:regexper#OpenCmd = 'open -a firefox'
 else
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
     " php setting.
