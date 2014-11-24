@@ -8,7 +8,7 @@ categories: []
 # Grep
 file grep
 ```
-find ./ -type f -exec grep "keyword" {} /dev/null \;
+find ./ -type d -name ".git" -prune -o -type d -name ".svn" -prune -o -type f -exec grep "keyword" {} /dev/null \;
 ```
 
 # Network
