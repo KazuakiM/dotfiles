@@ -372,7 +372,8 @@ let g:UltiSnipsEditSplit          = 'vertical'
 let g:UltiSnipsSnippetsDir        = $HOME.'/.vim/bundle/vim-snippets/UltiSnips'
 "}}}
 " vim-regexper {{{
-nnoremap <Leader>reg :RegexperExecute
+let g:regexper#AppPath = $HOME.'/.vim/bundle/regexper'
+nnoremap <Leader>reg :RegexperExecute<Space>
 "}}}
 "}}}
 "
@@ -696,6 +697,9 @@ NeoBundleFetch 'KazuakiM/neosnippet-snippets'
 "* URL: https://github.com/ziadoz/awesome-php
 NeoBundleFetch 'ziadoz/awesome-php'
 nnoremap <Leader>awe :tabnew $HOME/.vim/bundle/awesome-php/README.md<CR>
+"}}}
+" Regexper {{{
+NeoBundleFetch 'javallone/regexper'
 "}}}
 "}}}
 "
