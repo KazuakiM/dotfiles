@@ -5,6 +5,16 @@ tags: []
 categories: []
 - - -
 
+help
+```
+heroku --help
+```
+
+release note
+```
+heroku releases
+```
+
 deploy
 ```
 cd /dir/to/project
