@@ -74,7 +74,7 @@ set visualbell
 set t_vb=
 set noerrorbells
 set foldmethod=marker
-set foldopen-=search
+"set foldopen-=search
 set viminfo+=n~/.vim/viminfo/.viminfo
 set updatetime=1000
 nnoremap zx :<C-U>%foldopen<CR>
@@ -162,17 +162,17 @@ nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
 " SQL
 let g:sql_type_default='mysql'
 " PHP
-let php_sql_query = 1
-let php_baselib = 1
-let php_htmlInStrings = 1
-let php_noShortTags = 1
+let php_sql_query          = 1
+let php_baselib            = 1
+let php_htmlInStrings      = 1
+let php_noShortTags        = 1
 let php_parent_error_close = 1
 " Vim
 nnoremap [vim] <Nop>
 nmap <Leader>f [vim]
-nnoremap [vim]e :tabnew $MYVIMRC<CR>
-nnoremap [vim]s :source $MYVIMRC<CR>
-nnoremap [vim]h :source $VIMRUNTIME/syntax/colortest.vim<CR>
+nnoremap [vim]e :tabnew<Space>$MYVIMRC<CR>
+nnoremap [vim]s :source<Space>$MYVIMRC<CR>
+nnoremap [vim]h :source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
 " Close sub window
 autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
@@ -203,7 +203,6 @@ else
     NeoBundle 'vim-jp/vital.vim'
     NeoBundle 'mattn/webapi-vim'
     NeoBundle 'tpope/vim-fugitive'
-    NeoBundle 'itchyny/landscape.vim'
     NeoBundle 'itchyny/lightline.vim'
     NeoBundle 'Yggdroot/indentLine'
     NeoBundle 'thinca/vim-ref'
@@ -214,10 +213,7 @@ else
     NeoBundle 'fuenor/qfixgrep'
     NeoBundle 'LeafCage/yankround.vim'
     NeoBundle 'glidenote/memolist.vim'
-    " vim-quickrun {{{
-    " # command memo
-    " * :QuickRun :execute quickrun.
-    NeoBundle 'thinca/vim-quickrun' "}}}
+    NeoBundle 'thinca/vim-quickrun'
     NeoBundle 'thinca/vim-prettyprint'
     NeoBundle 'KazuakiM/vim-snippets'
     NeoBundle 'SirVer/ultisnips'
@@ -229,8 +225,8 @@ else
 endif
 " lightline {{{
 let g:lightline = {
-\    'colorscheme': 'landscape',
-\    'active': {
+\    'colorscheme': 'jellybeans',
+\    'active':      {
 \        'left':  [['mode','paste',],['fugitive','filename',],],
 \        'right': [['qfstatusline','lineinfo',],['percent',],['fileformat','fileencoding','filetype',],],},
 \    'component_function': {
@@ -254,12 +250,12 @@ function! MyReadonly()
     return &ft !~? 'help' && &readonly ? 'x' : ''
 endfunction
 function! MyFilename()
-    let fname = expand('%:t')
+    let fname    = expand('%:t')
     return fname =~ '__Gundo\|NERD_tree' ? '' :
-        \ &ft == 'unite' ? unite#get_status_string() :
-        \ ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-        \ ('' != fname ? fname : '[No Name]') .
-        \ ('' != MyModified() ? ' ' . MyModified() : '')
+    \    &ft == 'unite' ? unite#get_status_string() :
+    \    ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+    \    ('' != fname ? fname : '[No Name]') .
+    \    ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 function! MyFugitive()
     try
@@ -276,18 +272,13 @@ function! MyFileformat()
     return winwidth(0) > 70 ? &fileformat : ''
 endfunction
 function! MyFiletype()
-    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : '-') : ''
 endfunction
 function! MyFileencoding()
     return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
 endfunction
 function! MyMode()
-    let fname = expand('%:t')
-    return fname == '__Gundo__' ? 'Gundo' :
-        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
-        \ fname =~ 'NERD_tree' ? 'NERDTree' :
-        \ &ft == 'unite' ? 'Unite' :
-        \ winwidth(0) > 60 ? lightline#mode() : ''
+    return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 let g:unite_force_overwrite_statusline = 0
 "}}}
@@ -295,9 +286,9 @@ let g:unite_force_overwrite_statusline = 0
 let g:indentLine_faster = 1
 "}}}
 " vim-ref {{{
-let g:ref_cache_dir=$HOME.'/.vim/vim-ref/cache'
-let g:ref_phpmanual_path=$HOME.'/.vim/vim-ref/php-chunked-xhtml'
-let g:ref_detect_filetype={
+let g:ref_cache_dir       = $HOME.'/.vim/vim-ref/cache'
+let g:ref_phpmanual_path  = $HOME.'/.vim/vim-ref/php-chunked-xhtml'
+let g:ref_detect_filetype = {
 \    'html':       'phpmanual',
 \    'javascript': 'phpmanual',
 \    'css':        'phpmanual',}
@@ -315,8 +306,8 @@ nnoremap <Leader>ts :ts<CR>
 " qfixgrep {{{
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git
 set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
-let QFixWin_EnableMode = 1
-let QFix_UseLocationList = 1
+let g:QFixWin_EnableMode   = 1
+let g:QFix_UseLocationList = 1
 nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 "}}}
@@ -325,17 +316,20 @@ let g:yankround_dir=$HOME.'/.vim/yankround.vim'
 nmap p <Plug>(yankround-p)
 nmap <C-p> <Plug>(yankround-prev)
 nmap <C-n> <Plug>(yankround-next)
-let g:yankround_use_region_hl = 1
 highlight YankRoundRegion cterm=underline ctermfg=magenta
+let g:yankround_use_region_hl       = 1
 let g:yankround_region_hl_groupname = 'YankRoundRegion'
 "}}}
 " memolist.vim {{{
-let g:memolist_path = '$HOME/.vim/memolist.vim'
+let g:memolist_path                 = '$HOME/.vim/memolist.vim'
+let g:memolist_filename_prefix_none = 1
+let g:memolist_unite                = 1
+let g:memolist_unite_source         = 'file_rec'
+let g:memolist_unite_option         = '-default-action=tabopen'
 nnoremap [memolist] <Nop>
 nmap <Leader>m [memolist]
 nnoremap [memolist]n :MemoNew<CR>
 nnoremap [memolist]l :MemoList<CR>
-nnoremap [memolist]g :MemoGrep<CR>
 "}}}
 " vim-quickrun {{{
 nnoremap <Leader>run :QuickRun<CR>
@@ -372,10 +366,14 @@ let g:quickrun_config = {
 \        'outputter/buffer/split':           ':botright 7sp',},}
 "}}}
 " ultisnips {{{
-let g:UltiSnipsJumpForwardTrigger='<TAB>'
+let g:UltiSnipsJumpForwardTrigger = '<TAB>'
 "let g:UltiSnipsJumpBackwardTrigger=''
-let g:UltiSnipsEditSplit='vertical'
-let g:UltiSnipsSnippetsDir=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
+let g:UltiSnipsEditSplit          = 'vertical'
+let g:UltiSnipsSnippetsDir        = $HOME.'/.vim/bundle/vim-snippets/UltiSnips'
+"}}}
+" vim-regexper {{{
+let g:regexper#AppPath = $HOME.'/.vim/bundle/regexper'
+nnoremap <Leader>reg :RegexperExecute<Space>
 "}}}
 "}}}
 "
@@ -421,49 +419,52 @@ NeoBundleLazy 'supermomonga/jazzradio.vim', {
 nnoremap [unite] <Nop>
 nmap <Leader>u [unite]
 " default plugins
-nnoremap <silent> [unite]b    :<C-u>Unite buffer<CR>
-nnoremap <silent> [unite]bm   :<C-u>Unite bookmark<CR>
-nnoremap <silent> [unite]f    :<C-u>Unite -default-action=tabopen file_rec/async:!<CR>
-nnoremap <silent> [unite]map  :<C-u>Unite output:map\|map!\|lmap<CR>
-nnoremap <silent> [unite]mru  :<C-u>Unite file_mru<CR>
-nnoremap <silent> [unite]msg  :<C-u>Unite output:message<CR>
-nnoremap <silent> [unite]s    :<C-u>Unite output:scriptnames<CR>
+nnoremap <silent> [unite]f    :<C-u>call<Space>DispatchUniteFileRecAsyncOrGit()<CR>
+nnoremap <silent> [unite]map  :<C-u>Unite<Space>output:map\|map!\|lmap<CR>
+nnoremap <silent> [unite]msg  :<C-u>Unite<Space>output:message<CR>
+nnoremap <silent> [unite]s    :<C-u>Unite<Space>-default-action=ex<Space>output:scriptnames<CR>
 " add plugins
-nnoremap <silent> [unite]dic :<C-u>Unite codic<CR>
-nnoremap <silent> [unite]h   :<C-u>Unite help<CR>
-nnoremap <silent> [unite]j   :<C-u>Unite jazzradio<CR>
-nnoremap <silent> [unite]rad :<C-u>Unite jazzradio<CR>
-nnoremap <silent> [unite]t   :<C-u>Unite tag<CR>
-nnoremap <silent> [unite]v   :<C-u>Unite -auto-preview variable<CR>
-nnoremap <silent> [unite]web :<C-u>Unite webcolorname<CR>
-nnoremap <silent> [unite]y   :<C-u>Unite yankround<CR>
+nnoremap <silent> [unite]dic :<C-u>Unite<Space>codic<CR>
+nnoremap <silent> [unite]h   :<C-u>Unite<Space>help<CR>
+nnoremap <silent> [unite]t   :<C-u>Unite<Space>tag<CR>
+nnoremap <silent> [unite]v   :<C-u>Unite<Space>-auto-preview<Space>variable<CR>
+nnoremap <silent> [unite]web :<C-u>Unite<Space>webcolorname<CR>
+nnoremap <silent> [unite]y   :<C-u>Unite<Space>yankround<CR>
 " jazzradio
 nnoremap [jazzradio] <Nop>
 nmap <Leader>j [jazzradio]
 nnoremap [jazzradio]u :JazzradioUpdateChannels<CR>
 nnoremap [jazzradio]p :JazzradioPlay<Space>CurrentJazz<CR>
 nnoremap [jazzradio]o :JazzradioStop<CR>
-nnoremap [jazzradio]l :<C-u>Unite jazzradio<CR>
+nnoremap [jazzradio]l :<C-u>Unite<Space>jazzradio<CR>
+" http://qiita.com/yuku_t/items/9263e6d9105ba972aea8
+function! DispatchUniteFileRecAsyncOrGit()
+    if isdirectory(getcwd().'/.git')
+        Unite -default-action=tabopen file_rec/git
+    else
+        Unite -default-action=tabopen file_rec/async:!
+    endif
+endfunction
 let s:hooks = neobundle#get_hooks('unite.vim')
 function! s:hooks.on_source(bundle)
-    let g:unite_data_directory=$HOME.'/.vim/unite.vim'
-    let g:unite_enable_start_insert=1
-    let g:unite_source_grep_command='ag'
-    let g:unite_source_grep_default_opts='--nocolor --nogroup'
-    let g:unite_source_grep_recursive_opt=''
-    let g:unite_source_grep_max_candidates=200
+    let g:unite_data_directory             = $HOME.'/.vim/unite.vim'
+    let g:unite_enable_start_insert        = 1
+    let g:unite_source_grep_command        = 'ag'
+    let g:unite_source_grep_default_opts   = '--nocolor --nogroup'
+    let g:unite_source_grep_recursive_opt  = ''
+    let g:unite_source_grep_max_candidates = 200
 endfunction
 unlet s:hooks
 let s:hooks = neobundle#get_hooks('unite-tag')
 function! s:hooks.on_source(bundle)
-    let g:unite_source_tag_max_name_length=30
-    let g:unite_source_tag_max_fname_length=128
-    let g:unite_source_tag_show_location=0
+    let g:unite_source_tag_max_name_length  = 30
+    let g:unite_source_tag_max_fname_length = 128
+    let g:unite_source_tag_show_location    = 0
 endfunction
 unlet s:hooks
 let s:hooks = neobundle#get_hooks('jazzradio.vim')
 function! s:hooks.on_source(bundle)
-    let g:jazzradio#cache_dir=$HOME.'/.vim/jazzradio.vim'
+    let g:jazzradio#cache_dir = $HOME.'/.vim/jazzradio.vim'
 endfunction
 unlet s:hooks
 "}}}
@@ -484,16 +485,18 @@ vmap <Leader>gx <Plug>(openbrowser-smart-search)
 " taglist.vim {{{
 NeoBundleLazy 'vim-scripts/taglist.vim', {
 \    'commands' : 'Tlist',}
-let Tlist_Use_Right_Window = 1
-let Tlist_Show_One_File = 1
-let Tlist_Exit_OnlyWindow = 1
-let g:tlist_php_settings = 'php;c:class;f:function;d:constant'
+let g:Tlist_Use_Right_Window = 1
+let g:Tlist_Show_One_File    = 1
+let g:Tlist_Exit_OnlyWindow  = 1
+let g:Tlist_WinWidth         = 20
+let g:tlist_php_settings     = 'php;c:class;f:function;d:constant'
 nnoremap <Leader>t :Tlist<CR>
 "}}}
 " nerdtree {{{
 NeoBundleLazy 'scrooloose/nerdtree', {
 \    'commands' : 'NERDTree',}
 nnoremap <expr><Leader>n ':NERDTree '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
+let g:NERDTreeWinSize           = 20
 let g:NERDTreeMinimalUI         = 1
 let g:NERDTreeRespectWildIgnore = 1
 let g:NERDTreeShowHidden        = 1
@@ -505,9 +508,9 @@ NeoBundleLazy 'junegunn/vim-easy-align', {
 vnoremap <silent> <Leader>a :EasyAlign<CR>
 let g:easy_align_delimiters = {
 \    '=': {
-\        'pattern': '===\|!==\|<=>\|\(&&\|||\|<<\|>>\)=\|=\~[#?]\?\|=>\|[:+/*!%^=><&|.-]\?=[#?]\?',
-\        'left_margin': 1,
-\        'right_margin': 1,
+\        'pattern':       '===\|!==\|<=>\|\(&&\|||\|<<\|>>\)=\|=\~[#?]\?\|=>\|[:+/*!%^=><&|.-]\?=[#?]\?',
+\        'left_margin':   1,
+\        'right_margin':  1,
 \        'stick_to_left': 0 },
 \    '>': {
 \        'pattern': '>>\|=>\|>', },
@@ -521,7 +524,7 @@ let g:easy_align_delimiters = {
 \    '$': {
 \        'pattern':         '\((.*\)\@!$\(.*)\)\@!',
 \        'ignore_groups':   ['String'],
-\        'right_margin':  0,
+\        'right_margin':    0,
 \        'delimiter_align': 'l', },
 \    ']': {
 \        'pattern':       '[[\]]',
@@ -533,11 +536,8 @@ let g:easy_align_delimiters = {
 \        'left_margin':   0,
 \        'right_margin':  0,
 \        'stick_to_left': 0, },
-\    'r': {
-\        'pattern':      'return\|continue\|break',
-\        'left_margin':  1 },
 \    'd': {
-\        'pattern':      ' \(\S\+\s*[;=]\)\@=',
+\        'pattern':      '\(\S\+\s*[;=]\)\@=',
 \        'left_margin':  0,
 \        'right_margin': 0, }, }
 "}}}
@@ -557,8 +557,8 @@ let s:hooks = neobundle#get_hooks('wildfire.vim')
 function! s:hooks.on_source(bundle)
     map <BS> <Plug>(wildfire-water)
     let g:wildfire_objects = {
-    \        '*' : ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it',],
-    \        'html,xml' : ['at', 'it',],}
+    \        '*':        ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it',],
+    \        'html,xml': ['at', 'it',],}
 endfunction
 unlet s:hooks
 "}}}
@@ -576,9 +576,9 @@ function! s:hooks.on_source(bundle)
     let g:neocomplete#same_filetypes           = {
     \   'html': 'html,css,javascript,php',}
     let g:neocomplete#sources = {
-    \   '_':    ['file', 'ultisnips', 'buffer', 'dictionary',],
-    \   'vim':  ['file', 'ultisnips', 'buffer', 'dictionary', 'syntax', 'vim'],
-    \   'html': ['file', 'ultisnips', 'buffer', 'dictionary', 'syntax',],}
+    \   '_':    ['file', 'ultisnips', 'buffer', 'dictionary', ],
+    \   'vim':  ['file', 'ultisnips', 'buffer', 'dictionary', 'vim'],
+    \   'html': ['file', 'ultisnips', 'buffer', 'dictionary', ],}
     let g:neocomplete#sources#dictionary#dictionaries = {
     \   'default':  '',
     \   'php':      $HOME.'/.vim/dict/php.dict',}
@@ -628,16 +628,16 @@ let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
 function! s:hooks.on_source(bundle)
     " If php-cs-fixer is in $PATH, you don't need to define 'let g:php_cs_fixer_path=/path/to/file'.
     " And this setting is moved at OS type category.
-    let g:php_cs_fixer_level='all'              " which level ?
-    let g:php_cs_fixer_config='default'         " configuration
-    let g:php_cs_fixer_php_path='php'           " Path to PHP
+    let g:php_cs_fixer_level                  = 'all'     " which level ?
+    let g:php_cs_fixer_config                 = 'default' " configuration
+    let g:php_cs_fixer_php_path               = 'php'     " Path to PHP
     " If you want to define specific fixers:
     "let g:php_cs_fixer_fixers_list = 'linefeed,short_tag,indentation'
-    let g:php_cs_fixer_enable_default_mapping=1 " Enable the mapping by default (<leader>pcd)
-    let g:php_cs_fixer_dry_run=0                " Call command with dry-run option
-    let g:php_cs_fixer_verbose=0                " Return the output of command if 1, else an inline information.
-    let g:php_cs_fixer_enable_default_mapping=0
-    nnoremap <Leader>php :call PhpCsFixerFixFile()<CR>
+    let g:php_cs_fixer_enable_default_mapping = 1         " Enable the mapping by default (<leader>pcd)
+    let g:php_cs_fixer_dry_run                = 0         " Call command with dry-run option
+    let g:php_cs_fixer_verbose                = 0         " Return the output of command if 1, else an inline information.
+    let g:php_cs_fixer_enable_default_mapping = 0
+    nnoremap <Leader>php :call<Space>PhpCsFixerFixFile()<CR>
 endfunction
 unlet s:hooks
 "}}}
@@ -660,7 +660,7 @@ function! s:hooks.on_source(bundle)
 
     "vim-watchdogs
     let g:watchdogs_check_BufWritePost_enable = 1
-    let g:watchdogs_check_CursorHold_enable = 1
+    let g:watchdogs_check_CursorHold_enable   = 1
 endfunction
 unlet s:hooks
 "}}}
@@ -698,6 +698,9 @@ NeoBundleFetch 'KazuakiM/neosnippet-snippets'
 NeoBundleFetch 'ziadoz/awesome-php'
 nnoremap <Leader>awe :tabnew $HOME/.vim/bundle/awesome-php/README.md<CR>
 "}}}
+" Regexper {{{
+NeoBundleFetch 'javallone/regexper'
+"}}}
 "}}}
 "
 "
@@ -706,13 +709,13 @@ nnoremap <Leader>awe :tabnew $HOME/.vim/bundle/awesome-php/README.md<CR>
 "{{{
 if has('mac')
     " Programming language
-    let $PYTHON_DLL  = '/usr/local/Cellar/python/2.7.7_2/Frameworks/Python.framework/Versions/2.7/lib/libpython2.7.dylib'
+    let $PYTHON_DLL = '/usr/local/Cellar/python/2.7.7_2/Frameworks/Python.framework/Versions/2.7/lib/libpython2.7.dylib'
     "let $PYTHON3_DLL = '/usr/local/Cellar/python3/3.4.1/Frameworks/Python.framework/Versions/3.4/lib/libpython3.4.dylib'
-    let $PERL_DLL    = '/usr/local/Cellar/perl518/5.18.2/lib/5.18.2/darwin-thread-multi-2level/CORE/libperl.dylib'
-    let $RUBY_DLL    = '/usr/local/lib/libruby.dylib'
-    let $LUA_DLL     = '/usr/local/lib/liblua.dylib'
-    let g:previm_open_cmd = 'open -a firefox'
-    nnoremap <Leader>reg :RegexperExecute
+    let $PERL_DLL   = '/usr/local/Cellar/perl518/5.18.2/lib/5.18.2/darwin-thread-multi-2level/CORE/libperl.dylib'
+    let $RUBY_DLL   = '/usr/local/lib/libruby.dylib'
+    let $LUA_DLL    = '/usr/local/lib/liblua.dylib'
+    let g:previm_open_cmd  = 'open -a firefox'
+    let g:regexper#OpenCmd = 'open -a firefox'
 else
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
     " php setting.

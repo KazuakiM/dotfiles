@@ -6,6 +6,8 @@
 " Basic
 set antialias
 set t_vb=
+set showtabline=1
+set guioptions-=T
 " Color
 autocmd MyAutoCmd ColorScheme * highlight Comment ctermfg=darkgray gui=NONE guifg=darkgray
 colorscheme jellybeans
