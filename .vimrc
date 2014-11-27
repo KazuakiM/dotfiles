@@ -217,9 +217,6 @@ else
     NeoBundle 'thinca/vim-prettyprint'
     NeoBundle 'KazuakiM/vim-snippets'
     NeoBundle 'SirVer/ultisnips'
-    if has('mac')
-        NeoBundle 'KazuakiM/vim-regexper'
-    endif
 
     NeoBundleSaveCache
 endif
@@ -370,10 +367,6 @@ let g:UltiSnipsJumpForwardTrigger = '<TAB>'
 "let g:UltiSnipsJumpBackwardTrigger=''
 let g:UltiSnipsEditSplit          = 'vertical'
 let g:UltiSnipsSnippetsDir        = $HOME.'/.vim/bundle/vim-snippets/UltiSnips'
-"}}}
-" vim-regexper {{{
-let g:regexper#AppPath = $HOME.'/.vim/bundle/regexper'
-nnoremap <Leader>reg :RegexperExecute<Space>
 "}}}
 "}}}
 "
@@ -548,6 +541,11 @@ NeoBundleLazy 'vim-scripts/SQLUtilities', {
 \    'commands': 'SQLUFormatter',}
 let g:sqlutil_align_comma = 1
 nnoremap <Leader>sql :SQLUFormatter<CR>
+"}}}
+" vim-regexper {{{
+NeoBundleLazy 'KazuakiM/vim-regexper'
+let g:regexper#AppPath = $HOME.'/.vim/bundle/regexper'
+nnoremap <Leader>reg :RegexperExecute<Space>
 "}}}
 " wildfire.vim {{{
 NeoBundleLazy 'gcmt/wildfire.vim', {
