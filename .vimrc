@@ -73,6 +73,8 @@ set virtualedit+=block
 set visualbell
 set t_vb=
 set noerrorbells
+set noimdisable
+set noimcmdline
 set foldmethod=marker
 "set foldopen-=search
 set viminfo+=n~/.vim/viminfo/.viminfo

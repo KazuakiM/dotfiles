@@ -8,6 +8,15 @@ set antialias
 set t_vb=
 set showtabline=1
 set guioptions-=T
+set guioptions-=m
+set guioptions-=g
+set guioptions-=r
+set guioptions-=R
+set guioptions-=l
+set guioptions-=L
+set guioptions-=t
+set guioptions-=b
+set winaltkeys=no
 " Color
 autocmd MyAutoCmd ColorScheme * highlight Comment ctermfg=darkgray gui=NONE guifg=darkgray
 colorscheme jellybeans
