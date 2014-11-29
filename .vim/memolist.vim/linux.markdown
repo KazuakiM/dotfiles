@@ -26,11 +26,8 @@ traceroute -d -p <port> <host>
 ```
 Tcpdump
 ```
-#dst/src host
 tcpdump -s0 -A -w /tmp/tcpdump_%Y%m%d_%H%M.cap port <port> host <host>
-#dst host
 tcpdump -s0 -A -w /tmp/tcpdump_%Y%m%d_%H%M.cap port <port> dst host <host>
-#src host
 tcpdump -s0 -A -w /tmp/tcpdump_%Y%m%d_%H%M.cap port <port> src host <host>
 ```
 

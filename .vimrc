@@ -207,7 +207,7 @@ else
     NeoBundle 'Yggdroot/indentLine'
     NeoBundle 'thinca/vim-ref'
     NeoBundle 'szw/vim-tags'
-    NeoBundle 'tpope/vim-surround'
+    NeoBundle 'kana/vim-smartinput'
     NeoBundle 'vim-scripts/matchit.zip'
     NeoBundle 'tpope/vim-endwise'
     NeoBundle 'fuenor/qfixgrep'
@@ -726,6 +726,27 @@ endif
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
 call neobundle#end()
+" vim-smartinput {{{
+call smartinput#map_to_trigger('i', '*', '*', '*')
+call smartinput#map_to_trigger('i', '!', '!', '!')
+call smartinput#map_to_trigger('i', '=', '=', '=')
+call smartinput#define_rule({
+\    'at':    '/\%#',
+\    'char':  '*',
+\    'input': '**/<Left><Left>',
+\})
+call smartinput#define_rule({
+\    'at':    '<?\%#',
+\    'char':  '=',
+\    'input': '=<Space><Space>?><Left><Left><Left>',
+\    'filetype': ['php'],
+\})
+call smartinput#define_rule({
+\    'at':    '<\%#',
+\    'char':  '!',
+\    'input': '!----><Left><Left><Left>',
+\})
+"}}}
 "}}}
 "
 "
