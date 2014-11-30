@@ -30,6 +30,7 @@ $ ln -sf $HOME/work/dotfiles/.ctags        .ctags
 $ ln -sf $HOME/work/dotfiles/.gitconfig    .gitconfig
 $ cp $HOME/work/dotfiles/.gitconfig.local .
 $ ln -sf $HOME/work/dotfiles/.gvimrc       .gvimrc
+$ ln -sf $HOME/work/dotfiles/.htoprc       .htoprc
 $ ln -sf $HOME/work/dotfiles/.mplayer      .mplayer
 $ ln -sf $HOME/work/dotfiles/.vim          .vim
 $ ln -sf $HOME/work/dotfiles/.vimrc        .vimrc
@@ -80,7 +81,7 @@ $ sudo yum update
 $ sudo yum install \
     colordiff ctags \
     gcc \
-    httpd \
+    htop httpd \
     libcurl-devel lynx \
     make man-pages-ja mercurial \
     ncurses-devel \
@@ -154,6 +155,7 @@ $ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/lo
 ```bash
 $ cd $HOME
 $ mkdir -p work
+$ mkdir -p .config/htop
 $ git clone git@github.com:KazuakiM/dotfiles.git work/dotfiles
 $ ln -sf $HOME/work/dotfiles/.bash_logout  .bash_logout
 $ ln -sf $HOME/work/dotfiles/.bash_profile .bash_profile
@@ -162,6 +164,7 @@ $ ln -sf $HOME/work/dotfiles/.ctags        .ctags
 $ ln -sf $HOME/work/dotfiles/.gitconfig    .gitconfig
 $ cp $HOME/work/dotfiles/.gitconfig.local .
 $ ln -sf $HOME/work/dotfiles/.gvimrc       .gvimrc
+$ ln -sf $HOME/work/dotfiles/.htoprc       .config/htop/htoprc
 $ ln -sf $HOME/work/dotfiles/.mplayer      .mplayer
 $ ln -sf $HOME/work/dotfiles/.vim          .vim
 $ ln -sf $HOME/work/dotfiles/.vimrc        .vimrc
