@@ -733,6 +733,12 @@ call smartinput#map_to_trigger('i', '*', '*', '*')
 call smartinput#map_to_trigger('i', '!', '!', '!')
 call smartinput#map_to_trigger('i', '=', '=', '=')
 call smartinput#define_rule({
+\    'at':    '\%#',
+\    'char':  '"',
+\    'input': '"',
+\    'filetype': ['vim'],
+\})
+call smartinput#define_rule({
 \    'at':    '/\%#',
 \    'char':  '*',
 \    'input': '**/<Left><Left>',
