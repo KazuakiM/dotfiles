@@ -1,6 +1,7 @@
 dotfiles
 ==========
 Files are setting my development environments.
+
 # Mac
 
 ### Install packages
@@ -18,7 +19,14 @@ $ brew update
 $ brew upgrade
 $ brew doctor
 ```
+rbenv
+```bash
+$ rbenv install 2.0.0-p247
+$ rbenv rehash
+```
+
 ### Set dotfiles
+
 ```bash
 $ cd $HOME
 $ mkdir -p work
@@ -41,17 +49,24 @@ $ wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp
 $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
 $ php $HOME/work/src/phpDict.php
 $ vi
+ Update from NeoBundleFetch to NeoBundle
  :NeoBundleInstall
+
+ Update from NeoBundle to NeoBundleFetch
 
 $ exit
 ```
+
 # Linux
 
 ### Setting
+
 ```bash
 $ sudo chown -R <Account>:<AccountGroup> /usr/local
 ```
+
 ### Install key & RPM
+
 Check key
 * [epel](http://ftp.riken.jp/Linux/fedora/epel)
 * [ius](http://dl.iuscommunity.org/pub/ius/IUS-COMMUNITY-GPG-KEY)
@@ -70,11 +85,13 @@ $ sudo rpm --import http://rpms.famillecollet.com/RPM-GPG-KEY-remi
 $ sudo rpm -ivh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 $ sudo rpm --import http://apt.sw.be/RPM-GPG-KEY.dag.txt
 $ sudo rpm -ivh http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el7.rf.x86_64.rpm
-$ sudo rpm -ivh http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
+$ sudo rpm -ivh http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
 $ cd /etc/yum.repos.d
  Check repository.
 ```
+
 ### Install packages
+
 yum
 ``` bash
 $ sudo yum update
@@ -86,7 +103,7 @@ $ sudo yum install \
     make man-pages-ja mercurial \
     ncurses-devel \
     openssl openssl-devel \
-    perl-core perl-devel php php-devel python-devel \
+    perl perl-core perl-devel php php-devel python python-devel \
     ruby ruby-devel \
     tree \
     wget
@@ -102,6 +119,14 @@ LuaJIT
 $ git clone http://luajit.org/git/luajit-2.0.git /usr/local/src/luajit
 $ cd /usr/local/src/luajit
 $ make && make install
+```
+rbenv
+```
+$ git clone https://github.com/sstephenson/rbenv.git /usr/local/rbenv
+$ git clone https://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plugins/ruby-build
+$ cd /usr/local/rbenv
+$ rbenv install 2.0.0-p247
+$ rbenv rehash
 ```
 Vim
 > Check command path
@@ -151,7 +176,9 @@ Composer
 ```bash
 $ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin
 ```
+
 ### Set dotfiles
+
 ```bash
 $ cd $HOME
 $ mkdir -p work
@@ -177,20 +204,27 @@ $ wget http://cs.sensiolabs.org/get/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-f
 $ chmod a+x $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 $ php $HOME/work/src/phpDict.php
 $ vi
+ Update from NeoBundleFetch to NeoBundle
  :NeoBundleInstall
+
+ Update from NeoBundle to NeoBundleFetch
 
 $ exit
 ```
+
 # Windows
 
 ### Install packages
 
 Cygwin
+
 ### Set environment variables
+
 * HOME
 * C:\cygwin64\home\<Account>
 
 ### Operate Cygwin
+
 ```bash
 $ cd $HOME
 $ cd ..
@@ -213,10 +247,15 @@ $ exit
 alias, export情報を読み込ませるため、一旦ターミナルを閉じる
 ```bash
 $ vi
+ Update from NeoBundleFetch to NeoBundle
  :NeoBundleInstall
+
+ Update from NeoBundle to NeoBundleFetch
 
 $ cp $HOME/.vim/colors/jellybeans.vim /cygwin/c/path/to/path/Vim/colors/
 ```
+
 # TODO
+
 * Add Brewfile
 * Try Chocolatey
