@@ -36,7 +36,6 @@
 "----------------------------------------------------------------------------------------------------------------------------------
 "{{{
 if has('vim_starting')
-    set nocompatible
     if (has("win32") || has ("win64"))
         set runtimepath+=$HOME/.vim,$HOME/.vim/after
     endif
@@ -58,7 +57,7 @@ scriptencoding utf-8
 set fileencoding=utf-8
 set fileformat=unix
 " Basic
-let mapleader=','
+let g:mapleader = ','
 set scrolloff=5
 autocmd MyAutoCmd FileType * set textwidth=0
 autocmd MyAutoCmd FileType * set formatoptions-=cb
@@ -249,19 +248,19 @@ function! MyReadonly()
     return &ft !~? 'help' && &readonly ? 'x' : ''
 endfunction
 function! MyFilename()
-    let fname    = expand('%:t')
-    return fname =~ '__Gundo\|NERD_tree' ? '' :
+    let a:fname    = expand('%:t')
+    return a:fname =~ '__Gundo\|NERD_tree' ? '' :
     \    &ft == 'unite' ? unite#get_status_string() :
     \    ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-    \    ('' != fname ? fname : '[No Name]') .
+    \    ('' != a:fname ? a:fname : '[No Name]') .
     \    ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 function! MyFugitive()
     try
         if expand('%:t') !~? 'Gundo\|NERD' && exists('*fugitive#head')
-            let mark = ''  " edit here for cool mark
-            let _ = fugitive#head()
-            return strlen(_) ? mark._ : ''
+            let a:mark = ''  " edit here for cool a:mark
+            let a:_ = fugitive#head()
+            return strlen(a:_) ? a:mark.a:_ : ''
         endif
     catch
     endtry
