@@ -1,6 +1,8 @@
 # .bash_profile
 # Get the aliases and functions
-if [ -f ~/.bash_profile.local ]; then
+if [ -f ~/.bash_profile.win ]; then
+    . ~/.bash_profile.win
+elif [ -f ~/.bash_profile.local ]; then
     . ~/.bash_profile.local
 fi
 if [ -f ~/.bashrc ]; then
@@ -23,7 +25,6 @@ alias gdiff='git diff -b'
 alias h='history'
 alias mv='mv -i'
 alias rm='rm -i'
-alias tail='tail -F'
 alias tree='tree -af'
 if type colordiff >/dev/null 2>&1; then
     alias diff='colordiff -u'
@@ -113,13 +114,17 @@ case "${OSTYPE}" in
         alias MV='open -a virtualbox'
         alias KOBO='open -a kobo'
         alias KINDLE='open -a kindle'
-        alias LINGR="sh $HOME/work/dotfiles/shell/lingrStarter.sh"
-        alias DEV="sh $HOME/work/dotfiles/shell/virutalBoxManageForMac.sh devmabu"
+        alias LINGR="sh $HOME/work/dotfiles/src/lingrStarter.sh"
+        alias DEV="sh $HOME/work/dotfiles/src/virutalBoxManageForMac.sh devmabu"
         alias MABU="ssh -l mabulog -p 2222 localhost"
         alias WIRE='/usr/local/bin/wireshark'
         alias WIRESHARK='/usr/local/bin/wireshark'
         export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
         export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+        if type rbenv >/dev/null 2>&1; then
+            export RBENV_ROOT=/usr/local/bin
+            eval "$(rbenv init -)";
+        fi
         localPath=''
         #brew --prefix perl518
         if [ -d /usr/local/opt/perl518/bin ]; then
@@ -132,10 +137,6 @@ case "${OSTYPE}" in
         #brew --prefix svn
         if [ -d /usr/local/opt/subversion/bin ]; then
             localPath="/usr/local/opt/subversion/bin:$localPath"
-        fi
-        #brew --prefix ruby
-        if [ -d /usr/local/opt/ruby/bin ]; then
-            localPath="/usr/local/opt/ruby/bin:$localPath"
         fi
         if [ -d /usr/local/heroku/bin ]; then
             localPath="/usr/local/heroku/bin:$localPath"
@@ -158,7 +159,9 @@ case "${OSTYPE}" in
         alias ls='ls -Ak --color=auto'
         alias sl='ls -Ak --color=auto'
         alias ll='ls -Akl --color=auto'
-        alias vi='vim'
-        alias gvim="$HOME/shell/vimStarter.sh"
+        alias vi="$HOME/src/vimStarter.sh"
+        alias vim="$HOME/src/vimStarter.sh"
+        alias gvim="$HOME/src/vimStarter.sh"
+        ;;
 esac
 #}}}

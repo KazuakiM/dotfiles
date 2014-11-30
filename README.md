@@ -2,10 +2,21 @@ dotfiles
 ==========
 Files are setting my development environments.
 # Mac
+
 ### Install packages
+
+AppStore
+* [Xcode](https://developer.apple.com/jp/xcode/downloads/)
+
 homebrew
 ```bash
-...
+$ xcode-select --install
+$ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+$ brew doctor
+$ brew install git
+$ brew update
+$ brew upgrade
+$ brew doctor
 ```
 ### Set dotfiles
 ```bash
@@ -27,23 +38,24 @@ $ ln -sf $HOME/work/dotfiles/.w3m          .w3m
 $ git clone git@github.com:Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
 $ wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp
 $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
-$ php $HOME/work/shell/phpDict.php
+$ php $HOME/work/src/phpDict.php
 $ vi
  :NeoBundleInstall
 
 $ exit
 ```
 # Linux
+
 ### Setting
 ```bash
 $ sudo chown -R <Account>:<AccountGroup> /usr/local
 ```
-### Install key
+### Install key & RPM
 Check key
-* [epel:RPM-GPG-KEY-EPEL-x](http://ftp.riken.jp/Linux/fedora/epel)
-* [ius:IUS-COMMUNITY-GPG-KEY](http://dl.iuscommunity.org/pub/ius/IUS-COMMUNITY-GPG-KEY)
-* [remi:RPM-GPG-KEY-remi](http://rpms.famillecollet.com/RPM-GPG-KEY-remi)
-* [rpmforge:RPM-GPG-KEY.dag.txt](http://apt.sw.be/RPM-GPG-KEY.dag.txt)
+* [epel](http://ftp.riken.jp/Linux/fedora/epel)
+* [ius](http://dl.iuscommunity.org/pub/ius/IUS-COMMUNITY-GPG-KEY)
+* [remi](http://rpms.famillecollet.com/RPM-GPG-KEY-remi)
+* [rpmforge](http://apt.sw.be/RPM-GPG-KEY.dag.txt)
 
 Usage
 > example CentOS7.
@@ -160,16 +172,20 @@ $ wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp
 $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
 $ wget http://cs.sensiolabs.org/get/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 $ chmod a+x $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
-$ php $HOME/work/shell/phpDict.php
+$ php $HOME/work/src/phpDict.php
 $ vi
  :NeoBundleInstall
 
 $ exit
 ```
-# Cygwin @ Windows
+# Windows
+
+### Install packages
+
+Cygwin
 ### Set environment variables
 * HOME
-* xxxxxx
+* C:\cygwin64\home\<Account>
 
 ### Operate Cygwin
 ```bash
@@ -188,10 +204,10 @@ $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
 $ wget http://cs.sensiolabs.org/get/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 $ chmod a+x $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 $ cp $HOME/.vimrc.local $HOME/.vimrc.win
-$ php $HOME/shell/phpDict.php
+$ php $HOME/src/phpDict.php
 $ exit
 ```
-
+alias, export情報を読み込ませるため、一旦ターミナルを閉じる
 ```bash
 $ vi
  :NeoBundleInstall
@@ -199,6 +215,5 @@ $ vi
 $ cp $HOME/.vim/colors/jellybeans.vim /cygwin/c/path/to/path/Vim/colors/
 ```
 # TODO
-* Add Windows detail
 * Add Brewfile
 * Try Chocolatey
