@@ -6,12 +6,14 @@ categories: []
 - - -
 
 # Grep
+
 file grep
 ```
 find ./ -type d -name ".git" -prune -o -type d -name ".svn" -prune -o -type f -exec grep "keyword" {} /dev/null \;
 ```
 
 # Network
+
 All network interface
 ```
 ifconfig -a
@@ -26,15 +28,13 @@ traceroute -d -p <port> <host>
 ```
 Tcpdump
 ```
-#dst/src host
 tcpdump -s0 -A -w /tmp/tcpdump_%Y%m%d_%H%M.cap port <port> host <host>
-#dst host
 tcpdump -s0 -A -w /tmp/tcpdump_%Y%m%d_%H%M.cap port <port> dst host <host>
-#src host
 tcpdump -s0 -A -w /tmp/tcpdump_%Y%m%d_%H%M.cap port <port> src host <host>
 ```
 
 # File size
+
 disc file system size
 ```
 df -h
@@ -46,4 +46,15 @@ du -sh *
 file size under directory
 ```
 find ./ -ls
+```
+
+# Service
+
+Check service status list
+```
+service --status-all
+```
+Check audo start service list
+```
+chkconfig --list
 ```
