@@ -245,11 +245,51 @@ Update auto_increment
 ALTER TABLE <Table1> AUTO_INCREMENT = <AutoIncrementData>;
 ```
 
-# TRANSACTION
+# FUNCTION
 
+GROUP_CONCAT  
+Require 2nd parameter at IFNULL.If max or min, check "Max/Min".
+```
+SELECT <UniqueColumn1>(, <UniqueColumn2>),
+  GROUP_CONCAT(CONCAT(IFNULL(<Column1>, ''), '_',IFNULL(<Column1>, '')) ORDER BY <Column1> ASC SEPARATOR '|') AS table_info
+  FROM <Table1>
+  GROUP BY <UniqueColumn1>(, <UniqueColumn2>)
+```
+
+# Other
+
+transaction
 ```
 BEGIN;
 COMMIT;
 ROLLBACK;
 ```
+Performance
+```
+EXPLAIN
+SELECT ...
+```
+[Max/Min](http://nippondanji.blogspot.jp/2009/05/mysql.html)
+
+| Type               | MIN                                                                 | MAX                                                                 |
+| :----------------- | ------------------------------------------------------------------: | ------------------------------------------------------------------: |
+| CHAR               | 0                                                                   | 255(文字)                                                           |
+| VARCHAR            | 0                                                                   | 65535(文字)                                                         |
+| BLOB               | 0                                                                   | 64(KB)                                                              |
+| TINYBLOB           | 0                                                                   | 256(B)                                                              |
+| MEDIUMBLOB         | 0                                                                   | 16(MB)                                                              |
+| LONGBLOB           | 0                                                                   | 4(GB)                                                               |
+| INT                | -2147483648                                                         | 2147483647                                                          |
+| INT UNSIGNED       | 0                                                                   | 4294967295                                                          |
+| TINYINT            | -127                                                                | 128                                                                 |
+| TINYINT UNSIGNED   | 0                                                                   | 255                                                                 |
+| SMALLINT           | -32768                                                              | 32767                                                               |
+| SMALLINT UNSIGNED  | 0                                                                   | 65535                                                               |
+| MEDIUMINT          | -8388608                                                            | 8388607                                                             |
+| MEDIUMINT UNSIGNED | 0                                                                   | 16777215                                                            |
+| BIGINT             | -9223372036854775808                                                | 9223372036854775807                                                 |
+| BIGINT UNSIGNED    | 0                                                                   | 18446744073709551615                                                |
+| DECIMAL            | [小数点が扱える](http://nippondanji.blogspot.jp/2009/05/mysql.html) | [小数点が扱える](http://nippondanji.blogspot.jp/2009/05/mysql.html) |
+| DATETIME           | 1000-01-01 00:00:00                                                 | 9999-12-31 23:59:59                                                 |
+| TIMESTAMP          | 1970-01-01 00:00:01                                                 | 2038-01-09 03:14:07(UTC)                                            |
 
