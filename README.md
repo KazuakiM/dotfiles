@@ -103,9 +103,9 @@ $ sudo yum install \
     htop httpd \
     libcurl-devel lynx \
     make man-pages-ja mercurial \
-    ncurses-devel \
+    ncurses-devel nmap-ncat \
     openssl openssl-devel \
-    perl perl-core perl-devel php php-devel python python-devel \
+    perl perl-core perl-devel php php-devel pv python python-devel \
     ruby ruby-devel \
     tree \
     wget
