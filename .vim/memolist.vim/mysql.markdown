@@ -35,6 +35,12 @@ AND ISP.TABLE_NAME = <Table1>;
 
 SHOW CREATE TABLE <Table1>\G
 ```
+CSV to SQL  
+'\47' is SingleQuote.
+```
+awk -F "," '{print "INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES ("$1",\047"$2"\047,...);"}' <dumpFile>.csv > /tmp/<dumpFile>.sql
+sed -i -e s/\'NULL\'/NULL/ /tmp/<dumpFile>.sql
+```
 
 # Import File
 
