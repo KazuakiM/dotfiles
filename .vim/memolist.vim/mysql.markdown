@@ -38,8 +38,8 @@ SHOW CREATE TABLE <Table1>\G
 CSV to SQL  
 '\47' is SingleQuote.
 ```
-awk -F "," '{print "INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES ("$1",\047"$2"\047,...);"}' <dumpFile>.csv > /tmp/<dumpFile>.sql
-sed -i -e s/\'NULL\'/NULL/ /tmp/<dumpFile>.sql
+$ awk -F "," '{print "INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES ("$1",\047"$2"\047,...);"}' <dumpFile>.csv > /tmp/<dumpFile>.sql
+$ sed -i -e s/\'NULL\'/NULL/ /tmp/<dumpFile>.sql
 ```
 
 # Import File
@@ -266,9 +266,13 @@ SHOW VARIABLES LIKE 'group_concat_max_len';
 MATH FUNCTION IF
 ```
 SELECT <UniqueColumn1>(, <UniqueColumn2>),
-  SUM(IF((Condition), <true>, <false=default>)) AS sum
+  SUM(IF(<Condition>, <true>, <false=default>)) AS sum
   FROM <Table1>
   GROUP BY <UniqueColumn1>(, <UniqueColumn2>);
+```
+DATETIME
+```
+SELECT DATE_ADD(NOW(), INTERVAL 9 hour);
 ```
 
 # Other
