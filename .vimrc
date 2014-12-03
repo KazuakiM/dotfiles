@@ -66,6 +66,7 @@ set hidden
 set ambiwidth=double
 set spelllang+=cjk
 set iminsert=0
+set imsearch=-1
 "set spell
 set backspace=indent,eol,start
 set virtualedit+=block
@@ -113,7 +114,7 @@ colorscheme jellybeans
 set title
 set ruler
 set laststatus=2
-set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,.DS_Store
+set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,.DS_Store,.,..
 set wildmenu
 set wildmode=longest:full,full
 " [memo]

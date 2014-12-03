@@ -15,8 +15,8 @@ $ mysql     -u<Account> -h<Host> -p <New DataBase> < '/tmp/<dumpFile>'
 Copy Table
 ```
 $ mysql -u<Account> -h<Host> -p -e "
-CREATE TABLE <DataBase1>.<New Table1>     LIKE         <DataBase1>.<Table1>;
-INSERT INTO  <New DataBase>.<New Table1> SELECT * FROM <New DataBase>.<Table1>;
+CREATE TABLE <New DataBase>.<New Table1> LIKE          <DataBase1>.<Table1>;
+INSERT INTO  <New DataBase>.<New Table1> SELECT * FROM <DataBase1>.<Table1>;
 "
 ```
 Check status DataBase
@@ -34,6 +34,12 @@ WHERE ISP.TABLE_SCHEMA = DATABASE()
 AND ISP.TABLE_NAME = <Table1>;
 
 SHOW CREATE TABLE <Table1>\G
+```
+CSV to SQL  
+'\47' is SingleQuote.
+```
+awk -F "," '{print "INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES ("$1",\047"$2"\047,...);"}' <dumpFile>.csv > /tmp/<dumpFile>.sql
+sed -i -e s/\'NULL\'/NULL/ /tmp/<dumpFile>.sql
 ```
 
 # Import File
@@ -248,12 +254,21 @@ ALTER TABLE <Table1> AUTO_INCREMENT = <AutoIncrementData>;
 # FUNCTION
 
 GROUP_CONCAT  
-Require 2nd parameter at IFNULL.If max or min, check "Max/Min".
+Require 2nd parameter at IFNULL.If max or min, check "Max/Min". And check 'group_concat_max_len'.
 ```
 SELECT <UniqueColumn1>(, <UniqueColumn2>),
   GROUP_CONCAT(CONCAT(IFNULL(<Column1>, ''), '_',IFNULL(<Column1>, '')) ORDER BY <Column1> ASC SEPARATOR '|') AS table_info
   FROM <Table1>
-  GROUP BY <UniqueColumn1>(, <UniqueColumn2>)
+  GROUP BY <UniqueColumn1>(, <UniqueColumn2>);
+
+SHOW VARIABLES LIKE 'group_concat_max_len';
+```
+MATH FUNCTION IF
+```
+SELECT <UniqueColumn1>(, <UniqueColumn2>),
+  SUM(IF((Condition), <true>, <false=default>)) AS sum
+  FROM <Table1>
+  GROUP BY <UniqueColumn1>(, <UniqueColumn2>);
 ```
 
 # Other
