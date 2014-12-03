@@ -66,6 +66,7 @@ set hidden
 set ambiwidth=double
 set spelllang+=cjk
 set iminsert=0
+set imsearch=-1
 "set spell
 set backspace=indent,eol,start
 set virtualedit+=block
@@ -113,7 +114,7 @@ colorscheme jellybeans
 set title
 set ruler
 set laststatus=2
-set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,.DS_Store
+set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,.DS_Store,.,..
 set wildmenu
 set wildmode=longest:full,full
 " [memo]
@@ -209,6 +210,7 @@ else
     NeoBundle 'thinca/vim-ref'
     NeoBundle 'szw/vim-tags'
     NeoBundle 'kana/vim-smartinput'
+    NeoBundle 'tpope/vim-surround'
     NeoBundle 'vim-scripts/matchit.zip'
     NeoBundle 'tpope/vim-endwise'
     NeoBundle 'fuenor/qfixgrep'
@@ -731,28 +733,14 @@ call neobundle#end()
 call smartinput#map_to_trigger('i', '*', '*', '*')
 call smartinput#map_to_trigger('i', '!', '!', '!')
 call smartinput#map_to_trigger('i', '=', '=', '=')
-call smartinput#define_rule({
-\    'at':    '\%#',
-\    'char':  '"',
-\    'input': '"',
-\    'filetype': ['vim'],
-\})
-call smartinput#define_rule({
-\    'at':    '/\%#',
-\    'char':  '*',
-\    'input': '**/<Left><Left>',
-\})
-call smartinput#define_rule({
-\    'at':    '<?\%#',
-\    'char':  '=',
-\    'input': '=<Space><Space>?><Left><Left><Left>',
-\    'filetype': ['php'],
-\})
-call smartinput#define_rule({
-\    'at':    '<\%#',
-\    'char':  '!',
-\    'input': '!----><Left><Left><Left>',
-\})
+call smartinput#define_rule({'at': '\%#',      'char': '"',    'input': '"',                 'filetype': ['vim'] })
+call smartinput#define_rule({'at': '''\%#''',  'char': '<BS>', 'input': '<Del>',                                 })
+call smartinput#define_rule({'at': '"\%#"',    'char': '<BS>', 'input': '<Del>',                                 })
+call smartinput#define_rule({'at': '<\%#',     'char': '!',    'input': '!----><Left><Left><Left>'               })
+call smartinput#define_rule({'at': '<?\%#',    'char': '=',    'input': '=?><Left><Left>',   'filetype': ['php'] })
+call smartinput#define_rule({'at': '<?=\%#?>', 'char': '<BS>', 'input': '<Del><Del><Space>', 'filetype': ['php'] })
+call smartinput#define_rule({'at': '/\%#',     'char': '*',    'input': '**/<Left><Left>'                        })
+call smartinput#define_rule({'at': '//\%#',    'char': '{',    'input': '{{{<Left><Left><Left><Left><Left>'      }) "}}}
 "}}}
 "}}}
 "

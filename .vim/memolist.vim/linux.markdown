@@ -5,6 +5,20 @@ tags: []
 categories: []
 - - -
 
+# File Transfer
+
+## No encrypt
+
+[nc/pv](http://blog.glidenote.com/blog/2014/12/02/using-netcat-for-file-transfers-with-pv/)
+Sender
+```
+$ pv ./<File> | nc -l 3000
+```
+receiver
+```
+$ nc foobar.com 3000 | pv > <File>
+```
+
 # Grep
 
 file grep
