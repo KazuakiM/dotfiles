@@ -399,9 +399,6 @@ NeoBundleLazy 'thinca/vim-editvar', {
 NeoBundleLazy 'rhysd/unite-codic.vim', {
 \    'depends':       ['koron/codic-vim', 'Shougo/unite.vim'],
 \    'unite_sources': 'codic',}
-NeoBundleLazy 'tsukkee/unite-tag' , {
-\    'depends':       'Shougo/unite.vim',
-\    'unite_sources': 'tag',}
 NeoBundleLazy 'supermomonga/jazzradio.vim', {
 \    'depends':       'Shougo/unite.vim',
 \    'unite_sources': 'jazzradio',
@@ -422,7 +419,6 @@ nnoremap <silent> [unite]s    :<C-u>Unite<Space>-default-action=ex<Space>output:
 " add plugins
 nnoremap <silent> [unite]dic :<C-u>Unite<Space>codic<CR>
 nnoremap <silent> [unite]h   :<C-u>Unite<Space>help<CR>
-nnoremap <silent> [unite]t   :<C-u>Unite<Space>tag<CR>
 nnoremap <silent> [unite]v   :<C-u>Unite<Space>-auto-preview<Space>variable<CR>
 nnoremap <silent> [unite]web :<C-u>Unite<Space>webcolorname<CR>
 nnoremap <silent> [unite]y   :<C-u>Unite<Space>yankround<CR>
@@ -685,8 +681,6 @@ nnoremap <silent> <Leader>pre :PrevimOpen<CR>
 "* New Install 'NeoBundle'. And Update 'NeoBundle' to 'NeoBundleFetch'.
 " ColorScheme {{{
 NeoBundleFetch 'nanotech/jellybeans.vim'
-NeoBundleFetch 'altercation/vim-colors-solarized'
-NeoBundleFetch 'tomasr/molokai'
 "}}}
 " Lingr (none-Vimplugin but there is vim-users.jp room.) {{{
 NeoBundleFetch 'psychs/lingr-irc'

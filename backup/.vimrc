@@ -126,6 +126,12 @@ NeoBundleLazy 'osyo-manga/unite-highlight', {
 \    'unite_sources': 'highlight',}
 nnoremap <silent> [unite]hl  :<C-u>Unite highlight<CR>
 "}}}
+" unite-tag {{{
+NeoBundleLazy 'tsukkee/unite-tag' , {
+\    'depends':       'Shougo/unite.vim',
+\    'unite_sources': 'tag',}
+nnoremap <silent> [unite]t   :<C-u>Unite<Space>tag<CR>
+"}}}
 " vimshell.vim {{{
 NeoBundleLazy 'Shougo/vimshell.vim', {
 \    'depends':  'Shougo/vimproc.vim',
@@ -196,4 +202,12 @@ function! s:hooks.on_source(bundle)
 endfunction
 unlet s:hooks
 "}}}
+"}}}
+"
+"
+" NeoBundleFetch
+"----------------------------------------------------------------------------------------------------------------------------------
+"{{{
+NeoBundleFetch 'altercation/vim-colors-solarized'
+NeoBundleFetch 'tomasr/molokai'
 "}}}
