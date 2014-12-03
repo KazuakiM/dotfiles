@@ -248,12 +248,21 @@ ALTER TABLE <Table1> AUTO_INCREMENT = <AutoIncrementData>;
 # FUNCTION
 
 GROUP_CONCAT  
-Require 2nd parameter at IFNULL.If max or min, check "Max/Min".
+Require 2nd parameter at IFNULL.If max or min, check "Max/Min". And check 'group_concat_max_len'.
 ```
 SELECT <UniqueColumn1>(, <UniqueColumn2>),
   GROUP_CONCAT(CONCAT(IFNULL(<Column1>, ''), '_',IFNULL(<Column1>, '')) ORDER BY <Column1> ASC SEPARATOR '|') AS table_info
   FROM <Table1>
-  GROUP BY <UniqueColumn1>(, <UniqueColumn2>)
+  GROUP BY <UniqueColumn1>(, <UniqueColumn2>);
+
+SHOW VARIABLES LIKE 'group_concat_max_len';
+```
+MATH FUNCTION IF
+```
+SELECT <UniqueColumn1>(, <UniqueColumn2>),
+  SUM(IF((Condition), <true>, <false=default>)) AS sum
+  FROM <Table1>
+  GROUP BY <UniqueColumn1>(, <UniqueColumn2>);
 ```
 
 # Other
