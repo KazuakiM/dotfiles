@@ -66,6 +66,7 @@ set hidden
 set ambiwidth=double
 set spelllang+=cjk
 set iminsert=0
+set imsearch=-1
 "set spell
 set backspace=indent,eol,start
 set virtualedit+=block
