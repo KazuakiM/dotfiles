@@ -15,8 +15,8 @@ $ mysql     -u<Account> -h<Host> -p <New DataBase> < '/tmp/<dumpFile>'
 Copy Table
 ```
 $ mysql -u<Account> -h<Host> -p -e "
-CREATE TABLE <DataBase1>.<New Table1>     LIKE         <DataBase1>.<Table1>;
-INSERT INTO  <New DataBase>.<New Table1> SELECT * FROM <New DataBase>.<Table1>;
+CREATE TABLE <New DataBase>.<New Table1> LIKE          <DataBase1>.<Table1>;
+INSERT INTO  <New DataBase>.<New Table1> SELECT * FROM <DataBase1>.<Table1>;
 "
 ```
 Check status DataBase
