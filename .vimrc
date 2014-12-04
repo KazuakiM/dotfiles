@@ -321,7 +321,6 @@ let g:yankround_use_region_hl       = 1
 let g:yankround_region_hl_groupname = 'YankRoundRegion'
 "}}}
 " memolist.vim {{{
-let g:memolist_path                 = '$HOME/.vim/memolist.vim'
 let g:memolist_filename_prefix_none = 1
 let g:memolist_unite                = 1
 let g:memolist_unite_source         = 'file_rec'
@@ -711,9 +710,14 @@ if has('mac')
     let $LUA_DLL    = '/usr/local/lib/liblua.dylib'
     let g:previm_open_cmd  = 'open -a firefox'
     let g:regexper#OpenCmd = 'open -a firefox'
+    let g:memolist_path    = '$HOME/.vim/memolist.vim'
+elseif (has("win32") || has ("win64"))
+    autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+    let g:memolist_path     = '/cygwin64/home/kazuakim/.vim/memolist.vim'
+    let g:php_cs_fixer_path = '$HOME/.vim/vim-php-cs-fixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
 else
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-    " php setting.
+    let g:memolist_path     = '$HOME/.vim/memolist.vim'
     let g:php_cs_fixer_path = '$HOME/.vim/vim-php-cs-fixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
 endif
 "}}}
