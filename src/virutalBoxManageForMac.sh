@@ -30,21 +30,43 @@ case ${serverStatus} in
         case ${runningNext} in
             2)
                 VBoxManage controlvm ${serverName} acpipowerbutton
-                echo "\nServer name '${serverName}' is ACPI shutdown starting";;
+                echo "\nServer name '${serverName}' is ACPI shutdown starting"
+                ;;
             3)
                 VBoxManage controlvm ${serverName} pause
-                echo "\nServer name '${serverName}' is pause";;
+                echo "\nServer name '${serverName}' is pause"
+                ;;
             *)
-                exit 0;;
-        esac;;
+                exit 0
+                ;;
+        esac
+        ;;
     'paused')
         VBoxManage controlvm ${serverName} resume
-        echo "\nServer name '${serverName}' is resume";;
+        echo "\nServer name '${serverName}' is resume"
+        ;;
     'powered') # powered is 'powered off'
         VBoxManage startvm ${serverName} --type=headless
-        echo "\nServer name '${serverName}' is started";;
+        echo "\nServer name '${serverName}' is started"
+        ;;
     *)
-        echo "\nException:Server name '${serverName}', Server status '${serverStatus}'";;
+        echo "\nException:Server name '${serverName}', Server status '${serverStatus}'"
+        echo "Request next:\n\t1:non action\n\t2:shutdown VirtualBox\n"
+        read runningNext
+        case ${runningNext} in
+            2)
+                VBoxManage controlvm ${serverName} acpipowerbutton
+                echo "\nServer name '${serverName}' is ACPI shutdown starting"
+                ;;
+            3)
+                VBoxManage controlvm ${serverName} pause
+                echo "\nServer name '${serverName}' is pause"
+                ;;
+            *)
+                exit 0
+                ;;
+        esac
+        ;;
 esac
 
 # Finish
