@@ -1,8 +1,6 @@
 "
 "
-" NeoBundle
-"----------------------------------------------------------------------------------------------------------------------------------
-"{{{
+" NeoBundle {{{
 " syntastic {{{
 NeoBundle 'scrooloose/syntastic'
 let g:syntastic_enable_signs=1
@@ -81,9 +79,7 @@ autocmd precious-indentline User PreciousFileType IndentLinesReset
 "}}}
 "
 "
-" NeoBundleLazy
-"----------------------------------------------------------------------------------------------------------------------------------
-"{{{
+" NeoBundleLazy {{{
 " vim-over {{{
 NeoBundleLazy 'osyo-manga/vim-over', {
 \    'autoload' : {
@@ -125,6 +121,19 @@ NeoBundleLazy 'osyo-manga/unite-highlight', {
 \    'depends':       'Shougo/unite.vim',
 \    'unite_sources': 'highlight',}
 nnoremap <silent> [unite]hl  :<C-u>Unite highlight<CR>
+"}}}
+" unite-tag {{{
+NeoBundleLazy 'tsukkee/unite-tag' , {
+\    'depends':       'Shougo/unite.vim',
+\    'unite_sources': 'tag',}
+nnoremap <silent> [unite]t   :<C-u>Unite<Space>tag<CR>
+let s:hooks = neobundle#get_hooks('unite-tag')
+function! s:hooks.on_source(bundle)
+    let g:unite_source_tag_max_name_length  = 30
+    let g:unite_source_tag_max_fname_length = 128
+    let g:unite_source_tag_show_location    = 0
+endfunction
+unlet s:hooks
 "}}}
 " vimshell.vim {{{
 NeoBundleLazy 'Shougo/vimshell.vim', {
@@ -196,4 +205,10 @@ function! s:hooks.on_source(bundle)
 endfunction
 unlet s:hooks
 "}}}
+"}}}
+"
+"
+" NeoBundleFetch {{{
+NeoBundleFetch 'altercation/vim-colors-solarized'
+NeoBundleFetch 'tomasr/molokai'
 "}}}

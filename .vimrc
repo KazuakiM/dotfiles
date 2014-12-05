@@ -1,8 +1,6 @@
 "
 "
-" Memo
-"----------------------------------------------------------------------------------------------------------------------------------
-"{{{
+" Memo {{{
 " :help internal-variables {{{
 "------------------------------------------------------------------------
 "| b: | buffer-variable   | Local to the current buffer.                |
@@ -32,9 +30,7 @@
 "}}}
 "
 "
-" Common
-"----------------------------------------------------------------------------------------------------------------------------------
-"{{{
+" Common {{{
 if has('vim_starting')
     if (has("win32") || has ("win64"))
         set runtimepath+=$HOME/.vim,$HOME/.vim/after
@@ -181,18 +177,14 @@ autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 "}}}
 "
 "
-" NeoBundle START
-"----------------------------------------------------------------------------------------------------------------------------------
-"{{{
+" NeoBundle START {{{
 call neobundle#begin(expand('$HOME/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 let g:neobundle#log_filename = $HOME.'/.vim/neobundle.vim/neobundle.log'
 "}}}
 "
 "
-" NeoBundle
-"----------------------------------------------------------------------------------------------------------------------------------
-"{{{
+" NeoBundle {{{
 if neobundle#has_cache()
     NeoBundleLoadCache
 else
@@ -373,16 +365,13 @@ let g:UltiSnipsSnippetsDir        = $HOME.'/.vim/bundle/vim-snippets/UltiSnips'
 "}}}
 "
 "
-" NeoBundleLazy
-"----------------------------------------------------------------------------------------------------------------------------------
-"{{{
+" NeoBundleLazy {{{
 " unite.vim
 " unite-webcolorname
 " unite-help
 " vim-editvar
 " codic-vim
 " unite-codic.vim
-" unite-tag
 " jazzradio.vim {{{
 NeoBundleLazy 'Shougo/unite.vim', {
 \    'commands' : 'Unite',}
@@ -398,9 +387,6 @@ NeoBundleLazy 'thinca/vim-editvar', {
 NeoBundleLazy 'rhysd/unite-codic.vim', {
 \    'depends':       ['koron/codic-vim', 'Shougo/unite.vim'],
 \    'unite_sources': 'codic',}
-NeoBundleLazy 'tsukkee/unite-tag' , {
-\    'depends':       'Shougo/unite.vim',
-\    'unite_sources': 'tag',}
 NeoBundleLazy 'supermomonga/jazzradio.vim', {
 \    'depends':       'Shougo/unite.vim',
 \    'unite_sources': 'jazzradio',
@@ -421,7 +407,6 @@ nnoremap <silent> [unite]s    :<C-u>Unite<Space>-default-action=ex<Space>output:
 " add plugins
 nnoremap <silent> [unite]dic :<C-u>Unite<Space>codic<CR>
 nnoremap <silent> [unite]h   :<C-u>Unite<Space>help<CR>
-nnoremap <silent> [unite]t   :<C-u>Unite<Space>tag<CR>
 nnoremap <silent> [unite]v   :<C-u>Unite<Space>-auto-preview<Space>variable<CR>
 nnoremap <silent> [unite]web :<C-u>Unite<Space>webcolorname<CR>
 nnoremap <silent> [unite]y   :<C-u>Unite<Space>yankround<CR>
@@ -448,13 +433,6 @@ function! s:hooks.on_source(bundle)
     let g:unite_source_grep_default_opts   = '--nocolor --nogroup'
     let g:unite_source_grep_recursive_opt  = ''
     let g:unite_source_grep_max_candidates = 200
-endfunction
-unlet s:hooks
-let s:hooks = neobundle#get_hooks('unite-tag')
-function! s:hooks.on_source(bundle)
-    let g:unite_source_tag_max_name_length  = 30
-    let g:unite_source_tag_max_fname_length = 128
-    let g:unite_source_tag_show_location    = 0
 endfunction
 unlet s:hooks
 let s:hooks = neobundle#get_hooks('jazzradio.vim')
@@ -677,15 +655,11 @@ nnoremap <silent> <Leader>pre :PrevimOpen<CR>
 "}}}
 "
 "
-" NeoBundleFetch
-"----------------------------------------------------------------------------------------------------------------------------------
-"{{{
+" NeoBundleFetch {{{
 "# function memo
 "* New Install 'NeoBundle'. And Update 'NeoBundle' to 'NeoBundleFetch'.
 " ColorScheme {{{
 NeoBundleFetch 'nanotech/jellybeans.vim'
-NeoBundleFetch 'altercation/vim-colors-solarized'
-NeoBundleFetch 'tomasr/molokai'
 "}}}
 " Lingr (none-Vimplugin but there is vim-users.jp room.) {{{
 NeoBundleFetch 'psychs/lingr-irc'
@@ -704,9 +678,7 @@ NeoBundleFetch 'javallone/regexper'
 "}}}
 "
 "
-" OS type
-"----------------------------------------------------------------------------------------------------------------------------------
-"{{{
+" OS type {{{
 if has('mac')
     " Programming language
     let $PYTHON_DLL = '/usr/local/Cellar/python/2.7.7_2/Frameworks/Python.framework/Versions/2.7/lib/libpython2.7.dylib'
@@ -729,9 +701,7 @@ endif
 "}}}
 "
 "
-" NeoBundle END
-"----------------------------------------------------------------------------------------------------------------------------------
-"{{{
+" NeoBundle END {{{
 call neobundle#end()
 " vim-smartinput {{{
 call smartinput#map_to_trigger('i', '*', '*', '*')
@@ -749,9 +719,7 @@ call smartinput#define_rule({'at': '//\%#',    'char': '{',    'input': '{{{<Lef
 "}}}
 "
 "
-" FileType
-"----------------------------------------------------------------------------------------------------------------------------------
-"{{{
+" FileType {{{
 filetype plugin indent on
 autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} setlocal filetype=markdown
 autocmd MyAutoCmd BufNewFile,BufRead *.coffee                   setlocal filetype=coffee
@@ -760,9 +728,7 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                setlocal filetyp
 "}}}
 "
 "
-" Extra local functions
-"----------------------------------------------------------------------------------------------------------------------------------
-"{{{
+" Extra local functions {{{
 " quickrun - prettyprint {{{
 "# function memo
 "* URL: http://qiita.com/rbtnn/items/39d9ba817329886e626b
@@ -812,9 +778,7 @@ nnoremap <F3> :call<Space>BufferInfo()<CR>
 "}}}
 "
 "
-" Other setting files
-"----------------------------------------------------------------------------------------------------------------------------------
-"{{{
+" Other setting files {{{
 " Environment setting file
 if (has("win32") || has ("win64"))
     source ~/.vimrc.win
