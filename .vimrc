@@ -715,6 +715,7 @@ call smartinput#define_rule({'at': '<?\%#',    'char': '=',    'input': '=?><Lef
 call smartinput#define_rule({'at': '<?=\%#?>', 'char': '<BS>', 'input': '<Del><Del><Space>', 'filetype': ['php'] })
 call smartinput#define_rule({'at': '/\%#',     'char': '*',    'input': '**/<Left><Left>'                        })
 call smartinput#define_rule({'at': '//\%#',    'char': '{',    'input': '{{{<Left><Left><Left><Left><Left>'      }) "}}}
+call smartinput#define_rule({'at': '//\%#',    'char': '}',    'input': '}}}<Left><Left><Left><Left><Left>'      }) "}}}
 call smartinput#define_rule({'at': '(\%#)',    'char': '<BS>', 'input': '<Del>',                                 })
 "}}}
 "}}}
