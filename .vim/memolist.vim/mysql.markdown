@@ -28,9 +28,7 @@ KILL xxxx;
 ```
 PARTITIONS
 ```
-SELECT ISP.TABLE_SCHEMA, ISP.TABLE_NAME, ISP.PARTITION_NAME, ISP.PARTITION_ORDINAL_POSITION, ISP.TABLE_ROWS
-FROM INFORMATION_SCHEMA.PARTITIONS ISP
-WHERE ISP.TABLE_SCHEMA = DATABASE()
+SELECT ISP.TABLE_SCHEMA, ISP.TABLE_NAME, ISP.PARTITION_NAME, ISP.PARTITION_ORDINAL_POSITION, ISP.TABLE_ROWS FROM INFORMATION_SCHEMA.PARTITIONS ISP WHERE ISP.TABLE_SCHEMA = DATABASE()
 AND ISP.TABLE_NAME = <Table1>;
 
 SHOW CREATE TABLE <Table1>\G
@@ -111,7 +109,7 @@ INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES
   (<ColumnData1>, <ColumnData2>, ...)
 ON DUPLICATE KEY UPDATE <Column2> = <ColumnData2>, <Column3> = <ColumnData3>;
 ```
-Inser Select
+Insert select
 ```
 INSERT INTO <Table1> (<Column1>, <Column2>, ...)
   SELECT <ColumnData1>, <ColumnData2>, ...;
@@ -136,16 +134,16 @@ WHERE <UniqueColumn1> IN (1,2);
 ```
 [Good2](http://qiita.com/masuidrive/items/0671ea7efa91a99c0268)
 ```
-CREATE TEMPORARY TABLE tmp_table(<UniqueColumn1>, <Column1>, ...);
+CREATE TEMPORARY TABLE tmp_<Table1>(<UniqueColumn1>, <Column1>, ...);
 
-INSERT INTO tmp_table(tbl1_id,body) VALUES
+INSERT INTO tmp_<Table1>(<UniqueColumn1>, <Column1>) VALUES
   (<UniqueColumnData1>, <ColumnData1>),
   (<UniqueColumnData2>, <ColumnData2>);
 
 UPDATE <Table1>
-  INNER JOIN tmp_table
-  ON <Table1>.<UniqueColumn1> = tmp_table.<UniqueColumn1>
-  SET <Table1>.<Column1> = tmp_table.<UniqueColumn1>;
+  INNER JOIN tmp_<Table1>
+  ON <Table1>.<UniqueColumn1> = tmp_<Table1>.<UniqueColumn1>
+  SET <Table1>.<Column1> = tmp_<Table1>.<UniqueColumn1>;
 ```
 
 # DELETE/TRUNCATE
@@ -163,15 +161,8 @@ TRUNCATE TABLE <Table1>;
 
 Search using Column
 ```
-SELECT ISC.TABLE_NAME,
-  ISC.COLUMN_NAME,
-  ISC.COLUMN_TYPE,
-  ISC.IS_NULLABLE,
-  ISC.COLUMN_KEY,
-  ISC.EXTRA
-  FROM INFORMATION_SCHEMA.COLUMNS ISC
-  WHERE ISC.TABLE_SCHEMA = DATABASE()
-  AND ISC.COLUMN_NAME = <Column1>;
+SELECT ISC.TABLE_NAME, ISC.COLUMN_NAME, ISC.COLUMN_TYPE, ISC.IS_NULLABLE, ISC.COLUMN_KEY, ISC.EXTRA FROM INFORMATION_SCHEMA.COLUMNS ISC WHERE ISC.TABLE_SCHEMA = DATABASE()
+AND ISC.COLUMN_NAME = <Column1>;
 ```
 Show using DataBase
 ```

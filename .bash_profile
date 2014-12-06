@@ -36,6 +36,8 @@ if type htop >/dev/null 2>&1; then
 fi
 export GREP_OPTIONS='--color=auto -I'
 export GREP_COLOR='1;33'
+alias grep="grep $GREP_OPTIONS"
+unset GREP_OPTIONS
 export XMLLINT_INDENT='    '
 #}}}
 # Less {{{

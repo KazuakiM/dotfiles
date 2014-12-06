@@ -9,8 +9,11 @@ categories: []
 ```
 Ctrl+k, Ctrl+c
 ```
-
 選択範囲のコメントアウト解除
 ```
 Ctrl+k, Ctrl+u
+```
+タブ切替
+```
+Ctrl+Alt+(PageUp or PageDown)
 ```
