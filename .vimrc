@@ -60,9 +60,9 @@ autocmd MyAutoCmd FileType * set formatoptions-=cb
 set autoread
 set hidden
 set ambiwidth=double
-set spelllang+=cjk
 set iminsert=0
 set imsearch=-1
+set spelllang+=cjk
 "set spell
 set backspace=indent,eol,start
 set virtualedit+=block
@@ -228,10 +228,8 @@ let g:lightline = {
 \        'filetype':     'MyFiletype',
 \        'fileencoding': 'MyFileencoding',
 \        'mode':         'MyMode',},
-\    'component_expand': {
-\        'qfstatusline': 'qfstatusline#Update',},
-\    'component_type': {
-\        'qfstatusline': 'error',},
+\    'component_expand': {'qfstatusline': 'qfstatusline#Update',},
+\    'component_type':   {'qfstatusline': 'error',},
 \    'subseparator': {
 \        'left':  '|',
 \        'right': '|',},}
@@ -334,16 +332,12 @@ let g:quickrun_config = {
 \        'runner':                              'vimproc',
 \        'runner/vimproc/updatetime':           60,},
 \    'watchdogs_checker/_': {
-\        'hook/close_quickfix/enable_exit':           1,
-\        'hook/back_window/enable_exit':              0,
-\        'hook/back_window/priority_exit':            1,
-\        'hook/quickfix_status_enable/enable_exit':   1,
-\        'hook/quickfix_status_enable/priority_exit': 2,
-\        'hook/qfsigns_update/enable_exit':           1,
-\        'hook/qfsigns_update/priority_exit':         3,
-\        'hook/qfstatusline_update/enable_exit':      1,
-\        'hook/qfstatusline_update/priority_exit':    4,
-\        'outputter/quickfix/open_cmd':               '',},
+\        'hook/close_quickfix/enable_exit':         1,
+\        'hook/back_window/enable_exit':            0,  'hook/back_window/priority_exit':            1,
+\        'hook/quickfix_status_enable/enable_exit': 1,  'hook/quickfix_status_enable/priority_exit': 2,
+\        'hook/qfsigns_update/enable_exit':         1,  'hook/qfsigns_update/priority_exit':         3,
+\        'hook/qfstatusline_update/enable_exit':    1,  'hook/qfstatusline_update/priority_exit':    4,
+\        'outputter/quickfix/open_cmd':             '', },
 \    'watchdogs_checker/php': {
 \        'command':     'php',
 \        'exec':        '%c -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0 -l %o %s:p',
@@ -390,32 +384,25 @@ NeoBundleLazy 'rhysd/unite-codic.vim', {
 NeoBundleLazy 'supermomonga/jazzradio.vim', {
 \    'depends':       'Shougo/unite.vim',
 \    'unite_sources': 'jazzradio',
-\    'commands':      [
-\        'JazzradioUpdateChannels',
-\        'JazzradioStop',
-\        {
-\            'name':     'JazzradioPlay',
-\            'complete': 'customlist,jazzradio#channel_id_complete'},],
-\    'function_prefix' : 'jazzradio',}
+\    'commands':      ['JazzradioUpdateChannels', 'JazzradioPlay',],}
 nnoremap [unite] <Nop>
 nmap <Leader>u [unite]
 " default plugins
-nnoremap <silent> [unite]f    :<C-u>call<Space>DispatchUniteFileRecAsyncOrGit()<CR>
-nnoremap <silent> [unite]map  :<C-u>Unite<Space>output:map\|map!\|lmap<CR>
-nnoremap <silent> [unite]msg  :<C-u>Unite<Space>output:message<CR>
-nnoremap <silent> [unite]s    :<C-u>Unite<Space>-default-action=ex<Space>output:scriptnames<CR>
+nnoremap <silent> [unite]f   :<C-u>call<Space>DispatchUniteFileRecAsyncOrGit()<CR>
+nnoremap <silent> [unite]map :<C-u>Unite<Space>output:map\|map!\|lmap<CR>
+nnoremap <silent> [unite]msg :<C-u>Unite<Space>output:message<CR>
+nnoremap <silent> [unite]s   :<C-u>Unite<Space>-default-action=ex<Space>output:scriptnames<CR>
 " add plugins
 nnoremap <silent> [unite]dic :<C-u>Unite<Space>codic<CR>
 nnoremap <silent> [unite]h   :<C-u>Unite<Space>help<CR>
 nnoremap <silent> [unite]v   :<C-u>Unite<Space>-auto-preview<Space>variable<CR>
 nnoremap <silent> [unite]web :<C-u>Unite<Space>webcolorname<CR>
-nnoremap <silent> [unite]y   :<C-u>Unite<Space>yankround<CR>
 " jazzradio
+let g:jazzradio#cache_dir = $HOME.'/.vim/jazzradio.vim'
 nnoremap [jazzradio] <Nop>
 nmap <Leader>j [jazzradio]
 nnoremap [jazzradio]u :JazzradioUpdateChannels<CR>
 nnoremap [jazzradio]p :JazzradioPlay<Space>CurrentJazz<CR>
-nnoremap [jazzradio]o :JazzradioStop<CR>
 nnoremap [jazzradio]l :<C-u>Unite<Space>jazzradio<CR>
 " http://qiita.com/yuku_t/items/9263e6d9105ba972aea8
 function! DispatchUniteFileRecAsyncOrGit()
@@ -435,11 +422,6 @@ function! s:hooks.on_source(bundle)
     let g:unite_source_grep_max_candidates = 200
 endfunction
 unlet s:hooks
-let s:hooks = neobundle#get_hooks('jazzradio.vim')
-function! s:hooks.on_source(bundle)
-    let g:jazzradio#cache_dir = $HOME.'/.vim/jazzradio.vim'
-endfunction
-unlet s:hooks
 "}}}
 " vimdoc-ja {{{
 NeoBundleLazy 'vim-jp/vimdoc-ja', {
@@ -449,7 +431,6 @@ NeoBundleLazy 'vim-jp/vimdoc-ja', {
 " open-browser.vim {{{
 NeoBundleLazy 'tyru/open-browser.vim', {
 \    'functions' : 'OpenBrowser',
-\    'commands'  : ['OpenBrowser', 'OpenBrowserSearch'],
 \    'mappings'  : '<Plug>(openbrowser-smart-search)',}
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
 nmap <Leader>gx <Plug>(openbrowser-smart-search)
@@ -481,38 +462,15 @@ NeoBundleLazy 'junegunn/vim-easy-align', {
 vnoremap <silent> <Leader>a :EasyAlign<CR>
 let g:easy_align_delimiters = {
 \    '=': {
-\        'pattern':       '===\|!==\|<=>\|\(&&\|||\|<<\|>>\)=\|=\~[#?]\?\|=>\|[:+/*!%^=><&|.-]\?=[#?]\?',
-\        'left_margin':   1,
-\        'right_margin':  1,
-\        'stick_to_left': 0 },
-\    '>': {
-\        'pattern': '>>\|=>\|>', },
-\    '/': {
-\        'pattern':       '//\+\|/\*\|\*/',
-\        'ignore_groups': ['String'], },
-\    '#': {
-\        'pattern':         '#\+',
-\        'ignore_groups':   ['String'],
-\        'delimiter_align': 'l', },
-\    '$': {
-\        'pattern':         '\((.*\)\@!$\(.*)\)\@!',
-\        'ignore_groups':   ['String'],
-\        'right_margin':    0,
-\        'delimiter_align': 'l', },
-\    ']': {
-\        'pattern':       '[[\]]',
-\        'left_margin':   0,
-\        'right_margin':  0,
-\        'stick_to_left': 0, },
-\    ')': {
-\        'pattern':       '[()]',
-\        'left_margin':   0,
-\        'right_margin':  0,
-\        'stick_to_left': 0, },
-\    'd': {
-\        'pattern':      '\(\S\+\s*[;=]\)\@=',
-\        'left_margin':  0,
-\        'right_margin': 0, }, }
+\        'pattern':     '===\|!==\|<=>\|\(&&\|||\|<<\|>>\)=\|=\~[#?]\?\|=>\|[:+/*!%^=><&|.-]\?=[#?]\?',
+\        'left_margin': 1, 'right_margin': 1, 'stick_to_left': 0 },
+\    '>': {'pattern': '>>\|=>\|>',             },
+\    '/': {'pattern': '//\+\|/\*\|\*/',        'ignore_groups': ['String'], },
+\    '#': {'pattern': '#\+',                   'ignore_groups': ['String'], 'delimiter_align': 'l', },
+\    '$': {'pattern': '\((.*\)\@!$\(.*)\)\@!', 'ignore_groups': ['String'], 'right_margin':    0,   'delimiter_align': 'l', },
+\    ']': {'pattern': '[[\]]',                 'left_margin':   0,          'right_margin':    0,   'stick_to_left':   0,   },
+\    ')': {'pattern': '[()]',                  'left_margin':   0,          'right_margin':    0,   'stick_to_left':   0,   },
+\    'd': {'pattern': '\(\S\+\s*[;=]\)\@=',    'left_margin':   0,          'right_margin':    0,   },                      }
 "}}}
 " Align
 " SQLUtilities {{{
@@ -535,8 +493,8 @@ let s:hooks = neobundle#get_hooks('wildfire.vim')
 function! s:hooks.on_source(bundle)
     map <BS> <Plug>(wildfire-water)
     let g:wildfire_objects = {
-    \        '*':        ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it',],
-    \        'html,xml': ['at', 'it',],}
+    \   '*':        ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it',],
+    \   'html,xml': ['at', 'it',],}
 endfunction
 unlet s:hooks
 "}}}
@@ -714,9 +672,10 @@ call smartinput#define_rule({'at': '<\%#',     'char': '!',    'input': '!----><
 call smartinput#define_rule({'at': '<?\%#',    'char': '=',    'input': '=?><Left><Left>',   'filetype': ['php'] })
 call smartinput#define_rule({'at': '<?=\%#?>', 'char': '<BS>', 'input': '<Del><Del><Space>', 'filetype': ['php'] })
 call smartinput#define_rule({'at': '/\%#',     'char': '*',    'input': '**/<Left><Left>'                        })
-call smartinput#define_rule({'at': '//\%#',    'char': '{',    'input': '{{{<Left><Left><Left><Left><Left>'      }) "}}}
-call smartinput#define_rule({'at': '//\%#',    'char': '}',    'input': '}}}<Left><Left><Left><Left><Left>'      }) "}}}
+call smartinput#define_rule({'at': '//\%#',    'char': '{',    'input': '{{{<Left><Left><Left><Left><Left>'      })
+call smartinput#define_rule({'at': '//\%#',    'char': '}',    'input': '}}}<Left><Left><Left><Left><Left>'      })
 call smartinput#define_rule({'at': '(\%#)',    'char': '<BS>', 'input': '<Del>',                                 })
+call smartinput#define_rule({'at': '{\%#}',    'char': '<BS>', 'input': '<Del>',                                 })
 "}}}
 "}}}
 "
@@ -752,30 +711,6 @@ function! s:auto_mkdir(dir, force)
         call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
     endif
 endfunction
-"}}}
-" File/Buffer information {{{
-function! FileInfo(filename)
-    let a:fn = expand('%:p')
-    echo '[filename ]'.a:fn
-    echo '[type     ]'.getftype(a:fn)
-    echo '[mtime    ]'.strftime('%Y-%m-%d %H:%M %a', getftime(a:fn))
-    echo '[size     ]'.getfsize(a:fn).' bytes'
-    echo '[perm     ]'.getfperm(a:fn)
-endfunction
-function! BufferInfo()
-    echo '[bufnr    ]'.bufnr('%')
-    echo '[bufname  ]'.expand('%:p')
-    echo '[cwd      ]'.getcwd()
-    if filereadable(expand('%'))
-        echo '[mtime    ]'.strftime('%Y-%m-%d %H:%M %a',getftime(expand('%')))
-    endif
-    echo '[size     ]'.(line2byte(line('$') + 1) - 1) . ' bytes'
-    echo '[filetype ]'.&ft
-    echo '[expandtab]'.(&et ? 'true' : 'false')
-    echo '[tabstop  ]'.&ts
-endfunction
-nnoremap <F2> :call<Space>FileInfo(expand('<cfile>'))<CR>
-nnoremap <F3> :call<Space>BufferInfo()<CR>
 "}}}
 "}}}
 "
