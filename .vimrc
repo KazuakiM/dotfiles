@@ -201,7 +201,6 @@ else
     \        'cygwin' : 'make -f make_cygwin.mak',},} "}}}
     NeoBundle 'vim-jp/vital.vim'
     NeoBundle 'mattn/webapi-vim'
-    NeoBundle 'tpope/vim-fugitive'
     NeoBundle 'itchyny/lightline.vim'
     NeoBundle 'Yggdroot/indentLine'
     NeoBundle 'thinca/vim-ref'
@@ -224,12 +223,12 @@ endif
 let g:lightline = {
 \    'colorscheme': 'jellybeans',
 \    'active':      {
-\        'left':  [['mode','paste',],['fugitive','filename',],],
-\        'right': [['qfstatusline','lineinfo',],['percent',],['fileformat','fileencoding','filetype',],],},
+\        'left':  [['mode','paste',],['filename','qfstatusline'],],
+\        'right': [['lineinfo',],['percent',],['fileformat','fileencoding','filetype',],],},
 \    'component_function': {
-\        'fugitive':     'MyFugitive',     'filename': 'MyFilename',
-\        'fileformat':   'MyFileformat',   'filetype': 'MyFiletype',
-\        'fileencoding': 'MyFileencoding', 'mode':     'MyMode',},
+\        'filename': 'MyFilename', 'fileformat':   'MyFileformat',
+\        'filetype': 'MyFiletype', 'fileencoding': 'MyFileencoding',
+\        'mode':     'MyMode',},
 \    'component_expand': {'qfstatusline': 'qfstatusline#Update',},
 \    'component_type':   {'qfstatusline': 'error',},
 \    'subseparator': {'left': '|', 'right': '|',},}
@@ -246,17 +245,6 @@ function! MyFilename()
     \    ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
     \    ('' != a:fname ? a:fname : '[No Name]') .
     \    ('' != MyModified() ? ' ' . MyModified() : '')
-endfunction
-function! MyFugitive()
-    try
-        if expand('%:t') !~? 'Gundo\|NERD' && exists('*fugitive#head')
-            let a:mark = ''  " edit here for cool a:mark
-            let a:_ = fugitive#head()
-            return strlen(a:_) ? a:mark.a:_ : ''
-        endif
-    catch
-    endtry
-    return ''
 endfunction
 function! MyFileformat()
     return winwidth(0) > 70 ? &fileformat : ''
@@ -334,9 +322,8 @@ let g:quickrun_config = {
 \    'watchdogs_checker/_': {
 \        'hook/close_quickfix/enable_exit':         1,
 \        'hook/back_window/enable_exit':            0,  'hook/back_window/priority_exit':            1,
-\        'hook/quickfix_status_enable/enable_exit': 1,  'hook/quickfix_status_enable/priority_exit': 2,
-\        'hook/qfsigns_update/enable_exit':         1,  'hook/qfsigns_update/priority_exit':         3,
-\        'hook/qfstatusline_update/enable_exit':    1,  'hook/qfstatusline_update/priority_exit':    4,
+\        'hook/qfsigns_update/enable_exit':         1,  'hook/qfsigns_update/priority_exit':         2,
+\        'hook/qfstatusline_update/enable_exit':    1,  'hook/qfstatusline_update/priority_exit':    3,
 \        'outputter/quickfix/open_cmd':             '', },
 \    'watchdogs_checker/php': {
 \        'command':     'php',
@@ -556,7 +543,7 @@ unlet s:hooks
 " vim-qfstatusline
 " quickfixstatus
 " vim-watchdogs {{{
-NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline', 'dannyob/quickfixstatus'], 'filetypes': ['php', 'javascript', 'ruby'],}
+NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline'], 'filetypes': ['php', 'javascript', 'ruby'],}
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle)
     "vim-qfsigns
@@ -565,6 +552,7 @@ function! s:hooks.on_source(bundle)
 
     "vim-qfstatusline
     let g:Qfstatusline#UpdateCmd = function('lightline#update')
+    let g:Qfstatusline#Text      = 1
 
     "vim-watchdogs
     let g:watchdogs_check_BufWritePost_enable = 1
@@ -637,6 +625,7 @@ call smartinput#map_to_trigger('i', '=', '=', '=')
 call smartinput#define_rule({'at': '\%#',      'char': '"',    'input': '"',                 'filetype': ['vim'] })
 call smartinput#define_rule({'at': '''\%#''',  'char': '<BS>', 'input': '<Del>',                                 })
 call smartinput#define_rule({'at': '"\%#"',    'char': '<BS>', 'input': '<Del>',                                 })
+call smartinput#define_rule({'at': '`\%#`',    'char': '<BS>', 'input': '<Del>',                                 })
 call smartinput#define_rule({'at': '<\%#',     'char': '!',    'input': '!----><Left><Left><Left>'               })
 call smartinput#define_rule({'at': '<?\%#',    'char': '=',    'input': '=?><Left><Left>',   'filetype': ['php'] })
 call smartinput#define_rule({'at': '<?=\%#?>', 'char': '<BS>', 'input': '<Del><Del><Space>', 'filetype': ['php'] })
@@ -645,6 +634,7 @@ call smartinput#define_rule({'at': '//\%#',    'char': '{',    'input': '{{{<Lef
 call smartinput#define_rule({'at': '//\%#',    'char': '}',    'input': '}}}<Left><Left><Left><Left><Left>'      })
 call smartinput#define_rule({'at': '(\%#)',    'char': '<BS>', 'input': '<Del>',                                 })
 call smartinput#define_rule({'at': '{\%#}',    'char': '<BS>', 'input': '<Del>',                                 })
+call smartinput#define_rule({'at': '\[\%#\]',  'char': '<BS>', 'input': '<Del>',                                 })
 "}}}
 "}}}
 "
