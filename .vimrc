@@ -33,7 +33,12 @@
 " Common {{{
 if has('vim_starting')
     if (has("win32") || has ("win64"))
+        let s:os_type = 'win'
         set runtimepath+=$HOME/.vim,$HOME/.vim/after
+    elseif has('mac')
+        let s:os_type = 'mac'
+    else
+        let s:os_type = 'unix'
     endif
     set runtimepath+=$HOME/.vim/bundle/neobundle.vim
 endif
@@ -222,17 +227,12 @@ let g:lightline = {
 \        'left':  [['mode','paste',],['fugitive','filename',],],
 \        'right': [['qfstatusline','lineinfo',],['percent',],['fileformat','fileencoding','filetype',],],},
 \    'component_function': {
-\        'fugitive':     'MyFugitive',
-\        'filename':     'MyFilename',
-\        'fileformat':   'MyFileformat',
-\        'filetype':     'MyFiletype',
-\        'fileencoding': 'MyFileencoding',
-\        'mode':         'MyMode',},
+\        'fugitive':     'MyFugitive',     'filename': 'MyFilename',
+\        'fileformat':   'MyFileformat',   'filetype': 'MyFiletype',
+\        'fileencoding': 'MyFileencoding', 'mode':     'MyMode',},
 \    'component_expand': {'qfstatusline': 'qfstatusline#Update',},
 \    'component_type':   {'qfstatusline': 'error',},
-\    'subseparator': {
-\        'left':  '|',
-\        'right': '|',},}
+\    'subseparator': {'left': '|', 'right': '|',},}
 function! MyModified()
     return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
@@ -367,24 +367,12 @@ let g:UltiSnipsSnippetsDir        = $HOME.'/.vim/bundle/vim-snippets/UltiSnips'
 " codic-vim
 " unite-codic.vim
 " jazzradio.vim {{{
-NeoBundleLazy 'Shougo/unite.vim', {
-\    'commands' : 'Unite',}
-NeoBundleLazy 'pasela/unite-webcolorname', {
-\    'depends':       'Shougo/unite.vim',
-\    'unite_sources': 'webcolorname',}
-NeoBundleLazy 'Shougo/unite-help', {
-\    'depends':       'Shougo/unite.vim',
-\    'unite_sources': 'help',}
-NeoBundleLazy 'thinca/vim-editvar', {
-\    'depends':       ['thinca/vim-prettyprint', 'Shougo/unite.vim'],
-\    'unite_sources': 'variable',}
-NeoBundleLazy 'rhysd/unite-codic.vim', {
-\    'depends':       ['koron/codic-vim', 'Shougo/unite.vim'],
-\    'unite_sources': 'codic',}
-NeoBundleLazy 'supermomonga/jazzradio.vim', {
-\    'depends':       'Shougo/unite.vim',
-\    'unite_sources': 'jazzradio',
-\    'commands':      ['JazzradioUpdateChannels', 'JazzradioPlay',],}
+NeoBundleLazy 'Shougo/unite.vim', {'commands': 'Unite',}
+NeoBundleLazy 'pasela/unite-webcolorname',  {'depends': 'Shougo/unite.vim',                             'unite_sources': 'webcolorname',}
+NeoBundleLazy 'Shougo/unite-help',          {'depends': 'Shougo/unite.vim',                             'unite_sources': 'help',}
+NeoBundleLazy 'thinca/vim-editvar',         {'depends': ['thinca/vim-prettyprint', 'Shougo/unite.vim'], 'unite_sources': 'variable',}
+NeoBundleLazy 'rhysd/unite-codic.vim',      {'depends': ['koron/codic-vim',        'Shougo/unite.vim'], 'unite_sources': 'codic',}
+NeoBundleLazy 'supermomonga/jazzradio.vim', {'depends': 'Shougo/unite.vim',                             'unite_sources': 'jazzradio', 'commands': ['JazzradioUpdateChannels', 'JazzradioPlay', ],}
 nnoremap [unite] <Nop>
 nmap <Leader>u [unite]
 " default plugins
@@ -424,21 +412,17 @@ endfunction
 unlet s:hooks
 "}}}
 " vimdoc-ja {{{
-NeoBundleLazy 'vim-jp/vimdoc-ja', {
-\    'commands' : 'help',}
+NeoBundleLazy 'vim-jp/vimdoc-ja', {'commands': 'help',}
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc/
 "}}}
 " open-browser.vim {{{
-NeoBundleLazy 'tyru/open-browser.vim', {
-\    'functions' : 'OpenBrowser',
-\    'mappings'  : '<Plug>(openbrowser-smart-search)',}
+NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'OpenBrowser', 'mappings': '<Plug>(openbrowser-smart-search)',}
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
 nmap <Leader>gx <Plug>(openbrowser-smart-search)
 vmap <Leader>gx <Plug>(openbrowser-smart-search)
 "}}}
 " taglist.vim {{{
-NeoBundleLazy 'vim-scripts/taglist.vim', {
-\    'commands' : 'Tlist',}
+NeoBundleLazy 'vim-scripts/taglist.vim', {'commands': 'Tlist',}
 let g:Tlist_Use_Right_Window = 1
 let g:Tlist_Show_One_File    = 1
 let g:Tlist_Exit_OnlyWindow  = 1
@@ -447,8 +431,7 @@ let g:tlist_php_settings     = 'php;c:class;f:function;d:constant'
 nnoremap <Leader>t :Tlist<CR>
 "}}}
 " nerdtree {{{
-NeoBundleLazy 'scrooloose/nerdtree', {
-\    'commands' : 'NERDTree',}
+NeoBundleLazy 'scrooloose/nerdtree', {'commands': 'NERDTree',}
 nnoremap <expr><Leader>n ':NERDTree '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
 let g:NERDTreeWinSize           = 20
 let g:NERDTreeMinimalUI         = 1
@@ -457,8 +440,7 @@ let g:NERDTreeShowHidden        = 1
 autocmd MyAutoCmd BufEnter * if (winnr('$') == 1 && exists('b:NERDTreeType') && b:NERDTreeType == 'primary') | q | endif
 "}}}
 " vim-easy-align {{{
-NeoBundleLazy 'junegunn/vim-easy-align', {
-\    'commands' : 'EasyAlign',}
+NeoBundleLazy 'junegunn/vim-easy-align', {'commands': 'EasyAlign',}
 vnoremap <silent> <Leader>a :EasyAlign<CR>
 let g:easy_align_delimiters = {
 \    '=': {
@@ -474,20 +456,17 @@ let g:easy_align_delimiters = {
 "}}}
 " Align
 " SQLUtilities {{{
-NeoBundleLazy 'vim-scripts/SQLUtilities', {
-\    'depends':  'vim-scripts/Align',
-\    'commands': 'SQLUFormatter',}
+NeoBundleLazy 'vim-scripts/SQLUtilities', {'depends': 'vim-scripts/Align', 'commands': 'SQLUFormatter',}
 let g:sqlutil_align_comma = 1
 nnoremap <Leader>sql :SQLUFormatter<CR>
 "}}}
 " vim-regexper {{{
-NeoBundleLazy 'KazuakiM/vim-regexper'
+NeoBundleLazy 'KazuakiM/vim-regexper', {'commands': 'RegexperExecute',}
 let g:regexper#AppPath = $HOME.'/.vim/bundle/regexper'
 nnoremap <Leader>reg :RegexperExecute<Space>
 "}}}
 " wildfire.vim {{{
-NeoBundleLazy 'gcmt/wildfire.vim', {
-\    'mappings' : '<Plug>(wildfire-fuel)',}
+NeoBundleLazy 'gcmt/wildfire.vim', {'mappings': '<Plug>(wildfire-fuel)',}
 map <ENTER> <Plug>(wildfire-fuel)
 let s:hooks = neobundle#get_hooks('wildfire.vim')
 function! s:hooks.on_source(bundle)
@@ -499,9 +478,7 @@ endfunction
 unlet s:hooks
 "}}}
 " neocomplete.vim {{{
-NeoBundleLazy 'Shougo/neocomplete.vim', {
-\    'depends': ['SirVer/ultisnips', 'KazuakiM/vim-snippets',],
-\    'insert':  1,}
+NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['SirVer/ultisnips', 'KazuakiM/vim-snippets',], 'insert': 1,}
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle)
     let g:acp_enableAtStartup                  = 0
@@ -523,15 +500,14 @@ function! s:hooks.on_source(bundle)
     " tags using.
     "let g:neocomplete#sources = {
     "\   '_':    ['file', 'ultisnips', 'buffer', 'dictionary', 'tag',],
-    "\   'vim':  ['file', 'ultisnips', 'buffer', 'dictionary', 'tag', 'syntax', 'vim'],
-    "\   'html': ['file', 'ultisnips', 'buffer', 'dictionary', 'tag', 'syntax',],}
+    "\   'vim':  ['file', 'ultisnips', 'buffer', 'dictionary', 'tag', 'vim'],
+    "\   'html': ['file', 'ultisnips', 'buffer', 'dictionary', 'tag',],}
     "let g:neocomplete#sources#tags#cache_limit_size     = 10000000
 endfunction
 unlet s:hooks
 "}}}
 " gundo.vim {{{
-NeoBundleLazy 'sjl/gundo.vim', {
-\    'insert' : 1,}
+NeoBundleLazy 'sjl/gundo.vim', {'insert': 1,}
 let s:hooks = neobundle#get_hooks('gundo.vim')
 function! s:hooks.on_source(bundle)
     nnoremap u g-
@@ -545,8 +521,7 @@ unlet s:hooks
 "* ':w sudo:%'          :sudo save
 "* ':w sudo:<filename>' :sudo another name save
 "* ':e sudo:%'          :sudo open
-NeoBundleLazy 'vim-scripts/sudo.vim', {
-\    'insert' : 1,}
+NeoBundleLazy 'vim-scripts/sudo.vim', {'insert': 1,}
 let s:hooks = neobundle#get_hooks('sudo.vim')
 function! s:hooks.on_source(bundle)
     nnoremap [sudo] <Nop>
@@ -558,8 +533,7 @@ endfunction
 unlet s:hooks
 "}}}
 " vim-php-cs-fixer {{{
-NeoBundleLazy 'stephpy/vim-php-cs-fixer', {
-\    'filetypes': 'php',}
+NeoBundleLazy 'stephpy/vim-php-cs-fixer', {'filetypes': 'php',}
 let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
 function! s:hooks.on_source(bundle)
     " If php-cs-fixer is in $PATH, you don't need to define 'let g:php_cs_fixer_path=/path/to/file'.
@@ -582,9 +556,7 @@ unlet s:hooks
 " vim-qfstatusline
 " quickfixstatus
 " vim-watchdogs {{{
-NeoBundleLazy 'osyo-manga/vim-watchdogs', {
-\    'depends':   ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline', 'dannyob/quickfixstatus'],
-\    'filetypes': ['php', 'javascript', 'ruby'],}
+NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline', 'dannyob/quickfixstatus'], 'filetypes': ['php', 'javascript', 'ruby'],}
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle)
     "vim-qfsigns
@@ -601,13 +573,10 @@ endfunction
 unlet s:hooks
 "}}}
 " vim-markdown {{{
-NeoBundleLazy 'plasticboy/vim-markdown', {
-\    'filetypes': 'markdown',}
+NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'markdown',}
 "}}}
 " previm {{{
-NeoBundleLazy 'kannokanno/previm', {
-\    'depends':   'open-browser.vim',
-\    'filetypes': 'markdown',}
+NeoBundleLazy 'kannokanno/previm', {'depends': 'open-browser.vim', 'filetypes': 'markdown',}
 nnoremap <silent> <Leader>pre :PrevimOpen<CR>
 "}}}
 "}}}
@@ -637,7 +606,7 @@ NeoBundleFetch 'javallone/regexper'
 "
 "
 " OS type {{{
-if has('mac')
+if (s:os_type ==# 'mac')
     " Programming language
     let $PYTHON_DLL = '/usr/local/Cellar/python/2.7.7_2/Frameworks/Python.framework/Versions/2.7/lib/libpython2.7.dylib'
     "let $PYTHON3_DLL = '/usr/local/Cellar/python3/3.4.1/Frameworks/Python.framework/Versions/3.4/lib/libpython3.4.dylib'
@@ -647,7 +616,7 @@ if has('mac')
     let g:previm_open_cmd  = 'open -a firefox'
     let g:regexper#OpenCmd = 'open -a firefox'
     let g:memolist_path    = '$HOME/.vim/memolist.vim'
-elseif (has("win32") || has ("win64"))
+elseif (s:os_type ==# 'win')
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
     let g:memolist_path     = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     let g:php_cs_fixer_path = '$HOME/.vim/vim-php-cs-fixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
@@ -717,7 +686,7 @@ endfunction
 "
 " Other setting files {{{
 " Environment setting file
-if (has("win32") || has ("win64"))
+if (s:os_type ==# 'win')
     source ~/.vimrc.win
 else
     source ~/.vimrc.local
