@@ -40,6 +40,7 @@ $ cp $HOME/work/dotfiles/.gitconfig.local .
 $ ln -sf $HOME/work/dotfiles/.gvimrc       .gvimrc
 $ ln -sf $HOME/work/dotfiles/.htoprc       .htoprc
 $ ln -sf $HOME/work/dotfiles/.mplayer      .mplayer
+$ cp $HOME/work/dotfiles/.netrc.org        .netrc
 $ ln -sf $HOME/work/dotfiles/.vim          .vim
 $ ln -sf $HOME/work/dotfiles/.vimrc        .vimrc
 $ cp $HOME/work/dotfiles/.vimrc.local .
@@ -195,6 +196,7 @@ $ cp $HOME/work/dotfiles/.gitconfig.local .
 $ ln -sf $HOME/work/dotfiles/.gvimrc       .gvimrc
 $ ln -sf $HOME/work/dotfiles/.htoprc       .config/htop/htoprc
 $ ln -sf $HOME/work/dotfiles/.mplayer      .mplayer
+$ cp $HOME/work/dotfiles/.netrc.org        .netrc
 $ ln -sf $HOME/work/dotfiles/.vim          .vim
 $ ln -sf $HOME/work/dotfiles/.vimrc        .vimrc
 $ cp $HOME/work/dotfiles/.vimrc.local .
@@ -245,6 +247,7 @@ $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
 $ wget http://cs.sensiolabs.org/get/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 $ chmod a+x $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 $ cp $HOME/.vimrc.local $HOME/.vimrc.win
+$ cp $HOME/.netrc.org   $HOME/.netrc
 $ php $HOME/src/phpDict.php
 $ cd $HOME/.vim/bundle/regexper
 $ bundle install
