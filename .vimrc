@@ -541,19 +541,14 @@ unlet s:hooks
 " shabadou.vim
 " vim-qfsigns
 " vim-qfstatusline
-" quickfixstatus
 " vim-watchdogs {{{
 NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline'], 'filetypes': ['php', 'javascript', 'ruby'],}
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle)
     "vim-qfsigns
     nnoremap <Leader>sy :QfsignsJunmp<CR>
-    "let g:qfsigns#AutoJump = 2
-
     "vim-qfstatusline
     let g:Qfstatusline#UpdateCmd = function('lightline#update')
-    let g:Qfstatusline#Text      = 1
-
     "vim-watchdogs
     let g:watchdogs_check_BufWritePost_enable = 1
     let g:watchdogs_check_CursorHold_enable   = 1
