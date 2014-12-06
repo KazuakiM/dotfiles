@@ -118,6 +118,7 @@ set laststatus=2
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,.DS_Store,.,..
 set wildmenu
 set wildmode=longest:full,full
+set noequalalways
 " [memo]
 " q:  command history
 " q/  downward search
@@ -176,9 +177,10 @@ nmap <Leader>f [vim]
 nnoremap [vim]e :tabnew<Space>$MYVIMRC<CR>
 nnoremap [vim]s :source<Space>$MYVIMRC<CR>
 nnoremap [vim]h :source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
-" Close sub window
+" Autocmd
 autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
+autocmd MyAutoCmd InsertLeave * set nopaste
 "}}}
 "
 "
