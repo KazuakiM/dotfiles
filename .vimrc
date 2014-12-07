@@ -130,14 +130,13 @@ set cursorcolumn
 " Clipboard
 set clipboard+=autoselect,unnamed
 " Backup
+set swapfile
+set directory=$HOME/.vim/swap
 autocmd MyAutoCmd VimEnter * call s:auto_mkdir($HOME.'/.vim/backup/'.s:date_hour, 1)
-autocmd MyAutoCmd VimEnter * call s:auto_mkdir($HOME.'/.vim/swap/'  .s:date_hour, 1)
 autocmd MyAutoCmd VimEnter * call s:auto_mkdir($HOME.'/.vim/undo/'  .s:date_hour, 1)
 set backup
-set swapfile
 set undofile
 let &backupdir = $HOME.'/.vim/backup/'.s:date_hour
-let &directory = $HOME.'/.vim/swap/'  .s:date_hour
 let &undodir   = $HOME.'/.vim/undo/'  .s:date_hour
 " Indentation
 set tabstop=4
