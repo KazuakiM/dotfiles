@@ -227,9 +227,8 @@ let g:lightline = {
 \        'left':  [['mode','paste',],['filename','qfstatusline'],],
 \        'right': [['lineinfo',],['percent',],['fileformat','fileencoding','filetype',],],},
 \    'component_function': {
-\        'filename': 'MyFilename', 'fileformat':   'MyFileformat',
-\        'filetype': 'MyFiletype', 'fileencoding': 'MyFileencoding',
-\        'mode':     'MyMode',},
+\        'filename':     'MyFilename',     'fileformat': 'MyFileformat', 'filetype': 'MyFiletype',
+\        'fileencoding': 'MyFileencoding', 'mode':       'MyMode',},
 \    'component_expand': {'qfstatusline': 'qfstatusline#Update',},
 \    'component_type':   {'qfstatusline': 'error',},
 \    'subseparator': {'left': '|', 'right': '|',},}
@@ -619,21 +618,22 @@ call smartinput#map_to_trigger('i', '*', '*', '*')
 call smartinput#map_to_trigger('i', '!', '!', '!')
 call smartinput#map_to_trigger('i', '=', '=', '=')
 call smartinput#map_to_trigger('i', 'p', 'p', 'p')
-call smartinput#define_rule({'at': '\%#',        'char': '"',    'input': '"',                 'filetype': ['vim'] })
-call smartinput#define_rule({'at': '''\%#''',    'char': '<BS>', 'input': '<Del>',                                 })
-call smartinput#define_rule({'at': '"\%#"',      'char': '<BS>', 'input': '<Del>',                                 })
-call smartinput#define_rule({'at': '`\%#`',      'char': '<BS>', 'input': '<Del>',                                 })
-call smartinput#define_rule({'at': '<\%#',       'char': '!',    'input': '!----><Left><Left><Left>'               })
-call smartinput#define_rule({'at': '<?\%#',      'char': '=',    'input': '=?><Left><Left>',   'filetype': ['php'] })
-call smartinput#define_rule({'at': '<?=\%#?>',   'char': '<BS>', 'input': '<Del><Del><Space>', 'filetype': ['php'] })
-call smartinput#define_rule({'at': '<?\%#',      'char': 'p',    'input': 'php?><Left><Left>', 'filetype': ['php'] })
-call smartinput#define_rule({'at': '<?php\%#?>', 'char': '<BS>', 'input': '<Del><Del><Space>', 'filetype': ['php'] })
-call smartinput#define_rule({'at': '/\%#',       'char': '*',    'input': '**/<Left><Left>'                        })
-call smartinput#define_rule({'at': '//\%#',      'char': '{',    'input': '{{{<Left><Left><Left><Left><Left>'      })
-call smartinput#define_rule({'at': '//\%#',      'char': '}',    'input': '}}}<Left><Left><Left><Left><Left>'      })
-call smartinput#define_rule({'at': '(\%#)',      'char': '<BS>', 'input': '<Del>',                                 })
-call smartinput#define_rule({'at': '{\%#}',      'char': '<BS>', 'input': '<Del>',                                 })
-call smartinput#define_rule({'at': '\[\%#\]',    'char': '<BS>', 'input': '<Del>',                                 })
+call smartinput#define_rule({'at': '\%#',        'char': '"',    'input': '"',                                 'filetype': ['vim'] })
+call smartinput#define_rule({'at': '''\%#''',    'char': '<BS>', 'input': '<Del>',                                                 })
+call smartinput#define_rule({'at': '"\%#"',      'char': '<BS>', 'input': '<Del>',                                                 })
+call smartinput#define_rule({'at': '`\%#`',      'char': '<BS>', 'input': '<Del>',                                                 })
+call smartinput#define_rule({'at': '<\%#',       'char': '!',    'input': '!----><Left><Left><Left>',                              })
+call smartinput#define_rule({'at': '<!--\%#-->', 'char': '<BS>', 'input': '<Del><Del><Del>',                                       })
+call smartinput#define_rule({'at': '<?\%#',      'char': '=',    'input': '=?><Left><Left>',                   'filetype': ['php'] })
+call smartinput#define_rule({'at': '<?=\%#?>',   'char': '<BS>', 'input': '<Del><Del>',                        'filetype': ['php'] })
+call smartinput#define_rule({'at': '<?\%#',      'char': 'p',    'input': 'php?><Left><Left>',                 'filetype': ['php'] })
+call smartinput#define_rule({'at': '<?php\%#?>', 'char': '<BS>', 'input': '<Del><Del>',                        'filetype': ['php'] })
+call smartinput#define_rule({'at': '/\%#',       'char': '*',    'input': '**/<Left><Left>',                                       })
+call smartinput#define_rule({'at': '//\%#',      'char': '{',    'input': '{{{<Left><Left><Left><Left><Left>',                     })
+call smartinput#define_rule({'at': '//\%#',      'char': '}',    'input': '}}}<Left><Left><Left><Left><Left>',                     })
+call smartinput#define_rule({'at': '(\%#)',      'char': '<BS>', 'input': '<Del>',                                                 })
+call smartinput#define_rule({'at': '{\%#}',      'char': '<BS>', 'input': '<Del>',                                                 })
+call smartinput#define_rule({'at': '\[\%#\]',    'char': '<BS>', 'input': '<Del>',                                                 })
 "}}}
 "}}}
 "
