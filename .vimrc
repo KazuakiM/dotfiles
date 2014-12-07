@@ -49,9 +49,8 @@ augroup precious-indentline
     autocmd!
 augroup END
 " Variable
-"let s:localtime=localtime()
-"let s:time=strftime('%Y%m%d%H%M%S',s:localtime)
-"let s:date_hour=strftime('%Y%m%d%H',s:localtime)
+let s:localtime = localtime()
+let s:date_hour = strftime('%Y%m%d%H',s:localtime)
 " Encode
 set encoding=utf-8
 scriptencoding utf-8
@@ -92,8 +91,9 @@ nnoremap fs <C-w>-
 nnoremap rq <C-w>>
 nnoremap rw <C-w><
 "paste
-nnoremap <silent><expr><Leader>v  ':set<Space>paste<CR><Insert><C-r>+<ESC>:set<Space>nopaste<CR>'
-inoremap <silent><expr><C-v> '<ESC>:set<Space>paste<CR><Insert><C-r>+<ESC>:set<Space>nopaste<CR><Insert>'
+autocmd MyAutoCmd InsertLeave * set nopaste
+nnoremap <silent><expr><Leader>v      ':set<Space>paste<CR><Insert><C-r>+<ESC>'
+inoremap <silent><expr><Leader>v '<ESC>:set<Space>paste<CR><Insert><C-r>+<ESC><Insert>'
 " Color
 syntax on
 set t_Co=256
@@ -118,6 +118,7 @@ set laststatus=2
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,.DS_Store,.,..
 set wildmenu
 set wildmode=longest:full,full
+set noequalalways
 " [memo]
 " q:  command history
 " q/  downward search
@@ -129,15 +130,14 @@ set cursorcolumn
 " Clipboard
 set clipboard+=autoselect,unnamed
 " Backup
-set backup
-set backupdir=$HOME/.vim/backup
 set swapfile
 set directory=$HOME/.vim/swap
-set noundofile
-"set undofile
-"autocmd MyAutoCmd VimEnter * call s:auto_mkdir($HOME.'/.vim/undo/'.s:date_hour.'/', 1)
-"let g:undodir_path=$HOME.'/.vim/undo/'.s:date_hour.'/'
-"set undodir=eval(g:undodir_path)
+autocmd MyAutoCmd VimEnter * call s:auto_mkdir($HOME.'/.vim/backup/'.s:date_hour, 1)
+autocmd MyAutoCmd VimEnter * call s:auto_mkdir($HOME.'/.vim/undo/'  .s:date_hour, 1)
+set backup
+set undofile
+let &backupdir = $HOME.'/.vim/backup/'.s:date_hour
+let &undodir   = $HOME.'/.vim/undo/'  .s:date_hour
 " Indentation
 set tabstop=4
 set softtabstop=4
@@ -176,7 +176,7 @@ nmap <Leader>f [vim]
 nnoremap [vim]e :tabnew<Space>$MYVIMRC<CR>
 nnoremap [vim]s :source<Space>$MYVIMRC<CR>
 nnoremap [vim]h :source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
-" Close sub window
+" Autocmd
 autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 "}}}
@@ -226,9 +226,8 @@ let g:lightline = {
 \        'left':  [['mode','paste',],['filename','qfstatusline'],],
 \        'right': [['lineinfo',],['percent',],['fileformat','fileencoding','filetype',],],},
 \    'component_function': {
-\        'filename': 'MyFilename', 'fileformat':   'MyFileformat',
-\        'filetype': 'MyFiletype', 'fileencoding': 'MyFileencoding',
-\        'mode':     'MyMode',},
+\        'filename':     'MyFilename',     'fileformat': 'MyFileformat', 'filetype': 'MyFiletype',
+\        'fileencoding': 'MyFileencoding', 'mode':       'MyMode',},
 \    'component_expand': {'qfstatusline': 'qfstatusline#Update',},
 \    'component_type':   {'qfstatusline': 'error',},
 \    'subseparator': {'left': '|', 'right': '|',},}
@@ -591,8 +590,8 @@ NeoBundleFetch 'javallone/regexper'
 " OS type {{{
 if (s:os_type ==# 'mac')
     " Programming language
-    let $PYTHON_DLL = '/usr/local/Cellar/python/2.7.7_2/Frameworks/Python.framework/Versions/2.7/lib/libpython2.7.dylib'
-    "let $PYTHON3_DLL = '/usr/local/Cellar/python3/3.4.1/Frameworks/Python.framework/Versions/3.4/lib/libpython3.4.dylib'
+    let $PYTHON_DLL = '/usr/local/Cellar/python/2.7.8_2/Frameworks/Python.framework/Versions/Current/lib/libpython2.7.dylib'
+    "let $PYTHON3_DLL = '/usr/local/Cellar/python3/3.4.2_1/Frameworks/Python.framework/Versions/3.4/lib/libpython3.4.dylib'
     let $PERL_DLL   = '/usr/local/Cellar/perl518/5.18.2/lib/5.18.2/darwin-thread-multi-2level/CORE/libperl.dylib'
     let $RUBY_DLL   = '/usr/local/lib/libruby.dylib'
     let $LUA_DLL    = '/usr/local/lib/liblua.dylib'
@@ -617,19 +616,23 @@ call neobundle#end()
 call smartinput#map_to_trigger('i', '*', '*', '*')
 call smartinput#map_to_trigger('i', '!', '!', '!')
 call smartinput#map_to_trigger('i', '=', '=', '=')
-call smartinput#define_rule({'at': '\%#',      'char': '"',    'input': '"',                 'filetype': ['vim'] })
-call smartinput#define_rule({'at': '''\%#''',  'char': '<BS>', 'input': '<Del>',                                 })
-call smartinput#define_rule({'at': '"\%#"',    'char': '<BS>', 'input': '<Del>',                                 })
-call smartinput#define_rule({'at': '`\%#`',    'char': '<BS>', 'input': '<Del>',                                 })
-call smartinput#define_rule({'at': '<\%#',     'char': '!',    'input': '!----><Left><Left><Left>'               })
-call smartinput#define_rule({'at': '<?\%#',    'char': '=',    'input': '=?><Left><Left>',   'filetype': ['php'] })
-call smartinput#define_rule({'at': '<?=\%#?>', 'char': '<BS>', 'input': '<Del><Del><Space>', 'filetype': ['php'] })
-call smartinput#define_rule({'at': '/\%#',     'char': '*',    'input': '**/<Left><Left>'                        })
-call smartinput#define_rule({'at': '//\%#',    'char': '{',    'input': '{{{<Left><Left><Left><Left><Left>'      })
-call smartinput#define_rule({'at': '//\%#',    'char': '}',    'input': '}}}<Left><Left><Left><Left><Left>'      })
-call smartinput#define_rule({'at': '(\%#)',    'char': '<BS>', 'input': '<Del>',                                 })
-call smartinput#define_rule({'at': '{\%#}',    'char': '<BS>', 'input': '<Del>',                                 })
-call smartinput#define_rule({'at': '\[\%#\]',  'char': '<BS>', 'input': '<Del>',                                 })
+call smartinput#map_to_trigger('i', 'p', 'p', 'p')
+call smartinput#define_rule({'at': '\%#',        'char': '"',    'input': '"',                                 'filetype': ['vim'] })
+call smartinput#define_rule({'at': '''\%#''',    'char': '<BS>', 'input': '<Del>',                                                 })
+call smartinput#define_rule({'at': '"\%#"',      'char': '<BS>', 'input': '<Del>',                                                 })
+call smartinput#define_rule({'at': '`\%#`',      'char': '<BS>', 'input': '<Del>',                                                 })
+call smartinput#define_rule({'at': '<\%#',       'char': '!',    'input': '!----><Left><Left><Left>',                              })
+call smartinput#define_rule({'at': '<!--\%#-->', 'char': '<BS>', 'input': '<Del><Del><Del>',                                       })
+call smartinput#define_rule({'at': '<?\%#',      'char': '=',    'input': '=?><Left><Left>',                   'filetype': ['php'] })
+call smartinput#define_rule({'at': '<?=\%#?>',   'char': '<BS>', 'input': '<Del><Del>',                        'filetype': ['php'] })
+call smartinput#define_rule({'at': '<?\%#',      'char': 'p',    'input': 'php?><Left><Left>',                 'filetype': ['php'] })
+call smartinput#define_rule({'at': '<?php\%#?>', 'char': '<BS>', 'input': '<Del><Del>',                        'filetype': ['php'] })
+call smartinput#define_rule({'at': '/\%#',       'char': '*',    'input': '**/<Left><Left>',                                       })
+call smartinput#define_rule({'at': '//\%#',      'char': '{',    'input': '{{{<Left><Left><Left><Left><Left>',                     })
+call smartinput#define_rule({'at': '//\%#',      'char': '}',    'input': '}}}<Left><Left><Left><Left><Left>',                     })
+call smartinput#define_rule({'at': '(\%#)',      'char': '<BS>', 'input': '<Del>',                                                 })
+call smartinput#define_rule({'at': '{\%#}',      'char': '<BS>', 'input': '<Del>',                                                 })
+call smartinput#define_rule({'at': '\[\%#\]',    'char': '<BS>', 'input': '<Del>',                                                 })
 "}}}
 "}}}
 "

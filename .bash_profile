@@ -41,7 +41,7 @@ unset GREP_OPTIONS
 export XMLLINT_INDENT='    '
 #}}}
 # Less {{{
-export LESS='-R'
+export LESS='-R --no-init'
 man() {
     env \
         LESS_TERMCAP_mb=$(printf "\e[1;31m") \
