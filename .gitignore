@@ -2,5 +2,6 @@
 .bash_profile.win
 C:/
 .DS_Store
+.netrc
 .vimrc.win
 .vt_locations

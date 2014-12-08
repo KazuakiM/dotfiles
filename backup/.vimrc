@@ -212,3 +212,31 @@ unlet s:hooks
 NeoBundleFetch 'altercation/vim-colors-solarized'
 NeoBundleFetch 'tomasr/molokai'
 "}}}
+"
+"
+" Extra local functions {{{
+" File/Buffer information {{{
+function! FileInfo(filename)
+    let a:fn = expand('%:p')
+    echo '[filename ]'.a:fn
+    echo '[type     ]'.getftype(a:fn)
+    echo '[mtime    ]'.strftime('%Y-%m-%d %H:%M %a', getftime(a:fn))
+    echo '[size     ]'.getfsize(a:fn).' bytes'
+    echo '[perm     ]'.getfperm(a:fn)
+endfunction
+function! BufferInfo()
+    echo '[bufnr    ]'.bufnr('%')
+    echo '[bufname  ]'.expand('%:p')
+    echo '[cwd      ]'.getcwd()
+    if filereadable(expand('%'))
+        echo '[mtime    ]'.strftime('%Y-%m-%d %H:%M %a',getftime(expand('%')))
+    endif
+    echo '[size     ]'.(line2byte(line('$') + 1) - 1) . ' bytes'
+    echo '[filetype ]'.&ft
+    echo '[expandtab]'.(&et ? 'true' : 'false')
+    echo '[tabstop  ]'.&ts
+endfunction
+nnoremap <F2> :call<Space>FileInfo(expand('<cfile>'))<CR>
+nnoremap <F3> :call<Space>BufferInfo()<CR>
+"}}}
+"}}}
