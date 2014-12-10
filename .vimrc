@@ -50,7 +50,7 @@ augroup precious-indentline
 augroup END
 " Variable
 let s:localtime = localtime()
-let s:date_hour = strftime('%Y%m%d%H',s:localtime)
+let s:date_min  = strftime('%Y%m%d%H%M',s:localtime)
 " Encode
 set encoding=utf-8
 scriptencoding utf-8
@@ -133,12 +133,12 @@ set clipboard+=autoselect,unnamed
 " Backup
 set swapfile
 set directory=$HOME/.vim/swap
-autocmd MyAutoCmd VimEnter * call s:auto_mkdir($HOME.'/.vim/backup/'.s:date_hour, 1)
-autocmd MyAutoCmd VimEnter * call s:auto_mkdir($HOME.'/.vim/undo/'  .s:date_hour, 1)
+autocmd MyAutoCmd VimEnter * call s:auto_mkdir($HOME.'/.vim/backup/'.s:date_min, 1)
+autocmd MyAutoCmd VimEnter * call s:auto_mkdir($HOME.'/.vim/undo/'  .s:date_min, 1)
 set backup
 set undofile
-let &backupdir = $HOME.'/.vim/backup/'.s:date_hour
-let &undodir   = $HOME.'/.vim/undo/'  .s:date_hour
+let &backupdir = $HOME.'/.vim/backup/'.s:date_min
+let &undodir   = $HOME.'/.vim/undo/'  .s:date_min
 " Indentation
 set tabstop=4
 set softtabstop=4
