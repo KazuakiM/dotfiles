@@ -108,7 +108,7 @@ $ sudo yum install \
     openssl openssl-devel \
     perl perl-core perl-devel php php-devel pv python python-devel \
     ruby ruby-devel \
-    tree \
+    the_silver_searcher tree \
     wget
 ```
 Git
