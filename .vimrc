@@ -50,7 +50,7 @@ augroup precious-indentline
 augroup END
 " Variable
 let s:localtime = localtime()
-let s:date_min  = strftime('%Y%m%d%H%M',s:localtime)
+let s:date      = strftime('%Y%m%d%H%M%S', s:localtime)
 " Encode
 set encoding=utf-8
 scriptencoding utf-8
@@ -133,12 +133,8 @@ set clipboard+=autoselect,unnamed
 " Backup
 set swapfile
 set directory=$HOME/.vim/swap
-autocmd MyAutoCmd VimEnter * call s:auto_mkdir($HOME.'/.vim/backup/'.s:date_min, 1)
-autocmd MyAutoCmd VimEnter * call s:auto_mkdir($HOME.'/.vim/undo/'  .s:date_min, 1)
 set backup
 set undofile
-let &backupdir = $HOME.'/.vim/backup/'.s:date_min
-let &undodir   = $HOME.'/.vim/undo/'  .s:date_min
 " Indentation
 set tabstop=4
 set softtabstop=4
@@ -565,6 +561,10 @@ NeoBundleFetch 'javallone/regexper'
 "
 " OS type {{{
 if (s:os_type ==# 'mac')
+    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/backup/'.s:date, 1)
+    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/undo/'  .s:date, 1)
+    let &backupdir = '/tmp/backup/'.s:date
+    let &undodir   = '/tmp/undo/'  .s:date
     let $PYTHON_DLL = '/usr/local/Cellar/python/2.7.8_2/Frameworks/Python.framework/Versions/Current/lib/libpython2.7.dylib'
     "let $PYTHON3_DLL = '/usr/local/Cellar/python3/3.4.2_1/Frameworks/Python.framework/Versions/3.4/lib/libpython3.4.dylib'
     let $PERL_DLL   = '/usr/local/Cellar/perl518/5.18.2/lib/5.18.2/darwin-thread-multi-2level/CORE/libperl.dylib'
@@ -574,10 +574,18 @@ if (s:os_type ==# 'mac')
     let g:regexper#OpenCmd = 'open -a firefox'
     let g:memolist_path    = '$HOME/.vim/memolist.vim'
 elseif (s:os_type ==# 'win')
+    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('C:\temp\backup\'.s:date, 1)
+    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('C:\temp\undo\'  .s:date, 1)
+    let &backupdir = 'C:\temp\backup\'.s:date
+    let &undodir   = 'C:\temp\undo\'  .s:date
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
     let g:memolist_path     = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     let g:php_cs_fixer_path = '$HOME/.vim/vim-php-cs-fixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
 else
+    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/backup/'.s:date, 1)
+    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/undo/'  .s:date, 1)
+    let &backupdir = '/tmp/backup/'.s:date
+    let &undodir   = '/tmp/undo/'  .s:date
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
     let g:memolist_path     = '$HOME/.vim/memolist.vim'
     let g:php_cs_fixer_path = '$HOME/.vim/vim-php-cs-fixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
