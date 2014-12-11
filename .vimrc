@@ -58,7 +58,7 @@ set fileencoding=utf-8
 set fileformat=unix
 " Basic
 let g:mapleader = ','
-set scrolloff=5
+set scrolloff=30
 autocmd MyAutoCmd FileType * set textwidth=0
 autocmd MyAutoCmd FileType * set formatoptions-=cb
 set autoread
