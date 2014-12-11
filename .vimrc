@@ -50,7 +50,7 @@ augroup precious-indentline
 augroup END
 " Variable
 let s:localtime = localtime()
-let s:date_hour = strftime('%Y%m%d%H',s:localtime)
+let s:date      = strftime('%Y%m%d%H%M%S', s:localtime)
 " Encode
 set encoding=utf-8
 scriptencoding utf-8
@@ -58,7 +58,7 @@ set fileencoding=utf-8
 set fileformat=unix
 " Basic
 let g:mapleader = ','
-set scrolloff=5
+set scrolloff=30
 autocmd MyAutoCmd FileType * set textwidth=0
 autocmd MyAutoCmd FileType * set formatoptions-=cb
 set autoread
@@ -79,7 +79,7 @@ set foldmethod=marker
 "set foldopen-=search
 set viminfo+=n~/.vim/viminfo/.viminfo
 set updatetime=1000
-nnoremap zx :<C-U>%foldopen<CR>
+nnoremap zx :%foldopen<CR>
 set matchpairs+=<:>
 nnoremap 0 $
 onoremap 0 $
@@ -90,7 +90,8 @@ nnoremap fa <C-w>+
 nnoremap fs <C-w>-
 nnoremap rq <C-w>>
 nnoremap rw <C-w><
-"paste
+nnoremap <Leader>w :w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null<CR>
+" Paste
 autocmd MyAutoCmd InsertLeave * set nopaste
 nnoremap <silent><expr><Leader>v      ':set<Space>paste<CR><Insert><C-r>+<ESC>'
 inoremap <silent><expr><Leader>v '<ESC>:set<Space>paste<CR><Insert><C-r>+<ESC><Insert>'
@@ -132,12 +133,8 @@ set clipboard+=autoselect,unnamed
 " Backup
 set swapfile
 set directory=$HOME/.vim/swap
-autocmd MyAutoCmd VimEnter * call s:auto_mkdir($HOME.'/.vim/backup/'.s:date_hour, 1)
-autocmd MyAutoCmd VimEnter * call s:auto_mkdir($HOME.'/.vim/undo/'  .s:date_hour, 1)
 set backup
 set undofile
-let &backupdir = $HOME.'/.vim/backup/'.s:date_hour
-let &undodir   = $HOME.'/.vim/undo/'  .s:date_hour
 " Indentation
 set tabstop=4
 set softtabstop=4
@@ -155,10 +152,10 @@ set wrapscan
 nnoremap <expr><Leader>%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
-" pretty print
+" Pretty print
 nnoremap <Leader>xml  :execute '%!xmllint --noblanks --nowrap --encode UTF-8 --format %'<CR>
 nnoremap <Leader>json :execute '%!python -m json.tool'<CR>
-" register
+" Register
 vnoremap <C-w> "ay
 vnoremap <C-e> "by
 nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
@@ -240,10 +237,8 @@ endfunction
 function! MyFilename()
     let a:fname    = expand('%:t')
     return a:fname =~ '__Gundo\|NERD_tree' ? '' :
-    \    &ft == 'unite' ? unite#get_status_string() :
-    \    ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-    \    ('' != a:fname ? a:fname : '[No Name]') .
-    \    ('' != MyModified() ? ' ' . MyModified() : '')
+    \    &ft == 'unite' ? unite#get_status_string() : ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+    \    ('' != a:fname ? a:fname : '[No Name]') .    ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 function! MyFileformat()
     return winwidth(0) > 70 ? &fileformat : ''
@@ -265,10 +260,7 @@ let g:indentLine_faster = 1
 " vim-ref {{{
 let g:ref_cache_dir       = $HOME.'/.vim/vim-ref/cache'
 let g:ref_phpmanual_path  = $HOME.'/.vim/vim-ref/php-chunked-xhtml'
-let g:ref_detect_filetype = {
-\    'html':       'phpmanual',
-\    'javascript': 'phpmanual',
-\    'css':        'phpmanual',}
+let g:ref_detect_filetype = {'html': 'phpmanual', 'javascript': 'phpmanual', 'css': 'phpmanual',}
 inoremap <silent><C-k> <C-o>:call<space>ref#K("normal")<CR><ESC>
 "}}}
 " vim-tags {{{
@@ -319,11 +311,11 @@ let g:quickrun_config = {
 \        'runner':                              'vimproc',
 \        'runner/vimproc/updatetime':           60,},
 \    'watchdogs_checker/_': {
-\        'hook/close_quickfix/enable_exit':         1,
-\        'hook/back_window/enable_exit':            0,  'hook/back_window/priority_exit':            1,
-\        'hook/qfsigns_update/enable_exit':         1,  'hook/qfsigns_update/priority_exit':         2,
-\        'hook/qfstatusline_update/enable_exit':    1,  'hook/qfstatusline_update/priority_exit':    3,
-\        'outputter/quickfix/open_cmd':             '', },
+\        'hook/close_quickfix/enable_exit':      1,
+\        'hook/back_window/enable_exit':         0,  'hook/back_window/priority_exit':         1,
+\        'hook/qfsigns_update/enable_exit':      1,  'hook/qfsigns_update/priority_exit':      2,
+\        'hook/qfstatusline_update/enable_exit': 1,  'hook/qfstatusline_update/priority_exit': 3,
+\        'outputter/quickfix/open_cmd':          '', },
 \    'watchdogs_checker/php': {
 \        'command':     'php',
 \        'exec':        '%c -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0 -l %o %s:p',
@@ -502,33 +494,13 @@ function! s:hooks.on_source(bundle)
 endfunction
 unlet s:hooks
 "}}}
-" sudo.vim {{{
-"# command memo
-"* ':w sudo:%'          :sudo save
-"* ':w sudo:<filename>' :sudo another name save
-"* ':e sudo:%'          :sudo open
-NeoBundleLazy 'vim-scripts/sudo.vim', {'insert': 1,}
-let s:hooks = neobundle#get_hooks('sudo.vim')
-function! s:hooks.on_source(bundle)
-    nnoremap [sudo] <Nop>
-    nmap <Leader>su [sudo]
-    nnoremap <silent> [sudo]w :w<Space>sudo:%<CR>
-    nnoremap <silent> [sudo]a :w<Space>sudo:
-    nnoremap <silent> [sudo]r :e<Space>sudo:%<CR>
-endfunction
-unlet s:hooks
-"}}}
 " vim-php-cs-fixer {{{
 NeoBundleLazy 'stephpy/vim-php-cs-fixer', {'filetypes': 'php',}
 let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
 function! s:hooks.on_source(bundle)
-    " If php-cs-fixer is in $PATH, you don't need to define 'let g:php_cs_fixer_path=/path/to/file'.
-    " And this setting is moved at OS type category.
     let g:php_cs_fixer_level                  = 'all'     " which level ?
     let g:php_cs_fixer_config                 = 'default' " configuration
     let g:php_cs_fixer_php_path               = 'php'     " Path to PHP
-    " If you want to define specific fixers:
-    "let g:php_cs_fixer_fixers_list = 'linefeed,short_tag,indentation'
     let g:php_cs_fixer_enable_default_mapping = 1         " Enable the mapping by default (<leader>pcd)
     let g:php_cs_fixer_dry_run                = 0         " Call command with dry-run option
     let g:php_cs_fixer_verbose                = 0         " Return the output of command if 1, else an inline information.
@@ -589,7 +561,10 @@ NeoBundleFetch 'javallone/regexper'
 "
 " OS type {{{
 if (s:os_type ==# 'mac')
-    " Programming language
+    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/backup/'.s:date, 1)
+    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/undo/'  .s:date, 1)
+    let &backupdir = '/tmp/backup/'.s:date
+    let &undodir   = '/tmp/undo/'  .s:date
     let $PYTHON_DLL = '/usr/local/Cellar/python/2.7.8_2/Frameworks/Python.framework/Versions/Current/lib/libpython2.7.dylib'
     "let $PYTHON3_DLL = '/usr/local/Cellar/python3/3.4.2_1/Frameworks/Python.framework/Versions/3.4/lib/libpython3.4.dylib'
     let $PERL_DLL   = '/usr/local/Cellar/perl518/5.18.2/lib/5.18.2/darwin-thread-multi-2level/CORE/libperl.dylib'
@@ -599,10 +574,18 @@ if (s:os_type ==# 'mac')
     let g:regexper#OpenCmd = 'open -a firefox'
     let g:memolist_path    = '$HOME/.vim/memolist.vim'
 elseif (s:os_type ==# 'win')
+    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('C:\temp\backup\'.s:date, 1)
+    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('C:\temp\undo\'  .s:date, 1)
+    let &backupdir = 'C:\temp\backup\'.s:date
+    let &undodir   = 'C:\temp\undo\'  .s:date
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
     let g:memolist_path     = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     let g:php_cs_fixer_path = '$HOME/.vim/vim-php-cs-fixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
 else
+    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/backup/'.s:date, 1)
+    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/undo/'  .s:date, 1)
+    let &backupdir = '/tmp/backup/'.s:date
+    let &undodir   = '/tmp/undo/'  .s:date
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
     let g:memolist_path     = '$HOME/.vim/memolist.vim'
     let g:php_cs_fixer_path = '$HOME/.vim/vim-php-cs-fixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
@@ -648,7 +631,6 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                setlocal filetyp
 "
 " Extra local functions {{{
 " quickrun - prettyprint {{{
-"# function memo
 "* URL: http://qiita.com/rbtnn/items/39d9ba817329886e626b
 "* NoFormattings :echo neobundle#config#get_neobundles()
 "* Formattings   :QuickRunPP neobundle#config#get_neobundles()

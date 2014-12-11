@@ -19,8 +19,9 @@ CREATE TABLE <New DataBase>.<New Table1> LIKE          <DataBase1>.<Table1>;
 INSERT INTO  <New DataBase>.<New Table1> SELECT * FROM <DataBase1>.<Table1>;
 "
 ```
-Check status DataBase
+[Trouble](http://qiita.com/muran001/items/14f19959d4723ffc29cc)
 ```
+SHOW GLOBAL STATUS;
 SHOW PROCESSLIST;
 SHOW FULL PROCESSLIST;
 
