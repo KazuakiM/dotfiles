@@ -1,9 +1,7 @@
 # Regularly update & git NG files. {{{
-/backup/*
 /bundle/*
 /colors/*
 /dict/*
-/undo/*
 /jazzradio.vim/*
 /neobundle.vim/*
 /neocomplete.vim/*
