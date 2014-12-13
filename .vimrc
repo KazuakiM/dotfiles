@@ -116,6 +116,7 @@ colorscheme jellybeans
 set title
 set ruler
 set laststatus=2
+set cmdheight=1
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,.DS_Store,.,..
 set wildmenu
 set wildmode=longest:full,full
@@ -389,6 +390,7 @@ unlet s:hooks
 " vimdoc-ja {{{
 NeoBundleLazy 'vim-jp/vimdoc-ja', {'commands': 'help'}
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc/
+"set helplang=ja
 "}}}
 " open-browser.vim {{{
 NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'OpenBrowser', 'mappings': '<Plug>(openbrowser-smart-search)'}
