@@ -90,6 +90,8 @@ nnoremap fa <C-w>+
 nnoremap fs <C-w>-
 nnoremap rq <C-w>>
 nnoremap rw <C-w><
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 nnoremap <Leader>w :w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null<CR>
 " Paste
 autocmd MyAutoCmd InsertLeave * set nopaste
