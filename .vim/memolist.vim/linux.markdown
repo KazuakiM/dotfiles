@@ -14,9 +14,20 @@ Sender
 ```
 $ pv ./<File> | nc -l 3000
 ```
-receiver
+Receiver
 ```
 $ nc foobar.com 3000 | pv > <File>
+```
+
+## scp
+
+Sender
+```
+$ scp -P <port> <file> <host>:/tmp/
+```
+Receiver
+```
+$ scp -P <port> <host>:/file/to/pasth/<file> /tmp/
 ```
 
 # Grep
