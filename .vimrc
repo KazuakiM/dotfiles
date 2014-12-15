@@ -90,6 +90,8 @@ nnoremap fa <C-w>+
 nnoremap fs <C-w>-
 nnoremap rq <C-w>>
 nnoremap rw <C-w><
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 nnoremap <Leader>w :w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null<CR>
 " Paste
 autocmd MyAutoCmd InsertLeave * set nopaste
@@ -116,6 +118,7 @@ colorscheme jellybeans
 set title
 set ruler
 set laststatus=2
+set cmdheight=1
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,.DS_Store,.,..
 set wildmenu
 set wildmode=longest:full,full
@@ -195,7 +198,7 @@ else
     \    'build' : {
     \        'mac'    : 'make -f make_mac.mak',
     \        'unix'   : 'make -f make_unix.mak',
-    \        'cygwin' : 'make -f make_cygwin.mak',},} "}}}
+    \        'cygwin' : 'make -f make_cygwin.mak'}} "}}}
     NeoBundle 'vim-jp/vital.vim'
     NeoBundle 'mattn/webapi-vim'
     NeoBundle 'itchyny/lightline.vim'
@@ -220,14 +223,12 @@ endif
 let g:lightline = {
 \    'colorscheme': 'jellybeans',
 \    'active':      {
-\        'left':  [['mode','paste',],['filename','qfstatusline'],],
-\        'right': [['lineinfo',],['percent',],['fileformat','fileencoding','filetype',],],},
-\    'component_function': {
-\        'filename':     'MyFilename',     'fileformat': 'MyFileformat', 'filetype': 'MyFiletype',
-\        'fileencoding': 'MyFileencoding', 'mode':       'MyMode',},
-\    'component_expand': {'qfstatusline': 'qfstatusline#Update',},
-\    'component_type':   {'qfstatusline': 'error',},
-\    'subseparator': {'left': '|', 'right': '|',},}
+\        'left':  [['mode','paste'],['filename','qfstatusline']],
+\        'right': [['lineinfo'],['percent'],['fileformat','fileencoding','filetype']]},
+\    'component_function': {'filename': 'MyFilename', 'fileformat': 'MyFileformat', 'filetype': 'MyFiletype', 'fileencoding': 'MyFileencoding', 'mode': 'MyMode'},
+\    'component_expand': {'qfstatusline': 'qfstatusline#Update'},
+\    'component_type':   {'qfstatusline': 'error'},
+\    'subseparator': {'left': '|', 'right': '|'}}
 function! MyModified()
     return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
@@ -260,7 +261,7 @@ let g:indentLine_faster = 1
 " vim-ref {{{
 let g:ref_cache_dir       = $HOME.'/.vim/vim-ref/cache'
 let g:ref_phpmanual_path  = $HOME.'/.vim/vim-ref/php-chunked-xhtml'
-let g:ref_detect_filetype = {'html': 'phpmanual', 'javascript': 'phpmanual', 'css': 'phpmanual',}
+let g:ref_detect_filetype = {'html': 'phpmanual', 'javascript': 'phpmanual', 'css': 'phpmanual'}
 inoremap <silent><C-k> <C-o>:call<space>ref#K("normal")<CR><ESC>
 "}}}
 " vim-tags {{{
@@ -309,24 +310,23 @@ let g:quickrun_config = {
 \        'outputter/buffer/close_on_empty':     1,
 \        'outputter/buffer/split':              ':botright',
 \        'runner':                              'vimproc',
-\        'runner/vimproc/updatetime':           60,},
+\        'runner/vimproc/updatetime':           60},
 \    'watchdogs_checker/_': {
 \        'hook/close_quickfix/enable_exit':      1,
-\        'hook/back_window/enable_exit':         0,  'hook/back_window/priority_exit':         1,
-\        'hook/qfsigns_update/enable_exit':      1,  'hook/qfsigns_update/priority_exit':      2,
-\        'hook/qfstatusline_update/enable_exit': 1,  'hook/qfstatusline_update/priority_exit': 3,
-\        'outputter/quickfix/open_cmd':          '', },
+\        'hook/back_window/enable_exit':         0, 'hook/back_window/priority_exit':         1,
+\        'hook/qfsigns_update/enable_exit':      1, 'hook/qfsigns_update/priority_exit':      2,
+\        'hook/qfstatusline_update/enable_exit': 1, 'hook/qfstatusline_update/priority_exit': 3,
+\        'outputter/quickfix/open_cmd':          ''},
 \    'watchdogs_checker/php': {
 \        'command':     'php',
 \        'exec':        '%c -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0 -l %o %s:p',
-\        'errorformat': '%m\ in\ %f\ on\ line\ %l',},
-\    'markdown': {
-\        'outputter': 'browser',},
+\        'errorformat': '%m\ in\ %f\ on\ line\ %l'},
+\    'markdown': {'outputter': 'browser'},
 \    'php': {
 \        'command':                          'phpunit',
 \        'cmdopt':                           '--no-configuration',
 \        'hook/close_buffer/enable_failure': 0,
-\        'outputter/buffer/split':           ':botright 7sp',},}
+\        'outputter/buffer/split':           ':botright 7sp'}}
 "}}}
 " ultisnips {{{
 let g:UltiSnipsJumpForwardTrigger = '<TAB>'
@@ -345,12 +345,12 @@ let g:UltiSnipsSnippetsDir        = $HOME.'/.vim/bundle/vim-snippets/UltiSnips'
 " codic-vim
 " unite-codic.vim
 " jazzradio.vim {{{
-NeoBundleLazy 'Shougo/unite.vim', {'commands': 'Unite',}
-NeoBundleLazy 'pasela/unite-webcolorname',  {'depends': 'Shougo/unite.vim',                             'unite_sources': 'webcolorname',}
-NeoBundleLazy 'Shougo/unite-help',          {'depends': 'Shougo/unite.vim',                             'unite_sources': 'help',}
-NeoBundleLazy 'thinca/vim-editvar',         {'depends': ['thinca/vim-prettyprint', 'Shougo/unite.vim'], 'unite_sources': 'variable',}
-NeoBundleLazy 'rhysd/unite-codic.vim',      {'depends': ['koron/codic-vim',        'Shougo/unite.vim'], 'unite_sources': 'codic',}
-NeoBundleLazy 'supermomonga/jazzradio.vim', {'depends': 'Shougo/unite.vim',                             'unite_sources': 'jazzradio', 'commands': ['JazzradioUpdateChannels', 'JazzradioPlay', ],}
+NeoBundleLazy 'Shougo/unite.vim', {'commands': 'Unite'}
+NeoBundleLazy 'pasela/unite-webcolorname',  {'depends': 'Shougo/unite.vim',                             'unite_sources': 'webcolorname'}
+NeoBundleLazy 'Shougo/unite-help',          {'depends': 'Shougo/unite.vim',                             'unite_sources': 'help'}
+NeoBundleLazy 'thinca/vim-editvar',         {'depends': ['thinca/vim-prettyprint', 'Shougo/unite.vim'], 'unite_sources': 'variable'}
+NeoBundleLazy 'rhysd/unite-codic.vim',      {'depends': ['koron/codic-vim',        'Shougo/unite.vim'], 'unite_sources': 'codic'}
+NeoBundleLazy 'supermomonga/jazzradio.vim', {'depends': 'Shougo/unite.vim',                             'unite_sources': 'jazzradio', 'commands': ['JazzradioUpdateChannels', 'JazzradioPlay']}
 nnoremap [unite] <Nop>
 nmap <Leader>u [unite]
 " default plugins
@@ -390,17 +390,18 @@ endfunction
 unlet s:hooks
 "}}}
 " vimdoc-ja {{{
-NeoBundleLazy 'vim-jp/vimdoc-ja', {'commands': 'help',}
+NeoBundleLazy 'vim-jp/vimdoc-ja', {'commands': 'help'}
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc/
+"set helplang=ja
 "}}}
 " open-browser.vim {{{
-NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'OpenBrowser', 'mappings': '<Plug>(openbrowser-smart-search)',}
+NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'OpenBrowser', 'mappings': '<Plug>(openbrowser-smart-search)'}
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
 nmap <Leader>gx <Plug>(openbrowser-smart-search)
 vmap <Leader>gx <Plug>(openbrowser-smart-search)
 "}}}
 " taglist.vim {{{
-NeoBundleLazy 'vim-scripts/taglist.vim', {'commands': 'Tlist',}
+NeoBundleLazy 'vim-scripts/taglist.vim', {'commands': 'Tlist'}
 let g:Tlist_Use_Right_Window = 1
 let g:Tlist_Show_One_File    = 1
 let g:Tlist_Exit_OnlyWindow  = 1
@@ -409,7 +410,7 @@ let g:tlist_php_settings     = 'php;c:class;f:function;d:constant'
 nnoremap <Leader>t :Tlist<CR>
 "}}}
 " nerdtree {{{
-NeoBundleLazy 'scrooloose/nerdtree', {'commands': 'NERDTree',}
+NeoBundleLazy 'scrooloose/nerdtree', {'commands': 'NERDTree'}
 nnoremap <expr><Leader>n ':NERDTree '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
 let g:NERDTreeWinSize           = 20
 let g:NERDTreeMinimalUI         = 1
@@ -418,45 +419,45 @@ let g:NERDTreeShowHidden        = 1
 autocmd MyAutoCmd BufEnter * if (winnr('$') == 1 && exists('b:NERDTreeType') && b:NERDTreeType == 'primary') | q | endif
 "}}}
 " vim-easy-align {{{
-NeoBundleLazy 'junegunn/vim-easy-align', {'commands': 'EasyAlign',}
+NeoBundleLazy 'junegunn/vim-easy-align', {'commands': 'EasyAlign'}
 vnoremap <silent> <Leader>a :EasyAlign<CR>
 let g:easy_align_delimiters = {
 \    '=': {
 \        'pattern':     '===\|!==\|<=>\|\(&&\|||\|<<\|>>\)=\|=\~[#?]\?\|=>\|[:+/*!%^=><&|.-]\?=[#?]\?',
-\        'left_margin': 1, 'right_margin': 1, 'stick_to_left': 0 },
-\    '>': {'pattern': '>>\|=>\|>',             },
-\    '/': {'pattern': '//\+\|/\*\|\*/',        'ignore_groups': ['String'], },
-\    '#': {'pattern': '#\+',                   'ignore_groups': ['String'], 'delimiter_align': 'l', },
-\    '$': {'pattern': '\((.*\)\@!$\(.*)\)\@!', 'ignore_groups': ['String'], 'right_margin':    0,   'delimiter_align': 'l', },
-\    ']': {'pattern': '[[\]]',                 'left_margin':   0,          'right_margin':    0,   'stick_to_left':   0,   },
-\    ')': {'pattern': '[()]',                  'left_margin':   0,          'right_margin':    0,   'stick_to_left':   0,   },
-\    'd': {'pattern': '\(\S\+\s*[;=]\)\@=',    'left_margin':   0,          'right_margin':    0,   },                      }
+\        'left_margin': 1, 'right_margin': 1, 'stick_to_left': 0},
+\    '>': {'pattern': '>>\|=>\|>'},
+\    '/': {'pattern': '//\+\|/\*\|\*/',        'ignore_groups': ['String']},
+\    '#': {'pattern': '#\+',                   'ignore_groups': ['String'], 'delimiter_align': 'l'},
+\    '$': {'pattern': '\((.*\)\@!$\(.*)\)\@!', 'ignore_groups': ['String'], 'right_margin':    0, 'delimiter_align': 'l'},
+\    ']': {'pattern': '[[\]]',                 'left_margin':   0,          'right_margin':    0, 'stick_to_left':   0},
+\    ')': {'pattern': '[()]',                  'left_margin':   0,          'right_margin':    0, 'stick_to_left':   0},
+\    'd': {'pattern': '\(\S\+\s*[;=]\)\@=',    'left_margin':   0,          'right_margin':    0}}
 "}}}
 " Align
 " SQLUtilities {{{
-NeoBundleLazy 'vim-scripts/SQLUtilities', {'depends': 'vim-scripts/Align', 'commands': 'SQLUFormatter',}
+NeoBundleLazy 'vim-scripts/SQLUtilities', {'depends': 'vim-scripts/Align', 'commands': 'SQLUFormatter'}
 let g:sqlutil_align_comma = 1
 nnoremap <Leader>sql :SQLUFormatter<CR>
 "}}}
 " vim-regexper {{{
-NeoBundleLazy 'KazuakiM/vim-regexper', {'commands': 'RegexperExecute',}
+NeoBundleLazy 'KazuakiM/vim-regexper', {'commands': 'RegexperExecute'}
 let g:regexper#AppPath = $HOME.'/.vim/bundle/regexper'
 nnoremap <Leader>reg :RegexperExecute<Space>
 "}}}
 " wildfire.vim {{{
-NeoBundleLazy 'gcmt/wildfire.vim', {'mappings': '<Plug>(wildfire-fuel)',}
+NeoBundleLazy 'gcmt/wildfire.vim', {'mappings': '<Plug>(wildfire-fuel)'}
 map <ENTER> <Plug>(wildfire-fuel)
 let s:hooks = neobundle#get_hooks('wildfire.vim')
 function! s:hooks.on_source(bundle)
     map <BS> <Plug>(wildfire-water)
     let g:wildfire_objects = {
-    \   '*':        ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it',],
-    \   'html,xml': ['at', 'it',],}
+    \   '*':        ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it'],
+    \   'html,xml': ['at', 'it']}
 endfunction
 unlet s:hooks
 "}}}
 " neocomplete.vim {{{
-NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['SirVer/ultisnips', 'KazuakiM/vim-snippets',], 'insert': 1,}
+NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['SirVer/ultisnips', 'KazuakiM/vim-snippets'], 'insert': 1}
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle)
     let g:acp_enableAtStartup                  = 0
@@ -467,25 +468,25 @@ function! s:hooks.on_source(bundle)
     let g:neocomplete#same_filetypes           = {
     \   'html': 'html,css,javascript,php',}
     let g:neocomplete#sources = {
-    \   '_':    ['file', 'ultisnips', 'buffer', 'dictionary', ],
+    \   '_':    ['file', 'ultisnips', 'buffer', 'dictionary'],
     \   'vim':  ['file', 'ultisnips', 'buffer', 'dictionary', 'vim'],
-    \   'html': ['file', 'ultisnips', 'buffer', 'dictionary', ],}
+    \   'html': ['file', 'ultisnips', 'buffer', 'dictionary']}
     let g:neocomplete#sources#dictionary#dictionaries = {
     \   'default':  '',
-    \   'php':      $HOME.'/.vim/dict/php.dict',}
+    \   'php':      $HOME.'/.vim/dict/php.dict'}
     let g:neocomplete#sources#syntax#min_keyword_length = 3
     inoremap <expr><C-c> pumvisible() ? "\<C-n>" : "\<C-c>"
     " tags using.
     "let g:neocomplete#sources = {
-    "\   '_':    ['file', 'ultisnips', 'buffer', 'dictionary', 'tag',],
+    "\   '_':    ['file', 'ultisnips', 'buffer', 'dictionary', 'tag'],
     "\   'vim':  ['file', 'ultisnips', 'buffer', 'dictionary', 'tag', 'vim'],
-    "\   'html': ['file', 'ultisnips', 'buffer', 'dictionary', 'tag',],}
+    "\   'html': ['file', 'ultisnips', 'buffer', 'dictionary', 'tag']}
     "let g:neocomplete#sources#tags#cache_limit_size     = 10000000
 endfunction
 unlet s:hooks
 "}}}
 " gundo.vim {{{
-NeoBundleLazy 'sjl/gundo.vim', {'insert': 1,}
+NeoBundleLazy 'sjl/gundo.vim', {'insert': 1}
 let s:hooks = neobundle#get_hooks('gundo.vim')
 function! s:hooks.on_source(bundle)
     nnoremap u g-
@@ -495,7 +496,7 @@ endfunction
 unlet s:hooks
 "}}}
 " vim-php-cs-fixer {{{
-NeoBundleLazy 'stephpy/vim-php-cs-fixer', {'filetypes': 'php',}
+NeoBundleLazy 'stephpy/vim-php-cs-fixer', {'filetypes': 'php'}
 let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
 function! s:hooks.on_source(bundle)
     let g:php_cs_fixer_level                  = 'all'     " which level ?
@@ -513,7 +514,7 @@ unlet s:hooks
 " vim-qfsigns
 " vim-qfstatusline
 " vim-watchdogs {{{
-NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline'], 'filetypes': ['php', 'javascript', 'ruby'],}
+NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline'], 'filetypes': ['php', 'javascript', 'ruby']}
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle)
     "vim-qfsigns
@@ -527,10 +528,10 @@ endfunction
 unlet s:hooks
 "}}}
 " vim-markdown {{{
-NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'markdown',}
+NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'markdown'}
 "}}}
 " previm {{{
-NeoBundleLazy 'kannokanno/previm', {'depends': 'open-browser.vim', 'filetypes': 'markdown',}
+NeoBundleLazy 'kannokanno/previm', {'depends': 'open-browser.vim', 'filetypes': 'markdown'}
 nnoremap <silent> <Leader>pre :PrevimOpen<CR>
 "}}}
 "}}}
@@ -600,22 +601,22 @@ call smartinput#map_to_trigger('i', '*', '*', '*')
 call smartinput#map_to_trigger('i', '!', '!', '!')
 call smartinput#map_to_trigger('i', '=', '=', '=')
 call smartinput#map_to_trigger('i', 'p', 'p', 'p')
-call smartinput#define_rule({'at': '\%#',        'char': '"',    'input': '"',                                 'filetype': ['vim'] })
-call smartinput#define_rule({'at': '''\%#''',    'char': '<BS>', 'input': '<Del>',                                                 })
-call smartinput#define_rule({'at': '"\%#"',      'char': '<BS>', 'input': '<Del>',                                                 })
-call smartinput#define_rule({'at': '`\%#`',      'char': '<BS>', 'input': '<Del>',                                                 })
-call smartinput#define_rule({'at': '<\%#',       'char': '!',    'input': '!----><Left><Left><Left>',                              })
-call smartinput#define_rule({'at': '<!--\%#-->', 'char': '<BS>', 'input': '<Del><Del><Del>',                                       })
-call smartinput#define_rule({'at': '<?\%#',      'char': '=',    'input': '=?><Left><Left>',                   'filetype': ['php'] })
-call smartinput#define_rule({'at': '<?=\%#?>',   'char': '<BS>', 'input': '<Del><Del>',                        'filetype': ['php'] })
-call smartinput#define_rule({'at': '<?\%#',      'char': 'p',    'input': 'php?><Left><Left>',                 'filetype': ['php'] })
-call smartinput#define_rule({'at': '<?php\%#?>', 'char': '<BS>', 'input': '<Del><Del>',                        'filetype': ['php'] })
-call smartinput#define_rule({'at': '/\%#',       'char': '*',    'input': '**/<Left><Left>',                                       })
-call smartinput#define_rule({'at': '//\%#',      'char': '{',    'input': '{{{<Left><Left><Left><Left><Left>',                     })
-call smartinput#define_rule({'at': '//\%#',      'char': '}',    'input': '}}}<Left><Left><Left><Left><Left>',                     })
-call smartinput#define_rule({'at': '(\%#)',      'char': '<BS>', 'input': '<Del>',                                                 })
-call smartinput#define_rule({'at': '{\%#}',      'char': '<BS>', 'input': '<Del>',                                                 })
-call smartinput#define_rule({'at': '\[\%#\]',    'char': '<BS>', 'input': '<Del>',                                                 })
+call smartinput#define_rule({'at': '\%#',        'char': '"',    'input': '"',                 'filetype': ['vim'] })
+call smartinput#define_rule({'at': '''\%#''',    'char': '<BS>', 'input': '<Del>'                                  })
+call smartinput#define_rule({'at': '"\%#"',      'char': '<BS>', 'input': '<Del>'                                  })
+call smartinput#define_rule({'at': '`\%#`',      'char': '<BS>', 'input': '<Del>'                                  })
+call smartinput#define_rule({'at': '<\%#',       'char': '!',    'input': '!----><Left><Left><Left>'               })
+call smartinput#define_rule({'at': '<!--\%#-->', 'char': '<BS>', 'input': '<Del><Del><Del>'                        })
+call smartinput#define_rule({'at': '<?\%#',      'char': '=',    'input': '=?><Left><Left>',   'filetype': ['php'] })
+call smartinput#define_rule({'at': '<?=\%#?>',   'char': '<BS>', 'input': '<Del><Del>',        'filetype': ['php'] })
+call smartinput#define_rule({'at': '<?\%#',      'char': 'p',    'input': 'php?><Left><Left>', 'filetype': ['php'] })
+call smartinput#define_rule({'at': '<?php\%#?>', 'char': '<BS>', 'input': '<Del><Del>',        'filetype': ['php'] })
+call smartinput#define_rule({'at': '/\%#',       'char': '*',    'input': '**/<Left><Left>'                        })
+call smartinput#define_rule({'at': '//\%#',      'char': '{',    'input': '{{{<Left><Left><Left><Left><Left>'      })
+call smartinput#define_rule({'at': '//\%#',      'char': '}',    'input': '}}}<Left><Left><Left><Left><Left>'      })
+call smartinput#define_rule({'at': '(\%#)',      'char': '<BS>', 'input': '<Del>'                                  })
+call smartinput#define_rule({'at': '{\%#}',      'char': '<BS>', 'input': '<Del>'                                  })
+call smartinput#define_rule({'at': '\[\%#\]',    'char': '<BS>', 'input': '<Del>'                                  })
 "}}}
 "}}}
 "
