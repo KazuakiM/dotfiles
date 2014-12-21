@@ -77,7 +77,7 @@ set noimdisable
 set noimcmdline
 set foldmethod=marker
 "set foldopen-=search
-set viminfo+=n~/.vim/viminfo/.viminfo
+set viminfo='100,f1,<50,:20,@20,/20,s100,h,n~/.vim/viminfo/.viminfo
 set updatetime=1000
 nnoremap zx :%foldopen<CR>
 set matchpairs+=<:>
@@ -294,10 +294,10 @@ let g:memolist_filename_prefix_none = 1
 let g:memolist_unite                = 1
 let g:memolist_unite_source         = 'file_rec'
 let g:memolist_unite_option         = '-default-action=tabopen'
-nnoremap [memolist] <Nop>
-nmap <Leader>m [memolist]
-nnoremap [memolist]n :MemoNew<CR>
-nnoremap [memolist]l :MemoList<CR>
+nnoremap <SID>[memolist] <Nop>
+nmap <Leader>m <SID>[memolist]
+nnoremap <SID>[memolist]n :MemoNew<CR>
+nnoremap <SID>[memolist]l :MemoList<CR>
 "}}}
 " vim-quickrun {{{
 nnoremap <Leader>run :QuickRun<CR>
@@ -350,25 +350,25 @@ NeoBundleLazy 'Shougo/unite-help',          {'depends': 'Shougo/unite.vim',     
 NeoBundleLazy 'thinca/vim-editvar',         {'depends': ['thinca/vim-prettyprint', 'Shougo/unite.vim'], 'unite_sources': 'variable'}
 NeoBundleLazy 'rhysd/unite-codic.vim',      {'depends': ['koron/codic-vim',        'Shougo/unite.vim'], 'unite_sources': 'codic'}
 NeoBundleLazy 'supermomonga/jazzradio.vim', {'depends': 'Shougo/unite.vim',                             'unite_sources': 'jazzradio', 'commands': ['JazzradioUpdateChannels', 'JazzradioPlay']}
-nnoremap [unite] <Nop>
-nmap <Leader>u [unite]
+nnoremap <SID>[unite] <Nop>
+nmap <Leader>u <SID>[unite]
 " default plugins
-nnoremap <silent> [unite]f   :<C-u>call<Space>DispatchUniteFileRecAsyncOrGit()<CR>
-nnoremap <silent> [unite]map :<C-u>Unite<Space>output:map\|map!\|lmap<CR>
-nnoremap <silent> [unite]msg :<C-u>Unite<Space>output:message<CR>
-nnoremap <silent> [unite]s   :<C-u>Unite<Space>-default-action=ex<Space>output:scriptnames<CR>
+nnoremap <silent> <SID>[unite]f   :<C-u>call<Space>DispatchUniteFileRecAsyncOrGit()<CR>
+nnoremap <silent> <SID>[unite]map :<C-u>Unite<Space>output:map\|map!\|lmap<CR>
+nnoremap <silent> <SID>[unite]msg :<C-u>Unite<Space>output:message<CR>
+nnoremap <silent> <SID>[unite]s   :<C-u>Unite<Space>-default-action=ex<Space>output:scriptnames<CR>
 " add plugins
-nnoremap <silent> [unite]dic :<C-u>Unite<Space>codic<CR>
-nnoremap <silent> [unite]h   :<C-u>Unite<Space>help<CR>
-nnoremap <silent> [unite]v   :<C-u>Unite<Space>-auto-preview<Space>variable<CR>
-nnoremap <silent> [unite]web :<C-u>Unite<Space>webcolorname<CR>
+nnoremap <silent> <SID>[unite]dic :<C-u>Unite<Space>codic<CR>
+nnoremap <silent> <SID>[unite]h   :<C-u>Unite<Space>help<CR>
+nnoremap <silent> <SID>[unite]v   :<C-u>Unite<Space>-auto-preview<Space>variable<CR>
+nnoremap <silent> <SID>[unite]web :<C-u>Unite<Space>webcolorname<CR>
 " jazzradio
 let g:jazzradio#cache_dir = $HOME.'/.vim/jazzradio.vim'
-nnoremap [jazzradio] <Nop>
-nmap <Leader>j [jazzradio]
-nnoremap [jazzradio]u :JazzradioUpdateChannels<CR>
-nnoremap [jazzradio]p :JazzradioPlay<Space>CurrentJazz<CR>
-nnoremap [jazzradio]l :<C-u>Unite<Space>jazzradio<CR>
+nnoremap <SID>[jazzradio] <Nop>
+nmap <Leader>j <SID>[jazzradio]
+nnoremap <SID>[jazzradio]u :JazzradioUpdateChannels<CR>
+nnoremap <SID>[jazzradio]p :JazzradioPlay<Space>CurrentJazz<CR>
+nnoremap <SID>[jazzradio]l :<C-u>Unite<Space>jazzradio<CR>
 " http://qiita.com/yuku_t/items/9263e6d9105ba972aea8
 function! DispatchUniteFileRecAsyncOrGit()
     if isdirectory(getcwd().'/.git')
