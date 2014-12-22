@@ -67,6 +67,9 @@ let g:context_filetype#filetypes = {
 let g:context_filetype#search_offset = 100
 "}}}
 " vim-precious {{{
+augroup precious-indentline
+    autocmd!
+augroup END
 NeoBundle 'osyo-manga/vim-precious'
 let g:precious_enable_switch_CursorMoved = {
 \    '*' : 0,}
