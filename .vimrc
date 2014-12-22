@@ -45,9 +45,6 @@ endif
 augroup MyAutoCmd
     autocmd!
 augroup END
-augroup precious-indentline
-    autocmd!
-augroup END
 " Variable
 let s:localtime = localtime()
 let s:date      = strftime('%Y%m%d%H%M%S', s:localtime)
