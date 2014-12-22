@@ -16,6 +16,9 @@ set guioptions-=t
 set guioptions-=b
 set winaltkeys=no
 " Color
+autocmd MyAutoCmd ColorScheme * highlight Comment    ctermfg=darkgray gui=NONE guifg=darkgray
+autocmd MyAutoCmd ColorScheme * highlight Folded     ctermfg=darkgray gui=NONE guifg=darkgray
+autocmd MyAutoCmd ColorScheme * highlight StatusLine ctermfg=darkgray gui=NONE guifg=darkgray
 colorscheme jellybeans
 "}}}
 "
@@ -32,8 +35,6 @@ if (has("win32") || has ("win64"))
     set guifont=Source_Code_Pro:h12:cANSI
     set lines=50
     set columns=87
-    autocmd MyAutoCmd ColorScheme * highlight Comment ctermfg=darkgray gui=NONE guifg=darkgray
-    autocmd MyAutoCmd ColorScheme * highlight Folded  ctermfg=darkgray gui=NONE guifg=darkgray
 else
     set guifont=Ricty_Discord_Regular:h16
     set lines=47
