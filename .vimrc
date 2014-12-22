@@ -264,7 +264,7 @@ nnoremap <Leader>ts :ts<CR>
 " add .vimrc.local
 "}}}
 " qfixgrep {{{
-set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git
+set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*.js'\ --exclude='*.log'
 set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
 let g:QFixWin_EnableMode   = 1
 let g:QFix_UseLocationList = 1
