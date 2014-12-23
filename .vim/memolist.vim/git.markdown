@@ -4,7 +4,6 @@ date: 2014-11-19 09:19
 tags: []
 categories: []
 - - -
-Gitのケーススタディ
 
 ## branch 作成
 ```
@@ -48,6 +47,30 @@ git branch
 git merge xxxxx
 
 git push origin master
+```
+
+## merge fork repository
+```
+pwd
+git status
+
+git checkout master
+git pull
+git branch -a
+
+git pull fork_master master
+git status
+
+git push
+```
+
+## Add fork repository
+```
+pwd
+git status
+git branch -a
+
+git remote add fork_master git://github.com/xxxxx/xxxxx
 ```
 
 ## git log
