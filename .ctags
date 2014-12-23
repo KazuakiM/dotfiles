@@ -6,4 +6,6 @@
 --exclude=*Test.php
 --exclude=*TestCase.php
 --langmap=PHP:+.inc.tpl
---php-types=cfd
+--regex-PHP=/const\s+([^ \t=]+)/\1/d/
+--php-kinds=cfd
+

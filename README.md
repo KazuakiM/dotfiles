@@ -11,12 +11,12 @@ AppStore
 
 homebrew
 ```bash
+$ cd $HOME
+$ mkdir -p work
 $ xcode-select --install
 $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-$ brew doctor
-$ brew install git
-$ brew update
-$ brew upgrade
+$ git clone git@github.com:KazuakiM/dotfiles.git work/dotfiles
+$ $HOME/work/dotfiles/lib/Brewfile
 $ brew doctor
 ```
 rbenv
@@ -29,8 +29,6 @@ $ rbenv rehash
 
 ```bash
 $ cd $HOME
-$ mkdir -p work
-$ git clone git@github.com:KazuakiM/dotfiles.git work/dotfiles
 $ ln -sf $HOME/work/dotfiles/.bash_logout  .bash_logout
 $ ln -sf $HOME/work/dotfiles/.bash_profile .bash_profile
 $ cp $HOME/work/dotfiles/.bash_profile.local .
@@ -266,5 +264,4 @@ $ cp $HOME/.vim/colors/jellybeans.vim /cygwin/c/path/to/path/Vim/colors/
 
 # TODO
 
-* Add Brewfile
 * Try Chocolatey

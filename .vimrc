@@ -45,9 +45,6 @@ endif
 augroup MyAutoCmd
     autocmd!
 augroup END
-augroup precious-indentline
-    autocmd!
-augroup END
 " Variable
 let s:localtime = localtime()
 let s:date      = strftime('%Y%m%d%H%M%S', s:localtime)
@@ -77,7 +74,7 @@ set noimdisable
 set noimcmdline
 set foldmethod=marker
 "set foldopen-=search
-set viminfo+=n~/.vim/viminfo/.viminfo
+set viminfo='100,f1,<50,:20,@20,/20,s100,h,n~/.vim/viminfo/.viminfo
 set updatetime=1000
 nnoremap zx :%foldopen<CR>
 set matchpairs+=<:>
@@ -193,25 +190,18 @@ let g:neobundle#log_filename = $HOME.'/.vim/neobundle.vim/neobundle.log'
 if neobundle#has_cache()
     NeoBundleLoadCache
 else
-    " vimproc {{{
-    NeoBundle 'Shougo/vimproc', {
-    \    'build' : {
-    \        'mac'    : 'make -f make_mac.mak',
-    \        'unix'   : 'make -f make_unix.mak',
-    \        'cygwin' : 'make -f make_cygwin.mak'}} "}}}
+    NeoBundle 'Shougo/vimproc', {'build': {'mac': 'make -f make_mac.mak', 'unix': 'make -f make_unix.mak', 'cygwin': 'make -f make_cygwin.mak'}}
     NeoBundle 'vim-jp/vital.vim'
     NeoBundle 'mattn/webapi-vim'
     NeoBundle 'itchyny/lightline.vim'
     NeoBundle 'Yggdroot/indentLine'
     NeoBundle 'thinca/vim-ref'
     NeoBundle 'szw/vim-tags'
-    NeoBundle 'kana/vim-smartinput'
     NeoBundle 'tpope/vim-surround'
     NeoBundle 'vim-scripts/matchit.zip'
     NeoBundle 'tpope/vim-endwise'
     NeoBundle 'fuenor/qfixgrep'
     NeoBundle 'LeafCage/yankround.vim'
-    NeoBundle 'glidenote/memolist.vim'
     NeoBundle 'thinca/vim-quickrun'
     NeoBundle 'thinca/vim-prettyprint'
     NeoBundle 'KazuakiM/vim-snippets'
@@ -290,16 +280,6 @@ highlight YankRoundRegion cterm=underline ctermfg=magenta
 let g:yankround_use_region_hl       = 1
 let g:yankround_region_hl_groupname = 'YankRoundRegion'
 "}}}
-" memolist.vim {{{
-let g:memolist_filename_prefix_none = 1
-let g:memolist_unite                = 1
-let g:memolist_unite_source         = 'file_rec'
-let g:memolist_unite_option         = '-default-action=tabopen'
-nnoremap [memolist] <Nop>
-nmap <Leader>m [memolist]
-nnoremap [memolist]n :MemoNew<CR>
-nnoremap [memolist]l :MemoList<CR>
-"}}}
 " vim-quickrun {{{
 nnoremap <Leader>run :QuickRun<CR>
 let g:quickrun_config = {
@@ -344,32 +324,38 @@ let g:UltiSnipsSnippetsDir        = $HOME.'/.vim/bundle/vim-snippets/UltiSnips'
 " vim-editvar
 " codic-vim
 " unite-codic.vim
-" jazzradio.vim {{{
-NeoBundleLazy 'Shougo/unite.vim', {'commands': 'Unite'}
-NeoBundleLazy 'pasela/unite-webcolorname',  {'depends': 'Shougo/unite.vim',                             'unite_sources': 'webcolorname'}
-NeoBundleLazy 'Shougo/unite-help',          {'depends': 'Shougo/unite.vim',                             'unite_sources': 'help'}
+" jazzradio.vim
+" memolist.vim {{{
+NeoBundleLazy 'Shougo/unite.vim',           {'commands': 'Unite'}
+NeoBundleLazy 'pasela/unite-webcolorname',  {'depends': 'Shougo/unite.vim', 'unite_sources': 'webcolorname'}
+NeoBundleLazy 'Shougo/unite-help',          {'depends': 'Shougo/unite.vim', 'unite_sources': 'help'}
 NeoBundleLazy 'thinca/vim-editvar',         {'depends': ['thinca/vim-prettyprint', 'Shougo/unite.vim'], 'unite_sources': 'variable'}
 NeoBundleLazy 'rhysd/unite-codic.vim',      {'depends': ['koron/codic-vim',        'Shougo/unite.vim'], 'unite_sources': 'codic'}
-NeoBundleLazy 'supermomonga/jazzradio.vim', {'depends': 'Shougo/unite.vim',                             'unite_sources': 'jazzradio', 'commands': ['JazzradioUpdateChannels', 'JazzradioPlay']}
-nnoremap [unite] <Nop>
-nmap <Leader>u [unite]
+NeoBundleLazy 'supermomonga/jazzradio.vim', {'unite_sources': 'jazzradio', 'commands': ['JazzradioUpdateChannels', 'JazzradioPlay']}
+NeoBundleLazy 'glidenote/memolist.vim',     {'commands': ['MemoNew', 'MemoList']}
+nnoremap <SID>[unite] <Nop>
+nmap <Leader>u <SID>[unite]
 " default plugins
-nnoremap <silent> [unite]f   :<C-u>call<Space>DispatchUniteFileRecAsyncOrGit()<CR>
-nnoremap <silent> [unite]map :<C-u>Unite<Space>output:map\|map!\|lmap<CR>
-nnoremap <silent> [unite]msg :<C-u>Unite<Space>output:message<CR>
-nnoremap <silent> [unite]s   :<C-u>Unite<Space>-default-action=ex<Space>output:scriptnames<CR>
+nnoremap <silent> <SID>[unite]f   :<C-u>call<Space>DispatchUniteFileRecAsyncOrGit()<CR>
+nnoremap <silent> <SID>[unite]map :<C-u>Unite<Space>output:map\|map!\|lmap<CR>
+nnoremap <silent> <SID>[unite]msg :<C-u>Unite<Space>output:message<CR>
+nnoremap <silent> <SID>[unite]s   :<C-u>Unite<Space>-default-action=ex<Space>output:scriptnames<CR>
 " add plugins
-nnoremap <silent> [unite]dic :<C-u>Unite<Space>codic<CR>
-nnoremap <silent> [unite]h   :<C-u>Unite<Space>help<CR>
-nnoremap <silent> [unite]v   :<C-u>Unite<Space>-auto-preview<Space>variable<CR>
-nnoremap <silent> [unite]web :<C-u>Unite<Space>webcolorname<CR>
+nnoremap <silent> <SID>[unite]dic :<C-u>Unite<Space>codic<CR>
+nnoremap <silent> <SID>[unite]h   :<C-u>Unite<Space>help<CR>
+nnoremap <silent> <SID>[unite]v   :<C-u>Unite<Space>-auto-preview<Space>variable<CR>
+nnoremap <silent> <SID>[unite]web :<C-u>Unite<Space>webcolorname<CR>
 " jazzradio
-let g:jazzradio#cache_dir = $HOME.'/.vim/jazzradio.vim'
-nnoremap [jazzradio] <Nop>
-nmap <Leader>j [jazzradio]
-nnoremap [jazzradio]u :JazzradioUpdateChannels<CR>
-nnoremap [jazzradio]p :JazzradioPlay<Space>CurrentJazz<CR>
-nnoremap [jazzradio]l :<C-u>Unite<Space>jazzradio<CR>
+nnoremap <SID>[jazzradio] <Nop>
+nmap <Leader>j <SID>[jazzradio]
+nnoremap <SID>[jazzradio]u :JazzradioUpdateChannels<CR>
+nnoremap <SID>[jazzradio]p :JazzradioPlay<Space>CurrentJazz<CR>
+nnoremap <SID>[jazzradio]l :<C-u>Unite<Space>jazzradio<CR>
+" memolist
+nnoremap <SID>[memolist] <Nop>
+nmap <Leader>m <SID>[memolist]
+nnoremap <SID>[memolist]n :MemoNew<CR>
+nnoremap <SID>[memolist]l :MemoList<CR>
 " http://qiita.com/yuku_t/items/9263e6d9105ba972aea8
 function! DispatchUniteFileRecAsyncOrGit()
     if isdirectory(getcwd().'/.git')
@@ -387,7 +373,17 @@ function! s:hooks.on_source(bundle)
     let g:unite_source_grep_recursive_opt  = ''
     let g:unite_source_grep_max_candidates = 200
 endfunction
-unlet s:hooks
+let s:hooks = neobundle#get_hooks('jazzradio.vim')
+function! s:hooks.on_source(bundle)
+    let g:jazzradio#cache_dir = $HOME.'/.vim/jazzradio.vim'
+endfunction
+let s:hooks = neobundle#get_hooks('memolist.vim')
+function! s:hooks.on_source(bundle)
+    let g:memolist_filename_prefix_none = 1
+    let g:memolist_unite                = 1
+    let g:memolist_unite_source         = 'file_rec'
+    let g:memolist_unite_option         = '-default-action=tabopen'
+endfunction
 "}}}
 " vimdoc-ja {{{
 NeoBundleLazy 'vim-jp/vimdoc-ja', {'commands': 'help'}
@@ -450,11 +446,8 @@ map <ENTER> <Plug>(wildfire-fuel)
 let s:hooks = neobundle#get_hooks('wildfire.vim')
 function! s:hooks.on_source(bundle)
     map <BS> <Plug>(wildfire-water)
-    let g:wildfire_objects = {
-    \   '*':        ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it'],
-    \   'html,xml': ['at', 'it']}
+    let g: wildfire_objects = {'*': ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it'],'html,xml': ['at', 'it']}
 endfunction
-unlet s:hooks
 "}}}
 " neocomplete.vim {{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['SirVer/ultisnips', 'KazuakiM/vim-snippets'], 'insert': 1}
@@ -483,7 +476,6 @@ function! s:hooks.on_source(bundle)
     "\   'html': ['file', 'ultisnips', 'buffer', 'dictionary', 'tag']}
     "let g:neocomplete#sources#tags#cache_limit_size     = 10000000
 endfunction
-unlet s:hooks
 "}}}
 " gundo.vim {{{
 NeoBundleLazy 'sjl/gundo.vim', {'insert': 1}
@@ -493,7 +485,6 @@ function! s:hooks.on_source(bundle)
     nnoremap <C-r> g+
     nnoremap <Leader>gundo :GundoToggle<CR>
 endfunction
-unlet s:hooks
 "}}}
 " vim-php-cs-fixer {{{
 NeoBundleLazy 'stephpy/vim-php-cs-fixer', {'filetypes': 'php'}
@@ -508,7 +499,6 @@ function! s:hooks.on_source(bundle)
     let g:php_cs_fixer_enable_default_mapping = 0
     nnoremap <Leader>php :call<Space>PhpCsFixerFixFile()<CR>
 endfunction
-unlet s:hooks
 "}}}
 " shabadou.vim
 " vim-qfsigns
@@ -596,28 +586,6 @@ endif
 "
 " NeoBundle END {{{
 call neobundle#end()
-" vim-smartinput {{{
-call smartinput#map_to_trigger('i', '*', '*', '*')
-call smartinput#map_to_trigger('i', '!', '!', '!')
-call smartinput#map_to_trigger('i', '=', '=', '=')
-call smartinput#map_to_trigger('i', 'p', 'p', 'p')
-call smartinput#define_rule({'at': '\%#',        'char': '"',    'input': '"',                 'filetype': ['vim'] })
-call smartinput#define_rule({'at': '''\%#''',    'char': '<BS>', 'input': '<Del>'                                  })
-call smartinput#define_rule({'at': '"\%#"',      'char': '<BS>', 'input': '<Del>'                                  })
-call smartinput#define_rule({'at': '`\%#`',      'char': '<BS>', 'input': '<Del>'                                  })
-call smartinput#define_rule({'at': '<\%#',       'char': '!',    'input': '!----><Left><Left><Left>'               })
-call smartinput#define_rule({'at': '<!--\%#-->', 'char': '<BS>', 'input': '<Del><Del><Del>'                        })
-call smartinput#define_rule({'at': '<?\%#',      'char': '=',    'input': '=?><Left><Left>',   'filetype': ['php'] })
-call smartinput#define_rule({'at': '<?=\%#?>',   'char': '<BS>', 'input': '<Del><Del>',        'filetype': ['php'] })
-call smartinput#define_rule({'at': '<?\%#',      'char': 'p',    'input': 'php?><Left><Left>', 'filetype': ['php'] })
-call smartinput#define_rule({'at': '<?php\%#?>', 'char': '<BS>', 'input': '<Del><Del>',        'filetype': ['php'] })
-call smartinput#define_rule({'at': '/\%#',       'char': '*',    'input': '**/<Left><Left>'                        })
-call smartinput#define_rule({'at': '//\%#',      'char': '{',    'input': '{{{<Left><Left><Left><Left><Left>'      })
-call smartinput#define_rule({'at': '//\%#',      'char': '}',    'input': '}}}<Left><Left><Left><Left><Left>'      })
-call smartinput#define_rule({'at': '(\%#)',      'char': '<BS>', 'input': '<Del>'                                  })
-call smartinput#define_rule({'at': '{\%#}',      'char': '<BS>', 'input': '<Del>'                                  })
-call smartinput#define_rule({'at': '\[\%#\]',    'char': '<BS>', 'input': '<Del>'                                  })
-"}}}
 "}}}
 "
 "

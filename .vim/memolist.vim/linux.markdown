@@ -14,16 +14,27 @@ Sender
 ```
 $ pv ./<File> | nc -l 3000
 ```
-receiver
+Receiver
 ```
 $ nc foobar.com 3000 | pv > <File>
+```
+
+## scp
+
+Sender
+```
+$ scp -P <port> <file> <host>:/tmp/
+```
+Receiver
+```
+$ scp -P <port> <host>:/file/to/pasth/<file> /tmp/
 ```
 
 # Grep
 
 file grep
 ```
-find ./ -type d -name ".git" -prune -o -type d -name ".svn" -prune -o -type f -exec grep "keyword" {} /dev/null \;
+find ./ -type d -name ".git" -prune -o -type d -name ".svn" -prune -o -type f -name "*.js" -prune -o -type f -exec grep "keyword" {} /dev/null \;
 ```
 
 # Network

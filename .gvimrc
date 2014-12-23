@@ -16,7 +16,9 @@ set guioptions-=t
 set guioptions-=b
 set winaltkeys=no
 " Color
-autocmd MyAutoCmd ColorScheme * highlight Comment ctermfg=darkgray gui=NONE guifg=darkgray
+autocmd MyAutoCmd ColorScheme * highlight Comment    ctermfg=darkgray gui=NONE guifg=darkgray
+autocmd MyAutoCmd ColorScheme * highlight Folded     ctermfg=darkgray gui=NONE guifg=darkgray
+autocmd MyAutoCmd ColorScheme * highlight StatusLine ctermfg=darkgray gui=NONE guifg=darkgray
 colorscheme jellybeans
 "}}}
 "

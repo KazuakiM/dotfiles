@@ -67,6 +67,9 @@ let g:context_filetype#filetypes = {
 let g:context_filetype#search_offset = 100
 "}}}
 " vim-precious {{{
+augroup precious-indentline
+    autocmd!
+augroup END
 NeoBundle 'osyo-manga/vim-precious'
 let g:precious_enable_switch_CursorMoved = {
 \    '*' : 0,}
@@ -76,6 +79,28 @@ autocmd MyAutoCmd InsertEnter * :PreciousSwitch
 autocmd MyAutoCmd InsertLeave * :PreciousReset
 autocmd precious-indentline User PreciousFileType IndentLinesReset
 "}}}
+" vim-smartinput {{{
+NeoBundle 'kana/vim-smartinput'
+call smartinput#map_to_trigger('i', '*', '*', '*')
+call smartinput#map_to_trigger('i', '!', '!', '!')
+call smartinput#map_to_trigger('i', '=', '=', '=')
+call smartinput#map_to_trigger('i', 'p', 'p', 'p')
+call smartinput#define_rule({'at': '\%#',        'char': '"',    'input': '"',                 'filetype': ['vim'] })
+call smartinput#define_rule({'at': '''\%#''',    'char': '<BS>', 'input': '<Del>'                                  })
+call smartinput#define_rule({'at': '"\%#"',      'char': '<BS>', 'input': '<Del>'                                  })
+call smartinput#define_rule({'at': '`\%#`',      'char': '<BS>', 'input': '<Del>'                                  })
+call smartinput#define_rule({'at': '<\%#',       'char': '!',    'input': '!----><Left><Left><Left>'               })
+call smartinput#define_rule({'at': '<!--\%#-->', 'char': '<BS>', 'input': '<Del><Del><Del>'                        })
+call smartinput#define_rule({'at': '<?\%#',      'char': '=',    'input': '=?><Left><Left>',   'filetype': ['php'] })
+call smartinput#define_rule({'at': '<?=\%#?>',   'char': '<BS>', 'input': '<Del><Del>',        'filetype': ['php'] })
+call smartinput#define_rule({'at': '<?\%#',      'char': 'p',    'input': 'php?><Left><Left>', 'filetype': ['php'] })
+call smartinput#define_rule({'at': '<?php\%#?>', 'char': '<BS>', 'input': '<Del><Del>',        'filetype': ['php'] })
+call smartinput#define_rule({'at': '/\%#',       'char': '*',    'input': '**/<Left><Left>'                        })
+call smartinput#define_rule({'at': '//\%#',      'char': '{',    'input': '{{{<Left><Left><Left><Left><Left>'      })
+call smartinput#define_rule({'at': '//\%#',      'char': '}',    'input': '}}}<Left><Left><Left><Left><Left>'      })
+call smartinput#define_rule({'at': '(\%#)',      'char': '<BS>', 'input': '<Del>'                                  })
+call smartinput#define_rule({'at': '{\%#}',      'char': '<BS>', 'input': '<Del>'                                  })
+call smartinput#define_rule({'at': '\[\%#\]',    'char': '<BS>', 'input': '<Del>'                                  })
 "}}}
 "
 "
