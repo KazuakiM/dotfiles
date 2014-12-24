@@ -443,11 +443,8 @@ nnoremap <Leader>reg :RegexperExecute<Space>
 " wildfire.vim {{{
 NeoBundleLazy 'gcmt/wildfire.vim', {'mappings': '<Plug>(wildfire-fuel)'}
 map <ENTER> <Plug>(wildfire-fuel)
-let s:hooks = neobundle#get_hooks('wildfire.vim')
-function! s:hooks.on_source(bundle)
-    map <BS> <Plug>(wildfire-water)
-    let g: wildfire_objects = {'*': ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it'],'html,xml': ['at', 'it']}
-endfunction
+map <BS> <Plug>(wildfire-water)
+let g:wildfire_objects = {'*': ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it'],'html,xml': ['at', 'it']}
 "}}}
 " neocomplete.vim {{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['SirVer/ultisnips', 'KazuakiM/vim-snippets'], 'insert': 1}
