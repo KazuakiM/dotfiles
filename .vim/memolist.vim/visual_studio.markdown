@@ -17,3 +17,7 @@ Ctrl+k, Ctrl+u
 ```
 Ctrl+Alt+(PageUp or PageDown)
 ```
+行指定ジャンプ
+```
+Ctrl+G
+```
