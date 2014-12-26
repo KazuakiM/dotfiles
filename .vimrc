@@ -82,6 +82,7 @@ nnoremap 0 $
 onoremap 0 $
 nnoremap 1 ^
 onoremap 1 ^
+nnoremap Y y$
 nnoremap gr gT
 nnoremap fa <C-w>+
 nnoremap fs <C-w>-
@@ -120,6 +121,11 @@ set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.p
 set wildmenu
 set wildmode=longest:full,full
 set noequalalways
+set wrap
+set display=lastline
+set pumheight=8
+set showmatch
+set matchtime=1
 " [memo]
 " q:  command history
 " q/  downward search
