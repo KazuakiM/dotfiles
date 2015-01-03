@@ -46,8 +46,7 @@ augroup MyAutoCmd
     autocmd!
 augroup END
 " Variable
-let s:localtime = localtime()
-let s:date      = strftime('%Y%m%d%H%M%S', s:localtime)
+let s:date = strftime('%Y%m%d%H%M%S', localtime())
 " Encode
 set encoding=utf-8
 scriptencoding utf-8
