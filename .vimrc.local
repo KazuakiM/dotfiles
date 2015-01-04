@@ -1,12 +1,10 @@
 "autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*.php setlocal tags=$HOME/.vim/tags/sample.tags {{{
 "}}}
-"autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/app/views/*.php setlocal filetype=html {{{
-"}}}
-"ALL TEST
-" Laravel {{{
+"ALL TEST {{{
+" Laravel
 "autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*.php let g:quickrun_config['php']['exec'] = '%c %o --bootstrap '$HOME/sample/bootstrap/autoload.php' $HOME/sample/app/tests'
 "}}}
-"SINGLE TEST
-" Laravel {{{
+"SINGLE TEST {{{
+" Laravel
 "autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*Test.php let g:quickrun_config['php']['exec'] = '%c %o --bootstrap '$HOME/sample/bootstrap/autoload.php' %s'
 "}}}
