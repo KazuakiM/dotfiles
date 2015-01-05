@@ -46,8 +46,7 @@ augroup MyAutoCmd
     autocmd!
 augroup END
 " Variable
-let s:localtime = localtime()
-let s:date      = strftime('%Y%m%d%H%M%S', s:localtime)
+let s:date = strftime('%Y%m%d%H%M%S', localtime())
 " Encode
 set encoding=utf-8
 scriptencoding utf-8
@@ -90,7 +89,7 @@ nnoremap rq <C-w>>
 nnoremap rw <C-w><
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
-nnoremap <Leader>w :w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null<CR>
+nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null<CR>
 " Paste
 autocmd MyAutoCmd InsertLeave * set nopaste
 nnoremap <silent><expr><Leader>v      ':set<Space>paste<CR><Insert><C-r>+<ESC>'
@@ -110,7 +109,9 @@ autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL',    '\
 autocmd MyAutoCmd ColorScheme * highlight IdeographicSpace cterm=reverse ctermfg=lightred     guibg=lightred
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m5 = matchadd('IdeographicSpace', '　')
 " Update Visual mode target colorScheme.
-autocmd MyAutoCmd ColorScheme * highlight Visual cterm=reverse ctermfg=lightgreen
+autocmd MyAutoCmd ColorScheme * highlight Visual          cterm=reverse   ctermfg=lightgreen
+" yankround.vim
+autocmd MyAutoCmd ColorScheme * highlight YankRoundRegion cterm=underline ctermfg=magenta
 colorscheme jellybeans
 " Show
 set title
@@ -176,9 +177,9 @@ let php_parent_error_close = 1
 " Vim
 nnoremap [vim] <Nop>
 nmap <Leader>f [vim]
-nnoremap [vim]e :tabnew<Space>$MYVIMRC<CR>
-nnoremap [vim]s :source<Space>$MYVIMRC<CR>
-nnoremap [vim]h :source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
+nnoremap [vim]e :<C-u>tabnew<Space>$MYVIMRC<CR>
+nnoremap [vim]s :<C-u>source<Space>$MYVIMRC<CR>
+nnoremap [vim]h :<C-u>source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
 " Autocmd
 autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
@@ -262,11 +263,10 @@ inoremap <silent><C-k> <C-o>:call<space>ref#K("normal")<CR><ESC>
 "}}}
 " vim-tags {{{
 let g:vim_tags_auto_generate = 1
-nnoremap <Leader>tags :TagsGenerate
 nnoremap <Leader>] <C-]>
 nnoremap <Leader>: :<C-u>tab<Space>stj<Space><C-R>=expand('<cword>')<CR><CR>
 nnoremap <Leader>[ <C-o>
-nnoremap <Leader>ts :ts<CR>
+nnoremap <Leader>ts :<C-u>ts<CR>
 " add .vimrc.local
 "}}}
 " qfixgrep {{{
@@ -282,12 +282,11 @@ let g:yankround_dir=$HOME.'/.vim/yankround.vim'
 nmap p <Plug>(yankround-p)
 nmap <C-p> <Plug>(yankround-prev)
 nmap <C-n> <Plug>(yankround-next)
-highlight YankRoundRegion cterm=underline ctermfg=magenta
 let g:yankround_use_region_hl       = 1
 let g:yankround_region_hl_groupname = 'YankRoundRegion'
 "}}}
 " vim-quickrun {{{
-nnoremap <Leader>run :QuickRun<CR>
+nnoremap <Leader>run :<C-u>QuickRun<CR>
 let g:quickrun_config = {
 \    '_': {
 \        'hook/close_buffer/enable_empty_data': 1,
@@ -354,14 +353,15 @@ nnoremap <silent> <SID>[unite]web :<C-u>Unite<Space>webcolorname<CR>
 " jazzradio
 nnoremap <SID>[jazzradio] <Nop>
 nmap <Leader>j <SID>[jazzradio]
-nnoremap <SID>[jazzradio]u :JazzradioUpdateChannels<CR>
-nnoremap <SID>[jazzradio]p :JazzradioPlay<Space>CurrentJazz<CR>
+nnoremap <SID>[jazzradio]u :<C-u>JazzradioUpdateChannels<CR>
+nnoremap <SID>[jazzradio]p :<C-u>JazzradioPlay<Space>CurrentJazz<CR>
+nnoremap <SID>[jazzradio]o :<C-u>JazzradioStop<CR>
 nnoremap <SID>[jazzradio]l :<C-u>Unite<Space>jazzradio<CR>
 " memolist
 nnoremap <SID>[memolist] <Nop>
 nmap <Leader>m <SID>[memolist]
-nnoremap <SID>[memolist]n :MemoNew<CR>
-nnoremap <SID>[memolist]l :MemoList<CR>
+nnoremap <SID>[memolist]n :<C-u>MemoNew<CR>
+nnoremap <SID>[memolist]l :<C-u>MemoList<CR>
 " http://qiita.com/yuku_t/items/9263e6d9105ba972aea8
 function! DispatchUniteFileRecAsyncOrGit()
     if isdirectory(getcwd().'/.git')
@@ -409,7 +409,7 @@ let g:Tlist_Show_One_File    = 1
 let g:Tlist_Exit_OnlyWindow  = 1
 let g:Tlist_WinWidth         = 20
 let g:tlist_php_settings     = 'php;c:class;f:function;d:constant'
-nnoremap <Leader>t :Tlist<CR>
+nnoremap <Leader>t :<C-u>Tlist<CR>
 "}}}
 " nerdtree {{{
 NeoBundleLazy 'scrooloose/nerdtree', {'commands': 'NERDTree'}
@@ -439,12 +439,12 @@ let g:easy_align_delimiters = {
 " SQLUtilities {{{
 NeoBundleLazy 'vim-scripts/SQLUtilities', {'depends': 'vim-scripts/Align', 'commands': 'SQLUFormatter'}
 let g:sqlutil_align_comma = 1
-nnoremap <Leader>sql :SQLUFormatter<CR>
+nnoremap <Leader>sql :<C-u>SQLUFormatter<CR>
 "}}}
 " vim-regexper {{{
 NeoBundleLazy 'KazuakiM/vim-regexper', {'commands': 'RegexperExecute'}
 let g:regexper#AppPath = $HOME.'/.vim/bundle/regexper'
-nnoremap <Leader>reg :RegexperExecute<Space>
+nnoremap <Leader>reg :<C-u>RegexperExecute<Space>
 "}}}
 " wildfire.vim {{{
 NeoBundleLazy 'gcmt/wildfire.vim', {'mappings': '<Plug>(wildfire-fuel)'}
@@ -486,7 +486,7 @@ let s:hooks = neobundle#get_hooks('gundo.vim')
 function! s:hooks.on_source(bundle)
     nnoremap u g-
     nnoremap <C-r> g+
-    nnoremap <Leader>gundo :GundoToggle<CR>
+    nnoremap <Leader>gundo :<C-u>GundoToggle<CR>
 endfunction
 "}}}
 " vim-php-cs-fixer {{{
@@ -525,7 +525,7 @@ NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'markdown'}
 "}}}
 " previm {{{
 NeoBundleLazy 'kannokanno/previm', {'depends': 'open-browser.vim', 'filetypes': 'markdown'}
-nnoremap <silent> <Leader>pre :PrevimOpen<CR>
+nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
 "}}}
 "}}}
 "
@@ -545,7 +545,7 @@ NeoBundleFetch 'KazuakiM/neosnippet-snippets'
 " PHP {{{
 "* URL: https://github.com/ziadoz/awesome-php
 NeoBundleFetch 'ziadoz/awesome-php'
-nnoremap <Leader>awe :tabnew $HOME/.vim/bundle/awesome-php/README.md<CR>
+nnoremap <Leader>awe :<C-u>tabnew $HOME/.vim/bundle/awesome-php/README.md<CR>
 "}}}
 " Regexper {{{
 NeoBundleFetch 'javallone/regexper'
