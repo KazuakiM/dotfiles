@@ -295,7 +295,7 @@ let g:quickrun_config = {
 \        'outputter/buffer/close_on_empty':     1,
 \        'outputter/buffer/split':              ':botright',
 \        'runner':                              'vimproc',
-\        'runner/vimproc/updatetime':           60},
+\        'runner/vimproc/updatetime':           600},
 \    'watchdogs_checker/_': {
 \        'hook/close_quickfix/enable_exit':      1,
 \        'hook/back_window/enable_exit':         0, 'hook/back_window/priority_exit':         1,
@@ -456,28 +456,23 @@ let g:wildfire_objects = {'*': ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it'],'html,
 NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['SirVer/ultisnips', 'KazuakiM/vim-snippets'], 'insert': 1}
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle)
-    let g:acp_enableAtStartup                  = 0
-    let g:neocomplete#data_directory           = $HOME.'/.vim/neocomplete.vim'
-    let g:neocomplete#enable_at_startup        = 1
-    let g:neocomplete#enable_smart_case        = 1
-    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-    let g:neocomplete#same_filetypes           = {
+    let g:acp_enableAtStartup                         = 0
+    let g:neocomplete#data_directory                  = $HOME.'/.vim/neocomplete.vim'
+    let g:neocomplete#enable_at_startup               = 1
+    let g:neocomplete#enable_smart_case               = 1
+    let g:neocomplete#lock_buffer_name_pattern        = '\*ku\*'
+    let g:neocomplete#min_keyword_length              = 4
+    let g:neocomplete#same_filetypes                  = {
     \   'html': 'html,css,javascript,php',}
     let g:neocomplete#sources = {
-    \   '_':    ['file', 'ultisnips', 'buffer', 'dictionary'],
-    \   'vim':  ['file', 'ultisnips', 'buffer', 'dictionary', 'vim'],
-    \   'html': ['file', 'ultisnips', 'buffer', 'dictionary']}
-    let g:neocomplete#sources#dictionary#dictionaries = {
+    \   '_':    ['ultisnips', 'buffer', 'dictionary', 'file'],
+    \   'vim':  ['ultisnips', 'buffer', 'dictionary', 'vim', 'file'],
+    \   'html': ['ultisnips', 'buffer', 'dictionary', 'file']}
+    let g:neocomplete#sources#buffer#cache_limit_size  = 50000
+    let g:neocomplete#sources#buffer#max_keyword_width = 30
+    let g:neocomplete#sources#dictionary#dictionaries  = {
     \   'default':  '',
     \   'php':      $HOME.'/.vim/dict/php.dict'}
-    let g:neocomplete#sources#syntax#min_keyword_length = 3
-    inoremap <expr><C-c> pumvisible() ? "\<C-n>" : "\<C-c>"
-    " tags using.
-    "let g:neocomplete#sources = {
-    "\   '_':    ['file', 'ultisnips', 'buffer', 'dictionary', 'tag'],
-    "\   'vim':  ['file', 'ultisnips', 'buffer', 'dictionary', 'tag', 'vim'],
-    "\   'html': ['file', 'ultisnips', 'buffer', 'dictionary', 'tag']}
-    "let g:neocomplete#sources#tags#cache_limit_size     = 10000000
 endfunction
 "}}}
 " gundo.vim {{{
@@ -611,7 +606,7 @@ function! s:quickrun_pp(q_args)
     let a:dict = {
     \    'type':                      'vim', 'runner':           'vimscript', 'outputter':          'buffer',
     \    'outputter/buffer/filetype': 'vim', 'hook/eval/enable': 1,           'hook/eval/template': 'echo PP(%s)',
-    \    'src':                       a:q_args,}
+    \    'src':                       a:q_args}
     call quickrun#run(a:dict)
 endfunction
 command! -nargs=1 -complete=expression QuickRunPP :call<Space>s:quickrun_pp(<q-args>)
