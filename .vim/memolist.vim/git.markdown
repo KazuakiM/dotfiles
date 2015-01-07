@@ -108,6 +108,10 @@ git show (ハッシュ値)
 ```
 gdiff HEAD^ HEAD
 ```
+過去のコミットと現在のdiff
+```
+gdiff (ハッシュ値) HEAD file1
+```
 マスターリポジトリと現在のリポジトリのdiff
 ```
 gdiff master xxxxx
