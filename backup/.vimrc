@@ -102,6 +102,7 @@ call smartinput#define_rule({'at': '(\%#)',      'char': '<BS>', 'input': '<Del>
 call smartinput#define_rule({'at': '{\%#}',      'char': '<BS>', 'input': '<Del>'                                  })
 call smartinput#define_rule({'at': '\[\%#\]',    'char': '<BS>', 'input': '<Del>'                                  })
 "}}}
+"}}}
 "
 "
 " NeoBundleLazy {{{

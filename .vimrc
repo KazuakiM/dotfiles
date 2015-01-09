@@ -54,7 +54,7 @@ set fileencoding=utf-8
 set fileformat=unix
 " Basic
 let g:mapleader = ','
-set scrolloff=30
+set scrolloff=999
 autocmd MyAutoCmd FileType * set textwidth=0
 autocmd MyAutoCmd FileType * set formatoptions-=cb
 set autoread
@@ -121,6 +121,7 @@ set cmdheight=1
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,.DS_Store,.,..
 set wildmenu
 set wildmode=longest:full,full
+set completeopt=longest,menu
 set noequalalways
 set wrap
 set display=lastline
@@ -167,7 +168,7 @@ vnoremap <C-w> "ay
 vnoremap <C-e> "by
 nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
 " SQL
-let g:sql_type_default='mysql'
+let g:sql_type_default = 'mysql'
 " PHP
 let php_sql_query          = 1
 let php_baselib            = 1
@@ -211,7 +212,6 @@ else
     NeoBundle 'LeafCage/yankround.vim'
     NeoBundle 'thinca/vim-quickrun'
     NeoBundle 'thinca/vim-prettyprint'
-    NeoBundle 'KazuakiM/vim-snippets'
     NeoBundle 'SirVer/ultisnips'
 
     NeoBundleSaveCache
@@ -314,10 +314,12 @@ let g:quickrun_config = {
 \        'outputter/buffer/split':           ':botright 7sp'}}
 "}}}
 " ultisnips {{{
-let g:UltiSnipsJumpForwardTrigger = '<TAB>'
-"let g:UltiSnipsJumpBackwardTrigger=''
-let g:UltiSnipsEditSplit          = 'vertical'
-let g:UltiSnipsSnippetsDir        = $HOME.'/.vim/bundle/vim-snippets/UltiSnips'
+let g:UltiSnipsEditSplit           = 'vertical'
+let g:UltiSnipsExpandTrigger       = '<TAB>'
+let g:UltiSnipsJumpBackwardTrigger = '<S-TAB>'
+let g:UltiSnipsJumpForwardTrigger  = '<TAB>'
+let g:UltiSnipsSnippetsDir         = $HOME.'/.vim/bundle/vim-snippets/UltiSnips'
+let g:UltiSnipsUsePythonVersion    = 2
 "}}}
 "}}}
 "
@@ -452,22 +454,19 @@ map <ENTER> <Plug>(wildfire-fuel)
 map <BS> <Plug>(wildfire-water)
 let g:wildfire_objects = {'*': ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it'],'html,xml': ['at', 'it']}
 "}}}
+" vim-snippets
 " neocomplete.vim {{{
-NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['SirVer/ultisnips', 'KazuakiM/vim-snippets'], 'insert': 1}
+NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': 'KazuakiM/vim-snippets', 'insert': 1}
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle)
-    let g:acp_enableAtStartup                         = 0
-    let g:neocomplete#data_directory                  = $HOME.'/.vim/neocomplete.vim'
-    let g:neocomplete#enable_at_startup               = 1
-    let g:neocomplete#enable_smart_case               = 1
-    let g:neocomplete#lock_buffer_name_pattern        = '\*ku\*'
-    let g:neocomplete#min_keyword_length              = 4
-    let g:neocomplete#same_filetypes                  = {
-    \   'html': 'html,css,javascript,php',}
-    let g:neocomplete#sources = {
-    \   '_':    ['ultisnips', 'buffer', 'dictionary', 'file'],
-    \   'vim':  ['ultisnips', 'buffer', 'dictionary', 'vim', 'file'],
-    \   'html': ['ultisnips', 'buffer', 'dictionary', 'file']}
+    "ultisnips
+    "neocomplete.vim
+    let g:neocomplete#data_directory                   = $HOME.'/.vim/neocomplete.vim'
+    let g:neocomplete#enable_at_startup                = 1
+    let g:neocomplete#enable_smart_case                = 1
+    let g:neocomplete#lock_buffer_name_pattern         = '\*ku\*'
+    let g:neocomplete#min_keyword_length               = 4
+    let g:neocomplete#sources                          = {'_': ['ultisnips', 'dictionary', 'buffer']}
     let g:neocomplete#sources#buffer#cache_limit_size  = 50000
     let g:neocomplete#sources#buffer#max_keyword_width = 30
     let g:neocomplete#sources#dictionary#dictionaries  = {
