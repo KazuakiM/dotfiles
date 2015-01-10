@@ -211,6 +211,7 @@ else
     NeoBundle 'thinca/vim-quickrun'
     NeoBundle 'thinca/vim-prettyprint'
     NeoBundle 'SirVer/ultisnips'
+    NeoBundle 'rhysd/clever-f.vim'
 
     NeoBundleSaveCache
 endif
@@ -318,6 +319,11 @@ let g:UltiSnipsJumpBackwardTrigger = '<S-TAB>'
 let g:UltiSnipsJumpForwardTrigger  = '<TAB>'
 let g:UltiSnipsSnippetsDir         = $HOME.'/.vim/bundle/vim-snippets/UltiSnips'
 let g:UltiSnipsUsePythonVersion    = 2
+"}}}
+" clever-f.vim {{{
+let g:clever_f_across_no_line = 0
+let g:clever_f_smart_case     = 1
+let g:clever_f_use_migemo     = 1
 "}}}
 "}}}
 "
