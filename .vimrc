@@ -323,7 +323,7 @@ let g:UltiSnipsUsePythonVersion    = 2
 " clever-f.vim {{{
 let g:clever_f_across_no_line = 0
 let g:clever_f_smart_case     = 1
-let g:clever_f_use_migemo     = 1
+let g:clever_f_use_migemo     = 0
 "}}}
 "}}}
 "
