@@ -326,19 +326,13 @@ let g:UltiSnipsUsePythonVersion    = 2
 "
 " NeoBundleLazy {{{
 " unite.vim
-" unite-webcolorname
 " unite-help
-" vim-editvar
 " codic-vim
 " unite-codic.vim
-" jazzradio.vim
 " memolist.vim {{{
 NeoBundleLazy 'Shougo/unite.vim',           {'commands': 'Unite'}
-NeoBundleLazy 'pasela/unite-webcolorname',  {'depends': 'Shougo/unite.vim', 'unite_sources': 'webcolorname'}
 NeoBundleLazy 'Shougo/unite-help',          {'depends': 'Shougo/unite.vim', 'unite_sources': 'help'}
-NeoBundleLazy 'thinca/vim-editvar',         {'depends': ['thinca/vim-prettyprint', 'Shougo/unite.vim'], 'unite_sources': 'variable'}
-NeoBundleLazy 'rhysd/unite-codic.vim',      {'depends': ['koron/codic-vim',        'Shougo/unite.vim'], 'unite_sources': 'codic'}
-NeoBundleLazy 'supermomonga/jazzradio.vim', {'unite_sources': 'jazzradio', 'commands': ['JazzradioUpdateChannels', 'JazzradioPlay']}
+NeoBundleLazy 'rhysd/unite-codic.vim',      {'depends': ['koron/codic-vim', 'Shougo/unite.vim'], 'unite_sources': 'codic'}
 NeoBundleLazy 'glidenote/memolist.vim',     {'commands': ['MemoNew', 'MemoList']}
 nnoremap <SID>[unite] <Nop>
 nmap <Leader>u <SID>[unite]
@@ -350,15 +344,6 @@ nnoremap <silent> <SID>[unite]s   :<C-u>Unite<Space>-default-action=ex<Space>out
 " add plugins
 nnoremap <silent> <SID>[unite]dic :<C-u>Unite<Space>codic<CR>
 nnoremap <silent> <SID>[unite]h   :<C-u>Unite<Space>help<CR>
-nnoremap <silent> <SID>[unite]v   :<C-u>Unite<Space>-auto-preview<Space>variable<CR>
-nnoremap <silent> <SID>[unite]web :<C-u>Unite<Space>webcolorname<CR>
-" jazzradio
-nnoremap <SID>[jazzradio] <Nop>
-nmap <Leader>j <SID>[jazzradio]
-nnoremap <SID>[jazzradio]u :<C-u>JazzradioUpdateChannels<CR>
-nnoremap <SID>[jazzradio]p :<C-u>JazzradioPlay<Space>CurrentJazz<CR>
-nnoremap <SID>[jazzradio]o :<C-u>JazzradioStop<CR>
-nnoremap <SID>[jazzradio]l :<C-u>Unite<Space>jazzradio<CR>
 " memolist
 nnoremap <SID>[memolist] <Nop>
 nmap <Leader>m <SID>[memolist]
@@ -380,10 +365,6 @@ function! s:hooks.on_source(bundle)
     let g:unite_source_grep_default_opts   = '--nocolor --nogroup'
     let g:unite_source_grep_recursive_opt  = ''
     let g:unite_source_grep_max_candidates = 200
-endfunction
-let s:hooks = neobundle#get_hooks('jazzradio.vim')
-function! s:hooks.on_source(bundle)
-    let g:jazzradio#cache_dir = $HOME.'/.vim/jazzradio.vim'
 endfunction
 let s:hooks = neobundle#get_hooks('memolist.vim')
 function! s:hooks.on_source(bundle)
@@ -442,11 +423,6 @@ let g:easy_align_delimiters = {
 NeoBundleLazy 'vim-scripts/SQLUtilities', {'depends': 'vim-scripts/Align', 'commands': 'SQLUFormatter'}
 let g:sqlutil_align_comma = 1
 nnoremap <Leader>sql :<C-u>SQLUFormatter<CR>
-"}}}
-" vim-regexper {{{
-NeoBundleLazy 'KazuakiM/vim-regexper', {'commands': 'RegexperExecute'}
-let g:regexper#AppPath = $HOME.'/.vim/bundle/regexper'
-nnoremap <Leader>reg :<C-u>RegexperExecute<Space>
 "}}}
 " wildfire.vim {{{
 NeoBundleLazy 'gcmt/wildfire.vim', {'mappings': '<Plug>(wildfire-fuel)'}
@@ -531,23 +507,11 @@ nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
 " NeoBundleFetch {{{
 "# function memo
 "* New Install 'NeoBundle'. And Update 'NeoBundle' to 'NeoBundleFetch'.
-" ColorScheme {{{
 NeoBundleFetch 'nanotech/jellybeans.vim'
-"}}}
-" Lingr (none-Vimplugin but there is vim-users.jp room.) {{{
 NeoBundleFetch 'psychs/lingr-irc'
-"}}}
-" neosnippet-snippets {{{
 NeoBundleFetch 'KazuakiM/neosnippet-snippets'
-"}}}
-" PHP {{{
-"* URL: https://github.com/ziadoz/awesome-php
 NeoBundleFetch 'ziadoz/awesome-php'
-nnoremap <Leader>awe :<C-u>tabnew $HOME/.vim/bundle/awesome-php/README.md<CR>
-"}}}
-" Regexper {{{
 NeoBundleFetch 'javallone/regexper'
-"}}}
 "}}}
 "
 "

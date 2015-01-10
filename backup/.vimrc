@@ -161,6 +161,33 @@ function! s:hooks.on_source(bundle)
 endfunction
 unlet s:hooks
 "}}}
+" unite-webcolorname {{{
+NeoBundleLazy 'pasela/unite-webcolorname',  {'depends': 'Shougo/unite.vim', 'unite_sources': 'webcolorname'}
+nnoremap <silent> <SID>[unite]web :<C-u>Unite<Space>webcolorname<CR>
+"}}}
+" vim-editvar {{{
+NeoBundleLazy 'thinca/vim-editvar',         {'depends': ['thinca/vim-prettyprint', 'Shougo/unite.vim'], 'unite_sources': 'variable'}
+nnoremap <silent> <SID>[unite]v   :<C-u>Unite<Space>-auto-preview<Space>variable<CR>
+"}}}
+" jazzradio.vim {{{
+NeoBundleLazy 'supermomonga/jazzradio.vim', {'unite_sources': 'jazzradio', 'commands': ['JazzradioUpdateChannels', 'JazzradioPlay']}
+" jazzradio
+nnoremap <SID>[jazzradio] <Nop>
+nmap <Leader>j <SID>[jazzradio]
+nnoremap <SID>[jazzradio]u :<C-u>JazzradioUpdateChannels<CR>
+nnoremap <SID>[jazzradio]p :<C-u>JazzradioPlay<Space>CurrentJazz<CR>
+nnoremap <SID>[jazzradio]o :<C-u>JazzradioStop<CR>
+nnoremap <SID>[jazzradio]l :<C-u>Unite<Space>jazzradio<CR>
+let s:hooks = neobundle#get_hooks('jazzradio.vim')
+function! s:hooks.on_source(bundle)
+    let g:jazzradio#cache_dir = $HOME.'/.vim/jazzradio.vim'
+endfunction
+"}}}
+" vim-regexper {{{
+NeoBundleLazy 'KazuakiM/vim-regexper', {'commands': 'RegexperExecute'}
+let g:regexper#AppPath = $HOME.'/.vim/bundle/regexper'
+nnoremap <Leader>reg :<C-u>RegexperExecute<Space>
+"}}}
 " vimshell.vim {{{
 NeoBundleLazy 'Shougo/vimshell.vim', {
 \    'depends':  'Shougo/vimproc.vim',
