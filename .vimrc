@@ -439,7 +439,7 @@ let g:wildfire_objects = {'*': ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it'],'html,
 NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': 'KazuakiM/vim-snippets', 'insert': 1}
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle)
-    let g:neocomplete#auto_completion_start_length     = 4
+    let g:neocomplete#auto_completion_start_length     = 3
     let g:neocomplete#data_directory                   = $HOME.'/.vim/neocomplete.vim'
     let g:neocomplete#enable_at_startup                = 1
     let g:neocomplete#enable_auto_close_preview        = 3
@@ -448,7 +448,7 @@ function! s:hooks.on_source(bundle)
     let g:neocomplete#lock_buffer_name_pattern         = '\.log\|.*quickrun.*\|.jax'
     let g:neocomplete#max_keyword_width                = 30
     let g:neocomplete#max_list                         = 8
-    let g:neocomplete#min_keyword_length               = 4
+    let g:neocomplete#min_keyword_length               = 3
     let g:neocomplete#sources                          = {'_': ['ultisnips', 'dictionary', 'buffer']}
     let g:neocomplete#sources#buffer#cache_limit_size  = 50000
     let g:neocomplete#sources#buffer#disabled_pattern  = '\.log\|\.jax'
