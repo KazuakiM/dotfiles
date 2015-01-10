@@ -32,7 +32,6 @@ brew install mysql
 brew install nkf
 brew install openssl
 brew install perl518
-brew install php-cs-fixer
 brew install php55
 brew install php55-mcrypt
 brew install php55-xdebug

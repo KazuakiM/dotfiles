@@ -46,6 +46,8 @@ $ ln -sf $HOME/work/dotfiles/.w3m          .w3m
 $ git clone git@github.com:Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
 $ wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp
 $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
+$ wget http://cs.sensiolabs.org/get/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
+$ chmod a+x $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 $ php $HOME/work/src/phpDict.php
 $ vi
  Update from NeoBundleFetch to NeoBundle

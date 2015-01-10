@@ -77,10 +77,8 @@ set viminfo='100,f1,<50,:20,@20,/20,s100,h,n~/.vim/viminfo/.viminfo
 set updatetime=1000
 nnoremap zx :%foldopen<CR>
 set matchpairs+=<:>
-nnoremap 0 $
-onoremap 0 $
-nnoremap 1 ^
-onoremap 1 ^
+noremap 0 $
+noremap 1 ^
 nnoremap Y y$
 nnoremap gr gT
 nnoremap fa <C-w>+
@@ -330,10 +328,10 @@ let g:UltiSnipsUsePythonVersion    = 2
 " codic-vim
 " unite-codic.vim
 " memolist.vim {{{
-NeoBundleLazy 'Shougo/unite.vim',           {'commands': 'Unite'}
-NeoBundleLazy 'Shougo/unite-help',          {'depends': 'Shougo/unite.vim', 'unite_sources': 'help'}
-NeoBundleLazy 'rhysd/unite-codic.vim',      {'depends': ['koron/codic-vim', 'Shougo/unite.vim'], 'unite_sources': 'codic'}
-NeoBundleLazy 'glidenote/memolist.vim',     {'commands': ['MemoNew', 'MemoList']}
+NeoBundleLazy 'Shougo/unite.vim',       { 'commands': 'Unite'}
+NeoBundleLazy 'Shougo/unite-help',      { 'depends':  'Shougo/unite.vim', 'unite_sources':     'help'}
+NeoBundleLazy 'rhysd/unite-codic.vim',  { 'depends':  ['koron/codic-vim', 'Shougo/unite.vim'], 'unite_sources': 'codic'}
+NeoBundleLazy 'glidenote/memolist.vim', { 'commands': ['MemoNew',         'MemoList']}
 nnoremap <SID>[unite] <Nop>
 nmap <Leader>u <SID>[unite]
 " default plugins
@@ -526,9 +524,10 @@ if (s:os_type ==# 'mac')
     let $PERL_DLL   = '/usr/local/Cellar/perl518/5.18.2/lib/5.18.2/darwin-thread-multi-2level/CORE/libperl.dylib'
     let $RUBY_DLL   = '/usr/local/lib/libruby.dylib'
     let $LUA_DLL    = '/usr/local/lib/liblua.dylib'
-    let g:previm_open_cmd  = 'open -a firefox'
-    let g:regexper#OpenCmd = 'open -a firefox'
-    let g:memolist_path    = '$HOME/.vim/memolist.vim'
+    let g:previm_open_cmd   = 'open -a firefox'
+    let g:regexper#OpenCmd  = 'open -a firefox'
+    let g:memolist_path     = '$HOME/.vim/memolist.vim'
+    let g:php_cs_fixer_path = $HOME.'/.vim/vim-php-cs-fixer/php-cs-fixer'
 elseif (s:os_type ==# 'win')
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('C:\temp\backup\'.s:date, 1)
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('C:\temp\undo\'  .s:date, 1)
@@ -536,7 +535,7 @@ elseif (s:os_type ==# 'win')
     let &undodir   = 'C:\temp\undo\'  .s:date
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
     let g:memolist_path     = '/cygwin64/home/kazuakim/.vim/memolist.vim'
-    let g:php_cs_fixer_path = '$HOME/.vim/vim-php-cs-fixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
+    let g:php_cs_fixer_path = $HOME.'/.vim/vim-php-cs-fixer/php-cs-fixer'
 else
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/backup/'.s:date, 1)
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/undo/'  .s:date, 1)
@@ -544,7 +543,7 @@ else
     let &undodir   = '/tmp/undo/'  .s:date
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
     let g:memolist_path     = '$HOME/.vim/memolist.vim'
-    let g:php_cs_fixer_path = '$HOME/.vim/vim-php-cs-fixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
+    let g:php_cs_fixer_path = $HOME.'/.vim/vim-php-cs-fixer/php-cs-fixer'
 endif
 "}}}
 "
