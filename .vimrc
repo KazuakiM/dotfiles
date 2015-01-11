@@ -62,8 +62,6 @@ set hidden
 set ambiwidth=double
 set iminsert=0
 set imsearch=-1
-set spelllang+=cjk
-"set spell
 set backspace=indent,eol,start
 set virtualedit+=block
 set visualbell
@@ -81,12 +79,13 @@ noremap 0 $
 noremap 1 ^
 nnoremap Y y$
 nnoremap gr gT
-nnoremap fa <C-w>+
-nnoremap fs <C-w>-
-nnoremap rq <C-w>>
-nnoremap rw <C-w><
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
+nnoremap gf <C-w>w
+nnoremap gs <C-w>+
+nnoremap gd <C-w>-
+noremap j gj
+noremap k gk
+noremap <Down> <C-f>
+noremap <Up>   <C-b>
 nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null<CR>
 " Paste
 autocmd MyAutoCmd InsertLeave * set nopaste
@@ -95,21 +94,23 @@ inoremap <silent><expr><Leader>v '<ESC>:set<Space>paste<CR><Insert><C-r>+<ESC><I
 " Color
 syntax on
 set t_Co=256
-" Check space and newLineCode.
-autocmd MyAutoCmd ColorScheme * highlight TabString        cterm=reverse ctermfg=darkgray     guibg=darkgray
+" Check space and new line code.
+autocmd MyAutoCmd ColorScheme * highlight TabString        cterm=reverse   ctermfg=darkgray                           guibg=darkgray
+autocmd MyAutoCmd ColorScheme * highlight CrString         cterm=reverse   ctermfg=darkred                            guibg=darkred
+autocmd MyAutoCmd ColorScheme * highlight CrlfString       cterm=reverse   ctermfg=darkmagenta                        guibg=darkmagenta
+autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL    cterm=reverse   ctermfg=lightmagenta                       guibg=lightmagenta
+autocmd MyAutoCmd ColorScheme * highlight IdeographicSpace cterm=reverse   ctermfg=lightred                           guibg=lightred
+autocmd MyAutoCmd ColorScheme * highlight Visual           cterm=reverse   ctermfg=lightgreen
+autocmd MyAutoCmd ColorScheme * highlight YankRoundRegion  cterm=underline ctermfg=magenta
+autocmd MyAutoCmd ColorScheme * highlight SpellBad         cterm=undercurl ctermfg=darkred ctermbg=NONE gui=undercurl guibg=NONE
+autocmd MyAutoCmd ColorScheme * highlight SpellCap         cterm=undercurl ctermfg=blue    ctermbg=NONE gui=undercurl guibg=NONE
+autocmd MyAutoCmd ColorScheme * highlight SpellRare        cterm=undercurl ctermbg=blue    ctermbg=NONE gui=undercurl guibg=NONE
+autocmd MyAutoCmd ColorScheme * highlight SpellLocal       cterm=undercurl ctermbg=blue    ctermbg=NONE gui=undercurl guibg=NONE
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',        "\t")
-autocmd MyAutoCmd ColorScheme * highlight CrString         cterm=reverse ctermfg=darkred      guibg=darkred
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',         "\r")
-autocmd MyAutoCmd ColorScheme * highlight CrlfString       cterm=reverse ctermfg=darkmagenta  guibg=darkmagenta
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',       "\r\n")
-autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL    cterm=reverse ctermfg=lightmagenta guibg=lightmagenta
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL',    '\s\+$')
-autocmd MyAutoCmd ColorScheme * highlight IdeographicSpace cterm=reverse ctermfg=lightred     guibg=lightred
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m5 = matchadd('IdeographicSpace', '　')
-" Update Visual mode target colorScheme.
-autocmd MyAutoCmd ColorScheme * highlight Visual          cterm=reverse   ctermfg=lightgreen
-" yankround.vim
-autocmd MyAutoCmd ColorScheme * highlight YankRoundRegion cterm=underline ctermfg=magenta
 colorscheme jellybeans
 " Show
 set title
@@ -453,9 +454,7 @@ function! s:hooks.on_source(bundle)
     let g:neocomplete#sources#buffer#cache_limit_size  = 50000
     let g:neocomplete#sources#buffer#disabled_pattern  = '\.log\|\.jax'
     let g:neocomplete#sources#buffer#max_keyword_width = 30
-    let g:neocomplete#sources#dictionary#dictionaries  = {
-    \   'default':  '',
-    \   'php':      $HOME.'/.vim/dict/php.dict'}
+    let g:neocomplete#sources#dictionary#dictionaries  = {'_': '', 'php': $HOME.'/.vim/dict/php.dict'}
 endfunction
 "}}}
 " gundo.vim {{{
@@ -471,13 +470,13 @@ endfunction
 NeoBundleLazy 'stephpy/vim-php-cs-fixer', {'filetypes': 'php'}
 let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
 function! s:hooks.on_source(bundle)
-    let g:php_cs_fixer_level                  = 'all'     " which level ?
-    let g:php_cs_fixer_config                 = 'default' " configuration
-    let g:php_cs_fixer_php_path               = 'php'     " Path to PHP
-    let g:php_cs_fixer_enable_default_mapping = 1         " Enable the mapping by default (<leader>pcd)
-    let g:php_cs_fixer_dry_run                = 0         " Call command with dry-run option
-    let g:php_cs_fixer_verbose                = 0         " Return the output of command if 1, else an inline information.
+    let g:php_cs_fixer_config                 = 'default'
+    let g:php_cs_fixer_dry_run                = 0
     let g:php_cs_fixer_enable_default_mapping = 0
+    let g:php_cs_fixer_level                  = 'all'
+    let g:php_cs_fixer_path                   = $HOME.'/.vim/vim-php-cs-fixer/php-cs-fixer'
+    let g:php_cs_fixer_php_path               = 'php'
+    let g:php_cs_fixer_verbose                = 0
     nnoremap <Leader>php :call<Space>PhpCsFixerFixFile()<CR>
 endfunction
 "}}}
@@ -525,31 +524,25 @@ if (s:os_type ==# 'mac')
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/undo/'  .s:date, 1)
     let &backupdir = '/tmp/backup/'.s:date
     let &undodir   = '/tmp/undo/'  .s:date
-    let $PYTHON_DLL = '/usr/local/Cellar/python/2.7.8_2/Frameworks/Python.framework/Versions/Current/lib/libpython2.7.dylib'
-    "let $PYTHON3_DLL = '/usr/local/Cellar/python3/3.4.2_1/Frameworks/Python.framework/Versions/3.4/lib/libpython3.4.dylib'
-    let $PERL_DLL   = '/usr/local/Cellar/perl518/5.18.2/lib/5.18.2/darwin-thread-multi-2level/CORE/libperl.dylib'
-    let $RUBY_DLL   = '/usr/local/lib/libruby.dylib'
-    let $LUA_DLL    = '/usr/local/lib/liblua.dylib'
-    let g:previm_open_cmd   = 'open -a firefox'
-    let g:regexper#OpenCmd  = 'open -a firefox'
-    let g:memolist_path     = '$HOME/.vim/memolist.vim'
-    let g:php_cs_fixer_path = $HOME.'/.vim/vim-php-cs-fixer/php-cs-fixer'
+    set spelllang+=cjk
+    set spell
+    let g:previm_open_cmd  = 'open -a firefox'
+    let g:regexper#OpenCmd = 'open -a firefox'
+    let g:memolist_path    = $HOME.'/.vim/memolist.vim'
 elseif (s:os_type ==# 'win')
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('C:\temp\backup\'.s:date, 1)
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('C:\temp\undo\'  .s:date, 1)
     let &backupdir = 'C:\temp\backup\'.s:date
     let &undodir   = 'C:\temp\undo\'  .s:date
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-    let g:memolist_path     = '/cygwin64/home/kazuakim/.vim/memolist.vim'
-    let g:php_cs_fixer_path = $HOME.'/.vim/vim-php-cs-fixer/php-cs-fixer'
+    let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
 else
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/backup/'.s:date, 1)
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/undo/'  .s:date, 1)
     let &backupdir = '/tmp/backup/'.s:date
     let &undodir   = '/tmp/undo/'  .s:date
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-    let g:memolist_path     = '$HOME/.vim/memolist.vim'
-    let g:php_cs_fixer_path = $HOME.'/.vim/vim-php-cs-fixer/php-cs-fixer'
+    let g:memolist_path = $HOME.'/.vim/memolist.vim'
 endif
 "}}}
 "
@@ -583,7 +576,7 @@ function! s:quickrun_pp(q_args)
 endfunction
 command! -nargs=1 -complete=expression QuickRunPP :call<Space>s:quickrun_pp(<q-args>)
 "}}}
-" Auto DirectoryMake {{{
+" auto make directory {{{
 function! s:auto_mkdir(dir, force)
     if !isdirectory(a:dir) && (a:force || input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
         call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
