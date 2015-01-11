@@ -39,6 +39,7 @@ $ ln -sf $HOME/work/dotfiles/.gvimrc       .gvimrc
 $ ln -sf $HOME/work/dotfiles/.htoprc       .htoprc
 $ ln -sf $HOME/work/dotfiles/.mplayer      .mplayer
 $ cp $HOME/work/dotfiles/.netrc.org        .netrc
+$ ln -sf $HOME/work/dotfiles/.tmux.conf    .tmux.conf
 $ ln -sf $HOME/work/dotfiles/.vim          .vim
 $ ln -sf $HOME/work/dotfiles/.vimrc        .vimrc
 $ cp $HOME/work/dotfiles/.vimrc.local .
@@ -108,7 +109,7 @@ $ sudo yum install \
     openssl openssl-devel \
     perl perl-core perl-devel php php-devel pv python python-devel \
     ruby ruby-devel \
-    the_silver_searcher tree \
+    the_silver_searcher tmux tree \
     wget
 ```
 Git
@@ -197,6 +198,7 @@ $ ln -sf $HOME/work/dotfiles/.gvimrc       .gvimrc
 $ ln -sf $HOME/work/dotfiles/.htoprc       .config/htop/htoprc
 $ ln -sf $HOME/work/dotfiles/.mplayer      .mplayer
 $ cp $HOME/work/dotfiles/.netrc.org        .netrc
+$ ln -sf $HOME/work/dotfiles/.tmux.conf    .tmux.conf
 $ ln -sf $HOME/work/dotfiles/.vim          .vim
 $ ln -sf $HOME/work/dotfiles/.vimrc        .vimrc
 $ cp $HOME/work/dotfiles/.vimrc.local .
