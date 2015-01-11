@@ -73,7 +73,7 @@ set foldmethod=marker
 "set foldopen-=search
 set viminfo='100,f1,<50,:20,@20,/20,s100,h,n~/.vim/viminfo/.viminfo
 set updatetime=1000
-nnoremap zx :%foldopen<CR>
+nnoremap zx :foldopen<CR>
 set matchpairs+=<:>
 noremap 0 $
 noremap 1 ^
@@ -524,8 +524,6 @@ if (s:os_type ==# 'mac')
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/undo/'  .s:date, 1)
     let &backupdir = '/tmp/backup/'.s:date
     let &undodir   = '/tmp/undo/'  .s:date
-    set spelllang+=cjk
-    set spell
     let g:previm_open_cmd  = 'open -a firefox'
     let g:regexper#OpenCmd = 'open -a firefox'
     let g:memolist_path    = $HOME.'/.vim/memolist.vim'
