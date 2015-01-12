@@ -79,7 +79,16 @@ Check service status list
 ```
 service --status-all
 ```
-Check audo start service list
+Check auto start service list
 ```
 chkconfig --list
 ```
+
+# File compress/decompress
+
+| 拡張子       | 圧縮                                  | 解凍                                                   |
+| :------------| :------------------------------------ | :----------------------------------------------------- |
+|.bz2          | $ bzip2 file1                         | $ bzip2 -dc  archive.bz2<br />$ bunzip2 -c archive.bz2 |
+|.gz           | $ gzip     file1                      | $ gunzip     archive.tar.gz                            |
+|.tgz, .tar.gz | $ tar zcvf archive.tar.gz file1 file2 | $ tar zxvf   archive.tar.gz                            |
+|.zip          | $ zip -r   archive.zip    file1 file2 | $ unzip      archive.tar.gz                            |

@@ -54,7 +54,7 @@ set fileencoding=utf-8
 set fileformat=unix
 " Basic
 let g:mapleader = ','
-set scrolloff=30
+set scrolloff=999
 autocmd MyAutoCmd FileType * set textwidth=0
 autocmd MyAutoCmd FileType * set formatoptions-=cb
 set autoread
@@ -62,8 +62,6 @@ set hidden
 set ambiwidth=double
 set iminsert=0
 set imsearch=-1
-set spelllang+=cjk
-"set spell
 set backspace=indent,eol,start
 set virtualedit+=block
 set visualbell
@@ -75,20 +73,19 @@ set foldmethod=marker
 "set foldopen-=search
 set viminfo='100,f1,<50,:20,@20,/20,s100,h,n~/.vim/viminfo/.viminfo
 set updatetime=1000
-nnoremap zx :%foldopen<CR>
+nnoremap zx :foldopen<CR>
 set matchpairs+=<:>
-nnoremap 0 $
-onoremap 0 $
-nnoremap 1 ^
-onoremap 1 ^
+noremap 0 $
+noremap 1 ^
 nnoremap Y y$
 nnoremap gr gT
-nnoremap fa <C-w>+
-nnoremap fs <C-w>-
-nnoremap rq <C-w>>
-nnoremap rw <C-w><
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
+nnoremap gf <C-w>w
+nnoremap gs <C-w>+
+nnoremap gd <C-w>-
+noremap j gj
+noremap k gk
+noremap <Down> <C-f>
+noremap <Up>   <C-b>
 nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null<CR>
 " Paste
 autocmd MyAutoCmd InsertLeave * set nopaste
@@ -97,21 +94,23 @@ inoremap <silent><expr><Leader>v '<ESC>:set<Space>paste<CR><Insert><C-r>+<ESC><I
 " Color
 syntax on
 set t_Co=256
-" Check space and newLineCode.
-autocmd MyAutoCmd ColorScheme * highlight TabString        cterm=reverse ctermfg=darkgray     guibg=darkgray
+" Check space and new line code.
+autocmd MyAutoCmd ColorScheme * highlight TabString        cterm=reverse   ctermfg=darkgray                           guibg=darkgray
+autocmd MyAutoCmd ColorScheme * highlight CrString         cterm=reverse   ctermfg=darkred                            guibg=darkred
+autocmd MyAutoCmd ColorScheme * highlight CrlfString       cterm=reverse   ctermfg=darkmagenta                        guibg=darkmagenta
+autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL    cterm=reverse   ctermfg=lightmagenta                       guibg=lightmagenta
+autocmd MyAutoCmd ColorScheme * highlight IdeographicSpace cterm=reverse   ctermfg=lightred                           guibg=lightred
+autocmd MyAutoCmd ColorScheme * highlight Visual           cterm=reverse   ctermfg=lightgreen
+autocmd MyAutoCmd ColorScheme * highlight YankRoundRegion  cterm=underline ctermfg=magenta
+autocmd MyAutoCmd ColorScheme * highlight SpellBad         cterm=undercurl ctermfg=darkred ctermbg=NONE gui=undercurl guibg=NONE
+autocmd MyAutoCmd ColorScheme * highlight SpellCap         cterm=undercurl ctermfg=blue    ctermbg=NONE gui=undercurl guibg=NONE
+autocmd MyAutoCmd ColorScheme * highlight SpellRare        cterm=undercurl ctermbg=blue    ctermbg=NONE gui=undercurl guibg=NONE
+autocmd MyAutoCmd ColorScheme * highlight SpellLocal       cterm=undercurl ctermbg=blue    ctermbg=NONE gui=undercurl guibg=NONE
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',        "\t")
-autocmd MyAutoCmd ColorScheme * highlight CrString         cterm=reverse ctermfg=darkred      guibg=darkred
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',         "\r")
-autocmd MyAutoCmd ColorScheme * highlight CrlfString       cterm=reverse ctermfg=darkmagenta  guibg=darkmagenta
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',       "\r\n")
-autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL    cterm=reverse ctermfg=lightmagenta guibg=lightmagenta
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL',    '\s\+$')
-autocmd MyAutoCmd ColorScheme * highlight IdeographicSpace cterm=reverse ctermfg=lightred     guibg=lightred
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m5 = matchadd('IdeographicSpace', '　')
-" Update Visual mode target colorScheme.
-autocmd MyAutoCmd ColorScheme * highlight Visual          cterm=reverse   ctermfg=lightgreen
-" yankround.vim
-autocmd MyAutoCmd ColorScheme * highlight YankRoundRegion cterm=underline ctermfg=magenta
 colorscheme jellybeans
 " Show
 set title
@@ -121,6 +120,7 @@ set cmdheight=1
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,.DS_Store,.,..
 set wildmenu
 set wildmode=longest:full,full
+set completeopt=longest,menu
 set noequalalways
 set wrap
 set display=lastline
@@ -167,7 +167,7 @@ vnoremap <C-w> "ay
 vnoremap <C-e> "by
 nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
 " SQL
-let g:sql_type_default='mysql'
+let g:sql_type_default = 'mysql'
 " PHP
 let php_sql_query          = 1
 let php_baselib            = 1
@@ -211,8 +211,8 @@ else
     NeoBundle 'LeafCage/yankround.vim'
     NeoBundle 'thinca/vim-quickrun'
     NeoBundle 'thinca/vim-prettyprint'
-    NeoBundle 'KazuakiM/vim-snippets'
     NeoBundle 'SirVer/ultisnips'
+    NeoBundle 'rhysd/clever-f.vim'
 
     NeoBundleSaveCache
 endif
@@ -295,7 +295,7 @@ let g:quickrun_config = {
 \        'outputter/buffer/close_on_empty':     1,
 \        'outputter/buffer/split':              ':botright',
 \        'runner':                              'vimproc',
-\        'runner/vimproc/updatetime':           60},
+\        'runner/vimproc/updatetime':           600},
 \    'watchdogs_checker/_': {
 \        'hook/close_quickfix/enable_exit':      1,
 \        'hook/back_window/enable_exit':         0, 'hook/back_window/priority_exit':         1,
@@ -314,30 +314,31 @@ let g:quickrun_config = {
 \        'outputter/buffer/split':           ':botright 7sp'}}
 "}}}
 " ultisnips {{{
-let g:UltiSnipsJumpForwardTrigger = '<TAB>'
-"let g:UltiSnipsJumpBackwardTrigger=''
-let g:UltiSnipsEditSplit          = 'vertical'
-let g:UltiSnipsSnippetsDir        = $HOME.'/.vim/bundle/vim-snippets/UltiSnips'
+let g:UltiSnipsEditSplit           = 'vertical'
+let g:UltiSnipsExpandTrigger       = '<TAB>'
+let g:UltiSnipsJumpBackwardTrigger = '<S-TAB>'
+let g:UltiSnipsJumpForwardTrigger  = '<TAB>'
+let g:UltiSnipsSnippetsDir         = $HOME.'/.vim/bundle/vim-snippets/UltiSnips'
+let g:UltiSnipsUsePythonVersion    = 2
+"}}}
+" clever-f.vim {{{
+let g:clever_f_across_no_line = 0
+let g:clever_f_smart_case     = 1
+let g:clever_f_use_migemo     = 0
 "}}}
 "}}}
 "
 "
 " NeoBundleLazy {{{
 " unite.vim
-" unite-webcolorname
 " unite-help
-" vim-editvar
 " codic-vim
 " unite-codic.vim
-" jazzradio.vim
 " memolist.vim {{{
-NeoBundleLazy 'Shougo/unite.vim',           {'commands': 'Unite'}
-NeoBundleLazy 'pasela/unite-webcolorname',  {'depends': 'Shougo/unite.vim', 'unite_sources': 'webcolorname'}
-NeoBundleLazy 'Shougo/unite-help',          {'depends': 'Shougo/unite.vim', 'unite_sources': 'help'}
-NeoBundleLazy 'thinca/vim-editvar',         {'depends': ['thinca/vim-prettyprint', 'Shougo/unite.vim'], 'unite_sources': 'variable'}
-NeoBundleLazy 'rhysd/unite-codic.vim',      {'depends': ['koron/codic-vim',        'Shougo/unite.vim'], 'unite_sources': 'codic'}
-NeoBundleLazy 'supermomonga/jazzradio.vim', {'unite_sources': 'jazzradio', 'commands': ['JazzradioUpdateChannels', 'JazzradioPlay']}
-NeoBundleLazy 'glidenote/memolist.vim',     {'commands': ['MemoNew', 'MemoList']}
+NeoBundleLazy 'Shougo/unite.vim',       { 'commands': 'Unite'}
+NeoBundleLazy 'Shougo/unite-help',      { 'depends':  'Shougo/unite.vim', 'unite_sources':     'help'}
+NeoBundleLazy 'rhysd/unite-codic.vim',  { 'depends':  ['koron/codic-vim', 'Shougo/unite.vim'], 'unite_sources': 'codic'}
+NeoBundleLazy 'glidenote/memolist.vim', { 'commands': ['MemoNew',         'MemoList']}
 nnoremap <SID>[unite] <Nop>
 nmap <Leader>u <SID>[unite]
 " default plugins
@@ -348,15 +349,6 @@ nnoremap <silent> <SID>[unite]s   :<C-u>Unite<Space>-default-action=ex<Space>out
 " add plugins
 nnoremap <silent> <SID>[unite]dic :<C-u>Unite<Space>codic<CR>
 nnoremap <silent> <SID>[unite]h   :<C-u>Unite<Space>help<CR>
-nnoremap <silent> <SID>[unite]v   :<C-u>Unite<Space>-auto-preview<Space>variable<CR>
-nnoremap <silent> <SID>[unite]web :<C-u>Unite<Space>webcolorname<CR>
-" jazzradio
-nnoremap <SID>[jazzradio] <Nop>
-nmap <Leader>j <SID>[jazzradio]
-nnoremap <SID>[jazzradio]u :<C-u>JazzradioUpdateChannels<CR>
-nnoremap <SID>[jazzradio]p :<C-u>JazzradioPlay<Space>CurrentJazz<CR>
-nnoremap <SID>[jazzradio]o :<C-u>JazzradioStop<CR>
-nnoremap <SID>[jazzradio]l :<C-u>Unite<Space>jazzradio<CR>
 " memolist
 nnoremap <SID>[memolist] <Nop>
 nmap <Leader>m <SID>[memolist]
@@ -378,10 +370,6 @@ function! s:hooks.on_source(bundle)
     let g:unite_source_grep_default_opts   = '--nocolor --nogroup'
     let g:unite_source_grep_recursive_opt  = ''
     let g:unite_source_grep_max_candidates = 200
-endfunction
-let s:hooks = neobundle#get_hooks('jazzradio.vim')
-function! s:hooks.on_source(bundle)
-    let g:jazzradio#cache_dir = $HOME.'/.vim/jazzradio.vim'
 endfunction
 let s:hooks = neobundle#get_hooks('memolist.vim')
 function! s:hooks.on_source(bundle)
@@ -441,43 +429,32 @@ NeoBundleLazy 'vim-scripts/SQLUtilities', {'depends': 'vim-scripts/Align', 'comm
 let g:sqlutil_align_comma = 1
 nnoremap <Leader>sql :<C-u>SQLUFormatter<CR>
 "}}}
-" vim-regexper {{{
-NeoBundleLazy 'KazuakiM/vim-regexper', {'commands': 'RegexperExecute'}
-let g:regexper#AppPath = $HOME.'/.vim/bundle/regexper'
-nnoremap <Leader>reg :<C-u>RegexperExecute<Space>
-"}}}
 " wildfire.vim {{{
 NeoBundleLazy 'gcmt/wildfire.vim', {'mappings': '<Plug>(wildfire-fuel)'}
 map <ENTER> <Plug>(wildfire-fuel)
 map <BS> <Plug>(wildfire-water)
 let g:wildfire_objects = {'*': ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it'],'html,xml': ['at', 'it']}
 "}}}
+" vim-snippets
 " neocomplete.vim {{{
-NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['SirVer/ultisnips', 'KazuakiM/vim-snippets'], 'insert': 1}
+NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': 'KazuakiM/vim-snippets', 'insert': 1}
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle)
-    let g:acp_enableAtStartup                  = 0
-    let g:neocomplete#data_directory           = $HOME.'/.vim/neocomplete.vim'
-    let g:neocomplete#enable_at_startup        = 1
-    let g:neocomplete#enable_smart_case        = 1
-    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-    let g:neocomplete#same_filetypes           = {
-    \   'html': 'html,css,javascript,php',}
-    let g:neocomplete#sources = {
-    \   '_':    ['file', 'ultisnips', 'buffer', 'dictionary'],
-    \   'vim':  ['file', 'ultisnips', 'buffer', 'dictionary', 'vim'],
-    \   'html': ['file', 'ultisnips', 'buffer', 'dictionary']}
-    let g:neocomplete#sources#dictionary#dictionaries = {
-    \   'default':  '',
-    \   'php':      $HOME.'/.vim/dict/php.dict'}
-    let g:neocomplete#sources#syntax#min_keyword_length = 3
-    inoremap <expr><C-c> pumvisible() ? "\<C-n>" : "\<C-c>"
-    " tags using.
-    "let g:neocomplete#sources = {
-    "\   '_':    ['file', 'ultisnips', 'buffer', 'dictionary', 'tag'],
-    "\   'vim':  ['file', 'ultisnips', 'buffer', 'dictionary', 'tag', 'vim'],
-    "\   'html': ['file', 'ultisnips', 'buffer', 'dictionary', 'tag']}
-    "let g:neocomplete#sources#tags#cache_limit_size     = 10000000
+    let g:neocomplete#auto_completion_start_length     = 3
+    let g:neocomplete#data_directory                   = $HOME.'/.vim/neocomplete.vim'
+    let g:neocomplete#enable_at_startup                = 1
+    let g:neocomplete#enable_auto_close_preview        = 3
+    let g:neocomplete#enable_smart_case                = 1
+    let g:neocomplete#keyword_patterns                 = {'_': '\h\w*'}
+    let g:neocomplete#lock_buffer_name_pattern         = '\.log\|.*quickrun.*\|.jax'
+    let g:neocomplete#max_keyword_width                = 30
+    let g:neocomplete#max_list                         = 8
+    let g:neocomplete#min_keyword_length               = 3
+    let g:neocomplete#sources                          = {'_': ['ultisnips', 'dictionary', 'buffer']}
+    let g:neocomplete#sources#buffer#cache_limit_size  = 50000
+    let g:neocomplete#sources#buffer#disabled_pattern  = '\.log\|\.jax'
+    let g:neocomplete#sources#buffer#max_keyword_width = 30
+    let g:neocomplete#sources#dictionary#dictionaries  = {'_': '', 'php': $HOME.'/.vim/dict/php.dict'}
 endfunction
 "}}}
 " gundo.vim {{{
@@ -493,13 +470,13 @@ endfunction
 NeoBundleLazy 'stephpy/vim-php-cs-fixer', {'filetypes': 'php'}
 let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
 function! s:hooks.on_source(bundle)
-    let g:php_cs_fixer_level                  = 'all'     " which level ?
-    let g:php_cs_fixer_config                 = 'default' " configuration
-    let g:php_cs_fixer_php_path               = 'php'     " Path to PHP
-    let g:php_cs_fixer_enable_default_mapping = 1         " Enable the mapping by default (<leader>pcd)
-    let g:php_cs_fixer_dry_run                = 0         " Call command with dry-run option
-    let g:php_cs_fixer_verbose                = 0         " Return the output of command if 1, else an inline information.
+    let g:php_cs_fixer_config                 = 'default'
+    let g:php_cs_fixer_dry_run                = 0
     let g:php_cs_fixer_enable_default_mapping = 0
+    let g:php_cs_fixer_level                  = 'all'
+    let g:php_cs_fixer_path                   = $HOME.'/.vim/vim-php-cs-fixer/php-cs-fixer'
+    let g:php_cs_fixer_php_path               = 'php'
+    let g:php_cs_fixer_verbose                = 0
     nnoremap <Leader>php :call<Space>PhpCsFixerFixFile()<CR>
 endfunction
 "}}}
@@ -533,23 +510,11 @@ nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
 " NeoBundleFetch {{{
 "# function memo
 "* New Install 'NeoBundle'. And Update 'NeoBundle' to 'NeoBundleFetch'.
-" ColorScheme {{{
 NeoBundleFetch 'nanotech/jellybeans.vim'
-"}}}
-" Lingr (none-Vimplugin but there is vim-users.jp room.) {{{
 NeoBundleFetch 'psychs/lingr-irc'
-"}}}
-" neosnippet-snippets {{{
 NeoBundleFetch 'KazuakiM/neosnippet-snippets'
-"}}}
-" PHP {{{
-"* URL: https://github.com/ziadoz/awesome-php
 NeoBundleFetch 'ziadoz/awesome-php'
-nnoremap <Leader>awe :<C-u>tabnew $HOME/.vim/bundle/awesome-php/README.md<CR>
-"}}}
-" Regexper {{{
 NeoBundleFetch 'javallone/regexper'
-"}}}
 "}}}
 "
 "
@@ -559,30 +524,23 @@ if (s:os_type ==# 'mac')
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/undo/'  .s:date, 1)
     let &backupdir = '/tmp/backup/'.s:date
     let &undodir   = '/tmp/undo/'  .s:date
-    let $PYTHON_DLL = '/usr/local/Cellar/python/2.7.8_2/Frameworks/Python.framework/Versions/Current/lib/libpython2.7.dylib'
-    "let $PYTHON3_DLL = '/usr/local/Cellar/python3/3.4.2_1/Frameworks/Python.framework/Versions/3.4/lib/libpython3.4.dylib'
-    let $PERL_DLL   = '/usr/local/Cellar/perl518/5.18.2/lib/5.18.2/darwin-thread-multi-2level/CORE/libperl.dylib'
-    let $RUBY_DLL   = '/usr/local/lib/libruby.dylib'
-    let $LUA_DLL    = '/usr/local/lib/liblua.dylib'
     let g:previm_open_cmd  = 'open -a firefox'
     let g:regexper#OpenCmd = 'open -a firefox'
-    let g:memolist_path    = '$HOME/.vim/memolist.vim'
+    let g:memolist_path    = $HOME.'/.vim/memolist.vim'
 elseif (s:os_type ==# 'win')
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('C:\temp\backup\'.s:date, 1)
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('C:\temp\undo\'  .s:date, 1)
     let &backupdir = 'C:\temp\backup\'.s:date
     let &undodir   = 'C:\temp\undo\'  .s:date
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-    let g:memolist_path     = '/cygwin64/home/kazuakim/.vim/memolist.vim'
-    let g:php_cs_fixer_path = '$HOME/.vim/vim-php-cs-fixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
+    let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
 else
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/backup/'.s:date, 1)
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/undo/'  .s:date, 1)
     let &backupdir = '/tmp/backup/'.s:date
     let &undodir   = '/tmp/undo/'  .s:date
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-    let g:memolist_path     = '$HOME/.vim/memolist.vim'
-    let g:php_cs_fixer_path = '$HOME/.vim/vim-php-cs-fixer/php-cs-fixer' " define the path to the php-cs-fixer.phar
+    let g:memolist_path = $HOME.'/.vim/memolist.vim'
 endif
 "}}}
 "
@@ -611,12 +569,12 @@ function! s:quickrun_pp(q_args)
     let a:dict = {
     \    'type':                      'vim', 'runner':           'vimscript', 'outputter':          'buffer',
     \    'outputter/buffer/filetype': 'vim', 'hook/eval/enable': 1,           'hook/eval/template': 'echo PP(%s)',
-    \    'src':                       a:q_args,}
+    \    'src':                       a:q_args}
     call quickrun#run(a:dict)
 endfunction
 command! -nargs=1 -complete=expression QuickRunPP :call<Space>s:quickrun_pp(<q-args>)
 "}}}
-" Auto DirectoryMake {{{
+" auto make directory {{{
 function! s:auto_mkdir(dir, force)
     if !isdirectory(a:dir) && (a:force || input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
         call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')

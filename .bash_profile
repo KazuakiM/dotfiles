@@ -1,5 +1,5 @@
 # .bash_profile
-# Get the aliases and functions
+# Get the aliases and functions {{{
 if [ -f ~/.bash_profile.win ]; then
     . ~/.bash_profile.win
 elif [ -f ~/.bash_profile.local ]; then
@@ -8,7 +8,7 @@ fi
 if [ -f ~/.bashrc ]; then
     . ~/.bashrc
 fi
-
+#}}}
 #User specific environment and startup programs {{{
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
 export LANG=ja_JP.UTF-8
@@ -79,6 +79,14 @@ ps1EndNormal=${lc}0m
 export PS1="${ps1StartCyan}\]\h \$ ${ps1EndNormal}\]"
 export MYSQL_PS1="\d @\h \n> "
 #export MYSQL_PS1="\d @\h[\u] \n> "
+#}}}
+#tmux {{{
+if type tmux >/dev/null 2>&1; then
+    alias tm='tmux'
+    alias tma0='tmux attach -t 0'
+    alias tma1='tmux attach -t 1'
+    alias tma2='tmux attach -t 2'
+fi
 #}}}
 #OS Type {{{
 case "${OSTYPE}" in
