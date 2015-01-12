@@ -34,54 +34,54 @@ $ scp -P <port> <host>:/file/to/pasth/<file> /tmp/
 
 file grep
 ```
-find ./ -type d -name ".git" -prune -o -type d -name ".svn" -prune -o -type f -name "*.js" -prune -o -type f -exec grep "keyword" {} /dev/null \;
+$ find ./ -type d -name ".git" -prune -o -type d -name ".svn" -prune -o -type f -name "*.js" -prune -o -type f -exec grep --color -I -n "keyword" {} /dev/null \;
 ```
 
 # Network
 
 All network interface
 ```
-ifconfig -a
+$ ifconfig -a
 ```
 5 request
 ```
-ping -d -c 5 <host>
+$ ping -d -c 5 <host>
 ```
 Trace route
 ```
-traceroute -d -p <port> <host>
+$ traceroute -d -p <port> <host>
 ```
 Tcpdump
 ```
-tcpdump -s0 -A -w /tmp/tcpdump_%Y%m%d_%H%M.cap port <port> host <host>
-tcpdump -s0 -A -w /tmp/tcpdump_%Y%m%d_%H%M.cap port <port> dst host <host>
-tcpdump -s0 -A -w /tmp/tcpdump_%Y%m%d_%H%M.cap port <port> src host <host>
+$ tcpdump -s0 -A -w /tmp/tcpdump_%Y%m%d_%H%M.cap port <port> host <host>
+$ tcpdump -s0 -A -w /tmp/tcpdump_%Y%m%d_%H%M.cap port <port> dst host <host>
+$ tcpdump -s0 -A -w /tmp/tcpdump_%Y%m%d_%H%M.cap port <port> src host <host>
 ```
 
 # File size
 
 disc file system size
 ```
-df -h
+$ df -h
 ```
 directory size
 ```
-du -sh *
+$ du -sh *
 ```
 file size under directory
 ```
-find ./ -ls
+$ find ./ -ls
 ```
 
 # Service
 
 Check service status list
 ```
-service --status-all
+$ service --status-all
 ```
 Check auto start service list
 ```
-chkconfig --list
+$ chkconfig --list
 ```
 
 # File compress/decompress

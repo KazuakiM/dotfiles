@@ -21,7 +21,7 @@ $ tmux lsc
 ```
 デタッチ
 ```
-Ctrl-t + d
+Prefix > d
 ```
 アタッチ
 ```
@@ -40,27 +40,44 @@ $ tmux kill-session -t <id>
 $ tmux kill-server
 ```
 
+# コピー
+
+```
+$ Prefix > [
+
+ h,j,k,l でコピー対象の頭に移動
+ v:start, y:end (image :Visual mode)
+
+$ Prefix > ]
+```
+
 # Window操作
 
 ウィンドウ一覧
 ```
-Ctrl-t + w
+Prefix > w
 ```
 ウィンドウ切替
 ```
-Ctrl-t + <ウィンドウ番号>
+Prefix > <ウィンドウ番号>
 ```
 ウィンドウ作成
 ```
-Ctrl-t + c
+Prefix > c
 ```
 ウィンドウ削除
 ```
-Ctrl-t + &
+Prefix > &
 ```
 # Etc
 
 設定ファイル再読み込み
 ```
-Ctrl-t + r
+Prefix > r
+```
+現在の設定の確認
+```
+$ tmux show-options -g        > /tmp/show-options.txt
+$ tmux show-window-options -g > /tmp/show-window-options.txt
+Prefix > :list-keys -t vi-copy
 ```

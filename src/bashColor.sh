@@ -5,7 +5,6 @@
 # @author soramugi-San
 # @url    http://qiita.com/soramugi/items/46117274419665e601fa
 #--------------------------------
-
 echo "
 # Attribute codes:
 # 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
@@ -32,4 +31,3 @@ echo "
 \033[36m シアン           36 \033[00m \033[46m 46 \033[00m \033[37;46m 37;46 \033[00m \033[30;01;46m 30;01;46 \033[00m
 \033[37m 白(またはグレー) 37 \033[00m \033[47m 47 \033[00m \033[30;47m 30;47 \033[00m \033[31;04;47m 31;04;47 \033[00m
 "
-

@@ -41,6 +41,7 @@ brew install pv
 brew install python
 brew install python3
 brew install rbenv
+brew install reattach-to-user-namespace
 brew install ricty
 brew install ruby
 brew install ruby-build
@@ -63,7 +64,7 @@ brew install wireshark
 #brew-gem,         gdbm,          htop-osx,              libtool,        ossp-uuid,    rbenv,      yasm
 #bundle,           gdk-pixbuf,    httpd24,               libunistring,   p11-kit,      readline,   zeromq
 #bundler,          geoip,         icu4c,                 libxml2,        pango,        ricty,      zlib
-#c-ares,           geoipupdate,   imlib2,                libyaml,        pcre,         ruby
+#c-ares,           geoipupdate,   imlib2,                libyaml,        pcre,         ruby,       reattach-to-user-namespace
 #cairo,            gettext,       jasper,                lua,            perl518,      ruby-build
 #cmake,            gettext-mk,    jpeg,                  luajit,         php-cs-fixer, scons
 #cmigemo-mk,       git,           libatomic_ops,         lynx,           php55,        sqlite
