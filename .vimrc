@@ -84,10 +84,8 @@ nnoremap gs <C-w>+
 nnoremap gd <C-w>-
 noremap j gj
 noremap k gk
-noremap <Down>  <C-f>
-noremap <Up>    <C-b>
-noremap <Right> <C-d>
-noremap <left>  <C-u>
+noremap <Down> <C-f>
+noremap <Up>   <C-b>
 nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null<CR>
 " Paste
 autocmd MyAutoCmd InsertLeave * set nopaste

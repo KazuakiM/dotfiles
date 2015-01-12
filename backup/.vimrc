@@ -3,13 +3,11 @@
 " NeoBundle {{{
 " syntastic {{{
 NeoBundle 'scrooloose/syntastic'
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=2
+let g:syntastic_enable_signs  = 1
+let g:syntastic_auto_loc_list = 2
 "}}}
 " vim-sqlfix(local file refer) {{{
-NeoBundle 'vim-sqlfix', {
-\    'base': '/srv/vim-plugin',
-\    'type': 'nosync'}
+NeoBundle 'vim-sqlfix', {'base': '/srv/vim-plugin', 'type': 'nosync'}
 "}}}
 " vdebug {{{
 " # command memo
@@ -31,15 +29,15 @@ NeoBundle 'joonty/vdebug'
 " html5.vim {{{
 NeoBundle 'othree/html5.vim'
 let g:html5_event_handler_attributes_complete = 1
-let g:html5_rdfa_attributes_complete = 1
-let g:html5_microdata_attributes_complete = 1
-let g:html5_aria_attributes_complete = 1
+let g:html5_rdfa_attributes_complete          = 1
+let g:html5_microdata_attributes_complete     = 1
+let g:html5_aria_attributes_complete          = 1
 "}}}
 " vim-qfreplace {{{
 " # command memo
 " * ,qr    :replace all files.
 NeoBundle 'thinca/vim-qfreplace'
-nnoremap <Leader>qr :Qfreplace<CR>
+nnoremap <Leader>qr :<C-u>Qfreplace<CR>
 "}}}
 " context_filetype.vim {{{
 " setlocal html filetype at .vimrc.local (views/*.php is html filetype).
@@ -71,10 +69,8 @@ augroup precious-indentline
     autocmd!
 augroup END
 NeoBundle 'osyo-manga/vim-precious'
-let g:precious_enable_switch_CursorMoved = {
-\    '*' : 0}
-let g:precious_enable_switch_CursorMoved_i = {
-\    '*' : 0}
+let g:precious_enable_switch_CursorMoved   = {'*' : 0}
+let g:precious_enable_switch_CursorMoved_i = {'*' : 0}
 autocmd MyAutoCmd InsertEnter * :PreciousSwitch
 autocmd MyAutoCmd InsertLeave * :PreciousReset
 autocmd precious-indentline User PreciousFileType IndentLinesReset
@@ -107,34 +103,19 @@ call smartinput#define_rule({'at': '\[\%#\]',    'char': '<BS>', 'input': '<Del>
 "
 " NeoBundleLazy {{{
 " vim-over {{{
-NeoBundleLazy 'osyo-manga/vim-over', {
-\    'autoload' : {
-\        'commands' : 'OverCommandLine'}}
+NeoBundleLazy 'osyo-manga/vim-over', {'autoload' : {'commands': 'OverCommandLine'}}
 nnoremap <expr><Leader>%s ':OverCommandLine<CR>%s/'.expand('<cword>').'/'
 "}}}
 " neosnippet-snippets
 " neosnippet.vim {{{
-NeoBundleLazy 'Shougo/neocomplete.vim', {
-\    'depends': ['KazuakiM/neosnippet-snippets', 'Shougo/neosnippet.vim', 'Shougo/context_filetype.vim'],
-\    'autoload' : {
-\        'insert' : 1}}
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-            \ '\<Plug>(neosnippet_expand_or_jump)'
-            \: pumvisible() ? '\<C-n>' : '\<TAB>'
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-            \ '\<Plug>(neosnippet_expand_or_jump)'
-            \: '\<TAB>'
-if has('conceal')
-    set conceallevel=2 concealcursor=i
-endif
-let g:neosnippet#disable_runtime_snippets = {
-\    '_' : 1,}
-let g:neosnippet#data_directory=$HOME.'/.vim/neosnippet.vim'
-let g:neosnippet#snippets_directory=$HOME.'/.vim/bundle/neosnippet-snippets/neosnippets'
+NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['KazuakiM/neosnippet-snippets', 'Shougo/neosnippet.vim', 'Shougo/context_filetype.vim'], 'autoload': {'insert': 1}}
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ? '\<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '\<C-n>' : '\<TAB>'
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ? '\<Plug>(neosnippet_expand_or_jump)' : '\<TAB>'
 snoremap <ESC> <ESC>:NeoSnippetClearMarkers<CR>
+set conceallevel=2 concealcursor=i
+let g:neosnippet#data_directory           = $HOME.'/.vim/neosnippet.vim'
+let g:neosnippet#disable_runtime_snippets = {'_' : 1}
+let g:neosnippet#snippets_directory       = $HOME.'/.vim/bundle/neosnippet-snippets/neosnippets'
 "}}}
 " unite-colorscheme {{{
 NeoBundleLazy 'ujihisa/unite-colorscheme', {'depends': 'Shougo/unite.vim', 'unite_sources': 'colorscheme'}
@@ -145,7 +126,7 @@ NeoBundleLazy 'osyo-manga/unite-highlight', {'depends': 'Shougo/unite.vim', 'uni
 nnoremap <silent> <SID>[unite]hl :<C-u>Unite<Space>highlight<CR>
 "}}}
 " unite-tag {{{
-NeoBundleLazy 'tsukkee/unite-tag' , {'depends': 'Shougo/unite.vim', 'unite_sources': 'tag'}
+NeoBundleLazy 'tsukkee/unite-tag', {'depends': 'Shougo/unite.vim', 'unite_sources': 'tag'}
 nnoremap <silent> <SID>[unite]t :<C-u>Unite<Space>tag<CR>
 let s:hooks = neobundle#get_hooks('unite-tag')
 function! s:hooks.on_source(bundle)
@@ -183,11 +164,11 @@ nnoremap <Leader>reg :<C-u>RegexperExecute<Space>
 "}}}
 " vimshell.vim {{{
 NeoBundleLazy 'Shougo/vimshell.vim', {'depends': 'Shougo/vimproc.vim', 'commands': ['VimShell', 'VimShellPop', 'VimShellInteractive']}
-nnoremap [vimshell.vim] <Nop>
-nmap <Leader>sh [vimshell.vim]
-nnoremap <silent> [vimshell.vim]s :<C-u>VimShell<CR>
-nnoremap <silent> [vimshell.vim]p :<C-u>VimShellPop<CR>
-nnoremap <silent> [vimshell.vim]i :<C-u>VimShellInteractive
+nnoremap <SID>[vimshell.vim] <Nop>
+nmap <Leader>sh <SID>[vimshell.vim]
+nnoremap <silent> <SID>[vimshell.vim]s :<C-u>VimShell<CR>
+nnoremap <silent> <SID>[vimshell.vim]p :<C-u>VimShellPop<CR>
+nnoremap <silent> <SID>[vimshell.vim]i :<C-u>VimShellInteractive
 let s:hooks = neobundle#get_hooks('vimshell.vim')
 function! s:hooks.on_source(bundle)
     let g:vimshell_data_directory = $HOME.'/.vim/vimshell.vim/cache'
@@ -200,34 +181,30 @@ endfunction
 "* <C+y>,  :execute trigger key
 "* html:5 <=入力後に<C+y>,
 "* div>ul>li.class#id_$$*5 <=入力後に<C+y>,
-NeoBundleLazy 'mattn/emmet-vim', {
-\    'filetypes': ['html', 'php', 'css', 'sass', 'scss', 'less']}
+NeoBundleLazy 'mattn/emmet-vim', {'filetypes': ['html', 'php', 'css', 'sass', 'scss', 'less']}
 let s:hooks = neobundle#get_hooks('emmet-vim')
 function! s:hooks.on_source(bundle)
     let g:user_emmet_settings = {
-    \    'lang' : 'ja',
-    \    'indentation' : '    ',
-    \    'html' : { 'filters' : 'html'},
-    \    'css'  : { 'filters' : 'fc'},
-    \    'php'  : {
-    \        'filters' : 'html',
-    \        'extends' : 'html'}}
-    let g:user_emmet_mode='a'
+    \    'lang':        'ja',
+    \    'indentation': '    ',
+    \    'html':        {'filters': 'html'},
+    \    'css':         {'filters': 'fc'},
+    \    'php':         {
+    \        'filters': 'html',
+    \        'extends': 'html'}}
+    let g:user_emmet_mode        = 'a'
     let g:use_emmet_complete_tag = 1
     "let g:user_emmet_leader_key=''
 endfunction
 "}}}
 " vim-css3-syntax {{{
-NeoBundleLazy 'hail2u/vim-css3-syntax', {
-\    'filetypes': ['html', 'php', 'css', 'sass', 'scss', 'less']}
+NeoBundleLazy 'hail2u/vim-css3-syntax', {'filetypes': ['html', 'php', 'css', 'sass', 'scss', 'less']}
 "}}}
 " vim-javascript {{{
-NeoBundleLazy 'pangloss/vim-javascript', {
-\    'filetypes': ['html', 'php', 'javascript']}
+NeoBundleLazy 'pangloss/vim-javascript', {'filetypes': ['html', 'php', 'javascript']}
 "}}}
 " sass-compile.vim {{{
-NeoBundleLazy 'AtsushiM/sass-compile.vim', {
-\    'filetypes': ['sass', 'scss']}
+NeoBundleLazy 'AtsushiM/sass-compile.vim', {'filetypes': ['sass', 'scss']}
 let s:hooks = neobundle#get_hooks('sass-compile.vim')
 function! s:hooks.on_source(bundle)
     let g:sass_compile_cdloop = 5
@@ -238,8 +215,7 @@ function! s:hooks.on_source(bundle)
 endfunction
 "}}}
 " vim-coffee-script {{{
-NeoBundleLazy 'kchmck/vim-coffee-script', {
-\    'filetypes': 'coffee'}
+NeoBundleLazy 'kchmck/vim-coffee-script', {'filetypes': 'coffee'}
 let s:hooks = neobundle#get_hooks('vim-coffee-script')
 function! s:hooks.on_source(bundle)
     autocmd MyAutoCmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
