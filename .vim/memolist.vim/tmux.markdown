@@ -64,3 +64,8 @@ Ctrl-t + &
 ```
 Ctrl-t + r
 ```
+現在の設定の確認
+```
+$ tmux show-options -g        > /tmp/show-options.txt
+$ tmux show-window-options -g > /tmp/show-window-options.txt
+```
