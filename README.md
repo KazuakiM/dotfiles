@@ -39,6 +39,7 @@ $ ln -sf $HOME/work/dotfiles/.gvimrc       .gvimrc
 $ ln -sf $HOME/work/dotfiles/.htoprc       .htoprc
 $ ln -sf $HOME/work/dotfiles/.mplayer      .mplayer
 $ cp $HOME/work/dotfiles/.netrc.org        .netrc
+$ ln -sf $HOME/work/dotfiles/.tmux.conf    .tmux.conf
 $ ln -sf $HOME/work/dotfiles/.vim          .vim
 $ ln -sf $HOME/work/dotfiles/.vimrc        .vimrc
 $ cp $HOME/work/dotfiles/.vimrc.local .
@@ -46,6 +47,8 @@ $ ln -sf $HOME/work/dotfiles/.w3m          .w3m
 $ git clone git@github.com:Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
 $ wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp
 $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
+$ wget http://cs.sensiolabs.org/get/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
+$ chmod a+x $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 $ php $HOME/work/src/phpDict.php
 $ vi
  Update from NeoBundleFetch to NeoBundle
@@ -106,7 +109,7 @@ $ sudo yum install \
     openssl openssl-devel \
     perl perl-core perl-devel php php-devel pv python python-devel \
     ruby ruby-devel \
-    the_silver_searcher tree \
+    the_silver_searcher tmux tree \
     wget
 ```
 Git
@@ -195,6 +198,7 @@ $ ln -sf $HOME/work/dotfiles/.gvimrc       .gvimrc
 $ ln -sf $HOME/work/dotfiles/.htoprc       .config/htop/htoprc
 $ ln -sf $HOME/work/dotfiles/.mplayer      .mplayer
 $ cp $HOME/work/dotfiles/.netrc.org        .netrc
+$ ln -sf $HOME/work/dotfiles/.tmux.conf    .tmux.conf
 $ ln -sf $HOME/work/dotfiles/.vim          .vim
 $ ln -sf $HOME/work/dotfiles/.vimrc        .vimrc
 $ cp $HOME/work/dotfiles/.vimrc.local .
