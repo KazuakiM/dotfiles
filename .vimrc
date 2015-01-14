@@ -203,7 +203,6 @@ if neobundle#has_cache()
 else
     NeoBundle 'Shougo/vimproc', {'build': {'mac': 'make -f make_mac.mak', 'unix': 'make -f make_unix.mak', 'cygwin': 'make -f make_cygwin.mak'}}
     NeoBundle 'vim-jp/vital.vim'
-    NeoBundle 'mattn/webapi-vim'
     NeoBundle 'itchyny/lightline.vim'
     NeoBundle 'Yggdroot/indentLine'
     NeoBundle 'thinca/vim-ref'
@@ -213,7 +212,6 @@ else
     NeoBundle 'fuenor/qfixgrep'
     NeoBundle 'LeafCage/yankround.vim'
     NeoBundle 'thinca/vim-quickrun'
-    NeoBundle 'thinca/vim-prettyprint'
     NeoBundle 'SirVer/ultisnips'
     NeoBundle 'rhysd/clever-f.vim'
 
@@ -508,8 +506,6 @@ nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
 NeoBundleFetch 'nanotech/jellybeans.vim'
 NeoBundleFetch 'psychs/lingr-irc'
 NeoBundleFetch 'KazuakiM/neosnippet-snippets'
-NeoBundleFetch 'ziadoz/awesome-php'
-NeoBundleFetch 'javallone/regexper'
 "}}}
 "
 "
@@ -555,20 +551,6 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                setlocal filetyp
 "
 "
 " Extra local functions {{{
-" quickrun - prettyprint {{{
-"* URL: http://qiita.com/rbtnn/items/39d9ba817329886e626b
-"* NoFormattings :echo neobundle#config#get_neobundles()
-"* Formattings   :QuickRunPP neobundle#config#get_neobundles()
-"* Formatting    :QuickRunPP neobundle#get('vim-markdown')
-function! s:quickrun_pp(q_args)
-    let a:dict = {
-    \    'type':                      'vim', 'runner':           'vimscript', 'outputter':          'buffer',
-    \    'outputter/buffer/filetype': 'vim', 'hook/eval/enable': 1,           'hook/eval/template': 'echo PP(%s)',
-    \    'src':                       a:q_args}
-    call quickrun#run(a:dict)
-endfunction
-command! -nargs=1 -complete=expression QuickRunPP :call<Space>s:quickrun_pp(<q-args>)
-"}}}
 " auto make directory {{{
 function! s:auto_mkdir(dir, force)
     if !isdirectory(a:dir) && (a:force || input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
