@@ -98,6 +98,11 @@ call smartinput#define_rule({'at': '(\%#)',      'char': '<BS>', 'input': '<Del>
 call smartinput#define_rule({'at': '{\%#}',      'char': '<BS>', 'input': '<Del>'                                  })
 call smartinput#define_rule({'at': '\[\%#\]',    'char': '<BS>', 'input': '<Del>'                                  })
 "}}}
+" vim-tags {{{
+NeoBundle 'szw/vim-tags'
+let g:vim_tags_auto_generate = 1
+let g:vim_tags_cache_dir     = $HOME.'/.vim/vim-tags'
+"}}}
 "}}}
 "
 "

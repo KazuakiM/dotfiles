@@ -159,6 +159,10 @@ set wrapscan
 nnoremap <expr><Leader>%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
+" Tags
+nnoremap <Leader>] <C-]>
+nnoremap <Leader>: :<C-u>tab<Space>stj<Space><C-R>=expand('<cword>')<CR><CR>
+nnoremap <Leader>[ <C-o>
 " Pretty print
 nnoremap <Leader>xml  :execute '%!xmllint --noblanks --nowrap --encode UTF-8 --format %'<CR>
 nnoremap <Leader>json :execute '%!python -m json.tool'<CR>
@@ -180,7 +184,7 @@ nmap <Leader>f [vim]
 nnoremap [vim]e :<C-u>tabnew<Space>$MYVIMRC<CR>
 nnoremap [vim]s :<C-u>source<Space>$MYVIMRC<CR>
 nnoremap [vim]h :<C-u>source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
-" Autocmd
+" ESC-ESC
 autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 "}}}
@@ -203,7 +207,6 @@ else
     NeoBundle 'itchyny/lightline.vim'
     NeoBundle 'Yggdroot/indentLine'
     NeoBundle 'thinca/vim-ref'
-    NeoBundle 'szw/vim-tags'
     NeoBundle 'tpope/vim-surround'
     NeoBundle 'vim-scripts/matchit.zip'
     NeoBundle 'tpope/vim-endwise'
@@ -260,15 +263,6 @@ let g:ref_cache_dir       = $HOME.'/.vim/vim-ref/cache'
 let g:ref_phpmanual_path  = $HOME.'/.vim/vim-ref/php-chunked-xhtml'
 let g:ref_detect_filetype = {'html': 'phpmanual', 'javascript': 'phpmanual', 'css': 'phpmanual'}
 inoremap <silent><C-k> <C-o>:call<space>ref#K("normal")<CR><ESC>
-"}}}
-" vim-tags {{{
-let g:vim_tags_auto_generate = 1
-let g:vim_tags_cache_dir     = $HOME.'/.vim/vim-tags'
-nnoremap <Leader>] <C-]>
-nnoremap <Leader>: :<C-u>tab<Space>stj<Space><C-R>=expand('<cword>')<CR><CR>
-nnoremap <Leader>[ <C-o>
-nnoremap <Leader>ts :<C-u>ts<CR>
-" add .vimrc.local
 "}}}
 " qfixgrep {{{
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*.js'\ --exclude='*.log'
