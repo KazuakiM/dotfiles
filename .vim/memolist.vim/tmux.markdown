@@ -46,6 +46,7 @@ $ tmux kill-server
 $ Prefix > [
 
  h,j,k,l でコピー対象の頭に移動
+ 0:start-of-line, 9:end-of-line
  v:start, y:end (image :Visual mode)
 
 $ Prefix > ]
