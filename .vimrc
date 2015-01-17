@@ -171,14 +171,13 @@ nnoremap <Leader>json :execute '%!python -m json.tool'<CR>
 vnoremap <C-w> "ay
 vnoremap <C-e> "by
 nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
-" SQL
+" $VIMRUNTIME/syntax/sql.vim
 let g:sql_type_default = 'mysql'
-" PHP
-let php_sql_query          = 1
-let php_baselib            = 1
-let php_htmlInStrings      = 1
-let php_noShortTags        = 1
-let php_parent_error_close = 1
+" $VIMRUNTIME/syntax/php.vim
+let g:php_sql_query     = 1
+let g:php_htmlInStrings = 1
+let g:php_baselib       = 1
+let g:php_noShortTags   = 1
 " Vim
 nnoremap [vim] <Nop>
 nmap <Leader>f [vim]
