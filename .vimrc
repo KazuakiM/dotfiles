@@ -95,17 +95,18 @@ inoremap <silent><expr><Leader>v '<ESC>:set<Space>paste<CR><Insert><C-r>+<ESC><I
 syntax on
 set t_Co=256
 " Check space and new line code.
-autocmd MyAutoCmd ColorScheme * highlight TabString        cterm=reverse   ctermfg=darkgray                           guibg=darkgray
-autocmd MyAutoCmd ColorScheme * highlight CrString         cterm=reverse   ctermfg=darkred                            guibg=darkred
-autocmd MyAutoCmd ColorScheme * highlight CrlfString       cterm=reverse   ctermfg=darkmagenta                        guibg=darkmagenta
-autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL    cterm=reverse   ctermfg=lightmagenta                       guibg=lightmagenta
-autocmd MyAutoCmd ColorScheme * highlight IdeographicSpace cterm=reverse   ctermfg=lightred                           guibg=lightred
-autocmd MyAutoCmd ColorScheme * highlight Visual           cterm=reverse   ctermfg=lightgreen
-autocmd MyAutoCmd ColorScheme * highlight YankRoundRegion  cterm=underline ctermfg=magenta
-autocmd MyAutoCmd ColorScheme * highlight SpellBad         cterm=undercurl ctermfg=darkred ctermbg=NONE gui=undercurl guibg=NONE
-autocmd MyAutoCmd ColorScheme * highlight SpellCap         cterm=undercurl ctermfg=blue    ctermbg=NONE gui=undercurl guibg=NONE
-autocmd MyAutoCmd ColorScheme * highlight SpellRare        cterm=undercurl ctermbg=blue    ctermbg=NONE gui=undercurl guibg=NONE
-autocmd MyAutoCmd ColorScheme * highlight SpellLocal       cterm=undercurl ctermbg=blue    ctermbg=NONE gui=undercurl guibg=NONE
+autocmd MyAutoCmd ColorScheme * highlight TabString        cterm=reverse                 ctermfg=darkgray                               guibg=darkgray
+autocmd MyAutoCmd ColorScheme * highlight CrString         cterm=reverse                 ctermfg=darkred                                guibg=darkred
+autocmd MyAutoCmd ColorScheme * highlight CrlfString       cterm=reverse                 ctermfg=darkmagenta                            guibg=darkmagenta
+autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL    cterm=reverse                 ctermfg=lightmagenta                           guibg=lightmagenta
+autocmd MyAutoCmd ColorScheme * highlight IdeographicSpace cterm=reverse                 ctermfg=lightred                               guibg=lightred
+autocmd MyAutoCmd ColorScheme * highlight Visual           cterm=reverse                 ctermfg=lightgreen
+autocmd MyAutoCmd ColorScheme * highlight LineNr           cterm=NONE                    ctermfg=darkmagenta          guifg=darkmagenta guibg=NONE
+autocmd MyAutoCmd ColorScheme * highlight YankRoundRegion  cterm=underline               ctermfg=magenta
+autocmd MyAutoCmd ColorScheme * highlight SpellBad         cterm=undercurl gui=undercurl ctermfg=darkred ctermbg=NONE                   guibg=NONE
+autocmd MyAutoCmd ColorScheme * highlight SpellCap         cterm=undercurl gui=undercurl ctermfg=blue    ctermbg=NONE                   guibg=NONE
+autocmd MyAutoCmd ColorScheme * highlight SpellRare        cterm=undercurl gui=undercurl ctermfg=blue    ctermbg=NONE                   guibg=NONE
+autocmd MyAutoCmd ColorScheme * highlight SpellLocal       cterm=undercurl gui=undercurl ctermfg=blue    ctermbg=NONE                   guibg=NONE
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',        "\t")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',         "\r")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',       "\r\n")
