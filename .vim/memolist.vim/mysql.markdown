@@ -187,7 +187,7 @@ SHOW INDEX FROM <Table1>;
 ```
 DataBases
 ```
-SHOE DATABASES;
+SHOW DATABASES;
 ```
 Create tabe
 ```
@@ -262,9 +262,14 @@ SELECT <UniqueColumn1>(, <UniqueColumn2>),
   FROM <Table1>
   GROUP BY <UniqueColumn1>(, <UniqueColumn2>);
 ```
-DATETIME
+UTC+9(Japanese timezone)
 ```
 SELECT DATE_ADD(NOW(), INTERVAL 9 hour);
+```
+DATE_FORMAT
+```
+SELECT DATE_FORMAT(<Column1>, '%Y-%m-%d');
+SELECT DATE_FORMAT(<Column1>, '%Y-%m-%d %H:%i:%S');
 ```
 
 # Other

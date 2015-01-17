@@ -1,4 +1,4 @@
-title: tmux
+title: screen
 ==========
 date: 2015-01-11 15:51
 tags: []
@@ -9,15 +9,11 @@ categories: []
 
 起動
 ```
-$ tmux
+$ screen
 ```
 セッション一覧
 ```
-$ tmux ls
-```
-接続中のセッション一覧
-```
-$ tmux lsc
+$ screen -ls
 ```
 デタッチ
 ```
@@ -25,19 +21,7 @@ Prefix > Ctrl-u
 ```
 アタッチ
 ```
-$ tmux attach -t <id>
-```
-現在接続中のセッション削除
-```
-$ tmux kill-session
-```
-指定したセッション削除
-```
-$ tmux kill-session -t <id>
-```
-全てのセッション削除
-```
-$ tmux kill-server
+$ screen -r <id>
 ```
 
 # コピー
@@ -46,7 +30,7 @@ $ tmux kill-server
 $ Prefix > [
 
  h,j,k,l でコピー対象の頭に移動
- v:start, y:end (image :Visual mode)
+ ^:start, $:end
 
 $ Prefix > ]
 ```
@@ -56,10 +40,6 @@ $ Prefix > ]
 ウィンドウ一覧
 ```
 Prefix > Ctrl-l
-```
-ウィンドウ切替
-```
-Prefix > <ウィンドウ番号>
 ```
 ウィンドウ次へ
 ```
@@ -72,10 +52,6 @@ Prefix > Ctrl-s
 ウィンドウ作成
 ```
 Prefix > Ctrl-k
-```
-ウィンドウ垂直分割
-```
-Prefix > |
 ```
 ウィンドウ水平分割
 ```
@@ -95,10 +71,4 @@ Prefix > Ctrl-w
 設定ファイル再読み込み
 ```
 Prefix > r
-```
-現在の設定の確認
-```
-$ tmux show-options -g        > /tmp/show-options.txt
-$ tmux show-window-options -g > /tmp/show-window-options.txt
-Prefix > :list-keys -t vi-copy
 ```

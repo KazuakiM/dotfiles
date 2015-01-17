@@ -13,6 +13,7 @@
 /vim-php-cs-fixer/*
 /vim-ref/cache/*
 /vim-ref/php-chunked-xhtml/*
+/vim-tags/*
 /viminfo/*
 /vimshell.vim/cache/*
 /yankround.vim/*
