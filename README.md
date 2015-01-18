@@ -110,7 +110,7 @@ $ sudo yum install \
     ncurses-devel nmap-ncat \
     openssl openssl-devel \
     perl perl-core perl-devel php php-devel pv python python-devel \
-    ruby ruby-devel \
+    readline ruby ruby-devel \
     screen \
     the_silver_searcher tmux tree \
     wget
