@@ -1,0 +1,18 @@
+#referer {{{
+# https://github.com/yonchu/dotfiles/blob/master/.inputrc
+#}}}
+#base-terminal {{{
+set editing-mode vi
+set keymap vi-command
+set expand-tilde on
+set completion-ignore-case on
+set horizontal-scroll-mode off
+set bell-style none
+#}}}
+#base-japanese {{{
+set kanji-code utf-8
+set input-meta on
+set convert-meta off
+set meta-flag on
+set output-meta on
+#}}}
