@@ -37,6 +37,7 @@ $ ln -sf $HOME/work/dotfiles/.gitconfig    .gitconfig
 $ cp $HOME/work/dotfiles/.gitconfig.local .
 $ ln -sf $HOME/work/dotfiles/.gvimrc       .gvimrc
 $ ln -sf $HOME/work/dotfiles/.htoprc       .htoprc
+$ ln -sf $HOME/work/dotfiles/.inputrc      .inputrc
 $ ln -sf $HOME/work/dotfiles/.mplayer      .mplayer
 $ cp $HOME/work/dotfiles/.netrc.org        .netrc
 $ ln -sf $HOME/work/dotfiles/.screenrc     .screenrc
@@ -198,6 +199,7 @@ $ ln -sf $HOME/work/dotfiles/.gitconfig    .gitconfig
 $ cp $HOME/work/dotfiles/.gitconfig.local .
 $ ln -sf $HOME/work/dotfiles/.gvimrc       .gvimrc
 $ ln -sf $HOME/work/dotfiles/.htoprc       .config/htop/htoprc
+$ ln -sf $HOME/work/dotfiles/.inputrc      .inputrc
 $ ln -sf $HOME/work/dotfiles/.mplayer      .mplayer
 $ cp $HOME/work/dotfiles/.netrc.org        .netrc
 $ ln -sf $HOME/work/dotfiles/.screenrc     .screenrc
