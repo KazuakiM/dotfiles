@@ -37,8 +37,10 @@ $ ln -sf $HOME/work/dotfiles/.gitconfig    .gitconfig
 $ cp $HOME/work/dotfiles/.gitconfig.local .
 $ ln -sf $HOME/work/dotfiles/.gvimrc       .gvimrc
 $ ln -sf $HOME/work/dotfiles/.htoprc       .htoprc
+$ ln -sf $HOME/work/dotfiles/.inputrc      .inputrc
 $ ln -sf $HOME/work/dotfiles/.mplayer      .mplayer
 $ cp $HOME/work/dotfiles/.netrc.org        .netrc
+$ ln -sf $HOME/work/dotfiles/.screenrc     .screenrc
 $ ln -sf $HOME/work/dotfiles/.tmux.conf    .tmux.conf
 $ ln -sf $HOME/work/dotfiles/.vim          .vim
 $ ln -sf $HOME/work/dotfiles/.vimrc        .vimrc
@@ -108,7 +110,8 @@ $ sudo yum install \
     ncurses-devel nmap-ncat \
     openssl openssl-devel \
     perl perl-core perl-devel php php-devel pv python python-devel \
-    ruby ruby-devel \
+    readline ruby ruby-devel \
+    screen \
     the_silver_searcher tmux tree \
     wget
 ```
@@ -196,8 +199,10 @@ $ ln -sf $HOME/work/dotfiles/.gitconfig    .gitconfig
 $ cp $HOME/work/dotfiles/.gitconfig.local .
 $ ln -sf $HOME/work/dotfiles/.gvimrc       .gvimrc
 $ ln -sf $HOME/work/dotfiles/.htoprc       .config/htop/htoprc
+$ ln -sf $HOME/work/dotfiles/.inputrc      .inputrc
 $ ln -sf $HOME/work/dotfiles/.mplayer      .mplayer
 $ cp $HOME/work/dotfiles/.netrc.org        .netrc
+$ ln -sf $HOME/work/dotfiles/.screenrc     .screenrc
 $ ln -sf $HOME/work/dotfiles/.tmux.conf    .tmux.conf
 $ ln -sf $HOME/work/dotfiles/.vim          .vim
 $ ln -sf $HOME/work/dotfiles/.vimrc        .vimrc

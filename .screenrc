@@ -1,0 +1,45 @@
+#referer {{{
+# http://d.hatena.ne.jp/ksmemo/20080119/p1
+# https://github.com/castor4bit/dotfiles/blob/master/.screenrc
+# http://qiita.com/t_cyrill/items/54ffb13918cb421a961b
+# http://www.limy.org/program/screen.html
+#}}}
+#base-terminal {{{
+termcapinfo xterm* ti@:te@
+term xterm-256color
+autodetach on
+defmonitor on
+vbell off
+bell_msg ''
+defutf8 on
+defkanji utf-8
+defencoding utf-8
+encoding utf-8 utf-8
+defscrollback 10000
+startup_message off
+shell -$SHELL
+#}}}
+#display {{{
+hardstatus on
+hardstatus alwayslastline '%{= gk} %w %{= w.} %= %{= c.} Prefix C-a %{= bw} %H %{= k.} Window %n '
+#}}}
+#log {{{
+deflog on
+logfile "/var/log/screen-%Y%m%d-%n.log"
+#}}}
+#mapping {{{
+# window
+bind ^k screen
+bind ^u detach
+bind ^l windowlist -b
+# move
+bind ^d next
+bind ^s prev
+# split
+bind - eval 'split' 'focus' 'screen 1'
+bind ^p only
+# rename
+bind ^w title
+# reload
+bind r eval 'source $HOME/.screenrc'
+#}}}

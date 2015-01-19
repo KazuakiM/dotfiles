@@ -18,4 +18,4 @@ delay=15
 left_meters=AllCPUs
 left_meter_modes=1
 right_meters=Memory Swap Tasks LoadAverage
-right_meter_modes=1 1 2 2
+right_meter_modes=2 2 2 2
