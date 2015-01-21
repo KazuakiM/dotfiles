@@ -206,7 +206,6 @@ else
     NeoBundle 'itchyny/lightline.vim'
     NeoBundle 'Yggdroot/indentLine'
     NeoBundle 'thinca/vim-ref'
-    NeoBundle 'tpope/vim-surround'
     NeoBundle 'vim-scripts/matchit.zip'
     NeoBundle 'tpope/vim-endwise'
     NeoBundle 'fuenor/qfixgrep'
@@ -385,21 +384,27 @@ vmap <Leader>gx <Plug>(openbrowser-smart-search)
 "}}}
 " taglist.vim {{{
 NeoBundleLazy 'vim-scripts/taglist.vim', {'commands': 'Tlist'}
-let g:Tlist_Use_Right_Window = 1
-let g:Tlist_Show_One_File    = 1
-let g:Tlist_Exit_OnlyWindow  = 1
-let g:Tlist_WinWidth         = 20
-let g:tlist_php_settings     = 'php;c:class;f:function;d:constant'
 nnoremap <Leader>t :<C-u>Tlist<CR>
+let s:hooks = neobundle#get_hooks('taglist.vim')
+function! s:hooks.on_source(bundle)
+    let g:Tlist_Use_Right_Window = 1
+    let g:Tlist_Show_One_File    = 1
+    let g:Tlist_Exit_OnlyWindow  = 1
+    let g:Tlist_WinWidth         = 25
+    let g:tlist_php_settings     = 'php;c:class;f:function;d:constant'
+endfunction
 "}}}
 " nerdtree {{{
 NeoBundleLazy 'scrooloose/nerdtree', {'commands': 'NERDTree'}
 nnoremap <expr><Leader>n ':NERDTree '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
-let g:NERDTreeWinSize           = 20
-let g:NERDTreeMinimalUI         = 1
-let g:NERDTreeRespectWildIgnore = 1
-let g:NERDTreeShowHidden        = 1
-autocmd MyAutoCmd BufEnter * if (winnr('$') == 1 && exists('b:NERDTreeType') && b:NERDTreeType == 'primary') | q | endif
+let s:hooks = neobundle#get_hooks('nerdtree')
+function! s:hooks.on_source(bundle)
+    let g:NERDTreeWinSize           = 20
+    let g:NERDTreeMinimalUI         = 1
+    let g:NERDTreeRespectWildIgnore = 1
+    let g:NERDTreeShowHidden        = 1
+    autocmd MyAutoCmd BufEnter * if (winnr('$') == 1 && exists('b:NERDTreeType') && b:NERDTreeType == 'primary') | q | endif
+endfunction
 "}}}
 " vim-easy-align {{{
 NeoBundleLazy 'junegunn/vim-easy-align', {'commands': 'EasyAlign'}
@@ -421,6 +426,24 @@ let g:easy_align_delimiters = {
 NeoBundleLazy 'vim-scripts/SQLUtilities', {'depends': 'vim-scripts/Align', 'commands': 'SQLUFormatter'}
 let g:sqlutil_align_comma = 1
 nnoremap <Leader>sql :<C-u>SQLUFormatter<CR>
+"}}}
+" previm {{{
+NeoBundleLazy 'kannokanno/previm', {'depends': 'open-browser.vim', 'commands': 'PrevimOpen'}
+nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
+"}}}
+" vim-php-cs-fixer {{{
+NeoBundleLazy 'stephpy/vim-php-cs-fixer', {'functions': 'PhpCsFixerFixFile'}
+nnoremap <Leader>php :call<Space>PhpCsFixerFixFile()<CR>
+let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
+function! s:hooks.on_source(bundle)
+    let g:php_cs_fixer_config                 = 'default'
+    let g:php_cs_fixer_dry_run                = 0
+    let g:php_cs_fixer_enable_default_mapping = 0
+    let g:php_cs_fixer_level                  = 'all'
+    let g:php_cs_fixer_path                   = $HOME.'/.vim/vim-php-cs-fixer/php-cs-fixer'
+    let g:php_cs_fixer_php_path               = 'php'
+    let g:php_cs_fixer_verbose                = 0
+endfunction
 "}}}
 " wildfire.vim {{{
 NeoBundleLazy 'gcmt/wildfire.vim', {'mappings': '<Plug>(wildfire-fuel)'}
@@ -448,6 +471,7 @@ function! s:hooks.on_source(bundle)
     let g:neocomplete#sources#buffer#disabled_pattern  = '\.log\|\.jax'
     let g:neocomplete#sources#buffer#max_keyword_width = 30
     let g:neocomplete#sources#dictionary#dictionaries  = {'_': '', 'php': $HOME.'/.vim/dict/php.dict'}
+    let g:neocomplete#use_vimproc                      = 1
 endfunction
 "}}}
 " gundo.vim {{{
@@ -459,20 +483,7 @@ function! s:hooks.on_source(bundle)
     nnoremap <Leader>gundo :<C-u>GundoToggle<CR>
 endfunction
 "}}}
-" vim-php-cs-fixer {{{
-NeoBundleLazy 'stephpy/vim-php-cs-fixer', {'filetypes': 'php'}
-let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
-function! s:hooks.on_source(bundle)
-    let g:php_cs_fixer_config                 = 'default'
-    let g:php_cs_fixer_dry_run                = 0
-    let g:php_cs_fixer_enable_default_mapping = 0
-    let g:php_cs_fixer_level                  = 'all'
-    let g:php_cs_fixer_path                   = $HOME.'/.vim/vim-php-cs-fixer/php-cs-fixer'
-    let g:php_cs_fixer_php_path               = 'php'
-    let g:php_cs_fixer_verbose                = 0
-    nnoremap <Leader>php :call<Space>PhpCsFixerFixFile()<CR>
-endfunction
-"}}}
+NeoBundleLazy 'tpope/vim-surround', {'insert': 1}
 " shabadou.vim
 " vim-qfsigns
 " vim-qfstatusline
@@ -492,10 +503,6 @@ unlet s:hooks
 "}}}
 " vim-markdown {{{
 NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'markdown'}
-"}}}
-" previm {{{
-NeoBundleLazy 'kannokanno/previm', {'depends': 'open-browser.vim', 'filetypes': 'markdown'}
-nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
 "}}}
 "}}}
 "
