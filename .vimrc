@@ -205,7 +205,6 @@ else
     NeoBundle 'vim-jp/vital.vim'
     NeoBundle 'itchyny/lightline.vim'
     NeoBundle 'Yggdroot/indentLine'
-    NeoBundle 'thinca/vim-ref'
     NeoBundle 'vim-scripts/matchit.zip'
     NeoBundle 'tpope/vim-endwise'
     NeoBundle 'fuenor/qfixgrep'
@@ -255,14 +254,8 @@ let g:unite_force_overwrite_statusline = 0
 " indentLine {{{
 let g:indentLine_faster = 1
 "}}}
-" vim-ref {{{
-let g:ref_cache_dir       = $HOME.'/.vim/vim-ref/cache'
-let g:ref_phpmanual_path  = $HOME.'/.vim/vim-ref/php-chunked-xhtml'
-let g:ref_detect_filetype = {'html': 'phpmanual', 'javascript': 'phpmanual', 'css': 'phpmanual'}
-inoremap <silent><C-k> <C-o>:call<space>ref#K("normal")<CR><ESC>
-"}}}
 " qfixgrep {{{
-set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*.js'\ --exclude='*.log'
+set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*min.js'\ --exclude='*min.css'\ --exclude='*.log'
 set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
 let g:QFixWin_EnableMode   = 1
 let g:QFix_UseLocationList = 1
@@ -381,6 +374,18 @@ NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'OpenBrowser', 'mappings': 
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
 nmap <Leader>gx <Plug>(openbrowser-smart-search)
 vmap <Leader>gx <Plug>(openbrowser-smart-search)
+"}}}
+" vim-ref {{{
+NeoBundleLazy 'thinca/vim-ref', {'functions': 'ref#K'}
+let g:ref_no_default_key_mappings = 1
+inoremap <silent><C-k> <C-o>:call<space>ref#K("normal")<CR><ESC>
+nnoremap <silent>K :<C-u>call ref#K('normal')<CR>
+let s:hooks = neobundle#get_hooks('vim-ref')
+function! s:hooks.on_source(bundle)
+    let g:ref_cache_dir       = $HOME.'/.vim/vim-ref/cache'
+    let g:ref_phpmanual_path  = $HOME.'/.vim/vim-ref/php-chunked-xhtml'
+    let g:ref_detect_filetype = {'html': 'phpmanual', 'javascript': 'phpmanual', 'css': 'phpmanual'}
+endfunction
 "}}}
 " taglist.vim {{{
 NeoBundleLazy 'vim-scripts/taglist.vim', {'commands': 'Tlist'}
