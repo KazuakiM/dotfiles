@@ -485,17 +485,18 @@ NeoBundleFetch 'KazuakiM/neosnippet-snippets'
 "
 "
 " OS type {{{
-if (s:os_type ==# 'mac')
+" Exclusive {{{
+if (s:os_type !=# 'mac')
+    autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+elseif (s:os_type !=# 'win')
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/backup/'.s:date, 1)
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/undo/'  .s:date, 1)
     let &backupdir = '/tmp/backup/'.s:date
     let &undodir   = '/tmp/undo/'  .s:date
-    " previm {{{
-    let g:previm_open_cmd  = 'open -a firefox'
-    "}}}
     " memolist.vim {{{
     let g:memolist_path = $HOME.'/.vim/memolist.vim'
     "}}}
+else
     " lightline {{{
     let g:lightline = {
     \    'colorscheme': 'jellybeans',
@@ -534,65 +535,25 @@ if (s:os_type ==# 'mac')
     "}}}
     " indentLine {{{
     let g:indentLine_faster = 1
+    "}}}
+endif
+"}}}
+" Only {{{
+if (s:os_type ==# 'mac')
+    " previm {{{
+    let g:previm_open_cmd  = 'open -a firefox'
     "}}}
 elseif (s:os_type ==# 'win')
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('C:\temp\backup\'.s:date, 1)
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('C:\temp\undo\'  .s:date, 1)
     let &backupdir = 'C:\temp\backup\'.s:date
     let &undodir   = 'C:\temp\undo\'  .s:date
-    autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
     " memolist.vim {{{
     let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     "}}}
-    " lightline {{{
-    let g:lightline = {
-    \    'colorscheme': 'jellybeans',
-    \    'active':      {
-    \        'left':  [['mode','paste'],['filename','qfstatusline']],
-    \        'right': [['lineinfo'],['percent'],['fileformat','fileencoding','filetype']]},
-    \    'component_function': {'filename': 'MyFilename', 'fileformat': 'MyFileformat', 'filetype': 'MyFiletype', 'fileencoding': 'MyFileencoding', 'mode': 'MyMode'},
-    \    'component_expand': {'qfstatusline': 'qfstatusline#Update'},
-    \    'component_type':   {'qfstatusline': 'error'},
-    \    'subseparator': {'left': '|', 'right': '|'}}
-    function! MyModified()
-        return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-    endfunction
-    function! MyReadonly()
-        return &ft !~? 'help' && &readonly ? 'x' : ''
-    endfunction
-    function! MyFilename()
-        let a:fname    = expand('%:t')
-        return a:fname =~ '__Gundo\|NERD_tree' ? '' :
-        \    &ft == 'unite' ? unite#get_status_string() : ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-        \    ('' != a:fname ? a:fname : '[No Name]') .    ('' != MyModified() ? ' ' . MyModified() : '')
-    endfunction
-    function! MyFileformat()
-        return winwidth(0) > 70 ? &fileformat : ''
-    endfunction
-    function! MyFiletype()
-        return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : '-') : ''
-    endfunction
-    function! MyFileencoding()
-        return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-    endfunction
-    function! MyMode()
-        return winwidth(0) > 60 ? lightline#mode() : ''
-    endfunction
-    let g:unite_force_overwrite_statusline = 0
-    "}}}
-    " indentLine {{{
-    let g:indentLine_faster = 1
-    "}}}
 else
-    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/backup/'.s:date, 1)
-    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/undo/'  .s:date, 1)
-    let &backupdir = '/tmp/backup/'.s:date
-    let &undodir   = '/tmp/undo/'  .s:date
-    autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-    " memolist.vim {{{
-    let g:memolist_path = $HOME.'/.vim/memolist.vim'
-    "}}}
 endif
+"}}}
 "}}}
 "
 "
