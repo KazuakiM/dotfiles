@@ -156,7 +156,7 @@ $ find / -name "lua.h" 2>&1|grep lua.h
 $ sudo yum remove vim-enhanced vim-common
 $ hg clone https://vim.googlecode.com/hg/ /usr/local/src/vim
 $ cd /usr/local/src/vim
-$ ./configure \
+$ sudo ./configure \
     --prefix=/usr/local \
     --enable-fail-if-missing \
     --disable-darwin \
@@ -171,13 +171,13 @@ $ ./configure \
     --with-features=huge \
     --enable-rubyinterp \
     --with-ruby-command=/usr/bin/ruby \
-    --enable-python3interp \
-    --with-python3-config-dir=/usr/lib64/python2.7/config \
+    --enable-pythoninterp \
+    --with-python-config-dir=/usr/lib64/python2.7/config \
     --enable-perlinterp \
     --enable-luainterp \
     --with-lua-prefix=/usr/local \
     --with-luajit
-$ make && make install
+$ sudo make && sudo make install
 ```
 Composer
 ```bash
