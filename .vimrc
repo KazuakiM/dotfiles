@@ -240,11 +240,10 @@ let g:quickrun_config = {
 \        'runner':                              'vimproc',
 \        'runner/vimproc/updatetime':           600},
 \    'watchdogs_checker/_': {
-\        'hook/close_quickfix/enable_exit':      1,
-\        'hook/back_window/enable_exit':         0, 'hook/back_window/priority_exit':         1,
-\        'hook/qfsigns_update/enable_exit':      1, 'hook/qfsigns_update/priority_exit':      2,
-\        'hook/qfstatusline_update/enable_exit': 1, 'hook/qfstatusline_update/priority_exit': 3,
-\        'outputter/quickfix/open_cmd':          ''},
+\        'hook/close_quickfix/enable_exit': 1,
+\        'hook/back_window/enable_exit':    0,  'hook/back_window/priority_exit':    1,
+\        'hook/qfsigns_update/enable_exit': 1,  'hook/qfsigns_update/priority_exit': 2,
+\        'outputter/quickfix/open_cmd':     ''},
 \    'watchdogs_checker/php': {
 \        'command':     'php',
 \        'exec':        '%c -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0 -l %o %s:p',
@@ -488,7 +487,8 @@ NeoBundleFetch 'KazuakiM/neosnippet-snippets'
 " Exclusive {{{
 if (s:os_type !=# 'mac')
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-elseif (s:os_type !=# 'win')
+endif
+if (s:os_type !=# 'win')
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/backup/'.s:date, 1)
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/undo/'  .s:date, 1)
     let &backupdir = '/tmp/backup/'.s:date
@@ -496,7 +496,8 @@ elseif (s:os_type !=# 'win')
     " memolist.vim {{{
     let g:memolist_path = $HOME.'/.vim/memolist.vim'
     "}}}
-else
+endif
+if (s:os_type !=# 'unix')
     " lightline {{{
     let g:lightline = {
     \    'colorscheme': 'jellybeans',
@@ -536,6 +537,10 @@ else
     " indentLine {{{
     let g:indentLine_faster = 1
     "}}}
+    " vim-quickrun {{{
+    let g:quickrun_config['watchdogs_checker/_']['hook/qfstatusline_update/enable_exit']   = 1
+    let g:quickrun_config['watchdogs_checker/_']['hook/qfstatusline_update/priority_exit'] = 3
+    "}}}
 endif
 "}}}
 " Only {{{
@@ -551,7 +556,7 @@ elseif (s:os_type ==# 'win')
     " memolist.vim {{{
     let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     "}}}
-else
+elseif (s:os_type ==# 'unix')
 endif
 "}}}
 "}}}
