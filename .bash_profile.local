@@ -1,6 +1,6 @@
 ## Application Directory
 #alias APP='cd $HOME/sample'
-#alias LOG='tail -F ...'
+#alias LOG='tail -F /tmp/sniplog'
 
 ## ctags
 #tagsCmd='ctags --languages=php -f'
