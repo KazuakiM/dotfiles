@@ -93,26 +93,23 @@ nnoremap <silent><expr><Leader>v      ':set<Space>paste<CR><Insert><C-r>+<ESC>'
 inoremap <silent><expr><Leader>v '<ESC>:set<Space>paste<CR><Insert><C-r>+<ESC><Insert>'
 " Color
 syntax on
-set t_Co=256
 " Check space and new line code.
-autocmd MyAutoCmd ColorScheme * highlight TabString        cterm=reverse                 ctermfg=darkgray                               guibg=darkgray
-autocmd MyAutoCmd ColorScheme * highlight CrString         cterm=reverse                 ctermfg=darkred                                guibg=darkred
-autocmd MyAutoCmd ColorScheme * highlight CrlfString       cterm=reverse                 ctermfg=darkmagenta                            guibg=darkmagenta
-autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL    cterm=reverse                 ctermfg=lightmagenta                           guibg=lightmagenta
-autocmd MyAutoCmd ColorScheme * highlight IdeographicSpace cterm=reverse                 ctermfg=lightred                               guibg=lightred
-autocmd MyAutoCmd ColorScheme * highlight Visual           cterm=reverse                 ctermfg=lightgreen
-autocmd MyAutoCmd ColorScheme * highlight LineNr           cterm=NONE                    ctermfg=darkmagenta          guifg=darkmagenta guibg=NONE
-autocmd MyAutoCmd ColorScheme * highlight YankRoundRegion  cterm=underline               ctermfg=magenta
-autocmd MyAutoCmd ColorScheme * highlight SpellBad         cterm=undercurl gui=undercurl ctermfg=darkred ctermbg=NONE                   guibg=NONE
-autocmd MyAutoCmd ColorScheme * highlight SpellCap         cterm=undercurl gui=undercurl ctermfg=blue    ctermbg=NONE                   guibg=NONE
-autocmd MyAutoCmd ColorScheme * highlight SpellRare        cterm=undercurl gui=undercurl ctermfg=blue    ctermbg=NONE                   guibg=NONE
-autocmd MyAutoCmd ColorScheme * highlight SpellLocal       cterm=undercurl gui=undercurl ctermfg=blue    ctermbg=NONE                   guibg=NONE
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',        "\t")
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',         "\r")
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',       "\r\n")
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL',    '\s\+$')
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m5 = matchadd('IdeographicSpace', '　')
-colorscheme jellybeans
+set t_Co=16
+set background=dark
+let g:solarized_termtrans = 1
+let g:solarized_bold      = 0
+let g:solarized_underline = 0
+let g:solarized_italic    = 0
+autocmd MyAutoCmd ColorScheme * highlight TabString       cterm=NONE ctermbg=Gray    guibg=Gray
+autocmd MyAutoCmd ColorScheme * highlight CrString        cterm=NONE ctermbg=Gray    guibg=Gray
+autocmd MyAutoCmd ColorScheme * highlight CrlfString      cterm=NONE ctermbg=Gray    guibg=Gray
+autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL   cterm=NONE ctermbg=Gray    guibg=Gray
+autocmd MyAutoCmd ColorScheme * highlight YankRoundRegion cterm=NONE ctermfg=Magenta guifg=Magenta
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     "\t")
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      "\r")
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    "\r\n")
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', '\s\+$')
+colorscheme solarized
 " Show
 set title
 set ruler
@@ -134,8 +131,6 @@ set matchtime=1
 " q?  upward search
 set history=1000
 set number
-set cursorline
-set cursorcolumn
 " Clipboard
 set clipboard+=autoselect,unnamed
 " Backup
@@ -203,10 +198,6 @@ if neobundle#has_cache()
 else
     NeoBundle 'Shougo/vimproc', {'build': {'mac': 'make -f make_mac.mak', 'unix': 'make -f make_unix.mak', 'cygwin': 'make -f make_cygwin.mak'}}
     NeoBundle 'vim-jp/vital.vim'
-    NeoBundle 'itchyny/lightline.vim'
-    NeoBundle 'Yggdroot/indentLine'
-    NeoBundle 'thinca/vim-ref'
-    NeoBundle 'tpope/vim-surround'
     NeoBundle 'vim-scripts/matchit.zip'
     NeoBundle 'tpope/vim-endwise'
     NeoBundle 'fuenor/qfixgrep'
@@ -214,56 +205,15 @@ else
     NeoBundle 'thinca/vim-quickrun'
     NeoBundle 'SirVer/ultisnips'
     NeoBundle 'rhysd/clever-f.vim'
+    if (s:os_type !=# 'unix')
+        NeoBundle 'itchyny/lightline.vim'
+        NeoBundle 'Yggdroot/indentLine'
+    endif
 
     NeoBundleSaveCache
 endif
-" lightline {{{
-let g:lightline = {
-\    'colorscheme': 'jellybeans',
-\    'active':      {
-\        'left':  [['mode','paste'],['filename','qfstatusline']],
-\        'right': [['lineinfo'],['percent'],['fileformat','fileencoding','filetype']]},
-\    'component_function': {'filename': 'MyFilename', 'fileformat': 'MyFileformat', 'filetype': 'MyFiletype', 'fileencoding': 'MyFileencoding', 'mode': 'MyMode'},
-\    'component_expand': {'qfstatusline': 'qfstatusline#Update'},
-\    'component_type':   {'qfstatusline': 'error'},
-\    'subseparator': {'left': '|', 'right': '|'}}
-function! MyModified()
-    return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-function! MyReadonly()
-    return &ft !~? 'help' && &readonly ? 'x' : ''
-endfunction
-function! MyFilename()
-    let a:fname    = expand('%:t')
-    return a:fname =~ '__Gundo\|NERD_tree' ? '' :
-    \    &ft == 'unite' ? unite#get_status_string() : ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-    \    ('' != a:fname ? a:fname : '[No Name]') .    ('' != MyModified() ? ' ' . MyModified() : '')
-endfunction
-function! MyFileformat()
-    return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-function! MyFiletype()
-    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : '-') : ''
-endfunction
-function! MyFileencoding()
-    return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-endfunction
-function! MyMode()
-    return winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-let g:unite_force_overwrite_statusline = 0
-"}}}
-" indentLine {{{
-let g:indentLine_faster = 1
-"}}}
-" vim-ref {{{
-let g:ref_cache_dir       = $HOME.'/.vim/vim-ref/cache'
-let g:ref_phpmanual_path  = $HOME.'/.vim/vim-ref/php-chunked-xhtml'
-let g:ref_detect_filetype = {'html': 'phpmanual', 'javascript': 'phpmanual', 'css': 'phpmanual'}
-inoremap <silent><C-k> <C-o>:call<space>ref#K("normal")<CR><ESC>
-"}}}
 " qfixgrep {{{
-set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*.js'\ --exclude='*.log'
+set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*min.js'\ --exclude='*min.css'\ --exclude='*.log'
 set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
 let g:QFixWin_EnableMode   = 1
 let g:QFix_UseLocationList = 1
@@ -377,29 +327,29 @@ NeoBundleLazy 'vim-jp/vimdoc-ja', {'commands': 'help'}
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc/
 "set helplang=ja
 "}}}
-" open-browser.vim {{{
-NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'OpenBrowser', 'mappings': '<Plug>(openbrowser-smart-search)'}
-let g:netrw_nogx = 1 " disable netrw's gx mapping.
-nmap <Leader>gx <Plug>(openbrowser-smart-search)
-vmap <Leader>gx <Plug>(openbrowser-smart-search)
-"}}}
 " taglist.vim {{{
 NeoBundleLazy 'vim-scripts/taglist.vim', {'commands': 'Tlist'}
-let g:Tlist_Use_Right_Window = 1
-let g:Tlist_Show_One_File    = 1
-let g:Tlist_Exit_OnlyWindow  = 1
-let g:Tlist_WinWidth         = 20
-let g:tlist_php_settings     = 'php;c:class;f:function;d:constant'
 nnoremap <Leader>t :<C-u>Tlist<CR>
+let s:hooks = neobundle#get_hooks('taglist.vim')
+function! s:hooks.on_source(bundle)
+    let g:Tlist_Use_Right_Window = 1
+    let g:Tlist_Show_One_File    = 1
+    let g:Tlist_Exit_OnlyWindow  = 1
+    let g:Tlist_WinWidth         = 25
+    let g:tlist_php_settings     = 'php;c:class;f:function;d:constant'
+endfunction
 "}}}
 " nerdtree {{{
 NeoBundleLazy 'scrooloose/nerdtree', {'commands': 'NERDTree'}
 nnoremap <expr><Leader>n ':NERDTree '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
-let g:NERDTreeWinSize           = 20
-let g:NERDTreeMinimalUI         = 1
-let g:NERDTreeRespectWildIgnore = 1
-let g:NERDTreeShowHidden        = 1
-autocmd MyAutoCmd BufEnter * if (winnr('$') == 1 && exists('b:NERDTreeType') && b:NERDTreeType == 'primary') | q | endif
+let s:hooks = neobundle#get_hooks('nerdtree')
+function! s:hooks.on_source(bundle)
+    let g:NERDTreeWinSize           = 20
+    let g:NERDTreeMinimalUI         = 1
+    let g:NERDTreeRespectWildIgnore = 1
+    let g:NERDTreeShowHidden        = 1
+    autocmd MyAutoCmd BufEnter * if (winnr('$') == 1 && exists('b:NERDTreeType') && b:NERDTreeType == 'primary') | q | endif
+endfunction
 "}}}
 " vim-easy-align {{{
 NeoBundleLazy 'junegunn/vim-easy-align', {'commands': 'EasyAlign'}
@@ -421,6 +371,41 @@ let g:easy_align_delimiters = {
 NeoBundleLazy 'vim-scripts/SQLUtilities', {'depends': 'vim-scripts/Align', 'commands': 'SQLUFormatter'}
 let g:sqlutil_align_comma = 1
 nnoremap <Leader>sql :<C-u>SQLUFormatter<CR>
+"}}}
+" previm {{{
+NeoBundleLazy 'kannokanno/previm', {'depends': 'open-browser.vim', 'commands': 'PrevimOpen'}
+nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
+"}}}
+" vim-ref {{{
+NeoBundleLazy 'thinca/vim-ref', {'functions': 'ref#K'}
+let g:ref_no_default_key_mappings = 1
+inoremap <silent><C-k> <C-o>:call<space>ref#K("normal")<CR><ESC>
+nnoremap <silent>K :<C-u>call ref#K('normal')<CR>
+let s:hooks = neobundle#get_hooks('vim-ref')
+function! s:hooks.on_source(bundle)
+    let g:ref_cache_dir       = $HOME.'/.vim/vim-ref/cache'
+    let g:ref_phpmanual_path  = $HOME.'/.vim/vim-ref/php-chunked-xhtml'
+    let g:ref_detect_filetype = {'html': 'phpmanual', 'javascript': 'phpmanual', 'css': 'phpmanual'}
+endfunction
+"}}}
+" vim-php-cs-fixer {{{
+NeoBundleLazy 'stephpy/vim-php-cs-fixer', {'functions': 'PhpCsFixerFixFile'}
+nnoremap <Leader>php :<C-u>call<Space>PhpCsFixerFixFile()<CR>
+let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
+function! s:hooks.on_source(bundle)
+    let g:php_cs_fixer_config                 = 'default'
+    let g:php_cs_fixer_dry_run                = 0
+    let g:php_cs_fixer_enable_default_mapping = 0
+    let g:php_cs_fixer_level                  = 'all'
+    let g:php_cs_fixer_path                   = $HOME.'/.vim/vim-php-cs-fixer/php-cs-fixer'
+    let g:php_cs_fixer_php_path               = 'php'
+    let g:php_cs_fixer_verbose                = 0
+endfunction
+"}}}
+" open-browser.vim {{{
+NeoBundleLazy 'tyru/open-browser.vim', {'mappings': '<Plug>(openbrowser-smart-search)'}
+let g:netrw_nogx = 1 " disable netrw's gx mapping.
+nnoremap <Leader>gx <Plug>(openbrowser-smart-search)
 "}}}
 " wildfire.vim {{{
 NeoBundleLazy 'gcmt/wildfire.vim', {'mappings': '<Plug>(wildfire-fuel)'}
@@ -448,6 +433,7 @@ function! s:hooks.on_source(bundle)
     let g:neocomplete#sources#buffer#disabled_pattern  = '\.log\|\.jax'
     let g:neocomplete#sources#buffer#max_keyword_width = 30
     let g:neocomplete#sources#dictionary#dictionaries  = {'_': '', 'php': $HOME.'/.vim/dict/php.dict'}
+    let g:neocomplete#use_vimproc                      = 1
 endfunction
 "}}}
 " gundo.vim {{{
@@ -459,31 +445,24 @@ function! s:hooks.on_source(bundle)
     nnoremap <Leader>gundo :<C-u>GundoToggle<CR>
 endfunction
 "}}}
-" vim-php-cs-fixer {{{
-NeoBundleLazy 'stephpy/vim-php-cs-fixer', {'filetypes': 'php'}
-let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
-function! s:hooks.on_source(bundle)
-    let g:php_cs_fixer_config                 = 'default'
-    let g:php_cs_fixer_dry_run                = 0
-    let g:php_cs_fixer_enable_default_mapping = 0
-    let g:php_cs_fixer_level                  = 'all'
-    let g:php_cs_fixer_path                   = $HOME.'/.vim/vim-php-cs-fixer/php-cs-fixer'
-    let g:php_cs_fixer_php_path               = 'php'
-    let g:php_cs_fixer_verbose                = 0
-    nnoremap <Leader>php :call<Space>PhpCsFixerFixFile()<CR>
-endfunction
+" vim-surround {{{
+NeoBundleLazy 'tpope/vim-surround', {'insert': 1}
 "}}}
 " shabadou.vim
 " vim-qfsigns
 " vim-qfstatusline
 " vim-watchdogs {{{
-NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline'], 'filetypes': ['php', 'javascript', 'ruby']}
+if (s:os_type !=# 'unix')
+    NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline'], 'filetypes': ['php', 'javascript', 'ruby'], 'insert': 1}
+    "vim-qfstatusline
+    let g:Qfstatusline#UpdateCmd = function('lightline#update')
+else
+    NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns'], 'filetypes': ['php', 'javascript', 'ruby'], 'insert': 1}
+endif
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle)
     "vim-qfsigns
     nnoremap <Leader>sy :QfsignsJunmp<CR>
-    "vim-qfstatusline
-    let g:Qfstatusline#UpdateCmd = function('lightline#update')
     "vim-watchdogs
     let g:watchdogs_check_BufWritePost_enable = 1
     let g:watchdogs_check_CursorHold_enable   = 1
@@ -493,17 +472,13 @@ unlet s:hooks
 " vim-markdown {{{
 NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'markdown'}
 "}}}
-" previm {{{
-NeoBundleLazy 'kannokanno/previm', {'depends': 'open-browser.vim', 'filetypes': 'markdown'}
-nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
-"}}}
 "}}}
 "
 "
 " NeoBundleFetch {{{
 "# function memo
 "* New Install 'NeoBundle'. And Update 'NeoBundle' to 'NeoBundleFetch'.
-NeoBundleFetch 'nanotech/jellybeans.vim'
+NeoBundleFetch 'altercation/vim-colors-solarized'
 NeoBundleFetch 'psychs/lingr-irc'
 NeoBundleFetch 'KazuakiM/neosnippet-snippets'
 "}}}
@@ -515,23 +490,108 @@ if (s:os_type ==# 'mac')
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/undo/'  .s:date, 1)
     let &backupdir = '/tmp/backup/'.s:date
     let &undodir   = '/tmp/undo/'  .s:date
+    " previm {{{
     let g:previm_open_cmd  = 'open -a firefox'
-    let g:regexper#OpenCmd = 'open -a firefox'
-    let g:memolist_path    = $HOME.'/.vim/memolist.vim'
+    "}}}
+    " memolist.vim {{{
+    let g:memolist_path = $HOME.'/.vim/memolist.vim'
+    "}}}
+    " lightline {{{
+    let g:lightline = {
+    \    'colorscheme': 'jellybeans',
+    \    'active':      {
+    \        'left':  [['mode','paste'],['filename','qfstatusline']],
+    \        'right': [['lineinfo'],['percent'],['fileformat','fileencoding','filetype']]},
+    \    'component_function': {'filename': 'MyFilename', 'fileformat': 'MyFileformat', 'filetype': 'MyFiletype', 'fileencoding': 'MyFileencoding', 'mode': 'MyMode'},
+    \    'component_expand': {'qfstatusline': 'qfstatusline#Update'},
+    \    'component_type':   {'qfstatusline': 'error'},
+    \    'subseparator': {'left': '|', 'right': '|'}}
+    function! MyModified()
+        return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+    endfunction
+    function! MyReadonly()
+        return &ft !~? 'help' && &readonly ? 'x' : ''
+    endfunction
+    function! MyFilename()
+        let a:fname    = expand('%:t')
+        return a:fname =~ '__Gundo\|NERD_tree' ? '' :
+        \    &ft == 'unite' ? unite#get_status_string() : ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+        \    ('' != a:fname ? a:fname : '[No Name]') .    ('' != MyModified() ? ' ' . MyModified() : '')
+    endfunction
+    function! MyFileformat()
+        return winwidth(0) > 70 ? &fileformat : ''
+    endfunction
+    function! MyFiletype()
+        return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : '-') : ''
+    endfunction
+    function! MyFileencoding()
+        return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+    endfunction
+    function! MyMode()
+        return winwidth(0) > 60 ? lightline#mode() : ''
+    endfunction
+    let g:unite_force_overwrite_statusline = 0
+    "}}}
+    " indentLine {{{
+    let g:indentLine_faster = 1
+    "}}}
 elseif (s:os_type ==# 'win')
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('C:\temp\backup\'.s:date, 1)
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('C:\temp\undo\'  .s:date, 1)
     let &backupdir = 'C:\temp\backup\'.s:date
     let &undodir   = 'C:\temp\undo\'  .s:date
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+    " memolist.vim {{{
     let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
+    "}}}
+    " lightline {{{
+    let g:lightline = {
+    \    'colorscheme': 'jellybeans',
+    \    'active':      {
+    \        'left':  [['mode','paste'],['filename','qfstatusline']],
+    \        'right': [['lineinfo'],['percent'],['fileformat','fileencoding','filetype']]},
+    \    'component_function': {'filename': 'MyFilename', 'fileformat': 'MyFileformat', 'filetype': 'MyFiletype', 'fileencoding': 'MyFileencoding', 'mode': 'MyMode'},
+    \    'component_expand': {'qfstatusline': 'qfstatusline#Update'},
+    \    'component_type':   {'qfstatusline': 'error'},
+    \    'subseparator': {'left': '|', 'right': '|'}}
+    function! MyModified()
+        return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+    endfunction
+    function! MyReadonly()
+        return &ft !~? 'help' && &readonly ? 'x' : ''
+    endfunction
+    function! MyFilename()
+        let a:fname    = expand('%:t')
+        return a:fname =~ '__Gundo\|NERD_tree' ? '' :
+        \    &ft == 'unite' ? unite#get_status_string() : ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+        \    ('' != a:fname ? a:fname : '[No Name]') .    ('' != MyModified() ? ' ' . MyModified() : '')
+    endfunction
+    function! MyFileformat()
+        return winwidth(0) > 70 ? &fileformat : ''
+    endfunction
+    function! MyFiletype()
+        return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : '-') : ''
+    endfunction
+    function! MyFileencoding()
+        return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+    endfunction
+    function! MyMode()
+        return winwidth(0) > 60 ? lightline#mode() : ''
+    endfunction
+    let g:unite_force_overwrite_statusline = 0
+    "}}}
+    " indentLine {{{
+    let g:indentLine_faster = 1
+    "}}}
 else
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/backup/'.s:date, 1)
     autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/undo/'  .s:date, 1)
     let &backupdir = '/tmp/backup/'.s:date
     let &undodir   = '/tmp/undo/'  .s:date
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+    " memolist.vim {{{
     let g:memolist_path = $HOME.'/.vim/memolist.vim'
+    "}}}
 endif
 "}}}
 "

@@ -185,6 +185,7 @@ endfunction
 " vim-regexper {{{
 NeoBundleLazy 'KazuakiM/vim-regexper', {'commands': 'RegexperExecute'}
 let g:regexper#AppPath = $HOME.'/.vim/bundle/regexper'
+let g:regexper#OpenCmd = 'open -a firefox'
 nnoremap <Leader>reg :<C-u>RegexperExecute<Space>
 "}}}
 " vimshell.vim {{{
@@ -250,7 +251,8 @@ endfunction
 "
 "
 " NeoBundleFetch {{{
-NeoBundleFetch 'altercation/vim-colors-solarized'
+set t_Co=256
+NeoBundleFetch 'nanotech/jellybeans.vim'
 NeoBundleFetch 'tomasr/molokai'
 NeoBundleFetch 'ziadoz/awesome-php'
 NeoBundleFetch 'javallone/regexper'
