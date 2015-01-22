@@ -557,6 +557,7 @@ elseif (s:os_type ==# 'win')
     let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     "}}}
 elseif (s:os_type ==# 'unix')
+    set statusline=%F%m%r%h%w%q%=\|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 endif
 "}}}
 "}}}
