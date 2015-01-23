@@ -96,10 +96,6 @@ syntax on
 " Check space and new line code.
 set t_Co=16
 set background=dark
-let g:solarized_termtrans = 1
-let g:solarized_bold      = 0
-let g:solarized_underline = 0
-let g:solarized_italic    = 0
 autocmd MyAutoCmd ColorScheme * highlight TabString       cterm=NONE ctermbg=Gray    guibg=Gray
 autocmd MyAutoCmd ColorScheme * highlight CrString        cterm=NONE ctermbg=Gray    guibg=Gray
 autocmd MyAutoCmd ColorScheme * highlight CrlfString      cterm=NONE ctermbg=Gray    guibg=Gray
@@ -109,7 +105,7 @@ autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     "\t")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      "\r")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    "\r\n")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', '\s\+$')
-colorscheme solarized
+colorscheme desert
 " Show
 set title
 set ruler
@@ -131,6 +127,8 @@ set matchtime=1
 " q?  upward search
 set history=1000
 set number
+set cursorline
+set cursorcolumn
 " Clipboard
 set clipboard+=autoselect,unnamed
 " Backup
@@ -451,17 +449,13 @@ NeoBundleLazy 'tpope/vim-surround', {'insert': 1}
 " vim-qfsigns
 " vim-qfstatusline
 " vim-watchdogs {{{
-if (s:os_type !=# 'unix')
-    NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline'], 'filetypes': ['php', 'javascript', 'ruby'], 'insert': 1}
-    "vim-qfstatusline
-    let g:Qfstatusline#UpdateCmd = function('lightline#update')
-else
-    NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns'], 'filetypes': ['php', 'javascript', 'ruby'], 'insert': 1}
-endif
+NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline'], 'filetypes': ['php', 'javascript', 'ruby'], 'insert': 1}
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle)
     "vim-qfsigns
     nnoremap <Leader>sy :QfsignsJunmp<CR>
+    "vim-qfstatusline
+    let g:Qfstatusline#UpdateCmd = function('qfstatusline#Update')
     "vim-watchdogs
     let g:watchdogs_check_BufWritePost_enable = 1
     let g:watchdogs_check_CursorHold_enable   = 1
@@ -477,7 +471,6 @@ NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'markdown'}
 " NeoBundleFetch {{{
 "# function memo
 "* New Install 'NeoBundle'. And Update 'NeoBundle' to 'NeoBundleFetch'.
-NeoBundleFetch 'altercation/vim-colors-solarized'
 NeoBundleFetch 'psychs/lingr-irc'
 NeoBundleFetch 'KazuakiM/neosnippet-snippets'
 "}}}
@@ -557,7 +550,7 @@ elseif (s:os_type ==# 'win')
     let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     "}}}
 elseif (s:os_type ==# 'unix')
-    set statusline=%F%m%r%h%w%q%=\|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
+    set statusline=%t%m%r%h%w%q%{qfstatusline#Update()}%=\|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 endif
 "}}}
 "}}}
