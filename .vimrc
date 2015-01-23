@@ -238,10 +238,11 @@ let g:quickrun_config = {
 \        'runner':                              'vimproc',
 \        'runner/vimproc/updatetime':           600},
 \    'watchdogs_checker/_': {
-\        'hook/close_quickfix/enable_exit': 1,
-\        'hook/back_window/enable_exit':    0,  'hook/back_window/priority_exit':    1,
-\        'hook/qfsigns_update/enable_exit': 1,  'hook/qfsigns_update/priority_exit': 2,
-\        'outputter/quickfix/open_cmd':     ''},
+\        'hook/close_quickfix/enable_exit':      1,
+\        'hook/back_window/enable_exit':         0, 'hook/back_window/priority_exit':         1,
+\        'hook/qfsigns_update/enable_exit':      1, 'hook/qfsigns_update/priority_exit':      2,
+\        'hook/qfstatusline_update/enable_exit': 1, 'hook/qfstatusline_update/priority_exit': 3,
+\        'outputter/quickfix/open_cmd':          ''},
 \    'watchdogs_checker/php': {
 \        'command':     'php',
 \        'exec':        '%c -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0 -l %o %s:p',
@@ -454,8 +455,6 @@ let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle)
     "vim-qfsigns
     nnoremap <Leader>sy :QfsignsJunmp<CR>
-    "vim-qfstatusline
-    let g:Qfstatusline#UpdateCmd = function('qfstatusline#Update')
     "vim-watchdogs
     let g:watchdogs_check_BufWritePost_enable = 1
     let g:watchdogs_check_CursorHold_enable   = 1
@@ -527,12 +526,11 @@ if (s:os_type !=# 'unix')
     endfunction
     let g:unite_force_overwrite_statusline = 0
     "}}}
+    "vim-qfstatusline {{{
+    let g:Qfstatusline#UpdateCmd = function('lightline#update')
+    "}}}
     " indentLine {{{
     let g:indentLine_faster = 1
-    "}}}
-    " vim-quickrun {{{
-    let g:quickrun_config['watchdogs_checker/_']['hook/qfstatusline_update/enable_exit']   = 1
-    let g:quickrun_config['watchdogs_checker/_']['hook/qfstatusline_update/priority_exit'] = 3
     "}}}
 endif
 "}}}
@@ -550,7 +548,13 @@ elseif (s:os_type ==# 'win')
     let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     "}}}
 elseif (s:os_type ==# 'unix')
-    set statusline=%t%m%r%h%w%q%{qfstatusline#Update()}%=\|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
+    "vim-qfstatusline {{{
+    function! StatuslineUpldate()
+        return qfstatusline#Update()
+    endfunction
+    let g:Qfstatusline#UpdateCmd = function('StatuslineUpldate')
+    "}}}
+    set statusline=%t%m%r%h%w%q\ %{StatuslineUpldate()}%=\|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 endif
 "}}}
 "}}}
