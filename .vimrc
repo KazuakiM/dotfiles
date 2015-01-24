@@ -79,9 +79,8 @@ noremap 0 $
 noremap 1 ^
 nnoremap Y y$
 nnoremap gr gT
-nnoremap gf <C-w>w
 nnoremap gs <C-w>+
-nnoremap gd <C-w>-
+nnoremap gd <C-w>>
 noremap j gj
 noremap k gk
 noremap <Down> <C-f>
@@ -258,7 +257,8 @@ let g:quickrun_config = {
 \        'outputter/quickfix/open_cmd':          ''},
 \    'watchdogs_checker/php': {
 \        'command':     'php',
-\        'exec':        '%c -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0 -l %o %s:p',
+\        'cmdopt':      '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
+\        'exec':        '%c %o %s:p',
 \        'errorformat': '%m\ in\ %f\ on\ line\ %l'},
 \    'markdown': {'outputter': 'browser'},
 \    'php': {
