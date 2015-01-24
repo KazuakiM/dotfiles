@@ -108,6 +108,7 @@ autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    "\r\n
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', '\s\+$')
 colorscheme desert
 " Show
+set shortmess+=I
 set title
 set ruler
 set laststatus=2
@@ -122,6 +123,8 @@ set display=lastline
 set pumheight=8
 set showmatch
 set matchtime=1
+set lazyredraw
+set ttyfast
 " [memo]
 " q:  command history
 " q/  downward search
@@ -216,6 +219,7 @@ else
     NeoBundle 'thinca/vim-quickrun'
     NeoBundle 'SirVer/ultisnips'
     NeoBundle 'rhysd/clever-f.vim'
+    NeoBundle 'vim-jp/vimdoc-ja'
     NeoBundle 'Yggdroot/indentLine'
 
     NeoBundleSaveCache
@@ -278,6 +282,10 @@ let g:clever_f_across_no_line = 0
 let g:clever_f_smart_case     = 1
 let g:clever_f_use_migemo     = 0
 "}}}
+" vimdoc-ja {{{
+set helplang=ja
+"helptags $HOME/.vim/bundle/vimdoc-ja/doc
+"}}}
 " indentLine {{{
 let g:indentLine_faster = 1
 "}}}
@@ -333,11 +341,6 @@ function! s:hooks.on_source(bundle)
     let g:memolist_unite_source         = 'file_rec'
     let g:memolist_unite_option         = '-default-action=tabopen'
 endfunction
-"}}}
-" vimdoc-ja {{{
-NeoBundleLazy 'vim-jp/vimdoc-ja', {'commands': 'help'}
-"helptags $HOME/.vim/bundle/vimdoc-ja/doc/
-"set helplang=ja
 "}}}
 " taglist.vim {{{
 NeoBundleLazy 'vim-scripts/taglist.vim', {'commands': 'Tlist'}
