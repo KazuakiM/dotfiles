@@ -414,9 +414,9 @@ function! s:hooks.on_source(bundle)
 endfunction
 "}}}
 " open-browser.vim {{{
-NeoBundleLazy 'tyru/open-browser.vim', {'mappings': '<Plug>(openbrowser-smart-search)'}
+NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'openbrowser#_keymapping_smart_search'}
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
-nnoremap <Leader>gx <Plug>(openbrowser-smart-search)
+nnoremap <Leader>gx :<C-u>call openbrowser#_keymapping_smart_search('n')<CR>
 "}}}
 " wildfire.vim {{{
 NeoBundleLazy 'gcmt/wildfire.vim', {'mappings': '<Plug>(wildfire-fuel)'}
@@ -463,8 +463,8 @@ NeoBundleLazy 'tpope/vim-surround', {'insert': 1}
 " vim-qfsigns
 " vim-qfstatusline
 " vim-watchdogs {{{
+NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline'], 'insert': 1}
 let g:Qfstatusline#UpdateCmd = function('StatuslineSyntax')
-NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline'], 'filetypes': ['php', 'javascript', 'ruby'], 'insert': 1}
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle)
     "vim-qfsigns
