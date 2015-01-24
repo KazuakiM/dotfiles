@@ -216,9 +216,7 @@ else
     NeoBundle 'thinca/vim-quickrun'
     NeoBundle 'SirVer/ultisnips'
     NeoBundle 'rhysd/clever-f.vim'
-    if (s:os_type !=# 'unix')
-        NeoBundle 'Yggdroot/indentLine'
-    endif
+    NeoBundle 'Yggdroot/indentLine'
 
     NeoBundleSaveCache
 endif
@@ -279,6 +277,9 @@ let g:UltiSnipsUsePythonVersion    = 2
 let g:clever_f_across_no_line = 0
 let g:clever_f_smart_case     = 1
 let g:clever_f_use_migemo     = 0
+"}}}
+" indentLine {{{
+let g:indentLine_faster = 1
 "}}}
 "}}}
 "
@@ -506,9 +507,6 @@ if (s:os_type !=# 'win')
     "}}}
 endif
 if (s:os_type !=# 'unix')
-    " indentLine {{{
-    let g:indentLine_faster = 1
-    "}}}
 endif
 "}}}
 " Only {{{
