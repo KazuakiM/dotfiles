@@ -100,8 +100,9 @@ autocmd MyAutoCmd ColorScheme * highlight TabString       cterm=NONE      ctermb
 autocmd MyAutoCmd ColorScheme * highlight CrString        cterm=NONE      ctermbg=Gray    guibg=Gray
 autocmd MyAutoCmd ColorScheme * highlight CrlfString      cterm=NONE      ctermbg=Gray    guibg=Gray
 autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL   cterm=NONE      ctermbg=Gray    guibg=Gray
-autocmd MyAutoCmd ColorScheme * highlight YankRoundRegion cterm=NONE      ctermfg=Magenta guifg=Magenta
-autocmd MyAutoCmd ColorScheme * highlight QFError         cterm=underline ctermfg=Magenta guifg=Magenta
+autocmd MyAutoCmd ColorScheme * highlight YankRoundRegion cterm=NONE                                      ctermfg=Magenta guifg=Magenta
+autocmd MyAutoCmd ColorScheme * highlight QFError         cterm=underline                                 ctermfg=Magenta guifg=Magenta
+autocmd MyAutoCmd ColorScheme * highlight StatusLineNC    cterm=NONE      ctermbg=DarkGray guifg=DarkGray
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     "\t")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      "\r")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    "\r\n")
@@ -130,6 +131,18 @@ set history=1000
 set number
 set cursorline
 set cursorcolumn
+function! StatuslineSyntax()
+    return qfstatusline#Update()
+endfunction
+function! StatuslineMode()
+    let a:mode_list    = {'n': 'NORMAL ','v': 'VISUAL ','V': 'V-LINE ',"\<C-v>": 'V-BLOCK','s': 'SELECT ','S': 'S-LINE ',"\<C-s>": 'S-BLOCK','i': 'INSERT ','R': 'REPLACE','c': 'COMMAND'}
+    let a:current_mode = mode()
+    if count(a:mode_list, a:current_mode) ==# 0
+        return a:mode_list[a:current_mode]
+    endif
+    return a:current_mode.'?'
+endfunction
+set statusline=\ %{StatuslineMode()}\ \|\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=\|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 " Clipboard
 set clipboard+=autoselect,unnamed
 " Backup
@@ -205,7 +218,6 @@ else
     NeoBundle 'SirVer/ultisnips'
     NeoBundle 'rhysd/clever-f.vim'
     if (s:os_type !=# 'unix')
-        NeoBundle 'itchyny/lightline.vim'
         NeoBundle 'Yggdroot/indentLine'
     endif
 
@@ -451,6 +463,7 @@ NeoBundleLazy 'tpope/vim-surround', {'insert': 1}
 " vim-qfsigns
 " vim-qfstatusline
 " vim-watchdogs {{{
+let g:Qfstatusline#UpdateCmd = function('StatuslineSyntax')
 NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline'], 'filetypes': ['php', 'javascript', 'ruby'], 'insert': 1}
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle)
@@ -493,45 +506,6 @@ if (s:os_type !=# 'win')
     "}}}
 endif
 if (s:os_type !=# 'unix')
-    " lightline {{{
-    let g:lightline = {
-    \    'colorscheme': 'jellybeans',
-    \    'active':      {
-    \        'left':  [['mode','paste'],['filename','qfstatusline']],
-    \        'right': [['lineinfo'],['percent'],['fileformat','fileencoding','filetype']]},
-    \    'component_function': {'filename': 'MyFilename', 'fileformat': 'MyFileformat', 'filetype': 'MyFiletype', 'fileencoding': 'MyFileencoding', 'mode': 'MyMode'},
-    \    'component_expand': {'qfstatusline': 'qfstatusline#Update'},
-    \    'component_type':   {'qfstatusline': 'error'},
-    \    'subseparator': {'left': '|', 'right': '|'}}
-    function! MyModified()
-        return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-    endfunction
-    function! MyReadonly()
-        return &ft !~? 'help' && &readonly ? 'x' : ''
-    endfunction
-    function! MyFilename()
-        let a:fname    = expand('%:t')
-        return a:fname =~ '__Gundo\|NERD_tree' ? '' :
-        \    &ft == 'unite' ? unite#get_status_string() : ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-        \    ('' != a:fname ? a:fname : '[No Name]') .    ('' != MyModified() ? ' ' . MyModified() : '')
-    endfunction
-    function! MyFileformat()
-        return winwidth(0) > 70 ? &fileformat : ''
-    endfunction
-    function! MyFiletype()
-        return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : '-') : ''
-    endfunction
-    function! MyFileencoding()
-        return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-    endfunction
-    function! MyMode()
-        return winwidth(0) > 60 ? lightline#mode() : ''
-    endfunction
-    let g:unite_force_overwrite_statusline = 0
-    "}}}
-    "vim-qfstatusline {{{
-    let g:Qfstatusline#UpdateCmd = function('lightline#update')
-    "}}}
     " indentLine {{{
     let g:indentLine_faster = 1
     "}}}
@@ -551,13 +525,6 @@ elseif (s:os_type ==# 'win')
     let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     "}}}
 elseif (s:os_type ==# 'unix')
-    "vim-qfstatusline {{{
-    function! StatuslineUpldate()
-        return qfstatusline#Update()
-    endfunction
-    let g:Qfstatusline#UpdateCmd = function('StatuslineUpldate')
-    "}}}
-    set statusline=\ %{mode()}\ \|\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineUpldate()}%=\|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 endif
 "}}}
 "}}}
