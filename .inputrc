@@ -5,7 +5,6 @@
 #}}}
 #base-variable {{{
 set bell-style none
-set completion-ignore-case on
 set convert-meta off
 set editing-mode vi
 set expand-tilde on
