@@ -96,11 +96,12 @@ syntax on
 " Check space and new line code.
 set t_Co=16
 set background=dark
-autocmd MyAutoCmd ColorScheme * highlight TabString       cterm=NONE ctermbg=Gray    guibg=Gray
-autocmd MyAutoCmd ColorScheme * highlight CrString        cterm=NONE ctermbg=Gray    guibg=Gray
-autocmd MyAutoCmd ColorScheme * highlight CrlfString      cterm=NONE ctermbg=Gray    guibg=Gray
-autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL   cterm=NONE ctermbg=Gray    guibg=Gray
-autocmd MyAutoCmd ColorScheme * highlight YankRoundRegion cterm=NONE ctermfg=Magenta guifg=Magenta
+autocmd MyAutoCmd ColorScheme * highlight TabString       cterm=NONE      ctermbg=Gray    guibg=Gray
+autocmd MyAutoCmd ColorScheme * highlight CrString        cterm=NONE      ctermbg=Gray    guibg=Gray
+autocmd MyAutoCmd ColorScheme * highlight CrlfString      cterm=NONE      ctermbg=Gray    guibg=Gray
+autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL   cterm=NONE      ctermbg=Gray    guibg=Gray
+autocmd MyAutoCmd ColorScheme * highlight YankRoundRegion cterm=NONE      ctermfg=Magenta guifg=Magenta
+autocmd MyAutoCmd ColorScheme * highlight QFError         cterm=underline ctermfg=Magenta guifg=Magenta
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     "\t")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      "\r")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    "\r\n")
@@ -455,6 +456,8 @@ let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle)
     "vim-qfsigns
     nnoremap <Leader>sy :QfsignsJunmp<CR>
+    let g:qfsigns#Config = {'id': '5050', 'name': 'QFError',}
+    execute 'sign define '.get(g:qfsigns#Config,'name').' linehl=QFError texthl=QFError text=>>'
     "vim-watchdogs
     let g:watchdogs_check_BufWritePost_enable = 1
     let g:watchdogs_check_CursorHold_enable   = 1
@@ -554,7 +557,7 @@ elseif (s:os_type ==# 'unix')
     endfunction
     let g:Qfstatusline#UpdateCmd = function('StatuslineUpldate')
     "}}}
-    set statusline=%t%m%r%h%w%q\ %{StatuslineUpldate()}%=\|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
+    set statusline=\ %{mode()}\ \|\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineUpldate()}%=\|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 endif
 "}}}
 "}}}
