@@ -32,7 +32,7 @@
 "
 " Common {{{
 if has('vim_starting')
-    if (has("win32") || has ("win64"))
+    if has('win32') || has ('win64')
         let s:os_type = 'win'
         set runtimepath+=$HOME/.vim,$HOME/.vim/after
     elseif has('mac')
@@ -235,6 +235,7 @@ else
     NeoBundle 'rhysd/clever-f.vim'
     NeoBundle 'vim-jp/vimdoc-ja'
     NeoBundle 'Yggdroot/indentLine'
+    "NeoBundle 'Kuniwak/vint'
 
     NeoBundleSaveCache
 endif
