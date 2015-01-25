@@ -81,8 +81,6 @@ nnoremap Y y$
 nnoremap gr gT
 nnoremap gs <C-w>+
 nnoremap gd <C-w>>
-noremap j gj
-noremap k gk
 noremap <Down> <C-f>
 noremap <Up>   <C-b>
 nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null<CR>
@@ -110,7 +108,30 @@ colorscheme desert
 " Show
 set shortmess+=I
 set title
-set ruler
+set titleold=
+set titlestring=%t(%F)
+" http://d.hatena.ne.jp/thinca/20111204/1322932585
+function! TabpageLabelUpdate(tab_number) "{{{
+    let title = gettabvar(a:tab_number, 'title')
+    if title !=# ''
+        return title
+    endif
+
+    let a:highlight = a:tab_number is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
+    let a:bufnrs    = tabpagebuflist(a:tab_number)
+    let a:bufnr     = len(a:bufnrs)
+    if a:bufnr is 1
+        let a:bufnr = ''
+    endif
+    let a:modified = len(filter(copy(a:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
+    return '%'.a:tab_number.'T'.a:highlight.a:bufnr.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tab_number) - 1]), ':t').a:modified.'%T%#TabLineFill#'
+endfunction "}}}
+function! TabLineUpdate() "{{{
+  return join(map(range(1, tabpagenr('$')), 'TabpageLabelUpdate(v:val)'), ' | ').'%#TabLineFill#%T%='
+endfunction "}}}
+set tabline=%!TabLineUpdate()
+set showcmd
+set noruler
 set laststatus=2
 set cmdheight=1
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,.DS_Store,.,..
@@ -133,17 +154,18 @@ set history=1000
 set number
 set cursorline
 set cursorcolumn
-function! StatuslineSyntax()
+function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
-endfunction
-function! StatuslineMode()
-    let a:mode_list    = {'n': 'NORMAL ','v': 'VISUAL ','V': 'V-LINE ',"\<C-v>": 'V-BLOCK','s': 'SELECT ','S': 'S-LINE ',"\<C-s>": 'S-BLOCK','i': 'INSERT ','R': 'REPLACE','c': 'COMMAND'}
+endfunction "}}}
+function! StatuslineMode() "{{{
+    let a:mode_list    = {'n': ' NORMAL','v': ' VISUAL','V': ' V-LINE',"\<C-v>": 'V-BLOCK','s': ' SELECT','S': ' S-LINE',"\<C-s>": 'S-BLOCK','i': ' INSERT','R': 'REPLACE','c': 'COMMAND','r': 'COMMAND'}
     let a:current_mode = mode()
-    if count(a:mode_list, a:current_mode) ==# 0
-        return a:mode_list[a:current_mode]
+    let a:paste_mode   = (&paste) ? '(PASTE)' : ''
+    if has_key(a:mode_list, a:current_mode)
+        return a:mode_list[a:current_mode].a:paste_mode
     endif
-    return a:current_mode.'?'
-endfunction
+    return a:current_mode.a:paste_mode.'?'
+endfunction "}}}
 set statusline=\ %{StatuslineMode()}\ \|\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=\|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 " Clipboard
 set clipboard+=autoselect,unnamed
@@ -193,9 +215,6 @@ nmap <Leader>f [vim]
 nnoremap [vim]e :<C-u>tabnew<Space>$MYVIMRC<CR>
 nnoremap [vim]s :<C-u>source<Space>$MYVIMRC<CR>
 nnoremap [vim]h :<C-u>source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
-" ESC-ESC
-autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
-autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 "}}}
 "
 "
@@ -546,13 +565,11 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                setlocal filetyp
 "
 "
 " Extra local functions {{{
-" auto make directory {{{
-function! s:auto_mkdir(dir, force)
+function! s:auto_mkdir(dir, force) "{{{
     if !isdirectory(a:dir) && (a:force || input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
         call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
     endif
-endfunction
-"}}}
+endfunction "}}}
 "}}}
 "
 "
