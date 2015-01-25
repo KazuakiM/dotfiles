@@ -112,11 +112,6 @@ set titleold=
 set titlestring=%t(%F)
 " http://d.hatena.ne.jp/thinca/20111204/1322932585
 function! TabpageLabelUpdate(tab_number) "{{{
-    let title = gettabvar(a:tab_number, 'title')
-    if title !=# ''
-        return title
-    endif
-
     let a:highlight = a:tab_number is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
     let a:bufnrs    = tabpagebuflist(a:tab_number)
     let a:bufnr     = len(a:bufnrs)
@@ -127,7 +122,7 @@ function! TabpageLabelUpdate(tab_number) "{{{
     return '%'.a:tab_number.'T'.a:highlight.a:bufnr.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tab_number) - 1]), ':t').a:modified.'%T%#TabLineFill#'
 endfunction "}}}
 function! TabLineUpdate() "{{{
-  return join(map(range(1, tabpagenr('$')), 'TabpageLabelUpdate(v:val)'), ' | ').'%#TabLineFill#%T%='
+    return join(map(range(1, tabpagenr('$')), 'TabpageLabelUpdate(v:val)'), ' | ').'%#TabLineFill#%T%='
 endfunction "}}}
 set tabline=%!TabLineUpdate()
 set showcmd
