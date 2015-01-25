@@ -161,7 +161,7 @@ function! StatuslineMode() "{{{
     endif
     return a:current_mode.a:paste_mode.'?'
 endfunction "}}}
-set statusline=\ %{StatuslineMode()}\ \|\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=\|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
+set statusline=\ %{StatuslineMode()}\ \|\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 " Clipboard
 set clipboard+=autoselect,unnamed
 " Backup
