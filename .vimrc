@@ -32,7 +32,7 @@
 "
 " Common {{{
 if has('vim_starting')
-    if (has("win32") || has ("win64"))
+    if has('win32') || has ('win64')
         let s:os_type = 'win'
         set runtimepath+=$HOME/.vim,$HOME/.vim/after
     elseif has('mac')
@@ -79,11 +79,8 @@ noremap 0 $
 noremap 1 ^
 nnoremap Y y$
 nnoremap gr gT
-nnoremap gf <C-w>w
 nnoremap gs <C-w>+
-nnoremap gd <C-w>-
-noremap j gj
-noremap k gk
+nnoremap gd <C-w>>
 noremap <Down> <C-f>
 noremap <Up>   <C-b>
 nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null<CR>
@@ -109,8 +106,27 @@ autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    "\r\n
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', '\s\+$')
 colorscheme desert
 " Show
+set shortmess+=I
 set title
-set ruler
+set titleold=
+set titlestring=%t(%F)
+" http://d.hatena.ne.jp/thinca/20111204/1322932585
+function! TabpageLabelUpdate(tab_number) "{{{
+    let a:highlight = a:tab_number is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
+    let a:bufnrs    = tabpagebuflist(a:tab_number)
+    let a:bufnr     = len(a:bufnrs)
+    if a:bufnr is 1
+        let a:bufnr = ''
+    endif
+    let a:modified = len(filter(copy(a:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
+    return '%'.a:tab_number.'T'.a:highlight.a:bufnr.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tab_number) - 1]), ':t').a:modified.'%T%#TabLineFill#'
+endfunction "}}}
+function! TabLineUpdate() "{{{
+    return join(map(range(1, tabpagenr('$')), 'TabpageLabelUpdate(v:val)'), ' | ').'%#TabLineFill#%T%='
+endfunction "}}}
+set tabline=%!TabLineUpdate()
+set showcmd
+set noruler
 set laststatus=2
 set cmdheight=1
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,.DS_Store,.,..
@@ -123,6 +139,8 @@ set display=lastline
 set pumheight=8
 set showmatch
 set matchtime=1
+set lazyredraw
+set ttyfast
 " [memo]
 " q:  command history
 " q/  downward search
@@ -131,18 +149,19 @@ set history=1000
 set number
 set cursorline
 set cursorcolumn
-function! StatuslineSyntax()
+function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
-endfunction
-function! StatuslineMode()
-    let a:mode_list    = {'n': 'NORMAL ','v': 'VISUAL ','V': 'V-LINE ',"\<C-v>": 'V-BLOCK','s': 'SELECT ','S': 'S-LINE ',"\<C-s>": 'S-BLOCK','i': 'INSERT ','R': 'REPLACE','c': 'COMMAND'}
+endfunction "}}}
+function! StatuslineMode() "{{{
+    let a:mode_list    = {'n': ' NORMAL','v': ' VISUAL','V': ' V-LINE',"\<C-v>": 'V-BLOCK','s': ' SELECT','S': ' S-LINE',"\<C-s>": 'S-BLOCK','i': ' INSERT','R': 'REPLACE','c': 'COMMAND','r': 'COMMAND'}
     let a:current_mode = mode()
-    if count(a:mode_list, a:current_mode) ==# 0
-        return a:mode_list[a:current_mode]
+    let a:paste_mode   = (&paste) ? '(PASTE)' : ''
+    if has_key(a:mode_list, a:current_mode)
+        return a:mode_list[a:current_mode].a:paste_mode
     endif
-    return a:current_mode.'?'
-endfunction
-set statusline=\ %{StatuslineMode()}\ \|\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=\|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
+    return a:current_mode.a:paste_mode.'?'
+endfunction "}}}
+set statusline=\ %{StatuslineMode()}\ \|\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 " Clipboard
 set clipboard+=autoselect,unnamed
 " Backup
@@ -191,9 +210,6 @@ nmap <Leader>f [vim]
 nnoremap [vim]e :<C-u>tabnew<Space>$MYVIMRC<CR>
 nnoremap [vim]s :<C-u>source<Space>$MYVIMRC<CR>
 nnoremap [vim]h :<C-u>source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
-" ESC-ESC
-autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
-autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 "}}}
 "
 "
@@ -217,9 +233,9 @@ else
     NeoBundle 'thinca/vim-quickrun'
     NeoBundle 'SirVer/ultisnips'
     NeoBundle 'rhysd/clever-f.vim'
-    if (s:os_type !=# 'unix')
-        NeoBundle 'Yggdroot/indentLine'
-    endif
+    NeoBundle 'vim-jp/vimdoc-ja'
+    NeoBundle 'Yggdroot/indentLine'
+    "NeoBundle 'Kuniwak/vint'
 
     NeoBundleSaveCache
 endif
@@ -258,7 +274,8 @@ let g:quickrun_config = {
 \        'outputter/quickfix/open_cmd':          ''},
 \    'watchdogs_checker/php': {
 \        'command':     'php',
-\        'exec':        '%c -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0 -l %o %s:p',
+\        'cmdopt':      '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
+\        'exec':        '%c %o %s:p',
 \        'errorformat': '%m\ in\ %f\ on\ line\ %l'},
 \    'markdown': {'outputter': 'browser'},
 \    'php': {
@@ -279,6 +296,13 @@ let g:UltiSnipsUsePythonVersion    = 2
 let g:clever_f_across_no_line = 0
 let g:clever_f_smart_case     = 1
 let g:clever_f_use_migemo     = 0
+"}}}
+" vimdoc-ja {{{
+set helplang=ja
+"helptags $HOME/.vim/bundle/vimdoc-ja/doc
+"}}}
+" indentLine {{{
+let g:indentLine_faster = 1
 "}}}
 "}}}
 "
@@ -332,11 +356,6 @@ function! s:hooks.on_source(bundle)
     let g:memolist_unite_source         = 'file_rec'
     let g:memolist_unite_option         = '-default-action=tabopen'
 endfunction
-"}}}
-" vimdoc-ja {{{
-NeoBundleLazy 'vim-jp/vimdoc-ja', {'commands': 'help'}
-"helptags $HOME/.vim/bundle/vimdoc-ja/doc/
-"set helplang=ja
 "}}}
 " taglist.vim {{{
 NeoBundleLazy 'vim-scripts/taglist.vim', {'commands': 'Tlist'}
@@ -506,9 +525,6 @@ if (s:os_type !=# 'win')
     "}}}
 endif
 if (s:os_type !=# 'unix')
-    " indentLine {{{
-    let g:indentLine_faster = 1
-    "}}}
 endif
 "}}}
 " Only {{{
@@ -545,13 +561,11 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                setlocal filetyp
 "
 "
 " Extra local functions {{{
-" auto make directory {{{
-function! s:auto_mkdir(dir, force)
+function! s:auto_mkdir(dir, force) "{{{
     if !isdirectory(a:dir) && (a:force || input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
         call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
     endif
-endfunction
-"}}}
+endfunction "}}}
 "}}}
 "
 "
