@@ -38,7 +38,6 @@ hi WarningMsg   guifg=salmon
 "hi Tooltip
 "}}}
 " syntax highlighting groups {{{
-hi Comment     guifg=SkyBlue
 hi Constant    guifg=#ffa0a0
 hi Identifier  guifg=palegreen
 hi Statement   guifg=khaki
@@ -48,7 +47,6 @@ hi Special     guifg=navajowhite
 "hi Underlined
 hi Ignore      guifg=grey40
 "hi Error
-hi Todo        guifg=orangered   guibg=yellow2
 "}}}
 " color terminal definitions {{{
 hi SpecialKey                        ctermfg=DarkGreen
@@ -89,6 +87,7 @@ hi Error        cterm=bold           ctermfg=7         ctermbg=1
 hi CursorLine   cterm=NONE           ctermfg=Cyan
 hi CursorLineNr cterm=NONE           ctermfg=Cyan
 hi Pmenu                             ctermfg=DarkGrey  ctermbg=White
+hi PmenuSel                          ctermfg=Magenta   ctermbg=Black
 "}}}
 " my highlight {{{
 hi TabString       cterm=NONE      ctermbg=DarkGrey
