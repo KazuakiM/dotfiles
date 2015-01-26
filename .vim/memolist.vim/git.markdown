@@ -73,6 +73,15 @@ git branch -a
 git remote add fork_master git://github.com/xxxxx/xxxxx
 ```
 
+## Checkout remote branch repository
+```
+pwd
+git status
+git fetch
+git branch -a
+git checkout -b xxxxx origin/xxxxx
+```
+
 ## git log
 help
 ```
