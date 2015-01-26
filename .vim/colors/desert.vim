@@ -1,18 +1,12 @@
-" Vim color file
+" Vim color file {{{
 " Maintainer:  Hans Fugal <hans@fugal.net>
 " Last Change: $Date: 2004/06/13 19:30:30 $
 " Last Change: $Date: 2004/06/13 19:30:30 $
 " URL:         http://hans.fugal.net/vim/colors/desert.vim
 " Version:     $Id: desert.vim,v 1.1 2004/06/13 19:30:30 vimboss Exp $
+"}}}
 
-" cool help screens
-" :he group-name
-" :he highlight-groups
-" :he cterm-colors
-
-set background=dark
 let g:colors_name='desert'
-
 hi Normal guifg=White guibg=grey20
 
 " highlight groups {{{
@@ -24,9 +18,7 @@ hi Cursor       guifg=slategrey   guibg=khaki
 "hi DiffDelete
 "hi DiffText
 "hi ErrorMsg
-hi VertSplit    guifg=grey50      guibg=#c2bfa5   gui=none
-hi Folded       guifg=gold        guibg=grey30
-hi FoldColumn   guifg=tan         guibg=grey30
+hi VertSplit    guifg=grey50      guibg=#c2bfa5   gui=NONE
 hi IncSearch    guifg=slategrey   guibg=khaki
 "hi LineNr
 hi ModeMsg      guifg=goldenrod
@@ -35,10 +27,9 @@ hi NonText      guifg=LightBlue   guibg=grey30
 hi Question     guifg=springgreen
 hi Search       guifg=wheat       guibg=peru
 hi SpecialKey   guifg=yellowgreen
-hi StatusLine   guifg=black       guibg=#c2bfa5   gui=none
-hi StatusLineNC guifg=grey50      guibg=#c2bfa5   gui=none
+hi StatusLine   guifg=black       guibg=#c2bfa5   gui=NONE
 hi Title        guifg=indianred
-hi Visual       guifg=khaki       guibg=olivedrab gui=none
+hi Visual       guifg=khaki       guibg=olivedrab gui=NONE
 "hi VisualNOS
 hi WarningMsg   guifg=salmon
 "hi WildMenu
@@ -60,32 +51,32 @@ hi Ignore      guifg=grey40
 hi Todo        guifg=orangered   guibg=yellow2
 "}}}
 " color terminal definitions {{{
-hi SpecialKey                        ctermfg=darkgreen
-hi NonText      cterm=bold           ctermfg=darkblue
-hi Directory                         ctermfg=darkcyan
+hi SpecialKey                        ctermfg=DarkGreen
+hi NonText      cterm=bold           ctermfg=DarkBlue
+hi Directory                         ctermfg=DarkCyan
 hi ErrorMsg     cterm=bold           ctermfg=7         ctermbg=1
-hi IncSearch    cterm=NONE           ctermfg=yellow    ctermbg=green
-hi Search       cterm=NONE           ctermfg=grey      ctermbg=blue
-hi MoreMsg                           ctermfg=darkgreen
-hi ModeMsg      cterm=NONE           ctermfg=brown
+hi IncSearch    cterm=NONE           ctermfg=Yellow    ctermbg=Green
+hi Search       cterm=NONE           ctermfg=Grey      ctermbg=blue
+hi MoreMsg                           ctermfg=DarkGreen
+hi ModeMsg      cterm=NONE           ctermfg=Brown
 hi LineNr                            ctermfg=3
-hi Question                          ctermfg=green
+hi Question                          ctermfg=Green
 hi StatusLine   cterm=bold,reverse
-hi StatusLineNC cterm=reverse
+hi StatusLineNC cterm=NONE           ctermbg=DarkGrey
 hi VertSplit    cterm=reverse
 hi Title                             ctermfg=5
 hi Visual       cterm=reverse
 hi VisualNOS    cterm=bold,underline
 hi WarningMsg                        ctermfg=1
 hi WildMenu                          ctermfg=0         ctermbg=3
-hi Folded                            ctermfg=darkgrey  ctermbg=NONE
-hi FoldColumn                        ctermfg=darkgrey  ctermbg=NONE
+hi Folded                            ctermfg=Blue      ctermbg=NONE
+hi FoldColumn                        ctermfg=DarkGrey  ctermbg=NONE
 hi DiffAdd                                             ctermbg=4
 hi DiffChange                                          ctermbg=5
 hi DiffDelete   cterm=bold           ctermfg=4         ctermbg=6
 hi DiffText     cterm=bold                             ctermbg=1
-hi Comment                           ctermfg=darkcyan
-hi Constant                          ctermfg=brown
+hi Comment                           ctermfg=Blue
+hi Constant                          ctermfg=Brown
 hi Special                           ctermfg=5
 hi Identifier                        ctermfg=6
 hi Statement                         ctermfg=3
@@ -93,6 +84,17 @@ hi PreProc                           ctermfg=5
 hi Type                              ctermfg=2
 hi Underlined   cterm=underline      ctermfg=5
 hi Ignore       cterm=bold           ctermfg=7
-hi Ignore                            ctermfg=darkgrey
+hi Ignore                            ctermfg=DarkGrey
 hi Error        cterm=bold           ctermfg=7         ctermbg=1
+hi CursorLine   cterm=NONE           ctermfg=Cyan
+hi CursorLineNr cterm=NONE           ctermfg=Cyan
+hi Pmenu                             ctermfg=DarkGrey  ctermbg=White
+"}}}
+" my highlight {{{
+hi TabString       cterm=NONE      ctermbg=DarkGrey
+hi CrString        cterm=NONE      ctermbg=DarkGrey
+hi CrlfString      cterm=NONE      ctermbg=DarkGrey
+hi WhitespaceEOL   cterm=NONE      ctermbg=DarkGrey
+hi YankRoundRegion cterm=NONE      ctermfg=Magenta
+hi QFError         cterm=underline ctermfg=Magenta
 "}}}
