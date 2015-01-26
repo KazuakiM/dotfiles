@@ -54,31 +54,8 @@ man() {
         man "$@"
 }
 #}}}
-#Linux Desktop Hacks Custopm prompt {{{
-function prompt_command
-{
-    tput sc
-    let backwash=$(tput cols)-$(echo $(pwd)@$USER | wc -m | tr -d ' ')-2
-    tput cup 0 ${backwash}
-    tput setaf 4
-    echo -n "["
-    tput setaf 6
-    echo -n "$(pwd)"
-    tput setaf 8
-    echo -n "@$USER"
-    tput setaf 4
-    echo -n "]"
-    tput rc
-}
-PROMPT_COMMAND=prompt_command
-#}}}
 #PS1(primary prompt string) {{{
-lc='\[\e[1;'
-ps1StartCyan=${lc}36m
-ps1EndNormal=${lc}0m
-export PS1="${ps1StartCyan}\]\h \$ ${ps1EndNormal}\]"
-export MYSQL_PS1="\d @\h \n> "
-#export MYSQL_PS1="\d @\h[\u] \n> "
+export PS1="\[\e[1;36m\]\h \$ \[\e[1;0m\]"
 #}}}
 #tmux {{{
 if type tmux >/dev/null 2>&1; then
@@ -152,6 +129,8 @@ case "${OSTYPE}" in
             localPath="/usr/local/heroku/bin:$localPath"
         fi
         export PATH=$localPath$PATH
+        export MYSQL_PS1="\d @\h \n> "
+        #export MYSQL_PS1="\d @\h[\u] \n> "
         ;;
     linux*)
         alias l='ls -AhX --color=auto'
@@ -173,6 +152,7 @@ case "${OSTYPE}" in
             export RBENV_ROOT=/usr/local/rbenv
             eval "$(rbenv init -)";
         fi
+        export MYSQL_PS1="\d> "
         ;;
     cygwin)
         alias l='ls -Ak --color=auto'

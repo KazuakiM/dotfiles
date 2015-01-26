@@ -32,7 +32,7 @@
 "
 " Common {{{
 if has('vim_starting')
-    if (has("win32") || has ("win64"))
+    if has('win32') || has ('win64')
         let s:os_type = 'win'
         set runtimepath+=$HOME/.vim,$HOME/.vim/after
     elseif has('mac')
@@ -79,11 +79,8 @@ noremap 0 $
 noremap 1 ^
 nnoremap Y y$
 nnoremap gr gT
-nnoremap gf <C-w>w
 nnoremap gs <C-w>+
-nnoremap gd <C-w>-
-noremap j gj
-noremap k gk
+nnoremap gd <C-w>>
 noremap <Down> <C-f>
 noremap <Up>   <C-b>
 nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null<CR>
@@ -96,23 +93,40 @@ syntax on
 " Check space and new line code.
 set t_Co=16
 set background=dark
-let g:solarized_termtrans = 1
-let g:solarized_bold      = 0
-let g:solarized_underline = 0
-let g:solarized_italic    = 0
-autocmd MyAutoCmd ColorScheme * highlight TabString       cterm=NONE ctermbg=Gray    guibg=Gray
-autocmd MyAutoCmd ColorScheme * highlight CrString        cterm=NONE ctermbg=Gray    guibg=Gray
-autocmd MyAutoCmd ColorScheme * highlight CrlfString      cterm=NONE ctermbg=Gray    guibg=Gray
-autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL   cterm=NONE ctermbg=Gray    guibg=Gray
-autocmd MyAutoCmd ColorScheme * highlight YankRoundRegion cterm=NONE ctermfg=Magenta guifg=Magenta
+autocmd MyAutoCmd ColorScheme * highlight TabString       cterm=NONE      ctermbg=Gray    guibg=Gray
+autocmd MyAutoCmd ColorScheme * highlight CrString        cterm=NONE      ctermbg=Gray    guibg=Gray
+autocmd MyAutoCmd ColorScheme * highlight CrlfString      cterm=NONE      ctermbg=Gray    guibg=Gray
+autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL   cterm=NONE      ctermbg=Gray    guibg=Gray
+autocmd MyAutoCmd ColorScheme * highlight YankRoundRegion cterm=NONE                                      ctermfg=Magenta guifg=Magenta
+autocmd MyAutoCmd ColorScheme * highlight QFError         cterm=underline                                 ctermfg=Magenta guifg=Magenta
+autocmd MyAutoCmd ColorScheme * highlight StatusLineNC    cterm=NONE      ctermbg=DarkGray guifg=DarkGray
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     "\t")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      "\r")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    "\r\n")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', '\s\+$')
-colorscheme solarized
+colorscheme desert
 " Show
+set shortmess+=I
 set title
-set ruler
+set titleold=
+set titlestring=%t(%F)
+" http://d.hatena.ne.jp/thinca/20111204/1322932585
+function! TabpageLabelUpdate(tab_number) "{{{
+    let a:highlight = a:tab_number is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
+    let a:bufnrs    = tabpagebuflist(a:tab_number)
+    let a:bufnr     = len(a:bufnrs)
+    if a:bufnr is 1
+        let a:bufnr = ''
+    endif
+    let a:modified = len(filter(copy(a:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
+    return '%'.a:tab_number.'T'.a:highlight.a:bufnr.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tab_number) - 1]), ':t').a:modified.'%T%#TabLineFill#'
+endfunction "}}}
+function! TabLineUpdate() "{{{
+    return join(map(range(1, tabpagenr('$')), 'TabpageLabelUpdate(v:val)'), ' | ').'%#TabLineFill#%T%='
+endfunction "}}}
+set tabline=%!TabLineUpdate()
+set showcmd
+set noruler
 set laststatus=2
 set cmdheight=1
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,.DS_Store,.,..
@@ -125,12 +139,29 @@ set display=lastline
 set pumheight=8
 set showmatch
 set matchtime=1
+set lazyredraw
+set ttyfast
 " [memo]
 " q:  command history
 " q/  downward search
 " q?  upward search
 set history=1000
 set number
+set cursorline
+set cursorcolumn
+function! StatuslineSyntax() "{{{
+    return qfstatusline#Update()
+endfunction "}}}
+function! StatuslineMode() "{{{
+    let a:mode_list    = {'n': ' NORMAL','v': ' VISUAL','V': ' V-LINE',"\<C-v>": 'V-BLOCK','s': ' SELECT','S': ' S-LINE',"\<C-s>": 'S-BLOCK','i': ' INSERT','R': 'REPLACE','c': 'COMMAND','r': 'COMMAND'}
+    let a:current_mode = mode()
+    let a:paste_mode   = (&paste) ? '(PASTE)' : ''
+    if has_key(a:mode_list, a:current_mode)
+        return a:mode_list[a:current_mode].a:paste_mode
+    endif
+    return a:current_mode.a:paste_mode.'?'
+endfunction "}}}
+set statusline=\ %{StatuslineMode()}\ \|\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 " Clipboard
 set clipboard+=autoselect,unnamed
 " Backup
@@ -179,9 +210,6 @@ nmap <Leader>f [vim]
 nnoremap [vim]e :<C-u>tabnew<Space>$MYVIMRC<CR>
 nnoremap [vim]s :<C-u>source<Space>$MYVIMRC<CR>
 nnoremap [vim]h :<C-u>source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
-" ESC-ESC
-autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
-autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 "}}}
 "
 "
@@ -205,10 +233,9 @@ else
     NeoBundle 'thinca/vim-quickrun'
     NeoBundle 'SirVer/ultisnips'
     NeoBundle 'rhysd/clever-f.vim'
-    if (s:os_type !=# 'unix')
-        NeoBundle 'itchyny/lightline.vim'
-        NeoBundle 'Yggdroot/indentLine'
-    endif
+    NeoBundle 'vim-jp/vimdoc-ja'
+    NeoBundle 'Yggdroot/indentLine'
+    "NeoBundle 'Kuniwak/vint'
 
     NeoBundleSaveCache
 endif
@@ -240,13 +267,15 @@ let g:quickrun_config = {
 \        'runner':                              'vimproc',
 \        'runner/vimproc/updatetime':           600},
 \    'watchdogs_checker/_': {
-\        'hook/close_quickfix/enable_exit': 1,
-\        'hook/back_window/enable_exit':    0,  'hook/back_window/priority_exit':    1,
-\        'hook/qfsigns_update/enable_exit': 1,  'hook/qfsigns_update/priority_exit': 2,
-\        'outputter/quickfix/open_cmd':     ''},
+\        'hook/close_quickfix/enable_exit':      1,
+\        'hook/back_window/enable_exit':         0, 'hook/back_window/priority_exit':         1,
+\        'hook/qfsigns_update/enable_exit':      1, 'hook/qfsigns_update/priority_exit':      2,
+\        'hook/qfstatusline_update/enable_exit': 1, 'hook/qfstatusline_update/priority_exit': 3,
+\        'outputter/quickfix/open_cmd':          ''},
 \    'watchdogs_checker/php': {
 \        'command':     'php',
-\        'exec':        '%c -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0 -l %o %s:p',
+\        'cmdopt':      '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
+\        'exec':        '%c %o %s:p',
 \        'errorformat': '%m\ in\ %f\ on\ line\ %l'},
 \    'markdown': {'outputter': 'browser'},
 \    'php': {
@@ -267,6 +296,13 @@ let g:UltiSnipsUsePythonVersion    = 2
 let g:clever_f_across_no_line = 0
 let g:clever_f_smart_case     = 1
 let g:clever_f_use_migemo     = 0
+"}}}
+" vimdoc-ja {{{
+set helplang=ja
+"helptags $HOME/.vim/bundle/vimdoc-ja/doc
+"}}}
+" indentLine {{{
+let g:indentLine_faster = 1
 "}}}
 "}}}
 "
@@ -320,11 +356,6 @@ function! s:hooks.on_source(bundle)
     let g:memolist_unite_source         = 'file_rec'
     let g:memolist_unite_option         = '-default-action=tabopen'
 endfunction
-"}}}
-" vimdoc-ja {{{
-NeoBundleLazy 'vim-jp/vimdoc-ja', {'commands': 'help'}
-"helptags $HOME/.vim/bundle/vimdoc-ja/doc/
-"set helplang=ja
 "}}}
 " taglist.vim {{{
 NeoBundleLazy 'vim-scripts/taglist.vim', {'commands': 'Tlist'}
@@ -402,9 +433,9 @@ function! s:hooks.on_source(bundle)
 endfunction
 "}}}
 " open-browser.vim {{{
-NeoBundleLazy 'tyru/open-browser.vim', {'mappings': '<Plug>(openbrowser-smart-search)'}
+NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'openbrowser#_keymapping_smart_search'}
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
-nnoremap <Leader>gx <Plug>(openbrowser-smart-search)
+nnoremap <Leader>gx :<C-u>call openbrowser#_keymapping_smart_search('n')<CR>
 "}}}
 " wildfire.vim {{{
 NeoBundleLazy 'gcmt/wildfire.vim', {'mappings': '<Plug>(wildfire-fuel)'}
@@ -451,17 +482,14 @@ NeoBundleLazy 'tpope/vim-surround', {'insert': 1}
 " vim-qfsigns
 " vim-qfstatusline
 " vim-watchdogs {{{
-if (s:os_type !=# 'unix')
-    NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline'], 'filetypes': ['php', 'javascript', 'ruby'], 'insert': 1}
-    "vim-qfstatusline
-    let g:Qfstatusline#UpdateCmd = function('lightline#update')
-else
-    NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns'], 'filetypes': ['php', 'javascript', 'ruby'], 'insert': 1}
-endif
+NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline'], 'insert': 1}
+let g:Qfstatusline#UpdateCmd = function('StatuslineSyntax')
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle)
     "vim-qfsigns
     nnoremap <Leader>sy :QfsignsJunmp<CR>
+    let g:qfsigns#Config = {'id': '5050', 'name': 'QFError',}
+    execute 'sign define '.get(g:qfsigns#Config,'name').' linehl=QFError texthl=QFError text=>>'
     "vim-watchdogs
     let g:watchdogs_check_BufWritePost_enable = 1
     let g:watchdogs_check_CursorHold_enable   = 1
@@ -477,7 +505,6 @@ NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'markdown'}
 " NeoBundleFetch {{{
 "# function memo
 "* New Install 'NeoBundle'. And Update 'NeoBundle' to 'NeoBundleFetch'.
-NeoBundleFetch 'altercation/vim-colors-solarized'
 NeoBundleFetch 'psychs/lingr-irc'
 NeoBundleFetch 'KazuakiM/neosnippet-snippets'
 "}}}
@@ -498,49 +525,6 @@ if (s:os_type !=# 'win')
     "}}}
 endif
 if (s:os_type !=# 'unix')
-    " lightline {{{
-    let g:lightline = {
-    \    'colorscheme': 'jellybeans',
-    \    'active':      {
-    \        'left':  [['mode','paste'],['filename','qfstatusline']],
-    \        'right': [['lineinfo'],['percent'],['fileformat','fileencoding','filetype']]},
-    \    'component_function': {'filename': 'MyFilename', 'fileformat': 'MyFileformat', 'filetype': 'MyFiletype', 'fileencoding': 'MyFileencoding', 'mode': 'MyMode'},
-    \    'component_expand': {'qfstatusline': 'qfstatusline#Update'},
-    \    'component_type':   {'qfstatusline': 'error'},
-    \    'subseparator': {'left': '|', 'right': '|'}}
-    function! MyModified()
-        return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-    endfunction
-    function! MyReadonly()
-        return &ft !~? 'help' && &readonly ? 'x' : ''
-    endfunction
-    function! MyFilename()
-        let a:fname    = expand('%:t')
-        return a:fname =~ '__Gundo\|NERD_tree' ? '' :
-        \    &ft == 'unite' ? unite#get_status_string() : ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-        \    ('' != a:fname ? a:fname : '[No Name]') .    ('' != MyModified() ? ' ' . MyModified() : '')
-    endfunction
-    function! MyFileformat()
-        return winwidth(0) > 70 ? &fileformat : ''
-    endfunction
-    function! MyFiletype()
-        return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : '-') : ''
-    endfunction
-    function! MyFileencoding()
-        return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-    endfunction
-    function! MyMode()
-        return winwidth(0) > 60 ? lightline#mode() : ''
-    endfunction
-    let g:unite_force_overwrite_statusline = 0
-    "}}}
-    " indentLine {{{
-    let g:indentLine_faster = 1
-    "}}}
-    " vim-quickrun {{{
-    let g:quickrun_config['watchdogs_checker/_']['hook/qfstatusline_update/enable_exit']   = 1
-    let g:quickrun_config['watchdogs_checker/_']['hook/qfstatusline_update/priority_exit'] = 3
-    "}}}
 endif
 "}}}
 " Only {{{
@@ -557,7 +541,6 @@ elseif (s:os_type ==# 'win')
     let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     "}}}
 elseif (s:os_type ==# 'unix')
-    set statusline=%F%m%r%h%w%q%=\|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 endif
 "}}}
 "}}}
@@ -578,13 +561,11 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                setlocal filetyp
 "
 "
 " Extra local functions {{{
-" auto make directory {{{
-function! s:auto_mkdir(dir, force)
+function! s:auto_mkdir(dir, force) "{{{
     if !isdirectory(a:dir) && (a:force || input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
         call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
     endif
-endfunction
-"}}}
+endfunction "}}}
 "}}}
 "
 "
