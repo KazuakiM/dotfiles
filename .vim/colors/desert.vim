@@ -39,7 +39,9 @@ hi Special                           ctermfg=Magenta
 hi SpecialKey                        ctermfg=DarkGreen
 hi Statement                         ctermfg=Yellow
 hi StatusLine   cterm=bold,reverse
-hi StatusLineNC cterm=NONE           ctermbg=DarkGrey
+hi StatusLineNC cterm=NONE                               ctermbg=DarkGrey
+hi TabLine      cterm=NONE           ctermfg=DarkGrey    ctermbg=Black
+hi TabLineSel   cterm=NONE           ctermfg=Black       ctermbg=Magenta
 hi Title                             ctermfg=Magenta
 hi Type                              ctermfg=Green
 hi Underlined   cterm=underline      ctermfg=Magenta
