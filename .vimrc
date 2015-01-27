@@ -93,13 +93,6 @@ syntax on
 " Check space and new line code.
 set t_Co=16
 set background=dark
-autocmd MyAutoCmd ColorScheme * highlight TabString       cterm=NONE      ctermbg=Gray    guibg=Gray
-autocmd MyAutoCmd ColorScheme * highlight CrString        cterm=NONE      ctermbg=Gray    guibg=Gray
-autocmd MyAutoCmd ColorScheme * highlight CrlfString      cterm=NONE      ctermbg=Gray    guibg=Gray
-autocmd MyAutoCmd ColorScheme * highlight WhitespaceEOL   cterm=NONE      ctermbg=Gray    guibg=Gray
-autocmd MyAutoCmd ColorScheme * highlight YankRoundRegion cterm=NONE                                      ctermfg=Magenta guifg=Magenta
-autocmd MyAutoCmd ColorScheme * highlight QFError         cterm=underline                                 ctermfg=Magenta guifg=Magenta
-autocmd MyAutoCmd ColorScheme * highlight StatusLineNC    cterm=NONE      ctermbg=DarkGray guifg=DarkGray
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     "\t")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      "\r")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    "\r\n")
