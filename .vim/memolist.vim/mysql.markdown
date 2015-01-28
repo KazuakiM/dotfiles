@@ -77,6 +77,15 @@ $ vi <dumpFile>
   Check execute results.
 $ tar zcvf <dumpFile>.tar.gz <dumpFile>
 ```
+Recode dump
+```
+$ mysqldump -u<Account> -h<Host> -p <DataBase> \
+ --where='<Condition>' \
+ --default-character-set=utf8 --skip-lock-tables -c -e -q -t --result-file='/tmp/<dumpFile>' --tables \
+ <Table1> <Table2>;
+$ vi /tmp/<dumpFile>
+  Check execute results.
+```
 TSV
 ```
 $ mysql -u<Account> -h<Host> -p <DataBase> -e "

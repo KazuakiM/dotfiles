@@ -5,7 +5,7 @@
 # @author soramugi-San
 # @url    http://qiita.com/soramugi/items/46117274419665e601fa
 #--------------------------------
-echo "
+echo -e "
 # Attribute codes:
 # 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
 # Text color codes:
