@@ -136,8 +136,8 @@ set lazyredraw
 set ttyfast
 " [memo]
 " q:  command history
-" q/  downward search
-" q?  upward search
+" q/  downword search
+" q?  upword search
 set history=1000
 set number
 set cursorline
@@ -145,12 +145,17 @@ set cursorcolumn
 function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
 endfunction "}}}
+let s:mode_type = 'n'
 function! StatuslineMode() "{{{
-    let a:mode_list    = {'n': ' NORMAL','v': ' VISUAL','V': ' V-LINE',"\<C-v>": 'V-BLOCK','s': ' SELECT','S': ' S-LINE',"\<C-s>": 'S-BLOCK','i': ' INSERT','R': 'REPLACE','c': 'COMMAND','r': 'COMMAND'}
+    let a:mode_list    = {'n': {'word': ' NORMAL', 'color': 'NONE'}, 'v': {'word': ' VISUAL', 'color': 'DarkMagenta'}, 'V': {'word': ' V-LINE', 'color': 'DarkMasenta'}, "\<C-v>": {'word': 'V-BLOCK', 'color': 'DarkMagenta'}, 's': {'word': ' SELECT', 'color': 'Yellow'}, 'S': {'word': ' S-LINE', 'color': 'Yellow'}, "\<C-s>": {'word': 'S-BLOCK', 'color': 'Yellow'}, 'i': {'word': ' INSERT', 'color': 'DarkGreen'}, 'R': {'word': 'REPLACE', 'color': 'DarkRed'}, 'c': {'word': 'COMMAND', 'color': 'DarkBlue'}, 'r': {'word': 'COMMAND', 'color': 'DarkBlue'}}
     let a:current_mode = mode()
     let a:paste_mode   = (&paste) ? '(PASTE)' : ''
     if has_key(a:mode_list, a:current_mode)
-        return a:mode_list[a:current_mode].a:paste_mode
+        if a:current_mode !=# s:mode_type
+            exec 'hi StatusLine cterm=bold,reverse ctermfg='.a:mode_list[a:current_mode]['color']
+            let s:mode_type = a:current_mode
+        endif
+        return a:mode_list[a:current_mode]['word'].a:paste_mode
     endif
     return a:current_mode.a:paste_mode.'?'
 endfunction "}}}
