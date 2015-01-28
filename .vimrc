@@ -145,24 +145,7 @@ set cursorcolumn
 function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
 endfunction "}}}
-let s:mode_type = 'n'
-function! StatuslineMode() "{{{
-    let a:mode_list    = {'n': {'word': ' NORMAL', 'color': 'NONE'}, 'v': {'word': ' VISUAL', 'color': 'DarkMagenta'},
-    \    'V': {'word': ' V-LINE', 'color': 'DarkMasenta'}, "\<C-v>": {'word': 'V-BLOCK', 'color': 'DarkMagenta'}, 's': {'word': ' SELECT', 'color': 'Yellow'},
-    \    'S': {'word': ' S-LINE', 'color': 'Yellow'},      "\<C-s>": {'word': 'S-BLOCK', 'color': 'Yellow'},      'i': {'word': ' INSERT', 'color': 'DarkGreen'},
-    \    'R': {'word': 'REPLACE', 'color': 'DarkRed'},     'c':      {'word': 'COMMAND', 'color': 'DarkBlue'},    'r': {'word': 'COMMAND', 'color': 'DarkBlue'}}
-    let a:current_mode = mode()
-    let a:paste_mode   = (&paste) ? '(PASTE)' : ''
-    if has_key(a:mode_list, a:current_mode)
-        if a:current_mode !=# s:mode_type
-            exec 'hi StatusLine cterm=bold,reverse ctermfg='.a:mode_list[a:current_mode]['color']
-            let s:mode_type = a:current_mode
-        endif
-        return a:mode_list[a:current_mode]['word'].a:paste_mode
-    endif
-    return a:current_mode.a:paste_mode.'?'
-endfunction "}}}
-set statusline=\ %{StatuslineMode()}\ \|\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
+set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 " Clipboard
 set clipboard+=autoselect,unnamed
 " Backup
