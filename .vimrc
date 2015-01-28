@@ -147,7 +147,10 @@ function! StatuslineSyntax() "{{{
 endfunction "}}}
 let s:mode_type = 'n'
 function! StatuslineMode() "{{{
-    let a:mode_list    = {'n': {'word': ' NORMAL', 'color': 'NONE'}, 'v': {'word': ' VISUAL', 'color': 'DarkMagenta'}, 'V': {'word': ' V-LINE', 'color': 'DarkMasenta'}, "\<C-v>": {'word': 'V-BLOCK', 'color': 'DarkMagenta'}, 's': {'word': ' SELECT', 'color': 'Yellow'}, 'S': {'word': ' S-LINE', 'color': 'Yellow'}, "\<C-s>": {'word': 'S-BLOCK', 'color': 'Yellow'}, 'i': {'word': ' INSERT', 'color': 'DarkGreen'}, 'R': {'word': 'REPLACE', 'color': 'DarkRed'}, 'c': {'word': 'COMMAND', 'color': 'DarkBlue'}, 'r': {'word': 'COMMAND', 'color': 'DarkBlue'}}
+    let a:mode_list    = {'n': {'word': ' NORMAL', 'color': 'NONE'}, 'v': {'word': ' VISUAL', 'color': 'DarkMagenta'},
+    \    'V': {'word': ' V-LINE', 'color': 'DarkMasenta'}, "\<C-v>": {'word': 'V-BLOCK', 'color': 'DarkMagenta'}, 's': {'word': ' SELECT', 'color': 'Yellow'},
+    \    'S': {'word': ' S-LINE', 'color': 'Yellow'},      "\<C-s>": {'word': 'S-BLOCK', 'color': 'Yellow'},      'i': {'word': ' INSERT', 'color': 'DarkGreen'},
+    \    'R': {'word': 'REPLACE', 'color': 'DarkRed'},     'c':      {'word': 'COMMAND', 'color': 'DarkBlue'},    'r': {'word': 'COMMAND', 'color': 'DarkBlue'}}
     let a:current_mode = mode()
     let a:paste_mode   = (&paste) ? '(PASTE)' : ''
     if has_key(a:mode_list, a:current_mode)
