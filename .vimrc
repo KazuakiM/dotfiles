@@ -112,10 +112,10 @@ function! TabpageLabelUpdate(tab_number) "{{{
         let a:bufnr = ''
     endif
     let a:modified = len(filter(copy(a:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
-    return '%'.a:tab_number.'T'.a:highlight.a:bufnr.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tab_number) - 1]), ':t').a:modified.'%T%#TabLineFill#'
+    return '%'.a:tab_number.'T'.a:highlight.a:bufnr.' '.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tab_number) - 1]), ':t').' '.a:modified.'%T%#TabLineFill#'
 endfunction "}}}
 function! TabLineUpdate() "{{{
-    return join(map(range(1, tabpagenr('$')), 'TabpageLabelUpdate(v:val)'), ' | ').'%#TabLineFill#%T%='
+    return join(map(range(1, tabpagenr('$')), 'TabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
 endfunction "}}}
 set tabline=%!TabLineUpdate()
 set showcmd
