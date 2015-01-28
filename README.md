@@ -24,6 +24,11 @@ rbenv
 $ rbenv install 2.0.0-p247
 $ rbenv rehash
 ```
+Ricty
+```bash
+$ git clone git@github.com:yascentur/RictyDiminished.git /tmp/RictyDiminished
+$ cp -p /tmp/RictyDiminished/*.ttl $HOME/Library/Fonts/
+```
 
 ### Set dotfiles
 
@@ -259,6 +264,9 @@ $ cp $HOME/.netrc.org   $HOME/.netrc
 $ php $HOME/src/phpDict.php
 $ cd $HOME/.vim/bundle/regexper
 $ bundle install
+$ git clone git@github.com:yascentur/RictyDiminished.git /tmp/RictyDiminished
+ Copy font directory
+
 $ exit
 ```
 alias, export情報を読み込ませるため、一旦ターミナルを閉じる
@@ -268,8 +276,6 @@ $ vi
  :NeoBundleInstall
 
  Update from NeoBundle to NeoBundleFetch
-
-$ cp $HOME/.vim/colors/jellybeans.vim /cygwin/c/path/to/path/Vim/colors/
 ```
 
 # TODO
