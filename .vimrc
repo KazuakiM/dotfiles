@@ -188,6 +188,14 @@ let g:php_sql_query     = 1
 let g:php_htmlInStrings = 1
 let g:php_baselib       = 1
 let g:php_noShortTags   = 1
+" disable plugin
+let g:loaded_gzip          = 1
+let g:loaded_matchparen    = 1
+let g:loaded_netrwPlugin   = 1
+let g:loaded_tarPlugin     = 1
+let g:loaded_vimballPlugin = 1
+let g:loaded_zipPlugin     = 1
+"
 " Vim
 nnoremap [vim] <Nop>
 nmap <Leader>f [vim]
