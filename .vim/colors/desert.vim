@@ -11,10 +11,11 @@ endif
 let g:colors_name = 'desert'
 
 " color terminal definitions {{{
-hi Comment                           ctermfg=Blue
+hi Comment                           ctermfg=Red
 hi Constant                          ctermfg=Brown
-hi CursorLine   cterm=NONE           ctermfg=Cyan
-hi CursorLineNr cterm=NONE           ctermfg=Cyan
+hi CursorColumn cterm=NONE           ctermfg=Black       ctermbg=Grey
+hi CursorLine   cterm=underline      ctermfg=NONE        ctermbg=NONE
+hi CursorLineNr cterm=reverse        ctermfg=NONE        ctermbg=NONE
 hi DiffAdd                                               ctermbg=Blue
 hi DiffChange                                            ctermbg=Magenta
 hi DiffDelete   cterm=bold           ctermfg=Blue        ctermbg=Cyan
@@ -38,9 +39,9 @@ hi Search       cterm=NONE           ctermfg=Grey        ctermbg=blue
 hi Special                           ctermfg=Magenta
 hi SpecialKey                        ctermfg=DarkGreen
 hi Statement                         ctermfg=Yellow
-hi StatusLine   cterm=bold,reverse
-hi StatusLineNC cterm=NONE                               ctermbg=DarkGrey
-hi TabLine      cterm=NONE           ctermfg=DarkGrey    ctermbg=Black
+hi StatusLine   cterm=NONE           ctermfg=Black       ctermbg=Grey
+hi StatusLineNC cterm=NONE           ctermfg=NONE        ctermbg=DarkGrey
+hi TabLine      cterm=NONE           ctermfg=White       ctermbg=Black
 hi TabLineSel   cterm=NONE           ctermfg=Black       ctermbg=Magenta
 hi Title                             ctermfg=Magenta
 hi Type                              ctermfg=Green

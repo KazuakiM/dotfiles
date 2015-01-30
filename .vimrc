@@ -136,8 +136,8 @@ set lazyredraw
 set ttyfast
 " [memo]
 " q:  command history
-" q/  downward search
-" q?  upward search
+" q/  downword search
+" q?  upword search
 set history=1000
 set number
 set cursorline
@@ -145,16 +145,7 @@ set cursorcolumn
 function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
 endfunction "}}}
-function! StatuslineMode() "{{{
-    let a:mode_list    = {'n': ' NORMAL','v': ' VISUAL','V': ' V-LINE',"\<C-v>": 'V-BLOCK','s': ' SELECT','S': ' S-LINE',"\<C-s>": 'S-BLOCK','i': ' INSERT','R': 'REPLACE','c': 'COMMAND','r': 'COMMAND'}
-    let a:current_mode = mode()
-    let a:paste_mode   = (&paste) ? '(PASTE)' : ''
-    if has_key(a:mode_list, a:current_mode)
-        return a:mode_list[a:current_mode].a:paste_mode
-    endif
-    return a:current_mode.a:paste_mode.'?'
-endfunction "}}}
-set statusline=\ %{StatuslineMode()}\ \|\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
+set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 " Clipboard
 set clipboard+=autoselect,unnamed
 " Backup
@@ -197,6 +188,14 @@ let g:php_sql_query     = 1
 let g:php_htmlInStrings = 1
 let g:php_baselib       = 1
 let g:php_noShortTags   = 1
+" disable plugin
+let g:loaded_gzip          = 1
+let g:loaded_matchparen    = 1
+let g:loaded_netrwPlugin   = 1
+let g:loaded_tarPlugin     = 1
+let g:loaded_vimballPlugin = 1
+let g:loaded_zipPlugin     = 1
+"
 " Vim
 nnoremap [vim] <Nop>
 nmap <Leader>f [vim]
