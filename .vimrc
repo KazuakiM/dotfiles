@@ -55,7 +55,7 @@ set fileformat=unix
 " Basic
 let g:mapleader = ','
 set scrolloff=999
-autocmd MyAutoCmd FileType * set textwidth=0
+autocmd MyAutoCmd BufEnter * set textwidth=0
 autocmd MyAutoCmd FileType * set formatoptions-=cb
 set autoread
 set hidden
@@ -140,7 +140,9 @@ set ttyfast
 " q?  upword search
 set history=1000
 set number
-set cursorline
+" http://d.hatena.ne.jp/thinca/20090530/1243615055
+autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * setlocal nocursorline
+autocmd MyAutoCmd CursorHold,CursorHoldI            * setlocal cursorline
 set cursorcolumn
 function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
@@ -508,10 +510,8 @@ if (s:os_type !=# 'mac')
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
 if (s:os_type !=# 'win')
-    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/backup/'.s:date, 1)
-    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/undo/'  .s:date, 1)
-    let &backupdir = '/tmp/backup/'.s:date
-    let &undodir   = '/tmp/undo/'  .s:date
+    autocmd MyAutoCmd VimEnter * call BigFileMeasures('/tmp/backup/'.s:date, 1)
+    autocmd MyAutoCmd VimEnter * call BigFileMeasures('/tmp/undo/'  .s:date, 1)
     " memolist.vim {{{
     let g:memolist_path = $HOME.'/.vim/memolist.vim'
     "}}}
@@ -525,10 +525,8 @@ if (s:os_type ==# 'mac')
     let g:previm_open_cmd  = 'open -a firefox'
     "}}}
 elseif (s:os_type ==# 'win')
-    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('C:\temp\backup\'.s:date, 1)
-    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('C:\temp\undo\'  .s:date, 1)
-    let &backupdir = 'C:\temp\backup\'.s:date
-    let &undodir   = 'C:\temp\undo\'  .s:date
+    autocmd MyAutoCmd VimEnter * call BigFileMeasures('C:\temp\backup\'.s:date, 1)
+    autocmd MyAutoCmd VimEnter * call BigFileMeasures('C:\temp\undo\'  .s:date, 1)
     " memolist.vim {{{
     let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     "}}}
@@ -553,7 +551,28 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                setlocal filetyp
 "
 "
 " Extra local functions {{{
-function! s:auto_mkdir(dir, force) "{{{
+function! BigFileMeasures(dir, force) "{{{
+    "Check 128KB file size.
+    if getfsize(expand('%:p')) >= 131072
+        setlocal noswapfile
+        setlocal nobackup
+        setlocal noundofile
+        setlocal nowritebackup
+        filetype off
+        filetype plugin indent off
+        syntax off
+    else
+        call AutoMkdir(a:dir, a:force)
+        if (s:os_type !=# 'win')
+            let &backupdir = '/tmp/backup/'.s:date
+            let &undodir   = '/tmp/undo/'  .s:date
+        else
+            let &backupdir = 'C:\temp\backup\'.s:date
+            let &undodir   = 'C:\temp\undo\'  .s:date
+        endif
+    endif
+endfunction "}}}
+function! AutoMkdir(dir, force) "{{{
     if !isdirectory(a:dir) && (a:force || input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
         call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
     endif
