@@ -247,9 +247,19 @@ Delete Index
 ```
 ALTER TABLE <Table1> DROP INDEX <Index1>;
 ```
-Update auto_increment
+Update auto_increment  
 ```
-ALTER TABLE <Table1> AUTO_INCREMENT = <AutoIncrementData>;
+ex) now :389, next_increment:391 => increment:390. 
+
+SELECT MAX(id) AS max_num FROM <Table1>\G
+
+   MAX(id): 389
+
+SHOW TABLE STATUS LIKE <Table1>\G
+
+   Auto_increment: 391
+
+ALTER TABLE <Table1> AUTO_INCREMENT = 390;
 ```
 
 # FUNCTION
