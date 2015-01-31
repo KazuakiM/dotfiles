@@ -29,6 +29,21 @@ Ricty
 $ git clone git@github.com:yascentur/RictyDiminished.git /tmp/RictyDiminished
 $ cp -p /tmp/RictyDiminished/*.ttl $HOME/Library/Fonts/
 ```
+[bettertouchtool](http://www.bettertouchtool.net/)
+
+* Action Settings(Window Snapping etc.) > Window Snapping
+  * Normal Snapping / Moving:
+    * Left width: 24%
+    * Right width: 76%
+  * Corner Snapping / Move to quarters:
+    * Left width: 50%
+    * Right width: 50%
+
+[Karabiner](https://pqrs.org/osx/karabiner/index.html.ja)
+
+* Key Repeat > Basic Configurations > KeyRepeat
+ * Delay Until Repeat: 200ms
+ * Key Repeat: 25ms
 
 ### Set dotfiles
 
