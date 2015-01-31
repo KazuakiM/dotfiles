@@ -113,6 +113,7 @@ nnoremap Y y$
 nnoremap gr gT
 nnoremap gs <C-w>+
 nnoremap gd <C-w>>
+nnoremap ga %
 noremap <Down> <C-f>
 noremap <Up>   <C-b>
 nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null<CR>
