@@ -111,11 +111,20 @@ noremap 0 $
 noremap 1 ^
 nnoremap Y y$
 nnoremap gr gT
-nnoremap gs <C-w>+
-nnoremap gd <C-w>>
 nnoremap ga %
+nmap <SID>[ws] <Nop>
+nmap <C-w>+ <C-w>+<SID>[ws]
+nmap <C-w>- <C-w>-<SID>[ws]
+nmap <C-w>> <C-w>><SID>[ws]
+nmap <C-w>< <C-w><<SID>[ws]
+nnoremap <script> <SID>[ws]+ <C-w>+<SID>[ws]
+nnoremap <script> <SID>[ws]- <C-w>-<SID>[ws]
+nnoremap <script> <SID>[ws]> <C-w>><SID>[ws]
+nnoremap <script> <SID>[ws]< <C-w><<SID>[ws]
 noremap <Down> <C-f>
 noremap <Up>   <C-b>
+inoremap <C-u> <C-g>u<C-u>
+inoremap <C-w> <C-g>u<C-w>
 nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null<CR>
 " Paste
 autocmd MyAutoCmd InsertLeave * set nopaste
@@ -167,10 +176,6 @@ set showmatch
 set matchtime=1
 set lazyredraw
 set ttyfast
-" [memo]
-" q:  command history
-" q/  downword search
-" q?  upword search
 set history=1000
 set number
 " http://d.hatena.ne.jp/thinca/20090530/1243615055
@@ -235,11 +240,11 @@ let g:loaded_vimballPlugin = 1
 let g:loaded_zipPlugin     = 1
 "
 " Vim
-nnoremap [vim] <Nop>
-nmap <Leader>f [vim]
-nnoremap [vim]e :<C-u>tabnew<Space>$MYVIMRC<CR>
-nnoremap [vim]s :<C-u>source<Space>$MYVIMRC<CR>
-nnoremap [vim]h :<C-u>source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
+nnoremap <SID>[vim] <Nop>
+nmap <Leader>f <SID>[vim]
+nnoremap <SID>[vim]e :<C-u>tabnew<Space>$MYVIMRC<CR>
+nnoremap <SID>[vim]s :<C-u>source<Space>$MYVIMRC<CR>
+nnoremap <SID>[vim]h :<C-u>source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
 "}}}
 "
 "
