@@ -103,7 +103,7 @@ set noimdisable
 set noimcmdline
 set foldmethod=marker
 "set foldopen-=search
-set viminfo='100,f1,<50,:20,@20,/20,s100,h,n~/.vim/viminfo/.viminfo
+set viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo
 set updatetime=1000
 nnoremap zx :foldopen<CR>
 set matchpairs+=<:>
@@ -259,6 +259,7 @@ else
     NeoBundle 'thinca/vim-quickrun'
     NeoBundle 'SirVer/ultisnips'
     NeoBundle 'rhysd/clever-f.vim'
+    NeoBundle 'gcmt/wildfire.vim'
     NeoBundle 'vim-jp/vimdoc-ja'
     NeoBundle 'Yggdroot/indentLine'
     "NeoBundle 'Kuniwak/vint'
@@ -322,6 +323,11 @@ let g:UltiSnipsUsePythonVersion    = 2
 let g:clever_f_across_no_line = 0
 let g:clever_f_smart_case     = 1
 let g:clever_f_use_migemo     = 0
+"}}}
+" wildfire.vim {{{
+let g:wildfire_objects   = {'*': ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it'],'html,xml': ['at', 'it']}
+let g:wildfire_fuel_map  = '<Enter>'
+let g:wildfire_water_map = '<BS>'
 "}}}
 " vimdoc-ja {{{
 set helplang=ja
@@ -462,12 +468,6 @@ endfunction
 NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'openbrowser#_keymapping_smart_search'}
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
 nnoremap <Leader>gx :<C-u>call openbrowser#_keymapping_smart_search('n')<CR>
-"}}}
-" wildfire.vim {{{
-NeoBundleLazy 'gcmt/wildfire.vim', {'mappings': '<Plug>(wildfire-fuel)'}
-map <ENTER> <Plug>(wildfire-fuel)
-map <BS> <Plug>(wildfire-water)
-let g:wildfire_objects = {'*': ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it'],'html,xml': ['at', 'it']}
 "}}}
 " vim-snippets
 " neocomplete.vim {{{
