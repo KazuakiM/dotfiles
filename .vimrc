@@ -31,22 +31,53 @@
 "
 "
 " Common {{{
+" Variable
+let s:date = strftime('%Y%m%d%H%M%S', localtime())
+" Reset my autocmd
+augroup MyAutoCmd
+    autocmd!
+augroup END
+" First action special functions
+function! BigFileMeasures(backupDir, undoDir) "{{{
+    "Check 128KB file size.
+    if getfsize(expand('%:p')) >= 131072
+        setlocal noswapfile nobackup nowritebackup noundofile viminfo=
+        filetype off
+        filetype plugin indent off
+        syntax off
+        return 1
+    endif
+    call AutoMkdir(a:backupDir.s:date, 1)
+    call AutoMkdir(a:undoDir.  s:date, 1)
+    let &backupdir = a:backupDir.s:date
+    let &undodir   = a:undoDir.  s:date
+    return 0
+endfunction "}}}
+function! AutoMkdir(dir, force) "{{{
+    if !isdirectory(a:dir) && (a:force || input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
+        call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
+    endif
+endfunction "}}}
 if has('vim_starting')
     if has('win32') || has ('win64')
+        if BigFileMeasures('C:\temp\backup\', 'C:\temp\undo\')
+            finish
+        endif
         let s:os_type = 'win'
         set runtimepath+=$HOME/.vim,$HOME/.vim/after
     elseif has('mac')
+        if BigFileMeasures('/tmp/backup/', '/tmp/undo/')
+            finish
+        endif
         let s:os_type = 'mac'
     else
+        if BigFileMeasures('/tmp/backup/', '/tmp/undo/')
+            finish
+        endif
         let s:os_type = 'unix'
     endif
     set runtimepath+=$HOME/.vim/bundle/neobundle.vim
 endif
-augroup MyAutoCmd
-    autocmd!
-augroup END
-" Variable
-let s:date = strftime('%Y%m%d%H%M%S', localtime())
 " Encode
 set encoding=utf-8
 scriptencoding utf-8
@@ -510,8 +541,6 @@ if (s:os_type !=# 'mac')
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
 if (s:os_type !=# 'win')
-    autocmd MyAutoCmd VimEnter * call BigFileMeasures('/tmp/backup/'.s:date, 1)
-    autocmd MyAutoCmd VimEnter * call BigFileMeasures('/tmp/undo/'  .s:date, 1)
     " memolist.vim {{{
     let g:memolist_path = $HOME.'/.vim/memolist.vim'
     "}}}
@@ -525,8 +554,6 @@ if (s:os_type ==# 'mac')
     let g:previm_open_cmd  = 'open -a firefox'
     "}}}
 elseif (s:os_type ==# 'win')
-    autocmd MyAutoCmd VimEnter * call BigFileMeasures('C:\temp\backup\'.s:date, 1)
-    autocmd MyAutoCmd VimEnter * call BigFileMeasures('C:\temp\undo\'  .s:date, 1)
     " memolist.vim {{{
     let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     "}}}
@@ -547,36 +574,6 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} setlocal filetyp
 autocmd MyAutoCmd BufNewFile,BufRead *.coffee                   setlocal filetype=coffee
 autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}                  setlocal filetype=snippets
 autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                setlocal filetype=xxd
-"}}}
-"
-"
-" Extra local functions {{{
-function! BigFileMeasures(dir, force) "{{{
-    "Check 128KB file size.
-    if getfsize(expand('%:p')) >= 131072
-        setlocal noswapfile
-        setlocal nobackup
-        setlocal noundofile
-        setlocal nowritebackup
-        filetype off
-        filetype plugin indent off
-        syntax off
-    else
-        call AutoMkdir(a:dir, a:force)
-        if (s:os_type !=# 'win')
-            let &backupdir = '/tmp/backup/'.s:date
-            let &undodir   = '/tmp/undo/'  .s:date
-        else
-            let &backupdir = 'C:\temp\backup\'.s:date
-            let &undodir   = 'C:\temp\undo\'  .s:date
-        endif
-    endif
-endfunction "}}}
-function! AutoMkdir(dir, force) "{{{
-    if !isdirectory(a:dir) && (a:force || input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
-        call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
-    endif
-endfunction "}}}
 "}}}
 "
 "
