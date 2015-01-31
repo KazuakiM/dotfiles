@@ -31,12 +31,17 @@
 "
 "
 " Common {{{
-" Variable
-let s:date = strftime('%Y%m%d%H%M%S', localtime())
+" Encode
+set encoding=utf-8
+scriptencoding utf-8
+set fileencoding=utf-8
+set fileformat=unix
 " Reset my autocmd
 augroup MyAutoCmd
     autocmd!
 augroup END
+" Variable
+let s:date = strftime('%Y%m%d%H%M%S', localtime())
 " First action special functions
 function! BigFileMeasures(backupDir, undoDir) "{{{
     "Check 128KB file size.
@@ -78,11 +83,6 @@ if has('vim_starting')
     endif
     set runtimepath+=$HOME/.vim/bundle/neobundle.vim
 endif
-" Encode
-set encoding=utf-8
-scriptencoding utf-8
-set fileencoding=utf-8
-set fileformat=unix
 " Basic
 let g:mapleader = ','
 set scrolloff=999
@@ -113,10 +113,10 @@ nnoremap Y y$
 nnoremap gr gT
 nnoremap ga %
 nmap <SID>[ws] <Nop>
-nmap <C-w>+ <C-w>+<SID>[ws]
-nmap <C-w>- <C-w>-<SID>[ws]
-nmap <C-w>> <C-w>><SID>[ws]
-nmap <C-w>< <C-w><<SID>[ws]
+nmap + <C-w>+<SID>[ws]
+nmap - <C-w>-<SID>[ws]
+nmap > <C-w>><SID>[ws]
+nmap < <C-w><<SID>[ws]
 nnoremap <script> <SID>[ws]+ <C-w>+<SID>[ws]
 nnoremap <script> <SID>[ws]- <C-w>-<SID>[ws]
 nnoremap <script> <SID>[ws]> <C-w>><SID>[ws]
