@@ -325,7 +325,7 @@ let g:clever_f_smart_case     = 1
 let g:clever_f_use_migemo     = 0
 "}}}
 " wildfire.vim {{{
-let g:wildfire_objects   = {'*': ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it'],'html,xml': ['at', 'it']}
+let g:wildfire_objects   = ["i'", "a'", 'i"', 'a"', 'i`', 'a`', "i,", "a,", 'i)', 'i}', 'i]', 'i>', 'ip', 'it']
 let g:wildfire_fuel_map  = '<Enter>'
 let g:wildfire_water_map = '<BS>'
 "}}}
