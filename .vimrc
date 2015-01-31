@@ -86,8 +86,9 @@ set fileformat=unix
 " Basic
 let g:mapleader = ','
 set scrolloff=999
-autocmd MyAutoCmd BufEnter * set textwidth=0
-autocmd MyAutoCmd FileType * set formatoptions-=cb
+autocmd MyAutoCmd VimEnter * set textwidth=0
+"autocmd MyAutoCmd VimEnter * set formatoptions-=v
+"autocmd MyAutoCmd VimEnter * set formatoptions-=b
 set autoread
 set hidden
 set ambiwidth=double
@@ -133,7 +134,7 @@ colorscheme desert
 set shortmess+=I
 set title
 set titleold=
-set titlestring=%t(%F)
+set titlestring=%F
 " http://d.hatena.ne.jp/thinca/20111204/1322932585
 function! TabpageLabelUpdate(tab_number) "{{{
     let a:highlight = a:tab_number is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
