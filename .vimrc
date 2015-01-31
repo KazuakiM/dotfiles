@@ -216,6 +216,9 @@ nnoremap <Leader>json :execute '%!python -m json.tool'<CR>
 vnoremap <C-w> "ay
 vnoremap <C-e> "by
 nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
+" ESC - ESC
+autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
+autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 " $VIMRUNTIME/syntax/sql.vim
 let g:sql_type_default = 'mysql'
 " $VIMRUNTIME/syntax/php.vim
