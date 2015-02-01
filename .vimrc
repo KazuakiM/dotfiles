@@ -40,10 +40,7 @@ set fileformat=unix
 augroup MyAutoCmd
     autocmd!
 augroup END
-" Variable
-let s:date = strftime('%Y%m%d%H%M%S', localtime())
-" First action special functions
-function! BigFileMeasures(backupDir, undoDir) "{{{
+function! KazuakiMVimStart(backupDir, undoDir) "{{{
     "Check 128KB file size.
     if getfsize(expand('%:p')) >= 131072
         setlocal noswapfile nobackup nowritebackup noundofile viminfo=
@@ -64,22 +61,23 @@ function! AutoMkdir(dir, force) "{{{
     endif
 endfunction "}}}
 if has('vim_starting')
+    let s:date = strftime('%Y%m%d%H%M%S', localtime())
     if has('win32') || has ('win64')
-        if BigFileMeasures('C:\temp\backup\', 'C:\temp\undo\')
+        if KazuakiMVimStart('C:\temp\backup\', 'C:\temp\undo\')
             finish
         endif
-        let s:os_type = 'win'
+        let s:osType = 'win'
         set runtimepath+=$HOME/.vim,$HOME/.vim/after
     elseif has('macunix')
-        if BigFileMeasures('/tmp/backup/', '/tmp/undo/')
+        if KazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
             finish
         endif
-        let s:os_type = 'macunix'
+        let s:osType = 'macunix'
     else
-        if BigFileMeasures('/tmp/backup/', '/tmp/undo/')
+        if KazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
             finish
         endif
-        let s:os_type = 'unix'
+        let s:osType = 'unix'
     endif
     set runtimepath+=$HOME/.vim/bundle/neobundle.vim
 endif
@@ -541,27 +539,27 @@ NeoBundleFetch 'KazuakiM/neosnippet-snippets'
 "
 " OS type {{{
 " Exclusive {{{
-if (s:os_type !=# 'macunix')
+if (s:osType !=# 'macunix')
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
-if (s:os_type !=# 'win')
+if (s:osType !=# 'win')
     " memolist.vim {{{
     let g:memolist_path = $HOME.'/.vim/memolist.vim'
     "}}}
 endif
-if (s:os_type !=# 'unix')
+if (s:osType !=# 'unix')
 endif
 "}}}
 " Only {{{
-if (s:os_type ==# 'macunix')
+if (s:osType ==# 'macunix')
     " previm {{{
     let g:previm_open_cmd  = 'open -a firefox'
     "}}}
-elseif (s:os_type ==# 'win')
+elseif (s:osType ==# 'win')
     " memolist.vim {{{
     let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     "}}}
-elseif (s:os_type ==# 'unix')
+elseif (s:osType ==# 'unix')
 endif
 "}}}
 "}}}
@@ -578,12 +576,20 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} setlocal filetyp
 autocmd MyAutoCmd BufNewFile,BufRead *.coffee                   setlocal filetype=coffee
 autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}                  setlocal filetype=snippets
 autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                setlocal filetype=xxd
+"filetype: directory
+if isdirectory(expand("%:p"))
+    let g:NERDTreeHijackNetrw = 1
+    augroup NERDTreeHijackNetrw
+        autocmd!
+        autocmd BufEnter,VimEnter * call nerdtree#checkForBrowse(expand('<amatch>'))
+    augroup END
+endif
 "}}}
 "
 "
 " Other setting files {{{
 " Environment setting file
-if (s:os_type ==# 'win')
+if (s:osType ==# 'win')
     source ~/.vimrc.win
 else
     source ~/.vimrc.local
