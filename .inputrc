@@ -6,7 +6,8 @@
 #base-variable {{{
 set bell-style none
 set convert-meta off
-set editing-mode vi
+#Input error. So sad.
+#set editing-mode vi
 set expand-tilde on
 set input-meta on
 set keymap vi-command
@@ -14,6 +15,4 @@ set meta-flag on
 set output-meta on
 set show-all-if-ambiguous on
 #}}}
-#base-japanese patch {{{
-set kanji-code utf-8
-#}}}
+
