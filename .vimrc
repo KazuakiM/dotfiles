@@ -577,12 +577,8 @@ autocmd MyAutoCmd BufNewFile,BufRead *.coffee                   setlocal filetyp
 autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}                  setlocal filetype=snippets
 autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                setlocal filetype=xxd
 "filetype: directory
-if isdirectory(expand("%:p"))
-    let g:NERDTreeHijackNetrw = 1
-    augroup NERDTreeHijackNetrw
-        autocmd!
-        autocmd BufEnter,VimEnter * call nerdtree#checkForBrowse(expand('<amatch>'))
-    augroup END
+if isdirectory(expand('%:p'))
+    call nerdtree#checkForBrowse(expand('<amatch>'))
 endif
 "}}}
 "
