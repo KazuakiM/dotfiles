@@ -40,9 +40,10 @@ set fileformat=unix
 augroup MyAutoCmd
     autocmd!
 augroup END
+let s:firstFileSize = expand('%:p')
 function! KazuakiMVimStart(backupDir, undoDir) "{{{
     "Check 128KB file size.
-    if getfsize(expand('%:p')) >= 131072
+    if getfsize(s:firstFileSize) >= 131072
         setlocal noswapfile nobackup nowritebackup noundofile viminfo=
         filetype off
         filetype plugin indent off
@@ -577,7 +578,7 @@ autocmd MyAutoCmd BufNewFile,BufRead *.coffee                   setlocal filetyp
 autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}                  setlocal filetype=snippets
 autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                setlocal filetype=xxd
 "filetype: directory
-if isdirectory(expand('%:p'))
+if isdirectory(s:firstFileSize)
     call nerdtree#checkForBrowse(expand('<amatch>'))
 endif
 "}}}
