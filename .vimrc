@@ -70,11 +70,11 @@ if has('vim_starting')
         endif
         let s:os_type = 'win'
         set runtimepath+=$HOME/.vim,$HOME/.vim/after
-    elseif has('mac')
+    elseif has('macunix')
         if BigFileMeasures('/tmp/backup/', '/tmp/undo/')
             finish
         endif
-        let s:os_type = 'mac'
+        let s:os_type = 'macunix'
     else
         if BigFileMeasures('/tmp/backup/', '/tmp/undo/')
             finish
@@ -238,7 +238,6 @@ let g:loaded_netrwPlugin   = 1
 let g:loaded_tarPlugin     = 1
 let g:loaded_vimballPlugin = 1
 let g:loaded_zipPlugin     = 1
-"
 " Vim
 nnoremap <SID>[vim] <Nop>
 nmap <Leader>f <SID>[vim]
@@ -547,7 +546,7 @@ NeoBundleFetch 'KazuakiM/neosnippet-snippets'
 "
 " OS type {{{
 " Exclusive {{{
-if (s:os_type !=# 'mac')
+if (s:os_type !=# 'macunix')
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
 if (s:os_type !=# 'win')
@@ -559,7 +558,7 @@ if (s:os_type !=# 'unix')
 endif
 "}}}
 " Only {{{
-if (s:os_type ==# 'mac')
+if (s:os_type ==# 'macunix')
     " previm {{{
     let g:previm_open_cmd  = 'open -a firefox'
     "}}}

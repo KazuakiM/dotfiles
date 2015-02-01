@@ -29,7 +29,7 @@ Ricty
 $ git clone git@github.com:yascentur/RictyDiminished.git /tmp/RictyDiminished
 $ cp -p /tmp/RictyDiminished/*.ttl $HOME/Library/Fonts/
 ```
-[bettertouchtool](http://www.bettertouchtool.net/)
+[BetterTouchTool](http://www.bettertouchtool.net/)
 
 * Action Settings(Window Snapping etc.) > Window Snapping
   * Normal Snapping / Moving:
@@ -38,6 +38,10 @@ $ cp -p /tmp/RictyDiminished/*.ttl $HOME/Library/Fonts/
   * Corner Snapping / Move to quarters:
     * Left width: 50%
     * Right width: 50%
+
+[FireFox](https://www.mozilla.org/ja/firefox/)
+
+Common setting
 
 [Karabiner](https://pqrs.org/osx/karabiner/index.html.ja)
 
@@ -67,11 +71,11 @@ $ ln -sf $HOME/work/dotfiles/.vimrc        .vimrc
 $ cp $HOME/work/dotfiles/.vimrc.local .
 $ ln -sf $HOME/work/dotfiles/.w3m          .w3m
 $ git clone git@github.com:Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
-$ wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp
+$ wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp/php_manual_ja.tar.gz
 $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
 $ wget http://cs.sensiolabs.org/get/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 $ chmod a+x $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
-$ php $HOME/work/src/phpDict.php
+$ php $HOME/work/dotfiles/src/phpDict.php
 $ vi
  Update from NeoBundleFetch to NeoBundle
  :NeoBundleInstall
@@ -230,11 +234,11 @@ $ ln -sf $HOME/work/dotfiles/.vimrc        .vimrc
 $ cp $HOME/work/dotfiles/.vimrc.local .
 $ ln -sf $HOME/work/dotfiles/.w3m          .w3m
 $ git clone git@github.com:Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
-$ wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp
+$ wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp/php_manual_ja.tar.gz
 $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
 $ wget http://cs.sensiolabs.org/get/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 $ chmod a+x $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
-$ php $HOME/work/src/phpDict.php
+$ php $HOME/work/dotfiles/src/phpDict.php
 $ vi
  Update from NeoBundleFetch to NeoBundle
  :NeoBundleInstall
@@ -292,6 +296,37 @@ $ vi
 
  Update from NeoBundle to NeoBundleFetch
 ```
+
+# Common setting
+
+### Install packages
+
+[FireFox](https://www.mozilla.org/ja/firefox/)
+
+* Required sync setting
+
+* オプション > コンテンツ > フォントとカラー
+  * デフォルトフォント: Ricty
+* add-on
+  * [Adblock Plus](https://addons.mozilla.org/ja/firefox/addon/adblock-plus/)
+  * [AutoPager](https://addons.mozilla.org/ja/firefox/addon/autopager/)
+  * [chaika](https://addons.mozilla.org/ja/firefox/addon/chaika/)
+    * オプション > 板一覧 > 検索ボックス > デフォルト検索エンジン  
+      2ch検索(ff2ch.syoboi.jp)
+  * [DownThemAll!](https://addons.mozilla.org/ja/firefox/addon/downthemall/)
+  * [feedly](https://addons.mozilla.org/ja/firefox/addon/feedly/)
+  * [Firebug](https://addons.mozilla.org/ja/firefox/addon/firebug/)
+  * [FireMobileSimulator](https://addons.mozilla.org/ja/firefox/addon/firemobilesimulator/)
+  * [Growl/GNTP](https://addons.mozilla.org/ja/firefox/addon/growlgntp/)
+  * [Hatena Bookmark](https://addons.mozilla.org/ja/firefox/addon/hatena-bookmark/)
+  * [JSONView](https://addons.mozilla.org/ja/firefox/addon/jsonview/)
+  * [nclvauto](https://addons.mozilla.org/ja/firefox/addon/nclvauto/)
+  * [Quick Translator](https://addons.mozilla.org/ja/firefox/addon/quick-translator/)
+  * [RESTClient](https://addons.mozilla.org/ja/firefox/addon/restclient/)
+  * [ScrollyFox](https://addons.mozilla.org/ja/firefox/addon/scrollyfox/)
+  * [The Addon Bar(restored)](https://addons.mozilla.org/ja/firefox/addon/the-addon-bar/?src=hp-btn-promo)
+  * [Web Developer](https://addons.mozilla.org/ja/firefox/addon/web-developer/)
+  * [テキストリンク](https://addons.mozilla.org/ja/firefox/addon/text-link/)
 
 # TODO
 
