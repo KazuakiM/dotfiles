@@ -112,15 +112,10 @@ noremap 1 ^
 nnoremap Y y$
 nnoremap gr gT
 nnoremap ga %
-nmap <SID>[ws] <Nop>
-nmap + <C-w>+<SID>[ws]
-nmap - <C-w>-<SID>[ws]
-nmap > <C-w>><SID>[ws]
-nmap < <C-w><<SID>[ws]
-nnoremap <script> <SID>[ws]+ <C-w>+<SID>[ws]
-nnoremap <script> <SID>[ws]- <C-w>-<SID>[ws]
-nnoremap <script> <SID>[ws]> <C-w>><SID>[ws]
-nnoremap <script> <SID>[ws]< <C-w><<SID>[ws]
+nnoremap + <C-w>+
+nnoremap - <C-w>-
+nnoremap > <C-w>>
+nnoremap < <C-w><
 noremap <Down> <C-f>
 noremap <Up>   <C-b>
 inoremap <C-u> <C-g>u<C-u>
