@@ -124,6 +124,16 @@ Insert select
 INSERT INTO <Table1> (<Column1>, <Column2>, ...)
   SELECT <ColumnData1>, <ColumnData2>, ...;
 ```
+[Insert select duplicate key update](http://qiita.com/yuzroz/items/f0eccf847b2ea42f885f)
+```
+INSERT INTO <Table1> (<Column1>, <Column2>, ...)
+  SELECT <ColumnData1>, <ColumnData2>, ...
+  FROM <Table2>
+  ORDER BY <ColumnData1>
+ON DUPLICATE KEY UPDATE
+  <Column2> = IF(<Table1>.<Column1> < <Table2>.<ColumnData1>, <Table1>.<Column1>, <Table2>.<ColumnData1>),
+  <Column3> = CONCAT(<Table1>.<Column3>, '_', IFNULL(<Column1>, ''));
+```
 
 # UPDATE
 
@@ -273,6 +283,8 @@ SELECT <UniqueColumn1>(, <UniqueColumn2>),
   GROUP BY <UniqueColumn1>(, <UniqueColumn2>);
 
 SHOW VARIABLES LIKE 'group_concat_max_len';
+
+SET SESSION group_concat_max_len = 2048;
 ```
 MATH FUNCTION IF
 ```
