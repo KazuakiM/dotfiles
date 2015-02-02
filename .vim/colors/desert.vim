@@ -11,7 +11,7 @@ endif
 let g:colors_name = 'desert'
 
 " color terminal definitions {{{
-hi Comment                           ctermfg=Red
+hi Comment                           ctermfg=Red         ctermbg=NONE
 hi Constant                          ctermfg=Brown
 hi CursorColumn cterm=NONE           ctermfg=Black       ctermbg=Grey
 hi CursorLine   cterm=underline      ctermfg=NONE        ctermbg=NONE
@@ -49,7 +49,7 @@ hi Underlined   cterm=underline      ctermfg=Magenta
 hi VertSplit    cterm=reverse
 hi Visual       cterm=NONE           ctermfg=Yellow
 hi VisualNOS    cterm=bold,underline
-hi WarningMsg                        ctermfg=Red
+hi WarningMsg                        ctermfg=Red         ctermbg=NONE
 hi WildMenu                          ctermfg=DarkGrey    ctermbg=Yellow
 "}}}
 " my highlight {{{

@@ -31,32 +31,63 @@
 "
 "
 " Common {{{
-if has('vim_starting')
-    if has('win32') || has ('win64')
-        let s:os_type = 'win'
-        set runtimepath+=$HOME/.vim,$HOME/.vim/after
-    elseif has('mac')
-        let s:os_type = 'mac'
-    else
-        let s:os_type = 'unix'
-    endif
-    set runtimepath+=$HOME/.vim/bundle/neobundle.vim
-endif
-augroup MyAutoCmd
-    autocmd!
-augroup END
-" Variable
-let s:date = strftime('%Y%m%d%H%M%S', localtime())
 " Encode
 set encoding=utf-8
 scriptencoding utf-8
 set fileencoding=utf-8
 set fileformat=unix
+" Reset my autocmd
+augroup MyAutoCmd
+    autocmd!
+augroup END
+let s:firstFileSize = expand('%:p')
+function! KazuakiMVimStart(backupDir, undoDir) "{{{
+    "Check 128KB file size.
+    if getfsize(s:firstFileSize) >= 131072
+        setlocal noswapfile nobackup nowritebackup noundofile viminfo=
+        filetype off
+        filetype plugin indent off
+        syntax off
+        return 1
+    endif
+    call AutoMkdir(a:backupDir.s:date, 1)
+    call AutoMkdir(a:undoDir.  s:date, 1)
+    let &backupdir = a:backupDir.s:date
+    let &undodir   = a:undoDir.  s:date
+    return 0
+endfunction "}}}
+function! AutoMkdir(dir, force) "{{{
+    if !isdirectory(a:dir) && (a:force || input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
+        call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
+    endif
+endfunction "}}}
+if has('vim_starting')
+    let s:date = strftime('%Y%m%d%H%M%S', localtime())
+    if has('win32') || has ('win64')
+        if KazuakiMVimStart('C:\temp\backup\', 'C:\temp\undo\')
+            finish
+        endif
+        let s:osType = 'win'
+        set runtimepath+=$HOME/.vim,$HOME/.vim/after
+    elseif has('macunix')
+        if KazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
+            finish
+        endif
+        let s:osType = 'macunix'
+    else
+        if KazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
+            finish
+        endif
+        let s:osType = 'unix'
+    endif
+    set runtimepath+=$HOME/.vim/bundle/neobundle.vim
+endif
 " Basic
 let g:mapleader = ','
 set scrolloff=999
-autocmd MyAutoCmd FileType * set textwidth=0
-autocmd MyAutoCmd FileType * set formatoptions-=cb
+autocmd MyAutoCmd VimEnter * set textwidth=0
+"autocmd MyAutoCmd VimEnter * set formatoptions-=v
+"autocmd MyAutoCmd VimEnter * set formatoptions-=b
 set autoread
 set hidden
 set ambiwidth=double
@@ -71,7 +102,7 @@ set noimdisable
 set noimcmdline
 set foldmethod=marker
 "set foldopen-=search
-set viminfo='100,f1,<50,:20,@20,/20,s100,h,n~/.vim/viminfo/.viminfo
+set viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo
 set updatetime=1000
 nnoremap zx :foldopen<CR>
 set matchpairs+=<:>
@@ -79,10 +110,15 @@ noremap 0 $
 noremap 1 ^
 nnoremap Y y$
 nnoremap gr gT
-nnoremap gs <C-w>+
-nnoremap gd <C-w>>
+nnoremap ga %
+nnoremap + <C-w>+
+nnoremap - <C-w>-
+nnoremap > <C-w>>
+nnoremap < <C-w><
 noremap <Down> <C-f>
 noremap <Up>   <C-b>
+inoremap <C-u> <C-g>u<C-u>
+inoremap <C-w> <C-g>u<C-w>
 nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null<CR>
 " Paste
 autocmd MyAutoCmd InsertLeave * set nopaste
@@ -102,7 +138,7 @@ colorscheme desert
 set shortmess+=I
 set title
 set titleold=
-set titlestring=%t(%F)
+set titlestring=%F
 " http://d.hatena.ne.jp/thinca/20111204/1322932585
 function! TabpageLabelUpdate(tab_number) "{{{
     let a:highlight = a:tab_number is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
@@ -134,13 +170,11 @@ set showmatch
 set matchtime=1
 set lazyredraw
 set ttyfast
-" [memo]
-" q:  command history
-" q/  downword search
-" q?  upword search
 set history=1000
 set number
-set cursorline
+" http://d.hatena.ne.jp/thinca/20090530/1243615055
+autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * setlocal nocursorline
+autocmd MyAutoCmd CursorHold,CursorHoldI            * setlocal cursorline
 set cursorcolumn
 function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
@@ -181,6 +215,9 @@ nnoremap <Leader>json :execute '%!python -m json.tool'<CR>
 vnoremap <C-w> "ay
 vnoremap <C-e> "by
 nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
+" ESC - ESC
+autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
+autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 " $VIMRUNTIME/syntax/sql.vim
 let g:sql_type_default = 'mysql'
 " $VIMRUNTIME/syntax/php.vim
@@ -195,13 +232,12 @@ let g:loaded_netrwPlugin   = 1
 let g:loaded_tarPlugin     = 1
 let g:loaded_vimballPlugin = 1
 let g:loaded_zipPlugin     = 1
-"
 " Vim
-nnoremap [vim] <Nop>
-nmap <Leader>f [vim]
-nnoremap [vim]e :<C-u>tabnew<Space>$MYVIMRC<CR>
-nnoremap [vim]s :<C-u>source<Space>$MYVIMRC<CR>
-nnoremap [vim]h :<C-u>source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
+nnoremap <SID>[vim] <Nop>
+nmap <Leader>f <SID>[vim]
+nnoremap <SID>[vim]e :<C-u>tabnew<Space>$MYVIMRC<CR>
+nnoremap <SID>[vim]s :<C-u>source<Space>$MYVIMRC<CR>
+nnoremap <SID>[vim]h :<C-u>source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
 "}}}
 "
 "
@@ -225,6 +261,7 @@ else
     NeoBundle 'thinca/vim-quickrun'
     NeoBundle 'SirVer/ultisnips'
     NeoBundle 'rhysd/clever-f.vim'
+    NeoBundle 'gcmt/wildfire.vim'
     NeoBundle 'vim-jp/vimdoc-ja'
     NeoBundle 'Yggdroot/indentLine'
     "NeoBundle 'Kuniwak/vint'
@@ -288,6 +325,11 @@ let g:UltiSnipsUsePythonVersion    = 2
 let g:clever_f_across_no_line = 0
 let g:clever_f_smart_case     = 1
 let g:clever_f_use_migemo     = 0
+"}}}
+" wildfire.vim {{{
+let g:wildfire_objects   = ["i'", "a'", 'i"', 'a"', 'i`', 'a`', "i,", "a,", 'i)', 'i}', 'i]', 'i>', 'ip', 'it']
+let g:wildfire_fuel_map  = '<Enter>'
+let g:wildfire_water_map = '<BS>'
 "}}}
 " vimdoc-ja {{{
 set helplang=ja
@@ -429,12 +471,6 @@ NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'openbrowser#_keymapping_sm
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
 nnoremap <Leader>gx :<C-u>call openbrowser#_keymapping_smart_search('n')<CR>
 "}}}
-" wildfire.vim {{{
-NeoBundleLazy 'gcmt/wildfire.vim', {'mappings': '<Plug>(wildfire-fuel)'}
-map <ENTER> <Plug>(wildfire-fuel)
-map <BS> <Plug>(wildfire-water)
-let g:wildfire_objects = {'*': ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it'],'html,xml': ['at', 'it']}
-"}}}
 " vim-snippets
 " neocomplete.vim {{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': 'KazuakiM/vim-snippets', 'insert': 1}
@@ -504,35 +540,27 @@ NeoBundleFetch 'KazuakiM/neosnippet-snippets'
 "
 " OS type {{{
 " Exclusive {{{
-if (s:os_type !=# 'mac')
+if (s:osType !=# 'macunix')
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
-if (s:os_type !=# 'win')
-    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/backup/'.s:date, 1)
-    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('/tmp/undo/'  .s:date, 1)
-    let &backupdir = '/tmp/backup/'.s:date
-    let &undodir   = '/tmp/undo/'  .s:date
+if (s:osType !=# 'win')
     " memolist.vim {{{
     let g:memolist_path = $HOME.'/.vim/memolist.vim'
     "}}}
 endif
-if (s:os_type !=# 'unix')
+if (s:osType !=# 'unix')
 endif
 "}}}
 " Only {{{
-if (s:os_type ==# 'mac')
+if (s:osType ==# 'macunix')
     " previm {{{
     let g:previm_open_cmd  = 'open -a firefox'
     "}}}
-elseif (s:os_type ==# 'win')
-    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('C:\temp\backup\'.s:date, 1)
-    autocmd MyAutoCmd VimEnter * call s:auto_mkdir('C:\temp\undo\'  .s:date, 1)
-    let &backupdir = 'C:\temp\backup\'.s:date
-    let &undodir   = 'C:\temp\undo\'  .s:date
+elseif (s:osType ==# 'win')
     " memolist.vim {{{
     let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     "}}}
-elseif (s:os_type ==# 'unix')
+elseif (s:osType ==# 'unix')
 endif
 "}}}
 "}}}
@@ -549,21 +577,16 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} setlocal filetyp
 autocmd MyAutoCmd BufNewFile,BufRead *.coffee                   setlocal filetype=coffee
 autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}                  setlocal filetype=snippets
 autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                setlocal filetype=xxd
-"}}}
-"
-"
-" Extra local functions {{{
-function! s:auto_mkdir(dir, force) "{{{
-    if !isdirectory(a:dir) && (a:force || input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
-        call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
-    endif
-endfunction "}}}
+"filetype: directory
+if isdirectory(s:firstFileSize)
+    call nerdtree#checkForBrowse(expand('<amatch>'))
+endif
 "}}}
 "
 "
 " Other setting files {{{
 " Environment setting file
-if (s:os_type ==# 'win')
+if (s:osType ==# 'win')
     source ~/.vimrc.win
 else
     source ~/.vimrc.local

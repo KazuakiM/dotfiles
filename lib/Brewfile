@@ -84,6 +84,7 @@ brew cask install google-chrome
 brew cask install google-japanese-ime
 brew cask install growlnotify
 brew cask install iterm2
+brew cask install karabiner
 brew cask install kindle
 brew cask install libreoffice
 brew cask install limechat
@@ -92,5 +93,4 @@ brew cask install thunderbird
 brew cask install virtualbox
 brew cask install xtrafinder
 brew cask install yorufukurou
-brew cask install github
 #}}}
