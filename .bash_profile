@@ -60,9 +60,9 @@ export PS1="\[\e[1;36m\]\h \$ \[\e[1;0m\]"
 #tmux {{{
 if type tmux >/dev/null 2>&1; then
     alias tm='tmux'
-    alias tma0='tmux attach -t 0'
-    alias tma1='tmux attach -t 1'
-    alias tma2='tmux attach -t 2'
+    alias tma0='tmux attach -d -t 0'
+    alias tma1='tmux attach -d -t 1'
+    alias tma2='tmux attach -d -t 2'
 fi
 #}}}
 #OS Type {{{
