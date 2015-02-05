@@ -219,7 +219,7 @@ $ ln -sf $HOME/work/dotfiles/.bash_logout  .bash_logout
 $ ln -sf $HOME/work/dotfiles/.bash_profile .bash_profile
 $ cp $HOME/work/dotfiles/.bash_profile.local .
 $ ln -sf $HOME/work/dotfiles/.ctags        .ctags
-$ ln -sf $HOME/work/dotfiles/.dir_color    .dir_color
+$ ln -sf $HOME/work/dotfiles/.dir_colors   .dir_colors
 $ ln -sf $HOME/work/dotfiles/.gitconfig    .gitconfig
 $ cp $HOME/work/dotfiles/.gitconfig.local .
 $ ln -sf $HOME/work/dotfiles/.gvimrc       .gvimrc
