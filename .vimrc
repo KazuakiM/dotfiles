@@ -111,10 +111,15 @@ noremap 1 ^
 nnoremap Y y$
 nnoremap gr gT
 nnoremap ga %
-nnoremap + <C-w>+
-nnoremap - <C-w>-
-nnoremap > <C-w>>
-nnoremap < <C-w><
+nmap <SID>[ws] <Nop>
+nmap + <C-w>+<SID>[ws]
+nmap - <C-w>-<SID>[ws]
+nmap > <C-w>><SID>[ws]
+nmap < <C-w><<SID>[ws]
+nnoremap <script> <SID>[ws]+ <C-w>+<SID>[ws]
+nnoremap <script> <SID>[ws]- <C-w>-<SID>[ws]
+nnoremap <script> <SID>[ws]> <C-w>><SID>[ws]
+nnoremap <script> <SID>[ws]< <C-w><<SID>[ws]
 noremap <Down> <C-f>
 noremap <Up>   <C-b>
 inoremap <C-u> <C-g>u<C-u>
@@ -261,6 +266,7 @@ else
     NeoBundle 'thinca/vim-quickrun'
     NeoBundle 'SirVer/ultisnips'
     NeoBundle 'rhysd/clever-f.vim'
+    NeoBundle 'tpope/vim-surround'
     NeoBundle 'gcmt/wildfire.vim'
     NeoBundle 'vim-jp/vimdoc-ja'
     NeoBundle 'Yggdroot/indentLine'
@@ -502,9 +508,6 @@ function! s:hooks.on_source(bundle)
     nnoremap <C-r> g+
     nnoremap <Leader>gundo :<C-u>GundoToggle<CR>
 endfunction
-"}}}
-" vim-surround {{{
-NeoBundleLazy 'tpope/vim-surround', {'insert': 1}
 "}}}
 " shabadou.vim
 " vim-qfsigns

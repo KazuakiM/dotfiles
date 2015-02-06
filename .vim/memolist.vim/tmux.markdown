@@ -62,25 +62,26 @@ Prefix > Ctrl-l
 ```
 Prefix > <ウィンドウ番号>
 ```
-ウィンドウ次へ
-```
-Prefix > Ctrl-d
-```
-ウィンドウ前へ
+ウィンドウ前へ/次へ
 ```
 Prefix > Ctrl-s
+Prefix > Ctrl-d
 ```
 ウィンドウ作成
 ```
 Prefix > Ctrl-k
 ```
-ウィンドウ垂直分割
+ウィンドウ垂直分割/水平分割
 ```
-Prefix > |
+Prefix > v
+Prefix > s
 ```
-ウィンドウ水平分割
+ウィンドウリサイズ
 ```
+Prefix > +
 Prefix > -
+Prefix > >
+Prefix > <
 ```
 ウィンドウ分割解除
 ```
