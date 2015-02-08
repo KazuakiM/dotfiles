@@ -31,19 +31,16 @@
 "
 "
 " Common {{{
-" Encode
-set encoding=utf-8
+set encoding=utf-8 fileencoding=utf-8 fileformat=unix
 scriptencoding utf-8
-set fileencoding=utf-8
-set fileformat=unix
-" Reset my autocmd
+let g:mapleader = ','
 augroup MyAutoCmd
     autocmd!
 augroup END
-let s:firstFileSize = expand('%:p')
+let s:firstFilePath = expand('%:p')
 function! KazuakiMVimStart(backupDir, undoDir) "{{{
     "Check 128KB file size.
-    if getfsize(s:firstFileSize) >= 131072
+    if getfsize(s:firstFilePath) >= 131072
         setlocal noswapfile nobackup nowritebackup noundofile viminfo=
         filetype off
         filetype plugin indent off
@@ -82,68 +79,16 @@ if has('vim_starting')
     endif
     set runtimepath+=$HOME/.vim/bundle/neobundle.vim
 endif
-" Basic
-let g:mapleader = ','
-set scrolloff=999
+" autocmd
 autocmd MyAutoCmd VimEnter * set textwidth=0
+autocmd MyAutoCmd InsertLeave * set nopaste
+" http://d.hatena.ne.jp/thinca/20090530/1243615055
+autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * setlocal nocursorline
+autocmd MyAutoCmd CursorHold,CursorHoldI            * setlocal cursorline
+autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
+autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 "autocmd MyAutoCmd VimEnter * set formatoptions-=v
 "autocmd MyAutoCmd VimEnter * set formatoptions-=b
-set autoread
-set hidden
-set ambiwidth=double
-set iminsert=0
-set imsearch=-1
-set backspace=indent,eol,start
-set virtualedit+=block
-set visualbell
-set t_vb=
-set noerrorbells
-set noimdisable
-set noimcmdline
-set foldmethod=marker
-"set foldopen-=search
-set viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo
-set updatetime=1000
-nnoremap zx :foldopen<CR>
-set matchpairs+=<:>
-noremap 0 $
-noremap 1 ^
-nnoremap Y y$
-nnoremap gr gT
-nnoremap ga %
-nmap <SID>[ws] <Nop>
-nmap + <C-w>+<SID>[ws]
-nmap - <C-w>-<SID>[ws]
-nmap > <C-w>><SID>[ws]
-nmap < <C-w><<SID>[ws]
-nnoremap <script> <SID>[ws]+ <C-w>+<SID>[ws]
-nnoremap <script> <SID>[ws]- <C-w>-<SID>[ws]
-nnoremap <script> <SID>[ws]> <C-w>><SID>[ws]
-nnoremap <script> <SID>[ws]< <C-w><<SID>[ws]
-noremap <Down> <C-f>
-noremap <Up>   <C-b>
-inoremap <C-u> <C-g>u<C-u>
-inoremap <C-w> <C-g>u<C-w>
-nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null<CR>
-" Paste
-autocmd MyAutoCmd InsertLeave * set nopaste
-nnoremap <silent><expr><Leader>v      ':set<Space>paste<CR><Insert><C-r>+<ESC>'
-inoremap <silent><expr><Leader>v '<ESC>:set<Space>paste<CR><Insert><C-r>+<ESC><Insert>'
-" Color
-syntax on
-" Check space and new line code.
-set t_Co=16
-set background=dark
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     "\t")
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      "\r")
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    "\r\n")
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', '\s\+$')
-colorscheme desert
-" Show
-set shortmess+=I
-set title
-set titleold=
-set titlestring=%F
 " http://d.hatena.ne.jp/thinca/20111204/1322932585
 function! TabpageLabelUpdate(tab_number) "{{{
     let a:highlight = a:tab_number is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
@@ -158,54 +103,59 @@ endfunction "}}}
 function! TabLineUpdate() "{{{
     return join(map(range(1, tabpagenr('$')), 'TabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
 endfunction "}}}
-set tabline=%!TabLineUpdate()
-set showcmd
-set noruler
-set laststatus=2
-set cmdheight=1
-set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,.DS_Store,.,..
-set wildmenu
-set wildmode=longest:full,full
-set completeopt=longest,menu
-set noequalalways
-set wrap
-set display=lastline
-set pumheight=8
-set showmatch
-set matchtime=1
-set lazyredraw
-set ttyfast
-set history=1000
-set number
-" http://d.hatena.ne.jp/thinca/20090530/1243615055
-autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * setlocal nocursorline
-autocmd MyAutoCmd CursorHold,CursorHoldI            * setlocal cursorline
-set cursorcolumn
 function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
 endfunction "}}}
+set scrolloff=999 autoread hidden ambiwidth=double iminsert=0 imsearch=-1 backspace=indent,eol,start virtualedit+=block visualbell t_vb= noerrorbells noimdisable
+set noimcmdline foldmethod=marker viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo updatetime=1000 matchpairs+=<:> shortmess+=I title titleold=
+set titlestring=%F tabline=%!TabLineUpdate() showcmd noruler laststatus=2 cmdheight=1 wildmenu wildmode=longest:full,full completeopt=longest,menu noequalalways
+set wrap display=lastline pumheight=8 showmatch matchtime=1 lazyredraw ttyfast history=1000 number cursorcolumn clipboard+=autoselect,unnamed swapfile
+set directory=$HOME/.vim/swap backup undofile tabstop=4 softtabstop=4 shiftwidth=4 expandtab autoindent smartindent smarttab incsearch ignorecase smartcase hlsearch
+set wrapscan helplang=ja
+set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,.DS_Store,.,..
 set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
-" Clipboard
-set clipboard+=autoselect,unnamed
-" Backup
-set swapfile
-set directory=$HOME/.vim/swap
-set backup
-set undofile
-" Indentation
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set expandtab
-set autoindent
-set smartindent
-set smarttab
+set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*min.js'\ --exclude='*min.css'\ --exclude='*.log'
+set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
+"set foldopen-=search
+"helptags $HOME/.vim/bundle/vimdoc-ja/doc
+" Color
+syntax on
+set t_Co=16 background=dark
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     "\t")
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      "\r")
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    "\r\n")
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', '\s\+$')
+colorscheme desert
+" Mapping
+"  Fold
+nnoremap zx :foldopen<CR>
+"  Line
+noremap 0 $
+noremap 1 ^
+nnoremap Y y$
+nnoremap gr gT
+inoremap <C-u> <C-g>u<C-u>
+inoremap <C-w> <C-g>u<C-w>
+"  Window Size
+nmap <SID>[ws] <Nop>
+nmap + <C-w>+<SID>[ws]
+nmap - <C-w>-<SID>[ws]
+nmap > <C-w>><SID>[ws]
+nmap < <C-w><<SID>[ws]
+nnoremap <script> <SID>[ws]+ <C-w>+<SID>[ws]
+nnoremap <script> <SID>[ws]- <C-w>-<SID>[ws]
+nnoremap <script> <SID>[ws]> <C-w>><SID>[ws]
+nnoremap <script> <SID>[ws]< <C-w><<SID>[ws]
+"  Cursor
+nnoremap ga %
+noremap <Down> <C-f>
+noremap <Up>   <C-b>
+"  Sudo Write
+nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null<CR>
+"  Paste
+nnoremap <silent><expr><Leader>v      ':set<Space>paste<CR><Insert><C-r>+<ESC>'
+inoremap <silent><expr><Leader>v '<ESC>:set<Space>paste<CR><Insert><C-r>+<ESC><Insert>'
 " Search
-set incsearch
-set ignorecase
-set smartcase
-set hlsearch
-set wrapscan
 nnoremap <expr><Leader>%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
@@ -220,9 +170,6 @@ nnoremap <Leader>json :execute '%!python -m json.tool'<CR>
 vnoremap <C-w> "ay
 vnoremap <C-e> "by
 nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
-" ESC - ESC
-autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
-autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 " $VIMRUNTIME/syntax/sql.vim
 let g:sql_type_default = 'mysql'
 " $VIMRUNTIME/syntax/php.vim
@@ -275,8 +222,6 @@ else
     NeoBundleSaveCache
 endif
 " qfixgrep {{{
-set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*min.js'\ --exclude='*min.css'\ --exclude='*.log'
-set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
 let g:QFixWin_EnableMode   = 1
 let g:QFix_UseLocationList = 1
 nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
@@ -294,30 +239,18 @@ let g:yankround_region_hl_groupname = 'YankRoundRegion'
 nnoremap <Leader>run :<C-u>QuickRun<CR>
 let g:quickrun_config = {
 \    '_': {
-\        'hook/close_buffer/enable_empty_data': 1,
-\        'hook/close_buffer/enable_failure':    1,
-\        'outputter':                           'multi:buffer:quickfix',
-\        'outputter/buffer/close_on_empty':     1,
-\        'outputter/buffer/split':              ':botright',
-\        'runner':                              'vimproc',
+\        'hook/close_buffer/enable_empty_data': 1,    'hook/close_buffer/enable_failure': 1,           'outputter': 'multi:buffer:quickfix',
+\        'outputter/buffer/close_on_empty':     1,    'outputter/buffer/split':           ':botright', 'runner':    'vimproc',
 \        'runner/vimproc/updatetime':           600},
 \    'watchdogs_checker/_': {
-\        'hook/close_quickfix/enable_exit':      1,
-\        'hook/back_window/enable_exit':         0, 'hook/back_window/priority_exit':         1,
-\        'hook/qfsigns_update/enable_exit':      1, 'hook/qfsigns_update/priority_exit':      2,
-\        'hook/qfstatusline_update/enable_exit': 1, 'hook/qfstatusline_update/priority_exit': 3,
-\        'outputter/quickfix/open_cmd':          ''},
+\        'hook/close_quickfix/enable_exit':        1, 'hook/back_window/enable_exit':      0,   'hook/back_window/priority_exit':       1,
+\        'hook/qfsigns_update/enable_exit':        1, 'hook/qfsigns_update/priority_exit': 2,   'hook/qfstatusline_update/enable_exit': 1,
+\        'hook/qfstatusline_update/priority_exit': 3, 'outputter/quickfix/open_cmd':       ''},
 \    'watchdogs_checker/php': {
-\        'command':     'php',
-\        'cmdopt':      '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
-\        'exec':        '%c %o %s:p',
-\        'errorformat': '%m\ in\ %f\ on\ line\ %l'},
+\        'command': 'php',        'cmdopt':      '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
+\        'exec':    '%c %o %s:p', 'errorformat': '%m\ in\ %f\ on\ line\ %l'},
 \    'markdown': {'outputter': 'browser'},
-\    'php': {
-\        'command':                          'phpunit',
-\        'cmdopt':                           '--no-configuration',
-\        'hook/close_buffer/enable_failure': 0,
-\        'outputter/buffer/split':           ':botright 7sp'}}
+\    'php': {'command': 'phpunit', 'cmdopt': '--no-configuration', 'hook/close_buffer/enable_failure': 0, 'outputter/buffer/split': ':botright 7sp'}}
 "}}}
 " ultisnips {{{
 let g:UltiSnipsEditSplit           = 'vertical'
@@ -336,10 +269,6 @@ let g:clever_f_use_migemo     = 0
 let g:wildfire_objects   = ["i'", "a'", 'i"', 'a"', 'i`', 'a`', "i,", "a,", 'i)', 'i}', 'i]', 'i>', 'ip', 'it']
 let g:wildfire_fuel_map  = '<Enter>'
 let g:wildfire_water_map = '<BS>'
-"}}}
-" vimdoc-ja {{{
-set helplang=ja
-"helptags $HOME/.vim/bundle/vimdoc-ja/doc
 "}}}
 " indentLine {{{
 let g:indentLine_faster = 1
@@ -418,23 +347,21 @@ function! s:hooks.on_source(bundle)
     let g:NERDTreeMinimalUI         = 1
     let g:NERDTreeRespectWildIgnore = 1
     let g:NERDTreeShowHidden        = 1
-    autocmd MyAutoCmd BufEnter * if (winnr('$') == 1 && exists('b:NERDTreeType') && b:NERDTreeType == 'primary') | q | endif
+    autocmd MyAutoCmd BufEnter * if winnr('$') is 1 && exists('b:NERDTreeType') && b:NERDTreeType ==# 'primary' | q | endif
 endfunction
 "}}}
 " vim-easy-align {{{
 NeoBundleLazy 'junegunn/vim-easy-align', {'commands': 'EasyAlign'}
 vnoremap <silent> <Leader>a :EasyAlign<CR>
 let g:easy_align_delimiters = {
-\    '=': {
-\        'pattern':     '===\|!==\|<=>\|\(&&\|||\|<<\|>>\)=\|=\~[#?]\?\|=>\|[:+/*!%^=><&|.-]\?=[#?]\?',
-\        'left_margin': 1, 'right_margin': 1, 'stick_to_left': 0},
+\    '=': {'pattern': '===\|!==\|<=>\|\(&&\|||\|<<\|>>\)=\|=\~[#?]\?\|=>\|[:+/*!%^=><&|.-]\?=[#?]\?', 'left_margin': 1, 'right_margin': 1, 'stick_to_left': 0},
 \    '>': {'pattern': '>>\|=>\|>'},
 \    '/': {'pattern': '//\+\|/\*\|\*/',        'ignore_groups': ['String']},
-\    '#': {'pattern': '#\+',                   'ignore_groups': ['String'], 'delimiter_align': 'l'},
-\    '$': {'pattern': '\((.*\)\@!$\(.*)\)\@!', 'ignore_groups': ['String'], 'right_margin':    0, 'delimiter_align': 'l'},
-\    ']': {'pattern': '[[\]]',                 'left_margin':   0,          'right_margin':    0, 'stick_to_left':   0},
-\    ')': {'pattern': '[()]',                  'left_margin':   0,          'right_margin':    0, 'stick_to_left':   0},
-\    'd': {'pattern': '\(\S\+\s*[;=]\)\@=',    'left_margin':   0,          'right_margin':    0}}
+\    '#': {'pattern': '#\+',                   'ignore_groups': ['String'],                                                           'delimiter_align': 'l'},
+\    '$': {'pattern': '\((.*\)\@!$\(.*)\)\@!', 'ignore_groups': ['String'],                   'right_margin': 0,                      'delimiter_align': 'l'},
+\    ']': {'pattern': '[[\]]',                 'ignore_groups': ['String'], 'left_margin': 0, 'right_margin': 0, 'stick_to_left': 0},
+\    ')': {'pattern': '[()]',                  'ignore_groups': ['String'], 'left_margin': 0, 'right_margin': 0, 'stick_to_left': 0},
+\    'd': {'pattern': '\(\S\+\s*[;=]\)\@=',    'ignore_groups': ['String'], 'left_margin': 0, 'right_margin': 0}}
 "}}}
 " Align
 " SQLUtilities {{{
@@ -543,10 +470,10 @@ NeoBundleFetch 'KazuakiM/neosnippet-snippets'
 "
 " OS type {{{
 " Exclusive {{{
-if (s:osType !=# 'macunix')
+if s:osType !=# 'macunix'
     autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
-if (s:osType !=# 'win')
+if s:osType !=# 'win'
     " memolist.vim {{{
     let g:memolist_path = $HOME.'/.vim/memolist.vim'
     "}}}
@@ -555,11 +482,11 @@ if (s:osType !=# 'unix')
 endif
 "}}}
 " Only {{{
-if (s:osType ==# 'macunix')
+if s:osType ==# 'macunix'
     " previm {{{
     let g:previm_open_cmd  = 'open -a firefox'
     "}}}
-elseif (s:osType ==# 'win')
+elseif s:osType ==# 'win'
     " memolist.vim {{{
     let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     "}}}
@@ -581,7 +508,7 @@ autocmd MyAutoCmd BufNewFile,BufRead *.coffee                   setlocal filetyp
 autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}                  setlocal filetype=snippets
 autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                setlocal filetype=xxd
 "filetype: directory
-if isdirectory(s:firstFileSize)
+if isdirectory(s:firstFilePath)
     call nerdtree#checkForBrowse(expand('<amatch>'))
 endif
 "}}}
@@ -589,7 +516,7 @@ endif
 "
 " Other setting files {{{
 " Environment setting file
-if (s:osType ==# 'win')
+if s:osType ==# 'win'
     source ~/.vimrc.win
 else
     source ~/.vimrc.local

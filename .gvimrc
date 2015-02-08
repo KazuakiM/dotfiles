@@ -30,7 +30,7 @@ nnoremap <expr><Leader>n ':NERDTree '.expand("%:p").'<CR>'
 "
 "
 " OS type {{{
-if (has("win32") || has ("win64"))
+if has("win32") || has ("win64")
     set guifont=Source_Code_Pro:h12:cANSI
     set lines=50
     set columns=87

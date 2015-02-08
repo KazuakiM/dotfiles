@@ -16,6 +16,5 @@
 /viminfo/*
 /vimshell.vim/cache/*
 /yankround.vim/*
-.netrwhist
 #}}}
 # Memos file manage.
