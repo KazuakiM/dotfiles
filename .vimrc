@@ -153,8 +153,8 @@ noremap <Up>   <C-b>
 "  Sudo Write
 nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null<CR>
 "  Paste
-nnoremap <silent><expr><Leader>v      ':set<Space>paste<CR><Insert><C-r>+<ESC>'
-inoremap <silent><expr><Leader>v '<ESC>:set<Space>paste<CR><Insert><C-r>+<ESC><Insert>'
+nnoremap <silent><expr><Leader>v  ':set<Space>paste<CR><Insert><C-r>+<ESC>'
+inoremap <silent><expr><C-v> '<ESC>:set<Space>paste<CR><Insert><C-r>+<ESC><Insert>'
 " Search
 nnoremap <expr><Leader>%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
@@ -207,7 +207,6 @@ else
     NeoBundle 'Shougo/vimproc', {'build': {'mac': 'make -f make_mac.mak', 'unix': 'make -f make_unix.mak', 'cygwin': 'make -f make_cygwin.mak'}}
     NeoBundle 'vim-jp/vital.vim'
     NeoBundle 'vim-scripts/matchit.zip'
-    NeoBundle 'tpope/vim-endwise'
     NeoBundle 'fuenor/qfixgrep'
     NeoBundle 'LeafCage/yankround.vim'
     NeoBundle 'thinca/vim-quickrun'
