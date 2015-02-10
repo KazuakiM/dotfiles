@@ -83,8 +83,8 @@ endif
 autocmd MyAutoCmd VimEnter * set textwidth=0
 autocmd MyAutoCmd InsertLeave * set nopaste
 " http://d.hatena.ne.jp/thinca/20090530/1243615055
-autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * setlocal nocursorline
-autocmd MyAutoCmd CursorHold,CursorHoldI            * setlocal cursorline
+autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * setlocal nocursorline nocursorcolumn
+autocmd MyAutoCmd CursorHold,CursorHoldI            * setlocal cursorline cursorcolumn
 autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 "autocmd MyAutoCmd VimEnter * set formatoptions-=v
@@ -106,12 +106,12 @@ endfunction "}}}
 function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
 endfunction "}}}
-set scrolloff=999 autoread hidden ambiwidth=double iminsert=0 imsearch=-1 backspace=indent,eol,start virtualedit+=block visualbell t_vb= noerrorbells noimdisable
-set noimcmdline foldmethod=marker viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo updatetime=1000 matchpairs+=<:> shortmess+=I title titleold=
-set titlestring=%F tabline=%!TabLineUpdate() showcmd noruler laststatus=2 cmdheight=1 wildmenu wildmode=longest:full,full completeopt=longest,menu noequalalways
-set wrap display=lastline pumheight=8 showmatch matchtime=1 lazyredraw ttyfast history=1000 number cursorcolumn clipboard+=autoselect,unnamed swapfile
-set directory=$HOME/.vim/swap backup undofile tabstop=4 softtabstop=4 shiftwidth=4 expandtab autoindent smartindent smarttab incsearch ignorecase smartcase hlsearch
-set wrapscan helplang=ja
+set ambiwidth=double autoindent autoread backspace=indent,eol,start backup clipboard+=autoselect,unnamed cmdheight=1 completeopt=longest,menu
+set directory=$HOME/.vim/swap display=lastline expandtab foldmethod=marker helplang=ja hidden history=1000 hlsearch ignorecase iminsert=0 imsearch=-1 incsearch
+set laststatus=2 lazyredraw matchpairs+=<:> matchtime=1 noequalalways noerrorbells noimcmdline noimdisable noruler number pumheight=8 scrolloff=999 shiftwidth=4
+set shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile tabline=%!TabLineUpdate() tabstop=4 title titleold= titlestring=%F ttyfast
+set t_vb= undofile updatetime=1000 viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo virtualedit+=block visualbell
+set wildmenu wildmode=longest:full,full wrap wrapscan
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,.DS_Store,.,..
 set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*min.js'\ --exclude='*min.css'\ --exclude='*.log'
@@ -120,7 +120,6 @@ set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc
 " Color
 syntax on
-set t_Co=16 background=dark
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     "\t")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      "\r")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    "\r\n")
