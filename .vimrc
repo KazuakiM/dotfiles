@@ -81,9 +81,6 @@ endif
 " autocmd
 autocmd MyAutoCmd VimEnter * set textwidth=0
 autocmd MyAutoCmd InsertLeave * set nopaste
-" http://d.hatena.ne.jp/thinca/20090530/1243615055
-autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * setlocal nocursorline nocursorcolumn
-autocmd MyAutoCmd CursorHold,CursorHoldI            * setlocal cursorline cursorcolumn
 autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 "autocmd MyAutoCmd VimEnter * set formatoptions-=v
@@ -140,7 +137,7 @@ nnoremap gr gT
 inoremap <C-u> <C-g>u<C-u>
 inoremap <C-w> <C-g>u<C-w>
 "  Window Size
-nmap <SID>[ws] <Nop>
+nnoremap <SID>[ws] <Nop>
 nmap + <C-w>+<SID>[ws]
 nmap - <C-w>-<SID>[ws]
 nmap > <C-w>><SID>[ws]
