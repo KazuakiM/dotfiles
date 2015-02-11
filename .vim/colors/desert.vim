@@ -20,7 +20,7 @@ let g:colors_name = 'desert'
 hi Normal       cterm=NONE           gui=NONE           ctermfg=White     guifg=White     ctermbg=Black    guibg=Black
 hi Comment      cterm=NONE           gui=NONE           ctermfg=Red       guifg=Red       ctermbg=NONE     guibg=NONE
 hi Constant     cterm=NONE           gui=NONE           ctermfg=Brown     guifg=Brown
-hi Cursor       cterm=NONE           gui=NONE           ctermfg=NONE      guifg=NONE      ctermbg=NONE     guibg=NONE
+hi Cursor       cterm=NONE           gui=NONE           ctermfg=NONE      guifg=Black     ctermbg=NONE     guibg=White
 hi CursorColumn cterm=NONE           gui=NONE           ctermfg=Black     guifg=Black     ctermbg=Grey     guibg=Grey
 hi CursorLine   cterm=underline      gui=underline      ctermfg=NONE      guifg=NONE      ctermbg=NONE     guibg=NONE
 hi CursorLineNr cterm=reverse        gui=reverse        ctermfg=NONE      guifg=NONE      ctermbg=NONE     guibg=NONE
