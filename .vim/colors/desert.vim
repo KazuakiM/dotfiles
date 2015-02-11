@@ -43,7 +43,7 @@ hi Special      cterm=NONE           gui=NONE           ctermfg=Magenta   guifg=
 hi SpecialKey   cterm=NONE           gui=NONE           ctermfg=DarkGreen guifg=DarkGreen
 hi Statement    cterm=NONE           gui=NONE           ctermfg=Yellow    guifg=Yellow
 hi StatusLine   cterm=NONE           gui=NONE           ctermfg=Black     guifg=Black     ctermbg=Grey     guibg=Grey
-hi StatusLineNC cterm=NONE           gui=NONE           ctermfg=White     guifg=White     ctermbg=Black    guibg=DarkBlue
+hi StatusLineNC cterm=NONE           gui=NONE           ctermfg=White     guifg=White     ctermbg=DarkGrey guibg=DarkBlue
 hi TabLine      cterm=NONE           gui=NONE           ctermfg=White     guifg=White     ctermbg=Black    guibg=Black
 hi TabLineSel   cterm=NONE           gui=NONE           ctermfg=Black     guifg=Black     ctermbg=Magenta  guibg=Magenta
 hi Title        cterm=NONE           gui=NONE           ctermfg=Magenta   guifg=Magenta

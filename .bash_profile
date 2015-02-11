@@ -26,7 +26,7 @@ alias h='history'
 alias mv='mv -i'
 alias rm='rm -i'
 alias tree='tree -af'
-alias FIND='find ./ -type d -name ".git" -prune -o -type d -name ".svn" -prune -o -type f -name "*min.js" -prune -o -type f -name "*min.css" -prune -o -type f -print | xargs grep --color -I -n "$@"'
+alias FIND='find ./ -type d -name ".git" -prune -o -type d -name ".svn" -prune -o -type f -name "*.json" -prune -o -type f -name "*.log" -prune -o -type f -name "*min.js" -prune -o -type f -name "*min.css" -prune -o -type f -print | xargs grep --color -I -n "$@"'
 if type colordiff >/dev/null 2>&1; then
     alias diff='colordiff -u'
 else
