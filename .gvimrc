@@ -16,7 +16,7 @@ set guioptions-=t
 set guioptions-=b
 set winaltkeys=no
 " Color
-set background=dark
+colorscheme desert
 " Show
 set cmdheight=1
 "}}}

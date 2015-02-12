@@ -34,7 +34,7 @@ $ scp -P <port> <host>:/file/to/pasth/<file> /tmp/
 
 file grep
 ```
-$ find ./ -type d -name ".git" -prune -o -type d -name ".svn" -prune -o -type f -name "*min.js" -prune -o -type f -name "*min.css" -prune -o -type f -exec grep --color -I -n "keyword" {} /dev/null \;
+$ find ./ -type d -name ".git" -prune -o -type d -name ".svn" -prune -o -type f -name "*.json" -prune -o -type f -name "*.log" -prune -o -type f -name "*min.js" -prune -o -type f -name "*min.css" -prune -o -type f -exec grep --color -I -n "keyword" {} /dev/null \;
 ```
 
 # Network
