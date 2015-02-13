@@ -6,10 +6,6 @@
 " Version:     $Id: desert.vim,v 1.1 2004/06/13 19:30:30 vimboss Exp $
 "}}}
 set t_Co=16 background=dark
-let &t_ti .= "\e[1 q"
-let &t_te .= "\e[0 q"
-let &t_SI .= "\e[5 q"
-let &t_EI .= "\e[1 q"
 hi clear
 syntax reset
 if exists('g:colors_name')

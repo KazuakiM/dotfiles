@@ -113,12 +113,6 @@ set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.p
 set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 "set foldopen-=search
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc
-" Terminal
-" http://qiita.com/kefir_/items/c725731d33de4d8fb096
-let &t_CS = 'y'
-let &t_CV = "\e[%i%p1%d;%p2%ds"
-let &t_ti = &t_ti . "\e[?6;69h"
-let &t_te = "\e[?6;69l" . &t_te
 " Color
 syntax on
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     "\t")
