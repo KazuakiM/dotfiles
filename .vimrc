@@ -109,7 +109,7 @@ set number pumheight=8 scrolloff=999 shiftwidth=4 shortmess+=I showcmd showmatch
 set tabstop=4 title titleold= titlestring=%F ttyfast t_vb= undofile updatetime=1000 viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo
 set virtualedit+=block visualbell wildmenu wildmode=longest:full,full wrap wrapscan
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*.json'\ --exclude='*.log'\ --exclude='*min.js'\ --exclude='*min.css'
-set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,.DS_Store,.,..
+set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,C,.DS_Store,.,..
 set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 "set foldopen-=search
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc
@@ -148,7 +148,7 @@ noremap <Up>   <C-b>
 nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null<CR>
 "  Paste
 nnoremap <silent><expr><Leader>v  ':set<Space>paste<CR><Insert><C-r>+<ESC>'
-inoremap <silent><expr><C-v> '<ESC>:set<Space>paste<CR><Insert><C-r>+<ESC><Insert>'
+inoremap <silent><expr><C-v> '<ESC>:set<Space>paste<CR><Insert><C-r>+<ESC><Insert><Right>'
 " Search
 nnoremap <expr><Leader>%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
