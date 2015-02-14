@@ -102,7 +102,7 @@ endfunction "}}}
 function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
 endfunction "}}}
-set ambiwidth=double autoindent autoread backspace=indent,eol,start backup clipboard+=autoselect,unnamed cmdheight=1 completeopt=longest,menu
+set ambiwidth=double autochdir autoindent autoread backspace=indent,eol,start backup clipboard+=autoselect,unnamed cmdheight=1 completeopt=longest,menu
 set directory=$HOME/.vim/swap display=lastline expandtab foldmethod=marker grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m helplang=ja hidden history=1000 hlsearch
 set ignorecase iminsert=0 imsearch=-1 incsearch laststatus=2 lazyredraw matchpairs+=<:> matchtime=1 noequalalways noerrorbells noimcmdline noimdisable noruler
 set number pumheight=8 scrolloff=999 shiftwidth=4 shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile tabline=%!TabLineUpdate()
@@ -217,7 +217,7 @@ endif
 " qfixgrep {{{
 let g:QFixWin_EnableMode   = 1
 let g:QFix_UseLocationList = 1
-nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
+nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of('vital').import('Prelude').path2project_directory('%').'<CR>'
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 "}}}
 " yankround.vim {{{
@@ -333,7 +333,7 @@ endfunction
 "}}}
 " nerdtree {{{
 NeoBundleLazy 'scrooloose/nerdtree', {'commands': 'NERDTree'}
-nnoremap <expr><Leader>n ':NERDTree '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
+nnoremap <expr><Leader>n ':NERDTree '.vital#of('vital').import('Prelude').path2project_directory('%').'<CR>'
 let s:hooks = neobundle#get_hooks('nerdtree')
 function! s:hooks.on_source(bundle)
     let g:NERDTreeWinSize           = 20
@@ -369,7 +369,7 @@ nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
 " vim-ref {{{
 NeoBundleLazy 'thinca/vim-ref', {'functions': 'ref#K'}
 let g:ref_no_default_key_mappings = 1
-inoremap <silent><C-k> <C-o>:call<space>ref#K("normal")<CR><ESC>
+inoremap <silent><C-k> <C-o>:call<space>ref#K('normal')<CR><ESC>
 nnoremap <silent>K :<C-u>call ref#K('normal')<CR>
 let s:hooks = neobundle#get_hooks('vim-ref')
 function! s:hooks.on_source(bundle)
@@ -394,7 +394,7 @@ endfunction
 "}}}
 " open-browser.vim {{{
 NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'openbrowser#_keymapping_smart_search'}
-let g:netrw_nogx = 1 " disable netrw's gx mapping.
+let g:netrw_nogx = 1
 nnoremap <Leader>gx :<C-u>call openbrowser#_keymapping_smart_search('n')<CR>
 "}}}
 " vim-snippets
@@ -464,7 +464,7 @@ NeoBundleFetch 'KazuakiM/neosnippet-snippets'
 " OS type {{{
 " Exclusive {{{
 if s:osType !=# 'macunix'
-    autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+    autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line('$') | exe "normal! g`\"" | endif
 endif
 if s:osType !=# 'win'
     " memolist.vim {{{

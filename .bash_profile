@@ -80,7 +80,7 @@ case "${OSTYPE}" in
         alias ls='ls -AGh'
         alias sl='ls -AGh'
         alias ll='ls -AGhl'
-        alias vi='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+        alias vi='open -a MacVim "$@"'
         alias vim='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
         alias gvim='open -a MacVim "$@"'
         alias httpd='sudo apachectl'

@@ -22,13 +22,6 @@ set cmdheight=1
 "}}}
 "
 "
-" NeoBundleLazy {{{
-" nerdtree {{{
-nnoremap <expr><Leader>n ':NERDTree '.expand("%:p").'<CR>'
-"}}}
-"}}}
-"
-"
 " OS type {{{
 if has("win32") || has ("win64")
     set guifont=Source_Code_Pro:h12:cANSI
@@ -37,7 +30,8 @@ if has("win32") || has ("win64")
     winpos 704 0
 else
     set guifont=Ricty_Discord_Regular:h16
-    set lines=47
-    set columns=96
+    set lines=44
+    set columns=170
+    winpos 0 23
 endif
 "}}}
