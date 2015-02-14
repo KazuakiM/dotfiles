@@ -80,9 +80,9 @@ case "${OSTYPE}" in
         alias ls='ls -AGh'
         alias sl='ls -AGh'
         alias ll='ls -AGhl'
-        alias vi='open -a MacVim "$@"'
+        alias vi="$HOME/work/dotfiles/src/macVimStater.sh"
         alias vim='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-        alias gvim='open -a MacVim "$@"'
+        alias gvim="$HOME/work/dotfiles/src/macVimStater.sh"
         alias httpd='sudo apachectl'
         alias composer='php -d memory_limit=1G /usr/local/opt/composer/libexec/composer.phar'
         alias MYSQL='mysql.server'
