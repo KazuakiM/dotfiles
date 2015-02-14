@@ -86,26 +86,29 @@ autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 "autocmd MyAutoCmd VimEnter * set formatoptions-=v
 "autocmd MyAutoCmd VimEnter * set formatoptions-=b
 " http://d.hatena.ne.jp/thinca/20111204/1322932585
-function! TabpageLabelUpdate(tab_number) "{{{
-    let a:highlight = a:tab_number is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
-    let a:bufnrs    = tabpagebuflist(a:tab_number)
-    let a:bufnr     = len(a:bufnrs)
-    if a:bufnr is 1
-        let a:bufnr = ''
-    endif
-    let a:modified = len(filter(copy(a:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
-    return '%'.a:tab_number.'T'.a:highlight.a:bufnr.' '.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tab_number) - 1]), ':t').' '.a:modified.'%T%#TabLineFill#'
-endfunction "}}}
-function! TabLineUpdate() "{{{
-    return join(map(range(1, tabpagenr('$')), 'TabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
-endfunction "}}}
+if !has('gui_running')
+    function! TabpageLabelUpdate(tab_number) "{{{
+        let a:highlight = a:tab_number is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
+        let a:bufnrs    = tabpagebuflist(a:tab_number)
+        let a:bufnr     = len(a:bufnrs)
+        if a:bufnr is 1
+            let a:bufnr = ''
+        endif
+        let a:modified = len(filter(copy(a:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
+        return '%'.a:tab_number.'T'.a:highlight.a:bufnr.' '.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tab_number) - 1]), ':t').' '.a:modified.'%T%#TabLineFill#'
+    endfunction "}}}
+    function! TabLineUpdate() "{{{
+        return join(map(range(1, tabpagenr('$')), 'TabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
+    endfunction "}}}
+    set tabline=%!TabLineUpdate()
+endif
 function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
 endfunction "}}}
 set ambiwidth=double autochdir autoindent autoread backspace=indent,eol,start backup clipboard+=autoselect,unnamed cmdheight=1 completeopt=longest,menu
 set directory=$HOME/.vim/swap display=lastline expandtab foldmethod=marker grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m helplang=ja hidden history=1000 hlsearch
-set ignorecase iminsert=0 imsearch=-1 incsearch laststatus=2 lazyredraw matchpairs+=<:> matchtime=1 noequalalways noerrorbells noimcmdline noimdisable noruler
-set number pumheight=8 scrolloff=999 shiftwidth=4 shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile tabline=%!TabLineUpdate()
+set ignorecase iminsert=0 imsearch=-1 incsearch laststatus=2 lazyredraw matchpairs+=<:> matchtime=1 noequalalways noerrorbells noimcmdline noimdisable nomodeline
+set noruler number pumheight=8 scrolloff=999 shiftwidth=4 shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile
 set tabstop=4 title titleold= titlestring=%F ttyfast t_vb= undofile updatetime=1000 viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo
 set virtualedit+=block visualbell wildmenu wildmode=longest:full,full wrap wrapscan
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*.json'\ --exclude='*.log'\ --exclude='*min.js'\ --exclude='*min.css'
@@ -121,6 +124,9 @@ autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    "\r\n
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', '\s\+$')
 colorscheme desert
 " Mapping
+"  ESC
+inoremap jk <ESC>
+inoremap kj <ESC>
 "  Fold
 nnoremap zx :foldopen<CR>
 "  Line
