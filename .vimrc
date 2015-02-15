@@ -86,22 +86,6 @@ autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 "autocmd MyAutoCmd VimEnter * set formatoptions-=v
 "autocmd MyAutoCmd VimEnter * set formatoptions-=b
 " http://d.hatena.ne.jp/thinca/20111204/1322932585
-if !has('gui_running')
-    function! TabpageLabelUpdate(tab_number) "{{{
-        let a:highlight = a:tab_number is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
-        let a:bufnrs    = tabpagebuflist(a:tab_number)
-        let a:bufnr     = len(a:bufnrs)
-        if a:bufnr is 1
-            let a:bufnr = ''
-        endif
-        let a:modified = len(filter(copy(a:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
-        return '%'.a:tab_number.'T'.a:highlight.a:bufnr.' '.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tab_number) - 1]), ':t').' '.a:modified.'%T%#TabLineFill#'
-    endfunction "}}}
-    function! TabLineUpdate() "{{{
-        return join(map(range(1, tabpagenr('$')), 'TabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
-    endfunction "}}}
-    set tabline=%!TabLineUpdate()
-endif
 function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
 endfunction "}}}
@@ -493,6 +477,26 @@ elseif s:osType ==# 'win'
 elseif (s:osType ==# 'unix')
 endif
 "}}}
+"}}}
+"
+"
+" Vim / gVim {{{
+if !has('gui_running')
+    function! TabpageLabelUpdate(tab_number) "{{{
+        let a:highlight = a:tab_number is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
+        let a:bufnrs    = tabpagebuflist(a:tab_number)
+        let a:bufnr     = len(a:bufnrs)
+        if a:bufnr is 1
+            let a:bufnr = ''
+        endif
+        let a:modified = len(filter(copy(a:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
+        return '%'.a:tab_number.'T'.a:highlight.a:bufnr.' '.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tab_number) - 1]), ':t').' '.a:modified.'%T%#TabLineFill#'
+    endfunction "}}}
+    function! TabLineUpdate() "{{{
+        return join(map(range(1, tabpagenr('$')), 'TabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
+    endfunction "}}}
+    set tabline=%!TabLineUpdate()
+endif
 "}}}
 "
 "
