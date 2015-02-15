@@ -313,8 +313,8 @@ let s:hooks = neobundle#get_hooks('unite.vim')
 function! s:hooks.on_source(bundle)
     let g:unite_data_directory             = $HOME.'/.vim/unite.vim'
     let g:unite_enable_start_insert        = 1
-    let g:unite_source_grep_command        = 'ag'
-    let g:unite_source_grep_default_opts   = '--nocolor --nogroup'
+    let g:unite_source_grep_command        = 'grep'
+    let g:unite_source_grep_default_opts   = '--color=auto -i -I'
     let g:unite_source_grep_recursive_opt  = ''
     let g:unite_source_grep_max_candidates = 200
 endfunction
