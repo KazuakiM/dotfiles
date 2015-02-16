@@ -26,7 +26,14 @@ alias h='history'
 alias mv='mv -i'
 alias rm='rm -i'
 alias tree='tree -af'
-alias FIND='find ./ -type d -iname ".git" -prune -o -type d -iname ".svn" -prune -o -type f -iname "*.json" -prune -o -type f -iname "*.log" -prune -o -type f -iname "*min.js" -prune -o -type f -iname "*min.css" -prune -o -type f -print | xargs grep --color -i -I -n "$@"'
+findIgnore=''
+findIgnore=${findIgnore}'    -type d -iname ".git"     -prune'
+findIgnore=${findIgnore}' -o -type d -iname ".svn"     -prune'
+findIgnore=${findIgnore}' -o -type f -iname "*.log"    -prune'
+findIgnore=${findIgnore}' -o -type f -iname "*.json"   -prune'
+findIgnore=${findIgnore}' -o -type f -iname "*min.js"  -prune'
+findIgnore=${findIgnore}' -o -type f -iname "*min.css" -prune'
+alias FIND='find ./ '${findIgnore}' -o -type f -print0 | xargs -0 grep --color -i -I -n "$@"'
 if type colordiff >/dev/null 2>&1; then
     alias diff='colordiff -u'
 else
@@ -35,7 +42,7 @@ fi
 if type htop >/dev/null 2>&1; then
     alias top='htop'
 fi
-export GREP_OPTIONS='--color=auto -I'
+export GREP_OPTIONS='--color=auto -i -I'
 export GREP_COLOR='1;33'
 alias grep="grep $GREP_OPTIONS"
 unset GREP_OPTIONS
@@ -73,9 +80,9 @@ case "${OSTYPE}" in
         alias ls='ls -AGh'
         alias sl='ls -AGh'
         alias ll='ls -AGhl'
-        alias vi='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+        alias vi="$HOME/work/dotfiles/src/macVimStater.sh"
         alias vim='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-        alias gvim='open -a MacVim "$@"'
+        alias gvim="$HOME/work/dotfiles/src/macVimStater.sh"
         alias httpd='sudo apachectl'
         alias composer='php -d memory_limit=1G /usr/local/opt/composer/libexec/composer.phar'
         alias MYSQL='mysql.server'

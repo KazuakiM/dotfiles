@@ -86,26 +86,14 @@ autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 "autocmd MyAutoCmd VimEnter * set formatoptions-=v
 "autocmd MyAutoCmd VimEnter * set formatoptions-=b
 " http://d.hatena.ne.jp/thinca/20111204/1322932585
-function! TabpageLabelUpdate(tab_number) "{{{
-    let a:highlight = a:tab_number is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
-    let a:bufnrs    = tabpagebuflist(a:tab_number)
-    let a:bufnr     = len(a:bufnrs)
-    if a:bufnr is 1
-        let a:bufnr = ''
-    endif
-    let a:modified = len(filter(copy(a:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
-    return '%'.a:tab_number.'T'.a:highlight.a:bufnr.' '.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tab_number) - 1]), ':t').' '.a:modified.'%T%#TabLineFill#'
-endfunction "}}}
-function! TabLineUpdate() "{{{
-    return join(map(range(1, tabpagenr('$')), 'TabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
-endfunction "}}}
 function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
 endfunction "}}}
-set ambiwidth=double autoindent autoread backspace=indent,eol,start backup clipboard+=autoselect,unnamed cmdheight=1 completeopt=longest,menu
+" Basic
+set ambiwidth=double autochdir autoindent autoread backspace=indent,eol,start backup clipboard+=autoselect,unnamed cmdheight=1 completeopt=longest,menu
 set directory=$HOME/.vim/swap display=lastline expandtab foldmethod=marker grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m helplang=ja hidden history=1000 hlsearch
-set ignorecase iminsert=0 imsearch=-1 incsearch laststatus=2 lazyredraw matchpairs+=<:> matchtime=1 noequalalways noerrorbells noimcmdline noimdisable noruler
-set number pumheight=8 scrolloff=999 shiftwidth=4 shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile tabline=%!TabLineUpdate()
+set ignorecase iminsert=0 imsearch=-1 incsearch laststatus=2 lazyredraw matchpairs+=<:> matchtime=1 mouse= noequalalways noerrorbells noimcmdline noimdisable
+set nomodeline noruler number pumheight=8 scrolloff=999 shiftwidth=4 shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile
 set tabstop=4 title titleold= titlestring=%F ttyfast t_vb= undofile updatetime=1000 viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo
 set virtualedit+=block visualbell wildmenu wildmode=longest:full,full wrap wrapscan
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*.json'\ --exclude='*.log'\ --exclude='*min.js'\ --exclude='*min.css'
@@ -121,6 +109,9 @@ autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    "\r\n
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', '\s\+$')
 colorscheme desert
 " Mapping
+"  ESC
+inoremap jk <ESC>
+inoremap kj <ESC>
 "  Fold
 nnoremap zx :foldopen<CR>
 "  Line
@@ -217,7 +208,7 @@ endif
 " qfixgrep {{{
 let g:QFixWin_EnableMode   = 1
 let g:QFix_UseLocationList = 1
-nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
+nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of('vital').import('Prelude').path2project_directory('%').'<CR>'
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 "}}}
 " yankround.vim {{{
@@ -306,8 +297,8 @@ let s:hooks = neobundle#get_hooks('unite.vim')
 function! s:hooks.on_source(bundle)
     let g:unite_data_directory             = $HOME.'/.vim/unite.vim'
     let g:unite_enable_start_insert        = 1
-    let g:unite_source_grep_command        = 'ag'
-    let g:unite_source_grep_default_opts   = '--nocolor --nogroup'
+    let g:unite_source_grep_command        = 'grep'
+    let g:unite_source_grep_default_opts   = '--color=auto -i -I'
     let g:unite_source_grep_recursive_opt  = ''
     let g:unite_source_grep_max_candidates = 200
 endfunction
@@ -333,7 +324,7 @@ endfunction
 "}}}
 " nerdtree {{{
 NeoBundleLazy 'scrooloose/nerdtree', {'commands': 'NERDTree'}
-nnoremap <expr><Leader>n ':NERDTree '.vital#of("vital").import("Prelude").path2project_directory("%").'<CR>'
+nnoremap <expr><Leader>n ':NERDTree '.vital#of('vital').import('Prelude').path2project_directory('%').'<CR>'
 let s:hooks = neobundle#get_hooks('nerdtree')
 function! s:hooks.on_source(bundle)
     let g:NERDTreeWinSize           = 20
@@ -369,7 +360,7 @@ nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
 " vim-ref {{{
 NeoBundleLazy 'thinca/vim-ref', {'functions': 'ref#K'}
 let g:ref_no_default_key_mappings = 1
-inoremap <silent><C-k> <C-o>:call<space>ref#K("normal")<CR><ESC>
+inoremap <silent><C-k> <C-o>:call<space>ref#K('normal')<CR><ESC>
 nnoremap <silent>K :<C-u>call ref#K('normal')<CR>
 let s:hooks = neobundle#get_hooks('vim-ref')
 function! s:hooks.on_source(bundle)
@@ -394,7 +385,7 @@ endfunction
 "}}}
 " open-browser.vim {{{
 NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'openbrowser#_keymapping_smart_search'}
-let g:netrw_nogx = 1 " disable netrw's gx mapping.
+let g:netrw_nogx = 1
 nnoremap <Leader>gx :<C-u>call openbrowser#_keymapping_smart_search('n')<CR>
 "}}}
 " vim-snippets
@@ -464,7 +455,7 @@ NeoBundleFetch 'KazuakiM/neosnippet-snippets'
 " OS type {{{
 " Exclusive {{{
 if s:osType !=# 'macunix'
-    autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+    autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line('$') | exe "normal! g`\"" | endif
 endif
 if s:osType !=# 'win'
     " memolist.vim {{{
@@ -486,6 +477,26 @@ elseif s:osType ==# 'win'
 elseif (s:osType ==# 'unix')
 endif
 "}}}
+"}}}
+"
+"
+" Vim / gVim {{{
+if !has('gui_running')
+    function! TabpageLabelUpdate(tab_number) "{{{
+        let a:highlight = a:tab_number is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
+        let a:bufnrs    = tabpagebuflist(a:tab_number)
+        let a:bufnr     = len(a:bufnrs)
+        if a:bufnr is 1
+            let a:bufnr = ''
+        endif
+        let a:modified = len(filter(copy(a:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
+        return '%'.a:tab_number.'T'.a:highlight.a:bufnr.' '.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tab_number) - 1]), ':t').' '.a:modified.'%T%#TabLineFill#'
+    endfunction "}}}
+    function! TabLineUpdate() "{{{
+        return join(map(range(1, tabpagenr('$')), 'TabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
+    endfunction "}}}
+    set tabline=%!TabLineUpdate()
+endif
 "}}}
 "
 "
