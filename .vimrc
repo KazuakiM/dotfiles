@@ -93,8 +93,8 @@ endfunction "}}}
 set ambiwidth=double autochdir autoindent autoread backspace=indent,eol,start backup clipboard+=autoselect,unnamed cmdheight=1 completeopt=longest,menu
 set directory=$HOME/.vim/swap display=lastline expandtab foldmethod=marker grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m helplang=ja hidden history=1000 hlsearch
 set ignorecase iminsert=0 imsearch=-1 incsearch laststatus=2 lazyredraw matchpairs+=<:> matchtime=1 mouse= noequalalways noerrorbells noimcmdline noimdisable
-set nomodeline noruler number pumheight=8 scrolloff=999 shiftwidth=4 shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile
-set tabstop=4 title titleold= titlestring=%F ttyfast t_vb= undofile updatetime=1000 viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo
+set noruler number pumheight=8 scrolloff=999 shiftwidth=4 shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile tabstop=4 title
+set titleold= titlestring=%F ttyfast t_vb= undofile updatetime=1000 viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo
 set virtualedit+=block visualbell wildmenu wildmode=longest:full,full wrap wrapscan
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*.json'\ --exclude='*.log'\ --exclude='*min.js'\ --exclude='*min.css'
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,C,.DS_Store,.,..
@@ -103,10 +103,11 @@ set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&filef
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc
 " Color
 syntax on
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',     "\t")
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',      "\r")
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',    "\r\n")
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL', '\s\+$')
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',        "\t")
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',         "\r")
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',       "\r\n")
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL',    '\s\+$')
+autocmd MyAutoCmd VimEnter,WinEnter * let w:m5 = matchadd('IdeographicSpace', '　')
 colorscheme desert
 " Mapping
 "  ESC
