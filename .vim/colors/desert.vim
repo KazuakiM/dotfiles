@@ -15,7 +15,7 @@ let g:colors_name = 'desert'
 " color terminal definitions {{{
 hi Normal       cterm=NONE           gui=NONE           ctermfg=White     guifg=White     ctermbg=Black    guibg=Black
 hi Comment      cterm=NONE           gui=NONE           ctermfg=Red       guifg=Red       ctermbg=NONE     guibg=NONE
-hi Constant     cterm=NONE           gui=NONE           ctermfg=Brown     guifg=Brown
+hi Constant     cterm=NONE           gui=NONE           ctermfg=Red       guifg=Red
 hi Cursor       cterm=NONE           gui=NONE           ctermfg=NONE      guifg=Black     ctermbg=NONE     guibg=White
 hi CursorColumn cterm=NONE           gui=NONE           ctermfg=Black     guifg=Black     ctermbg=Grey     guibg=Grey
 hi CursorLine   cterm=underline      gui=underline      ctermfg=NONE      guifg=NONE      ctermbg=NONE     guibg=NONE
@@ -33,7 +33,7 @@ hi Identifier   cterm=NONE           gui=NONE           ctermfg=Cyan      guifg=
 hi Ignore       cterm=bold           gui=bold           ctermfg=White     guifg=White
 hi IncSearch    cterm=NONE           gui=NONE           ctermfg=Yellow    guifg=Yellow    ctermbg=Green    guibg=Green
 hi LineNr       cterm=NONE           gui=NONE           ctermfg=Yellow    guifg=Yellow
-hi ModeMsg      cterm=NONE           gui=NONE           ctermfg=Brown     guifg=Brown
+hi ModeMsg      cterm=NONE           gui=NONE           ctermfg=Red       guifg=Red
 hi NonText      cterm=bold           gui=bold           ctermfg=DarkBlue  guifg=DarkBlue
 hi Pmenu        cterm=NONE           gui=NONE           ctermfg=DarkGrey  guifg=DarkGrey  ctermbg=White    guibg=White
 hi PmenuSel     cterm=NONE           gui=NONE           ctermfg=Magenta   guifg=Magenta   ctermbg=Black    guibg=Black
@@ -57,10 +57,11 @@ hi WarningMsg   cterm=NONE           gui=NONE           ctermfg=Red       guifg=
 hi WildMenu     cterm=NONE           gui=NONE           ctermfg=DarkGrey  guifg=DarkGrey  ctermbg=Yellow   guibg=Yellow
 "}}}
 " my highlight {{{
-hi CrString        cterm=NONE      gui=NONE      ctermbg=DarkGrey guibg=DarkGrey
-hi CrlfString      cterm=NONE      gui=NONE      ctermbg=DarkGrey guibg=DarkGrey
-hi QFError         cterm=underline gui=underline ctermfg=Magenta  guifg=Magenta
-hi TabString       cterm=NONE      gui=NONE      ctermbg=DarkGrey guibg=DarkGrey
-hi WhitespaceEOL   cterm=NONE      gui=NONE      ctermbg=DarkGrey guibg=DarkGrey
-hi YankRoundRegion cterm=NONE      gui=NONE      ctermfg=Magenta  guifg=Magenta
+hi CrString         cterm=NONE      gui=NONE      ctermbg=DarkGrey guibg=DarkGrey
+hi CrlfString       cterm=NONE      gui=NONE      ctermbg=DarkGrey guibg=DarkGrey
+hi IdeographicSpace cterm=NONE      gui=NONE      ctermfg=DarkGrey guifg=DarkGrey
+hi QFError          cterm=underline gui=underline ctermfg=Magenta  guifg=Magenta
+hi TabString        cterm=NONE      gui=NONE      ctermbg=DarkGrey guibg=DarkGrey
+hi WhitespaceEOL    cterm=NONE      gui=NONE      ctermbg=DarkGrey guibg=DarkGrey
+hi YankRoundRegion  cterm=NONE      gui=NONE      ctermfg=Magenta  guifg=Magenta
 "}}}
