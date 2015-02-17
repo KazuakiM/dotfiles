@@ -79,6 +79,7 @@ if has('vim_starting')
     set runtimepath+=$HOME/.vim/bundle/neobundle.vim
 endif
 " autocmd
+autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line('$') | exe "normal! g`\"" | endif
 autocmd MyAutoCmd VimEnter * set textwidth=0
 autocmd MyAutoCmd InsertLeave * set nopaste
 autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
@@ -456,7 +457,6 @@ NeoBundleFetch 'KazuakiM/neosnippet-snippets'
 " OS type {{{
 " Exclusive {{{
 if s:osType !=# 'macunix'
-    autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line('$') | exe "normal! g`\"" | endif
 endif
 if s:osType !=# 'win'
     " memolist.vim {{{
