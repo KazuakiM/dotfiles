@@ -116,6 +116,7 @@ case "${OSTYPE}" in
         alias WIRESHARK='/usr/local/bin/wireshark'
         export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
         export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+        export VIM=$HOME
         if type rbenv >/dev/null 2>&1; then
             export RBENV_ROOT=/usr/local/bin
             eval "$(rbenv init -)";
