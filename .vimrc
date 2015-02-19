@@ -183,7 +183,9 @@ nnoremap <SID>[vim]h :<C-u>source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
 " NeoBundle START {{{
 call neobundle#begin(expand('$HOME/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
-let g:neobundle#log_filename = $HOME.'/.vim/neobundle.vim/neobundle.log'
+let g:neobundle#cache_file            = $HOME.'/.vim/neobundle.vim/cache'
+let g:neobundle#install_max_processes = 8
+let g:neobundle#log_filename          = $HOME.'/.vim/neobundle.vim/neobundle.log'
 "}}}
 "
 "
