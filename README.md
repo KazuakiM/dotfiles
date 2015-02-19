@@ -52,6 +52,11 @@ Common setting
  * Delay Until Repeat: 200ms
  * Key Repeat: 25ms
 
+[iTerm2](http://iterm2.com/)
+
+* Preferences > General > Preferences
+ * Load preferences from a custom folder or URL : $HOME/work/dotfiles/lib/iTerm2
+
 ### Set dotfiles
 
 ```bash
@@ -309,7 +314,7 @@ $ vi
 * Required sync setting
 
 * オプション > コンテンツ > フォントとカラー
-  * デフォルトフォント: Ricty
+  * デフォルトフォント: [Ricty](https://github.com/yascentur/RictyDiminished)
 * add-on
   * [Adblock Plus](https://addons.mozilla.org/ja/firefox/addon/adblock-plus/)
   * [AutoPager](https://addons.mozilla.org/ja/firefox/addon/autopager/)
