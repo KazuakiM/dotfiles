@@ -139,6 +139,15 @@ ON DUPLICATE KEY UPDATE
   <Column2> = IF(<Table1>.<Column1> < <Table2>.<ColumnData1>, <Table1>.<Column1>, <Table2>.<ColumnData1>),
   <Column3> = CONCAT(<Table1>.<Column3>, '_', IFNULL(<Column1>, ''));
 ```
+[Insert select group by duplicate key update](http://stackoverflow.com/questions/16935896/mysql-on-duplicate-key-update-while-inserting-a-result-set-from-a-query)
+```
+INSERT INTO <Table1> (<Column1>, <Column2>, ...)
+  SELECT <ColumnData1>, @group_column := <ColumnData2>, ...
+  FROM <Table2>
+  GROUP BY <ColumnData1>
+ON DUPLICATE KEY UPDATE
+  <Column2> = <Table1>.<Column2> + @group_column;
+```
 
 # UPDATE
 
