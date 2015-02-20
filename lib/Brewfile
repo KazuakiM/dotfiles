@@ -1,4 +1,3 @@
-#!/bin/sh
 # homebrew base {{{
 brew update
 brew upgrade
@@ -26,7 +25,7 @@ brew install grep
 brew install httpd24
 brew install lua
 brew install luajit
-brew install macvim-kaoriya
+brew install --HEAD macvim-kaoriya
 brew install mplayer
 brew install mysql
 brew install nkf
@@ -52,6 +51,7 @@ brew install tree
 brew install w3m
 brew install wget
 brew install wireshark
+linkapps
 # 2014-12-22 {{{
 #apr,              cscope,        gnu-tar,               libffi,         mercurial,    phpunit,    the_silver_searcher
 #apr-util,         ctags,         gnutls,                libgcrypt,      mhash,        pixman,     tmux

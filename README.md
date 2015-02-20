@@ -16,7 +16,10 @@ $ mkdir -p work
 $ xcode-select --install
 $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 $ git clone git@github.com:KazuakiM/dotfiles.git work/dotfiles
-$ $HOME/work/dotfiles/lib/Brewfile
+$ brew bundle $HOME/work/dotfiles/lib/Brewfile
+
+  (Important)I don't execute Brewfile. So I'll commentout a lot of code and execute a few code next to next.
+
 $ brew doctor
 ```
 rbenv
@@ -48,6 +51,11 @@ Common setting
 * Key Repeat > Basic Configurations > KeyRepeat
  * Delay Until Repeat: 200ms
  * Key Repeat: 25ms
+
+[iTerm2](http://iterm2.com/)
+
+* Preferences > General > Preferences
+ * Load preferences from a custom folder or URL : $HOME/work/dotfiles/lib/iTerm2
 
 ### Set dotfiles
 
@@ -306,7 +314,7 @@ $ vi
 * Required sync setting
 
 * オプション > コンテンツ > フォントとカラー
-  * デフォルトフォント: Ricty
+  * デフォルトフォント: [Ricty](https://github.com/yascentur/RictyDiminished)
 * add-on
   * [Adblock Plus](https://addons.mozilla.org/ja/firefox/addon/adblock-plus/)
   * [AutoPager](https://addons.mozilla.org/ja/firefox/addon/autopager/)
