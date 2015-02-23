@@ -1104,7 +1104,7 @@
 	<key>MaxVertically</key>
 	<false/>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/work/dotfiles/lib</string>
+	<string>~/work/dotfiles/lib/iTerm2</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -1131,7 +1131,7 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>442 234 924 485 0 0 1366 745 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>327 5 1034 740 0 0 1366 745 </string>
+	<string>0 5 1362 740 0 0 1366 745 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>1692 6 1034 762 1366 0 1360 768 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -2671,6 +2671,8 @@
 			<string></string>
 		</dict>
 	</array>
+	<key>NoSyncNeverRemindPrefsChangesCopy</key>
+	<true/>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -2719,7 +2721,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/mabuchikazuaki/work/dotfiles/lib</string>
+	<string>/Users/mabuchikazuaki/work/dotfiles/lib/iTerm2</string>
 	<key>PromptOnClose</key>
 	<false/>
 	<key>PromptOnQuit</key>
@@ -2741,7 +2743,7 @@
 	<key>SUFeedURL</key>
 	<string>http://iterm2.com/appcasts/testing.xml</string>
 	<key>SULastCheckTime</key>
-	<date>2015-02-19T21:46:47Z</date>
+	<date>2015-02-20T21:46:47Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
