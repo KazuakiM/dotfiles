@@ -54,7 +54,7 @@ hi Title        cterm=NONE           gui=NONE           ctermfg=Magenta   guifg=
 hi Type         cterm=NONE           gui=NONE           ctermfg=Green     guifg=Green     ctermbg=NONE     guibg=NONE
 hi Underlined   cterm=underline      gui=underline      ctermfg=Magenta   guifg=Magenta   ctermbg=NONE     guibg=NONE
 hi VertSplit    cterm=reverse        gui=reverse
-hi Visual       cterm=NONE           gui=NONE           ctermfg=Yellow    guifg=Yellow    ctermbg=NONE     guibg=NONE
+hi Visual       cterm=NONE           gui=NONE           ctermfg=Yellow    guifg=Yellow    ctermbg=Black    guibg=Black
 hi VisualNOS    cterm=bold,underline gui=bold,underline
 hi WarningMsg   cterm=NONE           gui=NONE           ctermfg=Red       guifg=Red       ctermbg=NONE     guibg=NONE
 hi WildMenu     cterm=NONE           gui=NONE           ctermfg=DarkGrey  guifg=DarkGrey  ctermbg=Yellow   guibg=Yellow
@@ -62,7 +62,7 @@ hi WildMenu     cterm=NONE           gui=NONE           ctermfg=DarkGrey  guifg=
 " my highlight {{{
 hi CrString         cterm=NONE      gui=NONE      ctermbg=DarkGrey guibg=DarkGrey
 hi CrlfString       cterm=NONE      gui=NONE      ctermbg=DarkGrey guibg=DarkGrey
-hi IdeographicSpace cterm=NONE      gui=NONE      ctermfg=DarkGrey guifg=DarkGrey
+hi IdeographicSpace cterm=NONE      gui=NONE      ctermbg=DarkGrey guibg=DarkGrey
 hi QFError          cterm=underline gui=underline ctermfg=Magenta  guifg=Magenta
 hi TabString        cterm=NONE      gui=NONE      ctermbg=DarkGrey guibg=DarkGrey
 hi WhitespaceEOL    cterm=NONE      gui=NONE      ctermbg=DarkGrey guibg=DarkGrey
