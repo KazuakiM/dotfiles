@@ -45,6 +45,20 @@ CSV to SQL
 $ awk -F "," '{print "INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES ("$1",\047"$2"\047,...);"}' <dumpFile>.csv > /tmp/<dumpFile>.sql
 $ sed -i -e s/\'NULL\'/NULL/ /tmp/<dumpFile>.sql
 ```
+DELETE CRLF or CR or LF  
+TODO:meta words.
+```
+SELECT <Column1> FROM <Table1> WHERE <Column1> LIKE '%\r\n%' OR <Column1> LIKE '%\r%' OR <Column1> LIKE '%\n%';
+
+BEGIN;
+UPDATE <Table1> SET <Column1> = REPLACE(<Column1>, '\r\n', '') WHERE <Column1> LIKE '%\r\n%';
+UPDATE <Table1> SET <Column1> = REPLACE(<Column1>, '\n',   '') WHERE <Column1> LIKE '%\n%';
+UPDATE <Table1> SET <Column1> = REPLACE(<Column1>, '\r',   '') WHERE <Column1> LIKE '%\r%';
+
+SELECT <Column1> FROM <Table1> WHERE <Column1> LIKE '%\r\n%' OR <Column1> LIKE '%\r%' OR <Column1> LIKE '%\n%';
+
+COMMIT;
+```
 
 # Import File
 
