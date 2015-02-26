@@ -87,7 +87,6 @@ autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 "autocmd MyAutoCmd VimEnter * set formatoptions-=v
 "autocmd MyAutoCmd VimEnter * set formatoptions-=b
-" http://d.hatena.ne.jp/thinca/20111204/1322932585
 function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
 endfunction "}}}
@@ -206,7 +205,6 @@ else
     NeoBundle 'gcmt/wildfire.vim'
     NeoBundle 'vim-jp/vimdoc-ja'
     NeoBundle 'Yggdroot/indentLine'
-    "NeoBundle 'Kuniwak/vint'
 
     NeoBundleSaveCache
 endif
@@ -255,7 +253,7 @@ let g:clever_f_smart_case     = 1
 let g:clever_f_use_migemo     = 0
 "}}}
 " wildfire.vim {{{
-let g:wildfire_objects   = ["i'", "a'", 'i"', 'a"', 'i`', 'a`', "i,", "a,", 'i)', 'i}', 'i]', 'i>', 'ip', 'it']
+let g:wildfire_objects   = ["i'", "a'", 'i"', 'a"', 'i`', 'a`', 'i,', 'a,', 'i)', 'i}', 'i]', 'i>', 'ip', 'it']
 let g:wildfire_fuel_map  = '<Enter>'
 let g:wildfire_water_map = '<BS>'
 "}}}
@@ -454,6 +452,7 @@ NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'markdown'}
 "* New Install 'NeoBundle'. And Update 'NeoBundle' to 'NeoBundleFetch'.
 NeoBundleFetch 'psychs/lingr-irc'
 NeoBundleFetch 'KazuakiM/neosnippet-snippets'
+NeoBundleFetch 'Kuniwak/vint'
 "}}}
 "
 "
@@ -486,6 +485,7 @@ endif
 "
 " Vim / gVim {{{
 if !has('gui_running')
+    " http://d.hatena.ne.jp/thinca/20111204/1322932585
     function! TabpageLabelUpdate(tab_number) "{{{
         let a:highlight = a:tab_number is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
         let a:bufnrs    = tabpagebuflist(a:tab_number)

@@ -330,6 +330,13 @@ DATE_FORMAT
 SELECT DATE_FORMAT(<Column1>, '%Y-%m-%d');
 SELECT DATE_FORMAT(<Column1>, '%Y-%m-%d %H:%i:%S');
 ```
+TRIM
+```
+SELECT TRIM(LEADING  '　' FROM '　I　love　Vim　');
+SELECT TRIM(TRAILING '　' FROM '　I　love　Vim　');
+SELECT TRIM('_' FROM '_I_love_Vim_');
+SELECT TRIM(' I love Vim ');
+```
 
 # Other
 
