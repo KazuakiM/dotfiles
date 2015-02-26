@@ -23,11 +23,17 @@ $ nc foobar.com 3000 | pv > <File>
 
 Sender
 ```
-$ scp -P <port> <file> <host>:/tmp/
+$ scp -P <port:22> <file> <host>:/tmp/
 ```
 Receiver
 ```
-$ scp -P <port> <host>:/file/to/pasth/<file> /tmp/
+$ scp -P <port:22> <host>:/file/to/pasth/<file> /tmp/
+```
+
+# SSH
+
+```
+$ ssh -p <port:22> -i <file.pem> <user>@<host>
 ```
 
 # Grep
