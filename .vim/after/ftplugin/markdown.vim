@@ -1,2 +1,2 @@
-setlocal spelllang+=cjk
-setlocal spell
+setlocal spelllang+=cjk spell
+hi! def link markdownItalic LineNr
