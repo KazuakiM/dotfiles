@@ -160,10 +160,10 @@ nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
 " $VIMRUNTIME/syntax/sql.vim
 let g:sql_type_default = 'mysql'
 " $VIMRUNTIME/syntax/php.vim
-let g:php_sql_query     = 1
-let g:php_htmlInStrings = 1
 let g:php_baselib       = 1
+let g:php_htmlInStrings = 1
 let g:php_noShortTags   = 1
+let g:php_sql_query     = 1
 " disable plugin
 let g:loaded_gzip          = 1
 let g:loaded_matchparen    = 1
@@ -209,8 +209,8 @@ else
     NeoBundleSaveCache
 endif
 " qfixgrep {{{
-let g:QFixWin_EnableMode   = 1
 let g:QFix_UseLocationList = 1
+let g:QFixWin_EnableMode   = 1
 nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of('vital').import('Prelude').path2project_directory('%').'<CR>'
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 "}}}
@@ -253,8 +253,8 @@ let g:clever_f_smart_case     = 1
 let g:clever_f_use_migemo     = 0
 "}}}
 " wildfire.vim {{{
-let g:wildfire_objects   = ["i'", "a'", 'i"', 'a"', 'i`', 'a`', 'i,', 'a,', 'i)', 'i}', 'i]', 'i>', 'ip', 'it']
 let g:wildfire_fuel_map  = '<Enter>'
+let g:wildfire_objects   = ["i'", "a'", 'i"', 'a"', 'i`', 'a`', 'i,', 'a,', 'i)', 'i}', 'i]', 'i>', 'ip', 'it']
 let g:wildfire_water_map = '<BS>'
 "}}}
 " indentLine {{{
@@ -308,9 +308,10 @@ endfunction
 let s:hooks = neobundle#get_hooks('memolist.vim')
 function! s:hooks.on_source(bundle)
     let g:memolist_filename_prefix_none = 1
+    let g:memolist_template_dir_path    = $HOME.'/.vim/memolist.vim'
     let g:memolist_unite                = 1
-    let g:memolist_unite_source         = 'file_rec'
     let g:memolist_unite_option         = '-default-action=tabopen'
+    let g:memolist_unite_source         = 'file_rec'
 endfunction
 "}}}
 " taglist.vim {{{
@@ -318,11 +319,11 @@ NeoBundleLazy 'vim-scripts/taglist.vim', {'commands': 'Tlist'}
 nnoremap <Leader>t :<C-u>Tlist<CR>
 let s:hooks = neobundle#get_hooks('taglist.vim')
 function! s:hooks.on_source(bundle)
-    let g:Tlist_Use_Right_Window = 1
-    let g:Tlist_Show_One_File    = 1
-    let g:Tlist_Exit_OnlyWindow  = 1
-    let g:Tlist_WinWidth         = 25
     let g:tlist_php_settings     = 'php;c:class;f:function;d:constant'
+    let g:Tlist_Exit_OnlyWindow  = 1
+    let g:Tlist_Show_One_File    = 1
+    let g:Tlist_Use_Right_Window = 1
+    let g:Tlist_WinWidth         = 25
 endfunction
 "}}}
 " nerdtree {{{
@@ -330,10 +331,10 @@ NeoBundleLazy 'scrooloose/nerdtree', {'commands': 'NERDTree'}
 nnoremap <expr><Leader>n ':NERDTree '.vital#of('vital').import('Prelude').path2project_directory('%').'<CR>'
 let s:hooks = neobundle#get_hooks('nerdtree')
 function! s:hooks.on_source(bundle)
-    let g:NERDTreeWinSize           = 20
     let g:NERDTreeMinimalUI         = 1
     let g:NERDTreeRespectWildIgnore = 1
     let g:NERDTreeShowHidden        = 1
+    let g:NERDTreeWinSize           = 20
     autocmd MyAutoCmd BufEnter * if winnr('$') is 1 && exists('b:NERDTreeType') && b:NERDTreeType ==# 'primary' | q | endif
 endfunction
 "}}}
@@ -368,8 +369,8 @@ nnoremap <silent>K :<C-u>call ref#K('normal')<CR>
 let s:hooks = neobundle#get_hooks('vim-ref')
 function! s:hooks.on_source(bundle)
     let g:ref_cache_dir       = $HOME.'/.vim/vim-ref/cache'
-    let g:ref_phpmanual_path  = $HOME.'/.vim/vim-ref/php-chunked-xhtml'
     let g:ref_detect_filetype = {'html': 'phpmanual', 'javascript': 'phpmanual', 'css': 'phpmanual'}
+    let g:ref_phpmanual_path  = $HOME.'/.vim/vim-ref/php-chunked-xhtml'
 endfunction
 "}}}
 " vim-php-cs-fixer {{{
