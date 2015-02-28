@@ -38,28 +38,28 @@ $ cp -p /tmp/RictyDiminished/*.ttl $HOME/Library/Fonts/
 
 [BetterTouchTool](http://www.bettertouchtool.net/)
 
-> |Action Settings(Window Snapping etc.) > Window Snapping||
-> |:-------------------------------------------------------|
-> |Normal Snapping / Moving                               ||
-> |Left width |                                         24%|
-> |Right width|                                         76%|
-> |Corner Snapping / Move to quarters                     ||
-> |Left width |                                         50%|
-> |Right width|                                         50%|
+|Action Settings(Window Snapping etc.) > Window Snapping||
+|:-------------------------------------------------------|
+|Normal Snapping / Moving                               ||
+|Left width |                                         24%|
+|Right width|                                         76%|
+|Corner Snapping / Move to quarters                     ||
+|Left width |                                         50%|
+|Right width|                                         50%|
 
 [FireFox](https://www.mozilla.org/ja/firefox/)
 > Common setting
 
 [Karabiner](https://pqrs.org/osx/karabiner/index.html.ja)
-> |Key Repeat > Basic Configurations > KeyRepeat||
-> |:--------------------------------------------||
-> |Delay Until Repeat|                      200ms|
-> |Key Repeat        |                       25ms|
+|Key Repeat > Basic Configurations > KeyRepeat||
+|:--------------------------------------------||
+|Delay Until Repeat|                      200ms|
+|Key Repeat        |                       25ms|
 
 [iTerm2](http://iterm2.com/)
-> |Preferences > General > Preferences                                       ||
-> |:--------------------------------------------------------------------------|
-> |Load preferences from a custom folder or URL|$HOME/work/dotfiles/lib/iTerm2|
+|Preferences > General > Preferences                                       ||
+|:--------------------------------------------------------------------------|
+|Load preferences from a custom folder or URL|$HOME/work/dotfiles/lib/iTerm2|
 
 ### Set dotfiles
 
@@ -279,9 +279,9 @@ $ exit
 
 ### Set environment variables
 
-> |Name|Value                     |
-> |:---|:-------------------------|
-> |HOME|C:\cygwin64\home\<Account>|
+|Name|Value                     |
+|:---|:-------------------------|
+|HOME|C:\cygwin64\home\<Account>|
 
 ### Operate Cygwin
 
