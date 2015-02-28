@@ -39,6 +39,7 @@ brew install pstree
 brew install pv
 brew install python
 brew install python3
+brew install q
 brew install rbenv
 brew install readline
 brew install reattach-to-user-namespace

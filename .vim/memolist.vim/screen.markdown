@@ -1,72 +1,77 @@
-title: screen
-==========
-date: 2015-01-11 15:51
-tags: []
-categories: []
-- - -
+screen
+===
 
-# セッション
+## セッション
 
 起動
-```
+```bash
 $ screen
 ```
+
 セッション一覧
-```
+```bash
 $ screen -ls
 ```
+
 デタッチ
 ```
 Prefix > Ctrl-u
 ```
+
 アタッチ
-```
+```bash
 $ screen -r <id>
 ```
 
-# コピー
+## コピー
 
 ```
-$ Prefix > [
+Prefix > [
 
  h,j,k,l でコピー対象の頭に移動
  ^:start, $:end
 
-$ Prefix > ]
+Prefix > ]
 ```
 
-# Window操作
+## Window操作
 
 ウィンドウ一覧
 ```
 Prefix > Ctrl-l
 ```
+
 ウィンドウ次へ
 ```
 Prefix > Ctrl-d
 ```
+
 ウィンドウ前へ
 ```
 Prefix > Ctrl-s
 ```
+
 ウィンドウ作成
 ```
 Prefix > Ctrl-k
 ```
+
 ウィンドウ水平分割
 ```
 Prefix > -
 ```
+
 ウィンドウ分割解除
 ```
 Prefix > Ctrl-p
 ```
+
 ウィンドウリネーム
 ```
 Prefix > Ctrl-w
 ```
 
-# Etc
+## Etc
 
 設定ファイル再読み込み
 ```
