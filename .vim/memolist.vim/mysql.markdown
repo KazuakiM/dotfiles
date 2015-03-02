@@ -1,53 +1,53 @@
-title: MySQL
-==========
-date: 2014-12-01 11:05
-tags: []
-categories: []
-- - -
+MySQL
+===
 
-# Tips
+## Tips
 
 Copy DataBase
-```
+```bash
 $ mysqldump -u<Account> -h<Host> -p <DataBase1>    > '/tmp/<dumpFile>'
 $ mysql     -u<Account> -h<Host> -p <New DataBase> < '/tmp/<dumpFile>'
 ```
+
 Copy Table
-```
-$ mysql -u<Account> -h<Host> -p -e "
+```sql
 CREATE TABLE <New DataBase>.<New Table1> LIKE          <DataBase1>.<Table1>;
 INSERT INTO  <New DataBase>.<New Table1> SELECT * FROM <DataBase1>.<Table1>;
-"
 ```
+
 Slave or Master  
 Slave is shown at infomation. Master is empty. 
-```
+```sql
 SHOW SLAVE STATUS\G
 ```
+
 [Trouble](http://qiita.com/muran001/items/14f19959d4723ffc29cc)
-```
+```sql
 SHOW GLOBAL STATUS;
 SHOW PROCESSLIST;
 SHOW FULL PROCESSLIST;
 
 KILL xxxx;
 ```
+
 PARTITIONS
-```
+```sql
 SELECT ISP.TABLE_SCHEMA, ISP.TABLE_NAME, ISP.PARTITION_NAME, ISP.PARTITION_ORDINAL_POSITION, ISP.TABLE_ROWS FROM INFORMATION_SCHEMA.PARTITIONS ISP WHERE ISP.TABLE_SCHEMA = DATABASE()
 AND ISP.TABLE_NAME = <Table1>;
 
 SHOW CREATE TABLE <Table1>\G
 ```
+
 CSV to SQL  
 '\47' is SingleQuote.
-```
+```bash
 $ awk -F "," '{print "INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES ("$1",\047"$2"\047,...);"}' <dumpFile>.csv > /tmp/<dumpFile>.sql
 $ sed -i -e s/\'NULL\'/NULL/ /tmp/<dumpFile>.sql
 ```
+
 DELETE CRLF or CR or LF  
 TODO:meta words.
-```
+```sql
 SELECT <Column1> FROM <Table1> WHERE <Column1> LIKE '%\r\n%' OR <Column1> LIKE '%\r%' OR <Column1> LIKE '%\n%';
 
 BEGIN;
@@ -60,16 +60,17 @@ SELECT <Column1> FROM <Table1> WHERE <Column1> LIKE '%\r\n%' OR <Column1> LIKE '
 COMMIT;
 ```
 
-# Import File
+## Import File
 
 CUI
-```
+```bash
 $ ls
   <dumpFile>
 $ mysql -u<Account> -h<Host> -p <DataBase>  < ./<dumpFile>
 ```
+
 Command
-```
+```sql
 $ ls
   <dumpFile>
 $ mysql -u<Account> -h<Host> -p <DataBase>
@@ -84,10 +85,10 @@ SOURCE ./<dumpFile>
 COMMIT;
 ```
 
-# Export File
+## Export File
 
 Tables dump
-```
+```bash
 $ mysqldump -u<Account> -h<Host> -p <DataBase> \
  --default-character-set=utf8 --skip-lock-tables -c -e -q -t --result-file='/tmp/<dumpFile>' --tables \
  <Table1> <Table2>;
@@ -96,8 +97,9 @@ $ vi <dumpFile>
   Check execute results.
 $ tar zcvf <dumpFile>.tar.gz <dumpFile>
 ```
+
 Recode dump
-```
+```bash
 $ mysqldump -u<Account> -h<Host> -p <DataBase> \
  --where='<Condition>' \
  --default-character-set=utf8 --skip-lock-tables -c -e -q -t --result-file='/tmp/<dumpFile>' --tables \
@@ -105,46 +107,52 @@ $ mysqldump -u<Account> -h<Host> -p <DataBase> \
 $ vi /tmp/<dumpFile>
   Check execute results.
 ```
+
 TSV
-```
+```bash
 $ mysql -u<Account> -h<Host> -p <DataBase> -e "
 <SQL>
 " > /tmp/<dumpFile>
 ```
+
 CSV
-```
+```bash
 $ mysql -u<Account> -h<Host> -p <DataBase> -e "
 <SQL>
 " | sed -e 's/\t/,/' > /tmp/<dumpFile>
 ```
 
-# INSERT
+## INSERT
 
 (Bulk )All columns set
-```
+```sql
 INSERT INTO <Table1> VALUES
   (<ColumnData1>, <ColumnData2>, ...),
   (<ColumnData1>, <ColumnData2>, ...);
 ```
+
 (Bulk )Insert
-```
+```sql
 INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES
   (<ColumnData1>, <ColumnData2>, ...),
   (<ColumnData1>, <ColumnData2>, ...);
 ```
+
 Insert duplicate key update
-```
+```sql
 INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES
   (<ColumnData1>, <ColumnData2>, ...)
 ON DUPLICATE KEY UPDATE <Column2> = <ColumnData2>, <Column3> = <ColumnData3>;
 ```
+
 Insert select
-```
+```sql
 INSERT INTO <Table1> (<Column1>, <Column2>, ...)
   SELECT <ColumnData1>, <ColumnData2>, ...;
 ```
+
 [Insert select duplicate key update](http://qiita.com/yuzroz/items/f0eccf847b2ea42f885f)
-```
+```sql
 INSERT INTO <Table1> (<Column1>, <Column2>, ...)
   SELECT <ColumnData1>, <ColumnData2>, ...
   FROM <Table2>
@@ -153,8 +161,9 @@ ON DUPLICATE KEY UPDATE
   <Column2> = IF(<Table1>.<Column1> < <Table2>.<ColumnData1>, <Table1>.<Column1>, <Table2>.<ColumnData1>),
   <Column3> = CONCAT(<Table1>.<Column3>, '_', IFNULL(<Column1>, ''));
 ```
+
 [Insert select group by duplicate key update](http://stackoverflow.com/questions/16935896/mysql-on-duplicate-key-update-while-inserting-a-result-set-from-a-query)
-```
+```sql
 INSERT INTO <Table1> (<Column1>, <Column2>, ...)
   SELECT <ColumnData1>, @group_column := <ColumnData2>, ...
   FROM <Table2>
@@ -163,15 +172,16 @@ ON DUPLICATE KEY UPDATE
   <Column2> = <Table1>.<Column2> + @group_column;
 ```
 
-# UPDATE
+## UPDATE
 
 Bad
-```
+```sql
 UPDATE <Table1> SET <Column1> = <ColumnData1> WHERE <UniqueColumn1> = <UniqueColumnData1>;
 UPDATE <Table1> SET <Column1> = <ColumnData2> WHERE <UniqueColumn1> = <UniqueColumnData2>;
 ```
+
 [Good1](http://d.hatena.ne.jp/knowledgetree/20100325/1269530022)
-```
+```sql
 UPDATE <Table1> SET
   <Column1> =
     CASE <UniqueColumn1>
@@ -180,8 +190,9 @@ UPDATE <Table1> SET
     END
 WHERE <UniqueColumn1> IN (1,2);
 ```
+
 [Good2](http://qiita.com/masuidrive/items/0671ea7efa91a99c0268)
-```
+```sql
 CREATE TEMPORARY TABLE tmp_<Table1>(<UniqueColumn1>, <Column1>, ...);
 
 INSERT INTO tmp_<Table1>(<UniqueColumn1>, <Column1>) VALUES
@@ -194,30 +205,33 @@ UPDATE <Table1>
   SET <Table1>.<Column1> = tmp_<Table1>.<UniqueColumn1>;
 ```
 
-# DELETE/TRUNCATE
+## DELETE/TRUNCATE
 
 Delete
-```
+```sql
 DELETE FROM <Table1> WHERE <Column1> = <ColumnData1>;
 ```
+
 Truncate
-```
+```sql
 TRUNCATE TABLE <Table1>;
 ```
 
-# SELECT
+## SELECT
 
 Search using Column
-```
+```sql
 SELECT ISC.TABLE_NAME, ISC.COLUMN_NAME, ISC.COLUMN_TYPE, ISC.IS_NULLABLE, ISC.COLUMN_KEY, ISC.EXTRA FROM INFORMATION_SCHEMA.COLUMNS ISC WHERE ISC.TABLE_SCHEMA = DATABASE()
 AND ISC.COLUMN_NAME = <Column1>;
 ```
+
 Show using DataBase
-```
+```sql
 SELECT DATABASE();
 ```
+
 Show empty min id
-```
+```sql
 SELECT MIN(TAB.<Column1> + 1) AS min_<Column1>
 FROM <Table1> TAB
 WHERE NOT EXISTS (
@@ -226,67 +240,76 @@ WHERE NOT EXISTS (
   WHERE (TAB.<Column1> + 1) = SUB_TAB.<Column1>);
 ```
 
-# SHOW
+## SHOW
 
 Index
-```
+```sql
 SHOW INDEX FROM <Table1>;
 ```
+
 DataBases
-```
+```sql
 SHOW DATABASES;
 ```
+
 Create tabe
-```
+```sql
 SHOW CREATE TABLE <Table1>\G
 ```
+
 Max string
-```
+```sql
 SHOW variables LIKE 'max_allowed_packet';
 ```
 
-# CREATE
+## CREATE
 
 DataBase
-```
+```sql
 CREATE DATABASE <DataBase1>;
 ```
 
-# DROP
+## DROP
 
 Table
-```
+```sql
 DROP TABLE <Table1>;
 ```
+
 DataBase
-```
+```sql
 DROP DATABASE <DataBase1>;
 ```
 
-# ALTER
+## ALTER
 
 Add column
-```
+```sql
 ALTER TABLE <Table1> ADD <Column schema> AFTER <Previous column>;
 ```
+
 Modify column
-```
+```sql
 ALTER TABLE <Table1> CHANGE <Previous column name> <Column schema>;
 ```
+
 Modify column schema
-```
+```sql
 ALTER TABLE <Table1> MODIFY <Column schema>;
 ```
+
 Delete Column
-```
+```sql
 ALTER TABLE <Table1> DROP <Column1>;
 ```
+
 Delete Index
-```
+```sql
 ALTER TABLE <Table1> DROP INDEX <Index1>;
 ```
-Update auto_increment  
-```
+
+Update auto_increment
+```sql
 ex) now :389, next_increment:391 => increment:390. 
 
 SELECT MAX(id) AS max_num FROM <Table1>\G
@@ -300,11 +323,11 @@ SHOW TABLE STATUS LIKE <Table1>\G
 ALTER TABLE <Table1> AUTO_INCREMENT = 390;
 ```
 
-# FUNCTION
+## FUNCTION
 
 GROUP_CONCAT  
 Require 2nd parameter at IFNULL.If max or min, check "Max/Min". And check 'group_concat_max_len'.
-```
+```sql
 SELECT <UniqueColumn1>(, <UniqueColumn2>),
   GROUP_CONCAT(CONCAT(IFNULL(<Column1>, ''), '_',IFNULL(<Column1>, '')) ORDER BY <Column1> ASC SEPARATOR '|') AS table_info
   FROM <Table1>
@@ -314,43 +337,49 @@ SHOW VARIABLES LIKE 'group_concat_max_len';
 
 SET SESSION group_concat_max_len = 2048;
 ```
+
 MATH FUNCTION IF
-```
+```sql
 SELECT <UniqueColumn1>(, <UniqueColumn2>),
   SUM(IF(<Condition>, <true>, <false=default>)) AS sum
   FROM <Table1>
   GROUP BY <UniqueColumn1>(, <UniqueColumn2>);
 ```
+
 UTC+9(Japanese timezone)
-```
+```sql
 SELECT DATE_ADD(NOW(), INTERVAL 9 hour);
 ```
+
 DATE_FORMAT
-```
+```sql
 SELECT DATE_FORMAT(<Column1>, '%Y-%m-%d');
 SELECT DATE_FORMAT(<Column1>, '%Y-%m-%d %H:%i:%S');
 ```
+
 TRIM
-```
+```sql
 SELECT TRIM(LEADING  '　' FROM '　I　love　Vim　');
 SELECT TRIM(TRAILING '　' FROM '　I　love　Vim　');
 SELECT TRIM('_' FROM '_I_love_Vim_');
 SELECT TRIM(' I love Vim ');
 ```
 
-# Other
+## Other
 
 transaction
-```
+```sql
 BEGIN;
 COMMIT;
 ROLLBACK;
 ```
+
 Performance
-```
+```sql
 EXPLAIN
 SELECT ...
 ```
+
 [Max/Min](http://nippondanji.blogspot.jp/2009/05/mysql.html)
 
 | Type               | MIN                                                                 | MAX                                                                 |

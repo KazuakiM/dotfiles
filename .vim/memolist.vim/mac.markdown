@@ -1,9 +1,5 @@
-title: Mac
-==========
-date: 2014-11-22 20:43
-tags: []
-categories: []
-- - -
+Mac
+===
 
 Hold down
 ```

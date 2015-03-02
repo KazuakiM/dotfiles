@@ -1,13 +1,14 @@
 dotfiles
-==========
+===
+
 Files are setting my development environments.
 
-# Mac
+## Mac
 
 ### Install packages
 
 AppStore
-* [Xcode](https://developer.apple.com/jp/xcode/downloads/)
+> [Xcode](https://developer.apple.com/jp/xcode/downloads/)
 
 homebrew
 ```bash
@@ -22,40 +23,42 @@ $ brew bundle $HOME/work/dotfiles/lib/Brewfile
 
 $ brew doctor
 ```
+
 rbenv
 ```bash
 $ rbenv install 2.0.0-p247
 $ rbenv rehash
 ```
+
 Ricty
 ```bash
 $ git clone git@github.com:yascentur/RictyDiminished.git /tmp/RictyDiminished
 $ cp -p /tmp/RictyDiminished/*.ttl $HOME/Library/Fonts/
 ```
-[BetterTouchTool](http://www.bettertouchtool.net/)
 
-* Action Settings(Window Snapping etc.) > Window Snapping
-  * Normal Snapping / Moving:
-    * Left width: 24%
-    * Right width: 76%
-  * Corner Snapping / Move to quarters:
-    * Left width: 50%
-    * Right width: 50%
+[BetterTouchTool](http://www.bettertouchtool.net/)
+> |Action Settings(Window Snapping etc.) > Window Snapping|   |
+> |:------------------------------------------------------|:--|
+> |Normal Snapping / Moving                               |   |
+> |Left width                                             |24%|
+> |Right width                                            |76%|
+> |Corner Snapping / Move to quarters                     |   |
+> |Left width                                             |50%|
+> |Right width                                            |50%|
 
 [FireFox](https://www.mozilla.org/ja/firefox/)
-
-Common setting
+> Common setting
 
 [Karabiner](https://pqrs.org/osx/karabiner/index.html.ja)
-
-* Key Repeat > Basic Configurations > KeyRepeat
- * Delay Until Repeat: 200ms
- * Key Repeat: 25ms
+> |Key Repeat > Basic Configurations > KeyRepeat|     |
+> |:--------------------------------------------|:----|
+> |Delay Until Repeat                           |200ms|
+> |Key Repeat                                   | 25ms|
 
 [iTerm2](http://iterm2.com/)
-
-* Preferences > General > Preferences
- * Load preferences from a custom folder or URL : $HOME/work/dotfiles/lib/iTerm2
+> |Preferences > General > Preferences         |                              |
+> |:-------------------------------------------|:-----------------------------|
+> |Load preferences from a custom folder or URL|$HOME/work/dotfiles/lib/iTerm2|
 
 ### Set dotfiles
 
@@ -95,7 +98,7 @@ $ bundle install
 $ exit
 ```
 
-# Linux
+## Linux
 
 ### Setting
 
@@ -113,20 +116,19 @@ Check key
 
 Usage
 > example CentOS7.
-
-```bash
-$ sudo rpm --import http://ftp.riken.jp/Linux/fedora/epel/RPM-GPG-KEY-EPEL-7
-$ sudo rpm -ivh http://ftp.riken.jp/Linux/fedora/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
-$ sudo rpm --import http://dl.iuscommunity.org/pub/ius/IUS-COMMUNITY-GPG-KEY
-$ sudo rpm -ivh http://dl.iuscommunity.org/pub/ius/stable/CentOS/7/x86_64/ius-release-1.0-13.ius.centos7.noarch.rpm
-$ sudo rpm --import http://rpms.famillecollet.com/RPM-GPG-KEY-remi
-$ sudo rpm -ivh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
-$ sudo rpm --import http://apt.sw.be/RPM-GPG-KEY.dag.txt
-$ sudo rpm -ivh http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el7.rf.x86_64.rpm
-$ sudo rpm -ivh http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
-$ cd /etc/yum.repos.d
- Check repository.
-```
+> ```bash
+> $ sudo rpm --import http://ftp.riken.jp/Linux/fedora/epel/RPM-GPG-KEY-EPEL-7
+> $ sudo rpm -ivh http://ftp.riken.jp/Linux/fedora/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
+> $ sudo rpm --import http://dl.iuscommunity.org/pub/ius/IUS-COMMUNITY-GPG-KEY
+> $ sudo rpm -ivh http://dl.iuscommunity.org/pub/ius/stable/CentOS/7/x86_64/ius-release-1.0-13.ius.centos7.noarch.rpm
+> $ sudo rpm --import http://rpms.famillecollet.com/RPM-GPG-KEY-remi
+> $ sudo rpm -ivh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+> $ sudo rpm --import http://apt.sw.be/RPM-GPG-KEY.dag.txt
+> $ sudo rpm -ivh http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el7.rf.x86_64.rpm
+> $ sudo rpm -ivh http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
+> $ cd /etc/yum.repos.d
+>  Check repository.
+> ```
 
 ### Install packages
 
@@ -147,70 +149,80 @@ $ sudo yum install \
     the_silver_searcher tmux tree \
     wget
 ```
+
+rpm
+> Check [ q ](http://harelba.github.io/q/install.html) Version  
+> ``` bash
+> $ sudo rpm -ivh https://github.com/harelba/packages-for-q/raw/master/rpms/q-text-as-data-1.5.0-1.noarch.rpm
+> ```
+
 Git
 ```bash
 $ git clone git://git.kernel.org/pub/scm/git/git.git /usr/local/src/git
 $ cd /usr/local/src/git
 $ make prefix=/usr/local all && make prefix=/usr/local install
 ```
+
 LuaJIT
 ```bash
 $ git clone http://luajit.org/git/luajit-2.0.git /usr/local/src/luajit
 $ cd /usr/local/src/luajit
 $ make && make install
 ```
+
 rbenv
-```
+```bash
 $ git clone https://github.com/sstephenson/rbenv.git /usr/local/rbenv
 $ git clone https://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plugins/ruby-build
 $ cd /usr/local/rbenv
 $ rbenv install 2.0.0-p247
 $ rbenv rehash
 ```
+
 Vim
 > Check command path
-
-```bash
-$ which ruby
- /usr/bin/ruby
-$ which python
- /usr/bin/python
-$ find / -name "config.c" 2>&1|grep config.c
- /usr/lib64/python2.7/config/config.c
-$ which perl
- /usr/bin/perl
-$ find / -name "lua.h" 2>&1|grep lua.h
- /usr/local/include/luajit-2.0/lua.h
-```
+> ```bash
+> $ which ruby
+>  /usr/bin/ruby
+> $ which python
+>  /usr/bin/python
+> $ find / -name "config.c" 2>&1|grep config.c
+>  /usr/lib64/python2.7/config/config.c
+> $ which perl
+>  /usr/bin/perl
+> $ find / -name "lua.h" 2>&1|grep lua.h
+>  /usr/local/include/luajit-2.0/lua.h
+> ```
+>
 > Usage
+> ```bash
+> $ sudo yum remove vim-enhanced vim-common
+> $ hg clone https://vim.googlecode.com/hg/ /usr/local/src/vim
+> $ cd /usr/local/src/vim
+> $ sudo ./configure \
+>     --prefix=/usr/local \
+>     --enable-fail-if-missing \
+>     --disable-darwin \
+>     --disable-selinux \
+>     --disable-xsmp \
+>     --disable-xsmp-interact \
+>     --enable-cscope \
+>     --disable-netbeans \
+>     --enable-multibyte \
+>     --disable-xim \
+>     --enable-fontset \
+>     --with-features=huge \
+>     --enable-rubyinterp \
+>     --with-ruby-command=/usr/bin/ruby \
+>     --enable-pythoninterp \
+>     --with-python-config-dir=/usr/lib64/python2.7/config \
+>     --enable-perlinterp \
+>     --enable-luainterp \
+>     --with-lua-prefix=/usr/local \
+>     --with-luajit
+> $ sudo make && sudo make install
+> ```
 
-```bash
-$ sudo yum remove vim-enhanced vim-common
-$ hg clone https://vim.googlecode.com/hg/ /usr/local/src/vim
-$ cd /usr/local/src/vim
-$ sudo ./configure \
-    --prefix=/usr/local \
-    --enable-fail-if-missing \
-    --disable-darwin \
-    --disable-selinux \
-    --disable-xsmp \
-    --disable-xsmp-interact \
-    --enable-cscope \
-    --disable-netbeans \
-    --enable-multibyte \
-    --disable-xim \
-    --enable-fontset \
-    --with-features=huge \
-    --enable-rubyinterp \
-    --with-ruby-command=/usr/bin/ruby \
-    --enable-pythoninterp \
-    --with-python-config-dir=/usr/lib64/python2.7/config \
-    --enable-perlinterp \
-    --enable-luainterp \
-    --with-lua-prefix=/usr/local \
-    --with-luajit
-$ sudo make && sudo make install
-```
 Composer
 ```bash
 $ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin
@@ -258,54 +270,57 @@ $ bundle install
 $ exit
 ```
 
-# Windows
+## Windows
 
 ### Install packages
 
-Cygwin
+> Cygwin
 
 ### Set environment variables
 
-* HOME
-* C:\cygwin64\home\<Account>
+|Name|Value                     |
+|:---|:-------------------------|
+|HOME|C:\cygwin64\home\<Account>|
 
 ### Operate Cygwin
 
-```bash
-$ cd $HOME
-$ cd ..
-$ ls
- <Account>
+> ```bash
+> $ cd $HOME
+> $ cd ..
+> $ ls
+>  <Account>
+>
+> $ tar zcvf <Account>.tar.gz <Account>
+> $ mv <Account>.tar.gz /tmp
+> $ rm -rf <Account>
+> $ git clone git@github.com:KazuakiM/dotfiles.git <Account>
+> $ git clone git@github.com:Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
+> $ wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp
+> $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
+> $ wget http://cs.sensiolabs.org/get/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
+> $ chmod a+x $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
+> $ cp $HOME/.vimrc.local $HOME/.vimrc.win
+> $ cp $HOME/.netrc.org   $HOME/.netrc
+> $ php $HOME/src/phpDict.php
+> $ cd $HOME/.vim/bundle/regexper
+> $ bundle install
+> $ git clone git@github.com:yascentur/RictyDiminished.git /tmp/RictyDiminished
+>  Copy font directory
+>
+> $ exit
+> ```
+>
+> alias, export情報を読み込ませるため、一旦ターミナルを閉じる
+>
+> ```bash
+> $ vi
+>  Update from NeoBundleFetch to NeoBundle
+>  :NeoBundleInstall
+>
+>  Update from NeoBundle to NeoBundleFetch
+> ```
 
-$ tar zcvf <Account>.tar.gz <Account>
-$ mv <Account>.tar.gz /tmp
-$ rm -rf <Account>
-$ git clone git@github.com:KazuakiM/dotfiles.git <Account>
-$ git clone git@github.com:Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
-$ wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp
-$ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
-$ wget http://cs.sensiolabs.org/get/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
-$ chmod a+x $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
-$ cp $HOME/.vimrc.local $HOME/.vimrc.win
-$ cp $HOME/.netrc.org   $HOME/.netrc
-$ php $HOME/src/phpDict.php
-$ cd $HOME/.vim/bundle/regexper
-$ bundle install
-$ git clone git@github.com:yascentur/RictyDiminished.git /tmp/RictyDiminished
- Copy font directory
-
-$ exit
-```
-alias, export情報を読み込ませるため、一旦ターミナルを閉じる
-```bash
-$ vi
- Update from NeoBundleFetch to NeoBundle
- :NeoBundleInstall
-
- Update from NeoBundle to NeoBundleFetch
-```
-
-# Common setting
+## Common setting
 
 ### Install packages
 
@@ -336,6 +351,6 @@ $ vi
   * [Web Developer](https://addons.mozilla.org/ja/firefox/addon/web-developer/)
   * [テキストリンク](https://addons.mozilla.org/ja/firefox/addon/text-link/)
 
-# TODO
+## TODO
 
 * Try Chocolatey

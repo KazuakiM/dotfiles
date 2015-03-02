@@ -1,9 +1,5 @@
-title: Html Special Characters
-==========
-date: 2014-11-26 23:32
-tags: []
-categories: []
-- - -
+Html Special Characters
+===
 
 | meaning                           | HTML Entity | ISO Latin-1 | Punctuation |
 | :-------------------------------- | :---------- | :---------- | :---------- |
