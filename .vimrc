@@ -119,6 +119,8 @@ nnoremap zx :foldopen<CR>
 "  Line
 noremap 0 $
 noremap 1 ^
+noremap k kzz
+noremap j jzz
 nnoremap Y y$
 nnoremap gr gT
 inoremap <C-u> <C-g>u<C-u>
