@@ -142,18 +142,18 @@ nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null
 "  Paste
 nnoremap <silent><expr><Leader>v  ':set<Space>paste<CR><Insert><Right><C-r>+<ESC>'
 inoremap <silent><expr><C-v> '<ESC>:set<Space>paste<CR><Insert><Right><C-r>+<ESC><Insert><Right>'
-" Search
+"  Search
 nnoremap <expr><Leader>%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
-" Tags
+"  Tags
 nnoremap <Leader>] <C-]>
 nnoremap <Leader>: :<C-u>tab<Space>stj<Space><C-R>=expand('<cword>')<CR><CR>
 nnoremap <Leader>[ <C-o>
-" Pretty print
+"  Pretty print
 nnoremap <Leader>xml  :execute '%!xmllint --noblanks --nowrap --encode UTF-8 --format %'<CR>
 nnoremap <Leader>json :execute '%!python -m json.tool'<CR>
-" Register
+"  Register
 vnoremap <C-w> "ay
 vnoremap <C-e> "by
 nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
@@ -177,6 +177,7 @@ nmap <Leader>f <SID>[vim]
 nnoremap <SID>[vim]e :<C-u>tabnew<Space>$MYVIMRC<CR>
 nnoremap <SID>[vim]s :<C-u>source<Space>$MYVIMRC<CR>
 nnoremap <SID>[vim]h :<C-u>source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
+nnoremap <SID>[vim]c :setlocal conceallevel=2<CR>
 "}}}
 "
 "
@@ -254,7 +255,7 @@ let g:clever_f_use_migemo     = 0
 "}}}
 " wildfire.vim {{{
 let g:wildfire_fuel_map  = '<Enter>'
-let g:wildfire_objects   = ["i'", "a'", 'i"', 'a"', 'i`', 'a`', 'i,', 'a,', 'i)', 'i}', 'i]', 'i>', 'ip', 'it']
+let g:wildfire_objects   = ["i'", 'i"', 'i`', 'i,', 'i)', 'i}', 'i]', 'i>', 'ip', 'it']
 let g:wildfire_water_map = '<BS>'
 "}}}
 " indentLine {{{
@@ -472,7 +473,7 @@ endif
 " Only {{{
 if s:osType ==# 'macunix'
     " previm {{{
-    let g:previm_open_cmd  = 'open -a firefox'
+    let g:previm_open_cmd  = 'open -a "Google Chrome"'
     "}}}
 elseif s:osType ==# 'win'
     " memolist.vim {{{

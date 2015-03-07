@@ -5,8 +5,8 @@ MySQL
 
 Copy DataBase
 ```bash
-$ mysqldump -u<Account> -h<Host> -p <DataBase1>    > '/tmp/<dumpFile>'
-$ mysql     -u<Account> -h<Host> -p <New DataBase> < '/tmp/<dumpFile>'
+$ mysqldump -u<Account> -h<Host> -p <DataBase1>    > /tmp/<dumpFile>.dump
+$ mysql     -u<Account> -h<Host> -p <New DataBase> < /tmp/<dumpFile>.dump
 ```
 
 Copy Table
@@ -48,6 +48,8 @@ UPDATE <Table1> SET <Column1> = REPLACE(<Column1>, '\n',   '') WHERE <Column1> L
 UPDATE <Table1> SET <Column1> = REPLACE(<Column1>, '\r',   '') WHERE <Column1> LIKE '%\r%';
 
 SELECT <Column1> FROM <Table1> WHERE <Column1> LIKE '%\r\n%' OR <Column1> LIKE '%\r%' OR <Column1> LIKE '%\n%';
+SELECT <UniqueColumn1>, <Column1> FROM <Table1> WHERE <UniqueColumn1> IN (...);
+
 
 COMMIT;
 ```
@@ -82,36 +84,38 @@ COMMIT;
 Tables dump
 ```bash
 $ mysqldump -u<Account> -h<Host> -p <DataBase> \
- --default-character-set=utf8 --skip-lock-tables -c -e -q -t --result-file='/tmp/<dumpFile>' --tables \
+ --default-character-set=utf8 --skip-lock-tables -c -e -q -t --result-file='/tmp/<dumpFile>.dump' --tables \
  <Table1> <Table2>;
-$ cd /tmp
-$ vi <dumpFile>
+$ vi /tmp/<dumpFile>.dump
   Check execute results.
-$ tar zcvf <dumpFile>.tar.gz <dumpFile>
+$ cd /tmp
+$ tar zcvf <dumpFile>.dump.tar.gz <dumpFile>.dump
 ```
 
 Recode dump
 ```bash
 $ mysqldump -u<Account> -h<Host> -p <DataBase> \
  --where='<Condition>' \
- --default-character-set=utf8 --skip-lock-tables -c -e -q -t --result-file='/tmp/<dumpFile>' --tables \
+ --default-character-set=utf8 --skip-lock-tables -c -e -q -t --result-file='/tmp/<dumpFile>.dump' --tables \
  <Table1> <Table2>;
-$ vi /tmp/<dumpFile>
+$ vi /tmp/<dumpFile>.dump
   Check execute results.
 ```
 
 TSV
 ```bash
+$ cd /tmp
 $ mysql -u<Account> -h<Host> -p <DataBase> -e "
 <SQL>
-" > /tmp/<dumpFile>
+" > <dumpFile>.tsv && tar zcvf <dumpFile>.tsv.tar.gz <dumpFile>.tsv && rm -f <dumpFile>.tsv
 ```
 
 CSV
 ```bash
+$ cd /tmp
 $ mysql -u<Account> -h<Host> -p <DataBase> -e "
 <SQL>
-" | sed -e 's/\t/,/' > /tmp/<dumpFile>
+" | sed -e 's/\t/,/' > <dumpFile>.csv && tar zcvf <dumpFile>.csv.tar.gz <dumpFile>.csv && rm -f <dumpFile>.csv
 ```
 ## PARTITIONS
 
@@ -194,7 +198,7 @@ ON DUPLICATE KEY UPDATE
 
 ## UPDATE
 
-Bad
+Normal
 ```sql
 UPDATE <Table1> SET <Column1> = <ColumnData1> WHERE <UniqueColumn1> = <UniqueColumnData1>;
 UPDATE <Table1> SET <Column1> = <ColumnData2> WHERE <UniqueColumn1> = <UniqueColumnData2>;
@@ -208,7 +212,7 @@ UPDATE <Table1> SET
     WHEN <UniqueColumnData1> THEN <ColumnData1>
     WHEN <UniqueColumnData2> THEN <ColumnData2>
     END
-WHERE <UniqueColumn1> IN (1,2);
+WHERE <UniqueColumn1> IN (...);
 ```
 
 [Good2](http://qiita.com/masuidrive/items/0671ea7efa91a99c0268)
@@ -330,7 +334,7 @@ ALTER TABLE <Table1> DROP INDEX <Index1>;
 
 Update auto_increment
 ```sql
-ex) now :389, next_increment:391 => increment:390. 
+ex) now :389, next_increment:391 => next_increment:390.
 
 SELECT MAX(id) AS max_num FROM <Table1>\G
 
