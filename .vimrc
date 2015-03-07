@@ -37,7 +37,7 @@ let g:mapleader = ','
 augroup MyAutoCmd
     autocmd!
 augroup END
-function! KazuakiMVimStart(backupDir, undoDir) "{{{
+function! s:kazuakiMVimStart(backupDir, undoDir) "{{{
     "Check 128KB file size.
     if getfsize(expand('%:p')) >= 131072
         setlocal noswapfile nobackup nowritebackup noundofile viminfo=
@@ -46,13 +46,13 @@ function! KazuakiMVimStart(backupDir, undoDir) "{{{
         syntax off
         return 1
     endif
-    call AutoMkdir(a:backupDir.s:date, 1)
-    call AutoMkdir(a:undoDir.  s:date, 1)
+    call s:autoMkdir(a:backupDir.s:date, 1)
+    call s:autoMkdir(a:undoDir.  s:date, 1)
     let &backupdir = a:backupDir.s:date
     let &undodir   = a:undoDir.  s:date
     return 0
 endfunction "}}}
-function! AutoMkdir(dir, force) "{{{
+function! s:autoMkdir(dir, force) "{{{
     if !isdirectory(a:dir) && (a:force || input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
         call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
     endif
@@ -60,18 +60,18 @@ endfunction "}}}
 if has('vim_starting')
     let s:date = strftime('%Y%m%d%H%M%S', localtime())
     if has('win32') || has ('win64')
-        if KazuakiMVimStart('C:\temp\backup\', 'C:\temp\undo\')
+        if s:kazuakiMVimStart('C:\temp\backup\', 'C:\temp\undo\')
             finish
         endif
         let s:osType = 'win'
         set runtimepath+=$HOME/.vim,$HOME/.vim/after
     elseif has('macunix')
-        if KazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
+        if s:kazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
             finish
         endif
         let s:osType = 'macunix'
     else
-        if KazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
+        if s:kazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
             finish
         endif
         let s:osType = 'unix'
@@ -120,9 +120,10 @@ nnoremap zx :foldopen<CR>
 noremap 0 $
 noremap 1 ^
 nnoremap Y y$
-nnoremap gr gT
 inoremap <C-u> <C-g>u<C-u>
 inoremap <C-w> <C-g>u<C-w>
+"  Tag
+nnoremap gr gT
 "  Window Size
 nnoremap <SID>[ws] <Nop>
 nmap + <C-w>+<SID>[ws]
@@ -154,6 +155,8 @@ nnoremap <Leader>[ <C-o>
 nnoremap <Leader>xml  :execute '%!xmllint --noblanks --nowrap --encode UTF-8 --format %'<CR>
 nnoremap <Leader>json :execute '%!python -m json.tool'<CR>
 "  Register
+nnoremap x "_x
+nnoremap X "_x
 vnoremap <C-w> "ay
 vnoremap <C-e> "by
 nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
@@ -421,7 +424,9 @@ NeoBundleLazy 'sjl/gundo.vim', {'insert': 1}
 let s:hooks = neobundle#get_hooks('gundo.vim')
 function! s:hooks.on_source(bundle)
     nnoremap u g-
+    nnoremap U g-
     nnoremap <C-r> g+
+    nnoremap <C-R> g+
     nnoremap <Leader>gundo :<C-u>GundoToggle<CR>
 endfunction
 "}}}
@@ -488,7 +493,7 @@ endif
 " Vim / gVim {{{
 if !has('gui_running')
     " http://d.hatena.ne.jp/thinca/20111204/1322932585
-    function! TabpageLabelUpdate(tab_number) "{{{
+    function! s:tabpageLabelUpdate(tab_number) "{{{
         let a:highlight = a:tab_number is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
         let a:bufnrs    = tabpagebuflist(a:tab_number)
         let a:bufnr     = len(a:bufnrs)
@@ -499,7 +504,7 @@ if !has('gui_running')
         return '%'.a:tab_number.'T'.a:highlight.a:bufnr.' '.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tab_number) - 1]), ':t').' '.a:modified.'%T%#TabLineFill#'
     endfunction "}}}
     function! TabLineUpdate() "{{{
-        return join(map(range(1, tabpagenr('$')), 'TabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
+        return join(map(range(1, tabpagenr('$')), 's:tabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
     endfunction "}}}
     set tabline=%!TabLineUpdate()
 endif
