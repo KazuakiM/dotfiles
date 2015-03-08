@@ -64,6 +64,28 @@ $ join -a1 -t ',' -e '-' -o '0 1.2 2.2' <(sort file1.tsv) <(sort file2.tsv)
 $ ssh -p <port:22> -i <file.pem> <user>@<host>
 ```
 
+## SSH(Step by step)
+
+```bash
+$ ssh -p <port:22> <user2>@<host2>
+```
+> ex)$HOME/.ssh/config
+> ```apache
+> # Step Server {{{
+> Host         host               # 実際にコマンドで入力する名前 (任意)
+> HostName     host.hoge.fuga     # ホスト名
+> User         user1              # ログインユーザ名
+> IdentityFile $HOME/.ssh/id_rsa  # 秘密鍵のファイル名
+> #}}}
+> # Target Server {{{
+> Host           host2
+> HostName       host2.foo.bar
+> User           user2
+> IdentityFile   $HOME/.ssh/id_rsa
+> ProxyCommand   ssh -CW %h:%p host1@user1
+> #}}}
+> ```
+
 ## Grep
 
 file grep using alias
