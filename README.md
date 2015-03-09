@@ -87,6 +87,7 @@ $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
 $ wget http://cs.sensiolabs.org/get/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 $ chmod a+x $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 $ php $HOME/work/dotfiles/src/phpDict.php
+$ sh $HOME/work/dotfiles/src/htmlReference.sh
 $ vi
  Update from NeoBundleFetch to NeoBundle
  :NeoBundleInstall
@@ -259,6 +260,7 @@ $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
 $ wget http://cs.sensiolabs.org/get/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 $ chmod a+x $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 $ php $HOME/work/dotfiles/src/phpDict.php
+$ sh $HOME/work/dotfiles/src/htmlReference.sh
 $ vi
  Update from NeoBundleFetch to NeoBundle
  :NeoBundleInstall
@@ -302,6 +304,7 @@ $ exit
 > $ cp $HOME/.vimrc.local $HOME/.vimrc.win
 > $ cp $HOME/.netrc.org   $HOME/.netrc
 > $ php $HOME/src/phpDict.php
+> $ sh $HOME/src/htmlReference.sh
 > $ cd $HOME/.vim/bundle/regexper
 > $ bundle install
 > $ git clone git@github.com:yascentur/RictyDiminished.git /tmp/RictyDiminished

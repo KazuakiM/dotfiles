@@ -37,7 +37,7 @@ let g:mapleader = ','
 augroup MyAutoCmd
     autocmd!
 augroup END
-function! KazuakiMVimStart(backupDir, undoDir) "{{{
+function! s:kazuakiMVimStart(backupDir, undoDir) "{{{
     "Check 128KB file size.
     if getfsize(expand('%:p')) >= 131072
         setlocal noswapfile nobackup nowritebackup noundofile viminfo=
@@ -46,13 +46,13 @@ function! KazuakiMVimStart(backupDir, undoDir) "{{{
         syntax off
         return 1
     endif
-    call AutoMkdir(a:backupDir.s:date, 1)
-    call AutoMkdir(a:undoDir.  s:date, 1)
+    call s:autoMkdir(a:backupDir.s:date, 1)
+    call s:autoMkdir(a:undoDir.  s:date, 1)
     let &backupdir = a:backupDir.s:date
     let &undodir   = a:undoDir.  s:date
     return 0
 endfunction "}}}
-function! AutoMkdir(dir, force) "{{{
+function! s:autoMkdir(dir, force) "{{{
     if !isdirectory(a:dir) && (a:force || input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
         call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
     endif
@@ -60,18 +60,18 @@ endfunction "}}}
 if has('vim_starting')
     let s:date = strftime('%Y%m%d%H%M%S', localtime())
     if has('win32') || has ('win64')
-        if KazuakiMVimStart('C:\temp\backup\', 'C:\temp\undo\')
+        if s:kazuakiMVimStart('C:\temp\backup\', 'C:\temp\undo\')
             finish
         endif
         let s:osType = 'win'
         set runtimepath+=$HOME/.vim,$HOME/.vim/after
     elseif has('macunix')
-        if KazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
+        if s:kazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
             finish
         endif
         let s:osType = 'macunix'
     else
-        if KazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
+        if s:kazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
             finish
         endif
         let s:osType = 'unix'
@@ -120,9 +120,10 @@ nnoremap zx :foldopen<CR>
 noremap 0 $
 noremap 1 ^
 nnoremap Y y$
-nnoremap gr gT
 inoremap <C-u> <C-g>u<C-u>
 inoremap <C-w> <C-g>u<C-w>
+"  Tag
+nnoremap gr gT
 "  Window Size
 nnoremap <SID>[ws] <Nop>
 nmap + <C-w>+<SID>[ws]
@@ -142,18 +143,20 @@ nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null
 "  Paste
 nnoremap <silent><expr><Leader>v  ':set<Space>paste<CR><Insert><Right><C-r>+<ESC>'
 inoremap <silent><expr><C-v> '<ESC>:set<Space>paste<CR><Insert><Right><C-r>+<ESC><Insert><Right>'
-" Search
+"  Search
 nnoremap <expr><Leader>%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
-" Tags
+"  Tags
 nnoremap <Leader>] <C-]>
 nnoremap <Leader>: :<C-u>tab<Space>stj<Space><C-R>=expand('<cword>')<CR><CR>
 nnoremap <Leader>[ <C-o>
-" Pretty print
+"  Pretty print
 nnoremap <Leader>xml  :execute '%!xmllint --noblanks --nowrap --encode UTF-8 --format %'<CR>
 nnoremap <Leader>json :execute '%!python -m json.tool'<CR>
-" Register
+"  Register
+nnoremap x "_x
+nnoremap X "_x
 vnoremap <C-w> "ay
 vnoremap <C-e> "by
 nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
@@ -177,6 +180,7 @@ nmap <Leader>f <SID>[vim]
 nnoremap <SID>[vim]e :<C-u>tabnew<Space>$MYVIMRC<CR>
 nnoremap <SID>[vim]s :<C-u>source<Space>$MYVIMRC<CR>
 nnoremap <SID>[vim]h :<C-u>source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
+nnoremap <SID>[vim]c :setlocal conceallevel=2<CR>
 "}}}
 "
 "
@@ -254,7 +258,7 @@ let g:clever_f_use_migemo     = 0
 "}}}
 " wildfire.vim {{{
 let g:wildfire_fuel_map  = '<Enter>'
-let g:wildfire_objects   = ["i'", "a'", 'i"', 'a"', 'i`', 'a`', 'i,', 'a,', 'i)', 'i}', 'i]', 'i>', 'ip', 'it']
+let g:wildfire_objects   = ["i'", 'i"', 'i`', 'i,', 'i)', 'i}', 'i]', 'i>', 'ip', 'it']
 let g:wildfire_water_map = '<BS>'
 "}}}
 " indentLine {{{
@@ -420,7 +424,9 @@ NeoBundleLazy 'sjl/gundo.vim', {'insert': 1}
 let s:hooks = neobundle#get_hooks('gundo.vim')
 function! s:hooks.on_source(bundle)
     nnoremap u g-
+    nnoremap U g-
     nnoremap <C-r> g+
+    nnoremap <C-R> g+
     nnoremap <Leader>gundo :<C-u>GundoToggle<CR>
 endfunction
 "}}}
@@ -472,7 +478,7 @@ endif
 " Only {{{
 if s:osType ==# 'macunix'
     " previm {{{
-    let g:previm_open_cmd  = 'open -a firefox'
+    let g:previm_open_cmd  = 'open -a "Google Chrome"'
     "}}}
 elseif s:osType ==# 'win'
     " memolist.vim {{{
@@ -487,7 +493,7 @@ endif
 " Vim / gVim {{{
 if !has('gui_running')
     " http://d.hatena.ne.jp/thinca/20111204/1322932585
-    function! TabpageLabelUpdate(tab_number) "{{{
+    function! s:tabpageLabelUpdate(tab_number) "{{{
         let a:highlight = a:tab_number is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
         let a:bufnrs    = tabpagebuflist(a:tab_number)
         let a:bufnr     = len(a:bufnrs)
@@ -498,7 +504,7 @@ if !has('gui_running')
         return '%'.a:tab_number.'T'.a:highlight.a:bufnr.' '.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tab_number) - 1]), ':t').' '.a:modified.'%T%#TabLineFill#'
     endfunction "}}}
     function! TabLineUpdate() "{{{
-        return join(map(range(1, tabpagenr('$')), 'TabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
+        return join(map(range(1, tabpagenr('$')), 's:tabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
     endfunction "}}}
     set tabline=%!TabLineUpdate()
 endif
