@@ -34,7 +34,7 @@ mkdir -p ${outputDir}
 for tag in ${tagList[@]}; do
     wget "${url}${tag}.shtml" -P ${outputDir}
     #High Traffic NG
-    sleep 5m
+    sleep 10s
 done
 ln -sf $HOME/.vim/vim-ref/php-chunked-xhtml/h.shtml $HOME/.vim/vim-ref/php-chunked-xhtml/h1.shtml
 ln -sf $HOME/.vim/vim-ref/php-chunked-xhtml/h.shtml $HOME/.vim/vim-ref/php-chunked-xhtml/h2.shtml
