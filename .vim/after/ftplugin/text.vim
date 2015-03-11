@@ -1,1 +1,1 @@
-setlocal spelllang+=cjk spell
+"setlocal spelllang+=cjk spell
