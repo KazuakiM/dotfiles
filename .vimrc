@@ -168,6 +168,7 @@ let g:php_htmlInStrings = 1
 let g:php_noShortTags   = 1
 let g:php_sql_query     = 1
 " disable plugin
+let g:loaded_2html_plugin  = 1
 let g:loaded_gzip          = 1
 let g:loaded_matchparen    = 1
 let g:loaded_netrwPlugin   = 1
@@ -244,12 +245,13 @@ let g:quickrun_config = {
 \    'php': {'command': 'phpunit', 'cmdopt': '--no-configuration', 'hook/close_buffer/enable_failure': 0, 'outputter/buffer/split': ':botright 7sp'}}
 "}}}
 " ultisnips {{{
-let g:UltiSnipsEditSplit           = 'vertical'
-let g:UltiSnipsExpandTrigger       = '<TAB>'
-let g:UltiSnipsJumpBackwardTrigger = '<S-TAB>'
-let g:UltiSnipsJumpForwardTrigger  = '<TAB>'
-let g:UltiSnipsSnippetsDir         = $HOME.'/.vim/bundle/vim-snippets/UltiSnips'
-let g:UltiSnipsUsePythonVersion    = 2
+let g:did_UltiSnips_snipmate_compatibility = 1
+let g:UltiSnipsEditSplit                   = 'vertical'
+let g:UltiSnipsExpandTrigger               = '<TAB>'
+let g:UltiSnipsJumpBackwardTrigger         = '<S-TAB>'
+let g:UltiSnipsJumpForwardTrigger          = '<TAB>'
+let g:UltiSnipsSnippetsDir                 = $HOME.'/.vim/bundle/vim-snippets/UltiSnips'
+let g:UltiSnipsUsePythonVersion            = 2
 "}}}
 " clever-f.vim {{{
 let g:clever_f_across_no_line = 0
