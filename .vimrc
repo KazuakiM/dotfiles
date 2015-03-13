@@ -520,10 +520,10 @@ call neobundle#end()
 "
 " FileType {{{
 filetype plugin indent on
-autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*} setlocal filetype=markdown
-autocmd MyAutoCmd BufNewFile,BufRead *.coffee                   setlocal filetype=coffee
-autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}                  setlocal filetype=snippets
-autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                setlocal filetype=xxd
+autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*,txt,text} setlocal filetype=markdown
+autocmd MyAutoCmd BufNewFile,BufRead *.coffee                            setlocal filetype=coffee
+autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}                           setlocal filetype=snippets
+autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                         setlocal filetype=xxd
 autocmd MyAutoCmd BufEnter * if isdirectory(expand('%:p')) | call nerdtree#checkForBrowse(expand('<amatch>')) | endif
 "}}}
 "
