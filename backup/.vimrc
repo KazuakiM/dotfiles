@@ -146,10 +146,6 @@ let g:neosnippet#snippets_directory       = $HOME.'/.vim/bundle/neosnippet-snipp
 NeoBundleLazy 'ujihisa/unite-colorscheme', {'depends': 'Shougo/unite.vim', 'unite_sources': 'colorscheme'}
 nnoremap <silent> <SID>[unite]cs :<C-u>Unite<Space>-auto-preview<Space>colorscheme<CR>
 "}}}
-" unite-highlight {{{
-NeoBundleLazy 'osyo-manga/unite-highlight', {'depends': 'Shougo/unite.vim', 'unite_sources': 'highlight'}
-nnoremap <silent> <SID>[unite]hl :<C-u>Unite<Space>highlight<CR>
-"}}}
 " unite-tag {{{
 NeoBundleLazy 'tsukkee/unite-tag', {'depends': 'Shougo/unite.vim', 'unite_sources': 'tag'}
 nnoremap <silent> <SID>[unite]t :<C-u>Unite<Space>tag<CR>

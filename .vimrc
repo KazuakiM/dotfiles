@@ -274,11 +274,13 @@ let g:indentLine_faster = 1
 " unite-help
 " codic-vim
 " unite-codic.vim
+" unite-highlight
 " memolist.vim {{{
-NeoBundleLazy 'Shougo/unite.vim',       { 'commands': 'Unite'}
-NeoBundleLazy 'Shougo/unite-help',      { 'depends':  'Shougo/unite.vim', 'unite_sources':     'help'}
-NeoBundleLazy 'rhysd/unite-codic.vim',  { 'depends':  ['koron/codic-vim', 'Shougo/unite.vim'], 'unite_sources': 'codic'}
-NeoBundleLazy 'glidenote/memolist.vim', { 'commands': ['MemoNew',         'MemoList']}
+NeoBundleLazy 'Shougo/unite.vim',           { 'commands': 'Unite'}
+NeoBundleLazy 'Shougo/unite-help',          { 'depends':  'Shougo/unite.vim', 'unite_sources':     'help'}
+NeoBundleLazy 'rhysd/unite-codic.vim',      { 'depends':  ['koron/codic-vim', 'Shougo/unite.vim'], 'unite_sources': 'codic'}
+NeoBundleLazy 'osyo-manga/unite-highlight', { 'depends':  'Shougo/unite.vim', 'unite_sources':     'highlight'}
+NeoBundleLazy 'glidenote/memolist.vim',     { 'commands': ['MemoNew',         'MemoList']}
 nnoremap <SID>[unite] <Nop>
 nmap <Leader>u <SID>[unite]
 " default plugins
@@ -289,6 +291,7 @@ nnoremap <silent> <SID>[unite]s   :<C-u>Unite<Space>-default-action=ex<Space>out
 " add plugins
 nnoremap <silent> <SID>[unite]dic :<C-u>Unite<Space>codic<CR>
 nnoremap <silent> <SID>[unite]h   :<C-u>Unite<Space>help<CR>
+nnoremap <silent> <SID>[unite]hl  :<C-u>Unite<Space>highlight<CR>
 " memolist
 nnoremap <SID>[memolist] <Nop>
 nmap <Leader>m <SID>[memolist]
