@@ -391,7 +391,7 @@ function! s:hooks.on_source(bundle)
     let g:php_cs_fixer_config                 = 'default'
     let g:php_cs_fixer_dry_run                = 0
     let g:php_cs_fixer_enable_default_mapping = 0
-    let g:php_cs_fixer_level                  = 'all'
+    let g:php_cs_fixer_level                  = 'psr2'
     let g:php_cs_fixer_path                   = $HOME.'/.vim/vim-php-cs-fixer/php-cs-fixer'
     let g:php_cs_fixer_php_path               = 'php'
     let g:php_cs_fixer_verbose                = 0
