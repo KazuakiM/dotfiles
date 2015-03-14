@@ -210,6 +210,7 @@ else
     NeoBundle 'gcmt/wildfire.vim'
     NeoBundle 'vim-jp/vimdoc-ja'
     NeoBundle 'Yggdroot/indentLine'
+    NeoBundle 'plasticboy/vim-markdown'
 
     NeoBundleSaveCache
 endif
@@ -453,9 +454,6 @@ function! s:hooks.on_source(bundle)
 endfunction
 unlet s:hooks
 "}}}
-" vim-markdown {{{
-NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'markdown'}
-"}}}
 "}}}
 "
 "
@@ -523,10 +521,10 @@ call neobundle#end()
 "
 " FileType {{{
 filetype plugin indent on
-autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*,txt,text} setlocal filetype=markdown
-autocmd MyAutoCmd BufNewFile,BufRead *.coffee                            setlocal filetype=coffee
-autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}                           setlocal filetype=snippets
-autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                         setlocal filetype=xxd
+autocmd MyAutoCmd BufNewFile,BufRead *.{txt,text} setlocal filetype=mkd
+autocmd MyAutoCmd BufNewFile,BufRead *.coffee     setlocal filetype=coffee
+autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}    setlocal filetype=snippets
+autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}  setlocal filetype=xxd
 autocmd MyAutoCmd BufEnter * if isdirectory(expand('%:p')) | call nerdtree#checkForBrowse(expand('<amatch>')) | endif
 "}}}
 "

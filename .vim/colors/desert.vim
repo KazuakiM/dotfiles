@@ -54,7 +54,7 @@ hi Title        cterm=NONE           gui=NONE           ctermfg=Magenta   guifg=
 hi Type         cterm=NONE           gui=NONE           ctermfg=Green     guifg=Green     ctermbg=NONE     guibg=NONE
 hi Underlined   cterm=underline      gui=underline      ctermfg=Magenta   guifg=Magenta   ctermbg=NONE     guibg=NONE
 hi VertSplit    cterm=reverse        gui=reverse
-hi Visual       cterm=NONE           gui=NONE           ctermfg=Yellow    guifg=Yellow    ctermbg=Black    guibg=Black
+hi Visual       cterm=NONE           gui=NONE           ctermfg=Yellow    guifg=Yellow    ctermbg=DarkGrey guibg=DarkGrey
 hi VisualNOS    cterm=bold,underline gui=bold,underline
 hi WarningMsg   cterm=NONE           gui=NONE           ctermfg=Red       guifg=Red       ctermbg=NONE     guibg=NONE
 hi WildMenu     cterm=NONE           gui=NONE           ctermfg=DarkGrey  guifg=DarkGrey  ctermbg=Yellow   guibg=Yellow
