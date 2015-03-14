@@ -37,7 +37,8 @@ class unicodeCheck //{{{
 {
     //Class variable {{{
     private static $_pattern = [
-        'hiragana' => '/\A[\x{3041}-\x{3096}\x{309D}-\x{309F}]+\z/u', ];
+        'hiragana' => '/\A[\x{3041}-\x{3096}\x{309d}-\x{309f}]+\z/u',
+        'katakana' => '/\A[\x{30a1}-\x{30fa}\x{31f0}-\x{31ff}]+\z/u',];
     private $_mode;
     //}}}
 
@@ -48,11 +49,35 @@ class unicodeCheck //{{{
 
     public function getUnicodeList() //{{{
     {
-        echo("Unicode,Subject,Numeric\n");
+        echo("Unicode,Subject,Numeric,Hiragana\n");
         foreach (range(0x0000, 0xffff) as $point) {
             $subject = mb_convert_encoding("&#{$point};", 'UTF-8', 'HTML-ENTITIES');
-            echo('U+'.dechex($point).",{$subject},".$this->pregIsNumeric($subject)."\n");
+            $echo    = 'U+'.dechex($point).",{$subject}"
+                .",".$this->pregIsNumeric($subject)
+                .','.$this->pregMatch('hiragana', $subject)
+                .','.$this->pregMatch('katakana', $subject)."\n";
+            echo($echo);
         }
+    } //}}}
+
+    public function pregIsNumeric($subject) //{{{
+    {
+        $result = 'NG';
+        if (is_numeric($subject)) {
+            $result = 'OK';
+        }
+
+        return $result;
+    } //}}}
+
+    public function pregMatch($mode, $subject) //{{{
+    {
+        $result = 'NG';
+        if (preg_match(self::$_pattern[$mode], $subject)) {
+            $result = 'OK';
+        }
+
+        return $result;
     } //}}}
 
     public function getUnicodeNumeric() //{{{
@@ -72,26 +97,5 @@ EOL;
         foreach ($isNumericArray as $subjectRow) {
             echo("{$subjectRow}\t".gettype($subjectRow)."\t".$this->pregIsNumeric($subjectRow)."\n");
         }
-    } //}}}
-
-    public function pregIsNumeric($subject) //{{{
-    {
-        $result = 'NG';
-        if (is_numeric($subject)) {
-            $result = 'OK';
-        }
-
-        return $result;
-    } //}}}
-
-    public function pregMatch($pattern, $subject) //{{{
-    {
-        $result = 'NG';
-        if (preg_match(self::$_pattern[$pattern], $subject)) {
-            $result = 'OK';
-        }
-        echo("{$subject}\t".gettype($subject)."\t");
-
-        return $this->output($result);
     } //}}}
 } //}}}
