@@ -39,21 +39,26 @@ EOL;
 class unicodeCheck //{{{
 {
     //Class variable {{{
-    private static $_pattern = [
-        'hiragana' => '/\A[\x{3041}-\x{3096}\x{309d}-\x{309f}]+\z/u',
-        'katakana' => '/\A[\x{30a1}-\x{30fa}\x{31f0}-\x{31ff}]+\z/u',
-        'kanji'    => '/\A[\x{3005}\x{3007}\x{303B}\x{3400}-\x{9fff}\x{f900}-\x{faff}\x{20000}-\x{2ffff}]+\z/u'];
+    private $_pattern;
     private $_mode;
     //}}}
 
     public function __construct($mode) //{{{
     {
-        $this->_mode = $mode;
+        $this->_mode    = $mode;
+        //JP: Hiragana + Katakana + Kanji
+        $this->_pattern = [
+            'hiragana' => '/\A[\x{3040}-\x{3096}\x{309d}-\x{309f}]+\z/u',
+            'katakana' => '/\A[\x{30a0}-\x{30ff}\x{31f0}-\x{31ff}]+\z/u',
+            'kanji'    => '/\A[\x{3005}\x{3007}\x{303B}\x{3400}-\x{9fff}\x{f900}-\x{faff}\x{20000}-\x{2ffff}]+\z/u',
+            'jp'       =>
+                '/\A[\x{3005}\x{3007}\x{303B}\x{3040}-\x{3096}\x{30a0}-\x{30ff}\x{309d}-\x{309f}\x{31f0}-\x{31ff}\x{3400}-\x{9fff}\x{f900}-\x{faff}'.
+                '\x{20000}-\x{2ffff}]+\z/u'];
     } //}}}
 
     public function getUnicodeList() //{{{
     {
-        echo("Unicode,Subject,Numeric,Hiragana,Katakana,Kanji\n");
+        echo("Unicode,Subject,Numeric,Hiragana,Katakana,Kanji,JP\n");
         foreach (range(0x0000, 0x30000) as $point) {
             $subject = mb_convert_encoding("&#{$point};", 'UTF-8', 'HTML-ENTITIES');
             echo('U+'.dechex($point).",{$subject}"
@@ -61,6 +66,7 @@ class unicodeCheck //{{{
                 .','.$this->pregMatch('hiragana', $subject)
                 .','.$this->pregMatch('katakana', $subject)
                 .','.$this->pregMatch('kanji',    $subject)
+                .','.$this->pregMatch('jp',       $subject)
                 ."\n");
         }
     } //}}}
@@ -78,7 +84,7 @@ class unicodeCheck //{{{
     public function pregMatch($mode, $subject) //{{{
     {
         $result = 'NG';
-        if (preg_match(self::$_pattern[$mode], $subject)) {
+        if (preg_match($this->_pattern[$mode], $subject)) {
             $result = 'OK';
         }
 
