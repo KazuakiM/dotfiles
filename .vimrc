@@ -210,6 +210,7 @@ else
     NeoBundle 'gcmt/wildfire.vim'
     NeoBundle 'vim-jp/vimdoc-ja'
     NeoBundle 'Yggdroot/indentLine'
+    NeoBundle 'plasticboy/vim-markdown'
 
     NeoBundleSaveCache
 endif
@@ -274,11 +275,13 @@ let g:indentLine_faster = 1
 " unite-help
 " codic-vim
 " unite-codic.vim
+" unite-highlight
 " memolist.vim {{{
-NeoBundleLazy 'Shougo/unite.vim',       { 'commands': 'Unite'}
-NeoBundleLazy 'Shougo/unite-help',      { 'depends':  'Shougo/unite.vim', 'unite_sources':     'help'}
-NeoBundleLazy 'rhysd/unite-codic.vim',  { 'depends':  ['koron/codic-vim', 'Shougo/unite.vim'], 'unite_sources': 'codic'}
-NeoBundleLazy 'glidenote/memolist.vim', { 'commands': ['MemoNew',         'MemoList']}
+NeoBundleLazy 'Shougo/unite.vim',           { 'commands': 'Unite'}
+NeoBundleLazy 'Shougo/unite-help',          { 'depends':  'Shougo/unite.vim', 'unite_sources':     'help'}
+NeoBundleLazy 'rhysd/unite-codic.vim',      { 'depends':  ['koron/codic-vim', 'Shougo/unite.vim'], 'unite_sources': 'codic'}
+NeoBundleLazy 'osyo-manga/unite-highlight', { 'depends':  'Shougo/unite.vim', 'unite_sources':     'highlight'}
+NeoBundleLazy 'glidenote/memolist.vim',     { 'commands': ['MemoNew',         'MemoList']}
 nnoremap <SID>[unite] <Nop>
 nmap <Leader>u <SID>[unite]
 " default plugins
@@ -289,6 +292,7 @@ nnoremap <silent> <SID>[unite]s   :<C-u>Unite<Space>-default-action=ex<Space>out
 " add plugins
 nnoremap <silent> <SID>[unite]dic :<C-u>Unite<Space>codic<CR>
 nnoremap <silent> <SID>[unite]h   :<C-u>Unite<Space>help<CR>
+nnoremap <silent> <SID>[unite]hl  :<C-u>Unite<Space>highlight<CR>
 " memolist
 nnoremap <SID>[memolist] <Nop>
 nmap <Leader>m <SID>[memolist]
@@ -387,7 +391,7 @@ function! s:hooks.on_source(bundle)
     let g:php_cs_fixer_config                 = 'default'
     let g:php_cs_fixer_dry_run                = 0
     let g:php_cs_fixer_enable_default_mapping = 0
-    let g:php_cs_fixer_level                  = 'all'
+    let g:php_cs_fixer_level                  = 'psr2'
     let g:php_cs_fixer_path                   = $HOME.'/.vim/vim-php-cs-fixer/php-cs-fixer'
     let g:php_cs_fixer_php_path               = 'php'
     let g:php_cs_fixer_verbose                = 0
@@ -449,9 +453,6 @@ function! s:hooks.on_source(bundle)
     let g:watchdogs_check_CursorHold_enable   = 1
 endfunction
 unlet s:hooks
-"}}}
-" vim-markdown {{{
-NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'markdown'}
 "}}}
 "}}}
 "
@@ -520,10 +521,10 @@ call neobundle#end()
 "
 " FileType {{{
 filetype plugin indent on
-autocmd MyAutoCmd BufNewFile,BufRead *.{md,mkd,mdwn,mkdn,mark*,txt,text} setlocal filetype=markdown
-autocmd MyAutoCmd BufNewFile,BufRead *.coffee                            setlocal filetype=coffee
-autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}                           setlocal filetype=snippets
-autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                         setlocal filetype=xxd
+autocmd MyAutoCmd BufNewFile,BufRead *.{txt,text} setlocal filetype=mkd
+autocmd MyAutoCmd BufNewFile,BufRead *.coffee     setlocal filetype=coffee
+autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}    setlocal filetype=snippets
+autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}  setlocal filetype=xxd
 autocmd MyAutoCmd BufEnter * if isdirectory(expand('%:p')) | call nerdtree#checkForBrowse(expand('<amatch>')) | endif
 "}}}
 "
