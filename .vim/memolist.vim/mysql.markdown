@@ -16,9 +16,10 @@ INSERT INTO  <New DataBase>.<New Table1> SELECT * FROM <DataBase1>.<Table1>;
 ```
 
 Slave or Master  
-Slave is shown at infomation. Master is empty. 
+Slave is shown at infomation. Master is empty.
 ```sql
-SHOW SLAVE STATUS\G
+SHOW MASTER STATUS\G
+SHOW SLAVE  STATUS\G
 ```
 
 [Trouble](http://qiita.com/muran001/items/14f19959d4723ffc29cc)
@@ -290,19 +291,19 @@ SHOW variables LIKE 'max_allowed_packet';
 
 DataBase
 ```sql
-CREATE DATABASE <DataBase1>;
+CREATE DATABASE <DataBase1>, <DataBase2>;
 ```
 
 ## DROP
 
 Table
 ```sql
-DROP TABLE <Table1>;
+DROP TABLE <Table1>, <Table2>;
 ```
 
 DataBase
 ```sql
-DROP DATABASE <DataBase1>;
+DROP DATABASE <DataBase1>, <DataBase2>;
 ```
 
 ## ALTER
@@ -347,6 +348,37 @@ SHOW TABLE STATUS LIKE <Table1>\G
 ALTER TABLE <Table1> AUTO_INCREMENT = 390;
 ```
 
+Modify table name
+```sql
+ALTER TABLE <Table1> RENAME <Table2>;
+```
+
+## DATE
+
+UTC+9(Japanese timezone)
+```sql
+SELECT DATE_ADD(NOW(), INTERVAL 9 hour);
+```
+
+DATE_FORMAT
+```sql
+SELECT DATE_FORMAT(<Column1>, '%Y-%m-%d');
+SELECT DATE_FORMAT(<Column1>, '%Y-%m-%d %H:%i:%S');
+```
+
+DATE Exsample
+
+|Note                            |SQL                                                                    |
+| :----------------------------- | :-------------------------------------------------------------------- |
+|yesterday                       |SELECT DATE_ADD(CURDATE(), INTERVAL -1 DAY);                           |
+|tomorrow                        |SELECT DATE_ADD(CURDATE(), INTERVAL 1 DAY);                            |
+|the first of the previous month |SELECT DATE_FORMAT(ADDDATE(CURDATE(), INTERVAL -1 MONTH), '%Y-%m-01'); |
+|the first of the now month      |SELECT DATE_FORMAT(CURDATE(), '%Y-%m-01');                             |
+|the first of the next month     |SELECT DATE_FORMAT(ADDDATE(CURDATE(), INTERVAL 1 MONTH), '%Y-%m-01');  |
+|the end of the previous month   |SELECT LAST_DAY(ADDDATE(CURDATE(), INTERVAL -1 MONTH));                |
+|the end of the now month        |SELECT LAST_DAY(CURDATE());                                            |
+|the end of the next month       |SELECT LAST_DAY(ADDDATE(CURDATE(), INTERVAL 1 MONTH));                 |
+
 ## FUNCTION
 
 GROUP_CONCAT  
@@ -368,17 +400,6 @@ SELECT <UniqueColumn1>(, <UniqueColumn2>),
   SUM(IF(<Condition>, <true>, <false=default>)) AS sum
   FROM <Table1>
   GROUP BY <UniqueColumn1>(, <UniqueColumn2>);
-```
-
-UTC+9(Japanese timezone)
-```sql
-SELECT DATE_ADD(NOW(), INTERVAL 9 hour);
-```
-
-DATE_FORMAT
-```sql
-SELECT DATE_FORMAT(<Column1>, '%Y-%m-%d');
-SELECT DATE_FORMAT(<Column1>, '%Y-%m-%d %H:%i:%S');
 ```
 
 TRIM
