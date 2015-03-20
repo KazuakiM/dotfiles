@@ -83,10 +83,13 @@ autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line('$') |
 autocmd MyAutoCmd BufEnter * execute 'lcd '.expand('%:p:h')
 autocmd MyAutoCmd VimEnter * set textwidth=0
 autocmd MyAutoCmd InsertLeave * set nopaste
+autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 "autocmd MyAutoCmd VimEnter * set formatoptions-=v
 "autocmd MyAutoCmd VimEnter * set formatoptions-=b
+autocmd MyAutoCmd BufEnter * if winnr('$') is 1 && getbufvar(winbufnr(0), '&diff') is 1 | diffoff | endif
+autocmd MyAutoCmd BufEnter * if winnr('$') is 1 && exists('b:NERDTreeType') && b:NERDTreeType ==# 'primary' | q | endif
 function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
 endfunction "}}}
@@ -224,7 +227,6 @@ endif
 let g:QFix_UseLocationList = 1
 let g:QFixWin_EnableMode   = 1
 nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of('vital').import('Prelude').path2project_directory('%').'<CR>'
-autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 "}}}
 " yankround.vim {{{
 let g:yankround_dir=$HOME.'/.vim/yankround.vim'
@@ -351,7 +353,6 @@ function! s:hooks.on_source(bundle)
     let g:NERDTreeRespectWildIgnore = 1
     let g:NERDTreeShowHidden        = 1
     let g:NERDTreeWinSize           = 20
-    autocmd MyAutoCmd BufEnter * if winnr('$') is 1 && exists('b:NERDTreeType') && b:NERDTreeType ==# 'primary' | q | endif
 endfunction
 "}}}
 " vim-easy-align {{{
