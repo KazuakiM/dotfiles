@@ -88,8 +88,7 @@ autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 "autocmd MyAutoCmd VimEnter * set formatoptions-=v
 "autocmd MyAutoCmd VimEnter * set formatoptions-=b
-autocmd MyAutoCmd BufEnter * if (winnr('$') is 1) && (&l:diff || (exists('b:NERDTreeType') && (b:NERDTreeType ==# 'primary')))
-\    | q | endif
+autocmd MyAutoCmd BufEnter * if (winnr('$') is 1) && (&l:diff || (exists('b:NERDTreeType') && (b:NERDTreeType ==# 'primary'))) | q | endif
 function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
 endfunction "}}}
@@ -114,7 +113,7 @@ autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',         "\
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',       "\r\n")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL',    '\s\+$')
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m5 = matchadd('IdeographicSpace', '　')
-colorscheme desert
+colorscheme kazuakim
 " Mapping
 "  ESC
 inoremap jk <ESC>

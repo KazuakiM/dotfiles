@@ -1,17 +1,10 @@
-" Vim color file {{{
-" Maintainer:  Hans Fugal <hans@fugal.net>
-" Last Change: $Date: 2004/06/13 19:30:30 $
-" Last Change: $Date: 2004/06/13 19:30:30 $
-" URL:         http://hans.fugal.net/vim/colors/desert.vim
-" Version:     $Id: desert.vim,v 1.1 2004/06/13 19:30:30 vimboss Exp $
-"}}}
 set t_Co=16 background=dark
 hi clear
 syntax reset
 if exists('g:colors_name')
     finish
 endif
-let g:colors_name = 'desert'
+let g:colors_name = 'kazuakim'
 " color terminal definitions {{{
 highlight Normal       cterm=NONE           gui=NONE           ctermfg=White     guifg=White     ctermbg=Black    guibg=Black
 highlight Comment      cterm=NONE           gui=NONE           ctermfg=Red       guifg=Red       ctermbg=NONE     guibg=NONE

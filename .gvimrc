@@ -5,7 +5,7 @@
 set antialias cmdheight=1 guioptions-=b guioptions-=g guioptions-=l guioptions-=L guioptions-=m guioptions-=r guioptions-=R guioptions-=t guioptions-=T mouse=
 set showtabline=1 t_vb= winaltkeys=no
 " Color
-colorscheme desert
+colorscheme kazuakim
 " Show
 "}}}
 "
