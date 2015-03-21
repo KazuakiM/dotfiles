@@ -22,7 +22,7 @@ highlight CursorLine   cterm=underline      gui=underline      ctermfg=NONE     
 highlight CursorLineNr cterm=reverse        gui=reverse        ctermfg=NONE      guifg=NONE      ctermbg=NONE     guibg=NONE
 highlight DiffAdd      cterm=NONE           gui=NONE           ctermfg=Yellow    guifg=Yellow    ctermbg=Black    guibg=Black
 highlight DiffChange   cterm=NONE           gui=NONE           ctermfg=Green     guifg=Green     ctermbg=Black    guibg=Black
-highlight DiffDelete   cterm=bold           gui=bold           ctermfg=Blue      guifg=Blue      ctermbg=Black    guibg=Black
+highlight DiffDelete   cterm=bold           gui=bold           ctermfg=Cyan      guifg=Cyan      ctermbg=Black    guibg=Black
 highlight DiffText     cterm=bold           gui=bold           ctermfg=Red       guifg=Red       ctermbg=Black    guibg=Black
 highlight Directory    cterm=NONE           gui=NONE           ctermfg=DarkCyan  guifg=DarkCyan  ctermbg=NONE     guibg=NONE
 highlight Error        cterm=bold           gui=bold           ctermfg=White     guifg=White     ctermbg=Red      guibg=Red
