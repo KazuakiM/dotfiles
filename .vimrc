@@ -79,6 +79,13 @@ if has('vim_starting')
     set runtimepath+=$HOME/.vim/bundle/neobundle.vim
 endif
 " autocmd
+function! AutocmdBufEnter() "{{{
+    if winnr('$') is 1
+        if (getbufvar(winbufnr(0), '&diff') is 1) || (exists('b:NERDTreeType') && (b:NERDTreeType ==# 'primary'))
+            q
+        endif
+    endif
+endfunction "}}}
 autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line('$') | exe "normal! g`\"" | endif
 autocmd MyAutoCmd BufEnter * execute 'lcd '.expand('%:p:h')
 autocmd MyAutoCmd VimEnter * set textwidth=0
@@ -88,14 +95,13 @@ autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 "autocmd MyAutoCmd VimEnter * set formatoptions-=v
 "autocmd MyAutoCmd VimEnter * set formatoptions-=b
-autocmd MyAutoCmd BufEnter * if winnr('$') is 1 && getbufvar(winbufnr(0), '&diff') is 1 | diffoff | endif
-autocmd MyAutoCmd BufEnter * if winnr('$') is 1 && exists('b:NERDTreeType') && b:NERDTreeType ==# 'primary' | q | endif
+autocmd MyAutoCmd BufEnter * call AutocmdBufEnter()
 function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
 endfunction "}}}
 " Basic
 set ambiwidth=double autoindent autoread backspace=indent,eol,start backup clipboard+=autoselect,unnamed cmdheight=1 completeopt=longest,menu
-set diffopt=filler,context:3,iwhite,vertical directory=$HOME/.vim/swap display=lastline expandtab foldmethod=marker grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
+set diffopt=filler,context:5,iwhite,vertical directory=$HOME/.vim/swap display=lastline expandtab foldmethod=marker grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m
 set helplang=ja hidden history=1000 hlsearch ignorecase iminsert=0 imsearch=-1 incsearch laststatus=2 lazyredraw matchpairs+=<:> matchtime=1 mouse= noequalalways
 set noerrorbells noimcmdline noimdisable noruler number pumheight=8 scrolloff=999 shiftwidth=4 shortmess+=I showcmd showmatch smartcase smartindent smarttab
 set softtabstop=4 swapfile tabstop=4 title titleold= titlestring=%F ttyfast t_vb= undofile updatetime=1000
@@ -106,7 +112,9 @@ set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&filef
 "set foldopen-=search
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc
 " Color
-syntax on
+if getbufvar(winbufnr(0), '&diff') isnot 1
+    syntax on
+endif
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',        "\t")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',         "\r")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',       "\r\n")
@@ -155,9 +163,9 @@ nnoremap <Leader>] <C-]>
 nnoremap <Leader>: :<C-u>tab<Space>stj<Space><C-R>=expand('<cword>')<CR><CR>
 nnoremap <Leader>[ <C-o>
 "  Diff
-nnoremap <Leader>diff :<C-u>diffsplit<Space>
-nnoremap <C-j> [c
-nnoremap <C-k> ]c
+nnoremap <Leader>df :<C-u>diffsplit<Space>
+nnoremap <C-k> [c
+nnoremap <C-j> ]c
 nnoremap <C-h> do
 nnoremap <C-l> dp
 "  Pretty print
