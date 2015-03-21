@@ -6,7 +6,8 @@
 [core]
     precomposeunicode = true
 [color]
-    ui = auto
+    editor = vim
+    ui     = auto
 [diff]
     algorithm = histogram
     tool      = vimdiff
@@ -16,5 +17,5 @@
     ff   = false
     tool = vimdiff
 [mergetool]
-    keepBackup = false
+    keepBackup = true
     prompt     = false
