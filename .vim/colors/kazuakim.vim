@@ -1,17 +1,10 @@
-" Vim color file {{{
-" Maintainer:  Hans Fugal <hans@fugal.net>
-" Last Change: $Date: 2004/06/13 19:30:30 $
-" Last Change: $Date: 2004/06/13 19:30:30 $
-" URL:         http://hans.fugal.net/vim/colors/desert.vim
-" Version:     $Id: desert.vim,v 1.1 2004/06/13 19:30:30 vimboss Exp $
-"}}}
 set t_Co=16 background=dark
 hi clear
 syntax reset
 if exists('g:colors_name')
     finish
 endif
-let g:colors_name = 'desert'
+let g:colors_name = 'kazuakim'
 " color terminal definitions {{{
 highlight Normal       cterm=NONE           gui=NONE           ctermfg=White     guifg=White     ctermbg=Black    guibg=Black
 highlight Comment      cterm=NONE           gui=NONE           ctermfg=Red       guifg=Red       ctermbg=NONE     guibg=NONE
@@ -20,10 +13,10 @@ highlight Cursor       cterm=NONE           gui=NONE           ctermfg=NONE     
 highlight CursorColumn cterm=NONE           gui=NONE           ctermfg=Black     guifg=Black     ctermbg=Grey     guibg=Grey
 highlight CursorLine   cterm=underline      gui=underline      ctermfg=NONE      guifg=NONE      ctermbg=NONE     guibg=NONE
 highlight CursorLineNr cterm=reverse        gui=reverse        ctermfg=NONE      guifg=NONE      ctermbg=NONE     guibg=NONE
-highlight DiffAdd      cterm=NONE           gui=NONE                                             ctermbg=Blue     guibg=Blue
-highlight DiffChange   cterm=NONE           gui=NONE                                             ctermbg=Magenta  guibg=Magenta
-highlight DiffDelete   cterm=bold           gui=bold           ctermfg=Blue      guifg=Blue      ctermbg=Cyan     guibg=Cyan
-highlight DiffText     cterm=bold           gui=bold                                             ctermbg=Red      guibg=Red
+highlight DiffAdd      cterm=NONE           gui=NONE           ctermfg=Yellow    guifg=Yellow    ctermbg=Black    guibg=Black
+highlight DiffChange   cterm=NONE           gui=NONE           ctermfg=Green     guifg=Green     ctermbg=Black    guibg=Black
+highlight DiffDelete   cterm=NONE           gui=NONE           ctermfg=Cyan      guifg=Cyan      ctermbg=Black    guibg=Black
+highlight DiffText     cterm=NONE           gui=NONE           ctermfg=Red       guifg=Red       ctermbg=Black    guibg=Black
 highlight Directory    cterm=NONE           gui=NONE           ctermfg=DarkCyan  guifg=DarkCyan  ctermbg=NONE     guibg=NONE
 highlight Error        cterm=bold           gui=bold           ctermfg=White     guifg=White     ctermbg=Red      guibg=Red
 highlight ErrorMsg     cterm=bold           gui=bold           ctermfg=White     guifg=White     ctermbg=Red      guibg=Red

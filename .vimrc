@@ -82,34 +82,38 @@ endif
 autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line('$') | exe "normal! g`\"" | endif
 autocmd MyAutoCmd BufEnter * execute 'lcd '.expand('%:p:h')
 autocmd MyAutoCmd VimEnter * set textwidth=0
-autocmd MyAutoCmd InsertLeave * set nopaste
+autocmd MyAutoCmd InsertLeave * set nopaste | if &l:diff | diffupdate | endif
+autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
 "autocmd MyAutoCmd VimEnter * set formatoptions-=v
 "autocmd MyAutoCmd VimEnter * set formatoptions-=b
+autocmd MyAutoCmd BufEnter * if (winnr('$') is 1) && (&l:diff || (exists('b:NERDTreeType') && (b:NERDTreeType ==# 'primary'))) | q | endif
 function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
 endfunction "}}}
 " Basic
 set ambiwidth=double autoindent autoread backspace=indent,eol,start backup clipboard+=autoselect,unnamed cmdheight=1 completeopt=longest,menu
-set directory=$HOME/.vim/swap display=lastline expandtab foldmethod=marker grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m helplang=ja hidden history=1000 hlsearch
-set ignorecase iminsert=0 imsearch=-1 incsearch laststatus=2 lazyredraw matchpairs+=<:> matchtime=1 mouse= noequalalways noerrorbells noimcmdline noimdisable
-set noruler number pumheight=8 scrolloff=999 shiftwidth=4 shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile tabstop=4 title
-set titleold= titlestring=%F ttyfast t_vb= undofile updatetime=1000 viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo
-set virtualedit+=block visualbell wildmenu wildmode=longest:full,full wrap wrapscan
+set diffopt+=filler,context:5,iwhite,horizontal directory=$HOME/.vim/swap display=lastline expandtab fillchars+=diff:* foldmethod=marker
+set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m helplang=ja hidden history=1000 hlsearch ignorecase iminsert=0 imsearch=-1 incsearch laststatus=2 lazyredraw
+set matchpairs+=<:> matchtime=1 mouse= noequalalways noerrorbells noimcmdline noimdisable noruler number pumheight=8 scrolloff=999 shiftwidth=4 shortmess+=I
+set showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile tabstop=4 title titleold= titlestring=%F ttyfast t_vb= undofile updatetime=1000
+set viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo virtualedit+=block visualbell wildmenu wildmode=longest:full,full wrap wrapscan
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*.json'\ --exclude='*.log'\ --exclude='*min.js'\ --exclude='*min.css'
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,C,.DS_Store,.,..
 set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 "set foldopen-=search
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc
 " Color
-syntax on
+if getbufvar(winbufnr(0), '&diff') isnot 1
+    syntax on
+endif
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',        "\t")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',         "\r")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',       "\r\n")
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL',    '\s\+$')
 autocmd MyAutoCmd VimEnter,WinEnter * let w:m5 = matchadd('IdeographicSpace', '　')
-colorscheme desert
+colorscheme kazuakim
 " Mapping
 "  ESC
 inoremap jk <ESC>
@@ -151,6 +155,12 @@ cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 nnoremap <Leader>] <C-]>
 nnoremap <Leader>: :<C-u>tab<Space>stj<Space><C-R>=expand('<cword>')<CR><CR>
 nnoremap <Leader>[ <C-o>
+"  Diff
+nnoremap <Leader>df :<C-u>diffsplit<Space>
+nnoremap <C-k> [c
+nnoremap <C-j> ]c
+nnoremap <C-h> do
+nnoremap <C-l> dp
 "  Pretty print
 nnoremap <Leader>xml  :execute '%!xmllint --noblanks --nowrap --encode UTF-8 --format %'<CR>
 nnoremap <Leader>json :execute '%!python -m json.tool'<CR>
@@ -218,7 +228,6 @@ endif
 let g:QFix_UseLocationList = 1
 let g:QFixWin_EnableMode   = 1
 nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of('vital').import('Prelude').path2project_directory('%').'<CR>'
-autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 "}}}
 " yankround.vim {{{
 let g:yankround_dir=$HOME.'/.vim/yankround.vim'
@@ -345,7 +354,6 @@ function! s:hooks.on_source(bundle)
     let g:NERDTreeRespectWildIgnore = 1
     let g:NERDTreeShowHidden        = 1
     let g:NERDTreeWinSize           = 20
-    autocmd MyAutoCmd BufEnter * if winnr('$') is 1 && exists('b:NERDTreeType') && b:NERDTreeType ==# 'primary' | q | endif
 endfunction
 "}}}
 " vim-easy-align {{{
@@ -391,7 +399,7 @@ function! s:hooks.on_source(bundle)
     let g:php_cs_fixer_config                 = 'default'
     let g:php_cs_fixer_dry_run                = 0
     let g:php_cs_fixer_enable_default_mapping = 0
-    let g:php_cs_fixer_level                  = 'psr2'
+    let g:php_cs_fixer_level                  = 'all'
     let g:php_cs_fixer_path                   = $HOME.'/.vim/vim-php-cs-fixer/php-cs-fixer'
     let g:php_cs_fixer_php_path               = 'php'
     let g:php_cs_fixer_verbose                = 0
@@ -440,7 +448,8 @@ endfunction
 " vim-qfsigns
 " vim-qfstatusline
 " vim-watchdogs {{{
-NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline'], 'insert': 1}
+NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline'],
+\    'insert': 1}
 let g:Qfstatusline#UpdateCmd = function('StatuslineSyntax')
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle)

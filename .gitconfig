@@ -1,11 +1,21 @@
 # Git version 1.7.10 over
 [include]
     path = ~/.gitconfig.local
-[merge]
-    ff = false
+[branch "master"]
+    mergeoptions = --no-edit
 [core]
     precomposeunicode = true
 [color]
-    ui = auto
-[branch "master"]
-    mergeoptions = --no-edit
+    editor = vim
+    ui     = auto
+[diff]
+    algorithm = histogram
+    tool      = vimdiff
+[difftool]
+    prompt = false
+[merge]
+    ff   = false
+    tool = vimdiff
+[mergetool]
+    keepBackup = true
+    prompt     = false
