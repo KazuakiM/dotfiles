@@ -5,9 +5,9 @@
     mergeoptions = --no-edit
 [core]
     precomposeunicode = true
+    editor            = vim
 [color]
-    editor = vim
-    ui     = auto
+    ui = auto
 [diff]
     algorithm = histogram
     tool      = vimdiff
