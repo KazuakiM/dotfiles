@@ -46,14 +46,14 @@ function! s:kazuakiMVimStart(backupDir, undoDir) "{{{
         syntax off
         return 1
     endif
-    call s:autoMkdir(a:backupDir.s:date, 1)
-    call s:autoMkdir(a:undoDir.  s:date, 1)
+    call s:autoMkdir(a:backupDir.s:date)
+    call s:autoMkdir(a:undoDir.  s:date)
     let &backupdir = a:backupDir.s:date
     let &undodir   = a:undoDir.  s:date
     return 0
 endfunction "}}}
-function! s:autoMkdir(dir, force) "{{{
-    if !isdirectory(a:dir) && (a:force || input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
+function! s:autoMkdir(dir) "{{{
+    if !isdirectory(a:dir)
         call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
     endif
 endfunction "}}}
@@ -76,6 +76,7 @@ if has('vim_starting')
         endif
         let s:osType = 'unix'
     endif
+    unlet s:date
     set runtimepath+=$HOME/.vim/bundle/neobundle.vim
 endif
 " autocmd
@@ -86,8 +87,7 @@ autocmd MyAutoCmd InsertLeave * set nopaste | if &l:diff | diffupdate | endif
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
-"autocmd MyAutoCmd VimEnter * set formatoptions-=v
-"autocmd MyAutoCmd VimEnter * set formatoptions-=b
+"autocmd MyAutoCmd VimEnter * set formatoptions-=v formatoptions-=b
 autocmd MyAutoCmd BufEnter * if (winnr('$') is 1) && (&l:diff || (exists('b:NERDTreeType') && (b:NERDTreeType ==# 'primary'))) | q | endif
 function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
@@ -490,7 +490,7 @@ endif
 " Only {{{
 if s:osType ==# 'macunix'
     " previm {{{
-    let g:previm_open_cmd  = 'open -a "Google Chrome"'
+    let g:previm_open_cmd = 'open -a "Google Chrome"'
     "}}}
 elseif s:osType ==# 'win'
     " memolist.vim {{{
