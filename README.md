@@ -24,12 +24,6 @@ $ brew brewdle
 $ brew doctor
 ```
 
-Ricty
-```bash
-$ git clone https://github.com/yascentur/RictyDiminished.git /tmp/RictyDiminished
-$ cp -f /tmp/RictyDiminished/*.ttl $HOME/Library/Fonts/
-```
-
 [BetterTouchTool](http://www.bettertouchtool.net/)
 > |Action Settings(Window Snapping etc.) > Window Snapping|   |
 > |:------------------------------------------------------|:--|
