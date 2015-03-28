@@ -17,6 +17,8 @@ $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/maste
 $ mkdir -p $HOME/work
 $ git clone https://github.com/KazuakiM/dotfiles.git $HOME/work/dotfiles
 $ cd $HOME/work/dotfiles/lib
+$ brew update
+$ brew upgrade
 $ brew tap Homebrew/brewdler
 $ brew brewdle
 $ brew doctor

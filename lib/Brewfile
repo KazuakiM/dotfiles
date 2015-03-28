@@ -1,11 +1,3 @@
-#Install
-# $ brew tap Homebrew/brewdler
-# $ brew brewdle
-#Dump
-# $ brew brewdle dump
-#------------------------------
-brew update
-brew upgrade
 tap 'caskroom/cask'
 tap 'caskroom/fonts'
 tap 'homebrew/apache'
@@ -14,8 +6,6 @@ tap 'homebrew/dupes'
 tap 'homebrew/php'
 tap 'homebrew/versions'
 tap 'kazuakim/macvim'
-brew update
-brew upgrade
 brew 'apr'
 brew 'apr-util'
 brew 'atk'
@@ -36,12 +26,12 @@ brew 'ctags'
 brew 'czmq'
 brew 'd-bus'
 brew 'fontconfig'
-brew 'fontforge'
 brew 'freetype'
 brew 'gdbm'
 brew 'gdk-pixbuf'
 brew 'geoip', args: ['with-geoipupdate']
 brew 'geoipupdate'
+brew 'gettext'
 brew 'gettext-mk'
 brew 'git'
 brew 'glib'
