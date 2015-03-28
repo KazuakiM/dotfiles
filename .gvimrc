@@ -15,7 +15,7 @@ if has("win32") || has ("win64")
     set guifont=Source_Code_Pro:h12:cANSI lines=54 columns=150
     winpos 704 0
 else
-    set guifont=Ricty_Discord_Regular:h16 lines=44 columns=170
+    set guifont=Ricty\ Diminished\ Discord\ Regular:h16 lines=44 columns=170
     winpos 0 23
 endif
 "}}}
