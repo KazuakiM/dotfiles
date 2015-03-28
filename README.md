@@ -16,10 +16,9 @@ $ xcode-select --install
 $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 $ mkdir -p $HOME/work
 $ git clone https://github.com/KazuakiM/dotfiles.git $HOME/work/dotfiles
-$ brew bundle $HOME/work/dotfiles/lib/Brewfile
-
-  (Important)I don't execute Brewfile. So I'll commentout a lot of code and execute a few code next to next.
-
+$ cd $HOME/work/dotfiles/lib
+$ brew tap Homebrew/brewdler
+$ brew brewdle
 $ brew doctor
 ```
 
