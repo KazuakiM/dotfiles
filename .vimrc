@@ -368,7 +368,11 @@ let g:easy_align_delimiters = {
 " Align
 " SQLUtilities {{{
 NeoBundleLazy 'vim-scripts/SQLUtilities', {'depends': 'vim-scripts/Align', 'commands': 'SQLUFormatter'}
-let g:sqlutil_align_comma = 1
+let g:sqlutil_align_comma         = 0
+let g:sqlutil_align_first_word    = 1
+let g:sqlutil_align_keyword_right = 0
+let g:sqlutil_align_where         = 0
+let g:sqlutil_keyword_case        = '\U'
 nnoremap <Leader>sql :<C-u>SQLUFormatter<CR>
 "}}}
 " previm {{{
