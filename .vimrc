@@ -80,15 +80,16 @@ if has('vim_starting')
     set runtimepath+=$HOME/.vim/bundle/neobundle.vim
 endif
 " autocmd
+autocmd MyAutoCmd BufEnter * if isdirectory(expand('%:p')) | call nerdtree#checkForBrowse(expand('<amatch>')) | endif | execute 'lcd '.expand('%:p:h')
+\|    if (winnr('$') is 1) && (&l:diff || (exists('b:NERDTreeType') && (b:NERDTreeType ==# 'primary'))) | q | endif
 autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line('$') | exe "normal! g`\"" | endif
-autocmd MyAutoCmd BufEnter * execute 'lcd '.expand('%:p:h')
-autocmd MyAutoCmd VimEnter * set textwidth=0
-autocmd MyAutoCmd InsertLeave * set nopaste | if &l:diff | diffupdate | endif
-autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
+autocmd MyAutoCmd InsertLeave * set nopaste | if &l:diff | diffupdate | endif
+autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
+autocmd MyAutoCmd VimEnter * set textwidth=0
+autocmd MyAutoCmd VimEnter,WinEnter * match KazuakiMCheckString "\t\|\r\|\r\n\|\s\+$\|　"
 "autocmd MyAutoCmd VimEnter * set formatoptions-=v formatoptions-=b
-autocmd MyAutoCmd BufEnter * if (winnr('$') is 1) && (&l:diff || (exists('b:NERDTreeType') && (b:NERDTreeType ==# 'primary'))) | q | endif
 function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
 endfunction "}}}
@@ -108,11 +109,6 @@ set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&filef
 if getbufvar(winbufnr(0), '&diff') isnot 1
     syntax on
 endif
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m1 = matchadd('TabString',        "\t")
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m2 = matchadd('CrString',         "\r")
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m3 = matchadd('CrlfString',       "\r\n")
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m4 = matchadd('WhitespaceEOL',    '\s\+$')
-autocmd MyAutoCmd VimEnter,WinEnter * let w:m5 = matchadd('IdeographicSpace', '　')
 colorscheme kazuakim
 " Mapping
 "  ESC
@@ -534,7 +530,6 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{txt,text} setlocal filetype=mkd
 autocmd MyAutoCmd BufNewFile,BufRead *.coffee     setlocal filetype=coffee
 autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}    setlocal filetype=snippets
 autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}  setlocal filetype=xxd
-autocmd MyAutoCmd BufEnter * if isdirectory(expand('%:p')) | call nerdtree#checkForBrowse(expand('<amatch>')) | endif
 "}}}
 "
 "
