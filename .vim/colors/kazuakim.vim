@@ -53,11 +53,7 @@ highlight WarningMsg   cterm=NONE           gui=NONE           ctermfg=Red      
 highlight WildMenu     cterm=NONE           gui=NONE           ctermfg=DarkGrey  guifg=DarkGrey  ctermbg=Yellow   guibg=Yellow
 "}}}
 " my highlight {{{
-highlight CrString         cterm=NONE      gui=NONE      ctermbg=DarkGrey guibg=DarkGrey
-highlight CrlfString       cterm=NONE      gui=NONE      ctermbg=DarkGrey guibg=DarkGrey
-highlight IdeographicSpace cterm=NONE      gui=NONE      ctermbg=DarkGrey guibg=DarkGrey
-highlight QFError          cterm=underline gui=underline ctermfg=Magenta  guifg=Magenta
-highlight TabString        cterm=NONE      gui=NONE      ctermbg=DarkGrey guibg=DarkGrey
-highlight WhitespaceEOL    cterm=NONE      gui=NONE      ctermbg=DarkGrey guibg=DarkGrey
-highlight YankRoundRegion  cterm=NONE      gui=NONE      ctermfg=Magenta  guifg=Magenta
+highlight KazuakiMCheckString cterm=NONE      gui=NONE      ctermbg=DarkGrey guibg=DarkGrey
+highlight QFError             cterm=underline gui=underline ctermfg=Magenta  guifg=Magenta
+highlight YankRoundRegion     cterm=NONE      gui=NONE      ctermfg=Magenta  guifg=Magenta
 "}}}

@@ -1477,11 +1477,11 @@
 			<key>Name</key>
 			<string>MBA</string>
 			<key>Non Ascii Font</key>
-			<string>Ricty-Regular 16</string>
+			<string>RictyDiminishedDiscord-Regular 16</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Ricty-Regular 16</string>
+			<string>RictyDiminishedDiscord-Regular 16</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1988,11 +1988,11 @@
 			<key>Name</key>
 			<string>TransparentMBA</string>
 			<key>Non Ascii Font</key>
-			<string>Ricty-Regular 16</string>
+			<string>RictyDiminishedDiscord-Regular 16</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Ricty-Regular 16</string>
+			<string>RictyDiminishedDiscord-Regular 16</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -2492,11 +2492,11 @@
 			<key>Name</key>
 			<string>YAMAHA</string>
 			<key>Non Ascii Font</key>
-			<string>Ricty-Regular 16</string>
+			<string>RictyDiminishedDiscord-Regular 16</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Ricty-Regular 16</string>
+			<string>RictyDiminishedDiscord-Regular 16</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -2743,7 +2743,7 @@
 	<key>SUFeedURL</key>
 	<string>http://iterm2.com/appcasts/testing.xml</string>
 	<key>SULastCheckTime</key>
-	<date>2015-03-07T15:01:18Z</date>
+	<date>2015-03-28T12:57:04Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>

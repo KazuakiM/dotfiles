@@ -1,99 +1,123 @@
-# homebrew base {{{
-brew update
-brew upgrade
-#}}}
-# brew tap {{{
-brew tap caskroom/homebrew-cask
-brew tap homebrew/homebrew-apache
-brew tap homebrew/homebrew-php
-brew tap homebrew/homebrew-versions
-brew tap kazuakim/splhack
-brew tap sanemat/homebrew-font
-#}}}
-# brew install {{{
-brew install git
-brew install mercurial
-brew install subversion
-brew install brew-cask
-brew install brew-gem
-brew install composer
-brew install colordiff
-brew install ctags
-brew install gnu-tar
-brew install go
-brew install grep
-brew install httpd24
-brew install lua
-brew install luajit
-brew install --HEAD macvim-kaoriya
-brew install mplayer
-brew install mysql
-brew install nkf
-brew install openssl
-brew install perl518
-brew install php55
-brew install php55-mcrypt
-brew install php55-xdebug
-brew install phpunit
-brew install pstree
-brew install pv
-brew install python
-brew install python3
-brew install q
-brew install rbenv
-brew install readline
-brew install reattach-to-user-namespace
-brew install ruby
-brew install ruby-build
-brew install sqlite
-brew install the_silver_searcher
-brew install tmux
-brew install tree
-brew install w3m
-brew install wget
-brew install wireshark
-linkapps
-# 2014-12-22 {{{
-#apr,              cscope,        gnu-tar,               libffi,         mercurial,    phpunit,    the_silver_searcher
-#apr-util,         ctags,         gnutls,                libgcrypt,      mhash,        pixman,     tmux
-#atk,              ctags-objc-ja, go,                    libgpg-error,   mplayer,      pkg-config, tree
-#autoconf,         czmq,          gobject-introspection, libpgm,         mysql,        pstree,     unixodbc
-#automake,         d-bus,         grep,                  libpng,         nettle,       pv,         w3m
-#bash-completion2, fontconfig,    gtk+,                  libsodium,      nkf,          python,     wget
-#bdw-gc,           fontforge,     guile,                 libtasn1,       node,         python3,    wireshark
-#brew-cask,        freetype,      harfbuzz,              libtiff,        openssl,      qt,         xz
-#brew-gem,         gdbm,          htop-osx,              libtool,        ossp-uuid,    rbenv,      yasm
-#bundle,           gdk-pixbuf,    httpd24,               libunistring,   p11-kit,      readline,   zeromq
-#bundler,          geoip,         icu4c,                 libxml2,        pango,                    zlib
-#c-ares,           geoipupdate,   imlib2,                libyaml,        pcre,         ruby,       reattach-to-user-namespace
-#cairo,            gettext,       jasper,                lua,            perl518,      ruby-build
-#cmake,            gettext-mk,    jpeg,                  luajit,         php-cs-fixer, scons
-#cmigemo-mk,       git,           libatomic_ops,         lynx,           php55,        sqlite
-#colordiff,        glib,          libcaca,               macvim-kaoriya, php55-mcrypt, subversion
-#composer,         gmp,           libevent,              mcrypt,         php55-xdebug, swig
-#}}}
-#}}}
-# brew cask {{{
-brew cask install bettertouchtool
-brew cask install cheatsheet
-brew cask install cooviewer
-brew cask install dropbox
-brew cask install firefox
-brew cask install filezilla
-brew cask install gimp
-brew cask install google-chrome
-brew cask install google-japanese-ime
-brew cask install growlnotify
-brew cask install iterm2
-brew cask install karabiner
-brew cask install kindle
-brew cask install libreoffice
-brew cask install libreoffice
-brew cask install limechat
-brew cask install the-unarchiver
-brew cask install thunderbird
-brew cask install vagrant
-brew cask install virtualbox
-brew cask install xtrafinder
-brew cask install yorufukurou
-#}}}
+tap 'caskroom/cask'
+tap 'caskroom/fonts'
+tap 'homebrew/apache'
+tap 'homebrew/brewdler'
+tap 'homebrew/dupes'
+tap 'homebrew/php'
+tap 'homebrew/versions'
+tap 'kazuakim/macvim'
+brew 'apr'
+brew 'apr-util'
+brew 'atk'
+brew 'autoconf'
+brew 'automake'
+brew 'bash-completion2'
+brew 'bdw-gc'
+brew 'brew-cask'
+brew 'brew-gem'
+brew 'c-ares'
+brew 'cairo'
+brew 'cmake'
+brew 'cmigemo-mk', args: ['HEAD']
+brew 'colordiff'
+brew 'composer'
+brew 'cscope'
+brew 'ctags'
+brew 'czmq'
+brew 'd-bus'
+brew 'fontconfig'
+brew 'freetype'
+brew 'gdbm'
+brew 'gdk-pixbuf'
+brew 'geoip', args: ['with-geoipupdate']
+brew 'geoipupdate'
+brew 'gettext'
+brew 'gettext-mk'
+brew 'git'
+brew 'glib'
+brew 'gmp'
+brew 'gnu-tar'
+brew 'gnutls', args: ['with-p11-kit', 'with-guile']
+brew 'go'
+brew 'gobject-introspection'
+brew 'grep', args: ['with-default-names']
+brew 'gtk+', args: ['with-jasper']
+brew 'guile'
+brew 'harfbuzz'
+brew 'htop-osx'
+brew 'httpd24'
+brew 'icu4c'
+brew 'imlib2'
+brew 'jasper'
+brew 'jpeg'
+brew 'libatomic_ops'
+brew 'libcaca', args: ['with-imlib2']
+brew 'libevent'
+brew 'libffi'
+brew 'libgcrypt'
+brew 'libgpg-error'
+brew 'libpgm'
+brew 'libpng'
+brew 'libsodium'
+brew 'libtasn1'
+brew 'libtiff'
+brew 'libtool'
+brew 'libunistring'
+brew 'libxml2', args: ['with-python']
+brew 'libyaml'
+brew 'lua'
+brew 'luajit'
+brew 'lynx'
+brew 'macvim-kaoriya', args: ['HEAD']
+brew 'mcrypt'
+brew 'mercurial'
+brew 'mhash'
+brew 'mplayer', args: ['with-libcaca', 'with-x']
+brew 'mysql'
+brew 'nettle'
+brew 'nkf'
+brew 'node', args: ['with-debug']
+brew 'openssl'
+brew 'ossp-uuid'
+brew 'p11-kit'
+brew 'pango'
+brew 'pcre'
+brew 'perl518'
+brew 'php-cs-fixer'
+brew 'php55'
+brew 'php55-mcrypt'
+brew 'php55-xdebug'
+brew 'phpunit'
+brew 'pixman'
+brew 'pkg-config'
+brew 'pstree'
+brew 'pv'
+brew 'python', args: ['with-dtrace']
+brew 'python3'
+brew 'q'
+brew 'qt', args: ['with-mysql', 'with-qt3support', 'developer', 'with-d-bus']
+brew 'rbenv'
+brew 'readline'
+brew 'reattach-to-user-namespace'
+brew 'ruby'
+brew 'ruby-build'
+brew 'scons'
+brew 'sqlite'
+brew 'subversion'
+brew 'swig'
+brew 'the_silver_searcher'
+brew 'tmux'
+brew 'tree'
+brew 'unixodbc'
+brew 'w3m'
+brew 'wget'
+brew 'wireshark', args: ['with-gtk+', 'with-lua', 'without-geoip', 'with-qt', 'with-headers']
+brew 'xz'
+brew 'yasm'
+brew 'zeromq', args: ['with-pgm']
+brew 'zlib'
+cask 'font-ricty-diminished'
+cask 'karabiner'
+cask 'libreoffice'
+cask 'vagrant'
+cask 'vagrant-manager'

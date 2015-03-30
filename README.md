@@ -16,17 +16,12 @@ $ xcode-select --install
 $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 $ mkdir -p $HOME/work
 $ git clone https://github.com/KazuakiM/dotfiles.git $HOME/work/dotfiles
-$ brew bundle $HOME/work/dotfiles/lib/Brewfile
-
-  (Important)I don't execute Brewfile. So I'll commentout a lot of code and execute a few code next to next.
-
+$ cd $HOME/work/dotfiles/lib
+$ brew update
+$ brew upgrade
+$ brew tap Homebrew/brewdler
+$ brew brewdle
 $ brew doctor
-```
-
-Ricty
-```bash
-$ git clone https://github.com/yascentur/RictyDiminished.git /tmp/RictyDiminished
-$ cp -f /tmp/RictyDiminished/*.ttl $HOME/Library/Fonts/
 ```
 
 [BetterTouchTool](http://www.bettertouchtool.net/)
@@ -82,15 +77,7 @@ $ wget http://cs.sensiolabs.org/get/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-f
 $ chmod a+x $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 $ php $HOME/work/dotfiles/src/phpDict.php
 $ sh $HOME/work/dotfiles/src/htmlReference.sh
-$ vi
- Update from NeoBundleFetch to NeoBundle
- :NeoBundleInstall
-
- Update from NeoBundle to NeoBundleFetch
-
-$ cd $HOME/.vim/bundle/regexper
-$ bundle install
-$ exit
+$ sh $HOME/.vim/bundle/neobundle.vim/bin/neoinstall
 ```
 
 ### Vagrant
@@ -134,20 +121,11 @@ I made Vagrantfile.
 > $ cp -f $HOME/.netrc.org   $HOME/.netrc
 > $ php $HOME/src/phpDict.php
 > $ sh $HOME/src/htmlReference.sh
+> $ sh $HOME/.vim/bundle/neobundle.vim/bin/neoinstall
 > $ git clone https://github.com/yascentur/RictyDiminished.git /tmp/RictyDiminished
 >  Copy font directory
 >
 > $ exit
-> ```
->
-> alias, export情報を読み込ませるため、一旦ターミナルを閉じる
->
-> ```bash
-> $ vi
->  Update from NeoBundleFetch to NeoBundle
->  :NeoBundleInstall
->
->  Update from NeoBundle to NeoBundleFetch
 > ```
 
 ## Common setting
