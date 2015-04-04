@@ -410,6 +410,34 @@ SELECT TRIM('_' FROM '_I_love_Vim_');
 SELECT TRIM(' I love Vim ');
 ```
 
+Comma list string search1(MySQL Only)
+```sql
+ex) 11 search
+
+SELECT FIND_IN_SET(11, '1,2,11');
+```
+
+Pipe list string search(MySQL Only)
+```sql
+ex) 11 search
+
+SELECT FIND_IN_SET(11, REPLACE('1|2|11', '|', ','));
+```
+
+Comma list string search2(MySQL Only?)
+```sql
+ex) 11 search
+
+SELECT * FROM <Table1> WHERE <Column1> REGEXP '[[:<:]]11[[:>:]]';
+```
+
+Comma list string search3
+```sql
+ex) 11 search
+
+SELECT * FROM <Table1> WHERE CONCAT(',', <Column1>, ',') LIKE CONCAT('%,', 11, ',%');
+```
+
 ## Other
 
 transaction
