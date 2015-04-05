@@ -33,12 +33,6 @@ let g:html5_rdfa_attributes_complete          = 1
 let g:html5_microdata_attributes_complete     = 1
 let g:html5_aria_attributes_complete          = 1
 "}}}
-" vim-qfreplace {{{
-" # command memo
-" * ,qr    :replace all files.
-NeoBundle 'thinca/vim-qfreplace'
-nnoremap <Leader>qr :<C-u>Qfreplace<CR>
-"}}}
 " context_filetype.vim {{{
 " setlocal html filetype at .vimrc.local (views/*.php is html filetype).
 NeoBundle 'Shougo/context_filetype.vim'

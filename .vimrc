@@ -210,7 +210,7 @@ nmap <Leader>f <SID>[vim]
 nnoremap <SID>[vim]e :<C-u>tabnew<Space>$MYVIMRC<CR>
 nnoremap <SID>[vim]s :<C-u>source<Space>$MYVIMRC<CR>
 nnoremap <SID>[vim]h :<C-u>source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
-nnoremap <SID>[vim]c :setlocal conceallevel=2<CR>
+nnoremap <SID>[vim]c :<C-u>setlocal<Space>conceallevel=2<CR>
 "}}}
 "
 "
@@ -246,7 +246,8 @@ endif
 " qfixgrep {{{
 let g:QFix_UseLocationList = 1
 let g:QFixWin_EnableMode   = 1
-nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of('vital').import('Prelude').path2project_directory('%').'<CR>'
+nnoremap <expr> <Leader>grek ':silent grep! '.expand('<cword>').' '.vital#of('vital').import('Prelude').path2project_directory('%').'<CR>'
+nnoremap <expr> <Leader>grel ':silent grep!  '.vital#of('vital').import('Prelude').path2project_directory('%').'<C-b><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right>'
 "}}}
 " yankround.vim {{{
 let g:yankround_dir=$HOME.'/.vim/yankround.vim'
@@ -299,6 +300,9 @@ let g:indentLine_faster = 1
 "
 "
 " NeoBundleLazy {{{
+"
+" TODO:If gVim for Windows italic fonts are deleted, I would move 'unite-highlight' to backup/.vimrc.
+"
 " unite.vim
 " unite-help
 " codic-vim
@@ -375,6 +379,14 @@ function! s:hooks.on_source(bundle)
     let g:NERDTreeWinSize           = 20
 endfunction
 "}}}
+" vim-qfreplace {{{
+"
+" XXX:I think I should operate 'vim-qfreplace'. It's so cool.
+"
+NeoBundleLazy 'thinca/vim-qfreplace', {'commands': 'Qfreplace'}
+nnoremap <Leader>qr :<C-u>Qfreplace<CR>
+"}}}
+
 " vim-easy-align {{{
 NeoBundleLazy 'junegunn/vim-easy-align', {'commands': 'EasyAlign'}
 vnoremap <silent> <Leader>a :EasyAlign<CR>
@@ -431,7 +443,7 @@ endfunction
 " open-browser.vim {{{
 NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'openbrowser#_keymapping_smart_search'}
 let g:netrw_nogx = 1
-nnoremap <Leader>gx :<C-u>call openbrowser#_keymapping_smart_search('n')<CR>
+nnoremap <Leader>gx :<C-u>call<Space>openbrowser#_keymapping_smart_search('n')<CR>
 "}}}
 " vim-snippets
 " neocomplete.vim {{{
