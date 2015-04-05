@@ -246,7 +246,7 @@ endif
 " qfixgrep {{{
 let g:QFix_UseLocationList = 1
 let g:QFixWin_EnableMode   = 1
-nnoremap <expr> <Leader>grek ':silent grep! '.expand('<cword>').' '.vital#of('vital').import('Prelude').path2project_directory('%').'<CR>'
+nnoremap <expr> <Leader>grek ':silent grep! '.expand('<cword>').' '.vital#of('vital').import('Prelude').path2project_directory('%').'<C-b><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right>'
 nnoremap <expr> <Leader>grel ':silent grep!  '.vital#of('vital').import('Prelude').path2project_directory('%').'<C-b><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right>'
 "}}}
 " yankround.vim {{{
@@ -386,7 +386,6 @@ endfunction
 NeoBundleLazy 'thinca/vim-qfreplace', {'commands': 'Qfreplace'}
 nnoremap <Leader>qr :<C-u>Qfreplace<CR>
 "}}}
-
 " vim-easy-align {{{
 NeoBundleLazy 'junegunn/vim-easy-align', {'commands': 'EasyAlign'}
 vnoremap <silent> <Leader>a :EasyAlign<CR>
