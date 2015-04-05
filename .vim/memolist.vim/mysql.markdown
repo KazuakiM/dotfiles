@@ -85,7 +85,7 @@ COMMIT;
 Tables dump
 ```bash
 $ mysqldump -u<Account> -h<Host> -p <DataBase> \
- --default-character-set=utf8 --skip-lock-tables -c -e -q -t --result-file='/tmp/<dumpFile>.dump' --tables \
+ --default-character-set=utf8 --single-transaction --skip-lock-tables -c -e -q -t --result-file='/tmp/<dumpFile>.dump' --tables \
  <Table1> <Table2>;
 $ vi /tmp/<dumpFile>.dump
   Check execute results.
@@ -97,8 +97,18 @@ Recode dump
 ```bash
 $ mysqldump -u<Account> -h<Host> -p <DataBase> \
  --where='<Condition>' \
- --default-character-set=utf8 --skip-lock-tables -c -e -q -t --result-file='/tmp/<dumpFile>.dump' --tables \
+ --default-character-set=utf8 --single-transaction --skip-lock-tables -c -e -q -t --result-file='/tmp/<dumpFile>.dump' --tables \
  <Table1> <Table2>;
+$ vi /tmp/<dumpFile>.dump
+  Check execute results.
+```
+
+1 table Recode dump(TABLE JOIN)
+```bash
+$ mysqldump -u<Account> -h<Host> -p <DataBase> \
+ --where='id IN (SELECT <T1>.id FROM <Table1> <T1> INNER JOIN <Table2> <T2> ON <T1>.id = <T2>.t1_id WHERE <T2>.status = 1)' \
+ --default-character-set=utf8 --single-transaction --skip-lock-tables -c -e -q -t --result-file='/tmp/<dumpFile>.dump' --tables \
+ <Table1>;
 $ vi /tmp/<dumpFile>.dump
   Check execute results.
 ```
