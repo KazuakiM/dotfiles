@@ -85,7 +85,7 @@ COMMIT;
 Tables dump
 ```bash
 $ mysqldump -u<Account> -h<Host> -p <DataBase> \
- --default-character-set=utf8 --skip-lock-tables -c -e -q -t --result-file='/tmp/<dumpFile>.dump' --tables \
+ --default-character-set=utf8 --single-transaction --skip-lock-tables -c -e -q -t --result-file='/tmp/<dumpFile>.dump' --tables \
  <Table1> <Table2>;
 $ vi /tmp/<dumpFile>.dump
   Check execute results.
@@ -97,8 +97,18 @@ Recode dump
 ```bash
 $ mysqldump -u<Account> -h<Host> -p <DataBase> \
  --where='<Condition>' \
- --default-character-set=utf8 --skip-lock-tables -c -e -q -t --result-file='/tmp/<dumpFile>.dump' --tables \
+ --default-character-set=utf8 --single-transaction --skip-lock-tables -c -e -q -t --result-file='/tmp/<dumpFile>.dump' --tables \
  <Table1> <Table2>;
+$ vi /tmp/<dumpFile>.dump
+  Check execute results.
+```
+
+1 table Recode dump(TABLE JOIN)
+```bash
+$ mysqldump -u<Account> -h<Host> -p <DataBase> \
+ --where='id IN (SELECT <T1>.id FROM <Table1> <T1> INNER JOIN <Table2> <T2> ON <T1>.id = <T2>.t1_id WHERE <T2>.status = 1)' \
+ --default-character-set=utf8 --single-transaction --skip-lock-tables -c -e -q -t --result-file='/tmp/<dumpFile>.dump' --tables \
+ <Table1>;
 $ vi /tmp/<dumpFile>.dump
   Check execute results.
 ```
@@ -410,6 +420,34 @@ SELECT TRIM('_' FROM '_I_love_Vim_');
 SELECT TRIM(' I love Vim ');
 ```
 
+Comma list string search1(MySQL Only)
+```sql
+ex) 11 search
+
+SELECT FIND_IN_SET(11, '1,2,11');
+```
+
+Pipe list string search(MySQL Only)
+```sql
+ex) 11 search
+
+SELECT FIND_IN_SET(11, REPLACE('1|2|11', '|', ','));
+```
+
+Comma list string search2(MySQL Only?)
+```sql
+ex) 11 search
+
+SELECT * FROM <Table1> WHERE <Column1> REGEXP '[[:<:]]11[[:>:]]';
+```
+
+Comma list string search3
+```sql
+ex) 11 search
+
+SELECT * FROM <Table1> WHERE CONCAT(',', <Column1>, ',') LIKE CONCAT('%,', 11, ',%');
+```
+
 ## Other
 
 transaction
@@ -425,27 +463,28 @@ EXPLAIN
 SELECT ...
 ```
 
-[Max/Min](http://nippondanji.blogspot.jp/2009/05/mysql.html)
+[Max/Min](http://nippondanji.blogspot.jp/2009/05/mysql.html) and [Storage Required Rule for MySQL5.7](http://dev.mysql.com/doc/refman/5.7/en/storage-requirements.html)
 
-| Type               | MIN                                                                 | MAX                                                                 |
-| :----------------- | ------------------------------------------------------------------: | ------------------------------------------------------------------: |
-| CHAR               | 0                                                                   | 255(文字)                                                           |
-| VARCHAR            | 0                                                                   | 65535(文字)                                                         |
-| BLOB               | 0                                                                   | 64(KB)                                                              |
-| TINYBLOB           | 0                                                                   | 256(B)                                                              |
-| MEDIUMBLOB         | 0                                                                   | 16(MB)                                                              |
-| LONGBLOB           | 0                                                                   | 4(GB)                                                               |
-| INT                | -2147483648                                                         | 2147483647                                                          |
-| INT UNSIGNED       | 0                                                                   | 4294967295                                                          |
-| TINYINT            | -127                                                                | 128                                                                 |
-| TINYINT UNSIGNED   | 0                                                                   | 255                                                                 |
-| SMALLINT           | -32768                                                              | 32767                                                               |
-| SMALLINT UNSIGNED  | 0                                                                   | 65535                                                               |
-| MEDIUMINT          | -8388608                                                            | 8388607                                                             |
-| MEDIUMINT UNSIGNED | 0                                                                   | 16777215                                                            |
-| BIGINT             | -9223372036854775808                                                | 9223372036854775807                                                 |
-| BIGINT UNSIGNED    | 0                                                                   | 18446744073709551615                                                |
-| DECIMAL            | [小数点が扱える](http://nippondanji.blogspot.jp/2009/05/mysql.html) | [小数点が扱える](http://nippondanji.blogspot.jp/2009/05/mysql.html) |
-| DATETIME           | 1000-01-01 00:00:00                                                 | 9999-12-31 23:59:59                                                 |
-| TIMESTAMP          | 1970-01-01 00:00:01                                                 | 2038-01-09 03:14:07(UTC)                                            |
+| Data Type                              | MIN                                                                 | MAX                                                                 | Storage Required |
+| :------------------------------------- | ------------------------------------------------------------------: | ------------------------------------------------------------------: | :--------------- |
+| CHAR                                   | 0                                                                   | 255(文字)                                                           | M × w bytes, 0 <= M <= 255, where w is the number of bytes required for the maximum-length character in the character set.<br />See [Section 14.2.15.7, "Physical Row Structure"](http://dev.mysql.com/doc/refman/5.7/en/innodb-physical-record.html) for information about CHAR data type storage requirements for InnoDB tables. |
+| VARCHAR                                | 0                                                                   | 65535(文字)                                                         | L + 1 bytes if column values require 0 – 255 bytes<br />L + 2 bytes if values may require more than 255 bytes |
+| BLOB                                   | 0                                                                   | 64(KB)                                                              | L + 2 bytes, where L < 216 |
+| TINYBLOB                               | 0                                                                   | 256(B)                                                              | L + 1 bytes, where L < 28  |
+| MEDIUMBLOB                             | 0                                                                   | 16(MB)                                                              | L + 3 bytes, where L < 224 |
+| LONGBLOB                               | 0                                                                   | 4(GB)                                                               | L + 4 bytes, where L < 232 |
+| INT                                    | -2147483648                                                         | 2147483647                                                          | 4 bytes |
+| INT UNSIGNED                           | 0                                                                   | 4294967295                                                          | 4 bytes |
+| TINYINT                                | -127                                                                | 128                                                                 | 1 byte  |
+| TINYINT UNSIGNED                       | 0                                                                   | 255                                                                 | 1 byte  |
+| SMALLINT                               | -32768                                                              | 32767                                                               | 2 bytes |
+| SMALLINT UNSIGNED                      | 0                                                                   | 65535                                                               | 2 bytes |
+| MEDIUMINT                              | -8388608                                                            | 8388607                                                             | 3 bytes |
+| MEDIUMINT UNSIGNED                     | 0                                                                   | 16777215                                                            | 3 bytes |
+| BIGINT                                 | -9223372036854775808                                                | 9223372036854775807                                                 | 8 bytes |
+| BIGINT UNSIGNED                        | 0                                                                   | 18446744073709551615                                                | 8 bytes |
+| FLOAT<br />(単精度<br />浮動小数点数)  | -3.402823466E<br />+38                                              | 3.402823466E<br />+38                                               | 4 bytes |
+| DOUBLE<br />(倍精度<br />浮動小数点数) | -1.7976931348623157E<br />+308                                      | 1.7976931348623157E<br />+308                                       | 8 bytes |
+| DECIMAL<br />([アンパック<br />浮動小数点数](http://nippondanji.blogspot.jp/2009/05/mysql.html))||||
+| DATETIME                               | 1000-01-01 00:00:00                                                 | 9999-12-31 23:59:59                                                 |5 bytes + fractional seconds storage |
 

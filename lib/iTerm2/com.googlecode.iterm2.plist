@@ -1131,7 +1131,7 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>427 184 924 485 0 0 1366 745 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 5 1362 740 0 0 1366 745 </string>
+	<string>327 5 1034 740 0 0 1366 745 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>1692 6 1034 762 1366 0 1360 768 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -1635,7 +1635,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.0078217452391982079</real>
+			<real>0.064612612128257751</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unlimited Scrollback</key>
@@ -2743,7 +2743,7 @@
 	<key>SUFeedURL</key>
 	<string>http://iterm2.com/appcasts/testing.xml</string>
 	<key>SULastCheckTime</key>
-	<date>2015-03-28T12:57:04Z</date>
+	<date>2015-03-30T14:07:52Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>

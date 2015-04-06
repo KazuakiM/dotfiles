@@ -37,7 +37,7 @@ let g:mapleader = ','
 augroup MyAutoCmd
     autocmd!
 augroup END
-function! s:kazuakiMVimStart(backupDir, undoDir) "{{{
+function! s:KazuakiMVimStart(backupDir, undoDir) "{{{
     "Check 128KB file size.
     if getfsize(expand('%:p')) >= 131072
         setlocal noswapfile nobackup nowritebackup noundofile viminfo=
@@ -46,13 +46,13 @@ function! s:kazuakiMVimStart(backupDir, undoDir) "{{{
         syntax off
         return 1
     endif
-    call s:autoMkdir(a:backupDir.s:date)
-    call s:autoMkdir(a:undoDir.  s:date)
+    call s:AutoMkdir(a:backupDir.s:date)
+    call s:AutoMkdir(a:undoDir.  s:date)
     let &backupdir = a:backupDir.s:date
     let &undodir   = a:undoDir.  s:date
     return 0
 endfunction "}}}
-function! s:autoMkdir(dir) "{{{
+function! s:AutoMkdir(dir) "{{{
     if !isdirectory(a:dir)
         call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
     endif
@@ -60,18 +60,18 @@ endfunction "}}}
 if has('vim_starting')
     let s:date = strftime('%Y%m%d%H%M%S', localtime())
     if has('win32') || has ('win64')
-        if s:kazuakiMVimStart('C:\temp\backup\', 'C:\temp\undo\')
+        if s:KazuakiMVimStart('C:\temp\backup\', 'C:\temp\undo\')
             finish
         endif
         let s:osType = 'win'
         set runtimepath+=$HOME/.vim,$HOME/.vim/after
     elseif has('macunix')
-        if s:kazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
+        if s:KazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
             finish
         endif
         let s:osType = 'macunix'
     else
-        if s:kazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
+        if s:KazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
             finish
         endif
         let s:osType = 'unix'
@@ -80,15 +80,36 @@ if has('vim_starting')
     set runtimepath+=$HOME/.vim/bundle/neobundle.vim
 endif
 " autocmd
-autocmd MyAutoCmd BufEnter * if isdirectory(expand('%:p')) | call nerdtree#checkForBrowse(expand('<amatch>')) | endif | execute 'lcd '.expand('%:p:h')
-\|    if (winnr('$') is 1) && (&l:diff || (exists('b:NERDTreeType') && (b:NERDTreeType ==# 'primary'))) | q | endif
-autocmd MyAutoCmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line('$') | exe "normal! g`\"" | endif
-autocmd MyAutoCmd CmdwinEnter * nmap <silent> <ESC><ESC> :q<CR>
-autocmd MyAutoCmd CmdwinLeave * nunmap <ESC><ESC>
-autocmd MyAutoCmd InsertLeave * set nopaste | if &l:diff | diffupdate | endif
+function! s:KazuakiMCheckString() "{{{
+    match KazuakiMCheckString "\t\|\r\|\r\n\|\s\+$\|　"
+endfunction "}}}
+function! s:KazuakiMBufEnter() "{{{
+    " If open direcotry, call NERDTree
+    if isdirectory(expand('%:p'))
+        call nerdtree#checkForBrowse(expand('<amatch>'))
+    endif
+    " Move current file(/directory) path
+    execute 'lcd '.expand('%:p:h')
+    " Auto close VimDiff or primary NERDTree
+    if (winnr('$') is 1) && (&l:diff || (exists('b:NERDTreeType') && (b:NERDTreeType ==# 'primary')))
+        quit
+    endif
+endfunction "}}}
+function! s:KazuakiMVimEnter() "{{{
+    set textwidth=0
+    call s:KazuakiMCheckString()
+endfunction "}}}
+function! s:KazuakiMWinEnter() "{{{
+    call s:KazuakiMCheckString()
+endfunction "}}}
+autocmd MyAutoCmd BufEnter             * call s:KazuakiMBufEnter()
+autocmd MyAutoCmd BufReadPost          * if line("'\"") > 1 && line("'\"") <= line('$') | exe "normal! g`\"" | endif
+autocmd MyAutoCmd CmdwinEnter          * nmap <silent> <ESC><ESC> :q<CR>
+autocmd MyAutoCmd CmdwinLeave          * nunmap <ESC><ESC>
+autocmd MyAutoCmd InsertLeave          * set nopaste | if &l:diff | diffupdate | endif
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
-autocmd MyAutoCmd VimEnter * set textwidth=0
-autocmd MyAutoCmd VimEnter,WinEnter * match KazuakiMCheckString "\t\|\r\|\r\n\|\s\+$\|　"
+autocmd MyAutoCmd VimEnter             * call s:KazuakiMVimEnter()
+autocmd MyAutoCmd WinEnter             * call s:KazuakiMWinEnter()
 "autocmd MyAutoCmd VimEnter * set formatoptions-=v formatoptions-=b
 function! StatuslineSyntax() "{{{
     return qfstatusline#Update()
@@ -143,6 +164,8 @@ nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null
 "  Paste
 nnoremap <silent><expr><Leader>v  ':set<Space>paste<CR><Insert><Right><C-r>+<ESC>'
 inoremap <silent><expr><C-v> '<ESC>:set<Space>paste<CR><Insert><Right><C-r>+<ESC><Insert><Right>'
+"  Replace
+nnoremap R gR
 "  Search
 nnoremap <expr><Leader>%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
@@ -187,7 +210,7 @@ nmap <Leader>f <SID>[vim]
 nnoremap <SID>[vim]e :<C-u>tabnew<Space>$MYVIMRC<CR>
 nnoremap <SID>[vim]s :<C-u>source<Space>$MYVIMRC<CR>
 nnoremap <SID>[vim]h :<C-u>source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
-nnoremap <SID>[vim]c :setlocal conceallevel=2<CR>
+nnoremap <SID>[vim]c :<C-u>setlocal<Space>conceallevel=2<CR>
 "}}}
 "
 "
@@ -223,7 +246,8 @@ endif
 " qfixgrep {{{
 let g:QFix_UseLocationList = 1
 let g:QFixWin_EnableMode   = 1
-nnoremap <expr> <Leader>grep ':silent grep! '.expand('<cword>').' '.vital#of('vital').import('Prelude').path2project_directory('%').'<CR>'
+nnoremap <expr> <Leader>grek ':silent grep! '.expand('<cword>').' '.vital#of('vital').import('Prelude').path2project_directory('%').'<C-b><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right>'
+nnoremap <expr> <Leader>grel ':silent grep!  '.vital#of('vital').import('Prelude').path2project_directory('%').'<C-b><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right>'
 "}}}
 " yankround.vim {{{
 let g:yankround_dir=$HOME.'/.vim/yankround.vim'
@@ -276,6 +300,9 @@ let g:indentLine_faster = 1
 "
 "
 " NeoBundleLazy {{{
+"
+" TODO:If gVim for Windows italic fonts are deleted, I would move 'unite-highlight' to backup/.vimrc.
+"
 " unite.vim
 " unite-help
 " codic-vim
@@ -352,6 +379,13 @@ function! s:hooks.on_source(bundle)
     let g:NERDTreeWinSize           = 20
 endfunction
 "}}}
+" vim-qfreplace {{{
+"
+" XXX:I think I should operate 'vim-qfreplace'. It's so cool.
+"
+NeoBundleLazy 'thinca/vim-qfreplace', {'commands': 'Qfreplace'}
+nnoremap <Leader>qr :<C-u>Qfreplace<CR>
+"}}}
 " vim-easy-align {{{
 NeoBundleLazy 'junegunn/vim-easy-align', {'commands': 'EasyAlign'}
 vnoremap <silent> <Leader>a :EasyAlign<CR>
@@ -383,7 +417,7 @@ nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
 NeoBundleLazy 'thinca/vim-ref', {'functions': 'ref#K'}
 let g:ref_no_default_key_mappings = 1
 inoremap <silent><C-k> <C-o>:call<space>ref#K('normal')<CR><ESC>
-nnoremap <silent>K :<C-u>call ref#K('normal')<CR>
+nnoremap <silent>K     :<C-u>call<space>ref#K('normal')<CR>
 let s:hooks = neobundle#get_hooks('vim-ref')
 function! s:hooks.on_source(bundle)
     let g:ref_cache_dir       = $HOME.'/.vim/vim-ref/cache'
@@ -408,7 +442,7 @@ endfunction
 " open-browser.vim {{{
 NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'openbrowser#_keymapping_smart_search'}
 let g:netrw_nogx = 1
-nnoremap <Leader>gx :<C-u>call openbrowser#_keymapping_smart_search('n')<CR>
+nnoremap <Leader>gx :<C-u>call<Space>openbrowser#_keymapping_smart_search('n')<CR>
 "}}}
 " vim-snippets
 " neocomplete.vim {{{
@@ -505,7 +539,7 @@ endif
 " Vim / gVim {{{
 if !has('gui_running')
     " http://d.hatena.ne.jp/thinca/20111204/1322932585
-    function! s:tabpageLabelUpdate(tab_number) "{{{
+    function! s:TabpageLabelUpdate(tab_number) "{{{
         let a:highlight = a:tab_number is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
         let a:bufnrs    = tabpagebuflist(a:tab_number)
         let a:bufnr     = len(a:bufnrs)
@@ -516,7 +550,7 @@ if !has('gui_running')
         return '%'.a:tab_number.'T'.a:highlight.a:bufnr.' '.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tab_number) - 1]), ':t').' '.a:modified.'%T%#TabLineFill#'
     endfunction "}}}
     function! TabLineUpdate() "{{{
-        return join(map(range(1, tabpagenr('$')), 's:tabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
+        return join(map(range(1, tabpagenr('$')), 's:TabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
     endfunction "}}}
     set tabline=%!TabLineUpdate()
 endif
