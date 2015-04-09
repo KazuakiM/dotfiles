@@ -12,21 +12,27 @@ AppStore
 
 homebrew
 ```bash
+$ sudo chown -R $USER:staff /usr/local
 $ xcode-select --install
 $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 $ mkdir -p $HOME/work
 $ git clone https://github.com/KazuakiM/dotfiles.git $HOME/work/dotfiles
+$ sudo ln -sf $HOME/work/dotfiles/etc/paths /etc/paths
 $ cd $HOME/work/dotfiles/lib
 $ brew update
 $ brew upgrade
+$ brew doctor
 $ brew tap Homebrew/brewdler
 $ brew brewdle
 $ brew doctor
+$ cd /tmp
+$ brew brewdle dump
+$ cp -p Brewfile $HOME/work/dotfiles/lib/
 ```
 
 [BetterTouchTool](http://www.bettertouchtool.net/)
 > |Action Settings(Window Snapping etc.) > Window Snapping|   |
-> |:------------------------------------------------------|:--|
+> |:------------------------------------------------------|--:|
 > |Normal Snapping / Moving                               |   |
 > |Left width                                             |24%|
 > |Right width                                            |76%|
@@ -39,7 +45,7 @@ $ brew doctor
 
 [Karabiner](https://pqrs.org/osx/karabiner/index.html.ja)
 > |Key Repeat > Basic Configurations > KeyRepeat|     |
-> |:--------------------------------------------|:----|
+> |:--------------------------------------------|----:|
 > |Delay Until Repeat                           |200ms|
 > |Key Repeat                                   | 25ms|
 
@@ -135,15 +141,11 @@ I made Vagrantfile.
 [FireFox](https://www.mozilla.org/ja/firefox/)
 
 * Required sync setting
-
 * オプション > コンテンツ > フォントとカラー
-  * デフォルトフォント: [Ricty](https://github.com/yascentur/RictyDiminished)
+  * デフォルトフォント: [RictyDiminished](https://github.com/yascentur/RictyDiminished)
 * add-on
   * [Adblock Plus](https://addons.mozilla.org/ja/firefox/addon/adblock-plus/)
   * [AutoPager](https://addons.mozilla.org/ja/firefox/addon/autopager/)
-  * [chaika](https://addons.mozilla.org/ja/firefox/addon/chaika/)
-    * オプション > 板一覧 > 検索ボックス > デフォルト検索エンジン  
-      2ch検索(ff2ch.syoboi.jp)
   * [DownThemAll!](https://addons.mozilla.org/ja/firefox/addon/downthemall/)
   * [feedly](https://addons.mozilla.org/ja/firefox/addon/feedly/)
   * [Firebug](https://addons.mozilla.org/ja/firefox/addon/firebug/)
