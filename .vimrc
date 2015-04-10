@@ -164,7 +164,7 @@ nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null
 "  Paste
 nnoremap <silent><expr><Leader>v  ':set<Space>paste<CR><Insert><Right><C-r>+<ESC>'
 inoremap <silent><expr><C-v> '<ESC>:set<Space>paste<CR><Insert><Right><C-r>+<ESC><Insert><Right>'
-"cnoremap <M-v> <C-C><C-r>+
+cnoremap <M-v> <C-R><C-O>*
 "  Replace
 nnoremap R gR
 "  Search
