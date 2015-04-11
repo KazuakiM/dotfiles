@@ -17,7 +17,7 @@ $ xcode-select --install
 $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 $ mkdir -p $HOME/work
 $ git clone https://github.com/KazuakiM/dotfiles.git $HOME/work/dotfiles
-$ sudo ln -sf $HOME/work/dotfiles/etc/paths /etc/paths
+$ sudo cp -f $HOME/work/dotfiles/etc/paths /etc/paths
 $ cd $HOME/work/dotfiles/lib
 $ brew update
 $ brew upgrade
