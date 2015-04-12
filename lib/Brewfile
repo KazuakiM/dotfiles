@@ -32,7 +32,6 @@ brew 'gdk-pixbuf'
 brew 'geoip', args: ['with-geoipupdate']
 brew 'geoipupdate'
 brew 'gettext'
-brew 'gettext-mk'
 brew 'git'
 brew 'glib'
 brew 'gmp'

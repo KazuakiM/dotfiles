@@ -28,6 +28,8 @@ $ brew doctor
 $ cd /tmp
 $ brew brewdle dump
 $ cp -p Brewfile $HOME/work/dotfiles/lib/
+$ cd $HOME/work/dotfiles/
+$ git status
 ```
 
 [BetterTouchTool](http://www.bettertouchtool.net/)
@@ -147,7 +149,6 @@ I made Vagrantfile.
   * [Adblock Plus](https://addons.mozilla.org/ja/firefox/addon/adblock-plus/)
   * [AutoPager](https://addons.mozilla.org/ja/firefox/addon/autopager/)
   * [DownThemAll!](https://addons.mozilla.org/ja/firefox/addon/downthemall/)
-  * [feedly](https://addons.mozilla.org/ja/firefox/addon/feedly/)
   * [Firebug](https://addons.mozilla.org/ja/firefox/addon/firebug/)
   * [FireMobileSimulator](https://addons.mozilla.org/ja/firefox/addon/firemobilesimulator/)
   * [Growl/GNTP](https://addons.mozilla.org/ja/firefox/addon/growlgntp/)
