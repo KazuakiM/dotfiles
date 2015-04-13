@@ -17,7 +17,7 @@ $ xcode-select --install
 $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 $ mkdir -p $HOME/work
 $ git clone https://github.com/KazuakiM/dotfiles.git $HOME/work/dotfiles
-$ sudo ln -sf $HOME/work/dotfiles/etc/paths /etc/paths
+$ sudo cp -f $HOME/work/dotfiles/etc/paths /etc/paths
 $ cd $HOME/work/dotfiles/lib
 $ brew update
 $ brew upgrade
@@ -28,6 +28,8 @@ $ brew doctor
 $ cd /tmp
 $ brew brewdle dump
 $ cp -p Brewfile $HOME/work/dotfiles/lib/
+$ cd $HOME/work/dotfiles/
+$ git status
 ```
 
 [BetterTouchTool](http://www.bettertouchtool.net/)
@@ -147,7 +149,6 @@ I made Vagrantfile.
   * [Adblock Plus](https://addons.mozilla.org/ja/firefox/addon/adblock-plus/)
   * [AutoPager](https://addons.mozilla.org/ja/firefox/addon/autopager/)
   * [DownThemAll!](https://addons.mozilla.org/ja/firefox/addon/downthemall/)
-  * [feedly](https://addons.mozilla.org/ja/firefox/addon/feedly/)
   * [Firebug](https://addons.mozilla.org/ja/firefox/addon/firebug/)
   * [FireMobileSimulator](https://addons.mozilla.org/ja/firefox/addon/firemobilesimulator/)
   * [Growl/GNTP](https://addons.mozilla.org/ja/firefox/addon/growlgntp/)

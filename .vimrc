@@ -118,9 +118,10 @@ endfunction "}}}
 set ambiwidth=double autoindent autoread backspace=indent,eol,start backup clipboard+=autoselect,unnamed cmdheight=1 completeopt=longest,menu
 set diffopt+=filler,context:5,iwhite,horizontal directory=$HOME/.vim/swap display=lastline expandtab fillchars+=diff:* foldmethod=marker
 set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m helplang=ja hidden history=1000 hlsearch ignorecase iminsert=0 imsearch=-1 incsearch laststatus=2 lazyredraw
-set matchpairs+=<:> matchtime=1 mouse= noequalalways noerrorbells noimcmdline noimdisable noruler number pumheight=8 scrolloff=999 shiftwidth=4 shortmess+=I
-set showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile tabstop=4 title titleold= titlestring=%F ttyfast t_vb= undofile updatetime=1000
-set viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo virtualedit+=block visualbell wildmenu wildmode=longest:full,full wrap wrapscan
+set matchpairs+=<:> matchtime=1 mouse= nobomb noequalalways noerrorbells noimcmdline noimdisable noruler number pumheight=8 scrolloff=999 shiftwidth=4 shortmess+=I
+set showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile tabstop=4 title titleold= titlestring=%F ttyfast t_vb= undofile updatecount=30
+set updatetime=1000 viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo virtualedit+=block visualbell wildmenu wildmode=longest:full,full wrap
+set wrapscan
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*.json'\ --exclude='*.log'\ --exclude='*min.js'\ --exclude='*min.css'
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,C,.DS_Store,.,..
 set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
@@ -215,6 +216,27 @@ nnoremap <SID>[vim]c :<C-u>setlocal<Space>conceallevel=2<CR>
 "}}}
 "
 "
+" Vim / gVim {{{
+if !has('gui_running')
+    " http://d.hatena.ne.jp/thinca/20111204/1322932585
+    function! s:TabpageLabelUpdate(tab_number) "{{{
+        let a:highlight = a:tab_number is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
+        let a:bufnrs    = tabpagebuflist(a:tab_number)
+        let a:bufnr     = len(a:bufnrs)
+        if a:bufnr is 1
+            let a:bufnr = ''
+        endif
+        let a:modified = len(filter(copy(a:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
+        return '%'.a:tab_number.'T'.a:highlight.a:bufnr.' '.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tab_number) - 1]), ':t').' '.a:modified.'%T%#TabLineFill#'
+    endfunction "}}}
+    function! TabLineUpdate() "{{{
+        return join(map(range(1, tabpagenr('$')), 's:TabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
+    endfunction "}}}
+    set tabline=%!TabLineUpdate()
+endif
+"}}}
+"
+"
 " NeoBundle START {{{
 call neobundle#begin(expand('$HOME/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
@@ -240,23 +262,22 @@ else
     NeoBundle 'gcmt/wildfire.vim'
     NeoBundle 'vim-jp/vimdoc-ja'
     NeoBundle 'Yggdroot/indentLine'
-    NeoBundle 'plasticboy/vim-markdown'
 
     NeoBundleSaveCache
 endif
 " qfixgrep {{{
-let g:QFix_UseLocationList = 1
-let g:QFixWin_EnableMode   = 1
+let g:QFix_PreviewHeight = 20
+let g:QFixWin_EnableMode = 1
 nnoremap <expr> <Leader>grek ':silent grep! '.expand('<cword>').' '.vital#of('vital').import('Prelude').path2project_directory('%').'<C-b><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right>'
 nnoremap <expr> <Leader>grel ':silent grep!  '.vital#of('vital').import('Prelude').path2project_directory('%').'<C-b><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right>'
 "}}}
 " yankround.vim {{{
-let g:yankround_dir=$HOME.'/.vim/yankround.vim'
 nmap p <Plug>(yankround-p)
 nmap <C-p> <Plug>(yankround-prev)
 nmap <C-n> <Plug>(yankround-next)
-let g:yankround_use_region_hl       = 1
+let g:yankround_dir                 = $HOME.'/.vim/yankround.vim'
 let g:yankround_region_hl_groupname = 'YankRoundRegion'
+let g:yankround_use_region_hl       = 1
 "}}}
 " vim-quickrun {{{
 nnoremap <Leader>run :<C-u>QuickRun<CR>
@@ -498,6 +519,9 @@ function! s:hooks.on_source(bundle)
 endfunction
 unlet s:hooks
 "}}}
+" vim-markdown {{{
+NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
+"}}}
 "}}}
 "
 "
@@ -534,27 +558,6 @@ elseif s:osType ==# 'win'
 elseif (s:osType ==# 'unix')
 endif
 "}}}
-"}}}
-"
-"
-" Vim / gVim {{{
-if !has('gui_running')
-    " http://d.hatena.ne.jp/thinca/20111204/1322932585
-    function! s:TabpageLabelUpdate(tab_number) "{{{
-        let a:highlight = a:tab_number is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
-        let a:bufnrs    = tabpagebuflist(a:tab_number)
-        let a:bufnr     = len(a:bufnrs)
-        if a:bufnr is 1
-            let a:bufnr = ''
-        endif
-        let a:modified = len(filter(copy(a:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
-        return '%'.a:tab_number.'T'.a:highlight.a:bufnr.' '.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tab_number) - 1]), ':t').' '.a:modified.'%T%#TabLineFill#'
-    endfunction "}}}
-    function! TabLineUpdate() "{{{
-        return join(map(range(1, tabpagenr('$')), 's:TabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
-    endfunction "}}}
-    set tabline=%!TabLineUpdate()
-endif
 "}}}
 "
 "

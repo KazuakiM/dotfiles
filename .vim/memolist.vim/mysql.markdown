@@ -363,6 +363,12 @@ Modify table name
 ALTER TABLE <Table1> RENAME <Table2>;
 ```
 
+## JOIN
+
+[JOIN Exsample](http://www.codeproject.com/Articles/33052/Visual-Representation-of-SQL-Joins)
+
+![JOIN Image](http://www.codeproject.com/KB/database/Visual_SQL_Joins/Visual_SQL_JOINS_V2.png)
+
 ## DATE
 
 UTC+9(Japanese timezone)
