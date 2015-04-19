@@ -3,7 +3,7 @@ Git
 
 ## Tips
 
-branch 作成
+Create branch
 ```bash
 pwd
 git status
@@ -17,7 +17,7 @@ git checkout xxxxx
 git push origin xxxxx
 ```
 
-merge master to branch
+Merge master to branch
 ```bash
 pwd
 git status
@@ -28,12 +28,12 @@ git branch
 
 git checkout xxxxx
 git merge master
-gdiff master xxxxx
+gdiff master
 
 git push origin xxxxx
 ```
 
-merge branch to master
+Merge branch to master
 ```bash
 pwd
 git status
@@ -47,7 +47,7 @@ git merge xxxxx
 git push origin master
 ```
 
-merge fork repository
+Merge fork repository
 ```bash
 pwd
 git status
@@ -80,9 +80,16 @@ git branch -a
 git checkout -b xxxxx origin/xxxxx
 ```
 
+Create github.io pages
+* [GitHubにてリポジトリ新規作成](https://github.com/KazuakiM)
+ * SlideShowリポジトリ名定義:SlideShow-XXX
+* 新規リポジトリページからブランチ"gh-pages"を作成
+* 別の"SlideShow-XXX"の内容をコピー
+* 動作確認
+
 ## git log
 
-help
+Help
 ```bash
 git log --help
 ```
@@ -104,7 +111,7 @@ git log origin/master..xxxxx
 
 ## git diff
 
-help
+Help
 ```bash
 git diff --help
 ```
@@ -141,7 +148,7 @@ gdiff master <file1>
 
 ## git add/rm
 
-help
+Help
 ```bash
 git add --help
 git rm --help
@@ -166,7 +173,7 @@ git rm -r --cached directory1
 
 ## git reset
 
-help
+Help
 ```bash
 git reset --help
 ```
@@ -183,7 +190,7 @@ git reset HEAD file1
 
 ## git push
 
-help
+Help
 ```bash
 git push --help
 ```
