@@ -83,9 +83,21 @@ git checkout -b xxxxx origin/xxxxx
 Create github.io pages
 * [GitHubにてリポジトリ新規作成](https://github.com/KazuakiM)
  * SlideShowリポジトリ名定義:SlideShow-XXX
-* 新規リポジトリページからブランチ"gh-pages"を作成
-* 別の"SlideShow-XXX"の内容をコピー
 * 動作確認
+ ```bash
+ pwd
+ git clone git@github.com:KazuakiM/SlideShow-XXX.git
+ git status
+ git branch -a
+ git checkout -b gh-pages origin/gh-pages
+
+ #
+ # Copy other repositorys.
+ #
+
+ git commit -am 'first commit'
+ git push
+ ```
 
 ## git log
 
