@@ -128,7 +128,9 @@ set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&filef
 "set foldopen-=search
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc
 " Color
-if getbufvar(winbufnr(0), '&diff') isnot 1
+if getbufvar(winbufnr(0), '&diff') is 1
+    source $HOME/.vim/vimdiff/vimdiff.vim
+else
     syntax on
 endif
 colorscheme kazuakim
@@ -250,7 +252,7 @@ let g:neobundle#log_filename          = $HOME.'/.vim/neobundle.vim/neobundle.log
 if neobundle#has_cache()
     NeoBundleLoadCache
 else
-    NeoBundle 'Shougo/vimproc', {'build': {'mac': 'make -f make_mac.mak', 'unix': 'make -f make_unix.mak', 'cygwin': 'make -f make_cygwin.mak'}}
+    NeoBundle 'Shougo/vimproc.vim', {'build': {'mac': 'make -f make_mac.mak', 'unix': 'make -f make_unix.mak', 'cygwin': 'make -f make_cygwin.mak'}}
     NeoBundle 'vim-jp/vital.vim'
     NeoBundle 'vim-scripts/matchit.zip'
     NeoBundle 'fuenor/qfixgrep'
@@ -526,8 +528,6 @@ NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
 "
 "
 " NeoBundleFetch {{{
-"# function memo
-"* New Install 'NeoBundle'. And Update 'NeoBundle' to 'NeoBundleFetch'.
 NeoBundleFetch 'psychs/lingr-irc'
 NeoBundleFetch 'KazuakiM/neosnippet-snippets'
 NeoBundleFetch 'Kuniwak/vint'
