@@ -2,6 +2,8 @@ function! KazuakiMDiff() "{{{
     let a:extension = expand('%:e')
     if expand('%:r') ==# '.vimrc' || a:extension ==# 'vimrc'
         setlocal filetype=vim
+    elseif a:extension ==# 'js'
+        setlocal filetype=javascript
     elseif a:extension ==# 'lock'
         setlocal filetype=json
     else
