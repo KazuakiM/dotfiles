@@ -14,7 +14,7 @@ highlight CursorColumn cterm=NONE           gui=NONE           ctermfg=Black    
 highlight CursorLine   cterm=underline      gui=underline      ctermfg=NONE      guifg=NONE      ctermbg=NONE     guibg=NONE
 highlight CursorLineNr cterm=reverse        gui=reverse        ctermfg=NONE      guifg=NONE      ctermbg=NONE     guibg=NONE
 highlight DiffAdd      cterm=reverse        gui=reverse        ctermfg=Yellow    guifg=Yellow    ctermbg=Black    guibg=Black
-highlight DiffChange   cterm=reverse        gui=reverse        ctermfg=DarkGrey  guifg=DarkGrey  ctermbg=Black    guibg=Black
+highlight DiffChange   cterm=reverse        gui=reverse        ctermfg=DarkGrey  guifg=DarkGrey  ctermbg=White    guibg=White
 highlight DiffDelete   cterm=reverse        gui=reverse        ctermfg=Cyan      guifg=Cyan      ctermbg=Black    guibg=Black
 highlight DiffText     cterm=reverse        gui=reverse        ctermfg=Red       guifg=Red       ctermbg=Black    guibg=Black
 highlight Directory    cterm=NONE           gui=NONE           ctermfg=DarkCyan  guifg=DarkCyan  ctermbg=NONE     guibg=NONE
