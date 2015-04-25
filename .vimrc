@@ -100,12 +100,14 @@ function! s:KazuakiMVimEnter() "{{{
     call s:KazuakiMCheckString()
 endfunction "}}}
 function! s:KazuakiMWinEnter() "{{{
+    checktime
     call s:KazuakiMCheckString()
 endfunction "}}}
 autocmd MyAutoCmd BufEnter             * call s:KazuakiMBufEnter()
 autocmd MyAutoCmd BufReadPost          * if line("'\"") > 1 && line("'\"") <= line('$') | exe "normal! g`\"" | endif
 autocmd MyAutoCmd CmdwinEnter          * nmap <silent> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd CmdwinLeave          * nunmap <ESC><ESC>
+autocmd MyAutoCmd FocusGained          * checktime
 autocmd MyAutoCmd InsertLeave          * set nopaste | if &l:diff | diffupdate | endif
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 autocmd MyAutoCmd VimEnter             * call s:KazuakiMVimEnter()
@@ -129,7 +131,30 @@ set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&filef
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc
 " Color
 if getbufvar(winbufnr(0), '&diff') is 1
-    source $HOME/.vim/vimdiff/vimdiff.vim
+    function! s:KazuakiMDiff() "{{{
+        let a:extension = expand('%:e')
+        if expand('%:r') ==# '.vimrc' || a:extension ==# 'vimrc'
+            setlocal filetype=vim
+        elseif a:extension ==# 'js'
+            setlocal filetype=javascript
+        elseif a:extension ==# 'rb'
+            setlocal filetype=ruby
+        elseif a:extension ==# 'lock'
+            setlocal filetype=json
+        else
+            execute 'setlocal filetype='.a:extension
+        endif
+        source $VIMRUNTIME/syntax/syntax.vim
+    endfunction "}}}
+
+    if has('win32') || has ('win64')
+    elseif isdirectory('/Applications/MacVim.app/Contents/Resources/vim/runtime')
+        let $VIMRUNTIME = '/Applications/MacVim.app/Contents/Resources/vim/runtime'
+    else
+        let $VIMRUNTIME = '/usr/local/share/vim/vim74'
+    endif
+    set runtimepath+=$VIMRUNTIME
+    autocmd MyAutoCmd BufNewFile,BufRead * call s:KazuakiMDiff()
 else
     syntax on
 endif
