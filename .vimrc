@@ -89,7 +89,7 @@ function! s:KazuakiMBufEnter() "{{{
         call nerdtree#checkForBrowse(expand('<amatch>'))
     endif
     " Move current file(/directory) path
-    execute 'lcd '.expand('%:p:h')
+    execute 'lcd '.fnameescape(expand('%:p:h'))
     " Auto close VimDiff or primary NERDTree
     if (winnr('$') is 1) && (&l:diff || (exists('b:NERDTreeType') && (b:NERDTreeType ==# 'primary')))
         quit
