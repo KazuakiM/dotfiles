@@ -38,8 +38,8 @@ augroup MyAutoCmd
     autocmd!
 augroup END
 function! s:KazuakiMVimStart(backupDir, undoDir) "{{{
-    "Check 128KB file size.
-    if getfsize(expand('%:p')) >= 131072
+    "Check 256KB file size.
+    if getfsize(expand('%:p')) >= 262144
         setlocal noswapfile nobackup nowritebackup noundofile viminfo=
         filetype off
         filetype plugin indent off
@@ -132,17 +132,14 @@ set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&filef
 " Color
 if getbufvar(winbufnr(0), '&diff') is 1 && isdirectory('/Applications/MacVim.app/Contents/Resources/vim/runtime')
     function! s:KazuakiMDiff() "{{{
-        let a:extension = expand('%:e')
-        if expand('%:r') ==# '.vimrc' || a:extension ==# 'vimrc'
+        let a:ext         = expand('%:e')
+        let a:extBaseDict = {'js': 'javascript', 'lock': 'json', 'py': 'python', 'rb': 'ruby', 'vimrc': 'vim'}
+        if expand('%:r') ==# '.vimrc'
             setlocal filetype=vim
-        elseif a:extension ==# 'js'
-            setlocal filetype=javascript
-        elseif a:extension ==# 'rb'
-            setlocal filetype=ruby
-        elseif a:extension ==# 'lock'
-            setlocal filetype=json
+        elseif has_key(a:extBaseDict, a:ext)
+            execute 'setlocal filetype='.a:extBaseDict[a:ext]
         else
-            execute 'setlocal filetype='.a:extension
+            execute 'setlocal filetype='.a:ext
         endif
         source $VIMRUNTIME/syntax/syntax.vim
     endfunction "}}}
