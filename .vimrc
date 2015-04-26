@@ -130,7 +130,7 @@ set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&filef
 "set foldopen-=search
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc
 " Color
-if getbufvar(winbufnr(0), '&diff') is 1
+if getbufvar(winbufnr(0), '&diff') is 1 && isdirectory('/Applications/MacVim.app/Contents/Resources/vim/runtime')
     function! s:KazuakiMDiff() "{{{
         let a:extension = expand('%:e')
         if expand('%:r') ==# '.vimrc' || a:extension ==# 'vimrc'
@@ -147,12 +147,7 @@ if getbufvar(winbufnr(0), '&diff') is 1
         source $VIMRUNTIME/syntax/syntax.vim
     endfunction "}}}
 
-    if has('win32') || has ('win64')
-    elseif isdirectory('/Applications/MacVim.app/Contents/Resources/vim/runtime')
-        let $VIMRUNTIME = '/Applications/MacVim.app/Contents/Resources/vim/runtime'
-    else
-        let $VIMRUNTIME = '/usr/local/share/vim/vim74'
-    endif
+    let $VIMRUNTIME = '/Applications/MacVim.app/Contents/Resources/vim/runtime'
     set runtimepath+=$VIMRUNTIME
     autocmd MyAutoCmd BufNewFile,BufRead * call s:KazuakiMDiff()
 else
