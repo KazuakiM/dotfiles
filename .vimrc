@@ -533,8 +533,9 @@ function! s:hooks.on_source(bundle)
     let g:qfsigns#Config = {'id': '5050', 'name': 'QFError',}
     execute 'sign define '.get(g:qfsigns#Config,'name').' linehl=QFError texthl=QFError text=>>'
     "vim-watchdogs
-    let g:watchdogs_check_BufWritePost_enable = 1
-    let g:watchdogs_check_CursorHold_enable   = 1
+    let g:watchdogs_check_BufWritePost_enable  = 1
+    let g:watchdogs_check_BufWritePost_enables = {'vim': 0}
+    let g:watchdogs_check_CursorHold_enable    = 1
 endfunction
 unlet s:hooks
 "}}}
