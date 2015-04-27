@@ -13,10 +13,10 @@ highlight Cursor       cterm=NONE           gui=NONE           ctermfg=NONE     
 highlight CursorColumn cterm=NONE           gui=NONE           ctermfg=Black     guifg=Black     ctermbg=Grey     guibg=Grey
 highlight CursorLine   cterm=underline      gui=underline      ctermfg=NONE      guifg=NONE      ctermbg=NONE     guibg=NONE
 highlight CursorLineNr cterm=reverse        gui=reverse        ctermfg=NONE      guifg=NONE      ctermbg=NONE     guibg=NONE
-highlight DiffAdd      cterm=reverse        gui=reverse        ctermfg=Yellow    guifg=Yellow    ctermbg=Black    guibg=Black
-highlight DiffChange   cterm=reverse        gui=reverse        ctermfg=DarkGrey  guifg=DarkGrey  ctermbg=White    guibg=White
-highlight DiffDelete   cterm=reverse        gui=reverse        ctermfg=Cyan      guifg=Cyan      ctermbg=Black    guibg=Black
-highlight DiffText     cterm=reverse        gui=reverse        ctermfg=Red       guifg=Red       ctermbg=Black    guibg=Black
+highlight DiffAdd      cterm=NONE           gui=NONE           ctermfg=Yellow    guifg=Yellow    ctermbg=DarkGrey guibg=DarkGrey
+highlight DiffChange   cterm=NONE           gui=NONE           ctermfg=White     guifg=White     ctermbg=DarkGrey guibg=DarkGrey
+highlight DiffDelete   cterm=NONE           gui=NONE           ctermfg=Cyan      guifg=Cyan      ctermbg=DarkGrey guibg=DarkGrey
+highlight DiffText     cterm=NONE           gui=NONE           ctermfg=Red       guifg=Red       ctermbg=DarkGrey guibg=DarkGrey
 highlight Directory    cterm=NONE           gui=NONE           ctermfg=DarkCyan  guifg=DarkCyan  ctermbg=NONE     guibg=NONE
 highlight Error        cterm=bold           gui=bold           ctermfg=White     guifg=White     ctermbg=Red      guibg=Red
 highlight ErrorMsg     cterm=bold           gui=bold           ctermfg=White     guifg=White     ctermbg=Red      guibg=Red

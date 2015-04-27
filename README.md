@@ -33,6 +33,11 @@ $ git status
 ```
 
 [BetterTouchTool](http://www.bettertouchtool.net/)
+> 自動起動設定
+>  * /Users/xxxxx/Applications/BetterTouchTool.app
+>
+> Application設定
+>
 > |Action Settings(Window Snapping etc.) > Window Snapping|   |
 > |:------------------------------------------------------|--:|
 > |Normal Snapping / Moving                               |   |
@@ -42,14 +47,44 @@ $ git status
 > |Left width                                             |50%|
 > |Right width                                            |50%|
 
-[FireFox](https://www.mozilla.org/ja/firefox/)
-> Common setting
-
 [Karabiner](https://pqrs.org/osx/karabiner/index.html.ja)
 > |Key Repeat > Basic Configurations > KeyRepeat|     |
 > |:--------------------------------------------|----:|
 > |Delay Until Repeat                           |200ms|
 > |Key Repeat                                   | 25ms|
+
+
+[night-owl](https://sites.google.com/site/yorufukurou/home-en)
+> Application設定
+>
+> |大項目                               |少項目                                            |                   |
+> |:------------------------------------|:-------------------------------------------------|:------------------|
+> |環境設定 > 一般                      |                                                  |                   |
+> |                                     |投稿した後リストに自動フォーカスする              |チェック外し       |
+> |環境設定 > アカウント                |                                                  |                   |
+> |                                     |タイムラインタブを未読管理する                    |チェック外し       |
+> |環境設定 > 表示                      |                                                  |                   |
+> |                                     |片思いバッジを表示する                            |チェック           |
+> |                                     |ミニビューを使用する                              |チェック           |
+> |                                     |リストに表示する名前                              |ユーザID           |
+> |環境設定 > タブ                      |                                                  |                   |
+> |                                     |起動時に取得したツイートを既読状態にする          |チェック           |
+> |                                     |市場鵺にスクロールした際にツイートを既読状態にする|チェック           |
+> |                                     |Favoritesタブを表示する(要再起動)                 |チェック外し       |
+> |環境設定 > テキスト入力              |                                                  |                   |
+> |                                     |ツイート入力                                      |チェック           |
+> |                                     |フォントサイズ                                    |11pt               |
+> |                                     |投稿に使用するキー                                |Control + Return   |
+> |環境設定 > 色                        |                                                  |                   |
+> |                                     |リストの表示スタイル                              |ダーク             |
+> |                                     |デフォルトの色設定                                |Solarized(ダーク)  |
+> |環境設定 > 詳細                      |                                                  |                   |
+> |                                     |ダブルクリック時の挙動                            |会話ビューオン/オフ|
+> |                                     |ツイートのコピー形式                              |ツイートのURL      |
+
+
+[FireFox](https://www.mozilla.org/ja/firefox/)
+> Common setting
 
 [iTerm2](http://iterm2.com/)
 > |Preferences > General > Preferences         |                              |
