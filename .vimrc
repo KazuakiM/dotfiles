@@ -38,8 +38,8 @@ augroup MyAutoCmd
     autocmd!
 augroup END
 function! s:KazuakiMVimStart(backupDir, undoDir) "{{{
-    "Check 128KB file size.
-    if getfsize(expand('%:p')) >= 131072
+    "Check 256KB file size.
+    if getfsize(expand('%:p')) >= 262144
         setlocal noswapfile nobackup nowritebackup noundofile viminfo=
         filetype off
         filetype plugin indent off
@@ -89,7 +89,7 @@ function! s:KazuakiMBufEnter() "{{{
         call nerdtree#checkForBrowse(expand('<amatch>'))
     endif
     " Move current file(/directory) path
-    execute 'lcd '.expand('%:p:h')
+    execute 'lcd '.fnameescape(expand('%:p:h'))
     " Auto close VimDiff or primary NERDTree
     if (winnr('$') is 1) && (&l:diff || (exists('b:NERDTreeType') && (b:NERDTreeType ==# 'primary')))
         quit
@@ -100,12 +100,14 @@ function! s:KazuakiMVimEnter() "{{{
     call s:KazuakiMCheckString()
 endfunction "}}}
 function! s:KazuakiMWinEnter() "{{{
+    checktime
     call s:KazuakiMCheckString()
 endfunction "}}}
 autocmd MyAutoCmd BufEnter             * call s:KazuakiMBufEnter()
 autocmd MyAutoCmd BufReadPost          * if line("'\"") > 1 && line("'\"") <= line('$') | exe "normal! g`\"" | endif
 autocmd MyAutoCmd CmdwinEnter          * nmap <silent> <ESC><ESC> :q<CR>
 autocmd MyAutoCmd CmdwinLeave          * nunmap <ESC><ESC>
+autocmd MyAutoCmd FocusGained          * checktime
 autocmd MyAutoCmd InsertLeave          * set nopaste | if &l:diff | diffupdate | endif
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 autocmd MyAutoCmd VimEnter             * call s:KazuakiMVimEnter()
@@ -128,7 +130,24 @@ set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&filef
 "set foldopen-=search
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc
 " Color
-if getbufvar(winbufnr(0), '&diff') isnot 1
+if getbufvar(winbufnr(0), '&diff') is 1 && isdirectory('/Applications/MacVim.app/Contents/Resources/vim/runtime')
+    function! s:KazuakiMDiff() "{{{
+        let a:ext         = expand('%:e')
+        let a:extBaseDict = {'js': 'javascript', 'lock': 'json', 'py': 'python', 'rb': 'ruby', 'vimrc': 'vim'}
+        if expand('%:r') ==# '.vimrc'
+            setlocal filetype=vim
+        elseif has_key(a:extBaseDict, a:ext)
+            execute 'setlocal filetype='.a:extBaseDict[a:ext]
+        else
+            execute 'setlocal filetype='.a:ext
+        endif
+        source $VIMRUNTIME/syntax/syntax.vim
+    endfunction "}}}
+
+    let $VIMRUNTIME = '/Applications/MacVim.app/Contents/Resources/vim/runtime'
+    set runtimepath+=$VIMRUNTIME
+    autocmd MyAutoCmd BufNewFile,BufRead * call s:KazuakiMDiff()
+else
     syntax on
 endif
 colorscheme kazuakim
@@ -250,7 +269,7 @@ let g:neobundle#log_filename          = $HOME.'/.vim/neobundle.vim/neobundle.log
 if neobundle#has_cache()
     NeoBundleLoadCache
 else
-    NeoBundle 'Shougo/vimproc', {'build': {'mac': 'make -f make_mac.mak', 'unix': 'make -f make_unix.mak', 'cygwin': 'make -f make_cygwin.mak'}}
+    NeoBundle 'Shougo/vimproc.vim', {'build': {'mac': 'make -f make_mac.mak', 'unix': 'make -f make_unix.mak', 'cygwin': 'make -f make_cygwin.mak'}}
     NeoBundle 'vim-jp/vital.vim'
     NeoBundle 'vim-scripts/matchit.zip'
     NeoBundle 'fuenor/qfixgrep'
@@ -514,8 +533,9 @@ function! s:hooks.on_source(bundle)
     let g:qfsigns#Config = {'id': '5050', 'name': 'QFError',}
     execute 'sign define '.get(g:qfsigns#Config,'name').' linehl=QFError texthl=QFError text=>>'
     "vim-watchdogs
-    let g:watchdogs_check_BufWritePost_enable = 1
-    let g:watchdogs_check_CursorHold_enable   = 1
+    let g:watchdogs_check_BufWritePost_enable  = 1
+    let g:watchdogs_check_BufWritePost_enables = {'vim': 0}
+    let g:watchdogs_check_CursorHold_enable    = 1
 endfunction
 unlet s:hooks
 "}}}
@@ -526,8 +546,6 @@ NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
 "
 "
 " NeoBundleFetch {{{
-"# function memo
-"* New Install 'NeoBundle'. And Update 'NeoBundle' to 'NeoBundleFetch'.
 NeoBundleFetch 'psychs/lingr-irc'
 NeoBundleFetch 'KazuakiM/neosnippet-snippets'
 NeoBundleFetch 'Kuniwak/vint'

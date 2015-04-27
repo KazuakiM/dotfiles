@@ -17,7 +17,7 @@
 VAGRANTFILE_API_VERSION = 2
 VAGRANTFILE_LOG         = "/var/log/vagrantfile.log"
 ACCOUNT                 = "vagrant"
-PROCESS_MAX             = 9
+PROCESS_MAX             = 10
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   index = 0
 
@@ -91,17 +91,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       git clone https://github.com/vim/vim.git /usr/local/src/vim                                             >> #{VAGRANTFILE_LOG} 2>> #{VAGRANTFILE_LOG} && \
       cd /usr/local/src/vim                                                                                                                                && \
       sudo ln -s /usr/local/bin/luajit /usr/bin/luajit                                                                                                     && \
-      LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib                                                                                                      && \
       sudo ./configure --disable-darwin --disable-netbeans --disable-selinux --disable-xim --disable-xsmp --disable-xsmp-interact --enable-cscope \
         --enable-fail-if-missing --enable-fontset --enable-luainterp --enable-multibyte --enable-rubyinterp --enable-perlinterp --enable-pythoninterp \
         --prefix=/usr/local --with-features=huge --with-ruby-command=/usr/bin/ruby --with-python-config-dir=/usr/lib64/python2.7/config --with-luajit \
         --with-lua-prefix=/usr/local                                                                          >> #{VAGRANTFILE_LOG}                        && \
       sudo make                                                                                               >> #{VAGRANTFILE_LOG}                        && \
       sudo make install                                                                                       >> #{VAGRANTFILE_LOG}                        && \
-      vim -N -u $HOME/.vimrc -c 'try | NeoBundleUpdate! | finally | qall! | endtry' -U NONE -i NONE -V1 -e -s >> #{VAGRANTFILE_LOG} 2>> #{VAGRANTFILE_LOG} && \
     echo "[ #{index = (( index +1 ))}/#{PROCESS_MAX} ]Update chown ..." && \
       sudo chown -R #{ACCOUNT}:#{ACCOUNT} /usr/local && \
-      sudo chown -R #{ACCOUNT}:#{ACCOUNT} $HOME
+      sudo chown -R #{ACCOUNT}:#{ACCOUNT} $HOME      && \
+    echo "[ #{index = (( index +1 ))}/#{PROCESS_MAX} ]NeoBundleUpdate! (making now)..." && \
+      echo "$ vagrant ssh"                                       && \
+      echo "$ (LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib)" && \
+      echo "$ vim -N -u $HOME/.vimrc -c 'try | NeoBundleUpdate! | finally | qall! | endtry' -U NONE -i NONE -V1 -e -s >> #{VAGRANTFILE_LOG} 2>> #{VAGRANTFILE_LOG}"
   SHELL
 end
 
