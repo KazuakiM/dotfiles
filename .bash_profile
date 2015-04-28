@@ -84,6 +84,7 @@ case "${OSTYPE}" in
         alias vi="$HOME/work/dotfiles/src/macVimStater.sh"
         alias vim='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
         alias gvim="$HOME/work/dotfiles/src/macVimStater.sh"
+        alias vimdiff='/Applications/MacVim.app/Contents/MacOS/vimdiff'
         alias httpd='sudo apachectl'
         alias composer='php -d memory_limit=1G /usr/local/opt/composer/libexec/composer.phar'
         alias MYSQL='mysql.server'
@@ -91,9 +92,9 @@ case "${OSTYPE}" in
         alias GG='open -a firefox'
         alias MM='open -a thunderbird'
         alias MAIL='open -a thunderbird'
-        alias TT='open -a yorufukurou'
-        alias RR='open -a yorufukurou'
-        alias YORU='open -a yorufukurou'
+        alias TT='open -a "night owl"'
+        alias RR='open -a "night owl"'
+        alias YORU='open -a "night owl"'
         alias TWI='open -a tweetdeck'
         alias IT='open -a itunes'
         alias TI='open -a itunes'

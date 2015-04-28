@@ -11,11 +11,8 @@
 [diff]
     algorithm = histogram
     tool      = vimdiff
-[difftool]
-    prompt = false
 [merge]
     ff   = false
     tool = vimdiff
 [mergetool]
     keepBackup = true
-    prompt     = false

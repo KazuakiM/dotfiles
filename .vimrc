@@ -130,26 +130,7 @@ set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&filef
 "set foldopen-=search
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc
 " Color
-if getbufvar(winbufnr(0), '&diff') is 1 && isdirectory('/Applications/MacVim.app/Contents/Resources/vim/runtime')
-    function! s:KazuakiMDiff() "{{{
-        let a:ext         = expand('%:e')
-        let a:extBaseDict = {'js': 'javascript', 'lock': 'json', 'py': 'python', 'rb': 'ruby', 'vimrc': 'vim'}
-        if expand('%:r') ==# '.vimrc'
-            setlocal filetype=vim
-        elseif has_key(a:extBaseDict, a:ext)
-            execute 'setlocal filetype='.a:extBaseDict[a:ext]
-        else
-            execute 'setlocal filetype='.a:ext
-        endif
-        source $VIMRUNTIME/syntax/syntax.vim
-    endfunction "}}}
-
-    let $VIMRUNTIME = '/Applications/MacVim.app/Contents/Resources/vim/runtime'
-    set runtimepath+=$VIMRUNTIME
-    autocmd MyAutoCmd BufNewFile,BufRead * call s:KazuakiMDiff()
-else
-    syntax on
-endif
+syntax on
 colorscheme kazuakim
 " Mapping
 "  ESC
