@@ -32,35 +32,49 @@ $ cd $HOME/work/dotfiles/
 $ git status
 ```
 
+Auto start
+* /Users/xxxxx/Applications/BetterTouchTool.app
+* /Users/xxxxx/Applications/CheatSheet.app
+* /Users/xxxxx/Applications/Google Drive.app
+* /Users/xxxxx/Applications/KeePassX.app
+
 [BetterTouchTool](http://www.bettertouchtool.net/)
-> 自動起動設定
->  * /Users/xxxxx/Applications/BetterTouchTool.app
->
 > Application設定
 >
-> |Action Settings(Window Snapping etc.) > Window Snapping|   |
-> |:------------------------------------------------------|--:|
-> |Normal Snapping / Moving                               |   |
-> |Left width                                             |24%|
-> |Right width                                            |76%|
-> |Corner Snapping / Move to quarters                     |   |
-> |Left width                                             |50%|
-> |Right width                                            |50%|
+> |大項目                                                 |少項目                            |   |
+> |:------------------------------------------------------|:---------------------------------|--:|
+> |Action Settings(Window Snapping etc.) > Window Snapping|                                  |   |
+> |                                                       |Normal Snapping / Moving          |   |
+> |                                                       |Left width                        |24%|
+> |                                                       |Right width                       |76%|
+> |                                                       |Corner Snapping / Move to quarters|   |
+> |                                                       |Left width                        |50%|
+> |                                                       |Right width                       |50%|
+
+[CheatSheet](http://www.cheatsheetapp.com/CheatSheet/)
+
+[Google drive](https://drive.google.com/)
 
 [Karabiner](https://pqrs.org/osx/karabiner/index.html.ja)
-> |Key Repeat > Basic Configurations > KeyRepeat|     |
-> |:--------------------------------------------|----:|
-> |Delay Until Repeat                           |200ms|
-> |Key Repeat                                   | 25ms|
+> Application設定
+>
+> |大項目                                       |少項目            |     |
+> |:--------------------------------------------|:-----------------|----:|
+> |Key Repeat > Basic Configurations > KeyRepeat|                  |     |
+> |                                             |Delay Until Repeat|200ms|
+> |                                             |Key Repeat        | 25ms|
 
+[KeePassX](http://www.keepassx.org/)
 
-[night-owl](https://sites.google.com/site/yorufukurou/home-en)
+[夜フクロウ(Night 0wl)](https://sites.google.com/site/yorufukurou/home-en)
 > Application設定
 >
 > |大項目                               |少項目                                            |                   |
 > |:------------------------------------|:-------------------------------------------------|:------------------|
 > |環境設定 > 一般                      |                                                  |                   |
+> |                                     |リアルタイム更新を有効化する                      |チェック           |
 > |                                     |投稿した後リストに自動フォーカスする              |チェック外し       |
+> |                                     |更新時に一番上にスクロールする                    |チェック           |
 > |環境設定 > アカウント                |                                                  |                   |
 > |                                     |タイムラインタブを未読管理する                    |チェック外し       |
 > |環境設定 > 表示                      |                                                  |                   |
@@ -74,17 +88,24 @@ $ git status
 > |環境設定 > テキスト入力              |                                                  |                   |
 > |                                     |ツイート入力                                      |チェック           |
 > |                                     |フォントサイズ                                    |11pt               |
-> |                                     |投稿に使用するキー                                |Control + Return   |
+> |                                     |投稿に使用するキー                                |⌘ + Return         |
 > |環境設定 > 色                        |                                                  |                   |
 > |                                     |リストの表示スタイル                              |ダーク             |
-> |                                     |デフォルトの色設定                                |Solarized(ダーク)  |
+> |                                     |デフォルトの色設定                                |ダーク             |
 > |環境設定 > 詳細                      |                                                  |                   |
 > |                                     |ダブルクリック時の挙動                            |会話ビューオン/オフ|
 > |                                     |ツイートのコピー形式                              |ツイートのURL      |
+> |表示                                 |                                                  |                   |
+> |                                     |ツールバーを表示する/隠す                         |選択               |
+> |                                     |縮小                                              |選択               |
+> |ツイートボックス > ⚙                 |                                                  |                   |
+> |                                     |ハッシュタグを保持                                |                   |
 
 
 [FireFox](https://www.mozilla.org/ja/firefox/)
 > Common setting
+
+[FileZilla](https://filezilla-project.org/)
 
 [iTerm2](http://iterm2.com/)
 > |Preferences > General > Preferences         |                              |
