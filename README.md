@@ -35,11 +35,17 @@ $ git status
 ```
 
 Auto start
+* /Applications/Growl.app
+* /Applications/Karabiner.app
+* /Applications/Vagrant Manager.app
+* /Applications/XtraFinder.app
 * /Users/xxxxx/Applications/BetterTouchTool.app
 * /Users/xxxxx/Applications/CheatSheet.app
 * /Users/xxxxx/Applications/Google Drive.app
 * /Users/xxxxx/Applications/iTerm.app
 * /Users/xxxxx/Applications/KeePassX.app
+
+[AppCleaner](http://www.freemacsoft.net/appcleaner/)
 
 [BetterTouchTool](http://www.bettertouchtool.net/)
 > Application設定
@@ -60,6 +66,8 @@ Auto start
 
 [FileZilla](https://filezilla-project.org/)
 
+[GIMP](http://www.gimp.org)
+
 [Google drive](https://drive.google.com/)
 
 [Google 日本語IME](https://www.google.co.jp/ime/)
@@ -69,9 +77,10 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 [iTerm2](http://iterm2.com/)
 > Application設定
 >
-> |Preferences > General > Preferences         |                              |
-> |:-------------------------------------------|:-----------------------------|
-> |Load preferences from a custom folder or URL|$HOME/work/dotfiles/lib/iTerm2|
+> |大項目                             |少項目                                      |                              |
+> |:----------------------------------|:-------------------------------------------|:-----------------------------|
+> |Preferences > General > Preferences|                                            |                              |
+> |                                   |Load preferences from a custom folder or URL|$HOME/work/dotfiles/lib/iTerm2|
 
 [Karabiner](https://pqrs.org/osx/karabiner/index.html.ja)
 > Application設定
@@ -91,29 +100,26 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 [LimeChat](http://limechat.net/mac/)
 > Application設定
 >
-> |大項目                |少項目                       |              |
-> |:---------------------|:----------------------------|:-------------|
-> |LimeChat > Preferences|                             |              |
-> |                      |Log > Show job/leave events  |チェック外し  |
-> |                      |Log > Show rename events     |チェック外し  |
-> |                      |Log > Log transcripts        |Trashes       |
-> |                      |Theme > Current theme        |Spring Night  |
+> |大項目                |少項目                       |                                                                     |
+> |:---------------------|:----------------------------|:--------------------------------------------------------------------|
+> |LimeChat > Preferences|                             |                                                                     |
+> |                      |Log > Show job/leave events  |チェック外し                                                         |
+> |                      |Log > Show rename events     |チェック外し                                                         |
+> |                      |Log > Log transcripts        |Trashes                                                              |
+> |                      |Theme > Current theme        |Spring Night                                                         |
 > |                      |Theme > Override log font    |[RictyDiminished](https://github.com/yascentur/RictyDiminished) 13px |
 > |                      |Theme > Override input font  |[RictyDiminished](https://github.com/yascentur/RictyDiminished) 13px |
-> |Server > Add Server   |                             |              |
-> |                      |General > Network name       |Lingr         |
-> |                      |General > Connect on start up|チェック      |
-> |                      |General > Server             |localhost     |
-> |                      |General > Port               |26667         |
-> |                      |General > Server Password    |\* \* \* \*   |
-> |                      |General > Nickname           |kazuakiM      |
-> |                      |General > Login name         |kazuakiM      |
-> |                      |General > Real name          |kazuakiM      |
-> |                      |Details > Encoding           |UTF-8         |
-> |                      |Details > Fallback encoding  |Don't Fallback|
-
-
-[RictyDiminished](https://github.com/yascentur/RictyDiminished)
+> |Server > Add Server   |                             |                                                                     |
+> |                      |General > Network name       |Lingr                                                                |
+> |                      |General > Connect on start up|チェック                                                             |
+> |                      |General > Server             |localhost                                                            |
+> |                      |General > Port               |26667                                                                |
+> |                      |General > Server Password    |\* \* \* \*                                                          |
+> |                      |General > Nickname           |kazuakiM                                                             |
+> |                      |General > Login name         |kazuakiM                                                             |
+> |                      |General > Real name          |kazuakiM                                                             |
+> |                      |Details > Encoding           |UTF-8                                                                |
+> |                      |Details > Fallback encoding  |Don't Fallback                                                       |
 
 [夜フクロウ(Night 0wl)](https://sites.google.com/site/yorufukurou/home-en)
 > Application設定
@@ -141,6 +147,8 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 > |環境設定 > 色                        |                                                  |                   |
 > |                                     |リストの表示スタイル                              |ダーク             |
 > |                                     |デフォルトの色設定                                |ダーク             |
+> |環境設定 > 通知                      |                                                  |                   |
+> |                                     |音量                                              |5%                 |
 > |環境設定 > 詳細                      |                                                  |                   |
 > |                                     |ダブルクリック時の挙動                            |会話ビューオン/オフ|
 > |                                     |ツイートのコピー形式                              |ツイートのURL      |
@@ -150,7 +158,17 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 > |ツイートボックス > ⚙                 |                                                  |                   |
 > |                                     |ハッシュタグを保持                                |                   |
 
+[RictyDiminished](https://github.com/yascentur/RictyDiminished)
+
+[Silverlight](http://www.microsoft.com/silverlight/)
+
+[Sony Ericsson Bridge for Mac](http://support.sonymobile.com/au/tools/bridge-for-mac/)
+
+[The Unarchiver](http://unarchiver.c3.cx/)
+
 [tunnelblick](https://code.google.com/p/tunnelblick/)
+
+[XtraFinder](http://www.trankynam.com/xtrafinder/)
 
 [FireFox](https://www.mozilla.org/ja/firefox/)
 > Common setting
@@ -264,3 +282,5 @@ I made Vagrantfile.
 ## TODO
 
 * Try Chocolatey
+* Brewfile
+ Chrome, FireFox, Thunderbird, growlnotify, Addbe Flash Player
