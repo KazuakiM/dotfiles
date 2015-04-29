@@ -8,7 +8,9 @@ Files are setting my development environments.
 ### Install packages
 
 AppStore
-> [Xcode](https://developer.apple.com/jp/xcode/downloads/)
+* [Growl](https://itunes.apple.com/jp/app/growl/id467939042?mt=12)
+* [TweetDeck](https://itunes.apple.com/jp/app/tweetdeck-by-twitter/id485812721?mt=12)
+* [Xcode](https://developer.apple.com/jp/xcode/downloads/)
 
 homebrew
 ```bash
@@ -36,6 +38,7 @@ Auto start
 * /Users/xxxxx/Applications/BetterTouchTool.app
 * /Users/xxxxx/Applications/CheatSheet.app
 * /Users/xxxxx/Applications/Google Drive.app
+* /Users/xxxxx/Applications/iTerm.app
 * /Users/xxxxx/Applications/KeePassX.app
 
 [BetterTouchTool](http://www.bettertouchtool.net/)
@@ -53,7 +56,22 @@ Auto start
 
 [CheatSheet](http://www.cheatsheetapp.com/CheatSheet/)
 
+[Chicken](http://sourceforge.net/projects/chicken/)
+
+[FileZilla](https://filezilla-project.org/)
+
 [Google drive](https://drive.google.com/)
+
+[Google 日本語IME](https://www.google.co.jp/ime/)
+
+TODO: [GrowlNotify](http://growl.info/downloads)
+
+[iTerm2](http://iterm2.com/)
+> Application設定
+>
+> |Preferences > General > Preferences         |                              |
+> |:-------------------------------------------|:-----------------------------|
+> |Load preferences from a custom folder or URL|$HOME/work/dotfiles/lib/iTerm2|
 
 [Karabiner](https://pqrs.org/osx/karabiner/index.html.ja)
 > Application設定
@@ -65,6 +83,37 @@ Auto start
 > |                                             |Key Repeat        | 25ms|
 
 [KeePassX](http://www.keepassx.org/)
+
+[Kindle](https://www.amazon.com/gp/digital/fiona/kcp-landing-page)
+
+[LibreOffice](https://www.libreoffice.org/)
+
+[LimeChat](http://limechat.net/mac/)
+> Application設定
+>
+> |大項目                |少項目                       |              |
+> |:---------------------|:----------------------------|:-------------|
+> |LimeChat > Preferences|                             |              |
+> |                      |Log > Show job/leave events  |チェック外し  |
+> |                      |Log > Show rename events     |チェック外し  |
+> |                      |Log > Log transcripts        |Trashes       |
+> |                      |Theme > Current theme        |Spring Night  |
+> |                      |Theme > Override log font    |[RictyDiminished](https://github.com/yascentur/RictyDiminished) 13px |
+> |                      |Theme > Override input font  |[RictyDiminished](https://github.com/yascentur/RictyDiminished) 13px |
+> |Server > Add Server   |                             |              |
+> |                      |General > Network name       |Lingr         |
+> |                      |General > Connect on start up|チェック      |
+> |                      |General > Server             |localhost     |
+> |                      |General > Port               |26667         |
+> |                      |General > Server Password    |\* \* \* \*   |
+> |                      |General > Nickname           |kazuakiM      |
+> |                      |General > Login name         |kazuakiM      |
+> |                      |General > Real name          |kazuakiM      |
+> |                      |Details > Encoding           |UTF-8         |
+> |                      |Details > Fallback encoding  |Don't Fallback|
+
+
+[RictyDiminished](https://github.com/yascentur/RictyDiminished)
 
 [夜フクロウ(Night 0wl)](https://sites.google.com/site/yorufukurou/home-en)
 > Application設定
@@ -101,16 +150,10 @@ Auto start
 > |ツイートボックス > ⚙                 |                                                  |                   |
 > |                                     |ハッシュタグを保持                                |                   |
 
+[tunnelblick](https://code.google.com/p/tunnelblick/)
 
 [FireFox](https://www.mozilla.org/ja/firefox/)
 > Common setting
-
-[FileZilla](https://filezilla-project.org/)
-
-[iTerm2](http://iterm2.com/)
-> |Preferences > General > Preferences         |                              |
-> |:-------------------------------------------|:-----------------------------|
-> |Load preferences from a custom folder or URL|$HOME/work/dotfiles/lib/iTerm2|
 
 ### Set dotfiles
 

@@ -104,7 +104,7 @@ case "${OSTYPE}" in
         alias SFTP='open -a FileZilla'
         alias FTPS='open -a FileZilla'
         alias VPN='open -a tunnelblick'
-        alias VNC='open -a "Chicken of the VNC"'
+        alias VNC='open -a chicken'
         alias VB='open -a virtualbox'
         alias BV='open -a virtualbox'
         alias VM='open -a virtualbox'
