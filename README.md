@@ -8,7 +8,9 @@ Files are setting my development environments.
 ### Install packages
 
 AppStore
-> [Xcode](https://developer.apple.com/jp/xcode/downloads/)
+* [Growl](https://itunes.apple.com/jp/app/growl/id467939042?mt=12)
+* [TweetDeck](https://itunes.apple.com/jp/app/tweetdeck-by-twitter/id485812721?mt=12)
+* [Xcode](https://developer.apple.com/jp/xcode/downloads/)
 
 homebrew
 ```bash
@@ -32,35 +34,102 @@ $ cd $HOME/work/dotfiles/
 $ git status
 ```
 
+Auto start
+* /Applications/Growl.app
+* /Applications/Karabiner.app
+* /Applications/Vagrant Manager.app
+* /Applications/XtraFinder.app
+* /Users/xxxxx/Applications/BetterTouchTool.app
+* /Users/xxxxx/Applications/CheatSheet.app
+* /Users/xxxxx/Applications/Google Drive.app
+* /Users/xxxxx/Applications/iTerm.app
+* /Users/xxxxx/Applications/KeePassX.app
+
+[AppCleaner](http://www.freemacsoft.net/appcleaner/)
+
 [BetterTouchTool](http://www.bettertouchtool.net/)
-> 自動起動設定
->  * /Users/xxxxx/Applications/BetterTouchTool.app
->
 > Application設定
 >
-> |Action Settings(Window Snapping etc.) > Window Snapping|   |
-> |:------------------------------------------------------|--:|
-> |Normal Snapping / Moving                               |   |
-> |Left width                                             |24%|
-> |Right width                                            |76%|
-> |Corner Snapping / Move to quarters                     |   |
-> |Left width                                             |50%|
-> |Right width                                            |50%|
+> |大項目                                                 |少項目                            |   |
+> |:------------------------------------------------------|:---------------------------------|--:|
+> |Action Settings(Window Snapping etc.) > Window Snapping|                                  |   |
+> |                                                       |Normal Snapping / Moving          |   |
+> |                                                       |Left width                        |24%|
+> |                                                       |Right width                       |76%|
+> |                                                       |Corner Snapping / Move to quarters|   |
+> |                                                       |Left width                        |50%|
+> |                                                       |Right width                       |50%|
+
+[CheatSheet](http://www.cheatsheetapp.com/CheatSheet/)
+
+[Chicken](http://sourceforge.net/projects/chicken/)
+
+[FileZilla](https://filezilla-project.org/)
+
+[GIMP](http://www.gimp.org)
+
+[Google drive](https://drive.google.com/)
+
+[Google 日本語IME](https://www.google.co.jp/ime/)
+
+TODO: [GrowlNotify](http://growl.info/downloads)
+
+[iTerm2](http://iterm2.com/)
+> Application設定
+>
+> |大項目                             |少項目                                      |                              |
+> |:----------------------------------|:-------------------------------------------|:-----------------------------|
+> |Preferences > General > Preferences|                                            |                              |
+> |                                   |Load preferences from a custom folder or URL|$HOME/work/dotfiles/lib/iTerm2|
 
 [Karabiner](https://pqrs.org/osx/karabiner/index.html.ja)
-> |Key Repeat > Basic Configurations > KeyRepeat|     |
-> |:--------------------------------------------|----:|
-> |Delay Until Repeat                           |200ms|
-> |Key Repeat                                   | 25ms|
+> Application設定
+>
+> |大項目                                       |少項目            |     |
+> |:--------------------------------------------|:-----------------|----:|
+> |Key Repeat > Basic Configurations > KeyRepeat|                  |     |
+> |                                             |Delay Until Repeat|200ms|
+> |                                             |Key Repeat        | 25ms|
 
+[KeePassX](http://www.keepassx.org/)
 
-[night-owl](https://sites.google.com/site/yorufukurou/home-en)
+[Kindle](https://www.amazon.com/gp/digital/fiona/kcp-landing-page)
+
+[LibreOffice](https://www.libreoffice.org/)
+
+[LimeChat](http://limechat.net/mac/)
+> Application設定
+>
+> |大項目                |少項目                       |                                                                     |
+> |:---------------------|:----------------------------|:--------------------------------------------------------------------|
+> |LimeChat > Preferences|                             |                                                                     |
+> |                      |Log > Show job/leave events  |チェック外し                                                         |
+> |                      |Log > Show rename events     |チェック外し                                                         |
+> |                      |Log > Log transcripts        |Trashes                                                              |
+> |                      |Theme > Current theme        |Spring Night                                                         |
+> |                      |Theme > Override log font    |[RictyDiminished](https://github.com/yascentur/RictyDiminished) 13px |
+> |                      |Theme > Override input font  |[RictyDiminished](https://github.com/yascentur/RictyDiminished) 13px |
+> |Server > Add Server   |                             |                                                                     |
+> |                      |General > Network name       |Lingr                                                                |
+> |                      |General > Connect on start up|チェック                                                             |
+> |                      |General > Server             |localhost                                                            |
+> |                      |General > Port               |26667                                                                |
+> |                      |General > Server Password    |\* \* \* \*                                                          |
+> |                      |General > Nickname           |kazuakiM                                                             |
+> |                      |General > Login name         |kazuakiM                                                             |
+> |                      |General > Real name          |kazuakiM                                                             |
+> |                      |Details > Encoding           |UTF-8                                                                |
+> |                      |Details > Fallback encoding  |Don't Fallback                                                       |
+
+[夜フクロウ(Night 0wl)](https://sites.google.com/site/yorufukurou/home-en)
 > Application設定
 >
 > |大項目                               |少項目                                            |                   |
 > |:------------------------------------|:-------------------------------------------------|:------------------|
 > |環境設定 > 一般                      |                                                  |                   |
+> |                                     |リアルタイム更新を有効化する                      |チェック           |
 > |                                     |投稿した後リストに自動フォーカスする              |チェック外し       |
+> |                                     |更新時に一番上にスクロールする                    |チェック           |
 > |環境設定 > アカウント                |                                                  |                   |
 > |                                     |タイムラインタブを未読管理する                    |チェック外し       |
 > |環境設定 > 表示                      |                                                  |                   |
@@ -74,22 +143,35 @@ $ git status
 > |環境設定 > テキスト入力              |                                                  |                   |
 > |                                     |ツイート入力                                      |チェック           |
 > |                                     |フォントサイズ                                    |11pt               |
-> |                                     |投稿に使用するキー                                |Control + Return   |
+> |                                     |投稿に使用するキー                                |⌘ + Return         |
 > |環境設定 > 色                        |                                                  |                   |
 > |                                     |リストの表示スタイル                              |ダーク             |
-> |                                     |デフォルトの色設定                                |Solarized(ダーク)  |
+> |                                     |デフォルトの色設定                                |ダーク             |
+> |環境設定 > 通知                      |                                                  |                   |
+> |                                     |音量                                              |5%                 |
 > |環境設定 > 詳細                      |                                                  |                   |
 > |                                     |ダブルクリック時の挙動                            |会話ビューオン/オフ|
 > |                                     |ツイートのコピー形式                              |ツイートのURL      |
+> |表示                                 |                                                  |                   |
+> |                                     |ツールバーを表示する/隠す                         |選択               |
+> |                                     |縮小                                              |選択               |
+> |ツイートボックス > ⚙                 |                                                  |                   |
+> |                                     |ハッシュタグを保持                                |                   |
 
+[RictyDiminished](https://github.com/yascentur/RictyDiminished)
+
+[Silverlight](http://www.microsoft.com/silverlight/)
+
+[Sony Ericsson Bridge for Mac](http://support.sonymobile.com/au/tools/bridge-for-mac/)
+
+[The Unarchiver](http://unarchiver.c3.cx/)
+
+[tunnelblick](https://code.google.com/p/tunnelblick/)
+
+[XtraFinder](http://www.trankynam.com/xtrafinder/)
 
 [FireFox](https://www.mozilla.org/ja/firefox/)
 > Common setting
-
-[iTerm2](http://iterm2.com/)
-> |Preferences > General > Preferences         |                              |
-> |:-------------------------------------------|:-----------------------------|
-> |Load preferences from a custom folder or URL|$HOME/work/dotfiles/lib/iTerm2|
 
 ### Set dotfiles
 
@@ -200,3 +282,5 @@ I made Vagrantfile.
 ## TODO
 
 * Try Chocolatey
+* Brewfile
+ Chrome, FireFox, Thunderbird, growlnotify, Addbe Flash Player
