@@ -66,7 +66,13 @@ Auto start
 
 [FileZilla](https://filezilla-project.org/)
 
+[FireFox](https://www.mozilla.org/ja/firefox/)
+> Common setting
+
 [GIMP](http://www.gimp.org)
+
+[Google Chrome](https://www.google.com/chrome/)
+> Common setting
 
 [Google drive](https://drive.google.com/)
 
@@ -166,12 +172,18 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 
 [The Unarchiver](http://unarchiver.c3.cx/)
 
+[Thunderbird](http://www.mozilla.jp/thunderbird/)
+> |大項目                |少項目                                 |                                                                       |
+> |:---------------------|:--------------------------------------|:----------------------------------------------------------------------|
+> |Thunderbird > 環境設定|                                       |                                                                       |
+> |                      |表示 > 書式 > デフォルト フォント      |[RictyDiminished](https://github.com/yascentur/RictyDiminished)        |
+> |                      |表示 > 書式 > 詳細設定                 |[RictyDiminished](https://github.com/yascentur/RictyDiminished) & UTF-8|
+> |                      |編集 > 一般 > フォント                 |[RictyDiminished](https://github.com/yascentur/RictyDiminished)        |
+> |                      |編集 > 一般 > 送信テキスト形式         |プレーンテキストに変換して送信する                                     |
+
 [tunnelblick](https://code.google.com/p/tunnelblick/)
 
 [XtraFinder](http://www.trankynam.com/xtrafinder/)
-
-[FireFox](https://www.mozilla.org/ja/firefox/)
-> Common setting
 
 ### Set dotfiles
 
@@ -257,30 +269,52 @@ I made Vagrantfile.
 
 ### Install packages
 
-[FireFox](https://www.mozilla.org/ja/firefox/)
+[Google Chrome](https://www.google.com/chrome/)
+> Application設定
+>
+> |大項目                |少項目                                 |                                                                         |
+> |:---------------------|:--------------------------------------|:------------------------------------------------------------------------|
+> |Required sync setting |                                       |                                                                         |
+> |拡張機能              |                                       |                                                                         |
+> |                      |[Adblock Plus](https://chrome.google.com/webstore/detail/adblock-plus/cfhdojbkjhnklbpkdaibdccddilifddb)                   ||
+> |                      |[Auto Scroll](https://chrome.google.com/webstore/detail/auto-scroll/eochlhpceohhhfogfeladaifggikcjhk)                     ||
+> |                      |[AutoPagerize](http://autopagerize.net/)                                                                                  ||
+> |                      |[Awesome Screenshot](https://chrome.google.com/webstore/detail/awesome-screenshot-screen/alelhddbbhepgpmgidjdcjakblofbmce)||
+> |                      |[Image Downloader](https://chrome.google.com/webstore/detail/image-downloader/cnpniohnfphhjihaiiggeabnkjhpaldj)           ||
+> |                      |[Text Link Plus](https://chrome.google.com/webstore/detail/text-link/ikfmghnmgeicocakijcebpkmbfljnogk)                    ||
+> |                      |[User-Agent Switcher](https://chrome.google.com/webstore/detail/user-agent-switcher/lkmofgnohbedopheiphabfhfjgkhfcgf)     ||
+> |                      |[はてなブックマーク](https://chrome.google.com/webstore/detail/%E3%81%AF%E3%81%A6%E3%81%AA%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF-googlechrome-%E6%8B%A1%E5%BC%B5/dnlfpnhinnjdgmjfpccajboogcjocdla)||
+> |設定                  |                                       |                                                                         |
+> |                      |ウェブコンテンツ                       |フォント: [RictyDiminished](https://github.com/yascentur/RictyDiminished)|
 
-* Required sync setting
-* オプション > コンテンツ > フォントとカラー
-  * デフォルトフォント: [RictyDiminished](https://github.com/yascentur/RictyDiminished)
-* add-on
-  * [Adblock Plus](https://addons.mozilla.org/ja/firefox/addon/adblock-plus/)
-  * [AutoPager](https://addons.mozilla.org/ja/firefox/addon/autopager/)
-  * [DownThemAll!](https://addons.mozilla.org/ja/firefox/addon/downthemall/)
-  * [Firebug](https://addons.mozilla.org/ja/firefox/addon/firebug/)
-  * [FireMobileSimulator](https://addons.mozilla.org/ja/firefox/addon/firemobilesimulator/)
-  * [Growl/GNTP](https://addons.mozilla.org/ja/firefox/addon/growlgntp/)
-  * [Hatena Bookmark](https://addons.mozilla.org/ja/firefox/addon/hatena-bookmark/)
-  * [JSONView](https://addons.mozilla.org/ja/firefox/addon/jsonview/)
-  * [nclvauto](https://addons.mozilla.org/ja/firefox/addon/nclvauto/)
-  * [Quick Translator](https://addons.mozilla.org/ja/firefox/addon/quick-translator/)
-  * [RESTClient](https://addons.mozilla.org/ja/firefox/addon/restclient/)
-  * [ScrollyFox](https://addons.mozilla.org/ja/firefox/addon/scrollyfox/)
-  * [The Addon Bar(restored)](https://addons.mozilla.org/ja/firefox/addon/the-addon-bar/?src=hp-btn-promo)
-  * [Web Developer](https://addons.mozilla.org/ja/firefox/addon/web-developer/)
-  * [テキストリンク](https://addons.mozilla.org/ja/firefox/addon/text-link/)
+[FireFox](https://www.mozilla.org/ja/firefox/)
+> Application設定
+>
+> |大項目                |少項目                                 |                                                               |
+> |:---------------------|:--------------------------------------|:--------------------------------------------------------------|
+> |Required sync setting |                                       |                                                               |
+> |LimeChat > Preferences|                                       |                                                               |
+> |                      |Search                                 |Google以外Remove                                               |
+> |                      |Content > Fonts & Colors > Default font|[RictyDiminished](https://github.com/yascentur/RictyDiminished)|
+> |                      |Content > Languages > Choose           |Add Japanese[ja]                                               |
+> | add-on               |                                       |                                                               |
+> |                      |[Adblock Plus](https://addons.mozilla.org/ja/firefox/addon/adblock-plus/)                             ||
+> |                      |[AutoPager](https://addons.mozilla.org/ja/firefox/addon/autopager/)                                   ||
+> |                      |[DownThemAll!](https://addons.mozilla.org/ja/firefox/addon/downthemall/)                              ||
+> |                      |[Firebug](https://addons.mozilla.org/ja/firefox/addon/firebug/)                                       ||
+> |                      |[FireMobileSimulator](https://addons.mozilla.org/ja/firefox/addon/firemobilesimulator/)               ||
+> |                      |[Growl/GNTP](https://addons.mozilla.org/ja/firefox/addon/growlgntp/)                                  ||
+> |                      |[Hatena Bookmark](https://addons.mozilla.org/ja/firefox/addon/hatena-bookmark/)                       ||
+> |                      |[JSONView](https://addons.mozilla.org/ja/firefox/addon/jsonview/)                                     ||
+> |                      |[nclvauto](https://addons.mozilla.org/ja/firefox/addon/nclvauto/)                                     ||
+> |                      |[Quick Translator](https://addons.mozilla.org/ja/firefox/addon/quick-translator/)                     ||
+> |                      |[RESTClient](https://addons.mozilla.org/ja/firefox/addon/restclient/)                                 ||
+> |                      |[ScrollyFox](https://addons.mozilla.org/ja/firefox/addon/scrollyfox/)                                 ||
+> |                      |[The Addon Bar(restored)](https://addons.mozilla.org/ja/firefox/addon/the-addon-bar/?src=hp-btn-promo)||
+> |                      |[Web Developer](https://addons.mozilla.org/ja/firefox/addon/web-developer/)                           ||
+> |                      |[テキストリンク](https://addons.mozilla.org/ja/firefox/addon/text-link/)                              |　|
 
 ## TODO
 
 * Try Chocolatey
-* Brewfile
- Chrome, FireFox, Thunderbird, growlnotify, Addbe Flash Player
+
