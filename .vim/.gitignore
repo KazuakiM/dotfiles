@@ -5,6 +5,7 @@
 /neobundle.vim/*
 /neocomplete.vim/*
 /neosnippet.vim/*
+/nerdtree/*
 /swap/*
 /tags/*
 /unite.vim/*

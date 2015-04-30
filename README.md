@@ -297,7 +297,7 @@ I made Vagrantfile.
 > |                      |Search                                 |Google以外Remove                                               |
 > |                      |Content > Fonts & Colors > Default font|[RictyDiminished](https://github.com/yascentur/RictyDiminished)|
 > |                      |Content > Languages > Choose           |Add Japanese[ja]                                               |
-> | add-on               |                                       |                                                               |
+> |add-on                |                                       |                                                               |
 > |                      |[Adblock Plus](https://addons.mozilla.org/ja/firefox/addon/adblock-plus/)                             ||
 > |                      |[AutoPager](https://addons.mozilla.org/ja/firefox/addon/autopager/)                                   ||
 > |                      |[DownThemAll!](https://addons.mozilla.org/ja/firefox/addon/downthemall/)                              ||
@@ -312,7 +312,9 @@ I made Vagrantfile.
 > |                      |[ScrollyFox](https://addons.mozilla.org/ja/firefox/addon/scrollyfox/)                                 ||
 > |                      |[The Addon Bar(restored)](https://addons.mozilla.org/ja/firefox/addon/the-addon-bar/?src=hp-btn-promo)||
 > |                      |[Web Developer](https://addons.mozilla.org/ja/firefox/addon/web-developer/)                           ||
-> |                      |[テキストリンク](https://addons.mozilla.org/ja/firefox/addon/text-link/)                              |　|
+> |                      |[テキストリンク](https://addons.mozilla.org/ja/firefox/addon/text-link/)                              ||
+> |about:config          |                                       |                                                               |
+> |                      |browser.tabs.closeWindowWithLastTab    |false                                                          |
 
 ## TODO
 
