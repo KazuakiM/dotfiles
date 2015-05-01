@@ -395,8 +395,10 @@ NeoBundleLazy 'scrooloose/nerdtree', {'commands': 'NERDTree'}
 nnoremap <expr><Leader>n ':NERDTree '.vital#of('vital').import('Prelude').path2project_directory('%').'<CR>'
 let s:hooks = neobundle#get_hooks('nerdtree')
 function! s:hooks.on_source(bundle)
+    let g:NERDTreeBookmarksFile     = $HOME.'/.vim/nerdtree/.NERDTreeBookmarks'
     let g:NERDTreeMinimalUI         = 1
     let g:NERDTreeRespectWildIgnore = 1
+    let g:NERDTreeShowBookmarks     = 1
     let g:NERDTreeShowHidden        = 1
     let g:NERDTreeWinSize           = 20
 endfunction
@@ -517,6 +519,7 @@ function! s:hooks.on_source(bundle)
     let g:watchdogs_check_BufWritePost_enable  = 1
     let g:watchdogs_check_BufWritePost_enables = {'vim': 0}
     let g:watchdogs_check_CursorHold_enable    = 1
+    let g:watchdogs_check_CursorHold_enables   = {'vim': 0}
 endfunction
 unlet s:hooks
 "}}}
