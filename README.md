@@ -168,6 +168,8 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 
 [Silverlight](http://www.microsoft.com/silverlight/)
 
+[Skitch](http://evernote.com/skitch/)
+
 [Sony Ericsson Bridge for Mac](http://support.sonymobile.com/au/tools/bridge-for-mac/)
 
 [The Unarchiver](http://unarchiver.c3.cx/)
