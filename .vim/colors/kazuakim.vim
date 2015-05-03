@@ -54,6 +54,7 @@ highlight WildMenu     cterm=NONE           gui=NONE           ctermfg=DarkGrey 
 "}}}
 " my highlight {{{
 highlight KazuakiMCheckString cterm=NONE      gui=NONE      ctermbg=DarkGrey guibg=DarkGrey
-highlight QFError             cterm=underline gui=underline ctermfg=Magenta  guifg=Magenta
+highlight KazuakiMQFError     cterm=underline gui=underline ctermfg=Magenta  guifg=Magenta
 highlight YankRoundRegion     cterm=NONE      gui=NONE      ctermfg=Magenta  guifg=Magenta
+highlight default link KazuakiMTodo Todo
 "}}}
