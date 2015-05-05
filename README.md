@@ -169,6 +169,14 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 [Silverlight](http://www.microsoft.com/silverlight/)
 
 [Skitch](http://evernote.com/skitch/)
+> Application設定
+>
+> |大項目           |少項目                                                                        |            |
+> |:----------------|:-----------------------------------------------------------------------------|:-----------|
+> |Skitch > 環境設定|                                                                              |            |
+> |                 |一般設定 > Skitch Helper > コンピュータのログイン時に Skitch Helper を起動する|チェック外し|
+> |                 |同期 > 新しい Skitch ノートを Evernote に保存                                 |手動        |
+> |                 |同期 > Evernote との動機頻度                                                  |手動        |
 
 [Sony Ericsson Bridge for Mac](http://support.sonymobile.com/au/tools/bridge-for-mac/)
 

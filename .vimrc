@@ -81,7 +81,7 @@ if has('vim_starting')
 endif
 " autocmd
 function! s:KazuakiMCheckString() abort "{{{
-    let w:m1 = matchadd('KazuakiMCheckString', "\t\|\r\|\r\n\|\s\+$\|　")
+    let w:m1 = matchadd('KazuakiMCheckString', '\t\|\r\|\r\n\|\s\+$\|　')
     let w:m2 = matchadd('KazuakiMTodo',        'FIXME\|NOTE\|OPTIMIZE\|TODO\|XXXX')
 endfunction "}}}
 function! s:KazuakiMBufEnter() abort "{{{
