@@ -1,12 +1,9 @@
-# .bash_profile
+# .bashrc
 # Get the aliases and functions {{{
-if [ -f ~/.bash_profile.win ]; then
-    . ~/.bash_profile.win
-elif [ -f ~/.bash_profile.local ]; then
-    . ~/.bash_profile.local
-fi
-if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
+if [ -f ~/.bashrc.win ]; then
+    . ~/.bashrc.win
+elif [ -f ~/.bashrc.local ]; then
+    . ~/.bashrc.local
 fi
 #}}}
 #User specific environment and startup programs {{{
