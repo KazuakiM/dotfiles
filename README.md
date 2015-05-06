@@ -50,7 +50,7 @@ Auto start
 [BetterTouchTool](http://www.bettertouchtool.net/)
 > Application設定
 >
-> |大項目                                                 |少項目                            |   |
+> |大項目                                                 |小項目                            |   |
 > |:------------------------------------------------------|:---------------------------------|--:|
 > |Action Settings(Window Snapping etc.) > Window Snapping|                                  |   |
 > |                                                       |Normal Snapping / Moving          |   |
@@ -83,7 +83,7 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 [iTerm2](http://iterm2.com/)
 > Application設定
 >
-> |大項目                             |少項目                                      |                              |
+> |大項目                             |小項目                                      |                              |
 > |:----------------------------------|:-------------------------------------------|:-----------------------------|
 > |Preferences > General > Preferences|                                            |                              |
 > |                                   |Load preferences from a custom folder or URL|$HOME/work/dotfiles/lib/iTerm2|
@@ -91,7 +91,7 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 [Karabiner](https://pqrs.org/osx/karabiner/index.html.ja)
 > Application設定
 >
-> |大項目                                       |少項目            |     |
+> |大項目                                       |小項目            |     |
 > |:--------------------------------------------|:-----------------|----:|
 > |Key Repeat > Basic Configurations > KeyRepeat|                  |     |
 > |                                             |Delay Until Repeat|200ms|
@@ -106,7 +106,7 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 [LimeChat](http://limechat.net/mac/)
 > Application設定
 >
-> |大項目                |少項目                       |                                                                     |
+> |大項目                |小項目                       |                                                                     |
 > |:---------------------|:----------------------------|:--------------------------------------------------------------------|
 > |LimeChat > Preferences|                             |                                                                     |
 > |                      |Log > Show job/leave events  |チェック外し                                                         |
@@ -130,7 +130,7 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 [夜フクロウ(Night 0wl)](https://sites.google.com/site/yorufukurou/home-en)
 > Application設定
 >
-> |大項目                               |少項目                                            |                   |
+> |大項目                               |小項目                                            |                   |
 > |:------------------------------------|:-------------------------------------------------|:------------------|
 > |環境設定 > 一般                      |                                                  |                   |
 > |                                     |リアルタイム更新を有効化する                      |チェック           |
@@ -171,7 +171,7 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 [Skitch](http://evernote.com/skitch/)
 > Application設定
 >
-> |大項目           |少項目                                                                        |            |
+> |大項目           |小項目                                                                        |            |
 > |:----------------|:-----------------------------------------------------------------------------|:-----------|
 > |Skitch > 環境設定|                                                                              |            |
 > |                 |一般設定 > Skitch Helper > コンピュータのログイン時に Skitch Helper を起動する|チェック外し|
@@ -183,7 +183,7 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 [The Unarchiver](http://unarchiver.c3.cx/)
 
 [Thunderbird](http://www.mozilla.jp/thunderbird/)
-> |大項目                |少項目                                 |                                                                       |
+> |大項目                |小項目                                 |                                                                       |
 > |:---------------------|:--------------------------------------|:----------------------------------------------------------------------|
 > |Thunderbird > 環境設定|                                       |                                                                       |
 > |                      |表示 > 書式 > デフォルト フォント      |[RictyDiminished](https://github.com/yascentur/RictyDiminished)        |
@@ -282,15 +282,12 @@ I made Vagrantfile.
 [Google Chrome](https://www.google.com/chrome/)
 > Application設定
 >
-> |大項目                |少項目                                 |                                                                         |
+> |大項目                |小項目                                 |                                                                         |
 > |:---------------------|:--------------------------------------|:------------------------------------------------------------------------|
 > |Required sync setting |                                       |                                                                         |
 > |拡張機能              |                                       |                                                                         |
 > |                      |[Adblock Plus](https://chrome.google.com/webstore/detail/adblock-plus/cfhdojbkjhnklbpkdaibdccddilifddb)                   ||
-> |                      |[Auto Scroll](https://chrome.google.com/webstore/detail/auto-scroll/eochlhpceohhhfogfeladaifggikcjhk)                     ||
-> |                      |[AutoPagerize](http://autopagerize.net/)                                                                                  ||
 > |                      |[Awesome Screenshot](https://chrome.google.com/webstore/detail/awesome-screenshot-screen/alelhddbbhepgpmgidjdcjakblofbmce)||
-> |                      |[Image Downloader](https://chrome.google.com/webstore/detail/image-downloader/cnpniohnfphhjihaiiggeabnkjhpaldj)           ||
 > |                      |[Text Link Plus](https://chrome.google.com/webstore/detail/text-link/ikfmghnmgeicocakijcebpkmbfljnogk)                    ||
 > |                      |[User-Agent Switcher](https://chrome.google.com/webstore/detail/user-agent-switcher/lkmofgnohbedopheiphabfhfjgkhfcgf)     ||
 > |                      |[はてなブックマーク](https://chrome.google.com/webstore/detail/%E3%81%AF%E3%81%A6%E3%81%AA%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF-googlechrome-%E6%8B%A1%E5%BC%B5/dnlfpnhinnjdgmjfpccajboogcjocdla)||
@@ -300,7 +297,7 @@ I made Vagrantfile.
 [FireFox](https://www.mozilla.org/ja/firefox/)
 > Application設定
 >
-> |大項目                |少項目                                 |                                                               |
+> |大項目                |小項目                                 |                                                               |
 > |:---------------------|:--------------------------------------|:--------------------------------------------------------------|
 > |Required sync setting |                                       |                                                               |
 > |LimeChat > Preferences|                                       |                                                               |
@@ -309,8 +306,6 @@ I made Vagrantfile.
 > |                      |Content > Languages > Choose           |Add Japanese[ja]                                               |
 > |add-on                |                                       |                                                               |
 > |                      |[Adblock Plus](https://addons.mozilla.org/ja/firefox/addon/adblock-plus/)                             ||
-> |                      |[AutoPager](https://addons.mozilla.org/ja/firefox/addon/autopager/)                                   ||
-> |                      |[DownThemAll!](https://addons.mozilla.org/ja/firefox/addon/downthemall/)                              ||
 > |                      |[Firebug](https://addons.mozilla.org/ja/firefox/addon/firebug/)                                       ||
 > |                      |[FireMobileSimulator](https://addons.mozilla.org/ja/firefox/addon/firemobilesimulator/)               ||
 > |                      |[Growl/GNTP](https://addons.mozilla.org/ja/firefox/addon/growlgntp/)                                  ||
@@ -319,7 +314,6 @@ I made Vagrantfile.
 > |                      |[nclvauto](https://addons.mozilla.org/ja/firefox/addon/nclvauto/)                                     ||
 > |                      |[Quick Translator](https://addons.mozilla.org/ja/firefox/addon/quick-translator/)                     ||
 > |                      |[RESTClient](https://addons.mozilla.org/ja/firefox/addon/restclient/)                                 ||
-> |                      |[ScrollyFox](https://addons.mozilla.org/ja/firefox/addon/scrollyfox/)                                 ||
 > |                      |[The Addon Bar(restored)](https://addons.mozilla.org/ja/firefox/addon/the-addon-bar/?src=hp-btn-promo)||
 > |                      |[Web Developer](https://addons.mozilla.org/ja/firefox/addon/web-developer/)                           ||
 > |                      |[テキストリンク](https://addons.mozilla.org/ja/firefox/addon/text-link/)                              ||
