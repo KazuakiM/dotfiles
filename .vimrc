@@ -37,7 +37,7 @@ let g:mapleader = ','
 augroup MyAutoCmd
     autocmd!
 augroup END
-function! s:KazuakiMVimStart(backupDir, undoDir) "{{{
+function! s:KazuakiMVimStart(backupDir, undoDir) abort "{{{
     "Check 256KB file size.
     if getfsize(expand('%:p')) >= 262144
         setlocal noswapfile nobackup nowritebackup noundofile viminfo=
@@ -46,13 +46,13 @@ function! s:KazuakiMVimStart(backupDir, undoDir) "{{{
         syntax off
         return 1
     endif
-    call s:AutoMkdir(a:backupDir.s:date)
-    call s:AutoMkdir(a:undoDir.  s:date)
+    call s:KazuakiMAutoMkdir(a:backupDir.s:date)
+    call s:KazuakiMAutoMkdir(a:undoDir.  s:date)
     let &backupdir = a:backupDir.s:date
     let &undodir   = a:undoDir.  s:date
     return 0
 endfunction "}}}
-function! s:AutoMkdir(dir) "{{{
+function! s:KazuakiMAutoMkdir(dir) abort "{{{
     if !isdirectory(a:dir)
         call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
     endif
@@ -80,10 +80,11 @@ if has('vim_starting')
     set runtimepath+=$HOME/.vim/bundle/neobundle.vim
 endif
 " autocmd
-function! s:KazuakiMCheckString() "{{{
-    match KazuakiMCheckString "\t\|\r\|\r\n\|\s\+$\|　"
+function! s:KazuakiMCheckString() abort "{{{
+    let w:m1 = matchadd('KazuakiMCheckString', '\t\|\r\|\r\n\|\s\+$\|　')
+    let w:m2 = matchadd('KazuakiMTodo',        'FIXME\|NOTE\|OPTIMIZE\|TODO\|XXXX')
 endfunction "}}}
-function! s:KazuakiMBufEnter() "{{{
+function! s:KazuakiMBufEnter() abort "{{{
     " If open direcotry, call NERDTree
     if isdirectory(expand('%:p'))
         call nerdtree#checkForBrowse(expand('<amatch>'))
@@ -95,11 +96,11 @@ function! s:KazuakiMBufEnter() "{{{
         quit
     endif
 endfunction "}}}
-function! s:KazuakiMVimEnter() "{{{
+function! s:KazuakiMVimEnter() abort "{{{
     set textwidth=0
     call s:KazuakiMCheckString()
 endfunction "}}}
-function! s:KazuakiMWinEnter() "{{{
+function! s:KazuakiMWinEnter() abort "{{{
     checktime
     call s:KazuakiMCheckString()
 endfunction "}}}
@@ -113,7 +114,7 @@ autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 autocmd MyAutoCmd VimEnter             * call s:KazuakiMVimEnter()
 autocmd MyAutoCmd WinEnter             * call s:KazuakiMWinEnter()
 "autocmd MyAutoCmd VimEnter * set formatoptions-=v formatoptions-=b
-function! StatuslineSyntax() "{{{
+function! KazuakiMStatuslineSyntax() abort "{{{
     return qfstatusline#Update()
 endfunction "}}}
 " Basic
@@ -126,7 +127,7 @@ set updatetime=1000 viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/
 set wrapscan
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*.json'\ --exclude='*.log'\ --exclude='*min.js'\ --exclude='*min.css'
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,C,.DS_Store,.,..
-set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{StatuslineSyntax()}%=%Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
+set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{KazuakiMStatuslineSyntax()}%=%Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 "set foldopen-=search
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc
 " Color
@@ -191,6 +192,9 @@ nnoremap X "_x
 vnoremap <C-w> "ay
 vnoremap <C-e> "by
 nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
+" Wildmenu
+cnoremap <Left> <Space><BS><Left>
+cnoremap <Right> <Space><BS><Right>
 " $VIMRUNTIME/syntax/sql.vim
 let g:sql_type_default = 'mysql'
 " $VIMRUNTIME/syntax/php.vim
@@ -219,20 +223,20 @@ nnoremap <SID>[vim]c :<C-u>setlocal<Space>conceallevel=2<CR>
 " Vim / gVim {{{
 if !has('gui_running')
     " http://d.hatena.ne.jp/thinca/20111204/1322932585
-    function! s:TabpageLabelUpdate(tab_number) "{{{
-        let a:highlight = a:tab_number is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
-        let a:bufnrs    = tabpagebuflist(a:tab_number)
+    function! s:KazuakiMTabpageLabelUpdate(tabNumber) abort "{{{
+        let a:highlight = a:tabNumber is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
+        let a:bufnrs    = tabpagebuflist(a:tabNumber)
         let a:bufnr     = len(a:bufnrs)
         if a:bufnr is 1
             let a:bufnr = ''
         endif
         let a:modified = len(filter(copy(a:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
-        return '%'.a:tab_number.'T'.a:highlight.a:bufnr.' '.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tab_number) - 1]), ':t').' '.a:modified.'%T%#TabLineFill#'
+        return '%'.a:tabNumber.'T'.a:highlight.a:bufnr.' '.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tabNumber) - 1]), ':t').' '.a:modified.'%T%#TabLineFill#'
     endfunction "}}}
-    function! TabLineUpdate() "{{{
-        return join(map(range(1, tabpagenr('$')), 's:TabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
+    function! KazuakiMTabLineUpdate() abort "{{{
+        return join(map(range(1, tabpagenr('$')), 's:KazuakiMTabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
     endfunction "}}}
-    set tabline=%!TabLineUpdate()
+    set tabline=%!KazuakiMTabLineUpdate()
 endif
 "}}}
 "
@@ -247,9 +251,7 @@ let g:neobundle#log_filename          = $HOME.'/.vim/neobundle.vim/neobundle.log
 "
 "
 " NeoBundle {{{
-if neobundle#has_cache()
-    NeoBundleLoadCache
-else
+if neobundle#load_cache()
     NeoBundle 'Shougo/vimproc.vim', {'build': {'mac': 'make -f make_mac.mak', 'unix': 'make -f make_unix.mak', 'cygwin': 'make -f make_cygwin.mak'}}
     NeoBundle 'vim-jp/vital.vim'
     NeoBundle 'vim-scripts/matchit.zip'
@@ -268,8 +270,8 @@ endif
 " qfixgrep {{{
 let g:QFix_PreviewHeight = 20
 let g:QFixWin_EnableMode = 1
-nnoremap <expr> <Leader>grek ':silent grep! '.expand('<cword>').' '.vital#of('vital').import('Prelude').path2project_directory('%').'<C-b><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right>'
-nnoremap <expr> <Leader>grel ':silent grep!  '.vital#of('vital').import('Prelude').path2project_directory('%').'<C-b><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right><Right>'
+nnoremap <expr> <Leader>grek ':grep! '.expand('<cword>').' '.vital#of('vital').import('Prelude').path2project_directory('%').'<C-b><Right><Right><Right><Right><Right><Right>'
+nnoremap <expr> <Leader>grel ':grep!  '.vital#of('vital').import('Prelude').path2project_directory('%').'<C-b><Right><Right><Right><Right><Right><Right>'
 "}}}
 " yankround.vim {{{
 nmap p <Plug>(yankround-p)
@@ -339,7 +341,7 @@ NeoBundleLazy 'glidenote/memolist.vim',     { 'commands': ['MemoNew',         'M
 nnoremap <SID>[unite] <Nop>
 nmap <Leader>u <SID>[unite]
 " default plugins
-nnoremap <silent> <SID>[unite]f   :<C-u>call<Space>DispatchUniteFileRecAsyncOrGit()<CR>
+nnoremap <silent> <SID>[unite]f   :<C-u>call<Space>KazuakiMUniteFileRecAsyncOrGit()<CR>
 nnoremap <silent> <SID>[unite]map :<C-u>Unite<Space>output:map\|map!\|lmap<CR>
 nnoremap <silent> <SID>[unite]msg :<C-u>Unite<Space>output:message<CR>
 nnoremap <silent> <SID>[unite]s   :<C-u>Unite<Space>-default-action=ex<Space>output:scriptnames<CR>
@@ -353,7 +355,7 @@ nmap <Leader>m <SID>[memolist]
 nnoremap <SID>[memolist]n :<C-u>MemoNew<CR>
 nnoremap <SID>[memolist]l :<C-u>MemoList<CR>
 " http://qiita.com/yuku_t/items/9263e6d9105ba972aea8
-function! DispatchUniteFileRecAsyncOrGit()
+function! KazuakiMUniteFileRecAsyncOrGit() abort
     if isdirectory(getcwd().'/.git')
         Unite -default-action=tabopen file_rec/git
     else
@@ -361,7 +363,7 @@ function! DispatchUniteFileRecAsyncOrGit()
     endif
 endfunction
 let s:hooks = neobundle#get_hooks('unite.vim')
-function! s:hooks.on_source(bundle)
+function! s:hooks.on_source(bundle) abort
     let g:unite_data_directory             = $HOME.'/.vim/unite.vim'
     let g:unite_enable_start_insert        = 1
     let g:unite_source_grep_command        = 'grep'
@@ -370,7 +372,7 @@ function! s:hooks.on_source(bundle)
     let g:unite_source_grep_max_candidates = 200
 endfunction
 let s:hooks = neobundle#get_hooks('memolist.vim')
-function! s:hooks.on_source(bundle)
+function! s:hooks.on_source(bundle) abort
     let g:memolist_filename_prefix_none = 1
     let g:memolist_template_dir_path    = $HOME.'/.vim/memolist.vim'
     let g:memolist_unite                = 1
@@ -382,7 +384,7 @@ endfunction
 NeoBundleLazy 'vim-scripts/taglist.vim', {'commands': 'Tlist'}
 nnoremap <Leader>t :<C-u>Tlist<CR>
 let s:hooks = neobundle#get_hooks('taglist.vim')
-function! s:hooks.on_source(bundle)
+function! s:hooks.on_source(bundle) abort
     let g:tlist_php_settings     = 'php;c:class;f:function;d:constant'
     let g:Tlist_Exit_OnlyWindow  = 1
     let g:Tlist_Show_One_File    = 1
@@ -394,7 +396,7 @@ endfunction
 NeoBundleLazy 'scrooloose/nerdtree', {'commands': 'NERDTree'}
 nnoremap <expr><Leader>n ':NERDTree '.vital#of('vital').import('Prelude').path2project_directory('%').'<CR>'
 let s:hooks = neobundle#get_hooks('nerdtree')
-function! s:hooks.on_source(bundle)
+function! s:hooks.on_source(bundle) abort
     let g:NERDTreeBookmarksFile     = $HOME.'/.vim/nerdtree/.NERDTreeBookmarks'
     let g:NERDTreeMinimalUI         = 1
     let g:NERDTreeRespectWildIgnore = 1
@@ -443,7 +445,7 @@ let g:ref_no_default_key_mappings = 1
 inoremap <silent><C-k> <C-o>:call<space>ref#K('normal')<CR><ESC>
 nnoremap <silent>K     :<C-u>call<space>ref#K('normal')<CR>
 let s:hooks = neobundle#get_hooks('vim-ref')
-function! s:hooks.on_source(bundle)
+function! s:hooks.on_source(bundle) abort
     let g:ref_cache_dir       = $HOME.'/.vim/vim-ref/cache'
     let g:ref_detect_filetype = {'html': 'phpmanual', 'javascript': 'phpmanual', 'css': 'phpmanual'}
     let g:ref_phpmanual_path  = $HOME.'/.vim/vim-ref/php-chunked-xhtml'
@@ -453,7 +455,7 @@ endfunction
 NeoBundleLazy 'stephpy/vim-php-cs-fixer', {'functions': 'PhpCsFixerFixFile'}
 nnoremap <Leader>php :<C-u>call<Space>PhpCsFixerFixFile()<CR>
 let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
-function! s:hooks.on_source(bundle)
+function! s:hooks.on_source(bundle) abort
     let g:php_cs_fixer_config                 = 'default'
     let g:php_cs_fixer_dry_run                = 0
     let g:php_cs_fixer_enable_default_mapping = 0
@@ -472,7 +474,7 @@ nnoremap <Leader>gx :<C-u>call<Space>openbrowser#_keymapping_smart_search('n')<C
 " neocomplete.vim {{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': 'KazuakiM/vim-snippets', 'insert': 1}
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
-function! s:hooks.on_source(bundle)
+function! s:hooks.on_source(bundle) abort
     let g:neocomplete#auto_completion_start_length     = 3
     let g:neocomplete#data_directory                   = $HOME.'/.vim/neocomplete.vim'
     let g:neocomplete#enable_at_startup                = 1
@@ -494,7 +496,7 @@ endfunction
 " gundo.vim {{{
 NeoBundleLazy 'sjl/gundo.vim', {'insert': 1}
 let s:hooks = neobundle#get_hooks('gundo.vim')
-function! s:hooks.on_source(bundle)
+function! s:hooks.on_source(bundle) abort
     nnoremap u g-
     nnoremap U g-
     nnoremap <C-r> g+
@@ -508,13 +510,13 @@ endfunction
 " vim-watchdogs {{{
 NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline'],
 \    'insert': 1}
-let g:Qfstatusline#UpdateCmd = function('StatuslineSyntax')
+let g:Qfstatusline#UpdateCmd = function('KazuakiMStatuslineSyntax')
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
-function! s:hooks.on_source(bundle)
+function! s:hooks.on_source(bundle) abort
     "vim-qfsigns
     nnoremap <Leader>sy :QfsignsJunmp<CR>
-    let g:qfsigns#Config = {'id': '5050', 'name': 'QFError',}
-    execute 'sign define '.get(g:qfsigns#Config,'name').' linehl=QFError texthl=QFError text=>>'
+    let g:qfsigns#Config = {'id': '5050', 'name': 'KazuakiMQFError',}
+    execute 'sign define '.get(g:qfsigns#Config,'name').' linehl=KazuakiMQFError texthl=KazuakiMQFError text=>>'
     "vim-watchdogs
     let g:watchdogs_check_BufWritePost_enable  = 1
     let g:watchdogs_check_BufWritePost_enables = {'vim': 0}
@@ -570,10 +572,10 @@ call neobundle#end()
 "
 " FileType {{{
 filetype plugin indent on
-autocmd MyAutoCmd BufNewFile,BufRead *.{txt,text} setlocal filetype=mkd
-autocmd MyAutoCmd BufNewFile,BufRead *.coffee     setlocal filetype=coffee
-autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}    setlocal filetype=snippets
-autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}  setlocal filetype=xxd
+autocmd MyAutoCmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*,txt,text} setlocal filetype=mkd
+autocmd MyAutoCmd BufNewFile,BufRead *.coffee                            setlocal filetype=coffee
+autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}                           setlocal filetype=snippets
+autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                         setlocal filetype=xxd
 "}}}
 "
 "
