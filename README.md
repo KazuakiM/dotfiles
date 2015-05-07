@@ -198,24 +198,24 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 ### Set dotfiles
 
 ```bash
-$ ln -sf $HOME/work/dotfiles/.bash_logout     $HOME/.bash_logout
-$ ln -sf $HOME/work/dotfiles/.bash_profile    $HOME/.bash_profile
-$ ln -sf $HOME/work/dotfiles/.bashrc          $HOME/.bashrc
-$ cp -f  $HOME/work/dotfiles/.bashrc.local    $HOME/
-$ ln -sf $HOME/work/dotfiles/.ctags           $HOME/.ctags
-$ ln -sf $HOME/work/dotfiles/.gitconfig       $HOME/.gitconfig
-$ cp -f  $HOME/work/dotfiles/.gitconfig.local $HOME/
-$ ln -sf $HOME/work/dotfiles/.gvimrc          $HOME/.gvimrc
-$ ln -sf $HOME/work/dotfiles/.htoprc          $HOME/.htoprc
-$ ln -sf $HOME/work/dotfiles/.inputrc         $HOME/.inputrc
-$ ln -sf $HOME/work/dotfiles/.mplayer         $HOME/.mplayer
-$ cp -f  $HOME/work/dotfiles/.netrc.org       $HOME/.netrc
-$ ln -sf $HOME/work/dotfiles/.screenrc        $HOME/.screenrc
-$ ln -sf $HOME/work/dotfiles/.tmux.conf       $HOME/.tmux.conf
-$ ln -sf $HOME/work/dotfiles/.vim             $HOME/.vim
-$ ln -sf $HOME/work/dotfiles/.vimrc           $HOME/.vimrc
-$ cp -f  $HOME/work/dotfiles/.vimrc.local     $HOME/
-$ ln -sf $HOME/work/dotfiles/.w3m             $HOME/.w3m
+$ ln -sf $HOME/work/dotfiles/.bash_logout         $HOME/.bash_logout
+$ ln -sf $HOME/work/dotfiles/.bash_profile        $HOME/.bash_profile
+$ ln -sf $HOME/work/dotfiles/.bashrc              $HOME/.bashrc
+$ cp -f  $HOME/work/dotfiles/.bashrc.local        $HOME/
+$ ln -sf $HOME/work/dotfiles/.ctags               $HOME/.ctags
+$ ln -sf $HOME/work/dotfiles/.gitconfig.org       $HOME/.gitconfig
+$ cp -f  $HOME/work/dotfiles/.gitconfig.local.org $HOME/.gitconfig.local
+$ ln -sf $HOME/work/dotfiles/.gvimrc              $HOME/.gvimrc
+$ ln -sf $HOME/work/dotfiles/.htoprc              $HOME/.htoprc
+$ ln -sf $HOME/work/dotfiles/.inputrc             $HOME/.inputrc
+$ ln -sf $HOME/work/dotfiles/.mplayer             $HOME/.mplayer
+$ cp -f  $HOME/work/dotfiles/.netrc.org           $HOME/.netrc
+$ ln -sf $HOME/work/dotfiles/.screenrc            $HOME/.screenrc
+$ ln -sf $HOME/work/dotfiles/.tmux.conf           $HOME/.tmux.conf
+$ ln -sf $HOME/work/dotfiles/.vim                 $HOME/.vim
+$ ln -sf $HOME/work/dotfiles/.vimrc               $HOME/.vimrc
+$ cp -f  $HOME/work/dotfiles/.vimrc.local         $HOME/
+$ ln -sf $HOME/work/dotfiles/.w3m                 $HOME/.w3m
 $ mkdir -p /srv/vagrant
 $ ln -sf $HOME/work/dotfiles/lib/Vagrantfile /srv/vagrant/Vagrantfile
 $ git clone https://github.com/Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim

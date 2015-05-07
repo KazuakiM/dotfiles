@@ -1,11 +1,14 @@
-[user]
-    name =
-    email =
 [push]
     default = simple
 [core]
     autocrlf = input
+
+# Mac (GitHub) {{{
+[user]
+    name  = KazuakiM
+    email = kazuaki_mabuchi_to_go@hotmail.co.jp
 [difftool "vimdiff"]
     cmd = /Applications/MacVim.app/Contents/MacOS/vimdiff -o $LOCAL $REMOTE
 [mergetool "vimdiff"]
     cmd = /Applications/MacVim.app/Contents/MacOS/vimdiff -o $LOCAL $REMOTE
+#}}}
