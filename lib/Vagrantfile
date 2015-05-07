@@ -54,6 +54,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       mkdir -p $HOME/work $HOME/.config/htop                                                                                                       && \
       git clone https://github.com/KazuakiM/dotfiles.git $HOME/work/dotfiles                          >> #{VAGRANTFILE_LOG} 2>> #{VAGRANTFILE_LOG} && \
       ln -sf $HOME/work/dotfiles/.bash_logout     $HOME/.bash_logout                                                                               && \
+      ln -sf $HOME/work/dotfiles/.bash_profile    $HOME/.bash_profile                                                                              && \
       ln -sf $HOME/work/dotfiles/.bashrc          $HOME/.bashrc                                                                                    && \
       cp -f  $HOME/work/dotfiles/.bashrc.local    $HOME/                                                                                           && \
       ln -sf $HOME/work/dotfiles/.ctags           $HOME/.ctags                                                                                     && \
