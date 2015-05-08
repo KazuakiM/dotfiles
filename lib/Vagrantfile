@@ -53,24 +53,25 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     echo "[ #{index = (( index +1 ))}/#{PROCESS_MAX} ]Set dotfiles ..." && \
       mkdir -p $HOME/work $HOME/.config/htop                                                                                                       && \
       git clone https://github.com/KazuakiM/dotfiles.git $HOME/work/dotfiles                          >> #{VAGRANTFILE_LOG} 2>> #{VAGRANTFILE_LOG} && \
-      ln -sf $HOME/work/dotfiles/.bash_logout     $HOME/.bash_logout                                                                               && \
-      ln -sf $HOME/work/dotfiles/.bashrc          $HOME/.bashrc                                                                                    && \
-      cp -f  $HOME/work/dotfiles/.bashrc.local    $HOME/                                                                                           && \
-      ln -sf $HOME/work/dotfiles/.ctags           $HOME/.ctags                                                                                     && \
-      ln -sf $HOME/work/dotfiles/.dir_colors      $HOME/.dir_colors                                                                                && \
-      ln -sf $HOME/work/dotfiles/.gitconfig       $HOME/.gitconfig                                                                                 && \
-      cp -f  $HOME/work/dotfiles/.gitconfig.local $HOME/                                                                                           && \
-      ln -sf $HOME/work/dotfiles/.gvimrc          $HOME/.gvimrc                                                                                    && \
-      ln -sf $HOME/work/dotfiles/.htoprc          $HOME/.config/htop/htoprc                                                                        && \
-      ln -sf $HOME/work/dotfiles/.inputrc         $HOME/.inputrc                                                                                   && \
-      ln -sf $HOME/work/dotfiles/.mplayer         $HOME/.mplayer                                                                                   && \
-      cp -f  $HOME/work/dotfiles/.netrc.org       $HOME/.netrc                                                                                     && \
-      ln -sf $HOME/work/dotfiles/.screenrc        $HOME/.screenrc                                                                                  && \
-      ln -sf $HOME/work/dotfiles/.tmux.conf       $HOME/.tmux.conf                                                                                 && \
-      ln -sf $HOME/work/dotfiles/.vim             $HOME/.vim                                                                                       && \
-      ln -sf $HOME/work/dotfiles/.vimrc           $HOME/.vimrc                                                                                     && \
-      cp -f  $HOME/work/dotfiles/.vimrc.local     $HOME/                                                                                           && \
-      ln -sf $HOME/work/dotfiles/.w3m             $HOME/.w3m                                                                                       && \
+      ln -sf $HOME/work/dotfiles/.bash_logout         $HOME/.bash_logout                                                                           && \
+      ln -sf $HOME/work/dotfiles/.bash_profile        $HOME/.bash_profile                                                                          && \
+      ln -sf $HOME/work/dotfiles/.bashrc              $HOME/.bashrc                                                                                && \
+      cp -f  $HOME/work/dotfiles/.bashrc.local        $HOME/                                                                                       && \
+      ln -sf $HOME/work/dotfiles/.ctags               $HOME/.ctags                                                                                 && \
+      ln -sf $HOME/work/dotfiles/.dir_colors          $HOME/.dir_colors                                                                            && \
+      ln -sf $HOME/work/dotfiles/.gitconfig.org       $HOME/.gitconfig                                                                             && \
+      cp -f  $HOME/work/dotfiles/.gitconfig.local.org $HOME/.gitconfig.local                                                                       && \
+      ln -sf $HOME/work/dotfiles/.gvimrc              $HOME/.gvimrc                                                                                && \
+      ln -sf $HOME/work/dotfiles/.htoprc              $HOME/.config/htop/htoprc                                                                    && \
+      ln -sf $HOME/work/dotfiles/.inputrc             $HOME/.inputrc                                                                               && \
+      ln -sf $HOME/work/dotfiles/.mplayer             $HOME/.mplayer                                                                               && \
+      cp -f  $HOME/work/dotfiles/.netrc.org           $HOME/.netrc                                                                                 && \
+      ln -sf $HOME/work/dotfiles/.screenrc            $HOME/.screenrc                                                                              && \
+      ln -sf $HOME/work/dotfiles/.tmux.conf           $HOME/.tmux.conf                                                                             && \
+      ln -sf $HOME/work/dotfiles/.vim                 $HOME/.vim                                                                                   && \
+      ln -sf $HOME/work/dotfiles/.vimrc               $HOME/.vimrc                                                                                 && \
+      cp -f  $HOME/work/dotfiles/.vimrc.local         $HOME/                                                                                       && \
+      ln -sf $HOME/work/dotfiles/.w3m                 $HOME/.w3m                                                                                   && \
       git clone https://github.com/Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim           >> #{VAGRANTFILE_LOG} 2>> #{VAGRANTFILE_LOG} && \
       wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp/php_manual_ja.tar.gz  >> #{VAGRANTFILE_LOG} 2>> #{VAGRANTFILE_LOG} && \
       tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref                                        >> #{VAGRANTFILE_LOG} 2>> #{VAGRANTFILE_LOG} && \

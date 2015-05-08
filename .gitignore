@@ -2,5 +2,7 @@
 .bashrc.win
 C:/
 .DS_Store
+.gitconfig
+.gitconfig.local
 .netrc
 .vimrc.win
