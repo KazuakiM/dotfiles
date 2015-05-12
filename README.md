@@ -261,6 +261,10 @@ I made Vagrantfile.
 > $ rm -rf <Account>
 > $ git clone https://github.com/KazuakiM/dotfiles.git <Account>
 > $ git clone https://github.com/Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
+> $ cp -f $HOME/.gitconfig.org       $HOME/.gitconfig
+> $ cp -f $HOME/.gitconfig.local.org $HOME/.gitconfig.local
+>  Update local setting.
+>
 > $ wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp
 > $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
 > $ wget http://cs.sensiolabs.org/get/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
@@ -301,10 +305,10 @@ I made Vagrantfile.
 > |大項目                |小項目                                 |                                                               |
 > |:---------------------|:--------------------------------------|:--------------------------------------------------------------|
 > |Required sync setting |                                       |                                                               |
-> |LimeChat > Preferences|                                       |                                                               |
-> |                      |Search                                 |Google以外Remove                                               |
-> |                      |Content > Fonts & Colors > Default font|[RictyDiminished](https://github.com/yascentur/RictyDiminished)|
-> |                      |Content > Languages > Choose           |Add Japanese[ja]                                               |
+> |Firefox > 環境設定    |                                       |                                                               |
+> |                      |検索                                   |Google以外Remove                                               |
+> |                      |コンテンツ > フォントとカラー > デフォルトフォント|[RictyDiminished](https://github.com/yascentur/RictyDiminished)|
+> |                      |コンテンツ > 言語 > 言語設定           |Add Japanese[ja]                                               |
 > |add-on                |                                       |                                                               |
 > |                      |[Adblock Plus](https://addons.mozilla.org/ja/firefox/addon/adblock-plus/)                             ||
 > |                      |[Firebug](https://addons.mozilla.org/ja/firefox/addon/firebug/)                                       ||

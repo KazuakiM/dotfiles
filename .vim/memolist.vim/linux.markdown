@@ -156,6 +156,20 @@ $ cd /tmp/`date +%Y%m%d`
 $ concat_osx.sh `date +%Y%m%d`_ttyrecord.gif
 ```
 
+## nohup & disown
+
+Hung up block
+```bash
+$ nohup <command> > /tmp/nohup.log 2>&1 &
+```
+途中でバックグラウンド化
+```bash
+$ <command>
+ Ctrl+z
+$ jobs
+$ disown <PID>
+```
+
 ## Service
 
 Check service status list
