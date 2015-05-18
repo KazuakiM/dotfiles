@@ -492,5 +492,6 @@ SELECT ...
 | FLOAT<br />(単精度<br />浮動小数点数)  | -3.402823466E<br />+38                                              | 3.402823466E<br />+38                                               | 4 bytes |
 | DOUBLE<br />(倍精度<br />浮動小数点数) | -1.7976931348623157E<br />+308                                      | 1.7976931348623157E<br />+308                                       | 8 bytes |
 | DECIMAL<br />([アンパック<br />浮動小数点数](http://nippondanji.blogspot.jp/2009/05/mysql.html))||||
+| DATE                                   | 1000-01-01                                                          | 9999-12-31                                                          |3 bytes  |
 | DATETIME                               | 1000-01-01 00:00:00                                                 | 9999-12-31 23:59:59                                                 |5 bytes + fractional seconds storage |
 

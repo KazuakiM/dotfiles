@@ -82,7 +82,7 @@ endif
 " autocmd
 function! s:KazuakiMCheckString() abort "{{{
     let w:m1 = matchadd('KazuakiMCheckString', '\t\|\r\|\r\n\|\s\+$\|　')
-    let w:m2 = matchadd('KazuakiMTodo',        'FIXME\|NOTE\|OPTIMIZE\|TODO\|XXXX')
+    let w:m2 = matchadd('KazuakiMTodo',        'FIXME\|NOTE\|TODO\|XXX')
 endfunction "}}}
 function! s:KazuakiMBufEnter() abort "{{{
     " If open direcotry, call NERDTree

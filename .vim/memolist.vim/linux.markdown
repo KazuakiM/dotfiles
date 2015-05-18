@@ -134,26 +134,18 @@ file size under directory
 $ find ./ -ls
 ```
 
-## Gif
+## nohup & disown
 
-Free operation
+Hung up block
 ```bash
-$ mkdir -p /tmp/`date +%Y%m%d`
-$ ttyrec -a /tmp/`date +%Y%m%d`/ttyrecord
- Operate start.
-
-$ exit
-$ cd /tmp/`date +%Y%m%d`
-$ ttygif /tmp/`date +%Y%m%d`/ttyrecord
-$ concat_osx.sh `date +%Y%m%d`_ttyrecord.gif
+$ nohup <command> > /tmp/nohup.log 2>&1 &
 ```
-
-Command operation
+途中でバックグラウンド化
 ```bash
-$ mkdir -p /tmp/`date +%Y%m%d`
-$ ttyrec -a /tmp/`date +%Y%m%d`/ttyrecord -e COMMAND
-$ cd /tmp/`date +%Y%m%d`
-$ concat_osx.sh `date +%Y%m%d`_ttyrecord.gif
+$ <command>
+ Ctrl+z
+$ jobs
+$ disown <PID>
 ```
 
 ## Service

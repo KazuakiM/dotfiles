@@ -7,7 +7,7 @@ Files are setting my development environments.
 
 ### Install packages
 
-AppStore
+App
 * [Growl](https://itunes.apple.com/jp/app/growl/id467939042?mt=12)
 * [TweetDeck](https://itunes.apple.com/jp/app/tweetdeck-by-twitter/id485812721?mt=12)
 * [Xcode](https://developer.apple.com/jp/xcode/downloads/)
@@ -32,6 +32,17 @@ $ brew brewdle dump
 $ cp -p Brewfile $HOME/work/dotfiles/lib/
 $ cd $HOME/work/dotfiles/
 $ git status
+```
+
+Kindle Previewer
+* [Kindle Previewer](http://www.amazon.com/gp/feature.html?docId=1000765261)
+* [Java for OS X 2014-001](https://support.apple.com/kb/DL1572?locale=ja_JP)
+```bash
+$ /usr/libexec/java_home -v 1.6
+$ vim /Applications/Kindle\ Previewer.app/Contents/MacOS/Launcher
+
+   export DYLD_LIBRARY_PATH=.
+   export JAVA_HOME=/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
 ```
 
 Auto start
@@ -96,6 +107,16 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 > |Key Repeat > Basic Configurations > KeyRepeat|                  |     |
 > |                                             |Delay Until Repeat|200ms|
 > |                                             |Key Repeat        | 25ms|
+
+[KeyCast](https://github.com/cho45/KeyCast)
+> Application設定
+>
+> |大項目               |小項目|                                                                    |
+> |:--------------------|:-----|-------------------------------------------------------------------:|
+> |KeyCast > Preferences|      |                                                                    |
+> |                     |Width |300                                                                 |
+> |                     |Height|200                                                                 |
+> |                     |Font  |[RictyDiminished](https://github.com/yascentur/RictyDiminished) 15px|
 
 [KeePassX](http://www.keepassx.org/)
 
@@ -261,6 +282,10 @@ I made Vagrantfile.
 > $ rm -rf <Account>
 > $ git clone https://github.com/KazuakiM/dotfiles.git <Account>
 > $ git clone https://github.com/Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
+> $ cp -f $HOME/.gitconfig.org       $HOME/.gitconfig
+> $ cp -f $HOME/.gitconfig.local.org $HOME/.gitconfig.local
+>  Update local setting.
+>
 > $ wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp
 > $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
 > $ wget http://cs.sensiolabs.org/get/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
@@ -301,10 +326,10 @@ I made Vagrantfile.
 > |大項目                |小項目                                 |                                                               |
 > |:---------------------|:--------------------------------------|:--------------------------------------------------------------|
 > |Required sync setting |                                       |                                                               |
-> |LimeChat > Preferences|                                       |                                                               |
-> |                      |Search                                 |Google以外Remove                                               |
-> |                      |Content > Fonts & Colors > Default font|[RictyDiminished](https://github.com/yascentur/RictyDiminished)|
-> |                      |Content > Languages > Choose           |Add Japanese[ja]                                               |
+> |Firefox > 環境設定    |                                       |                                                               |
+> |                      |検索                                   |Google以外Remove                                               |
+> |                      |コンテンツ > フォントとカラー > デフォルトフォント|[RictyDiminished](https://github.com/yascentur/RictyDiminished)|
+> |                      |コンテンツ > 言語 > 言語設定           |Add Japanese[ja]                                               |
 > |add-on                |                                       |                                                               |
 > |                      |[Adblock Plus](https://addons.mozilla.org/ja/firefox/addon/adblock-plus/)                             ||
 > |                      |[Firebug](https://addons.mozilla.org/ja/firefox/addon/firebug/)                                       ||
