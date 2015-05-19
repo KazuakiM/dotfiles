@@ -283,6 +283,13 @@ WHERE NOT EXISTS (
   WHERE (TAB.<Column1> + 1) = SUB_TAB.<Column1>);
 ```
 
+Range column
+```sql
+SELECT <Column1>
+FROM <Table1> TAB
+WHERE NOW() BETWEEN start_date AND end_date;
+```
+
 ## SHOW
 
 Index
