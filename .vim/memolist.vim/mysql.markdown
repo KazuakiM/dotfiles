@@ -1,6 +1,14 @@
 MySQL
 ===
 
+## ER Diagram
+
+ALL DB
+* [Windows only](http://www.wind.sannet.ne.jp/m_matsu/developer/a5m2/)
+
+MySQL
+* [MySQL Workbench](http://dev.mysql.com/downloads/workbench/)
+
 ## Tips
 
 Copy DataBase
@@ -302,6 +310,15 @@ SHOW variables LIKE 'max_allowed_packet';
 DataBase
 ```sql
 CREATE DATABASE <DataBase1>, <DataBase2>;
+```
+
+Table  
+> Don't use direct CREATE TABLE commands and should use ER Diagram(check top page).
+
+Temporary table
+```sql
+CREATE TEMPORARY TABLE tmp_<Table1> (<Column1>, <Column2>, ...)
+  SELECT <ColumnData1>, <ColumnData2>, ...;
 ```
 
 ## DROP
