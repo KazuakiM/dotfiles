@@ -58,6 +58,13 @@ $ join -a1 -t ',' -e '-' -o '0 1.2 2.2' <(sort file1.tsv) <(sort file2.tsv)
 3,cat,-
 ```
 
+### File uniq
+
+sort and uniq
+```bash
+$ uniq <(sort file1) > output
+```
+
 ## SSH
 
 ```bash
