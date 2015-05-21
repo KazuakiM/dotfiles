@@ -223,6 +223,14 @@ UPDATE <Table1> SET <Column1> = <ColumnData1> WHERE <UniqueColumn1> = <UniqueCol
 UPDATE <Table1> SET <Column1> = <ColumnData2> WHERE <UniqueColumn1> = <UniqueColumnData2>;
 ```
 
+Table JOIN
+```sql
+UPDATE <Table1> AS TAB1
+  INNER JOIN <Table2> AS TAB2
+  ON TAB1.id = TAB2.tab1_id
+  SET TAB1.<Column1> = <ColumnData1> WHERE <UniqueColumn1> = <UniqueColumnData1>;
+```
+
 [Good1](http://d.hatena.ne.jp/knowledgetree/20100325/1269530022)
 ```sql
 UPDATE <Table1> SET
@@ -246,6 +254,16 @@ UPDATE <Table1>
   INNER JOIN tmp_<Table1>
   ON <Table1>.<UniqueColumn1> = tmp_<Table1>.<UniqueColumn1>
   SET <Table1>.<Column1> = tmp_<Table1>.<UniqueColumn1>;
+```
+
+Multi Table
+```sql
+UPDATE <Table1> AS TAB1
+  INNER JOIN <Table2> AS TAB2
+  ON TAB1.id = TAB2.tab1_id
+  SET TAB1.<Column1> = <ColumnData1>,
+  TAB2.<Column2> = <ColumnData2>
+  WHERE <UniqueColumn1> = <UniqueColumnData1>;
 ```
 
 ## DELETE/TRUNCATE
@@ -276,7 +294,7 @@ SELECT DATABASE();
 Show empty min id
 ```sql
 SELECT MIN(TAB.<Column1> + 1) AS min_<Column1>
-FROM <Table1> TAB
+FROM <Table1> AS TAB
 WHERE NOT EXISTS (
   SELECT SUB_TAB.<Column1>
   FROM <Table1> SUB_TAB
@@ -285,8 +303,8 @@ WHERE NOT EXISTS (
 
 Range column
 ```sql
-SELECT <Column1>
-FROM <Table1> TAB
+SELECT TAB.<Column1>
+FROM <Table1> AS TAB
 WHERE NOW() BETWEEN start_date AND end_date;
 ```
 
@@ -322,7 +340,7 @@ CREATE DATABASE <DataBase1>, <DataBase2>;
 Table  
 > Don't use direct CREATE TABLE commands and should use ER Diagram(check top page).
 
-Temporary table
+TEMPORARY TABLE - SELECT
 ```sql
 CREATE TEMPORARY TABLE tmp_<Table1> (<Column1>, <Column2>, ...)
   SELECT <ColumnData1>, <ColumnData2>, ...;
