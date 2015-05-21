@@ -119,7 +119,7 @@ function! KazuakiMStatuslineSyntax() abort "{{{
 endfunction "}}}
 " Basic
 set ambiwidth=double autoindent autoread backspace=indent,eol,start backup clipboard+=autoselect,unnamed cmdheight=1 completeopt=longest,menu
-set diffopt=filler,context:5,iwhite,horizontal directory=$HOME/.vim/swap display=lastline expandtab fillchars+=diff:* foldmethod=marker
+set diffopt=filler,context:5,iwhite,vertical directory=$HOME/.vim/swap display=lastline expandtab fillchars+=diff:* foldmethod=marker
 set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m helplang=ja hidden history=1000 hlsearch ignorecase iminsert=0 imsearch=-1 incsearch laststatus=2 lazyredraw
 set matchpairs+=<:> matchtime=1 mouse= nobomb noequalalways noerrorbells noimcmdline noimdisable noruler number pumheight=8 scrolloff=999 shiftwidth=4 shortmess+=I
 set showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile tabstop=4 title titleold= titlestring=%F ttyfast t_vb= undofile updatecount=30
