@@ -347,6 +347,7 @@ nnoremap <SID>[unite] <Nop>
 nmap <Leader>u <SID>[unite]
 " default plugins
 nnoremap <silent> <SID>[unite]f   :<C-u>call<Space>KazuakiMUniteFileRecAsyncOrGit()<CR>
+nnoremap <silent> <SID>[unite]let :<C-u>Unite<Space>output:let<CR>
 nnoremap <silent> <SID>[unite]map :<C-u>Unite<Space>output:map\|map!\|lmap<CR>
 nnoremap <silent> <SID>[unite]msg :<C-u>Unite<Space>output:message<CR>
 nnoremap <silent> <SID>[unite]s   :<C-u>Unite<Space>-default-action=ex<Space>output:scriptnames<CR>
