@@ -198,7 +198,7 @@ vnoremap <C-w> "ay
 vnoremap <C-e> "by
 nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
 " Wildmenu
-cnoremap <Left> <Space><BS><Left>
+cnoremap <Left>  <Space><BS><Left>
 cnoremap <Right> <Space><BS><Right>
 " $VIMRUNTIME/syntax/sql.vim
 let g:sql_type_default = 'mysql'
@@ -430,6 +430,11 @@ let g:easy_align_delimiters = {
 \    ')': {'pattern': '[()]',                  'ignore_groups': ['String'], 'left_margin': 0, 'right_margin': 0, 'stick_to_left': 0},
 \    'd': {'pattern': '\(\S\+\s*[;=]\)\@=',    'ignore_groups': ['String'], 'left_margin': 0, 'right_margin': 0}}
 "}}}
+" vim-quickhl {{{
+NeoBundleLazy 't9md/vim-quickhl', {'commands' : 'quickhl#manual#this'}
+nnoremap <Space>m :<C-u>call<Space>quickhl#manual#this('n')<CR>
+nnoremap <Space>M :<C-u>call<Space>quickhl#manual#reset()<CR>
+"}}}
 " Align
 " SQLUtilities {{{
 NeoBundleLazy 'vim-scripts/SQLUtilities', {'depends': 'vim-scripts/Align', 'commands': 'SQLUFormatter'}
@@ -447,8 +452,8 @@ nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
 " vim-ref {{{
 NeoBundleLazy 'thinca/vim-ref', {'functions': 'ref#K'}
 let g:ref_no_default_key_mappings = 1
-inoremap <silent><C-k> <C-o>:call<space>ref#K('normal')<CR><ESC>
-nnoremap <silent>K     :<C-u>call<space>ref#K('normal')<CR>
+inoremap <silent><C-k> <C-o>:call<Space>ref#K('normal')<CR><ESC>
+nnoremap <silent>K     :<C-u>call<Space>ref#K('normal')<CR>
 let s:hooks = neobundle#get_hooks('vim-ref')
 function! s:hooks.on_source(bundle) abort
     let g:ref_cache_dir       = $HOME.'/.vim/vim-ref/cache'
