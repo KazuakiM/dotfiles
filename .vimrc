@@ -435,6 +435,24 @@ let g:easy_align_delimiters = {
 NeoBundleLazy 't9md/vim-quickhl', {'commands' : 'quickhl#manual#this'}
 nnoremap <Space>m :<C-u>call<Space>quickhl#manual#this('n')<CR>
 nnoremap <Space>M :<C-u>call<Space>quickhl#manual#reset()<CR>
+let s:hooks = neobundle#get_hooks('vim-quickhl')
+function! s:hooks.on_source(bundle) abort
+    let g:quickhl_manual_colors = [
+    \ 'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkBlue    guibg=DarkBlue',
+    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=White ctermbg=DarkGreen   guibg=DarkGreen',
+    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=White ctermbg=DarkCyan    guibg=DarkCyan',
+    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=White ctermbg=DarkRed     guibg=DarkRed',
+    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=White ctermbg=DarkMagenta guibg=DarkMagenta',
+    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=DarkYellow  guibg=DarkYellow',
+    \ 'cterm=NONE gui=NONE ctermfg=White guifg=Black ctermbg=DarkGrey    guibg=DarkGrey',
+    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Grey        guibg=Grey',
+    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Blue        guibg=Blue',
+    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Green       guibg=Green',
+    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Cyan        guibg=Cyan',
+    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Red         guibg=Red',
+    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta     guibg=Magenta',
+    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow      guibg=Yellow']
+endfunction
 "}}}
 " Align
 " SQLUtilities {{{
