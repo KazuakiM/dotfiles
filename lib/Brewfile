@@ -117,6 +117,7 @@ brew 'xz'
 brew 'yasm'
 brew 'zeromq', args: ['with-pgm']
 brew 'zlib'
+cask 'android-file-transfer'
 cask 'appcleaner'
 cask 'bettertouchtool'
 cask 'cheatsheet'
