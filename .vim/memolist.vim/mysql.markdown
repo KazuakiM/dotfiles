@@ -411,6 +411,37 @@ ALTER TABLE <Table1> RENAME <Table2>;
 
 ![JOIN Image](http://www.codeproject.com/KB/database/Visual_SQL_Joins/Visual_SQL_JOINS_V2.png)
 
+## CASE
+
+Simple CASE
+```sql
+SELECT CASE <Column1>
+  WHEN <ColumnData1-1>  THEN <Data1-1>
+  WHEN <ColumnData1-2>  THEN <Data1-2>
+  ELSE <Data1-3>
+  END AS <Column1_RENAME>
+```
+
+Search CASE
+```sql
+SELECT CASE
+  WEHN <Column1> = <ColumnData1-1> THEN <Data1-1>
+  WHEN <Column1> = <ColumnData1-2> THEN <Data1-2>
+  ELSE <Data1-3>
+  END AS <Column1_RENAME>
+```
+
+GROUP BY - CASE
+```sql
+SELECT CASE
+  WEHN <Column1> = <ColumnData1-1> THEN <Data1-1>
+  WHEN <Column1> = <ColumnData1-2> THEN <Data1-2>
+  ELSE <Data1-3>
+  END AS <Column1_RENAME>
+  FROM <Table1>
+  GROUP BY <Column1_RENAME>
+```
+
 ## DATE
 
 UTC+9(Japanese timezone)
