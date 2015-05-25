@@ -491,6 +491,19 @@ SELECT <UniqueColumn1>(, <UniqueColumn2>),
   GROUP BY <UniqueColumn1>(, <UniqueColumn2>);
 ```
 
+COUNT - MAX
+```sql
+SELECT tab.<Column1>, COUNT(*) AS count
+FROM <Table1> AS tab
+GROUP BY tab.<Column1>
+HAVING count >= (
+  SELECT MAX(having_tab.count)
+  FROM (
+    SELECT COUNT(*) AS count
+    FROM <Table1> AS having_sub_tab
+    GROUP BY having_sub_tab.<Column1> ) AS having_tab );
+```
+
 TRIM
 ```sql
 SELECT TRIM(LEADING  '　' FROM '　I　love　Vim　');
