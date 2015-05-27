@@ -346,6 +346,11 @@ CREATE TEMPORARY TABLE tmp_<Table1> (<Column1>, <Column2>, ...)
   SELECT <ColumnData1>, <ColumnData2>, ...;
 ```
 
+INDEX
+```sql
+CREATE INDEX <Index1> ON <Table1>(<Column1>);
+```
+
 ## DROP
 
 Table
