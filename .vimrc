@@ -82,7 +82,7 @@ endif
 " autocmd
 function! s:KazuakiMCheckString() abort "{{{
     let w:m1 = matchadd('KazuakiMCheckString', '\t\|\r\|\r\n\|\s\+$\|　')
-    let w:m2 = matchadd('KazuakiMTodo',        'FIXME\|NOTE\|TODO\|XXX')
+    let w:m2 = matchadd('KazuakiMTodo',        'FIXME\|MEMO\|NOTE\|TODO\|XXX')
 endfunction "}}}
 function! s:KazuakiMBufEnter() abort "{{{
     " If open direcotry, call NERDTree
@@ -262,7 +262,6 @@ if neobundle#load_cache()
     NeoBundle 'vim-scripts/matchit.zip'
     NeoBundle 'fuenor/qfixgrep'
     NeoBundle 'LeafCage/yankround.vim'
-    NeoBundle 'thinca/vim-quickrun'
     NeoBundle 'SirVer/ultisnips'
     NeoBundle 'rhysd/clever-f.vim'
     NeoBundle 'tpope/vim-surround'
@@ -285,23 +284,6 @@ nmap <C-n> <Plug>(yankround-next)
 let g:yankround_dir                 = $HOME.'/.vim/yankround.vim'
 let g:yankround_region_hl_groupname = 'YankRoundRegion'
 let g:yankround_use_region_hl       = 1
-"}}}
-" vim-quickrun {{{
-nnoremap <Leader>run :<C-u>QuickRun<CR>
-let g:quickrun_config = {
-\    '_': {
-\        'hook/close_buffer/enable_empty_data': 1,    'hook/close_buffer/enable_failure': 1,           'outputter': 'multi:buffer:quickfix',
-\        'outputter/buffer/close_on_empty':     1,    'outputter/buffer/split':           ':botright', 'runner':    'vimproc',
-\        'runner/vimproc/updatetime':           600},
-\    'watchdogs_checker/_': {
-\        'hook/close_quickfix/enable_exit':        1, 'hook/back_window/enable_exit':      0,   'hook/back_window/priority_exit':       1,
-\        'hook/qfsigns_update/enable_exit':        1, 'hook/qfsigns_update/priority_exit': 2,   'hook/qfstatusline_update/enable_exit': 1,
-\        'hook/qfstatusline_update/priority_exit': 3, 'outputter/quickfix/open_cmd':       ''},
-\    'watchdogs_checker/php': {
-\        'command': 'php',        'cmdopt':      '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
-\        'exec':    '%c %o %s:p', 'errorformat': '%m\ in\ %f\ on\ line\ %l'},
-\    'markdown': {'outputter': 'browser'},
-\    'php': {'command': 'phpunit', 'cmdopt': '--no-configuration', 'hook/close_buffer/enable_failure': 0, 'outputter/buffer/split': ':botright 7sp'}}
 "}}}
 " ultisnips {{{
 let g:did_UltiSnips_snipmate_compatibility = 1
@@ -329,15 +311,15 @@ let g:indentLine_faster = 1
 "
 "
 " NeoBundleLazy {{{
-"
-" TODO:If gVim for Windows italic fonts are deleted, I would move 'unite-highlight' to backup/.vimrc.
-"
 " unite.vim
 " unite-help
 " codic-vim
 " unite-codic.vim
 " unite-highlight
 " memolist.vim {{{
+"
+" MEMO:If gVim for Windows italic fonts are deleted, I would move 'unite-highlight' to backup/.vimrc.
+"
 NeoBundleLazy 'Shougo/unite.vim',           { 'commands': 'Unite'}
 NeoBundleLazy 'Shougo/unite-help',          { 'depends':  'Shougo/unite.vim', 'unite_sources':     'help'}
 NeoBundleLazy 'rhysd/unite-codic.vim',      { 'depends':  ['koron/codic-vim', 'Shougo/unite.vim'], 'unite_sources': 'codic'}
@@ -386,6 +368,25 @@ function! s:hooks.on_source(bundle) abort
     let g:memolist_unite_source         = 'file_rec'
 endfunction
 "}}}
+" vim-quickrun {{{
+NeoBundleLazy 'thinca/vim-quickrun', {'commands': 'QuickRun'}
+nnoremap <Leader>run :<C-u>QuickRun<CR>
+" Set g:quickrun_config at .vimrc.local .
+let g:quickrun_config = {
+\    '_': {
+\        'hook/close_buffer/enable_empty_data': 1,    'hook/close_buffer/enable_failure': 1,           'outputter': 'multi:buffer:quickfix',
+\        'outputter/buffer/close_on_empty':     1,    'outputter/buffer/split':           ':botright', 'runner':    'vimproc',
+\        'runner/vimproc/updatetime':           600},
+\    'watchdogs_checker/_': {
+\        'hook/close_quickfix/enable_exit':        1, 'hook/back_window/enable_exit':      0,   'hook/back_window/priority_exit':       1,
+\        'hook/qfsigns_update/enable_exit':        1, 'hook/qfsigns_update/priority_exit': 2,   'hook/qfstatusline_update/enable_exit': 1,
+\        'hook/qfstatusline_update/priority_exit': 3, 'outputter/quickfix/open_cmd':       ''},
+\    'watchdogs_checker/php': {
+\        'command': 'php',        'cmdopt':      '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
+\        'exec':    '%c %o %s:p', 'errorformat': '%m\ in\ %f\ on\ line\ %l'},
+\    'markdown': {'outputter': 'browser'},
+\    'php': {'command': 'phpunit', 'cmdopt': '--no-configuration', 'hook/close_buffer/enable_failure': 0, 'outputter/buffer/split': ':botright 7sp'}}
+"}}}
 " taglist.vim {{{
 NeoBundleLazy 'vim-scripts/taglist.vim', {'commands': 'Tlist'}
 nnoremap <Leader>t :<C-u>Tlist<CR>
@@ -413,7 +414,7 @@ endfunction
 "}}}
 " vim-qfreplace {{{
 "
-" XXX:I think I should operate 'vim-qfreplace'. It's so cool.
+" MEMO:I think I should operate 'vim-qfreplace'. It's so cool.
 "
 NeoBundleLazy 'thinca/vim-qfreplace', {'commands': 'Qfreplace'}
 nnoremap <Leader>qr :<C-u>Qfreplace<CR>
