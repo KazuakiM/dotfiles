@@ -479,7 +479,7 @@ GROUP_CONCAT
 Require 2nd parameter at IFNULL.If max or min, check "Max/Min". And check 'group_concat_max_len'.
 ```sql
 SELECT <UniqueColumn1>(, <UniqueColumn2>),
-  GROUP_CONCAT(CONCAT(IFNULL(<Column1>, ''), '_',IFNULL(<Column1>, '')) ORDER BY <Column1> ASC SEPARATOR '|') AS table_info
+  GROUP_CONCAT([DISTINCT] CONCAT(IFNULL(<Column1>, ''), '_',IFNULL(<Column1>, '')) ORDER BY <Column1> ASC SEPARATOR '|') AS table_info
   FROM <Table1>
   GROUP BY <UniqueColumn1>(, <UniqueColumn2>);
 
