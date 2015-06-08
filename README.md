@@ -22,7 +22,7 @@ $ git clone https://github.com/KazuakiM/dotfiles.git $HOME/work/dotfiles
 $ sudo cp -f $HOME/work/dotfiles/etc/paths /etc/paths
 $ cd $HOME/work/dotfiles/lib
 $ brew update
-$ brew upgrade
+$ brew upgrade --all
 $ brew doctor
 $ brew tap Homebrew/brewdler
 $ brew brewdle

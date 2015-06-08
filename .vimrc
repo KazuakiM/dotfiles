@@ -465,6 +465,11 @@ let g:sqlutil_align_where         = 0
 let g:sqlutil_keyword_case        = '\U'
 nnoremap <Leader>sql :<C-u>SQLUFormatter<CR>
 "}}}
+" vim-sqlfix(making local) {{{
+if s:osType ==# 'macunix'
+    NeoBundleLazy 'vim-sqlfix', {'commands': 'Sqlfix', 'base': '/srv/vim-plugin', 'type': 'nosync'}
+endif
+"}}}
 " previm {{{
 NeoBundleLazy 'kannokanno/previm', {'depends': 'open-browser.vim', 'commands': 'PrevimOpen'}
 nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
@@ -557,6 +562,10 @@ unlet s:hooks
 "}}}
 " vim-markdown {{{
 NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
+"NeoBundleLazy 'plasticboy/vim-markdown', {'depends': 'joker1007/vim-markdown-quote-syntax', 'filetypes': 'mkd'}
+"}}}
+" vim-prettyprint {{{
+NeoBundleLazy 'thinca/vim-prettyprint', {'filetypes': 'vim'}
 "}}}
 "}}}
 "
@@ -602,9 +611,10 @@ call neobundle#end()
 "
 " FileType {{{
 filetype plugin indent on
-autocmd MyAutoCmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*,txt,text} setlocal filetype=mkd
 autocmd MyAutoCmd BufNewFile,BufRead *.coffee                            setlocal filetype=coffee
+autocmd MyAutoCmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*,txt,text} setlocal filetype=mkd
 autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}                           setlocal filetype=snippets
+autocmd MyAutoCmd BufNewFile,BufRead *.{vim*}                            setlocal filetype=vim
 autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                         setlocal filetype=xxd
 "}}}
 "
