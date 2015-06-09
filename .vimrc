@@ -465,10 +465,8 @@ let g:sqlutil_align_where         = 0
 let g:sqlutil_keyword_case        = '\U'
 nnoremap <Leader>sql :<C-u>SQLUFormatter<CR>
 "}}}
-" vim-sqlfix(making local) {{{
-if s:osType ==# 'macunix'
-    NeoBundleLazy 'vim-sqlfix', {'commands': 'Sqlfix', 'base': '/srv/vim-plugin', 'type': 'nosync'}
-endif
+" vim-sqlfix {{{
+NeoBundleLazy 'KazuakiM/vim-sqlfix', {'commands': 'Sqlfix'}
 "}}}
 " previm {{{
 NeoBundleLazy 'kannokanno/previm', {'depends': 'open-browser.vim', 'commands': 'PrevimOpen'}
