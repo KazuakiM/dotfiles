@@ -208,13 +208,14 @@ let g:php_htmlInStrings = 1
 let g:php_noShortTags   = 1
 let g:php_sql_query     = 1
 " disable plugin
-let g:loaded_2html_plugin  = 1
-let g:loaded_gzip          = 1
-let g:loaded_matchparen    = 1
-let g:loaded_netrwPlugin   = 1
-let g:loaded_tarPlugin     = 1
-let g:loaded_vimballPlugin = 1
-let g:loaded_zipPlugin     = 1
+let g:loaded_2html_plugin   = 1
+let g:loaded_gzip           = 1
+let g:loaded_matchparen     = 1
+let g:loaded_netrwPlugin    = 1
+let g:loaded_sql_completion = 1
+let g:loaded_tarPlugin      = 1
+let g:loaded_vimballPlugin  = 1
+let g:loaded_zipPlugin      = 1
 " Vim
 nnoremap <SID>[vim] <Nop>
 nmap <Leader>f <SID>[vim]
@@ -268,6 +269,7 @@ if neobundle#load_cache()
     NeoBundle 'gcmt/wildfire.vim'
     NeoBundle 'vim-jp/vimdoc-ja'
     NeoBundle 'Yggdroot/indentLine'
+    NeoBundle 'thinca/vim-prettyprint'
 
     NeoBundleSaveCache
 endif
@@ -455,16 +457,6 @@ function! s:hooks.on_source(bundle) abort
     \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow      guibg=Yellow']
 endfunction
 "}}}
-" Align
-" SQLUtilities {{{
-NeoBundleLazy 'vim-scripts/SQLUtilities', {'depends': 'vim-scripts/Align', 'commands': 'SQLUFormatter'}
-let g:sqlutil_align_comma         = 0
-let g:sqlutil_align_first_word    = 0
-let g:sqlutil_align_keyword_right = 0
-let g:sqlutil_align_where         = 0
-let g:sqlutil_keyword_case        = '\U'
-nnoremap <Leader>sql :<C-u>SQLUFormatter<CR>
-"}}}
 " vim-sqlfix {{{
 NeoBundleLazy 'KazuakiM/vim-sqlfix', {'commands': 'Sqlfix'}
 "}}}
@@ -561,9 +553,6 @@ unlet s:hooks
 " vim-markdown {{{
 NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
 "NeoBundleLazy 'plasticboy/vim-markdown', {'depends': 'joker1007/vim-markdown-quote-syntax', 'filetypes': 'mkd'}
-"}}}
-" vim-prettyprint {{{
-NeoBundleLazy 'thinca/vim-prettyprint', {'filetypes': 'vim'}
 "}}}
 "}}}
 "
