@@ -269,6 +269,7 @@ if neobundle#load_cache()
     NeoBundle 'gcmt/wildfire.vim'
     NeoBundle 'vim-jp/vimdoc-ja'
     NeoBundle 'Yggdroot/indentLine'
+    NeoBundle 'thinca/vim-prettyprint'
 
     NeoBundleSaveCache
 endif
@@ -552,9 +553,6 @@ unlet s:hooks
 " vim-markdown {{{
 NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
 "NeoBundleLazy 'plasticboy/vim-markdown', {'depends': 'joker1007/vim-markdown-quote-syntax', 'filetypes': 'mkd'}
-"}}}
-" vim-prettyprint {{{
-NeoBundleLazy 'thinca/vim-prettyprint', {'commands': ['PP', 'PrettyPrint'], 'functions': ['PP', 'PrettyPrint', 'prettyprint#echo']}
 "}}}
 "}}}
 "
