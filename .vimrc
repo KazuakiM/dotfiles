@@ -456,16 +456,6 @@ function! s:hooks.on_source(bundle) abort
     \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow      guibg=Yellow']
 endfunction
 "}}}
-" Align
-" SQLUtilities {{{
-NeoBundleLazy 'vim-scripts/SQLUtilities', {'depends': 'vim-scripts/Align', 'commands': 'SQLUFormatter'}
-let g:sqlutil_align_comma         = 0
-let g:sqlutil_align_first_word    = 0
-let g:sqlutil_align_keyword_right = 0
-let g:sqlutil_align_where         = 0
-let g:sqlutil_keyword_case        = '\U'
-nnoremap <Leader>sql :<C-u>SQLUFormatter<CR>
-"}}}
 " vim-sqlfix {{{
 NeoBundleLazy 'KazuakiM/vim-sqlfix', {'commands': 'Sqlfix'}
 "}}}
@@ -564,7 +554,7 @@ NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
 "NeoBundleLazy 'plasticboy/vim-markdown', {'depends': 'joker1007/vim-markdown-quote-syntax', 'filetypes': 'mkd'}
 "}}}
 " vim-prettyprint {{{
-NeoBundleLazy 'thinca/vim-prettyprint', {'filetypes': 'vim'}
+NeoBundleLazy 'thinca/vim-prettyprint', {'commands': ['PP', 'PrettyPrint'], 'functions': ['PP', 'PrettyPrint']}
 "}}}
 "}}}
 "
