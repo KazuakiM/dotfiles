@@ -208,14 +208,15 @@ let g:php_htmlInStrings = 1
 let g:php_noShortTags   = 1
 let g:php_sql_query     = 1
 " disable plugin
-let g:loaded_2html_plugin   = 1
-let g:loaded_gzip           = 1
-let g:loaded_matchparen     = 1
-let g:loaded_netrwPlugin    = 1
-let g:loaded_sql_completion = 1
-let g:loaded_tarPlugin      = 1
-let g:loaded_vimballPlugin  = 1
-let g:loaded_zipPlugin      = 1
+let g:loaded_2html_plugin      = 1
+let g:loaded_gzip              = 1
+let g:loaded_matchparen        = 1
+let g:loaded_netrwPlugin       = 1
+let g:loaded_sql_completion    = 1
+let g:loaded_tarPlugin         = 1
+let g:loaded_vimballPlugin     = 1
+let g:loaded_zipPlugin         = 1
+let g:omni_sql_no_default_maps = 1
 " Vim
 nnoremap <SID>[vim] <Nop>
 nmap <Leader>f <SID>[vim]
