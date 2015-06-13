@@ -134,14 +134,16 @@ else
     set nocursorline
 endif
 "set foldopen-=search
+"set colorcolumn=79
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc
 " Color
 syntax on
 colorscheme kazuakim
 " Mapping
 "  ESC
-inoremap jk <ESC>
-inoremap kj <ESC>
+inoremap jk <ESC>`^
+inoremap kj <ESC>`^
+inoremap <silent> <Esc>  <Esc>`^
 "  Fold
 nnoremap zx :foldopen<CR>
 "  Line
@@ -209,6 +211,7 @@ let g:php_noShortTags   = 1
 let g:php_sql_query     = 1
 " disable plugin
 let g:loaded_2html_plugin      = 1
+let g:loaded_getscriptPlugin   = 1
 let g:loaded_gzip              = 1
 let g:loaded_matchparen        = 1
 let g:loaded_netrwPlugin       = 1
