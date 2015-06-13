@@ -141,9 +141,10 @@ syntax on
 colorscheme kazuakim
 " Mapping
 "  ESC
-inoremap jk <ESC>`^
-inoremap kj <ESC>`^
-inoremap <silent> <Esc>  <Esc>`^
+inoremap jk <Esc>
+inoremap kj <Esc>
+" XXX:This setting is cursor previous position motion fix when insert mode leave. But It includes bug when arrow key type in insert mode.
+"inoremap <Esc> <Esc>`^
 "  Fold
 nnoremap zx :foldopen<CR>
 "  Line
@@ -565,6 +566,7 @@ NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
 NeoBundleFetch 'psychs/lingr-irc'
 NeoBundleFetch 'KazuakiM/neosnippet-snippets'
 NeoBundleFetch 'Kuniwak/vint'
+NeoBundleFetch 'thinca/vim-themis'
 "}}}
 "
 "
