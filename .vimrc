@@ -235,14 +235,14 @@ nnoremap <SID>[vim]c :<C-u>setlocal<Space>conceallevel=2<CR>
 if !has('gui_running')
     " http://d.hatena.ne.jp/thinca/20111204/1322932585
     function! s:KazuakiMTabpageLabelUpdate(tabNumber) abort "{{{
-        let a:highlight = a:tabNumber is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
-        let a:bufnrs    = tabpagebuflist(a:tabNumber)
-        let a:bufnr     = len(a:bufnrs)
-        if a:bufnr is 1
-            let a:bufnr = ''
+        let l:highlight = a:tabNumber is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
+        let l:bufnrs    = tabpagebuflist(a:tabNumber)
+        let l:bufnr     = len(l:bufnrs)
+        if l:bufnr is 1
+            let l:bufnr = ''
         endif
-        let a:modified = len(filter(copy(a:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
-        return '%'.a:tabNumber.'T'.a:highlight.a:bufnr.' '.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tabNumber) - 1]), ':t').' '.a:modified.'%T%#TabLineFill#'
+        let l:modified = len(filter(copy(l:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
+        return '%'.a:tabNumber.'T'.l:highlight.l:bufnr.' '.fnamemodify(bufname(l:bufnrs[tabpagewinnr(a:tabNumber) - 1]), ':t').' '.l:modified.'%T%#TabLineFill#'
     endfunction "}}}
     function! KazuakiMTabLineUpdate() abort "{{{
         return join(map(range(1, tabpagenr('$')), 's:KazuakiMTabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
