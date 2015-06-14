@@ -565,6 +565,7 @@ NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
 " NeoBundleFetch {{{
 NeoBundleFetch 'psychs/lingr-irc'
 NeoBundleFetch 'KazuakiM/neosnippet-snippets'
+NeoBundleFetch 'KazuakiM/vim-regexper'
 NeoBundleFetch 'Kuniwak/vint'
 NeoBundleFetch 'thinca/vim-themis'
 "}}}
