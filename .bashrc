@@ -82,6 +82,7 @@ case "${OSTYPE}" in
         alias vim='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
         alias gvim="$HOME/work/dotfiles/src/macVimStater.sh"
         alias vimdiff='/Applications/MacVim.app/Contents/MacOS/vimdiff'
+        alias test="cd $HOME/.vim/bundle/vim-sqlfix/ && $HOME/.vim/bundle/vim-themis/bin/themis test/sqlfix.vimspec -r --reporter dot"
         alias httpd='sudo apachectl'
         alias composer='php -d memory_limit=1G /usr/local/opt/composer/libexec/composer.phar'
         alias MYSQL='mysql.server'

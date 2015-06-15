@@ -47,9 +47,21 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       sudo yum clean all                                       >> #{VAGRANTFILE_LOG} && \
       sudo yum -y --enablerepo=epel,mysql,remi,rpmforge update >> #{VAGRANTFILE_LOG} && \
       sudo yum clean all                                       >> #{VAGRANTFILE_LOG} && \
-      sudo yum -y --enablerepo=epel,mysql,remi,rpmforge install colordiff ctags gcc git htop httpd libcurl-devel lynx make man-pages-ja ncurses-devel nmap-ncat \
-        openssl openssl-devel perl perl-core perl-devel php php-devel pv python python-devel readline ruby ruby-devel screen the_silver_searcher tmux tree wget \
-        yum-cron                                               >> #{VAGRANTFILE_LOG} && \
+      sudo yum -y --enablerepo=epel,mysql,remi,rpmforge install \
+        colordiff           ctags \
+        gcc                 git \
+        htop                httpd \
+        libcurl-devel       lynx \
+        make                man-pages-ja  mysql-community-server \
+        ncurses-devel       nmap-ncat \
+        openssl             openssl-devel \
+        perl                perl-core     perl-devel php php-devel pv python python-devel \
+        readline            ruby          ruby-devel \
+        screen              sqlite-devel \
+        the_silver_searcher tmux          tree \
+        wget \
+        yum-cron \
+        zlib-devel                                             >> #{VAGRANTFILE_LOG} && \
     echo "[ #{index = (( index +1 ))}/#{PROCESS_MAX} ]Set dotfiles ..." && \
       mkdir -p $HOME/work $HOME/.config/htop                                                                                                       && \
       git clone https://github.com/KazuakiM/dotfiles.git $HOME/work/dotfiles                          >> #{VAGRANTFILE_LOG} 2>> #{VAGRANTFILE_LOG} && \

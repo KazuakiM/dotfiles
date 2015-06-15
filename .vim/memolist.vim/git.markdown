@@ -99,16 +99,16 @@ Create github.io pages
  ```bash
  pwd
  git clone git@github.com:KazuakiM/SlideShow-XXX.git
- git status
- git branch -a
- git checkout -b gh-pages origin/gh-pages
+ cd SlideShow-XXX
+ git branch gh-pages
+ git checkout gh-pages
 
  #
  # Copy other repositorys.
  #
 
  git commit -am 'first commit'
- git push
+ git push origin gh-pages
  ```
 
 ## git log

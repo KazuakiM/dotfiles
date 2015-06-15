@@ -134,14 +134,17 @@ else
     set nocursorline
 endif
 "set foldopen-=search
+"set colorcolumn=79
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc
 " Color
 syntax on
 colorscheme kazuakim
 " Mapping
 "  ESC
-inoremap jk <ESC>
-inoremap kj <ESC>
+inoremap jk <Esc>
+inoremap kj <Esc>
+" XXX:This setting is cursor previous position motion fix when insert mode leave. But It includes bug when arrow key type in insert mode.
+"inoremap <Esc> <Esc>`^
 "  Fold
 nnoremap zx :foldopen<CR>
 "  Line
@@ -208,14 +211,16 @@ let g:php_htmlInStrings = 1
 let g:php_noShortTags   = 1
 let g:php_sql_query     = 1
 " disable plugin
-let g:loaded_2html_plugin   = 1
-let g:loaded_gzip           = 1
-let g:loaded_matchparen     = 1
-let g:loaded_netrwPlugin    = 1
-let g:loaded_sql_completion = 1
-let g:loaded_tarPlugin      = 1
-let g:loaded_vimballPlugin  = 1
-let g:loaded_zipPlugin      = 1
+let g:loaded_2html_plugin      = 1
+let g:loaded_getscriptPlugin   = 1
+let g:loaded_gzip              = 1
+let g:loaded_matchparen        = 1
+let g:loaded_netrwPlugin       = 1
+let g:loaded_sql_completion    = 1
+let g:loaded_tarPlugin         = 1
+let g:loaded_vimballPlugin     = 1
+let g:loaded_zipPlugin         = 1
+let g:omni_sql_no_default_maps = 1
 " Vim
 nnoremap <SID>[vim] <Nop>
 nmap <Leader>f <SID>[vim]
@@ -230,14 +235,14 @@ nnoremap <SID>[vim]c :<C-u>setlocal<Space>conceallevel=2<CR>
 if !has('gui_running')
     " http://d.hatena.ne.jp/thinca/20111204/1322932585
     function! s:KazuakiMTabpageLabelUpdate(tabNumber) abort "{{{
-        let a:highlight = a:tabNumber is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
-        let a:bufnrs    = tabpagebuflist(a:tabNumber)
-        let a:bufnr     = len(a:bufnrs)
-        if a:bufnr is 1
-            let a:bufnr = ''
+        let l:highlight = a:tabNumber is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
+        let l:bufnrs    = tabpagebuflist(a:tabNumber)
+        let l:bufnr     = len(l:bufnrs)
+        if l:bufnr is 1
+            let l:bufnr = ''
         endif
-        let a:modified = len(filter(copy(a:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
-        return '%'.a:tabNumber.'T'.a:highlight.a:bufnr.' '.fnamemodify(bufname(a:bufnrs[tabpagewinnr(a:tabNumber) - 1]), ':t').' '.a:modified.'%T%#TabLineFill#'
+        let l:modified = len(filter(copy(l:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
+        return '%'.a:tabNumber.'T'.l:highlight.l:bufnr.' '.fnamemodify(bufname(l:bufnrs[tabpagewinnr(a:tabNumber) - 1]), ':t').' '.l:modified.'%T%#TabLineFill#'
     endfunction "}}}
     function! KazuakiMTabLineUpdate() abort "{{{
         return join(map(range(1, tabpagenr('$')), 's:KazuakiMTabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
@@ -560,7 +565,9 @@ NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
 " NeoBundleFetch {{{
 NeoBundleFetch 'psychs/lingr-irc'
 NeoBundleFetch 'KazuakiM/neosnippet-snippets'
+NeoBundleFetch 'KazuakiM/vim-regexper'
 NeoBundleFetch 'Kuniwak/vint'
+NeoBundleFetch 'thinca/vim-themis'
 "}}}
 "
 "

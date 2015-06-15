@@ -11,21 +11,20 @@ runtime! indent/php.vim
 unlet s:doing_indent_inits
 
 function! GetHtmlPhpIndent(lnum) "{{{
+    let l:php_ind = GetPhpIndent()
+    if l:php_ind > -1
+        return l:php_ind
+    endif
     if exists('*HtmlIndent')
-        let html_ind = HtmlIndent()
+        let l:html_ind = HtmlIndent()
     else
-        let html_ind = HtmlIndentGet(a:lnum)
+        let l:html_ind = HtmlIndentGet(a:lnum)
     endif
-    let php_ind = GetPhpIndent()
-    if php_ind > -1
-        return php_ind
-    endif
-    if html_ind > -1
-        if getline(a:num) =~ "^<?" && (0< searchpair('<?', '', '?>', 'nWb')
-                \ || 0 < searchpair('<?', '', '?>', 'nW'))
+    if l:html_ind > -1
+        if getline(a:lnum) =~ "^<?" && (0< searchpair('<?', '', '?>', 'nWb') || 0 < searchpair('<?', '', '?>', 'nW'))
             return -1
         endif
-        return html_ind
+        return l:html_ind
     endif
     return -1
 endfunction "}}}
