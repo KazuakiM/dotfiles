@@ -134,7 +134,6 @@ else
     set nocursorline
 endif
 "set foldopen-=search
-"set colorcolumn=79
 "helptags $HOME/.vim/bundle/vimdoc-ja/doc
 " Color
 syntax on
