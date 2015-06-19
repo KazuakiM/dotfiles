@@ -272,6 +272,12 @@ Delete
 ```sql
 DELETE FROM <Table1> WHERE <Column1> = <ColumnData1>;
 ```
+Delete - JOIN
+```sql
+DELETE <Table1> FROM <Table1>
+    INNER JOIN <Table2> AS <tab2>
+    ON <Table1>.<Column1> = <tab2>.<Column2>;
+```
 
 Truncate
 ```sql
