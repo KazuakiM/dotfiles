@@ -100,6 +100,12 @@ let g:vim_tags_cache_dir     = $HOME.'/.vim/vim-tags'
 " webapi-vim {{{
 NeoBundle 'mattn/webapi-vim'
 "}}}
+"vim-qfsigns {{{
+NeoBundle 'KazuakiM/vim-qfsigns'
+nnoremap <Leader>sy :QfsignsJunmp<CR>
+let g:qfsigns#Config = {'id': '5050', 'name': 'KazuakiMQFError',}
+execute 'sign define '.get(g:qfsigns#Config,'name').' linehl=KazuakiMQFError texthl=KazuakiMQFError text=>>'
+"}}}
 "}}}
 "
 "

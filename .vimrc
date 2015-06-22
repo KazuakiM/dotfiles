@@ -142,8 +142,6 @@ colorscheme kazuakim
 "  ESC
 inoremap jk <Esc>
 inoremap kj <Esc>
-" XXX:This setting is cursor previous position motion fix when insert mode leave. But It includes bug when arrow key type in insert mode.
-"inoremap <Esc> <Esc>`^
 "  Fold
 nnoremap zx :foldopen<CR>
 "  Line
@@ -255,7 +253,7 @@ endif
 call neobundle#begin(expand('$HOME/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 let g:neobundle#cache_file            = $HOME.'/.vim/neobundle.vim/cache'
-let g:neobundle#install_max_processes = 8
+let g:neobundle#install_max_processes = 3
 let g:neobundle#log_filename          = $HOME.'/.vim/neobundle.vim/neobundle.log'
 "}}}
 "
@@ -534,18 +532,14 @@ function! s:hooks.on_source(bundle) abort
 endfunction
 "}}}
 " shabadou.vim
-" vim-qfsigns
+" vim-hier
 " vim-qfstatusline
 " vim-watchdogs {{{
-NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'KazuakiM/vim-qfsigns', 'KazuakiM/vim-qfstatusline'],
+NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'jceb/vim-hier', 'KazuakiM/vim-qfstatusline'],
 \    'insert': 1}
 let g:Qfstatusline#UpdateCmd = function('KazuakiMStatuslineSyntax')
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle) abort
-    "vim-qfsigns
-    nnoremap <Leader>sy :QfsignsJunmp<CR>
-    let g:qfsigns#Config = {'id': '5050', 'name': 'KazuakiMQFError',}
-    execute 'sign define '.get(g:qfsigns#Config,'name').' linehl=KazuakiMQFError texthl=KazuakiMQFError text=>>'
     "vim-watchdogs
     let g:watchdogs_check_BufWritePost_enable  = 1
     let g:watchdogs_check_BufWritePost_enables = {'vim': 0}
@@ -564,6 +558,7 @@ NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
 " NeoBundleFetch {{{
 NeoBundleFetch 'psychs/lingr-irc'
 NeoBundleFetch 'KazuakiM/neosnippet-snippets'
+NeoBundleFetch 'KazuakiM/vim-qfsigns'
 NeoBundleFetch 'KazuakiM/vim-regexper'
 NeoBundleFetch 'Kuniwak/vint'
 NeoBundleFetch 'thinca/vim-themis'

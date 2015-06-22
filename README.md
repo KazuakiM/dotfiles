@@ -240,7 +240,7 @@ $ ln -sf $HOME/work/dotfiles/.w3m                 $HOME/.w3m
 $ mkdir -p /srv/vagrant
 $ ln -sf $HOME/work/dotfiles/lib/Vagrantfile /srv/vagrant/Vagrantfile
 $ git clone https://github.com/Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
-$ wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp/php_manual_ja.tar.gz
+$ wget http://jp2.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp/php_manual_ja.tar.gz
 $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
 $ wget http://cs.sensiolabs.org/get/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 $ chmod a+x $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
@@ -286,7 +286,7 @@ I made Vagrantfile.
 > $ cp -f $HOME/.gitconfig.local.org $HOME/.gitconfig.local
 >  Update local setting.
 >
-> $ wget http://jp1.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp
+> $ wget http://jp2.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp
 > $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
 > $ wget http://cs.sensiolabs.org/get/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 > $ chmod a+x $HOME/.vim/vim-php-cs-fixer/php-cs-fixer

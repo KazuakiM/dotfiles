@@ -155,6 +155,12 @@ $ jobs
 $ disown <PID>
 ```
 
+## sed
+
+```bash
+$ sed -i -e 's/xxx/XXX/g' <file1>
+```
+
 ## Service
 
 Check service status list
