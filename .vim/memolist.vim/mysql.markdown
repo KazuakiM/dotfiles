@@ -159,8 +159,17 @@ Add new partitions table
 SHOW CREATE TABLE <Table1>;
 
 ALTER TABLE <Table1> ADD PARTITION (
-  PARTITION p201401 VALUES LESS THAN ('2014-02-01') ENGINE = InnoDB,
-  PARTITION p201402 VALUES LESS THAN ('2014-03-01') ENGINE = InnoDB);
+  PARTITION p201401 VALUES LESS THAN ('2014-02-01'),
+  PARTITION p201402 VALUES LESS THAN ('2014-03-01'));
+
+SHOW CREATE TABLE <Table1>;
+```
+
+Delete partitions
+```sql
+SHOW CREATE TABLE <Table1>;
+
+ALTER TABLE <Table1> DROP PARTITION p201401, p201402;
 
 SHOW CREATE TABLE <Table1>;
 ```
@@ -312,6 +321,24 @@ Range column
 SELECT TAB.<Column1>
 FROM <Table1> AS TAB
 WHERE NOW() BETWEEN start_date AND end_date;
+```
+
+DISTINCT to EXISTS  
+※情報が古い可能性あり(古い書籍からの引用)
+```sql
+before)
+SELECT DISTINCT <tab1>.<Column1>
+FROM <Table1> AS <tab1>
+INNER JOIN <Table2> AS <tab2>
+ON <tab1>.<Column1> = <tab2>.<Column3>
+
+after)
+SELECT <tab1>.<Column1>
+FROM <Table1> AS <tab1>
+WHERE EXISTS (
+    SELECT <tab2>.<Column3>
+    FROM <Table2> AS <tab2>
+    WHERE <tab1>.<Column1> = <tab2>.<Column3>);
 ```
 
 ## SHOW
