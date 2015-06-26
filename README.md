@@ -254,7 +254,7 @@ $ sh $HOME/.vim/bundle/neobundle.vim/bin/neoinstall
 ```bash
 $ cd /srv/vagrant
 $ vagrant ssh-config > ssh.config
-$ scp -P <Port:2222> -F /srv/vagrant/ssh.config default:/~ /tmp/
+$ scp -P <Port:2222> -F /srv/vagrant/ssh.config <file> default:/tmp/
 ```
 
 ## Linux
