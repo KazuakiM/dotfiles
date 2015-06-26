@@ -332,6 +332,7 @@ NeoBundleLazy 'glidenote/memolist.vim',     { 'commands': ['MemoNew',         'M
 nnoremap <SID>[unite] <Nop>
 nmap <Leader>u <SID>[unite]
 " default plugins
+nnoremap <silent> <SID>[unite]au  :<C-u>Unite<Space>output:autocmd<CR>
 nnoremap <silent> <SID>[unite]f   :<C-u>call<Space>KazuakiMUniteFileRecAsyncOrGit()<CR>
 nnoremap <silent> <SID>[unite]let :<C-u>Unite<Space>output:let<CR>
 nnoremap <silent> <SID>[unite]map :<C-u>Unite<Space>output:map\|map!\|lmap<CR>
