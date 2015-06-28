@@ -64,7 +64,8 @@ if has('vim_starting')
             finish
         endif
         let s:osType = 'win'
-        set runtimepath+=$HOME/.vim,$HOME/.vim/after
+        set runtimepath^=$HOME/.vim
+        set runtimepath+=$HOME/.vim/after
     elseif has('macunix')
         if s:KazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
             finish
@@ -261,17 +262,18 @@ let g:neobundle#log_filename          = $HOME.'/.vim/neobundle.vim/neobundle.log
 " NeoBundle {{{
 if neobundle#load_cache()
     NeoBundle 'Shougo/vimproc.vim', {'build': {'mac': 'make -f make_mac.mak', 'unix': 'make -f make_unix.mak', 'cygwin': 'make -f make_cygwin.mak'}}
+    NeoBundle 'fuenor/qfixgrep'
+    NeoBundle 'gcmt/wildfire.vim'
+    NeoBundle 'KazuakiM/vim-qfstatusline'
+    NeoBundle 'LeafCage/yankround.vim'
+    NeoBundle 'rhysd/clever-f.vim'
+    NeoBundle 'SirVer/ultisnips'
+    NeoBundle 'thinca/vim-prettyprint'
+    NeoBundle 'tpope/vim-surround'
+    NeoBundle 'vim-jp/vimdoc-ja'
     NeoBundle 'vim-jp/vital.vim'
     NeoBundle 'vim-scripts/matchit.zip'
-    NeoBundle 'fuenor/qfixgrep'
-    NeoBundle 'LeafCage/yankround.vim'
-    NeoBundle 'SirVer/ultisnips'
-    NeoBundle 'rhysd/clever-f.vim'
-    NeoBundle 'tpope/vim-surround'
-    NeoBundle 'gcmt/wildfire.vim'
-    NeoBundle 'vim-jp/vimdoc-ja'
     NeoBundle 'Yggdroot/indentLine'
-    NeoBundle 'thinca/vim-prettyprint'
 
     NeoBundleSaveCache
 endif
@@ -281,6 +283,14 @@ let g:QFixWin_EnableMode = 1
 nnoremap <expr> <Leader>grek ':grep! '.expand('<cword>').' '.vital#of('vital').import('Prelude').path2project_directory('%').'<C-b><Right><Right><Right><Right><Right><Right>'
 nnoremap <expr> <Leader>grel ':grep!  '.vital#of('vital').import('Prelude').path2project_directory('%').'<C-b><Right><Right><Right><Right><Right><Right>'
 "}}}
+" wildfire.vim {{{
+let g:wildfire_fuel_map  = '<Enter>'
+let g:wildfire_objects   = ["i'", 'i"', 'i`', 'i,', 'i)', 'i}', 'i]', 'i>', 'ip', 'it']
+let g:wildfire_water_map = '<BS>'
+"}}}
+" vim-qfstatusline {{{
+let g:Qfstatusline#UpdateCmd = function('KazuakiMStatuslineSyntax')
+"}}}
 " yankround.vim {{{
 nmap p <Plug>(yankround-p)
 nmap <C-p> <Plug>(yankround-prev)
@@ -288,6 +298,11 @@ nmap <C-n> <Plug>(yankround-next)
 let g:yankround_dir                 = $HOME.'/.vim/yankround.vim'
 let g:yankround_region_hl_groupname = 'YankRoundRegion'
 let g:yankround_use_region_hl       = 1
+"}}}
+" clever-f.vim {{{
+let g:clever_f_across_no_line = 0
+let g:clever_f_smart_case     = 1
+let g:clever_f_use_migemo     = 0
 "}}}
 " ultisnips {{{
 let g:did_UltiSnips_snipmate_compatibility = 1
@@ -297,16 +312,6 @@ let g:UltiSnipsJumpBackwardTrigger         = '<S-TAB>'
 let g:UltiSnipsJumpForwardTrigger          = '<TAB>'
 let g:UltiSnipsSnippetsDir                 = $HOME.'/.vim/bundle/vim-snippets/UltiSnips'
 let g:UltiSnipsUsePythonVersion            = 2
-"}}}
-" clever-f.vim {{{
-let g:clever_f_across_no_line = 0
-let g:clever_f_smart_case     = 1
-let g:clever_f_use_migemo     = 0
-"}}}
-" wildfire.vim {{{
-let g:wildfire_fuel_map  = '<Enter>'
-let g:wildfire_objects   = ["i'", 'i"', 'i`', 'i,', 'i)', 'i}', 'i]', 'i>', 'ip', 'it']
-let g:wildfire_water_map = '<BS>'
 "}}}
 " indentLine {{{
 let g:indentLine_faster = 1
@@ -460,11 +465,14 @@ function! s:hooks.on_source(bundle) abort
     \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow      guibg=Yellow']
 endfunction
 "}}}
+" vim-hier {{{
+NeoBundleLazy 'jceb/vim-hier', {'commands' : 'HierUpdate'}
+"}}}
 " vim-sqlfix {{{
 NeoBundleLazy 'KazuakiM/vim-sqlfix', {'commands': 'Sqlfix'}
 "}}}
 " previm {{{
-NeoBundleLazy 'kannokanno/previm', {'depends': 'open-browser.vim', 'commands': 'PrevimOpen'}
+NeoBundleLazy 'kannokanno/previm', {'commands': 'PrevimOpen'}
 nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
 "}}}
 " vim-ref {{{
@@ -533,12 +541,8 @@ function! s:hooks.on_source(bundle) abort
 endfunction
 "}}}
 " shabadou.vim
-" vim-hier
-" vim-qfstatusline
 " vim-watchdogs {{{
-NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': ['thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'jceb/vim-hier', 'KazuakiM/vim-qfstatusline'],
-\    'insert': 1}
-let g:Qfstatusline#UpdateCmd = function('KazuakiMStatuslineSyntax')
+NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': 'osyo-manga/shabadou.vim', 'insert': 1}
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
 function! s:hooks.on_source(bundle) abort
     "vim-watchdogs
