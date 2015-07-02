@@ -375,7 +375,11 @@ Table
 
 TEMPORARY TABLE - SELECT
 ```sql
-CREATE TEMPORARY TABLE tmp_<Table1> (<Column1>, <Column2>, ...)
+CREATE TEMPORARY TABLE tmp_<Table1> (
+  <Column1 schema>,
+  <Column2 schema>,
+  ...,
+  PRIMARY KEY (<Column1>,...))
   SELECT <ColumnData1>, <ColumnData2>, ...;
 ```
 
