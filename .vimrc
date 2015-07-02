@@ -64,8 +64,7 @@ if has('vim_starting')
             finish
         endif
         let s:osType = 'win'
-        set runtimepath^=$HOME/.vim
-        set runtimepath+=$HOME/.vim/after
+        set runtimepath^=$HOME/.vim runtimepath+=$HOME/.vim/after
     elseif has('macunix')
         if s:KazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
             finish
