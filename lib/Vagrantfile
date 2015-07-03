@@ -126,11 +126,21 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       sudo chown -R #{ACCOUNT}:#{ACCOUNT} /usr/local && \
       sudo chown -R #{ACCOUNT}:#{ACCOUNT} $HOME      && \
     echo "[ #{index = (( index +1 ))}/#{PROCESS_MAX} ]Infomation..." && \
-      echo "\tStart Up shell"                            && \
-      echo "$ $HOME/work/dotfiles/src/vagrantStartUp.sh" && \
-      echo ""                                            && \
-      echo "\tRuby on Rails"                             && \
-      echo "$ cd /srv/sample/ && rails server -b 0.0.0.0"
+      echo "\tStart Up shell"                                                && \
+      echo '$ $HOME/work/dotfiles/src/vagrantStartUp.sh'                     && \
+      echo ""                                                                && \
+      echo '[if-ERROR]'                                                      && \
+      echo "Failed to mount folders in Linux guest. This is usually beacuse" && \
+      echo 'the "vboxsf" file system is not available. Please verify that'   && \
+      echo ''                                                                && \
+      echo '$ vagrant ssh'                                                   && \
+      echo '$ sudo /etc/init.d/vboxadd setup'                                && \
+      echo '$ exit'                                                          && \
+      echo '$ vagrant halt'                                                  && \
+      echo '$ vagrant up'                                                    && \
+      echo ''                                                                && \
+      echo "\tRuby on Rails"                                                 && \
+      echo '$ cd /srv/sample/ && rails server -b 0.0.0.0'
   SHELL
 end
 
