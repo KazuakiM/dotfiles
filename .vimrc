@@ -469,6 +469,7 @@ NeoBundleLazy 'jceb/vim-hier', {'commands' : 'HierUpdate'}
 "}}}
 " vim-sqlfix {{{
 NeoBundleLazy 'KazuakiM/vim-sqlfix', {'commands': 'Sqlfix'}
+let g:sqlfix#Config = {'explain': 1}
 "}}}
 " previm {{{
 NeoBundleLazy 'kannokanno/previm', {'commands': 'PrevimOpen'}
