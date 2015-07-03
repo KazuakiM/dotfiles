@@ -554,7 +554,6 @@ unlet s:hooks
 "}}}
 " vim-markdown {{{
 NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
-"NeoBundleLazy 'plasticboy/vim-markdown', {'depends': 'joker1007/vim-markdown-quote-syntax', 'filetypes': 'mkd'}
 "}}}
 "}}}
 "

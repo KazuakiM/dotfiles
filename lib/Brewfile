@@ -60,6 +60,7 @@ brew 'jasper'
 brew 'icu4c'
 brew 'harfbuzz'
 brew 'pango'
+brew 'hicolor-icon-theme'
 brew 'gtk+', args: ['with-jasper']
 brew 'htop-osx'
 brew 'imagemagick'

@@ -5,6 +5,15 @@ Files are setting my development environments.
 
 ## Mac
 
+### sudo
+
+```bash
+$ pwd
+$ sudo visudo
+
+   Account setting
+```
+
 ### Install packages
 
 App
