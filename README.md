@@ -59,11 +59,22 @@ Auto start
 * /Applications/Karabiner.app
 * /Applications/Vagrant Manager.app
 * /Applications/XtraFinder.app
+* /Users/xxxxx/Applications/Alfred 2.app
 * /Users/xxxxx/Applications/BetterTouchTool.app
 * /Users/xxxxx/Applications/CheatSheet.app
 * /Users/xxxxx/Applications/Google Drive.app
 * /Users/xxxxx/Applications/iTerm.app
 * /Users/xxxxx/Applications/KeePassX.app
+
+[Alfred](http://www.alfredapp.com/)
+> Application設定
+>
+> |大項目     |小項目                            |                        |
+> |:----------|:---------------------------------|-----------------------:|
+> |Preferences|                                  |                        |
+> |           |General >Where are you            |Japan                   |
+> |Features   |                                  |                        |
+> |           |Default Results > Essentials > Bookmarks - Safari |Check   |
 
 [AppCleaner](http://www.freemacsoft.net/appcleaner/)
 
@@ -139,15 +150,15 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 > |大項目                |小項目                       |                                                                     |
 > |:---------------------|:----------------------------|:--------------------------------------------------------------------|
 > |LimeChat > Preferences|                             |                                                                     |
-> |                      |Log > Show job/leave events  |チェック外し                                                         |
-> |                      |Log > Show rename events     |チェック外し                                                         |
+> |                      |Log > Show job/leave events  |no check                                                             |
+> |                      |Log > Show rename events     |no check                                                             |
 > |                      |Log > Log transcripts        |Trashes                                                              |
 > |                      |Theme > Current theme        |Spring Night                                                         |
 > |                      |Theme > Override log font    |[RictyDiminished](https://github.com/yascentur/RictyDiminished) 13px |
 > |                      |Theme > Override input font  |[RictyDiminished](https://github.com/yascentur/RictyDiminished) 13px |
 > |Server > Add Server   |                             |                                                                     |
 > |                      |General > Network name       |Lingr                                                                |
-> |                      |General > Connect on start up|チェック                                                             |
+> |                      |General > Connect on start up|check                                                                |
 > |                      |General > Server             |localhost                                                            |
 > |                      |General > Port               |26667                                                                |
 > |                      |General > Server Password    |\* \* \* \*                                                          |
@@ -163,21 +174,21 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 > |大項目                               |小項目                                            |                   |
 > |:------------------------------------|:-------------------------------------------------|:------------------|
 > |環境設定 > 一般                      |                                                  |                   |
-> |                                     |リアルタイム更新を有効化する                      |チェック           |
-> |                                     |投稿した後リストに自動フォーカスする              |チェック外し       |
-> |                                     |更新時に一番上にスクロールする                    |チェック           |
+> |                                     |リアルタイム更新を有効化する                      |check              |
+> |                                     |投稿した後リストに自動フォーカスする              |no check           |
+> |                                     |更新時に一番上にスクロールする                    |check              |
 > |環境設定 > アカウント                |                                                  |                   |
-> |                                     |タイムラインタブを未読管理する                    |チェック外し       |
+> |                                     |タイムラインタブを未読管理する                    |no check           |
 > |環境設定 > 表示                      |                                                  |                   |
-> |                                     |片思いバッジを表示する                            |チェック           |
-> |                                     |ミニビューを使用する                              |チェック           |
+> |                                     |片思いバッジを表示する                            |check              |
+> |                                     |ミニビューを使用する                              |check              |
 > |                                     |リストに表示する名前                              |ユーザID           |
 > |環境設定 > タブ                      |                                                  |                   |
-> |                                     |起動時に取得したツイートを既読状態にする          |チェック           |
-> |                                     |市場鵺にスクロールした際にツイートを既読状態にする|チェック           |
-> |                                     |Favoritesタブを表示する(要再起動)                 |チェック外し       |
+> |                                     |起動時に取得したツイートを既読状態にする          |check              |
+> |                                     |市場鵺にスクロールした際にツイートを既読状態にする|check              |
+> |                                     |Favoritesタブを表示する(要再起動)                 |no check           |
 > |環境設定 > テキスト入力              |                                                  |                   |
-> |                                     |ツイート入力                                      |チェック           |
+> |                                     |ツイート入力                                      |check              |
 > |                                     |フォントサイズ                                    |11pt               |
 > |                                     |投稿に使用するキー                                |⌘ + Return         |
 > |環境設定 > 色                        |                                                  |                   |
@@ -196,17 +207,28 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 
 [RictyDiminished](https://github.com/yascentur/RictyDiminished)
 
+[Safari](https://www.apple.com/jp/safari/)
+> Application設定
+>
+> |大項目           |小項目                                                                             |                                        |
+> |:----------------|:----------------------------------------------------------------------------------|:---------------------------------------|
+> |Safari > 環境設定|                                                                                   |                                        |
+> |                 |一般 > 新規ウィンドウを開く場合                                                    |ホームページ                            |
+> |                 |一般 > 新規タブを開く場合                                                          |空のページ                              |
+> |                 |一般 > ホームページ                                                                |file:///file/to/path/safariBookmark.html|
+> |ブックマーク     |ホームページの内容をブックマークに登録する([Alfred](http://www.alfredapp.com/)利用)|                                        |
+
 [Silverlight](http://www.microsoft.com/silverlight/)
 
 [Skitch](http://evernote.com/skitch/)
 > Application設定
 >
-> |大項目           |小項目                                                                        |            |
-> |:----------------|:-----------------------------------------------------------------------------|:-----------|
-> |Skitch > 環境設定|                                                                              |            |
-> |                 |一般設定 > Skitch Helper > コンピュータのログイン時に Skitch Helper を起動する|チェック外し|
-> |                 |同期 > 新しい Skitch ノートを Evernote に保存                                 |手動        |
-> |                 |同期 > Evernote との動機頻度                                                  |手動        |
+> |大項目           |小項目                                                                        |        |
+> |:----------------|:-----------------------------------------------------------------------------|:-------|
+> |Skitch > 環境設定|                                                                              |        |
+> |                 |一般設定 > Skitch Helper > コンピュータのログイン時に Skitch Helper を起動する|no check|
+> |                 |同期 > 新しい Skitch ノートを Evernote に保存                                 |手動    |
+> |                 |同期 > Evernote との動機頻度                                                  |手動    |
 
 [Sony Ericsson Bridge for Mac](http://support.sonymobile.com/au/tools/bridge-for-mac/)
 
@@ -317,17 +339,20 @@ I made Vagrantfile.
 [Google Chrome](https://www.google.com/chrome/)
 > Application設定
 >
-> |大項目                |小項目                                 |                                                                         |
-> |:---------------------|:--------------------------------------|:------------------------------------------------------------------------|
-> |Required sync setting |                                       |                                                                         |
-> |拡張機能              |                                       |                                                                         |
-> |                      |[Adblock Plus](https://chrome.google.com/webstore/detail/adblock-plus/cfhdojbkjhnklbpkdaibdccddilifddb)                   ||
-> |                      |[Awesome Screenshot](https://chrome.google.com/webstore/detail/awesome-screenshot-screen/alelhddbbhepgpmgidjdcjakblofbmce)||
-> |                      |[Text Link Plus](https://chrome.google.com/webstore/detail/text-link/ikfmghnmgeicocakijcebpkmbfljnogk)                    ||
-> |                      |[User-Agent Switcher](https://chrome.google.com/webstore/detail/user-agent-switcher/lkmofgnohbedopheiphabfhfjgkhfcgf)     ||
+> |大項目                |小項目                                             |                                                                         |
+> |:---------------------|:--------------------------------------------------|:------------------------------------------------------------------------|
+> |Required sync setting |                                                   |                                                                         |
+> |Chrome > 環境設定     |                                                   |                                                                         |
+> |                      |設定 > デザイン > ホームボタンを表示する           |check                                                                    |
+> |                      |設定 > デザイン > ホームボタンを表示する > 変更する|file:///file/to/path/bookmark.html                                       |
+> |拡張機能              |                                                   |                                                                         |
+> |                      |[Adblock Plus](https://chrome.google.com/webstore/detail/adblock-plus/cfhdojbkjhnklbpkdaibdccddilifddb)                     ||
+> |                      |[Awesome Screenshot](https://chrome.google.com/webstore/detail/awesome-screenshot-screen/alelhddbbhepgpmgidjdcjakblofbmce)  ||
+> |                      |[Text Link Plus](https://chrome.google.com/webstore/detail/text-link/ikfmghnmgeicocakijcebpkmbfljnogk)                      ||
+> |                      |[User-Agent Switcher](https://chrome.google.com/webstore/detail/user-agent-switcher/lkmofgnohbedopheiphabfhfjgkhfcgf)       ||
 > |                      |[はてなブックマーク](https://chrome.google.com/webstore/detail/%E3%81%AF%E3%81%A6%E3%81%AA%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF-googlechrome-%E6%8B%A1%E5%BC%B5/dnlfpnhinnjdgmjfpccajboogcjocdla)||
-> |設定                  |                                       |                                                                         |
-> |                      |ウェブコンテンツ                       |フォント: [RictyDiminished](https://github.com/yascentur/RictyDiminished)|
+> |設定                  |                                                   |                                                                         |
+> |                      |ウェブコンテンツ                                   |フォント: [RictyDiminished](https://github.com/yascentur/RictyDiminished)|
 
 [FireFox](https://www.mozilla.org/ja/firefox/)
 > Application設定
@@ -336,6 +361,7 @@ I made Vagrantfile.
 > |:---------------------|:--------------------------------------|:--------------------------------------------------------------|
 > |Required sync setting |                                       |                                                               |
 > |Firefox > 環境設定    |                                       |                                                               |
+> |                      |一般 > ホームページ                    |file:///file/to/path/bookmark.html                             |
 > |                      |検索                                   |Google以外Remove                                               |
 > |                      |コンテンツ > フォントとカラー > デフォルトフォント|[RictyDiminished](https://github.com/yascentur/RictyDiminished)|
 > |                      |コンテンツ > 言語 > 言語設定           |Add Japanese[ja]                                               |
