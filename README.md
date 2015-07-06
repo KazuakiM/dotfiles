@@ -9,9 +9,10 @@ Files are setting my development environments.
 
 ```bash
 $ pwd
+/Users/<Account>
 $ sudo visudo
 
-   Account setting
+   <Account> ALL=(root) NOPASSWD: ALL
 ```
 
 ### Install packages
