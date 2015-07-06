@@ -85,15 +85,19 @@ function! s:KazuakiMCheckString() abort "{{{
     let w:m2 = matchadd('KazuakiMTodo',        'FIXME\|MEMO\|NOTE\|TODO\|XXX')
 endfunction "}}}
 function! s:KazuakiMBufEnter() abort "{{{
+    " Auto close VimDiff or primary NERDTree
+    if (winnr('$') is 1) && (&l:diff || (exists('b:NERDTreeType') && (b:NERDTreeType ==# 'primary')))
+        quit
+    endif
     " If open direcotry, call NERDTree
     if isdirectory(expand('%:p'))
         call nerdtree#checkForBrowse(expand('<amatch>'))
     endif
     " Move current file(/directory) path
     execute 'lcd '.fnameescape(expand('%:p:h'))
-    " Auto close VimDiff or primary NERDTree
-    if (winnr('$') is 1) && (&l:diff || (exists('b:NERDTreeType') && (b:NERDTreeType ==# 'primary')))
-        quit
+    " default filetype
+    if &filetype is ''
+        setlocal filetype=mkd
     endif
 endfunction "}}}
 function! s:KazuakiMVimEnter() abort "{{{
@@ -174,8 +178,6 @@ inoremap <silent><expr><C-v> '<ESC>:set<Space>paste<CR><Insert><Right><C-r>+<ESC
 cnoremap <M-v> <C-R><C-O>*
 "  Replace
 nnoremap R gR
-nnoremap <expr><Leader>%s  ':%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
-nnoremap <expr><Leader>%%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
 "  Search
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
@@ -470,7 +472,10 @@ NeoBundleLazy 'jceb/vim-hier', {'commands' : 'HierUpdate'}
 "}}}
 " vim-sqlfix {{{
 NeoBundleLazy 'KazuakiM/vim-sqlfix', {'commands': 'Sqlfix'}
-let g:sqlfix#Config = {'explain': 1}
+let s:hooks = neobundle#get_hooks('vim-sqlfix')
+function! s:hooks.on_source(bundle) abort
+    let g:sqlfix#Config = {'explain': 1}
+endfunction
 "}}}
 " previm {{{
 NeoBundleLazy 'kannokanno/previm', {'commands': 'PrevimOpen'}
@@ -504,7 +509,6 @@ endfunction
 "}}}
 " open-browser.vim {{{
 NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'openbrowser#_keymapping_smart_search'}
-let g:netrw_nogx = 1
 nnoremap <Leader>gx :<C-u>call<Space>openbrowser#_keymapping_smart_search('n')<CR>
 "}}}
 " vim-snippets
@@ -518,7 +522,7 @@ function! s:hooks.on_source(bundle) abort
     let g:neocomplete#enable_at_startup                = 1
     let g:neocomplete#enable_auto_close_preview        = 3
     let g:neocomplete#enable_auto_delimiter            = 1
-    let g:neocomplete#enable_auto_select               = 1
+    let g:neocomplete#enable_auto_select               = 0
     let g:neocomplete#enable_fuzzy_completion          = 0
     let g:neocomplete#enable_smart_case                = 1
     let g:neocomplete#keyword_patterns                 = {'_': '\h\w*'}
@@ -556,11 +560,25 @@ function! s:hooks.on_source(bundle) abort
     let g:watchdogs_check_CursorHold_enable    = 1
     let g:watchdogs_check_CursorHold_enables   = {'vim': 0}
 endfunction
-unlet s:hooks
 "}}}
 " vim-markdown {{{
 NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
 "}}}
+if (s:osType !=# 'unix')
+    " vim-over {{{
+    NeoBundleLazy 'osyo-manga/vim-over', {'commands': 'OverCommandLine'}
+    nnoremap <expr><Leader>%s  ':OverCommandLine<CR>%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
+    nnoremap <expr><Leader>%%s ':OverCommandLine<CR>%s/'.expand('<cword>').'//gc<Left><Left><Left>'
+    let s:hooks = neobundle#get_hooks('vim-over')
+    function! s:hooks.on_source(bundle) abort
+        let g:over#command_line#substitute#highlight_string = 'SpellCap'
+    endfunction
+    "}}}
+else
+    nnoremap <expr><Leader>%s  ':%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
+    nnoremap <expr><Leader>%%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
+endif
+unlet s:hooks
 "}}}
 "
 "

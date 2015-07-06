@@ -102,10 +102,6 @@ execute 'sign define '.get(g:qfsigns#Config,'name').' linehl=KazuakiMQFError tex
 "
 "
 " NeoBundleLazy {{{
-" vim-over {{{
-NeoBundleLazy 'osyo-manga/vim-over', {'autoload' : {'commands': 'OverCommandLine'}}
-nnoremap <expr><Leader>%s ':OverCommandLine<CR>%s/'.expand('<cword>').'/'
-"}}}
 " neosnippet-snippets
 " neosnippet.vim {{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['KazuakiM/neosnippet-snippets', 'Shougo/neosnippet.vim', 'Shougo/context_filetype.vim'], 'autoload': {'insert': 1}}
