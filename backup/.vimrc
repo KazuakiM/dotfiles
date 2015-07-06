@@ -1,14 +1,6 @@
 "
 "
 " NeoBundle {{{
-" syntastic {{{
-NeoBundle 'scrooloose/syntastic'
-let g:syntastic_enable_signs  = 1
-let g:syntastic_auto_loc_list = 2
-"}}}
-" vim-sqlfix(local file refer) {{{
-NeoBundle 'vim-sqlfix', {'base': '/srv/vim-plugin', 'type': 'nosync'}
-"}}}
 " vdebug {{{
 " # command memo
 " * <F5>  : start/run (to next breakpoint/end of script)
@@ -124,10 +116,6 @@ set conceallevel=2 concealcursor=i
 let g:neosnippet#data_directory           = $HOME.'/.vim/neosnippet.vim'
 let g:neosnippet#disable_runtime_snippets = {'_' : 1}
 let g:neosnippet#snippets_directory       = $HOME.'/.vim/bundle/neosnippet-snippets/neosnippets'
-"}}}
-" unite-colorscheme {{{
-NeoBundleLazy 'ujihisa/unite-colorscheme', {'depends': 'Shougo/unite.vim', 'unite_sources': 'colorscheme'}
-nnoremap <silent> <SID>[unite]cs :<C-u>Unite<Space>-auto-preview<Space>colorscheme<CR>
 "}}}
 " unite-tag {{{
 NeoBundleLazy 'tsukkee/unite-tag', {'depends': 'Shougo/unite.vim', 'unite_sources': 'tag'}

@@ -19,7 +19,7 @@
 VAGRANTFILE_API_VERSION = 2
 VAGRANTFILE_LOG         = "/var/log/vagrantfile.log"
 ACCOUNT                 = "vagrant"
-PROCESS_MAX             = 11
+PROCESS_MAX             = 12
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   index = 0
 
@@ -113,7 +113,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         --with-lua-prefix=/usr/local                                                                          >> #{VAGRANTFILE_LOG}                        && \
       sudo make                                                                                               >> #{VAGRANTFILE_LOG}                        && \
       sudo make install                                                                                       >> #{VAGRANTFILE_LOG}                        && \
-    echo "[ #{index = (( index +1 ))}/#{PROCESS_MAX} ]Rails Setting..." && \
+    echo "[ #{index = (( index + 1))}/#{PROCESS_MAX} ]Install Composer ..." && \
+      cd /usr/local/bin/                               && \
+      curl -sS https://getcomposer.org/installer | php && \
+      mv composer.phar composer                        && \
+    echo "[ #{index = (( index +1 ))}/#{PROCESS_MAX} ]Rails Setting ..." && \
       git clone https://github.com/sstephenson/rbenv.git      /usr/local/rbenv                     >> #{VAGRANTFILE_LOG} 2>> #{VAGRANTFILE_LOG} && \
       git clone https://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plugins/ruby-build  >> #{VAGRANTFILE_LOG} 2>> #{VAGRANTFILE_LOG} && \
       git clone https://gist.github.com/b3f0994a67e8e10fae95.git /tmp/rails.xml                    >> #{VAGRANTFILE_LOG} 2>> #{VAGRANTFILE_LOG} && \

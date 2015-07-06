@@ -60,6 +60,7 @@ brew 'jasper'
 brew 'icu4c'
 brew 'harfbuzz'
 brew 'pango'
+brew 'hicolor-icon-theme'
 brew 'gtk+', args: ['with-jasper']
 brew 'htop-osx'
 brew 'imagemagick'
@@ -117,6 +118,7 @@ brew 'homebrew/versions/bash-completion2'
 brew 'homebrew/versions/perl518'
 brew 'kazuakim/macvim/cmigemo-mk', args: ['HEAD']
 brew 'kazuakim/macvim/macvim-kaoriya', args: ['HEAD']
+cask 'alfred'
 cask 'android-file-transfer'
 cask 'appcleaner'
 cask 'bettertouchtool'

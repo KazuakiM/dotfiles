@@ -174,8 +174,9 @@ inoremap <silent><expr><C-v> '<ESC>:set<Space>paste<CR><Insert><Right><C-r>+<ESC
 cnoremap <M-v> <C-R><C-O>*
 "  Replace
 nnoremap R gR
+nnoremap <expr><Leader>%s  ':%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
+nnoremap <expr><Leader>%%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
 "  Search
-nnoremap <expr><Leader>%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 "  Tags
@@ -469,6 +470,7 @@ NeoBundleLazy 'jceb/vim-hier', {'commands' : 'HierUpdate'}
 "}}}
 " vim-sqlfix {{{
 NeoBundleLazy 'KazuakiM/vim-sqlfix', {'commands': 'Sqlfix'}
+let g:sqlfix#Config = {'explain': 1}
 "}}}
 " previm {{{
 NeoBundleLazy 'kannokanno/previm', {'commands': 'PrevimOpen'}
@@ -512,15 +514,19 @@ let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle) abort
     let g:neocomplete#auto_completion_start_length     = 3
     let g:neocomplete#data_directory                   = $HOME.'/.vim/neocomplete.vim'
+    let g:neocomplete#delimiter_patterns               = {'php': ['->', '::', '\']}
     let g:neocomplete#enable_at_startup                = 1
     let g:neocomplete#enable_auto_close_preview        = 3
+    let g:neocomplete#enable_auto_delimiter            = 1
+    let g:neocomplete#enable_auto_select               = 1
+    let g:neocomplete#enable_fuzzy_completion          = 0
     let g:neocomplete#enable_smart_case                = 1
     let g:neocomplete#keyword_patterns                 = {'_': '\h\w*'}
     let g:neocomplete#lock_buffer_name_pattern         = '\.log\|.*quickrun.*\|.jax'
     let g:neocomplete#max_keyword_width                = 30
     let g:neocomplete#max_list                         = 8
     let g:neocomplete#min_keyword_length               = 3
-    let g:neocomplete#sources                          = {'_': ['ultisnips', 'dictionary', 'buffer']}
+    let g:neocomplete#sources                          = {'_': ['ultisnips', 'file', 'dictionary', 'buffer']}
     let g:neocomplete#sources#buffer#cache_limit_size  = 50000
     let g:neocomplete#sources#buffer#disabled_pattern  = '\.log\|\.jax'
     let g:neocomplete#sources#buffer#max_keyword_width = 30
@@ -554,7 +560,6 @@ unlet s:hooks
 "}}}
 " vim-markdown {{{
 NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
-"NeoBundleLazy 'plasticboy/vim-markdown', {'depends': 'joker1007/vim-markdown-quote-syntax', 'filetypes': 'mkd'}
 "}}}
 "}}}
 "

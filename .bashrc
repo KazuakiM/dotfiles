@@ -38,7 +38,7 @@ else
     alias diff='diff -u'
 fi
 if type htop >/dev/null 2>&1; then
-    alias top='htop'
+    alias top='sudo htop'
 fi
 export GREP_OPTIONS='--color=auto -i -I'
 export GREP_COLOR='1;33'
