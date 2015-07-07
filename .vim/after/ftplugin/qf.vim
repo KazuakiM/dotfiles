@@ -3,5 +3,5 @@ augroup Hier
     autocmd!
 augroup END
 "}}}
-nmap <silent> <buffer> <ESC><ESC> :q<CR>
+nmap <silent> <buffer> <ESC><ESC> :quit<CR>
 nmap <Leader>ct <C-w>gF

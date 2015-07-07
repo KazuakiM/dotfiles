@@ -38,7 +38,7 @@ augroup MyAutoCmd
     autocmd!
 augroup END
 function! s:KazuakiMVimStart(backupDir, undoDir) abort "{{{
-    "Check 256KB file size. 
+    "Check 256KB file size.
     if getfsize(expand('%:p')) >= 262144
         setlocal noswapfile nobackup nowritebackup noundofile viminfo=
         filetype off
@@ -110,7 +110,7 @@ function! s:KazuakiMWinEnter() abort "{{{
 endfunction "}}}
 autocmd MyAutoCmd BufEnter             * call s:KazuakiMBufEnter()
 autocmd MyAutoCmd BufReadPost          * if line("'\"") > 1 && line("'\"") <= line('$') | exe "normal! g`\"" | endif
-autocmd MyAutoCmd CmdwinEnter          * nmap <silent> <ESC><ESC> :q<CR>
+autocmd MyAutoCmd CmdwinEnter          * nmap <silent> <ESC><ESC> :quit<CR>
 autocmd MyAutoCmd CmdwinLeave          * nunmap <ESC><ESC>
 autocmd MyAutoCmd FocusGained          * checktime
 autocmd MyAutoCmd InsertLeave          * set nopaste | if &l:diff | diffupdate | endif
@@ -640,13 +640,14 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                         setloca
 "
 " Function {{{
 nnoremap <F1> :<C-u>call<Space>KazuakiMEncodeSwitcher()<CR>
+nnoremap <expr><F2> ':!open -a firefox '.expand('%:p')
 let s:encodeList = ['utf-8', 'japan', 'sjis', 'euc-jp']
 function! KazuakiMEncodeSwitcher() abort "{{{
     let b:encodeIndex = ! exists('b:encodeIndex') ? 1 : b:encodeIndex + 1
     if b:encodeIndex ==# len(s:encodeList)
         let b:encodeIndex = 0
     endif
-    execute 'e ++encoding='.s:encodeList[b:encodeIndex]
+    execute 'edit ++encoding='.s:encodeList[b:encodeIndex]
 endfunction "}}}
 "}}}
 "
