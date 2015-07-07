@@ -85,15 +85,19 @@ function! s:KazuakiMCheckString() abort "{{{
     let w:m2 = matchadd('KazuakiMTodo',        'FIXME\|MEMO\|NOTE\|TODO\|XXX')
 endfunction "}}}
 function! s:KazuakiMBufEnter() abort "{{{
+    " Auto close VimDiff or primary NERDTree
+    if (winnr('$') is 1) && (&l:diff || (exists('b:NERDTreeType') && (b:NERDTreeType ==# 'primary')))
+        quit
+    endif
     " If open direcotry, call NERDTree
     if isdirectory(expand('%:p'))
         call nerdtree#checkForBrowse(expand('<amatch>'))
     endif
     " Move current file(/directory) path
     execute 'lcd '.fnameescape(expand('%:p:h'))
-    " Auto close VimDiff or primary NERDTree
-    if (winnr('$') is 1) && (&l:diff || (exists('b:NERDTreeType') && (b:NERDTreeType ==# 'primary')))
-        quit
+    " default filetype
+    if &filetype is ''
+        setlocal filetype=mkd
     endif
 endfunction "}}}
 function! s:KazuakiMVimEnter() abort "{{{
@@ -174,8 +178,6 @@ inoremap <silent><expr><C-v> '<ESC>:set<Space>paste<CR><Insert><Right><C-r>+<ESC
 cnoremap <M-v> <C-R><C-O>*
 "  Replace
 nnoremap R gR
-nnoremap <expr><Leader>%s  ':%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
-nnoremap <expr><Leader>%%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
 "  Search
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
@@ -353,30 +355,30 @@ nmap <Leader>m <SID>[memolist]
 nnoremap <SID>[memolist]n :<C-u>MemoNew<CR>
 nnoremap <SID>[memolist]l :<C-u>MemoList<CR>
 " http://qiita.com/yuku_t/items/9263e6d9105ba972aea8
-function! KazuakiMUniteFileRecAsyncOrGit() abort
+function! KazuakiMUniteFileRecAsyncOrGit() abort "{{{
     if isdirectory(getcwd().'/.git')
         Unite -default-action=tabopen file_rec/git
     else
         Unite -default-action=tabopen file_rec/async:!
     endif
-endfunction
+endfunction "}}}
 let s:hooks = neobundle#get_hooks('unite.vim')
-function! s:hooks.on_source(bundle) abort
+function! s:hooks.on_source(bundle) abort "{{{
     let g:unite_data_directory             = $HOME.'/.vim/unite.vim'
     let g:unite_enable_start_insert        = 1
     let g:unite_source_grep_command        = 'grep'
     let g:unite_source_grep_default_opts   = '--color=auto -i -I'
     let g:unite_source_grep_recursive_opt  = ''
     let g:unite_source_grep_max_candidates = 200
-endfunction
+endfunction "}}}
 let s:hooks = neobundle#get_hooks('memolist.vim')
-function! s:hooks.on_source(bundle) abort
+function! s:hooks.on_source(bundle) abort "{{{
     let g:memolist_filename_prefix_none = 1
     let g:memolist_template_dir_path    = $HOME.'/.vim/memolist.vim'
     let g:memolist_unite                = 1
     let g:memolist_unite_option         = '-default-action=tabopen'
     let g:memolist_unite_source         = 'file_rec'
-endfunction
+endfunction "}}}
 "}}}
 " vim-quickrun {{{
 NeoBundleLazy 'thinca/vim-quickrun', {'commands': 'QuickRun'}
@@ -401,26 +403,26 @@ let g:quickrun_config = {
 NeoBundleLazy 'vim-scripts/taglist.vim', {'commands': 'Tlist'}
 nnoremap <Leader>t :<C-u>Tlist<CR>
 let s:hooks = neobundle#get_hooks('taglist.vim')
-function! s:hooks.on_source(bundle) abort
+function! s:hooks.on_source(bundle) abort "{{{
     let g:tlist_php_settings     = 'php;c:class;f:function;d:constant'
     let g:Tlist_Exit_OnlyWindow  = 1
     let g:Tlist_Show_One_File    = 1
     let g:Tlist_Use_Right_Window = 1
     let g:Tlist_WinWidth         = 25
-endfunction
+endfunction "}}}
 "}}}
 " nerdtree {{{
 NeoBundleLazy 'scrooloose/nerdtree', {'commands': 'NERDTree'}
 nnoremap <expr><Leader>n ':NERDTree '.vital#of('vital').import('Prelude').path2project_directory('%').'<CR>'
 let s:hooks = neobundle#get_hooks('nerdtree')
-function! s:hooks.on_source(bundle) abort
+function! s:hooks.on_source(bundle) abort "{{{
     let g:NERDTreeBookmarksFile     = $HOME.'/.vim/nerdtree/.NERDTreeBookmarks'
     let g:NERDTreeMinimalUI         = 1
     let g:NERDTreeRespectWildIgnore = 1
     let g:NERDTreeShowBookmarks     = 1
     let g:NERDTreeShowHidden        = 1
     let g:NERDTreeWinSize           = 20
-endfunction
+endfunction "}}}
 "}}}
 " vim-qfreplace {{{
 "
@@ -447,7 +449,7 @@ NeoBundleLazy 't9md/vim-quickhl', {'commands' : 'quickhl#manual#this'}
 nnoremap <Space>m :<C-u>call<Space>quickhl#manual#this('n')<CR>
 nnoremap <Space>M :<C-u>call<Space>quickhl#manual#reset()<CR>
 let s:hooks = neobundle#get_hooks('vim-quickhl')
-function! s:hooks.on_source(bundle) abort
+function! s:hooks.on_source(bundle) abort "{{{
     let g:quickhl_manual_colors = [
     \ 'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkBlue    guibg=DarkBlue',
     \ 'cterm=NONE gui=NONE ctermfg=Black guifg=White ctermbg=DarkGreen   guibg=DarkGreen',
@@ -463,14 +465,17 @@ function! s:hooks.on_source(bundle) abort
     \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Red         guibg=Red',
     \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta     guibg=Magenta',
     \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow      guibg=Yellow']
-endfunction
+endfunction "}}}
 "}}}
 " vim-hier {{{
 NeoBundleLazy 'jceb/vim-hier', {'commands' : 'HierUpdate'}
 "}}}
 " vim-sqlfix {{{
 NeoBundleLazy 'KazuakiM/vim-sqlfix', {'commands': 'Sqlfix'}
-let g:sqlfix#Config = {'explain': 1}
+let s:hooks = neobundle#get_hooks('vim-sqlfix')
+function! s:hooks.on_source(bundle) abort "{{{
+    let g:sqlfix#Config = {'explain': 1}
+endfunction "}}}
 "}}}
 " previm {{{
 NeoBundleLazy 'kannokanno/previm', {'commands': 'PrevimOpen'}
@@ -482,17 +487,17 @@ let g:ref_no_default_key_mappings = 1
 inoremap <silent><C-k> <C-o>:call<Space>ref#K('normal')<CR><ESC>
 nnoremap <silent>K     :<C-u>call<Space>ref#K('normal')<CR>
 let s:hooks = neobundle#get_hooks('vim-ref')
-function! s:hooks.on_source(bundle) abort
+function! s:hooks.on_source(bundle) abort "{{{
     let g:ref_cache_dir       = $HOME.'/.vim/vim-ref/cache'
     let g:ref_detect_filetype = {'html': 'phpmanual', 'javascript': 'phpmanual', 'css': 'phpmanual'}
     let g:ref_phpmanual_path  = $HOME.'/.vim/vim-ref/php-chunked-xhtml'
-endfunction
+endfunction "}}}
 "}}}
 " vim-php-cs-fixer {{{
 NeoBundleLazy 'stephpy/vim-php-cs-fixer', {'functions': 'PhpCsFixerFixFile'}
 nnoremap <Leader>php :<C-u>call<Space>PhpCsFixerFixFile()<CR>
 let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
-function! s:hooks.on_source(bundle) abort
+function! s:hooks.on_source(bundle) abort "{{{
     let g:php_cs_fixer_config                 = 'default'
     let g:php_cs_fixer_dry_run                = 0
     let g:php_cs_fixer_enable_default_mapping = 0
@@ -500,25 +505,24 @@ function! s:hooks.on_source(bundle) abort
     let g:php_cs_fixer_path                   = $HOME.'/.vim/vim-php-cs-fixer/php-cs-fixer'
     let g:php_cs_fixer_php_path               = 'php'
     let g:php_cs_fixer_verbose                = 0
-endfunction
+endfunction "}}}
 "}}}
 " open-browser.vim {{{
 NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'openbrowser#_keymapping_smart_search'}
-let g:netrw_nogx = 1
 nnoremap <Leader>gx :<C-u>call<Space>openbrowser#_keymapping_smart_search('n')<CR>
 "}}}
 " vim-snippets
 " neocomplete.vim {{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': 'KazuakiM/vim-snippets', 'insert': 1}
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
-function! s:hooks.on_source(bundle) abort
+function! s:hooks.on_source(bundle) abort "{{{
     let g:neocomplete#auto_completion_start_length     = 3
     let g:neocomplete#data_directory                   = $HOME.'/.vim/neocomplete.vim'
     let g:neocomplete#delimiter_patterns               = {'php': ['->', '::', '\']}
     let g:neocomplete#enable_at_startup                = 1
     let g:neocomplete#enable_auto_close_preview        = 3
     let g:neocomplete#enable_auto_delimiter            = 1
-    let g:neocomplete#enable_auto_select               = 1
+    let g:neocomplete#enable_auto_select               = 0
     let g:neocomplete#enable_fuzzy_completion          = 0
     let g:neocomplete#enable_smart_case                = 1
     let g:neocomplete#keyword_patterns                 = {'_': '\h\w*'}
@@ -532,35 +536,53 @@ function! s:hooks.on_source(bundle) abort
     let g:neocomplete#sources#buffer#max_keyword_width = 30
     let g:neocomplete#sources#dictionary#dictionaries  = {'_': '', 'php': $HOME.'/.vim/dict/php.dict'}
     let g:neocomplete#use_vimproc                      = 1
-endfunction
+endfunction "}}}
 "}}}
 " gundo.vim {{{
 NeoBundleLazy 'sjl/gundo.vim', {'insert': 1}
 let s:hooks = neobundle#get_hooks('gundo.vim')
-function! s:hooks.on_source(bundle) abort
+function! s:hooks.on_source(bundle) abort "{{{
     nnoremap u g-
     nnoremap U g-
     nnoremap <C-r> g+
     nnoremap <C-R> g+
     nnoremap <Leader>gundo :<C-u>GundoToggle<CR>
-endfunction
+endfunction "}}}
 "}}}
 " shabadou.vim
 " vim-watchdogs {{{
 NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': 'osyo-manga/shabadou.vim', 'insert': 1}
 let s:hooks = neobundle#get_hooks('vim-watchdogs')
-function! s:hooks.on_source(bundle) abort
+function! s:hooks.on_source(bundle) abort "{{{
     "vim-watchdogs
     let g:watchdogs_check_BufWritePost_enable  = 1
     let g:watchdogs_check_BufWritePost_enables = {'vim': 0}
     let g:watchdogs_check_CursorHold_enable    = 1
     let g:watchdogs_check_CursorHold_enables   = {'vim': 0}
-endfunction
-unlet s:hooks
+endfunction "}}}
 "}}}
 " vim-markdown {{{
 NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
 "}}}
+if (s:osType !=# 'unix')
+    " vim-over {{{
+    NeoBundleLazy 'osyo-manga/vim-over', {'commands': 'OverCommandLine'}
+    nnoremap <expr><Leader>%s  ':OverCommandLine<CR>%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
+    nnoremap <expr><Leader>%%s ':OverCommandLine<CR>%s/'.expand('<cword>').'//gc<Left><Left><Left>'
+    let s:hooks = neobundle#get_hooks('vim-over')
+    function! s:hooks.on_source(bundle) abort "{{{
+        let g:over#command_line#substitute#highlight_string = 'SpellCap'
+    endfunction "}}}
+    "}}}
+    " incsearch.vim {{{
+    NeoBundleLazy 'haya14busa/incsearch.vim', {'mappings': '<Plug>(incsearch-forward)'}
+    nmap /  <Plug>(incsearch-forward)
+    "}}}
+else
+    nnoremap <expr><Leader>%s  ':%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
+    nnoremap <expr><Leader>%%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
+endif
+unlet s:hooks
 "}}}
 "
 "

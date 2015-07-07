@@ -37,9 +37,6 @@ if type colordiff >/dev/null 2>&1; then
 else
     alias diff='diff -u'
 fi
-if type htop >/dev/null 2>&1; then
-    alias top='sudo htop'
-fi
 export GREP_OPTIONS='--color=auto -i -I'
 export GREP_COLOR='1;33'
 alias grep="grep $GREP_OPTIONS"
@@ -121,6 +118,9 @@ case "${OSTYPE}" in
             export RBENV_ROOT=/usr/local/bin
             eval "$(rbenv init -)";
         fi
+        if type htop >/dev/null 2>&1; then
+            alias top='sudo htop'
+        fi
         localPath=''
         #brew --prefix perl518
         if [ -d /usr/local/opt/perl518/bin ]; then
@@ -157,6 +157,9 @@ case "${OSTYPE}" in
         if type rbenv >/dev/null 2>&1; then
             export RBENV_ROOT=/usr/local/rbenv
             eval "$(rbenv init -)";
+        fi
+        if type htop >/dev/null 2>&1; then
+            alias top='htop'
         fi
         export MYSQL_PS1="\d> "
         ;;
