@@ -38,7 +38,7 @@ augroup MyAutoCmd
     autocmd!
 augroup END
 function! s:KazuakiMVimStart(backupDir, undoDir) abort "{{{
-    "Check 256KB file size.
+    "Check 256KB file size. 
     if getfsize(expand('%:p')) >= 262144
         setlocal noswapfile nobackup nowritebackup noundofile viminfo=
         filetype off
@@ -635,6 +635,19 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*,txt,text} setloca
 autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}                           setlocal filetype=snippets
 autocmd MyAutoCmd BufNewFile,BufRead *.{vim*}                            setlocal filetype=vim
 autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                         setlocal filetype=xxd
+"}}}
+"
+"
+" Function {{{
+nnoremap <F1> :<C-u>call<Space>KazuakiMEncodeSwitcher()<CR>
+let s:encodeList = ['utf-8', 'japan', 'sjis', 'euc-jp']
+function! KazuakiMEncodeSwitcher() abort "{{{
+    let b:encodeIndex = ! exists('b:encodeIndex') ? 1 : b:encodeIndex + 1
+    if b:encodeIndex ==# len(s:encodeList)
+        let b:encodeIndex = 0
+    endif
+    execute 'e ++encoding='.s:encodeList[b:encodeIndex]
+endfunction "}}}
 "}}}
 "
 "
