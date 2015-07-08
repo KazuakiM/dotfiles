@@ -639,16 +639,19 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                         setloca
 "
 "
 " Function {{{
-nnoremap <F1> :<C-u>call<Space>KazuakiMEncodeSwitcher()<CR>
-nnoremap <expr><F2> ':!open -a firefox '.expand('%:p')
-let s:encodeList = ['utf-8', 'japan', 'sjis', 'euc-jp']
-function! KazuakiMEncodeSwitcher() abort "{{{
-    let b:encodeIndex = ! exists('b:encodeIndex') ? 1 : b:encodeIndex + 1
-    if b:encodeIndex ==# len(s:encodeList)
+nnoremap <F1> :<C-u>call<Space>KazuakiMCodeSwitch()<CR>
+function! KazuakiMCodeSwitch() abort "{{{
+    let b:encodeIndex = ! exists('b:encodeIndex') ? 2 : b:encodeIndex + 1
+    if b:encodeIndex is 1
+        setlocal encoding=utf-8  fileencoding=utf-8  fileformat=unix
+    elseif b:encodeIndex is 2
+        setlocal encoding=sjis   fileencoding=sjis   fileformat=dos
+    elseif b:encodeIndex is 3
+        setlocal encoding=euc-jp fileencoding=euc-jp fileformat=unix
         let b:encodeIndex = 0
     endif
-    execute 'edit ++encoding='.s:encodeList[b:encodeIndex]
 endfunction "}}}
+nnoremap <expr><F2> ':%!nkf --overwrite -e '.expand('%:p')
 "}}}
 "
 "
