@@ -289,6 +289,14 @@ $ vagrant ssh-config > ssh.config
 $ scp -P <Port:2222> -F /srv/vagrant/ssh.config <file> default:/tmp/
 ```
 
+### sudo
+
+```bash
+$ sudo visudo
+
+   <Account> ALL=(root) NOPASSWD: /usr/local/bin/htop
+```
+
 ## Linux
 
 I made Vagrantfile.

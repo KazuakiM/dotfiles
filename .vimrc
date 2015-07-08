@@ -110,7 +110,7 @@ function! s:KazuakiMWinEnter() abort "{{{
 endfunction "}}}
 autocmd MyAutoCmd BufEnter             * call s:KazuakiMBufEnter()
 autocmd MyAutoCmd BufReadPost          * if line("'\"") > 1 && line("'\"") <= line('$') | exe "normal! g`\"" | endif
-autocmd MyAutoCmd CmdwinEnter          * nmap <silent> <ESC><ESC> :q<CR>
+autocmd MyAutoCmd CmdwinEnter          * nmap <silent> <ESC><ESC> :quit<CR>
 autocmd MyAutoCmd CmdwinLeave          * nunmap <ESC><ESC>
 autocmd MyAutoCmd FocusGained          * checktime
 autocmd MyAutoCmd InsertLeave          * set nopaste | if &l:diff | diffupdate | endif
@@ -635,6 +635,20 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*,txt,text} setloca
 autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}                           setlocal filetype=snippets
 autocmd MyAutoCmd BufNewFile,BufRead *.{vim*}                            setlocal filetype=vim
 autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                         setlocal filetype=xxd
+"}}}
+"
+"
+" Function {{{
+nnoremap <F1> :<C-u>call<Space>KazuakiMEncodeSwitcher()<CR>
+nnoremap <expr><F2> ':!open -a firefox '.expand('%:p')
+let s:encodeList = ['utf-8', 'japan', 'sjis', 'euc-jp']
+function! KazuakiMEncodeSwitcher() abort "{{{
+    let b:encodeIndex = ! exists('b:encodeIndex') ? 1 : b:encodeIndex + 1
+    if b:encodeIndex ==# len(s:encodeList)
+        let b:encodeIndex = 0
+    endif
+    execute 'edit ++encoding='.s:encodeList[b:encodeIndex]
+endfunction "}}}
 "}}}
 "
 "
