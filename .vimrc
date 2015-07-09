@@ -99,6 +99,24 @@ function! s:KazuakiMBufEnter() abort "{{{
     if &filetype is ''
         setlocal filetype=mkd
     endif
+    " default encoding and fileformat
+    let l:fileencoding = &fileencoding
+    if l:fileencoding is 'utf-8'
+        setlocal encoding=utf-8
+        if &modifiable
+            setlocal fileformat=unix
+        endif
+    elseif  l:fileencoding is 'sjis'
+        setlocal encoding=sjis
+        if &modifiable
+            setlocal fileformat=dos
+        endif
+    elseif  l:fileencoding is 'euc-jp'
+        setlocal encoding=euc-jp
+        if &modifiable
+            setlocal fileformat=unix
+        endif
+    endif
 endfunction "}}}
 function! s:KazuakiMVimEnter() abort "{{{
     set textwidth=0
@@ -639,15 +657,17 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                         setloca
 "
 "
 " Function {{{
-nnoremap <F1> :<C-u>call<Space>KazuakiMEncodeSwitcher()<CR>
-nnoremap <expr><F2> ':!open -a firefox '.expand('%:p')
-let s:encodeList = ['utf-8', 'japan', 'sjis', 'euc-jp']
-function! KazuakiMEncodeSwitcher() abort "{{{
-    let b:encodeIndex = ! exists('b:encodeIndex') ? 1 : b:encodeIndex + 1
-    if b:encodeIndex ==# len(s:encodeList)
+nnoremap <F1> :<C-u>call<Space>KazuakiMCodeSwitch()<CR>
+function! KazuakiMCodeSwitch() abort "{{{
+    let b:encodeIndex = ! exists('b:encodeIndex') ? 2 : b:encodeIndex + 1
+    if b:encodeIndex is 1
+        execute 'edit ++bad=X ++encoding=utf-8'
+    elseif b:encodeIndex is 2
+        execute 'edit ++bad=X ++encoding=sjis'
+    elseif b:encodeIndex is 3
+        execute 'edit ++bad=X ++encoding=euc-jp'
         let b:encodeIndex = 0
     endif
-    execute 'edit ++encoding='.s:encodeList[b:encodeIndex]
 endfunction "}}}
 "}}}
 "
