@@ -86,7 +86,7 @@ function! s:KazuakiMCheckString() abort "{{{
 endfunction "}}}
 function! s:KazuakiMBufEnter() abort "{{{
     " Auto close VimDiff or primary NERDTree
-    if (winnr('$') is 1) && (&l:diff || (exists('b:NERDTreeType') && (b:NERDTreeType ==# 'primary')))
+    if winnr('$') is 1 && (&l:diff || (exists('b:NERDTreeType') && b:NERDTreeType ==# 'primary'))
         quit
     endif
     " If open direcotry, call NERDTree
@@ -582,7 +582,7 @@ endfunction "}}}
 " vim-markdown {{{
 NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
 "}}}
-if (s:osType !=# 'unix')
+if s:osType !=# 'unix'
     " vim-over {{{
     NeoBundleLazy 'osyo-manga/vim-over', {'commands': 'OverCommandLine'}
     nnoremap <expr><Leader>%s  ':OverCommandLine<CR>%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
@@ -594,7 +594,7 @@ if (s:osType !=# 'unix')
     "}}}
     " incsearch.vim {{{
     NeoBundleLazy 'haya14busa/incsearch.vim', {'mappings': '<Plug>(incsearch-forward)'}
-    nmap /  <Plug>(incsearch-forward)
+    nmap / <Plug>(incsearch-forward)
     "}}}
 else
     nnoremap <expr><Leader>%s  ':%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
@@ -635,7 +635,7 @@ elseif s:osType ==# 'win'
     " memolist.vim {{{
     let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     "}}}
-elseif (s:osType ==# 'unix')
+else
 endif
 "}}}
 "}}}
@@ -664,7 +664,7 @@ function! KazuakiMCodeSwitch() abort "{{{
         execute 'edit ++bad=X ++encoding=utf-8'
     elseif b:encodeIndex is 2
         execute 'edit ++bad=X ++encoding=sjis'
-    elseif b:encodeIndex is 3
+    else
         execute 'edit ++bad=X ++encoding=euc-jp'
         let b:encodeIndex = 0
     endif
