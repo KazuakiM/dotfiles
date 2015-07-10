@@ -581,6 +581,7 @@ endfunction "}}}
 "}}}
 " vim-markdown {{{
 NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
+let g:vim_markdown_folding_disabled = 1
 "}}}
 if s:osType !=# 'unix'
     " vim-over {{{
@@ -632,6 +633,9 @@ if s:osType ==# 'macunix'
     let g:previm_open_cmd = 'open -a "Google Chrome"'
     "}}}
 elseif s:osType ==# 'win'
+    " vimproc.vim {{{
+    let g:vimproc#dll_path ='C:/usr/local/bin/Vim/plugins/vimproc/autoload/vimproc_win64.dll'
+    "}}}
     " memolist.vim {{{
     let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     "}}}

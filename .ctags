@@ -3,7 +3,6 @@
 --exclude=*.js
 --exclude=*Test.php
 --exclude=*TestCase.php
---input-encoding=utf-8
 --recurse=yes
 --sort=yes
 --langmap=PHP:+.inc.tpl
