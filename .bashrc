@@ -83,6 +83,7 @@ case "${OSTYPE}" in
         alias httpd='sudo apachectl'
         alias composer='php -d memory_limit=1G /usr/local/opt/composer/libexec/composer.phar'
         alias MYSQL='mysql.server'
+        alias DIFF='open -a FileMerge'
         alias FF='open -a firefox'
         alias GG='open -a firefox'
         alias MM='open -a thunderbird'
