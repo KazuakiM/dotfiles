@@ -581,6 +581,7 @@ endfunction "}}}
 "}}}
 " vim-markdown {{{
 NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
+let g:vim_markdown_folding_disabled = 1
 "}}}
 if s:osType !=# 'unix'
     " vim-over {{{
