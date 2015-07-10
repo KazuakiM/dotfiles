@@ -164,6 +164,7 @@ colorscheme kazuakim
 "  ESC
 inoremap jk <Esc>
 inoremap kj <Esc>
+inoremap <CR> <CR>X<C-h>
 "  Fold
 nnoremap zx :foldopen<CR>
 "  Line
