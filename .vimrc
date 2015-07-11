@@ -2,7 +2,7 @@
 "
 " Memo {{{
 " :help internal-variables {{{
-"------------------------------------------------------------------------
+"+----+-------------------+---------------------------------------------+
 "| b: | buffer-variable   | Local to the current buffer.                |
 "| w: | window-variable   | Local to the current window.                |
 "| t: | tabpage-variable  | Local to the current tab page.              |
@@ -11,9 +11,9 @@
 "| s: | script-variable   | Local to a :source'ed Vim script.           |
 "| a: | function-argument | Function argument (only inside a function). |
 "| v: | vim-variable      | Global, predefined by Vim.                  |
-"------------------------------------------------------------------------ }}}
+"+----+-------------------+---------------------------------------------+ }}}
 " :help map {{{
-"---------------------------------------------------------------------------------------------------------------------------------
+"+----------------------------------------------+--------------------------------------------------------------------------------+
 "|commands:                                     |modes:                                                                          |
 "| Variables | Constants |  Unset  |  Destroy   | Normal | Visual | Select | Operator-pending | Insert | Command-line | Lang-Arg |
 "|   :map    | :noremap  | :unmap  | :mapclear  |  yes   |  yes   |  yes   |       yes        |   -    |      -       |    -     |
@@ -26,7 +26,7 @@
 "|   :imap   | :inoremap | :iunmap | :imapclear |   -    |   -    |   -    |        -         |  yes   |      -       |    -     |
 "|   :cmap   | :cnoremap | :cunmap | :cmapclear |   -    |   -    |   -    |        -         |   -    |     yes      |    -     |
 "|   :lmap   | :lnoremap | :lunmap | :lmapclear |   -    |   -    |   -    |        -         |  yes*  |     yes*     |   yes*   |
-"--------------------------------------------------------------------------------------------------------------------------------- }}}
+"+-----------+-----------+---------+------------+--------+--------+--------+------------------+--------+--------------+----------+ }}}
 "}}}
 "
 "

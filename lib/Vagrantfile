@@ -19,7 +19,7 @@
 VAGRANTFILE_API_VERSION = 2
 VAGRANTFILE_LOG         = "/var/log/vagrantfile.log"
 ACCOUNT                 = "vagrant"
-PROCESS_MAX             = 12
+PROCESS_MAX             = 13
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   index = 0
 
@@ -37,6 +37,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       echo "\tLOG:\t#{VAGRANTFILE_LOG}"                      && \
       export HOME=/home/#{ACCOUNT}                           && \
       echo "\tHOME:\t${HOME}"                                && \
+    echo "[ #{index = (( index +1 ))}/#{PROCESS_MAX} ]SELinux disabled ..." && \
+      sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config && \
     echo "[ #{index = (( index +1 ))}/#{PROCESS_MAX} ]Install key & repository ..." && \
       sudo rpm --import http://ftp.riken.jp/Linux/fedora/epel/RPM-GPG-KEY-EPEL-7                          >> #{VAGRANTFILE_LOG} && \
       sudo rpm -ivh http://ftp.riken.jp/Linux/fedora/epel/7/x86_64/e/epel-release-7-5.noarch.rpm          >> #{VAGRANTFILE_LOG} && \
@@ -128,6 +130,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     echo "[ #{index = (( index +1 ))}/#{PROCESS_MAX} ]Update chown ..." && \
       sudo chown -R #{ACCOUNT}:#{ACCOUNT} /srv       && \
       sudo chown -R #{ACCOUNT}:#{ACCOUNT} /usr/local && \
+      sudo chown -R #{ACCOUNT}:#{ACCOUNT} /var/log   && \
       sudo chown -R #{ACCOUNT}:#{ACCOUNT} $HOME      && \
     echo "[ #{index = (( index +1 ))}/#{PROCESS_MAX} ]Infomation..." && \
       echo "\tStart Up shell"                                                && \
