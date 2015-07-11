@@ -100,23 +100,7 @@ function! s:KazuakiMBufEnter() abort "{{{
         setlocal filetype=mkd
     endif
     " default encoding and fileformat
-    let l:fileencoding = &fileencoding
-    if l:fileencoding is 'utf-8'
-        setlocal encoding=utf-8
-        if &modifiable
-            setlocal fileformat=unix
-        endif
-    elseif  l:fileencoding is 'sjis'
-        setlocal encoding=sjis
-        if &modifiable
-            setlocal fileformat=dos
-        endif
-    elseif  l:fileencoding is 'euc-jp'
-        setlocal encoding=euc-jp
-        if &modifiable
-            setlocal fileformat=unix
-        endif
-    endif
+    execute 'setlocal encoding='.&fileencoding
 endfunction "}}}
 function! s:KazuakiMVimEnter() abort "{{{
     set textwidth=0
@@ -668,10 +652,28 @@ function! KazuakiMCodeSwitch() abort "{{{
     if b:encodeIndex is 1
         execute 'edit ++bad=X ++encoding=utf-8'
     elseif b:encodeIndex is 2
-        execute 'edit ++bad=X ++encoding=sjis'
+        if s:osType ==# 'win'
+            execute 'edit ++bad=X ++encoding=cp932'
+        else
+            execute 'edit ++bad=X ++encoding=sjis'
+        endif
     else
         execute 'edit ++bad=X ++encoding=euc-jp'
         let b:encodeIndex = 0
+    endif
+endfunction "}}}
+nnoremap <F2> :<C-u>call<Space>KazuakiMNewLineSwitch()<CR>
+function! KazuakiMNewLineSwitch() abort "{{{
+    if &modifiable
+        let b:newLineIndex = ! exists('b:newLineIndex') ? 2 : b:newLineIndex + 1
+        if b:newLineIndex is 1
+            setlocal fileformat=unix
+        elseif b:newLineIndex is 2
+            setlocal fileformat=dos
+        else
+            setlocal fileformat=mac
+            let b:newLineIndex = 0
+        endif
     endif
 endfunction "}}}
 "}}}
