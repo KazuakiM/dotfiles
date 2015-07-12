@@ -99,7 +99,7 @@ function! s:KazuakiMBufEnter() abort "{{{
     if &filetype is ''
         setlocal filetype=mkd
     endif
-    " default encoding and fileformat
+    " default encoding
     execute 'setlocal encoding='.&fileencoding
 endfunction "}}}
 function! s:KazuakiMVimEnter() abort "{{{

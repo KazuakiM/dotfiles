@@ -269,8 +269,7 @@ $ ln -sf $HOME/work/dotfiles/.vim                 $HOME/.vim
 $ ln -sf $HOME/work/dotfiles/.vimrc               $HOME/.vimrc
 $ cp -f  $HOME/work/dotfiles/.vimrc.local         $HOME/
 $ ln -sf $HOME/work/dotfiles/.w3m                 $HOME/.w3m
-$ mkdir -p /srv/vagrant
-$ ln -sf $HOME/work/dotfiles/lib/Vagrantfile /srv/vagrant/Vagrantfile
+$ ln -sf $HOME/work/dotfiles/lib/Vagrant          /srv/vagrant
 $ git clone https://github.com/Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
 $ wget http://jp2.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp/php_manual_ja.tar.gz
 $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
