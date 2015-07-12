@@ -30,7 +30,7 @@ $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/maste
 $ mkdir -p $HOME/work
 $ git clone https://github.com/KazuakiM/dotfiles.git $HOME/work/dotfiles
 $ sudo cp -f $HOME/work/dotfiles/etc/paths /etc/paths
-$ cd $HOME/work/dotfiles/lib
+$ cd $HOME/work/dotfiles/lib/Homebrew/
 $ brew update
 $ brew upgrade --all
 $ brew doctor
@@ -39,7 +39,7 @@ $ brew brewdle
 $ brew doctor
 $ cd /tmp
 $ brew brewdle dump
-$ cp -p Brewfile $HOME/work/dotfiles/lib/
+$ cp -p Brewfile $HOME/work/dotfiles/lib/Homebrew/
 $ cd $HOME/work/dotfiles/
 $ git status
 ```
@@ -284,8 +284,10 @@ $ sh $HOME/.vim/bundle/neobundle.vim/bin/neoinstall
 
 ```bash
 $ cd /srv/vagrant
+$ vagrant up
 $ vagrant ssh-config > ssh.config
-$ scp -P <Port:2222> -F /srv/vagrant/ssh.config <file> default:/tmp/
+$ scp -P 2222 -F /srv/vagrant/ssh.config /tmp/<file> default:/tmp/
+$ scp -P 2222 -F /srv/vagrant/ssh.config default:/tmp/<file> /tmp/
 ```
 
 ### sudo
