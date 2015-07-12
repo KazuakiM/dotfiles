@@ -7,6 +7,7 @@
 #variable {{{
 log=/var/log/vagrantfile.log
 #}}}
+echo "yum install ..."
 rpm --import http://ftp.riken.jp/Linux/fedora/epel/RPM-GPG-KEY-EPEL-7                          >> $log && \
 rpm -ivh http://ftp.riken.jp/Linux/fedora/epel/7/x86_64/e/epel-release-7-5.noarch.rpm          >> $log && \
 rpm --import http://rpms.famillecollet.com/RPM-GPG-KEY-remi                                    >> $log && \
