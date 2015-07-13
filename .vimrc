@@ -2,7 +2,7 @@
 "
 " Memo {{{
 " :help internal-variables {{{
-"------------------------------------------------------------------------
+"+----+-------------------+---------------------------------------------+
 "| b: | buffer-variable   | Local to the current buffer.                |
 "| w: | window-variable   | Local to the current window.                |
 "| t: | tabpage-variable  | Local to the current tab page.              |
@@ -11,9 +11,9 @@
 "| s: | script-variable   | Local to a :source'ed Vim script.           |
 "| a: | function-argument | Function argument (only inside a function). |
 "| v: | vim-variable      | Global, predefined by Vim.                  |
-"------------------------------------------------------------------------ }}}
+"+----+-------------------+---------------------------------------------+ }}}
 " :help map {{{
-"---------------------------------------------------------------------------------------------------------------------------------
+"+----------------------------------------------+--------------------------------------------------------------------------------+
 "|commands:                                     |modes:                                                                          |
 "| Variables | Constants |  Unset  |  Destroy   | Normal | Visual | Select | Operator-pending | Insert | Command-line | Lang-Arg |
 "|   :map    | :noremap  | :unmap  | :mapclear  |  yes   |  yes   |  yes   |       yes        |   -    |      -       |    -     |
@@ -26,7 +26,7 @@
 "|   :imap   | :inoremap | :iunmap | :imapclear |   -    |   -    |   -    |        -         |  yes   |      -       |    -     |
 "|   :cmap   | :cnoremap | :cunmap | :cmapclear |   -    |   -    |   -    |        -         |   -    |     yes      |    -     |
 "|   :lmap   | :lnoremap | :lunmap | :lmapclear |   -    |   -    |   -    |        -         |  yes*  |     yes*     |   yes*   |
-"--------------------------------------------------------------------------------------------------------------------------------- }}}
+"+-----------+-----------+---------+------------+--------+--------+--------+------------------+--------+--------------+----------+ }}}
 "}}}
 "
 "
@@ -99,24 +99,8 @@ function! s:KazuakiMBufEnter() abort "{{{
     if &filetype is ''
         setlocal filetype=mkd
     endif
-    " default encoding and fileformat
-    let l:fileencoding = &fileencoding
-    if l:fileencoding is 'utf-8'
-        setlocal encoding=utf-8
-        if &modifiable
-            setlocal fileformat=unix
-        endif
-    elseif  l:fileencoding is 'sjis'
-        setlocal encoding=sjis
-        if &modifiable
-            setlocal fileformat=dos
-        endif
-    elseif  l:fileencoding is 'euc-jp'
-        setlocal encoding=euc-jp
-        if &modifiable
-            setlocal fileformat=unix
-        endif
-    endif
+    " default encoding
+    execute 'setlocal encoding='.&fileencoding
 endfunction "}}}
 function! s:KazuakiMVimEnter() abort "{{{
     set textwidth=0
@@ -164,6 +148,7 @@ colorscheme kazuakim
 "  ESC
 inoremap jk <Esc>
 inoremap kj <Esc>
+inoremap <CR> <CR>X<C-h>
 "  Fold
 nnoremap zx :foldopen<CR>
 "  Line
@@ -667,10 +652,28 @@ function! KazuakiMCodeSwitch() abort "{{{
     if b:encodeIndex is 1
         execute 'edit ++bad=X ++encoding=utf-8'
     elseif b:encodeIndex is 2
-        execute 'edit ++bad=X ++encoding=sjis'
+        if s:osType ==# 'win'
+            execute 'edit ++bad=X ++encoding=cp932'
+        else
+            execute 'edit ++bad=X ++encoding=sjis'
+        endif
     else
         execute 'edit ++bad=X ++encoding=euc-jp'
         let b:encodeIndex = 0
+    endif
+endfunction "}}}
+nnoremap <F2> :<C-u>call<Space>KazuakiMNewLineSwitch()<CR>
+function! KazuakiMNewLineSwitch() abort "{{{
+    if &modifiable
+        let b:newLineIndex = ! exists('b:newLineIndex') ? 2 : b:newLineIndex + 1
+        if b:newLineIndex is 1
+            setlocal fileformat=unix
+        elseif b:newLineIndex is 2
+            setlocal fileformat=dos
+        else
+            setlocal fileformat=mac
+            let b:newLineIndex = 0
+        endif
     endif
 endfunction "}}}
 "}}}

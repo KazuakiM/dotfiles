@@ -9,6 +9,13 @@ ALL DB
 MySQL
 * [MySQL Workbench](http://dev.mysql.com/downloads/workbench/)
 
+## Best practice my.cnf
+
+* [kamipo-san's my.cnf](https://github.com/kamipo/etcfiles/blob/master/etc/my.cnf)
+* [yoku0825-san](https://github.com/yoku0825)
+ * [dotfiles my.cnf](https://github.com/yoku0825/dotfiles/blob/master/my.cnf)
+ * [my_setup my.cnf](https://github.com/yoku0825/my_setup/blob/master/my.cnf)
+
 ## Tips
 
 Copy DataBase
