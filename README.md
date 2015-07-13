@@ -284,6 +284,7 @@ $ sh $HOME/.vim/bundle/neobundle.vim/bin/neoinstall
 
 ```bash
 $ cd /srv/vagrant
+$ vagrant plugin install vagrant-cachier
 $ vagrant up
 $ vagrant ssh-config > ssh.config
 $ scp -P 2222 -F /srv/vagrant/ssh.config /tmp/<file> default:/tmp/

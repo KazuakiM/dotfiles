@@ -10,6 +10,6 @@ log=/var/log/vagrantfile.log
 echo "LuaJIT install ..."
 git clone http://luajit.org/git/luajit-2.0.git /usr/local/src/luajit >> $log 2>> $log && \
 cd /usr/local/src/luajit/                                                             && \
-make                                                                 >> $log          && \
-make install                                                         >> $log
+make                                                                 >> $log 2>> $log && \
+make install                                                         >> $log 2>> $log
 

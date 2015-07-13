@@ -17,9 +17,11 @@
 #  http://rubyonrails.org/download/
 #-----------------------------------------------------------------------------------------------
 MODE = {
-  'DEV'  => true,
-  'PHP'  => false,
-  'RUBY' => false}
+  'APACHE' => true,
+  'MYSQL'  => true,
+  'PHP'    => false,
+  'RUBY'   => true,
+  'DEV'    => false}
 VAGRANTFILE_API_VERSION = 2
 VAGRANTFILE_LOG         = "/var/log/vagrantfile.log"
 ACCOUNT                 = "vagrant"
@@ -27,6 +29,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   index = 0
 
   config.vm.box = "relativkreativ/centos-7-minimal"
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+  end
   config.vm.network  "forwarded_port", guest: 80,   host: 2223
   config.vm.network  "forwarded_port", guest: 3000, host: 3000
   config.vm.provider "virtualbox" do |vb|
@@ -47,6 +52,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   SHELL
   config.vm.provision "shell", path:'modules/yum.sh'
   #}}}
+
+  if MODE['APACHE'] then #{{{
+    config.vm.provision "shell", path:'modules/httpd.sh'
+  end #}}}
+
+  if MODE['MYSQL'] then #{{{
+    config.vm.provision "shell", path:'modules/mysql.sh'
+  end #}}}
 
   if MODE['PHP'] then #{{{
     config.vm.provision "shell", inline: <<-SHELL
