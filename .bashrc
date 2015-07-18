@@ -71,56 +71,50 @@ fi
 #OS Type {{{
 case "${OSTYPE}" in
     darwin*)
+        #command {{{
         alias l='ls -AGh'
+        alias ll='ls -AGhl'
         alias ls='ls -AGh'
         alias sl='ls -AGh'
-        alias ll='ls -AGhl'
+        alias lingr="sh $HOME/work/dotfiles/src/lingrStarter.sh"
         alias vi="$HOME/work/dotfiles/src/macVimStater.sh"
         alias vim='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-        alias gvim="$HOME/work/dotfiles/src/macVimStater.sh"
         alias vimdiff='/Applications/MacVim.app/Contents/MacOS/vimdiff'
-        alias test="cd $HOME/.vim/bundle/vim-sqlfix/ && $HOME/.vim/bundle/vim-themis/bin/themis test/sqlfix.vimspec -r --reporter dot"
-        alias httpd='sudo apachectl'
+        alias gvim="$HOME/work/dotfiles/src/macVimStater.sh"
         alias composer='php -d memory_limit=1G /usr/local/opt/composer/libexec/composer.phar'
+        alias HTTPD='sudo apachectl'
         alias MYSQL='mysql.server'
-        alias DIFF='open -a FileMerge'
-        alias FF='open -a firefox'
-        alias GG='open -a firefox'
-        alias MM='open -a thunderbird'
-        alias MAIL='open -a thunderbird'
-        alias TT='open -a "night owl"'
-        alias RR='open -a "night owl"'
-        alias YORU='open -a "night owl"'
-        alias TWI='open -a tweetdeck'
-        alias IT='open -a itunes'
-        alias TI='open -a itunes'
-        alias ITUNES='open -a itunes'
-        alias OFFICE='open -a /Applications/OpenOffice.org.app/Contents/MacOS/soffice'
-        alias FTP='open -a FileZilla'
-        alias SFTP='open -a FileZilla'
-        alias FTPS='open -a FileZilla'
-        alias VPN='open -a tunnelblick'
-        alias VNC='open -a chicken'
-        alias VB='open -a virtualbox'
-        alias BV='open -a virtualbox'
-        alias VM='open -a virtualbox'
-        alias MV='open -a virtualbox'
-        alias KOBO='open -a kobo'
-        alias KINDLE='open -a kindle'
-        alias LINGR="sh $HOME/work/dotfiles/src/lingrStarter.sh"
-        alias DEV="sh $HOME/work/dotfiles/src/virutalBoxManageForMac.sh devmabu"
-        alias MABU="ssh -l mabulog -p 2222 localhost"
-        alias WIRE='/usr/local/bin/wireshark'
-        alias WIRESHARK='/usr/local/bin/wireshark'
+        alias sqlfix="cd $HOME/.vim/bundle/vim-sqlfix/ && $HOME/.vim/bundle/vim-themis/bin/themis test/sqlfix.vimspec -r --reporter dot"
+        #alias dev="sh $HOME/work/dotfiles/src/virutalBoxManageForMac.sh devmabu"
+        #alias mabu="ssh -l mabulog -p 2222 localhost"
+        if type htop >/dev/null 2>&1; then
+            alias top='sudo htop'
+        fi
+        #}}}
+        # open {{{
+        alias VNC='open    -a Chicken'
+        alias BOOK='open   -a cooViewer'
+        alias DIFF='open   -a FileMerge'
+        alias FTP='open    -a FileZilla'
+        alias FF='open     -a Firefox'
+        alias IT='open     -a iTunes'
+        alias KINDLE='open -a Kindle'
+        alias LIBRE='open  -a LibreOffice'
+        alias OFFICE='open -a LibreOffice'
+        alias TT='open     -a "Night Owl"'
+        alias YORU='open   -a "Night Owl"'
+        alias MAIL='open   -a Thunderbird'
+        alias TWI='open    -a TweetDeck'
+        alias VPN='open    -a Tunnelblick'
+        alias VB='open     -a VirtualBox'
+        #}}}
+        # export {{{
         export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
         export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
         export VIM=$HOME
         if type rbenv >/dev/null 2>&1; then
             export RBENV_ROOT=/usr/local/bin
             eval "$(rbenv init -)";
-        fi
-        if type htop >/dev/null 2>&1; then
-            alias top='sudo htop'
         fi
         localPath=''
         #brew --prefix perl
@@ -141,16 +135,22 @@ case "${OSTYPE}" in
         export PATH=$localPath$PATH
         export MYSQL_PS1="\d @\h \n> "
         #export MYSQL_PS1="\d @\h[\u] \n> "
+        #}}}
         ;;
     linux*)
+        # command {{{
         alias l='ls -AhX --color=auto'
         alias ls='ls -AhX --color=auto'
         alias sl='ls -AhX --color=auto'
         alias ll='ls -AhXl --color=auto'
         alias vi='vim'
+        if type htop >/dev/null 2>&1; then
+            alias top='htop'
+        fi
+        #}}}
+        # export {{{
         export EDITOR=vim
         localPath=''
-        #rbenv
         if [ -d /usr/local/rbenv/bin ]; then
             localPath="/usr/local/rbenv/bin:$localPath"
         fi
@@ -159,12 +159,11 @@ case "${OSTYPE}" in
             export RBENV_ROOT=/usr/local/rbenv
             eval "$(rbenv init -)";
         fi
-        if type htop >/dev/null 2>&1; then
-            alias top='htop'
-        fi
         export MYSQL_PS1="\d> "
+        #}}}
         ;;
     cygwin)
+        # command {{{
         alias l='ls -Ak --color=auto'
         alias ls='ls -Ak --color=auto'
         alias sl='ls -Ak --color=auto'
@@ -172,6 +171,7 @@ case "${OSTYPE}" in
         alias vi="$HOME/src/vimStarter.sh"
         alias vim="$HOME/src/vimStarter.sh"
         alias gvim="$HOME/src/vimStarter.sh"
+        #}}}
         ;;
 esac
 #}}}
