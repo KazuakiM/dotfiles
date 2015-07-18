@@ -123,9 +123,9 @@ case "${OSTYPE}" in
             alias top='sudo htop'
         fi
         localPath=''
-        #brew --prefix perl518
-        if [ -d /usr/local/opt/perl518/bin ]; then
-            localPath="/usr/local/opt/perl518/bin:$localPath"
+        #brew --prefix perl
+        if [ -d /usr/local/opt/perl/bin ]; then
+            localPath="/usr/local/opt/perl/bin:$localPath"
         fi
         #brew --prefix gnu-tar
         if [ -d /usr/local/opt/gnu-tar/libexec/gnubin ]; then

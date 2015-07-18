@@ -21,12 +21,12 @@ yum -y --enablerepo=epel,remi,rpmforge install \
     colordiff           ctags \
     gcc                 gcc-c++        git \
     htop \
-    libcurl-devel       libffi-devel   libxml2-devel         libxslt-devel          libyaml-devel lynx \
+    libcurl-devel       libffi-devel   libxml2-devel libxslt-devel libyaml-devel lynx \
     make                man-pages-ja \
     ncurses-devel       nmap-ncat \
     openssl             openssl-devel \
-    perl                perl-core      perl-devel            php                    php-devel     pv python python-devel \
-    readline            readline-devel ruby                  ruby-devel \
+    pv \
+    readline            readline-devel \
     screen              sqlite-devel \
     the_silver_searcher tmux           tree \
     wget \
