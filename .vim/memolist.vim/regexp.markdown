@@ -79,12 +79,47 @@ regexp
 
 ## 思想
 
+郵便番号
+```php
+<?php
+/*
+1. 数値部は前半3文字、後半4文字で固定である。
+*/
+$addressArray = [
+    '123-1234',
+    '1234-1234'];
+foreach ($addressArray as $address) {
+    if (preg_match("/\A[\d]{3}-[\d]{4}\z/u", $address)) {
+        echo("{$address}:true\n");
+    } else {
+        echo("{$address}:false\n");
+    }
+}
 ```
-ex)郵便番号
-123-4567
+電話番号
+```php
+<?php
+/*
+1. 数値部は2〜4文字で3構成である。
+2. 先頭の数値部 + (-数値部) *2
+*/
+$telArray = [
+    '03-1234-1234',
+    '0120-123-123',
+    '090-1234-1234',
+    '00090-1234-1234'];
+foreach ($telArray as $tel) {
+    if (preg_match("/\A[\d]{2,4}(-[\d]{2,4}){2}\z/u", $tel)) {
+        echo("{$tel}:true\n");
+    } else {
+        echo("{$tel}:false\n");
+    }
+}
 
-\d{3}-\d{4}
+result:
+03-1234-1234:true
+0120-123-123:true
+090-1234-1234:true
+00090-1234-1234:false
 ```
-
-
 

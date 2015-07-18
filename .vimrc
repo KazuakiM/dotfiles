@@ -568,6 +568,16 @@ endfunction "}}}
 NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
 let g:vim_markdown_folding_disabled = 1
 "}}}
+"
+"
+" Exclusive {{{
+if s:osType !=# 'macunix'
+endif
+if s:osType !=# 'win'
+    " memolist.vim {{{
+    let g:memolist_path = $HOME.'/.vim/memolist.vim'
+    "}}}
+endif
 if s:osType !=# 'unix'
     " vim-over {{{
     NeoBundleLazy 'osyo-manga/vim-over', {'commands': 'OverCommandLine'}
@@ -582,36 +592,10 @@ if s:osType !=# 'unix'
     NeoBundleLazy 'haya14busa/incsearch.vim', {'mappings': '<Plug>(incsearch-forward)'}
     nmap / <Plug>(incsearch-forward)
     "}}}
-else
-    nnoremap <expr><Leader>%s  ':%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
-    nnoremap <expr><Leader>%%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
-endif
-unlet s:hooks
-"}}}
-"
-"
-" NeoBundleFetch {{{
-NeoBundleFetch 'psychs/lingr-irc'
-NeoBundleFetch 'KazuakiM/neosnippet-snippets'
-NeoBundleFetch 'KazuakiM/vim-qfsigns'
-NeoBundleFetch 'KazuakiM/vim-regexper'
-NeoBundleFetch 'Kuniwak/vint'
-NeoBundleFetch 'thinca/vim-themis'
-"}}}
-"
-"
-" OS type {{{
-" Exclusive {{{
-if s:osType !=# 'macunix'
-endif
-if s:osType !=# 'win'
-    " memolist.vim {{{
-    let g:memolist_path = $HOME.'/.vim/memolist.vim'
-    "}}}
-endif
-if (s:osType !=# 'unix')
 endif
 "}}}
+"
+"
 " Only {{{
 if s:osType ==# 'macunix'
     " previm {{{
@@ -624,9 +608,22 @@ elseif s:osType ==# 'win'
     " memolist.vim {{{
     let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     "}}}
-else
+elseif s:osType ==# 'unix'
+    nnoremap <expr><Leader>%s  ':%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
+    nnoremap <expr><Leader>%%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
 endif
 "}}}
+unlet s:hooks
+"}}}
+"
+"
+" NeoBundleFetch {{{
+NeoBundleFetch 'psychs/lingr-irc'
+NeoBundleFetch 'KazuakiM/neosnippet-snippets'
+NeoBundleFetch 'KazuakiM/vim-qfsigns'
+NeoBundleFetch 'KazuakiM/vim-regexper'
+NeoBundleFetch 'Kuniwak/vint'
+NeoBundleFetch 'thinca/vim-themis'
 "}}}
 "
 "
