@@ -392,9 +392,8 @@ let g:quickrun_config = {
 \        'outputter/buffer/close_on_empty':     1,    'outputter/buffer/split':           ':botright', 'runner':    'vimproc',
 \        'runner/vimproc/updatetime':           600},
 \    'watchdogs_checker/_': {
-\        'hook/close_quickfix/enable_exit':        1, 'hook/back_window/enable_exit':      0,   'hook/back_window/priority_exit':       1,
-\        'hook/qfsigns_update/enable_exit':        1, 'hook/qfsigns_update/priority_exit': 2,   'hook/qfstatusline_update/enable_exit': 1,
-\        'hook/qfstatusline_update/priority_exit': 3, 'outputter/quickfix/open_cmd':       ''},
+\        'hook/close_quickfix/enable_exit':      1, 'hook/back_window/enable_exit':           0, 'hook/back_window/priority_exit': 1,
+\        'hook/qfstatusline_update/enable_exit': 1, 'hook/qfstatusline_update/priority_exit': 2, 'outputter/quickfix/open_cmd':    ''},
 \    'watchdogs_checker/php': {
 \        'command': 'php',        'cmdopt':      '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
 \        'exec':    '%c %o %s:p', 'errorformat': '%m\ in\ %f\ on\ line\ %l'},
@@ -468,9 +467,6 @@ function! s:hooks.on_source(bundle) abort "{{{
     \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta     guibg=Magenta',
     \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow      guibg=Yellow']
 endfunction "}}}
-"}}}
-" vim-hier {{{
-NeoBundleLazy 'jceb/vim-hier', {'commands' : 'HierUpdate'}
 "}}}
 " vim-sqlfix {{{
 NeoBundleLazy 'KazuakiM/vim-sqlfix', {'commands': 'Sqlfix'}
