@@ -76,8 +76,28 @@ regexp
 | \\]  | ]      |
 | \\~  | ~      |
 
+## Variable
 
-## 思想
+```php
+<?php
+/*
+細かな制御90秒などはありえないなどの制御は未設定
+*/
+$date = '2015-02-25 22:52:25';
+//if (preg_match("/\A(?<year>[\d]{4})-(?<month>[\d]{2})-(?<day>[\d]{2})\s(?<time>[\d:]{8})\z/u",                $date, $matches)) {
+//if (preg_match("/\A(?<year>[\d]{4})-(?<month>[\d]{2})-(?<day>[\d]{2})\s(?<time>[\d]{2}:[\d]{2}:[\d]{2})\z/u", $date, $matches)) {
+if (preg_match("/\A(?<year>[\d]{4})-(?<month>[\d]{2})-(?<day>[\d]{2})\s(?<time>[\d]{2}(:[\d]{2}){2})\z/u",      $date, $matches)) {
+    echo("{$matches['year']}年{$matches['month']}月{$matches['day']}日 {$matches['time']}\n");
+}
+echo(date('Y年m月d日 H:i:s',strtotime($date))."\n");
+
+result:
+2015年02月25日 22:52:25
+2015年02月25日 22:52:25
+```
+
+
+## 利用サンプル
 
 郵便番号
 ```php
@@ -95,7 +115,12 @@ foreach ($addressArray as $address) {
         echo("{$address}:false\n");
     }
 }
+
+result:
+123-1234:true
+1234-1234:false
 ```
+
 電話番号
 ```php
 <?php
@@ -122,4 +147,49 @@ result:
 090-1234-1234:true
 00090-1234-1234:false
 ```
+
+[Best practice URL](http://qiita.com/mpyw/items/1e422848030fcde0f29a)
+```php
+<?php
+$urlArray = [
+    'https://www.google.co.jp/',
+    'http://localhost/',
+    'ftp://sample.com/'];
+foreach ($urlArray as $url) {
+    if (preg_match("/\A(https?|ftp):\/\/[\w\/\$_-~*();:@!?&=+.,%#]+\z/u", $url)) {
+        echo("{$url}:true\n");
+    } else {
+        echo("{$url}:false\n");
+    }
+}
+
+result:
+https://www.google.co.jp/:true
+http://localhost/:true
+ftp://sample.com/:true
+```
+
+[Better Mailaddress](http://www.w3.org/TR/html5/forms.html#valid-e-mail-address)
+```php
+<?php
+$mailaddressArray = [
+    'sample@localhost.com',
+    'dev_info@gmail.com'];
+foreach ($mailaddressArray as $mailaddress) {
+    if (preg_match("/\A[\w.!#$%&'*+\/=?^_`{|}~-]+@[\w](?:[\w-]{0,61}[\w])?(?:\.[\w](?:[\w-]{0,61}[\w])?)*\z/u", $mailaddress)) {
+        echo("{$mailaddress}:true\n");
+    } else {
+        echo("{$mailaddress}:false\n");
+    }
+}
+
+result:
+sample@localhost.com:true
+dev_info@gmail.com:true
+```
+
+## リンク
+
+* [正規表現技術入門 最新エンジン実装と理論的背景](http://gihyo.jp/book/2015/978-4-7741-7270-5)
+* [PCRE 正規表現](http://php.net/manual/ja/pcre.pattern.php)
 
