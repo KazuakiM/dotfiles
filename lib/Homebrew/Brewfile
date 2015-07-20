@@ -85,6 +85,7 @@ brew 'mysql'
 brew 'nkf'
 brew 'node', args: ['with-debug']
 brew 'ossp-uuid'
+brew 'perl'
 brew 'pstree'
 brew 'pv'
 brew 'python3'
@@ -115,7 +116,6 @@ brew 'homebrew/php/php55-mcrypt'
 brew 'homebrew/php/php55-xdebug'
 brew 'homebrew/php/phpunit'
 brew 'homebrew/versions/bash-completion2'
-brew 'homebrew/versions/perl518'
 brew 'kazuakim/macvim/cmigemo-mk', args: ['HEAD']
 brew 'kazuakim/macvim/macvim-kaoriya', args: ['HEAD']
 cask 'alfred'

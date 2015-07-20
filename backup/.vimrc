@@ -131,6 +131,13 @@ nnoremap <silent> <SID>[unite]web :<C-u>Unite<Space>webcolorname<CR>
 NeoBundleLazy 'thinca/vim-editvar', 'depends': ['thinca/vim-prettyprint', 'Shougo/unite.vim'], 'unite_sources': 'variable'}
 nnoremap <silent> <SID>[unite]v   :<C-u>Unite<Space>-auto-preview<Space>variable<CR>
 "}}}
+" vim-hier {{{
+NeoBundleLazy 'jceb/vim-hier', {'commands' : 'HierUpdate'}
+" .vim/after/ftplugin/qf.vim
+augroup Hier
+    autocmd!
+augroup END
+"}}}
 " jazzradio.vim {{{
 NeoBundleLazy 'supermomonga/jazzradio.vim', {'unite_sources': 'jazzradio', 'commands': ['JazzradioUpdateChannels', 'JazzradioPlay']}
 " jazzradio

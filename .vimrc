@@ -125,12 +125,11 @@ function! KazuakiMStatuslineSyntax() abort "{{{
 endfunction "}}}
 " Basic
 set ambiwidth=double autoindent autoread backspace=indent,eol,start backup clipboard+=autoselect,unnamed cmdheight=1 completeopt=longest,menu
-set diffopt=filler,context:5,iwhite,vertical directory=$HOME/.vim/swap display=lastline expandtab fillchars+=diff:* foldmethod=marker
-set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m helplang=ja hidden history=1000 hlsearch ignorecase iminsert=0 imsearch=-1 incsearch laststatus=2 lazyredraw
-set matchpairs+=<:> matchtime=1 mouse= nobomb noequalalways noerrorbells noimcmdline noimdisable noruler number pumheight=8 scrolloff=999 shiftwidth=4 shortmess+=I
-set showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile tabstop=4 title titleold= titlestring=%F ttyfast t_vb= undofile updatecount=30
-set updatetime=1000 viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo virtualedit+=block visualbell wildmenu wildmode=longest:full,full wrap
-set wrapscan
+set diffopt=filler,context:5,iwhite,vertical display=lastline expandtab fillchars+=diff:* foldmethod=marker grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m helplang=ja hidden
+set history=1000 hlsearch ignorecase iminsert=0 imsearch=-1 incsearch laststatus=2 lazyredraw matchpairs+=<:> matchtime=1 mouse= nobomb noequalalways noerrorbells
+set noimcmdline noimdisable noruler noswapfile number pumheight=8 scrolloff=999 shiftwidth=4 shortmess+=I showcmd showmatch smartcase smartindent smarttab
+set softtabstop=4 tabstop=4 title titleold= titlestring=%F ttyfast t_vb= undofile updatecount=30 updatetime=1000
+set viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo virtualedit+=block visualbell wildmenu wildmode=longest:full,full wrap wrapscan
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*.json'\ --exclude='*.log'\ --exclude='*min.js'\ --exclude='*min.css'
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,C,.DS_Store,.,..
 set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{KazuakiMStatuslineSyntax()}%=%Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
@@ -393,9 +392,8 @@ let g:quickrun_config = {
 \        'outputter/buffer/close_on_empty':     1,    'outputter/buffer/split':           ':botright', 'runner':    'vimproc',
 \        'runner/vimproc/updatetime':           600},
 \    'watchdogs_checker/_': {
-\        'hook/close_quickfix/enable_exit':        1, 'hook/back_window/enable_exit':      0,   'hook/back_window/priority_exit':       1,
-\        'hook/qfsigns_update/enable_exit':        1, 'hook/qfsigns_update/priority_exit': 2,   'hook/qfstatusline_update/enable_exit': 1,
-\        'hook/qfstatusline_update/priority_exit': 3, 'outputter/quickfix/open_cmd':       ''},
+\        'hook/close_quickfix/enable_exit':      1, 'hook/back_window/enable_exit':           0, 'hook/back_window/priority_exit': 1,
+\        'hook/qfstatusline_update/enable_exit': 1, 'hook/qfstatusline_update/priority_exit': 2, 'outputter/quickfix/open_cmd':    ''},
 \    'watchdogs_checker/php': {
 \        'command': 'php',        'cmdopt':      '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
 \        'exec':    '%c %o %s:p', 'errorformat': '%m\ in\ %f\ on\ line\ %l'},
@@ -469,9 +467,6 @@ function! s:hooks.on_source(bundle) abort "{{{
     \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta     guibg=Magenta',
     \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow      guibg=Yellow']
 endfunction "}}}
-"}}}
-" vim-hier {{{
-NeoBundleLazy 'jceb/vim-hier', {'commands' : 'HierUpdate'}
 "}}}
 " vim-sqlfix {{{
 NeoBundleLazy 'KazuakiM/vim-sqlfix', {'commands': 'Sqlfix'}
@@ -568,6 +563,16 @@ endfunction "}}}
 NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
 let g:vim_markdown_folding_disabled = 1
 "}}}
+"
+"
+" Exclusive {{{
+if s:osType !=# 'macunix'
+endif
+if s:osType !=# 'win'
+    " memolist.vim {{{
+    let g:memolist_path = $HOME.'/.vim/memolist.vim'
+    "}}}
+endif
 if s:osType !=# 'unix'
     " vim-over {{{
     NeoBundleLazy 'osyo-manga/vim-over', {'commands': 'OverCommandLine'}
@@ -582,36 +587,10 @@ if s:osType !=# 'unix'
     NeoBundleLazy 'haya14busa/incsearch.vim', {'mappings': '<Plug>(incsearch-forward)'}
     nmap / <Plug>(incsearch-forward)
     "}}}
-else
-    nnoremap <expr><Leader>%s  ':%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
-    nnoremap <expr><Leader>%%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
-endif
-unlet s:hooks
-"}}}
-"
-"
-" NeoBundleFetch {{{
-NeoBundleFetch 'psychs/lingr-irc'
-NeoBundleFetch 'KazuakiM/neosnippet-snippets'
-NeoBundleFetch 'KazuakiM/vim-qfsigns'
-NeoBundleFetch 'KazuakiM/vim-regexper'
-NeoBundleFetch 'Kuniwak/vint'
-NeoBundleFetch 'thinca/vim-themis'
-"}}}
-"
-"
-" OS type {{{
-" Exclusive {{{
-if s:osType !=# 'macunix'
-endif
-if s:osType !=# 'win'
-    " memolist.vim {{{
-    let g:memolist_path = $HOME.'/.vim/memolist.vim'
-    "}}}
-endif
-if (s:osType !=# 'unix')
 endif
 "}}}
+"
+"
 " Only {{{
 if s:osType ==# 'macunix'
     " previm {{{
@@ -624,9 +603,22 @@ elseif s:osType ==# 'win'
     " memolist.vim {{{
     let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     "}}}
-else
+elseif s:osType ==# 'unix'
+    nnoremap <expr><Leader>%s  ':%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
+    nnoremap <expr><Leader>%%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
 endif
 "}}}
+unlet s:hooks
+"}}}
+"
+"
+" NeoBundleFetch {{{
+NeoBundleFetch 'psychs/lingr-irc'
+NeoBundleFetch 'KazuakiM/neosnippet-snippets'
+NeoBundleFetch 'KazuakiM/vim-qfsigns'
+NeoBundleFetch 'KazuakiM/vim-regexper'
+NeoBundleFetch 'Kuniwak/vint'
+NeoBundleFetch 'thinca/vim-themis'
 "}}}
 "
 "

@@ -19,8 +19,8 @@
 MODE = {
   'APACHE' => true,
   'MYSQL'  => true,
-  'PHP'    => false,
-  'RUBY'   => true,
+  'PHP'    => true,
+  'RUBY'   => false,
   'DEV'    => false}
 VAGRANTFILE_API_VERSION = 2
 VAGRANTFILE_LOG         = "/var/log/vagrantfile.log"
@@ -48,6 +48,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       export HOME=/home/#{ACCOUNT}                           && \
       echo "\tHOME:\t${HOME}"                                && \
     echo "SELinux disabled ..."
+      setenforce 0 && \
       sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
   SHELL
   config.vm.provision "shell", path:'modules/yum.sh'
@@ -62,10 +63,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end #}}}
 
   if MODE['PHP'] then #{{{
-    config.vm.provision "shell", inline: <<-SHELL
-      echo "Composer install ..."
-        curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin >> #{VAGRANTFILE_LOG}
-    SHELL
+    config.vm.provision "shell", path:'modules/php.sh'
   end #}}}
 
   if MODE['RUBY'] then #{{{
