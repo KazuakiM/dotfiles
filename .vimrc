@@ -37,13 +37,24 @@ let g:mapleader = ','
 augroup MyAutoCmd
     autocmd!
 augroup END
+
+function! s:KazuakiMMinimal() abort "{{{
+    setlocal noswapfile nobackup nowritebackup noundofile viminfo=
+    filetype off
+    filetype plugin indent off
+    syntax off
+endfunction "}}}
+
+function! s:KazuakiMAutoMkdir(dir) abort "{{{
+    if !isdirectory(a:dir)
+        call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
+    endif
+endfunction "}}}
+
 function! s:KazuakiMVimStart(backupDir, undoDir) abort "{{{
     "Check 256KB file size.
     if getfsize(expand('%:p')) >= 262144
-        setlocal noswapfile nobackup nowritebackup noundofile viminfo=
-        filetype off
-        filetype plugin indent off
-        syntax off
+        call s:KazuakiMMinimal()
         return 1
     endif
     call s:KazuakiMAutoMkdir(a:backupDir.s:date)
@@ -52,12 +63,21 @@ function! s:KazuakiMVimStart(backupDir, undoDir) abort "{{{
     let &undodir   = a:undoDir.  s:date
     return 0
 endfunction "}}}
-function! s:KazuakiMAutoMkdir(dir) abort "{{{
-    if !isdirectory(a:dir)
-        call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
-    endif
-endfunction "}}}
+
 if has('vim_starting')
+    "Set Environment
+    let s:envHome = $HOME
+
+    "Check $HOME
+    if s:envHome is '/' || s:envHome is 'C:\'
+        call s:KazuakiMMinimal()
+        echohl ErrorMsg
+            echomsg '[WARNING]Would you check $HOME?'
+        echohl None
+        finish
+    endif
+
+    "Set runtimepath
     let s:date = strftime('%Y%m%d%H%M%S', localtime())
     if has('win32') || has ('win64')
         if s:KazuakiMVimStart('C:\temp\backup\', 'C:\temp\undo\')
@@ -79,37 +99,46 @@ if has('vim_starting')
     unlet s:date
     set runtimepath+=$HOME/.vim/bundle/neobundle.vim
 endif
+
 " autocmd
 function! s:KazuakiMCheckString() abort "{{{
     let w:m1 = matchadd('KazuakiMCheckString', '\t\|\r\|\r\n\|\s\+$\|　')
     let w:m2 = matchadd('KazuakiMTodo',        'FIXME\|MEMO\|NOTE\|TODO\|XXX')
 endfunction "}}}
+
 function! s:KazuakiMBufEnter() abort "{{{
     " Auto close VimDiff or primary NERDTree
     if winnr('$') is 1 && (&l:diff || (exists('b:NERDTreeType') && b:NERDTreeType ==# 'primary'))
         quit
     endif
+
     " If open direcotry, call NERDTree
     if isdirectory(expand('%:p'))
         call nerdtree#checkForBrowse(expand('<amatch>'))
     endif
+
     " Move current file(/directory) path
     execute 'lcd '.fnameescape(expand('%:p:h'))
+
     " default filetype
     if &filetype is ''
         setlocal filetype=mkd
     endif
+
     " default encoding
     execute 'setlocal encoding='.&fileencoding
 endfunction "}}}
+
 function! s:KazuakiMVimEnter() abort "{{{
     set textwidth=0
     call s:KazuakiMCheckString()
 endfunction "}}}
+
 function! s:KazuakiMWinEnter() abort "{{{
     checktime
     call s:KazuakiMCheckString()
 endfunction "}}}
+
 autocmd MyAutoCmd BufEnter             * call s:KazuakiMBufEnter()
 autocmd MyAutoCmd BufReadPost          * if line("'\"") > 1 && line("'\"") <= line('$') | exe "normal! g`\"" | endif
 autocmd MyAutoCmd CmdwinEnter          * nmap <silent> <ESC><ESC> :quit<CR>
@@ -120,9 +149,11 @@ autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 autocmd MyAutoCmd VimEnter             * call s:KazuakiMVimEnter()
 autocmd MyAutoCmd WinEnter             * call s:KazuakiMWinEnter()
 "autocmd MyAutoCmd VimEnter * set formatoptions-=v formatoptions-=b
+
 function! KazuakiMStatuslineSyntax() abort "{{{
     return qfstatusline#Update()
 endfunction "}}}
+
 " Basic
 set ambiwidth=double autoindent autoread backspace=indent,eol,start backup clipboard+=autoselect,unnamed cmdheight=1 completeopt=longest,menu
 set diffopt=filler,context:5,iwhite,vertical display=lastline expandtab fillchars+=diff:* foldmethod=marker grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m helplang=ja hidden
@@ -235,6 +266,7 @@ nnoremap <SID>[vim]c :<C-u>setlocal<Space>conceallevel=2<CR>
 "
 " Vim / gVim {{{
 if !has('gui_running')
+
     " http://d.hatena.ne.jp/thinca/20111204/1322932585
     function! s:KazuakiMTabpageLabelUpdate(tabNumber) abort "{{{
         let l:highlight = a:tabNumber is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
@@ -246,9 +278,11 @@ if !has('gui_running')
         let l:modified = len(filter(copy(l:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
         return '%'.a:tabNumber.'T'.l:highlight.l:bufnr.' '.fnamemodify(bufname(l:bufnrs[tabpagewinnr(a:tabNumber) - 1]), ':t').' '.l:modified.'%T%#TabLineFill#'
     endfunction "}}}
+
     function! KazuakiMTabLineUpdate() abort "{{{
         return join(map(range(1, tabpagenr('$')), 's:KazuakiMTabpageLabelUpdate(v:val)'), '|').'%#TabLineFill#%T%='
     endfunction "}}}
+
     set tabline=%!KazuakiMTabLineUpdate()
 endif
 "}}}
@@ -257,9 +291,9 @@ endif
 " NeoBundle START {{{
 call neobundle#begin(expand('$HOME/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
-let g:neobundle#cache_file            = $HOME.'/.vim/neobundle.vim/cache'
+let g:neobundle#cache_file            = s:envHome.'/.vim/neobundle.vim/cache'
 let g:neobundle#install_max_processes = 3
-let g:neobundle#log_filename          = $HOME.'/.vim/neobundle.vim/neobundle.log'
+let g:neobundle#log_filename          = s:envHome.'/.vim/neobundle.vim/neobundle.log'
 "}}}
 "
 "
@@ -299,7 +333,7 @@ let g:Qfstatusline#UpdateCmd = function('KazuakiMStatuslineSyntax')
 nmap p <Plug>(yankround-p)
 nmap <C-p> <Plug>(yankround-prev)
 nmap <C-n> <Plug>(yankround-next)
-let g:yankround_dir                 = $HOME.'/.vim/yankround.vim'
+let g:yankround_dir                 = s:envHome.'/.vim/yankround.vim'
 let g:yankround_region_hl_groupname = 'YankRoundRegion'
 let g:yankround_use_region_hl       = 1
 "}}}
@@ -314,7 +348,7 @@ let g:UltiSnipsEditSplit                   = 'vertical'
 let g:UltiSnipsExpandTrigger               = '<TAB>'
 let g:UltiSnipsJumpBackwardTrigger         = '<S-TAB>'
 let g:UltiSnipsJumpForwardTrigger          = '<TAB>'
-let g:UltiSnipsSnippetsDir                 = $HOME.'/.vim/bundle/vim-snippets/UltiSnips'
+let g:UltiSnipsSnippetsDir                 = s:envHome.'/.vim/bundle/vim-snippets/UltiSnips'
 let g:UltiSnipsUsePythonVersion            = 2
 "}}}
 " indentLine {{{
@@ -356,6 +390,7 @@ nnoremap <SID>[memolist] <Nop>
 nmap <Leader>m <SID>[memolist]
 nnoremap <SID>[memolist]n :<C-u>MemoNew<CR>
 nnoremap <SID>[memolist]l :<C-u>MemoList<CR>
+
 " http://qiita.com/yuku_t/items/9263e6d9105ba972aea8
 function! KazuakiMUniteFileRecAsyncOrGit() abort "{{{
     if isdirectory(getcwd().'/.git')
@@ -364,9 +399,10 @@ function! KazuakiMUniteFileRecAsyncOrGit() abort "{{{
         Unite -default-action=tabopen file_rec/async:!
     endif
 endfunction "}}}
+
 let s:hooks = neobundle#get_hooks('unite.vim')
 function! s:hooks.on_source(bundle) abort "{{{
-    let g:unite_data_directory             = $HOME.'/.vim/unite.vim'
+    let g:unite_data_directory             = s:envHome.'/.vim/unite.vim'
     let g:unite_enable_start_insert        = 1
     let g:unite_source_grep_command        = 'grep'
     let g:unite_source_grep_default_opts   = '--color=auto -i -I'
@@ -376,7 +412,7 @@ endfunction "}}}
 let s:hooks = neobundle#get_hooks('memolist.vim')
 function! s:hooks.on_source(bundle) abort "{{{
     let g:memolist_filename_prefix_none = 1
-    let g:memolist_template_dir_path    = $HOME.'/.vim/memolist.vim'
+    let g:memolist_template_dir_path    = s:envHome.'/.vim/memolist.vim'
     let g:memolist_unite                = 1
     let g:memolist_unite_option         = '-default-action=tabopen'
     let g:memolist_unite_source         = 'file_rec'
@@ -417,7 +453,7 @@ NeoBundleLazy 'scrooloose/nerdtree', {'commands': 'NERDTree'}
 nnoremap <expr><Leader>n ':NERDTree '.vital#of('vital').import('Prelude').path2project_directory('%').'<CR>'
 let s:hooks = neobundle#get_hooks('nerdtree')
 function! s:hooks.on_source(bundle) abort "{{{
-    let g:NERDTreeBookmarksFile     = $HOME.'/.vim/nerdtree/.NERDTreeBookmarks'
+    let g:NERDTreeBookmarksFile     = s:envHome.'/.vim/nerdtree/.NERDTreeBookmarks'
     let g:NERDTreeMinimalUI         = 1
     let g:NERDTreeRespectWildIgnore = 1
     let g:NERDTreeShowBookmarks     = 1
@@ -486,9 +522,9 @@ inoremap <silent><C-k> <C-o>:call<Space>ref#K('normal')<CR><ESC>
 nnoremap <silent>K     :<C-u>call<Space>ref#K('normal')<CR>
 let s:hooks = neobundle#get_hooks('vim-ref')
 function! s:hooks.on_source(bundle) abort "{{{
-    let g:ref_cache_dir       = $HOME.'/.vim/vim-ref/cache'
+    let g:ref_cache_dir       = s:envHome.'/.vim/vim-ref/cache'
     let g:ref_detect_filetype = {'html': 'phpmanual', 'javascript': 'phpmanual', 'css': 'phpmanual'}
-    let g:ref_phpmanual_path  = $HOME.'/.vim/vim-ref/php-chunked-xhtml'
+    let g:ref_phpmanual_path  = s:envHome.'/.vim/vim-ref/php-chunked-xhtml'
 endfunction "}}}
 "}}}
 " vim-php-cs-fixer {{{
@@ -500,7 +536,7 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:php_cs_fixer_dry_run                = 0
     let g:php_cs_fixer_enable_default_mapping = 0
     let g:php_cs_fixer_level                  = 'all'
-    let g:php_cs_fixer_path                   = $HOME.'/.vim/vim-php-cs-fixer/php-cs-fixer'
+    let g:php_cs_fixer_path                   = s:envHome.'/.vim/vim-php-cs-fixer/php-cs-fixer'
     let g:php_cs_fixer_php_path               = 'php'
     let g:php_cs_fixer_verbose                = 0
 endfunction "}}}
@@ -515,7 +551,7 @@ NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': 'KazuakiM/vim-snippets', 'in
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle) abort "{{{
     let g:neocomplete#auto_completion_start_length     = 3
-    let g:neocomplete#data_directory                   = $HOME.'/.vim/neocomplete.vim'
+    let g:neocomplete#data_directory                   = s:envHome.'/.vim/neocomplete.vim'
     let g:neocomplete#delimiter_patterns               = {'php': ['->', '::', '\']}
     let g:neocomplete#enable_at_startup                = 1
     let g:neocomplete#enable_auto_close_preview        = 3
@@ -532,7 +568,7 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:neocomplete#sources#buffer#cache_limit_size  = 50000
     let g:neocomplete#sources#buffer#disabled_pattern  = '\.log\|\.jax'
     let g:neocomplete#sources#buffer#max_keyword_width = 30
-    let g:neocomplete#sources#dictionary#dictionaries  = {'_': '', 'php': $HOME.'/.vim/dict/php.dict'}
+    let g:neocomplete#sources#dictionary#dictionaries  = {'_': '', 'php': s:envHome.'/.vim/dict/php.dict'}
     let g:neocomplete#use_vimproc                      = 1
 endfunction "}}}
 "}}}
@@ -570,7 +606,7 @@ if s:osType !=# 'macunix'
 endif
 if s:osType !=# 'win'
     " memolist.vim {{{
-    let g:memolist_path = $HOME.'/.vim/memolist.vim'
+    let g:memolist_path = s:envHome.'/.vim/memolist.vim'
     "}}}
 endif
 if s:osType !=# 'unix'
@@ -639,6 +675,7 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                         setloca
 "
 " Function {{{
 nnoremap <F1> :<C-u>call<Space>KazuakiMCodeSwitch()<CR>
+
 function! KazuakiMCodeSwitch() abort "{{{
     let b:encodeIndex = ! exists('b:encodeIndex') ? 2 : b:encodeIndex + 1
     if b:encodeIndex is 1
@@ -654,7 +691,9 @@ function! KazuakiMCodeSwitch() abort "{{{
         let b:encodeIndex = 0
     endif
 endfunction "}}}
+
 nnoremap <F2> :<C-u>call<Space>KazuakiMNewLineSwitch()<CR>
+
 function! KazuakiMNewLineSwitch() abort "{{{
     if &modifiable
         let b:newLineIndex = ! exists('b:newLineIndex') ? 2 : b:newLineIndex + 1
@@ -668,6 +707,7 @@ function! KazuakiMNewLineSwitch() abort "{{{
         endif
     endif
 endfunction "}}}
+
 "}}}
 "
 "
