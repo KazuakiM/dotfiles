@@ -1,4 +1,4 @@
-"autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*.php setlocal tags=$HOME/.vim/tags/sample.tags {{{
+"autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*.php setlocal tags=$HOME/.vim/tags/sample.tags,$HOME/.vim/tags/composer.tags {{{
 "}}}
 "ALL TEST {{{
 " Laravel
