@@ -1,8 +1,6 @@
 --exclude=.git
 --exclude=.svn
 --exclude=*.js
---exclude=*Test.php
---exclude=*TestCase.php
 --recurse=yes
 --sort=yes
 --langmap=PHP:+.inc.tpl

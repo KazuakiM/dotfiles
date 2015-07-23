@@ -5,7 +5,8 @@
 ## ctags
 #tagsCmd='ctags --languages=php -f'
 #tagsVariable=''
-#tagsVariable=$tagsVariable"cd $HOME/sample;$tagsCmd $HOME/.vim/tags/sample.tags $HOME/sample;"
+#tagsVariable=$tagsVariable"cd $HOME/sample;                      $tagsCmd $HOME/.vim/tags/sample.tags   $HOME/sample;"
+#tagsVariable=$tagsVariable"cd /directory/to/path/composer/vendor;$tagsCmd $HOME/.vim/tags/composer.tags /directory/to/path/composer/vendor;"
 #alias TAGS=$tagsVariable
 
 ## git pull
