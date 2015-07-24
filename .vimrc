@@ -546,10 +546,12 @@ NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'openbrowser#_keymapping_sm
 nnoremap <Leader>gx :<C-u>call<Space>openbrowser#_keymapping_smart_search('n')<CR>
 "}}}
 " vim-snippets
+" neoinclude.vim
 " neocomplete.vim {{{
-NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': 'KazuakiM/vim-snippets', 'insert': 1}
+NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['KazuakiM/vim-snippets', 'Shougo/neoinclude.vim'], 'insert': 1}
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle) abort "{{{
+    "neocomplete.vim
     let g:neocomplete#auto_completion_start_length     = 3
     let g:neocomplete#data_directory                   = s:envHome.'/.vim/neocomplete.vim'
     let g:neocomplete#delimiter_patterns               = {'php': ['->', '::', '\']}
@@ -570,6 +572,10 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:neocomplete#sources#buffer#max_keyword_width = 30
     let g:neocomplete#sources#dictionary#dictionaries  = {'_': '', 'php': s:envHome.'/.vim/dict/php.dict'}
     let g:neocomplete#use_vimproc                      = 1
+
+    "neoinclude.vim
+    let g:neoinclude#exts          = {'php': ['php', 'inc', 'tpl']}
+    let g:neoinclude#max_processes = 5
 endfunction "}}}
 "}}}
 " gundo.vim {{{
@@ -608,6 +614,9 @@ if s:osType !=# 'win'
     " memolist.vim {{{
     let g:memolist_path = s:envHome.'/.vim/memolist.vim'
     "}}}
+    " neoinclude.vim {{{
+    let g:neoinclude#delimiters = '\'
+    "}}}
 endif
 if s:osType !=# 'unix'
     " vim-over {{{
@@ -634,10 +643,13 @@ if s:osType ==# 'macunix'
     "}}}
 elseif s:osType ==# 'win'
     " vimproc.vim {{{
-    let g:vimproc#dll_path ='C:/usr/local/bin/Vim/plugins/vimproc/autoload/vimproc_win64.dll'
+    let g:vimproc#dll_path = 'C:\usr\local\bin\Vim\plugins\vimproc\autoload\vimproc_win64.dll'
     "}}}
     " memolist.vim {{{
     let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
+    "}}}
+    " neoinclude.vim {{{
+    let g:neoinclude#delimiters = '/'
     "}}}
 elseif s:osType ==# 'unix'
     nnoremap <expr><Leader>%s  ':%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
