@@ -161,6 +161,13 @@ $ disown <PID>
 $ sed -i -e 's/xxx/XXX/g' <file1>
 ```
 
+## awk
+
+'\47' is SingleQuote.
+```bash
+$ awk -F "," '{print "{\047id\047:"$1",\047name\047:"$2"}"}' <dumpFile>.csv > /tmp/<dumpFile>_result.csv
+```
+
 ## Service
 
 Check service status list
