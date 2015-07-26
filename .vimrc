@@ -429,7 +429,7 @@ let g:quickrun_config = {
 \        'runner/vimproc/updatetime':           600},
 \    'php': {'command': 'phpunit', 'cmdopt': '--no-configuration', 'hook/close_buffer/enable_failure': 0, 'outputter/buffer/split': ':botright 7sp'},
 \    'sql': {'type': 'sql/mysql'},
-\    'sql/mysql': {'exec': "%c %o < %s | sed -e 's/\t/|/g'"},
+\    'sql/mysql': {'exec': "%c %o < %s | sed -e 's/\t/|/g'", 'outputter': 'buffer', 'outputter/buffer/into': 1},
 \    'watchdogs_checker/_': {
 \        'hook/close_quickfix/enable_exit':      1, 'hook/back_window/enable_exit':           0, 'hook/back_window/priority_exit': 1,
 \        'hook/qfstatusline_update/enable_exit': 1, 'hook/qfstatusline_update/priority_exit': 2, 'outputter/quickfix/open_cmd':    ''},
