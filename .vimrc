@@ -427,14 +427,15 @@ let g:quickrun_config = {
 \        'hook/close_buffer/enable_empty_data': 1,    'hook/close_buffer/enable_failure': 1,           'outputter': 'multi:buffer:quickfix',
 \        'outputter/buffer/close_on_empty':     1,    'outputter/buffer/split':           ':botright', 'runner':    'vimproc',
 \        'runner/vimproc/updatetime':           600},
+\    'php': {'command': 'phpunit', 'cmdopt': '--no-configuration', 'hook/close_buffer/enable_failure': 0, 'outputter/buffer/split': ':botright 7sp'},
+\    'sql': {'type': 'sql/mysql'},
+\    'sql/mysql': {'exec': "%c %o < %s | sed -e 's/\t/|/g'"},
 \    'watchdogs_checker/_': {
 \        'hook/close_quickfix/enable_exit':      1, 'hook/back_window/enable_exit':           0, 'hook/back_window/priority_exit': 1,
 \        'hook/qfstatusline_update/enable_exit': 1, 'hook/qfstatusline_update/priority_exit': 2, 'outputter/quickfix/open_cmd':    ''},
 \    'watchdogs_checker/php': {
 \        'command': 'php',        'cmdopt':      '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
-\        'exec':    '%c %o %s:p', 'errorformat': '%m\ in\ %f\ on\ line\ %l'},
-\    'markdown': {'outputter': 'browser'},
-\    'php': {'command': 'phpunit', 'cmdopt': '--no-configuration', 'hook/close_buffer/enable_failure': 0, 'outputter/buffer/split': ':botright 7sp'}}
+\        'exec':    '%c %o %s:p', 'errorformat': '%m\ in\ %f\ on\ line\ %l'}}
 "}}}
 " taglist.vim {{{
 NeoBundleLazy 'vim-scripts/taglist.vim', {'commands': 'Tlist'}
@@ -716,6 +717,18 @@ function! KazuakiMNewLineSwitch() abort "{{{
             let b:newLineIndex = 0
         endif
     endif
+endfunction "}}}
+
+nnoremap <F3> :<C-u>call<Space>KazuakiMDatabaseSwitch()<CR>
+
+" Database Switch (.vimrc.local)
+function! KazuakiMDatabaseSwitch() abort "{{{
+    let b:databaseIndex = ! exists('b:databaseIndex') ? 0 : b:databaseIndex + 1
+    if len(g:KazuakiMDatabase) <= b:databaseIndex
+        let b:databaseIndex = 0
+    endif
+    let g:quickrun_config['sql/mysql']['cmdopt'] = g:KazuakiMDatabase[b:databaseIndex]
+    echo g:KazuakiMDatabase[b:databaseIndex]
 endfunction "}}}
 
 "}}}
