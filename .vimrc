@@ -488,20 +488,11 @@ nnoremap <Space>M :<C-u>call<Space>quickhl#manual#reset()<CR>
 let s:hooks = neobundle#get_hooks('vim-quickhl')
 function! s:hooks.on_source(bundle) abort "{{{
     let g:quickhl_manual_colors = [
-    \ 'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkBlue    guibg=DarkBlue',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=White ctermbg=DarkGreen   guibg=DarkGreen',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=White ctermbg=DarkCyan    guibg=DarkCyan',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=White ctermbg=DarkRed     guibg=DarkRed',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=White ctermbg=DarkMagenta guibg=DarkMagenta',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=DarkYellow  guibg=DarkYellow',
-    \ 'cterm=NONE gui=NONE ctermfg=White guifg=Black ctermbg=DarkGrey    guibg=DarkGrey',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Grey        guibg=Grey',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Blue        guibg=Blue',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Green       guibg=Green',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Cyan        guibg=Cyan',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Red         guibg=Red',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta     guibg=Magenta',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow      guibg=Yellow']
+    \ 'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=Blue    guibg=Blue',
+    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Green   guibg=Green',
+    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Cyan    guibg=Cyan',
+    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta guibg=Magenta',
+    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow  guibg=Yellow']
 endfunction "}}}
 "}}}
 " vim-sqlfix {{{
@@ -536,7 +527,6 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:php_cs_fixer_dry_run                = 0
     let g:php_cs_fixer_enable_default_mapping = 0
     let g:php_cs_fixer_level                  = 'all'
-    let g:php_cs_fixer_path                   = s:envHome.'/.vim/vim-php-cs-fixer/php-cs-fixer'
     let g:php_cs_fixer_php_path               = 'php'
     let g:php_cs_fixer_verbose                = 0
 endfunction "}}}
@@ -583,10 +573,8 @@ NeoBundleLazy 'sjl/gundo.vim', {'insert': 1}
 let s:hooks = neobundle#get_hooks('gundo.vim')
 function! s:hooks.on_source(bundle) abort "{{{
     nnoremap u g-
-    nnoremap U g-
+    nnoremap U :<C-u>GundoToggle<CR>
     nnoremap <C-r> g+
-    nnoremap <C-R> g+
-    nnoremap <Leader>gundo :<C-u>GundoToggle<CR>
 endfunction "}}}
 "}}}
 " shabadou.vim
@@ -609,7 +597,11 @@ let g:vim_markdown_folding_disabled = 1
 "
 " Exclusive {{{
 if s:osType !=# 'macunix'
+    " vim-php-cs-fixer {{{
+    let g:php_cs_fixer_path = s:envHome.'/.vim/vim-php-cs-fixer/php-cs-fixer'
+    "}}}
 endif
+
 if s:osType !=# 'win'
     " memolist.vim {{{
     let g:memolist_path = s:envHome.'/.vim/memolist.vim'
@@ -618,6 +610,7 @@ if s:osType !=# 'win'
     let g:neoinclude#delimiters = '\'
     "}}}
 endif
+
 if s:osType !=# 'unix'
     " vim-over {{{
     NeoBundleLazy 'osyo-manga/vim-over', {'commands': 'OverCommandLine'}
@@ -641,6 +634,10 @@ if s:osType ==# 'macunix'
     " previm {{{
     let g:previm_open_cmd = 'open -a "Google Chrome"'
     "}}}
+    " vim-php-cs-fixer {{{
+    let g:php_cs_fixer_path = '/usr/local/bin/php-cs-fixer'
+    "}}}
+
 elseif s:osType ==# 'win'
     " vimproc.vim {{{
     let g:vimproc#dll_path = 'C:\usr\local\bin\Vim\plugins\vimproc\autoload\vimproc_win64.dll'
@@ -651,6 +648,7 @@ elseif s:osType ==# 'win'
     " neoinclude.vim {{{
     let g:neoinclude#delimiters = '/'
     "}}}
+
 elseif s:osType ==# 'unix'
     nnoremap <expr><Leader>%s  ':%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
     nnoremap <expr><Leader>%%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'

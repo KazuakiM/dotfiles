@@ -1,3 +1,6 @@
-set colorcolumn=79
-autocmd MyAutoCmd BufWinEnter * set conceallevel=0
+augroup MyHelpAutoCmd
+    autocmd!
+    autocmd BufWinEnter * setlocal conceallevel=0
+augroup END
+setlocal colorcolumn=79
 nmap <silent> <buffer> <ESC><ESC> :quit<CR>

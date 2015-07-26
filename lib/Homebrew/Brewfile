@@ -110,10 +110,9 @@ brew 'homebrew/dupes/zlib'
 brew 'homebrew/apache/httpd24'
 brew 'homebrew/dupes/grep', args: ['with-default-names']
 brew 'homebrew/php/composer'
-brew 'homebrew/php/php55'
 brew 'homebrew/php/php-cs-fixer'
-brew 'homebrew/php/php55-mcrypt'
-brew 'homebrew/php/php55-xdebug'
+brew 'homebrew/php/php70'
+brew 'homebrew/php/php70-mcrypt'
 brew 'homebrew/php/phpunit'
 brew 'homebrew/versions/bash-completion2'
 brew 'kazuakim/macvim/cmigemo-mk', args: ['HEAD']
