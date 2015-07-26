@@ -1,7 +1,6 @@
 # Regularly update & git NG files. {{{
 /bundle/*
 /dict/*
-/jazzradio.vim/*
 /neobundle.vim/*
 /neocomplete.vim/*
 /neosnippet.vim/*
@@ -12,6 +11,7 @@
 /vim-php-cs-fixer/*
 /vim-ref/cache/*
 /vim-ref/php-chunked-xhtml/*
+/vim-sqlfix/*
 /vim-tags/*
 /viminfo/*
 /vimshell.vim/cache/*

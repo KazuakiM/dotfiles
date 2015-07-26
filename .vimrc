@@ -499,7 +499,7 @@ endfunction "}}}
 NeoBundleLazy 'KazuakiM/vim-sqlfix', {'commands': 'Sqlfix'}
 let s:hooks = neobundle#get_hooks('vim-sqlfix')
 function! s:hooks.on_source(bundle) abort "{{{
-    let g:sqlfix#Config = {'explain': 1}
+    let g:sqlfix#Config = {'direcotry_path': s:envHome.'/.vim/vim-sqlfix'}
 endfunction "}}}
 "}}}
 " previm {{{
