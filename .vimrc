@@ -130,7 +130,7 @@ function! s:KazuakiMBufEnter() abort "{{{
 endfunction "}}}
 
 function! s:KazuakiMVimEnter() abort "{{{
-    set textwidth=0
+    set ambiwidth=double textwidth=0
     call s:KazuakiMCheckString()
 endfunction "}}}
 
@@ -155,12 +155,12 @@ function! KazuakiMStatuslineSyntax() abort "{{{
 endfunction "}}}
 
 " Basic
-set ambiwidth=double autoindent autoread backspace=indent,eol,start backup clipboard+=autoselect,unnamed cmdheight=1 completeopt=longest,menu
-set diffopt=filler,context:5,iwhite,vertical display=lastline expandtab fillchars+=diff:* foldmethod=marker grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m helplang=ja hidden
-set history=1000 hlsearch ignorecase iminsert=0 imsearch=-1 incsearch laststatus=2 lazyredraw matchpairs+=<:> matchtime=1 mouse= nobomb noequalalways noerrorbells
-set noimcmdline noimdisable noruler noswapfile number pumheight=8 scrolloff=999 shiftwidth=4 shortmess+=I showcmd showmatch smartcase smartindent smarttab
-set softtabstop=4 tabstop=4 title titleold= titlestring=%F ttyfast t_vb= undofile updatecount=30 updatetime=1000
-set viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo virtualedit+=block visualbell wildmenu wildmode=longest:full,full wrap wrapscan
+set autoindent autoread backspace=indent,eol,start backup clipboard+=autoselect,unnamed cmdheight=1 completeopt=longest,menu diffopt=filler,context:5,iwhite,vertical
+set display=lastline expandtab fillchars+=diff:* foldmethod=marker grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m helplang=ja hidden history=1000 hlsearch ignorecase
+set iminsert=0 imsearch=-1 incsearch laststatus=2 lazyredraw matchpairs+=<:> matchtime=1 mouse= nobomb noequalalways noerrorbells noimcmdline noimdisable noruler
+set noswapfile number pumheight=8 scrolloff=999 shiftwidth=4 shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4 tabstop=4 title titleold=
+set titlestring=%F ttyfast t_vb= undofile updatecount=30 updatetime=1000 viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo virtualedit+=block
+set visualbell wildmenu wildmode=longest:full,full wrap wrapscan
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*.json'\ --exclude='*.log'\ --exclude='*min.js'\ --exclude='*min.css'
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,C,.DS_Store,.,..
 set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{KazuakiMStatuslineSyntax()}%=%Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
