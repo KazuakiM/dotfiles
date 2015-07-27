@@ -1,3 +1,6 @@
-autocmd MyAutoCmd VimEnter,WinEnter * %!xxd
-autocmd MyAutoCmd BufWritePre       * %!xxd -r
-autocmd MyAutoCmd BufWritePost      * %!xxd | setlocal nomod
+augroup MyXxdAutoCmd
+    autocmd!
+    autocmd VimEnter,WinEnter * %!xxd
+    autocmd BufWritePre       * %!xxd -r
+    autocmd BufWritePost      * %!xxd | setlocal nomod
+augroup END

@@ -108,7 +108,7 @@ endfunction "}}}
 
 function! s:KazuakiMBufEnter() abort "{{{
     " Auto close VimDiff or primary NERDTree
-    if winnr('$') is 1 && (&l:diff || match(['quickrun','qf'], &l:filetype) > -1 || (exists('b:NERDTreeType') && b:NERDTreeType ==# 'primary'))
+    if winnr('$') is 1 && (&l:diff || (exists('b:NERDTreeType') && b:NERDTreeType ==# 'primary'))
         quit
     endif
 
@@ -427,14 +427,15 @@ let g:quickrun_config = {
 \        'hook/close_buffer/enable_empty_data': 1,    'hook/close_buffer/enable_failure': 1,           'outputter': 'multi:buffer:quickfix',
 \        'outputter/buffer/close_on_empty':     1,    'outputter/buffer/split':           ':botright', 'runner':    'vimproc',
 \        'runner/vimproc/updatetime':           600},
+\    'php': {'command': 'phpunit', 'cmdopt': '--no-configuration', 'hook/close_buffer/enable_failure': 0, 'outputter/buffer/split': ':botright 7sp'},
+\    'sql': {'type': 'sql/mysql'},
+\    'sql/mysql': {'exec': "%c %o < %s | sed -e 's/\t/|/g'", 'outputter': 'buffer', 'outputter/buffer/into': 1},
 \    'watchdogs_checker/_': {
 \        'hook/close_quickfix/enable_exit':      1, 'hook/back_window/enable_exit':           0, 'hook/back_window/priority_exit': 1,
 \        'hook/qfstatusline_update/enable_exit': 1, 'hook/qfstatusline_update/priority_exit': 2, 'outputter/quickfix/open_cmd':    ''},
 \    'watchdogs_checker/php': {
 \        'command': 'php',        'cmdopt':      '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
-\        'exec':    '%c %o %s:p', 'errorformat': '%m\ in\ %f\ on\ line\ %l'},
-\    'markdown': {'outputter': 'browser'},
-\    'php': {'command': 'phpunit', 'cmdopt': '--no-configuration', 'hook/close_buffer/enable_failure': 0, 'outputter/buffer/split': ':botright 7sp'}}
+\        'exec':    '%c %o %s:p', 'errorformat': '%m\ in\ %f\ on\ line\ %l'}}
 "}}}
 " taglist.vim {{{
 NeoBundleLazy 'vim-scripts/taglist.vim', {'commands': 'Tlist'}
@@ -488,27 +489,18 @@ nnoremap <Space>M :<C-u>call<Space>quickhl#manual#reset()<CR>
 let s:hooks = neobundle#get_hooks('vim-quickhl')
 function! s:hooks.on_source(bundle) abort "{{{
     let g:quickhl_manual_colors = [
-    \ 'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkBlue    guibg=DarkBlue',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=White ctermbg=DarkGreen   guibg=DarkGreen',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=White ctermbg=DarkCyan    guibg=DarkCyan',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=White ctermbg=DarkRed     guibg=DarkRed',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=White ctermbg=DarkMagenta guibg=DarkMagenta',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=DarkYellow  guibg=DarkYellow',
-    \ 'cterm=NONE gui=NONE ctermfg=White guifg=Black ctermbg=DarkGrey    guibg=DarkGrey',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Grey        guibg=Grey',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Blue        guibg=Blue',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Green       guibg=Green',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Cyan        guibg=Cyan',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Red         guibg=Red',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta     guibg=Magenta',
-    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow      guibg=Yellow']
+    \ 'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=Blue    guibg=Blue',
+    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Green   guibg=Green',
+    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Cyan    guibg=Cyan',
+    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta guibg=Magenta',
+    \ 'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow  guibg=Yellow']
 endfunction "}}}
 "}}}
 " vim-sqlfix {{{
 NeoBundleLazy 'KazuakiM/vim-sqlfix', {'commands': 'Sqlfix'}
 let s:hooks = neobundle#get_hooks('vim-sqlfix')
 function! s:hooks.on_source(bundle) abort "{{{
-    let g:sqlfix#Config = {'explain': 1}
+    let g:sqlfix#Config = {'direcotry_path': s:envHome.'/.vim/vim-sqlfix'}
 endfunction "}}}
 "}}}
 " previm {{{
@@ -536,7 +528,6 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:php_cs_fixer_dry_run                = 0
     let g:php_cs_fixer_enable_default_mapping = 0
     let g:php_cs_fixer_level                  = 'all'
-    let g:php_cs_fixer_path                   = s:envHome.'/.vim/vim-php-cs-fixer/php-cs-fixer'
     let g:php_cs_fixer_php_path               = 'php'
     let g:php_cs_fixer_verbose                = 0
 endfunction "}}}
@@ -546,10 +537,12 @@ NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'openbrowser#_keymapping_sm
 nnoremap <Leader>gx :<C-u>call<Space>openbrowser#_keymapping_smart_search('n')<CR>
 "}}}
 " vim-snippets
+" neoinclude.vim
 " neocomplete.vim {{{
-NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': 'KazuakiM/vim-snippets', 'insert': 1}
+NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['KazuakiM/vim-snippets', 'Shougo/neoinclude.vim'], 'insert': 1}
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle) abort "{{{
+    "neocomplete.vim
     let g:neocomplete#auto_completion_start_length     = 3
     let g:neocomplete#data_directory                   = s:envHome.'/.vim/neocomplete.vim'
     let g:neocomplete#delimiter_patterns               = {'php': ['->', '::', '\']}
@@ -570,6 +563,10 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:neocomplete#sources#buffer#max_keyword_width = 30
     let g:neocomplete#sources#dictionary#dictionaries  = {'_': '', 'php': s:envHome.'/.vim/dict/php.dict'}
     let g:neocomplete#use_vimproc                      = 1
+
+    "neoinclude.vim
+    let g:neoinclude#exts          = {'php': ['php', 'inc', 'tpl']}
+    let g:neoinclude#max_processes = 5
 endfunction "}}}
 "}}}
 " gundo.vim {{{
@@ -577,10 +574,8 @@ NeoBundleLazy 'sjl/gundo.vim', {'insert': 1}
 let s:hooks = neobundle#get_hooks('gundo.vim')
 function! s:hooks.on_source(bundle) abort "{{{
     nnoremap u g-
-    nnoremap U g-
+    nnoremap U :<C-u>GundoToggle<CR>
     nnoremap <C-r> g+
-    nnoremap <C-R> g+
-    nnoremap <Leader>gundo :<C-u>GundoToggle<CR>
 endfunction "}}}
 "}}}
 " shabadou.vim
@@ -603,12 +598,20 @@ let g:vim_markdown_folding_disabled = 1
 "
 " Exclusive {{{
 if s:osType !=# 'macunix'
+    " vim-php-cs-fixer {{{
+    let g:php_cs_fixer_path = s:envHome.'/.vim/vim-php-cs-fixer/php-cs-fixer'
+    "}}}
 endif
+
 if s:osType !=# 'win'
     " memolist.vim {{{
     let g:memolist_path = s:envHome.'/.vim/memolist.vim'
     "}}}
+    " neoinclude.vim {{{
+    let g:neoinclude#delimiters = '\'
+    "}}}
 endif
+
 if s:osType !=# 'unix'
     " vim-over {{{
     NeoBundleLazy 'osyo-manga/vim-over', {'commands': 'OverCommandLine'}
@@ -632,13 +635,21 @@ if s:osType ==# 'macunix'
     " previm {{{
     let g:previm_open_cmd = 'open -a "Google Chrome"'
     "}}}
+    " vim-php-cs-fixer {{{
+    let g:php_cs_fixer_path = '/usr/local/bin/php-cs-fixer'
+    "}}}
+
 elseif s:osType ==# 'win'
     " vimproc.vim {{{
-    let g:vimproc#dll_path ='C:/usr/local/bin/Vim/plugins/vimproc/autoload/vimproc_win64.dll'
+    let g:vimproc#dll_path = 'C:\usr\local\bin\Vim\plugins\vimproc\autoload\vimproc_win64.dll'
     "}}}
     " memolist.vim {{{
     let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     "}}}
+    " neoinclude.vim {{{
+    let g:neoinclude#delimiters = '/'
+    "}}}
+
 elseif s:osType ==# 'unix'
     nnoremap <expr><Leader>%s  ':%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
     nnoremap <expr><Leader>%%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
@@ -706,6 +717,18 @@ function! KazuakiMNewLineSwitch() abort "{{{
             let b:newLineIndex = 0
         endif
     endif
+endfunction "}}}
+
+nnoremap <F3> :<C-u>call<Space>KazuakiMDatabaseSwitch()<CR>
+
+" Database Switch (.vimrc.local)
+function! KazuakiMDatabaseSwitch() abort "{{{
+    let b:databaseIndex = ! exists('b:databaseIndex') ? 0 : b:databaseIndex + 1
+    if len(g:KazuakiMDatabase) <= b:databaseIndex
+        let b:databaseIndex = 0
+    endif
+    let g:quickrun_config['sql/mysql']['cmdopt'] = g:KazuakiMDatabase[b:databaseIndex]
+    echo g:KazuakiMDatabase[b:databaseIndex]
 endfunction "}}}
 
 "}}}

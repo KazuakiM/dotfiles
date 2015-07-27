@@ -1,9 +1,18 @@
-"autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*.php setlocal tags=$HOME/.vim/tags/sample.tags,$HOME/.vim/tags/composer.tags {{{
+" vim-quickrun {{{
+"let g:KazuakiMDatabase = [
+"    \ '--user=xxxx --password=xxxx --host=xxxx --port=3306 --database=database --connect-timeout=20']
+"let g:quickrun_config['sql/mysql']['cmdopt'] = g:KazuakiMDatabase[0]
 "}}}
+
+"tags {{{
+"autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*.php setlocal tags=$HOME/.vim/tags/sample.tags,$HOME/.vim/tags/composer.tags
+"}}}
+
 "ALL TEST {{{
 " Laravel
 "autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*.php let g:quickrun_config['php']['exec'] = '%c %o --bootstrap '$HOME/sample/bootstrap/autoload.php' $HOME/sample/app/tests'
 "}}}
+
 "SINGLE TEST {{{
 " Laravel
 "autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*Test.php let g:quickrun_config['php']['exec'] = '%c %o --bootstrap '$HOME/sample/bootstrap/autoload.php' %s'

@@ -58,7 +58,7 @@ man() {
 }
 #}}}
 #PS1(primary prompt string) {{{
-export PS1="\[\e[1;36m\]\h \$ \[\e[1;0m\]"
+export PS1="\[\e[1;36m\]\u \$ \[\e[1;0m\]"
 #}}}
 #tmux {{{
 if type tmux >/dev/null 2>&1; then
