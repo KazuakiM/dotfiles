@@ -4,9 +4,9 @@
 [branch "master"]
     mergeoptions = --no-edit
 [alias]
-    df  = diff --ignore-space-at-eol --ignore-space-change --ignore-all-space --ignore-blank-lines
+    df  = diff --ignore-space-at-eol --ignore-space-change --ignore-blank-lines
     dff = difftool
-    lg  = log  --abbrev-commit --graph --pretty = oneline --date = relative
+    lg  = log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 [core]
     precomposeunicode = true
     editor            = vim
