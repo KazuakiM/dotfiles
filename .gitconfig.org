@@ -1,8 +1,12 @@
-# Git version 1.7.10 over
 [include]
+    # from 1.7.10
     path = ~/.gitconfig.local
 [branch "master"]
     mergeoptions = --no-edit
+[alias]
+    df  = diff --ignore-space-at-eol --ignore-space-change --ignore-all-space --ignore-blank-lines
+    dff = difftool
+    lg  = log  --abbrev-commit --graph --pretty = oneline --date = relative
 [core]
     precomposeunicode = true
     editor            = vim
@@ -12,7 +16,11 @@
     algorithm = histogram
     tool      = vimdiff
 [merge]
+    # from 1.7.6
     ff   = false
     tool = vimdiff
 [mergetool]
     keepBackup = true
+[pull]
+    # from 1.7.9
+    rebase = true

@@ -12,12 +12,14 @@ git checkout master
 git pull
 git branch
 
-git branch xxxxx
-git checkout xxxxx
-git push origin xxxxx
+NAME="`date +%Y%m%d`_XXX"
+
+git branch      $NAME
+git checkout    $NAME
+git push origin $NAME
 ```
 
-Merge master to branch
+Rebase branch to master
 ```bash
 pwd
 git status
@@ -27,23 +29,11 @@ git pull
 git branch
 
 git checkout xxxxx
-git merge master
 gdiff master
 
-git push origin xxxxx
-```
-
-Merge branch to master
-```bash
-pwd
-git status
+git rebase master
 
 git checkout master
-git pull
-git branch
-
-git merge xxxxx
-
 git push origin master
 ```
 
@@ -59,7 +49,7 @@ git branch -a
 git pull fork_master master
 git status
 
-git push
+git push origin master
 ```
 
 Add fork repository
