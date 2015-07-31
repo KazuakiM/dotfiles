@@ -589,11 +589,27 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:watchdogs_check_CursorHold_enable    = 1
     let g:watchdogs_check_CursorHold_enables   = {'vim': 0}
 endfunction "}}}
+unlet s:hooks
 "}}}
 " vim-markdown {{{
 NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
 let g:vim_markdown_folding_disabled = 1
 "}}}
+"" vim-over {{{
+"NeoBundleLazy 'osyo-manga/vim-over', {'commands': 'OverCommandLine'}
+"nnoremap <expr><Leader>%s  ':OverCommandLine<CR>%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
+"nnoremap <expr><Leader>%%s ':OverCommandLine<CR>%s/'.expand('<cword>').'//gc<Left><Left><Left>'
+"let s:hooks = neobundle#get_hooks('vim-over')
+"function! s:hooks.on_source(bundle) abort "{{{
+"    let g:over#command_line#substitute#highlight_string = 'SpellCap'
+"endfunction "}}}
+""}}}
+"" incsearch.vim {{{
+"NeoBundleLazy 'haya14busa/incsearch.vim', {'mappings': '<Plug>(incsearch-forward)'}
+"nmap / <Plug>(incsearch-forward)
+""}}}
+nnoremap <expr><Leader>%s  ':%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
+nnoremap <expr><Leader>%%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
 "
 "
 " Exclusive {{{
@@ -613,19 +629,6 @@ if s:osType !=# 'win'
 endif
 
 if s:osType !=# 'unix'
-    " vim-over {{{
-    NeoBundleLazy 'osyo-manga/vim-over', {'commands': 'OverCommandLine'}
-    nnoremap <expr><Leader>%s  ':OverCommandLine<CR>%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
-    nnoremap <expr><Leader>%%s ':OverCommandLine<CR>%s/'.expand('<cword>').'//gc<Left><Left><Left>'
-    let s:hooks = neobundle#get_hooks('vim-over')
-    function! s:hooks.on_source(bundle) abort "{{{
-        let g:over#command_line#substitute#highlight_string = 'SpellCap'
-    endfunction "}}}
-    "}}}
-    " incsearch.vim {{{
-    NeoBundleLazy 'haya14busa/incsearch.vim', {'mappings': '<Plug>(incsearch-forward)'}
-    nmap / <Plug>(incsearch-forward)
-    "}}}
 endif
 "}}}
 "
@@ -651,11 +654,8 @@ elseif s:osType ==# 'win'
     "}}}
 
 elseif s:osType ==# 'unix'
-    nnoremap <expr><Leader>%s  ':%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
-    nnoremap <expr><Leader>%%s ':%s/'.expand('<cword>').'//gc<Left><Left><Left>'
 endif
 "}}}
-unlet s:hooks
 "}}}
 "
 "
