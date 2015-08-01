@@ -157,10 +157,10 @@ endfunction "}}}
 " Basic
 set autoindent autoread backspace=indent,eol,start backup clipboard+=autoselect,unnamed cmdheight=1 completeopt=longest,menu diffopt=filler,context:5,iwhite,vertical
 set display=lastline expandtab fillchars+=diff:* foldmethod=marker grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m helplang=ja hidden history=1000 hlsearch ignorecase
-set iminsert=0 imsearch=-1 incsearch laststatus=2 lazyredraw matchpairs+=<:> matchtime=1 mouse= nobomb noequalalways noerrorbells noimcmdline noimdisable noruler
-set noswapfile number pumheight=8 scrolloff=999 shiftwidth=4 shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4 tabstop=4 title titleold=
-set titlestring=%F ttyfast t_vb= undofile updatecount=30 updatetime=1000 viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo virtualedit+=block
-set visualbell wildmenu wildmode=longest:full,full wrap wrapscan
+set iminsert=0 imsearch=-1 incsearch laststatus=2 lazyredraw matchpairs+=<:> matchtime=1 mouse= nobomb noequalalways noerrorbells nogdefault noimcmdline noimdisable
+set noruler noswapfile number pumheight=8 scrolloff=999 shiftwidth=4 shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4 tabstop=4 title
+set titleold= titlestring=%F ttyfast t_vb= undofile updatecount=30 updatetime=1000 viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo
+set virtualedit+=block visualbell wildmenu wildmode=longest:full,full wrap wrapscan
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*.json'\ --exclude='*.log'\ --exclude='*min.js'\ --exclude='*min.css'
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,C,.DS_Store,.,..
 set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{KazuakiMStatuslineSyntax()}%=%Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
@@ -201,8 +201,10 @@ nnoremap <script> <SID>[ws]> <C-w>><SID>[ws]
 nnoremap <script> <SID>[ws]< <C-w><<SID>[ws]
 "  Cursor
 nnoremap ga %
-noremap <Down> <C-f>
-noremap <Up>   <C-b>
+noremap <Down>  <C-f>
+noremap <Up>    <C-b>
+noremap <Right> $
+noremap <Left>  ^
 "  Sudo Write
 nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null<CR>
 "  Paste
@@ -258,7 +260,7 @@ let g:omni_sql_no_default_maps = 1
 nnoremap <SID>[vim] <Nop>
 nmap <Leader>f <SID>[vim]
 nnoremap <SID>[vim]e :<C-u>tabnew<Space>$MYVIMRC<CR>
-nnoremap <SID>[vim]s :<C-u>source<Space>$MYVIMRC<CR>
+nnoremap <SID>[vim]s :<C-u>tabnew<Space>$HOME/.vim/vim-sqlfix/sqlfix.sql<CR>
 nnoremap <SID>[vim]h :<C-u>source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
 nnoremap <SID>[vim]c :<C-u>setlocal<Space>conceallevel=2<CR>
 "}}}

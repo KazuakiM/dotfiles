@@ -295,9 +295,13 @@ $ scp -P 2222 -F /srv/vagrant/ssh.config default:/tmp/<file> /tmp/
 ### sudo
 
 ```bash
+$ which htop
+/usr/local/bin/htop
+$ which find
+/usr/bin/find
 $ sudo visudo
 
-   <Account> ALL=(root) NOPASSWD: /usr/local/bin/htop
+   <Account> ALL=(root) NOPASSWD: /usr/local/bin/htop,/usr/bin/find
 ```
 
 ## Linux
