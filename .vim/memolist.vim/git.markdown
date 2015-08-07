@@ -268,6 +268,11 @@ git stash list -p
 git stash list -p stash@{N}
 ```
 
+特定のファイルを復活
+```bash
+git checkout stash@{N} fuga.rb
+```
+
 
 ## branch delete
 
