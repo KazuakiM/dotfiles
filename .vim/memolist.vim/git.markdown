@@ -237,10 +237,37 @@ git stash list
 git stash drop
 ```
 
+退避ファイル全て削除
+```bash
+git stash clear
+```
+
+誤って退避ファイル全てを削除してしまった場合
+```bash
+git fsck | awk '/dangling commit/ {print $3}'
+  候補のsha1 がいくつか出てくる
+
+git show --summary 候補のsha1
+  一つ一つの sha1 の内容を確認
+
+git cherry-pick -n -m1 見つけたsha1
+```
+
 退避ファイル復活&退避ファイル削除
 ```bash
 git stash pop
 ```
+
+退避ファイルとの比較
+```bash
+git stash list -p
+```
+
+退避ファイルとの詳細な比較
+```bash
+git stash list -p stash@{N}
+```
+
 
 ## branch delete
 
