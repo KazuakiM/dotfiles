@@ -47,7 +47,8 @@ KILL xxxx;
 ```
 
 CSV to SQL  
-'\47' is SingleQuote.
+'\47' is SingleQuote.  
+$0 is all words. $1-N is separate words.
 ```bash
 $ awk -F "," '{print "INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES ("$1",\047"$2"\047,...);"}' <dumpFile>.csv > /tmp/<dumpFile>.sql
 $ sed -i -e s/\'NULL\'/NULL/ /tmp/<dumpFile>.sql
@@ -491,6 +492,15 @@ SELECT CASE
   GROUP BY <Column1_RENAME>
 ```
 
+## IN
+
+multi IN
+```sql
+SELECT <tab1>.<Column1>
+FROM <Table1> AS <tab1>
+WHERE (
+```
+
 ## DATE
 
 UTC+9(Japanese timezone)
@@ -535,7 +545,8 @@ SET SESSION group_concat_max_len = 2048;
 MATH FUNCTION IF
 ```sql
 SELECT <UniqueColumn1>(, <UniqueColumn2>),
-  SUM(IF(<Condition>, <true>, <false=default>)) AS sum
+  SUM(IF(<Condition>, <true>, <false=default>)) AS sum_a
+  SUM(IF(<Condition>, <true>, <false=default>)) AS sum_b
   FROM <Table1>
   GROUP BY <UniqueColumn1>(, <UniqueColumn2>);
 ```
