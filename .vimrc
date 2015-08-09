@@ -130,7 +130,7 @@ function! s:KazuakiMBufEnter() abort "{{{
 endfunction "}}}
 
 function! s:KazuakiMVimEnter() abort "{{{
-    set ambiwidth=double textwidth=0
+    set ambiwidth=double formatoptions-=c formatoptions-=b formatoptions-=t formatoptions-=v textwidth=0
     call s:KazuakiMCheckString()
 endfunction "}}}
 
@@ -148,7 +148,6 @@ autocmd MyAutoCmd InsertLeave          * set nopaste | if &l:diff | diffupdate |
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 autocmd MyAutoCmd VimEnter             * call s:KazuakiMVimEnter()
 autocmd MyAutoCmd WinEnter             * call s:KazuakiMWinEnter()
-"autocmd MyAutoCmd VimEnter * set formatoptions-=v formatoptions-=b
 
 function! KazuakiMStatuslineSyntax() abort "{{{
     return qfstatusline#Update()
@@ -687,7 +686,19 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                         setloca
 "
 "
 " Function {{{
-nnoremap <F1> :<C-u>call<Space>KazuakiMCodeSwitch()<CR>
+nnoremap <F1> :<C-u>call<Space>KazuakiMDatabaseSwitch()<CR>
+
+" Database Switch (.vimrc.local)
+function! KazuakiMDatabaseSwitch() abort "{{{
+    let b:databaseIndex = ! exists('b:databaseIndex') ? 0 : b:databaseIndex + 1
+    if len(g:KazuakiMDatabase) <= b:databaseIndex
+        let b:databaseIndex = 0
+    endif
+    let g:quickrun_config['sql/mysql']['cmdopt'] = g:KazuakiMDatabase[b:databaseIndex]
+    echo g:KazuakiMDatabase[b:databaseIndex]
+endfunction "}}}
+
+nnoremap <F3> :<C-u>call<Space>KazuakiMCodeSwitch()<CR>
 
 function! KazuakiMCodeSwitch() abort "{{{
     let b:encodeIndex = ! exists('b:encodeIndex') ? 2 : b:encodeIndex + 1
@@ -705,7 +716,7 @@ function! KazuakiMCodeSwitch() abort "{{{
     endif
 endfunction "}}}
 
-nnoremap <F2> :<C-u>call<Space>KazuakiMNewLineSwitch()<CR>
+nnoremap <F4> :<C-u>call<Space>KazuakiMNewLineSwitch()<CR>
 
 function! KazuakiMNewLineSwitch() abort "{{{
     if &modifiable
@@ -719,18 +730,6 @@ function! KazuakiMNewLineSwitch() abort "{{{
             let b:newLineIndex = 0
         endif
     endif
-endfunction "}}}
-
-nnoremap <F3> :<C-u>call<Space>KazuakiMDatabaseSwitch()<CR>
-
-" Database Switch (.vimrc.local)
-function! KazuakiMDatabaseSwitch() abort "{{{
-    let b:databaseIndex = ! exists('b:databaseIndex') ? 0 : b:databaseIndex + 1
-    if len(g:KazuakiMDatabase) <= b:databaseIndex
-        let b:databaseIndex = 0
-    endif
-    let g:quickrun_config['sql/mysql']['cmdopt'] = g:KazuakiMDatabase[b:databaseIndex]
-    echo g:KazuakiMDatabase[b:databaseIndex]
 endfunction "}}}
 
 "}}}
