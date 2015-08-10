@@ -125,12 +125,14 @@ function! s:KazuakiMBufEnter() abort "{{{
         setlocal filetype=mkd
     endif
 
+    " Forcibly update
+    set ambiwidth=double formatoptions-=c formatoptions-=b formatoptions-=t formatoptions-=v textwidth=0
+
     " default encoding
     execute 'setlocal encoding='.&fileencoding
 endfunction "}}}
 
 function! s:KazuakiMVimEnter() abort "{{{
-    set ambiwidth=double formatoptions-=c formatoptions-=b formatoptions-=t formatoptions-=v textwidth=0
     call s:KazuakiMCheckString()
 endfunction "}}}
 
