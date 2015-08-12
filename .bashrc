@@ -131,7 +131,7 @@ case "${OSTYPE}" in
             localPath="/usr/local/heroku/bin:$localPath"
         fi
         export PATH=$localPath$PATH
-        export MYSQL_PS1="\d @\h \n> "
+        export MYSQL_PS1="\d @\h> "
         #export MYSQL_PS1="\d @\h[\u] \n> "
         #}}}
         ;;

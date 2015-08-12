@@ -18,18 +18,6 @@ MySQL
 
 ## Tips
 
-Copy DataBase
-```bash
-$ mysqldump -u<Account> -h<Host> -p <DataBase1>    > /tmp/<dumpFile>.dump
-$ mysql     -u<Account> -h<Host> -p <New DataBase> < /tmp/<dumpFile>.dump
-```
-
-Copy Table
-```sql
-CREATE TABLE <New DataBase>.<New Table1> LIKE          <DataBase1>.<Table1>;
-INSERT INTO  <New DataBase>.<New Table1> SELECT * FROM <DataBase1>.<Table1>;
-```
-
 Slave or Master  
 Slave is shown at infomation. Master is empty.
 ```sql
@@ -46,30 +34,48 @@ SHOW FULL PROCESSLIST;
 KILL xxxx;
 ```
 
-CSV to SQL  
-'\47' is SingleQuote.  
-$0 is all words. $1-N is separate words.
-```bash
-$ awk -F "," '{print "INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES ("$1",\047"$2"\047,...);"}' <dumpFile>.csv > /tmp/<dumpFile>.sql
-$ sed -i -e s/\'NULL\'/NULL/ /tmp/<dumpFile>.sql
-```
-
 DELETE CRLF or CR or LF  
 TODO:meta words.
 ```sql
-SELECT <Column1> FROM <Table1> WHERE <Column1> LIKE '%\r\n%' OR <Column1> LIKE '%\r%' OR <Column1> LIKE '%\n%';
+SELECT <tab1>.<Column1> FROM <Table1> AS <tab1> WHERE <tab1>.<Column1> LIKE '%\r%' OR <tab1>.<Column1> LIKE '%\n%';
 
 BEGIN;
-UPDATE <Table1> SET <Column1> = REPLACE(<Column1>, '\r\n', '') WHERE <Column1> LIKE '%\r\n%';
-UPDATE <Table1> SET <Column1> = REPLACE(<Column1>, '\n',   '') WHERE <Column1> LIKE '%\n%';
-UPDATE <Table1> SET <Column1> = REPLACE(<Column1>, '\r',   '') WHERE <Column1> LIKE '%\r%';
+UPDATE <Table1> SET <Column1> = REPLACE(REPLACE(<Column1>, '\n', ''), '\r', '') WHERE <Column1> LIKE '%\r%' OR <Column1> LIKE '%\n%';
 
-SELECT <Column1> FROM <Table1> WHERE <Column1> LIKE '%\r\n%' OR <Column1> LIKE '%\r%' OR <Column1> LIKE '%\n%';
-SELECT <UniqueColumn1>, <Column1> FROM <Table1> WHERE <UniqueColumn1> IN (...);
+SELECT <tab1>.<Column1> FROM <Table1> AS <tab1> WHERE <tab1>.<Column1> LIKE '%\r%' OR <tab1>.<Column1> LIKE '%\n%';
+SELECT <tab1>.<UniqueColumn1>, <tab1>.<Column1> FROM <Table1> AS <tab1> WHERE <tab1>.<UniqueColumn1> IN (...);
 
 
 COMMIT;
 ```
+
+## TSV/CSV
+
+'\47' is SingleQuote.  
+$0 is all words. $1-N is separate words.
+
+TSV
+```bash
+$ mysql --skip-column-names -u<Account> -h<Host> -p <DataBase> -e "
+<SQL>
+" > /tmp/<dumpFile>.tsv
+
+$ awk -F '\t' '{print "INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES ("$1",\047"$2"\047,...);"}' /tmp/<dumpFile>.tsv > /tmp/<dumpFile>.sql
+$ sed -i -e s/\'NULL\'/NULL/ /tmp/<dumpFile>.sql
+```
+
+CSV (Exist heder case)
+```bash
+$ mysql -u<Account> -h<Host> -p <DataBase> -e "
+<SQL>
+INTO OUTFILE '/tmp/<dumpFile>.csv' FIELDS TERMINATED BY ',';
+"
+
+$ sed -i -e '1d' /tmp/<dumpFile>.csv
+$ awk -F ',' '{print "INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES ("$1",\047"$2"\047,...);"}' /tmp/<dumpFile>.csv > /tmp/<dumpFile>.sql
+$ sed -i -e s/\'NULL\'/NULL/ /tmp/<dumpFile>.sql
+```
+
 
 ## Import File
 
@@ -96,7 +102,24 @@ SOURCE ./<dumpFile>
 COMMIT;
 ```
 
+## Copy DataBase/Table
+
+Copy DataBase
+```bash
+$ mysqldump -u<Account> -h<Host> -p <DataBase1>    > /tmp/<dumpFile>.dump
+$ mysql     -u<Account> -h<Host> -p <New DataBase> < /tmp/<dumpFile>.dump
+```
+
+Copy Table
+```sql
+CREATE TABLE <New DataBase>.<New Table1> LIKE          <DataBase1>.<Table1>;
+INSERT INTO  <New DataBase>.<New Table1> SELECT * FROM <DataBase1>.<Table1>;
+```
+
 ## Export File
+
+--skip-add-drop-table:Do not write DROP TABLE statements.
+--no-create-info:     Do not write CREATE TABLE statements.
 
 Tables dump
 ```bash
@@ -105,50 +128,26 @@ $ mysqldump -u<Account> -h<Host> -p <DataBase> \
  <Table1> <Table2>;
 $ vi /tmp/<dumpFile>.dump
   Check execute results.
+
 $ cd /tmp
 $ tar zcvf <dumpFile>.dump.tar.gz <dumpFile>.dump
 ```
 
-Recode dump
+Where dump(sub query join sample) / table
 ```bash
 $ mysqldump -u<Account> -h<Host> -p <DataBase> \
- --where='<Condition>' \
- --default-character-set=utf8 --single-transaction --skip-lock-tables -c -e -q --result-file='/tmp/<dumpFile>.dump' --tables \
- <Table1> <Table2>;
-$ vi /tmp/<dumpFile>.dump
-  Check execute results.
-```
-
-1 table Recode dump(TABLE JOIN)
-```bash
-$ mysqldump -u<Account> -h<Host> -p <DataBase> \
- --where='id IN (SELECT <T1>.id FROM <Table1> <T1> INNER JOIN <Table2> <T2> ON <T1>.id = <T2>.t1_id WHERE <T2>.status = 1)' \
- --default-character-set=utf8 --single-transaction --skip-lock-tables -c -e -q --result-file='/tmp/<dumpFile>.dump' --tables \
+ --where='id IN (SELECT <tab1>.id FROM <Table1> AS <tab1> INNER JOIN <Table2> AS <tab2> ON <tab1>.id = <tab2>.t1_id WHERE <tab2>.status = 1)' \
+ --default-character-set=utf8 --single-transaction --skip-lock-tables -c -e -q --result-file='/tmp/<Table1>.dump' --tables \
  <Table1>;
-$ vi /tmp/<dumpFile>.dump
+$ vi /tmp/<Table1>.dump
   Check execute results.
 ```
 
-TSV
-```bash
-$ cd /tmp
-$ mysql -u<Account> -h<Host> -p <DataBase> -e "
-<SQL>
-" > <dumpFile>.tsv && tar zcvf <dumpFile>.tsv.tar.gz <dumpFile>.tsv && rm -f <dumpFile>.tsv
-```
-
-CSV
-```bash
-$ cd /tmp
-$ mysql -u<Account> -h<Host> -p <DataBase> -e "
-<SQL>
-" | sed -e 's/\t/,/' > <dumpFile>.csv && tar zcvf <dumpFile>.csv.tar.gz <dumpFile>.csv && rm -f <dumpFile>.csv
-```
 ## PARTITIONS
 
 Check partitions
 ```sql
-SELECT ISP.TABLE_SCHEMA, ISP.TABLE_NAME, ISP.PARTITION_NAME, ISP.PARTITION_ORDINAL_POSITION, ISP.TABLE_ROWS FROM INFORMATION_SCHEMA.PARTITIONS ISP WHERE ISP.TABLE_SCHEMA = DATABASE() AND ISP.PARTITION_NAME IS NOT NULL ORDER BY ISP.TABLE_NAME ASC, ISP.PARTITION_NAME ASC;
+SELECT isp.TABLE_SCHEMA, isp.TABLE_NAME, isp.PARTITION_NAME, isp.PARTITION_ORDINAL_POSITION, isp.TABLE_ROWS FROM INFORMATION_SCHEMA.PARTITIONS AS isp WHERE isp.TABLE_SCHEMA = DATABASE() AND isp.PARTITION_NAME IS NOT NULL ORDER BY isp.TABLE_NAME ASC, isp.PARTITION_NAME ASC;
 ```
 
 Update normal table to partitions table
@@ -156,8 +155,8 @@ Update normal table to partitions table
 SHOW CREATE TABLE <Table1>;
 
 ALTER TABLE <Table1> PARTITION BY RANGE COLUMNS(created_at) (
-  PARTITION p201401 VALUES LESS THAN ('2014-02-01') ENGINE = InnoDB,
-  PARTITION p201402 VALUES LESS THAN ('2014-03-01') ENGINE = InnoDB);
+    PARTITION p201401 VALUES LESS THAN ('2014-02-01') ENGINE = InnoDB,
+    PARTITION p201402 VALUES LESS THAN ('2014-03-01') ENGINE = InnoDB);
 
 SHOW CREATE TABLE <Table1>;
 ```
@@ -167,8 +166,8 @@ Add new partitions table
 SHOW CREATE TABLE <Table1>;
 
 ALTER TABLE <Table1> ADD PARTITION (
-  PARTITION p201401 VALUES LESS THAN ('2014-02-01'),
-  PARTITION p201402 VALUES LESS THAN ('2014-03-01'));
+    PARTITION p201401 VALUES LESS THAN ('2014-02-01'),
+    PARTITION p201402 VALUES LESS THAN ('2014-03-01'));
 
 SHOW CREATE TABLE <Table1>;
 ```
@@ -187,49 +186,49 @@ SHOW CREATE TABLE <Table1>;
 (Bulk )All columns set
 ```sql
 INSERT INTO <Table1> VALUES
-  (<ColumnData1>, <ColumnData2>, ...),
-  (<ColumnData1>, <ColumnData2>, ...);
+    (<ColumnData1>, <ColumnData2>, ...),
+    (<ColumnData1>, <ColumnData2>, ...);
 ```
 
 (Bulk )Insert
 ```sql
 INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES
-  (<ColumnData1>, <ColumnData2>, ...),
-  (<ColumnData1>, <ColumnData2>, ...);
+    (<ColumnData1>, <ColumnData2>, ...),
+    (<ColumnData1>, <ColumnData2>, ...);
 ```
 
 Insert duplicate key update
 ```sql
 INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES
-  (<ColumnData1>, <ColumnData2>, ...)
+    (<ColumnData1>, <ColumnData2>, ...)
 ON DUPLICATE KEY UPDATE <Column2> = <ColumnData2>, <Column3> = <ColumnData3>;
 ```
 
 Insert select
 ```sql
 INSERT INTO <Table1> (<Column1>, <Column2>, ...)
-  SELECT <ColumnData1>, <ColumnData2>, ...;
+    SELECT <ColumnData1>, <ColumnData2>, ...;
 ```
 
 [Insert select duplicate key update](http://qiita.com/yuzroz/items/f0eccf847b2ea42f885f)
 ```sql
 INSERT INTO <Table1> (<Column1>, <Column2>, ...)
-  SELECT <ColumnData1>, <ColumnData2>, ...
-  FROM <Table2>
-  ORDER BY <ColumnData1>
+    SELECT <tab2>.<ColumnData1>, <tab2>.<ColumnData2>, ...
+    FROM <Table2> AS <tab2>
+    ORDER BY <tab2>.<ColumnData1>
 ON DUPLICATE KEY UPDATE
-  <Column2> = IF(<Table1>.<Column1> < <Table2>.<ColumnData1>, <Table1>.<Column1>, <Table2>.<ColumnData1>),
-  <Column3> = CONCAT(<Table1>.<Column3>, '_', IFNULL(<Column1>, ''));
+    <Column2> = IF(<Table1>.<Column1> < <tab2>.<ColumnData1>, <Table1>.<Column1>, <tab2>.<ColumnData1>),
+    <Column3> = CONCAT(<Table1>.<Column3>, '_', IFNULL(<Table1>.<Column1>, ''));
 ```
 
 [Insert select group by duplicate key update](http://stackoverflow.com/questions/16935896/mysql-on-duplicate-key-update-while-inserting-a-result-set-from-a-query)
 ```sql
 INSERT INTO <Table1> (<Column1>, <Column2>, ...)
-  SELECT <ColumnData1>, @group_column := <ColumnData2>, ...
-  FROM <Table2>
-  GROUP BY <ColumnData1>
+    SELECT <tab2>.<ColumnData1>, @group_column := <tab2>.<ColumnData2>, ...
+    FROM <Table2> AS <tab2>
+    GROUP BY <tab2>.<ColumnData1>
 ON DUPLICATE KEY UPDATE
-  <Column2> = <Table1>.<Column2> + @group_column;
+    <Column2> = <Table1>.<Column2> + @group_column;
 ```
 
 ## UPDATE
@@ -242,20 +241,19 @@ UPDATE <Table1> SET <Column1> = <ColumnData2> WHERE <UniqueColumn1> = <UniqueCol
 
 Table JOIN
 ```sql
-UPDATE <Table1> AS TAB1
-  INNER JOIN <Table2> AS TAB2
-  ON TAB1.id = TAB2.tab1_id
-  SET TAB1.<Column1> = <ColumnData1> WHERE <UniqueColumn1> = <UniqueColumnData1>;
+UPDATE <Table1> AS <tab1>
+    INNER JOIN <Table2> AS <tab2>
+    ON <tab1>.id = <tab2>.tab1_id
+    SET <tab1>.<Column1> = <ColumnData1> WHERE <UniqueColumn1> = <UniqueColumnData1>;
 ```
 
 [Good1](http://d.hatena.ne.jp/knowledgetree/20100325/1269530022)
 ```sql
 UPDATE <Table1> SET
-  <Column1> =
-    CASE <UniqueColumn1>
-    WHEN <UniqueColumnData1> THEN <ColumnData1>
-    WHEN <UniqueColumnData2> THEN <ColumnData2>
-    END
+    <Column1> = CASE <UniqueColumn1>
+        WHEN <UniqueColumnData1> THEN <ColumnData1>
+        WHEN <UniqueColumnData2> THEN <ColumnData2>
+        END
 WHERE <UniqueColumn1> IN (...);
 ```
 
@@ -264,23 +262,22 @@ WHERE <UniqueColumn1> IN (...);
 CREATE TEMPORARY TABLE tmp_<Table1>(<UniqueColumn1>, <Column1>, ...);
 
 INSERT INTO tmp_<Table1>(<UniqueColumn1>, <Column1>) VALUES
-  (<UniqueColumnData1>, <ColumnData1>),
-  (<UniqueColumnData2>, <ColumnData2>);
+    (<UniqueColumnData1>, <ColumnData1>),
+    (<UniqueColumnData2>, <ColumnData2>);
 
-UPDATE <Table1>
-  INNER JOIN tmp_<Table1>
-  ON <Table1>.<UniqueColumn1> = tmp_<Table1>.<UniqueColumn1>
-  SET <Table1>.<Column1> = tmp_<Table1>.<UniqueColumn1>;
+UPDATE <Table1> AS <tab1>
+    INNER JOIN tmp_<Table1> AS <tmp>
+    ON <tab1>.<UniqueColumn1> = <tmp>.<UniqueColumn1>
+    SET <tab1>.<Column1> = <tmp>.<UniqueColumn1>;
 ```
 
 Multi Table
 ```sql
-UPDATE <Table1> AS TAB1
-  INNER JOIN <Table2> AS TAB2
-  ON TAB1.id = TAB2.tab1_id
-  SET TAB1.<Column1> = <ColumnData1>,
-  TAB2.<Column2> = <ColumnData2>
-  WHERE <UniqueColumn1> = <UniqueColumnData1>;
+UPDATE <Table1> AS <tab1>
+    INNER JOIN <Table2> AS <tab2>
+    ON <tab1>.id = <tab2>.tab1_id
+    SET <tab1>.<Column1> = <ColumnData1>, <tab2>.<Column2> = <ColumnData2>
+    WHERE <UniqueColumn1> = <UniqueColumnData1>;
 ```
 
 ## DELETE/TRUNCATE
@@ -305,8 +302,8 @@ TRUNCATE TABLE <Table1>;
 
 Search using Column
 ```sql
-SELECT ISC.TABLE_NAME, ISC.COLUMN_NAME, ISC.COLUMN_TYPE, ISC.IS_NULLABLE, ISC.COLUMN_KEY, ISC.EXTRA FROM INFORMATION_SCHEMA.COLUMNS ISC WHERE ISC.TABLE_SCHEMA = DATABASE()
-AND ISC.COLUMN_NAME = <Column1>;
+SELECT isc.TABLE_NAME, isc.COLUMN_NAME, isc.COLUMN_TYPE, isc.IS_NULLABLE, isc.COLUMN_KEY, isc.EXTRA FROM INFORMATION_SCHEMA.COLUMNS AS isc WHERE isc.TABLE_SCHEMA = DATABASE()
+AND isc.COLUMN_NAME = <Column1>;
 ```
 
 Show using DataBase
@@ -316,18 +313,18 @@ SELECT DATABASE();
 
 Show empty min id
 ```sql
-SELECT MIN(TAB.<Column1> + 1) AS min_<Column1>
-FROM <Table1> AS TAB
+SELECT MIN(<tab1>.<Column1> + 1) AS min_<Column1>
+FROM <Table1> AS <tab1>
 WHERE NOT EXISTS (
-  SELECT SUB_TAB.<Column1>
-  FROM <Table1> SUB_TAB
-  WHERE (TAB.<Column1> + 1) = SUB_TAB.<Column1>);
+    SELECT <sub_tab1>.<Column1>
+    FROM <Table1> AS <sub_tab1>
+    WHERE (<tab1>.<Column1> + 1) = <sub_tab1>.<Column1>);
 ```
 
 Range column
 ```sql
-SELECT TAB.<Column1>
-FROM <Table1> AS TAB
+SELECT <tab1>.<Column1>
+FROM <Table1> AS <tab1>
 WHERE NOW() BETWEEN start_date AND end_date;
 ```
 
@@ -384,11 +381,11 @@ Table
 TEMPORARY TABLE - SELECT
 ```sql
 CREATE TEMPORARY TABLE tmp_<Table1> (
-  <Column1 schema>,
-  <Column2 schema>,
-  ...,
-  PRIMARY KEY (<Column1>,...))
-  SELECT <ColumnData1>, <ColumnData2>, ...;
+    <Column1 schema>,
+    <Column2 schema>,
+    ...,
+    PRIMARY KEY (<Column1>,...))
+    SELECT <ColumnData1>, <ColumnData2>, ...;
 ```
 
 INDEX
@@ -466,30 +463,31 @@ ALTER TABLE <Table1> RENAME <Table2>;
 Simple CASE
 ```sql
 SELECT CASE <Column1>
-  WHEN <ColumnData1-1>  THEN <Data1-1>
-  WHEN <ColumnData1-2>  THEN <Data1-2>
-  ELSE <Data1-3>
-  END AS <Column1_RENAME>
+    WHEN <ColumnData1-1> THEN <Data1-1>
+    WHEN <ColumnData1-2> THEN <Data1-2>
+    ELSE <Data1-3>
+    END AS <Column1_RENAME>
 ```
 
 Search CASE
 ```sql
 SELECT CASE
-  WEHN <Column1> = <ColumnData1-1> THEN <Data1-1>
-  WHEN <Column1> = <ColumnData1-2> THEN <Data1-2>
-  ELSE <Data1-3>
-  END AS <Column1_RENAME>
+    WEHN <Column1> = <ColumnData1-1> THEN <Data1-1>
+    WHEN <Column1> = <ColumnData1-2> THEN <Data1-2>
+    ELSE <Data1-3>
+    END AS <Column1_RENAME>
 ```
 
 GROUP BY - CASE
 ```sql
-SELECT CASE
-  WEHN <Column1> = <ColumnData1-1> THEN <Data1-1>
-  WHEN <Column1> = <ColumnData1-2> THEN <Data1-2>
-  ELSE <Data1-3>
-  END AS <Column1_RENAME>
-  FROM <Table1>
-  GROUP BY <Column1_RENAME>
+SELECT
+    CASE
+        WEHN <tab1>.<Column1> = <ColumnData1-1> THEN <Data1-1>
+        WHEN <tab1>.<Column1> = <ColumnData1-2> THEN <Data1-2>
+        ELSE <tab1>.<Data1-3>
+        END AS <Column1_RENAME>
+    FROM <Table1> AS <tab1>
+    GROUP BY <Column1_RENAME>
 ```
 
 ## IN
@@ -532,10 +530,10 @@ DATE Exsample
 GROUP_CONCAT  
 Require 2nd parameter at IFNULL.If max or min, check "Max/Min". And check 'group_concat_max_len'.
 ```sql
-SELECT <UniqueColumn1>(, <UniqueColumn2>),
-  GROUP_CONCAT([DISTINCT] CONCAT(IFNULL(<Column1>, ''), '_',IFNULL(<Column1>, '')) ORDER BY <Column1> ASC SEPARATOR '|') AS table_info
-  FROM <Table1>
-  GROUP BY <UniqueColumn1>(, <UniqueColumn2>);
+SELECT <tab1>.<UniqueColumn1>(, <tab1>.<UniqueColumn2>),
+GROUP_CONCAT([DISTINCT] CONCAT(IFNULL(<tab1>.<Column1>, ''), '_',IFNULL(<tab1>.<Column1>, '')) ORDER BY <tab1>.<Column1> ASC SEPARATOR '|') AS table_info
+FROM <Table1> AS <tab1>
+GROUP BY <tab1>.<UniqueColumn1>(, <tab1>.<UniqueColumn2>);
 
 SHOW VARIABLES LIKE 'group_concat_max_len';
 
@@ -544,24 +542,24 @@ SET SESSION group_concat_max_len = 2048;
 
 MATH FUNCTION IF
 ```sql
-SELECT <UniqueColumn1>(, <UniqueColumn2>),
-  SUM(IF(<Condition>, <true>, <false=default>)) AS sum_a
-  SUM(IF(<Condition>, <true>, <false=default>)) AS sum_b
-  FROM <Table1>
-  GROUP BY <UniqueColumn1>(, <UniqueColumn2>);
+SELECT <tab1>.<UniqueColumn1>(, <tab1>.<UniqueColumn2>),
+SUM(IF(<tab1>.<Condition>, <true>, <false=default>)) AS sum_a,
+SUM(IF(<tab1>.<Condition>, <true>, <false=default>)) AS sum_b
+FROM <Table1> AS <tab1>
+GROUP BY <tab1>.<UniqueColumn1>(, <tab1>.<UniqueColumn2>);
 ```
 
 COUNT - MAX
 ```sql
-SELECT tab.<Column1>, COUNT(*) AS count
-FROM <Table1> AS tab
-GROUP BY tab.<Column1>
+SELECT <tab1>.<Column1>, COUNT(*) AS count
+FROM <Table1> AS <tab1>
+GROUP BY <tab1>.<Column1>
 HAVING count >= (
-  SELECT MAX(having_tab.count)
-  FROM (
-    SELECT COUNT(*) AS count
-    FROM <Table1> AS having_sub_tab
-    GROUP BY having_sub_tab.<Column1> ) AS having_tab );
+    SELECT MAX(<having_tab>.count)
+    FROM (
+        SELECT COUNT(*) AS count
+        FROM <Table1> AS <having_sub_tab>
+        GROUP BY <having_sub_tab>.<Column1> ) AS <having_tab> );
 ```
 
 TRIM
@@ -590,14 +588,14 @@ Comma list string search2(MySQL Only?)
 ```sql
 ex) 11 search
 
-SELECT * FROM <Table1> WHERE <Column1> REGEXP '[[:<:]]11[[:>:]]';
+SELECT <tab1>.* FROM <Table1> AS <tab1> WHERE <tab1>.<Column1> REGEXP '[[:<:]]11[[:>:]]';
 ```
 
 Comma list string search3
 ```sql
 ex) 11 search
 
-SELECT * FROM <Table1> WHERE CONCAT(',', <Column1>, ',') LIKE CONCAT('%,', 11, ',%');
+SELECT <tab1>.* FROM <Table1> AS <tab1> WHERE CONCAT(',', <tab1>.<Column1>, ',') LIKE CONCAT('%,', 11, ',%');
 ```
 
 ## Other
