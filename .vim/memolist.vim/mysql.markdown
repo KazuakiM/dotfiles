@@ -118,7 +118,7 @@ INSERT INTO  <New DataBase>.<New Table1> SELECT * FROM <DataBase1>.<Table1>;
 
 ## Export File
 
---skip-add-drop-table:Do not write DROP TABLE statements.
+--skip-add-drop-table:Do not write DROP TABLE statements.  
 --no-create-info:     Do not write CREATE TABLE statements.
 
 Tables dump
@@ -224,7 +224,7 @@ ON DUPLICATE KEY UPDATE
 [Insert select group by duplicate key update](http://stackoverflow.com/questions/16935896/mysql-on-duplicate-key-update-while-inserting-a-result-set-from-a-query)
 ```sql
 INSERT INTO <Table1> (<Column1>, <Column2>, ...)
-    SELECT <tab2>.<ColumnData1>, @group_column := <tab2>.<ColumnData2>, ...
+    SELECT <tab2>.<ColumnData1>, @group_column := COUNT(<tab2>.<ColumnData2>), ...
     FROM <Table2> AS <tab2>
     GROUP BY <tab2>.<ColumnData1>
 ON DUPLICATE KEY UPDATE
@@ -328,8 +328,7 @@ FROM <Table1> AS <tab1>
 WHERE NOW() BETWEEN start_date AND end_date;
 ```
 
-DISTINCT to EXISTS  
-※情報が古い可能性あり(古い書籍からの引用)
+DISTINCT to EXISTS
 ```sql
 before)
 SELECT DISTINCT <tab1>.<Column1>
@@ -436,7 +435,7 @@ Update auto_increment
 ```sql
 ex) now :389, next_increment:391 => next_increment:390.
 
-SELECT MAX(id) AS max_num FROM <Table1>\G
+SELECT MAX(<tab1>.id) AS max_num FROM <Table1> AS <tab1>\G
 
    MAX(id): 389
 
@@ -496,7 +495,9 @@ multi IN
 ```sql
 SELECT <tab1>.<Column1>
 FROM <Table1> AS <tab1>
-WHERE (
+WHERE (<tab1>.<column1>, <tab1>.<column2> [, <tab1>.<column3>]) IN (
+    (<ColumnData1-1>, <ColumnData2-1> [, <ColumnData3-1>]) [,
+    (<ColumnData1-2>, <ColumnData2-2> [, <ColumnData3-2>]) ] );
 ```
 
 ## DATE
@@ -530,10 +531,10 @@ DATE Exsample
 GROUP_CONCAT  
 Require 2nd parameter at IFNULL.If max or min, check "Max/Min". And check 'group_concat_max_len'.
 ```sql
-SELECT <tab1>.<UniqueColumn1>(, <tab1>.<UniqueColumn2>),
+SELECT <tab1>.<UniqueColumn1> [, <tab1>.<UniqueColumn2> ],
 GROUP_CONCAT([DISTINCT] CONCAT(IFNULL(<tab1>.<Column1>, ''), '_',IFNULL(<tab1>.<Column1>, '')) ORDER BY <tab1>.<Column1> ASC SEPARATOR '|') AS table_info
 FROM <Table1> AS <tab1>
-GROUP BY <tab1>.<UniqueColumn1>(, <tab1>.<UniqueColumn2>);
+GROUP BY <tab1>.<UniqueColumn1> [, <tab1>.<UniqueColumn2> ];
 
 SHOW VARIABLES LIKE 'group_concat_max_len';
 
