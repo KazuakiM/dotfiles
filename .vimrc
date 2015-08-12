@@ -31,6 +31,13 @@
 "
 "
 " Common {{{
+" Duplicate ban
+if v:servername is 'GVIM1'
+    call remote_send('GVIM', '<ESC>:tabnew '.expand('%:p').'<CR>')
+    call remote_foreground('GVIM')
+    quit
+endif
+
 set encoding=utf-8 fileencoding=utf-8 fileformat=unix
 scriptencoding utf-8
 let g:mapleader = ','
