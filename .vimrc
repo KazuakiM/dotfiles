@@ -33,6 +33,7 @@
 " Common {{{
 " Duplicate ban
 if v:servername is 'GVIM1'
+    setlocal viminfo=
     call remote_send('GVIM', '<ESC>:tabnew '.expand('%:p').'<CR>')
     call remote_foreground('GVIM')
     quit
