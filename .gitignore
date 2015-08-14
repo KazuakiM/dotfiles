@@ -5,6 +5,7 @@ C:/
 .gitconfig
 .gitconfig.local
 .netrc
+.ssh/
 .vimrc.win
 lib/Vagrant/ssh.config
 lib/Vagrant/.vagrant
