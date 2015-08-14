@@ -657,6 +657,9 @@ elseif s:osType ==# 'win'
     " vimproc.vim {{{
     let g:vimproc#dll_path = 'C:\usr\local\bin\Vim\plugins\vimproc\autoload\vimproc_win64.dll'
     "}}}
+    " previm {{{
+    let g:previm_open_cmd = 'C:/Program\ Files\ (x86)/Google/Chrome/Application/chrome.exe'
+    "}}}
     " memolist.vim {{{
     let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
     "}}}
