@@ -252,6 +252,8 @@ nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
 " Wildmenu
 cnoremap <Left>  <Space><BS><Left>
 cnoremap <Right> <Space><BS><Right>
+" Special word
+noremap! ¥ \
 " $VIMRUNTIME/syntax/sql.vim
 let g:sql_type_default = 'mysql'
 " $VIMRUNTIME/syntax/php.vim
@@ -383,6 +385,9 @@ let g:indentLine_faster = 1
 "
 " MEMO:If gVim for Windows italic fonts are deleted, I would move 'unite-highlight' to backup/.vimrc.
 "
+"MEMO:Unite for Windows check at Reading vimrc 2015-08-15!!!
+"call unite#custom#substitute('files', '[^~.* ]\ze/', '\0', -100)
+"call unite#custom#substitute('files', '/\ze[^~.* ]', '/', -100)
 NeoBundleLazy 'Shougo/unite.vim',           { 'commands': 'Unite'}
 NeoBundleLazy 'Shougo/unite-help',          { 'depends':  'Shougo/unite.vim', 'unite_sources':     'help'}
 NeoBundleLazy 'rhysd/unite-codic.vim',      { 'depends':  ['koron/codic-vim', 'Shougo/unite.vim'], 'unite_sources': 'codic'}
@@ -467,7 +472,10 @@ endfunction "}}}
 "}}}
 " nerdtree {{{
 NeoBundleLazy 'scrooloose/nerdtree', {'commands': 'NERDTree'}
-nnoremap <expr><Leader>n ':NERDTree '.vital#of('vital').import('Prelude').path2project_directory('%').'<CR>'
+nnoremap <SID>[nerdtree] <Nop>
+nmap <Leader>n <SID>[nerdtree]
+nnoremap <expr><SID>[nerdtree]n ':NERDTree '.vital#of('vital').import('Prelude').path2project_directory('%').'<CR>'
+nnoremap       <SID>[nerdtree]b :<C-u>NERDTree<CR>
 let s:hooks = neobundle#get_hooks('nerdtree')
 function! s:hooks.on_source(bundle) abort "{{{
     let g:NERDTreeBookmarksFile     = s:envHome.'/.vim/nerdtree/.NERDTreeBookmarks'
