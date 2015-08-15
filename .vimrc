@@ -31,14 +31,6 @@
 "
 "
 " Common {{{
-" Duplicate ban
-if v:servername is 'GVIM1'
-    setlocal viminfo=
-    call remote_send('GVIM', '<ESC>:tabnew '.expand('%:p').'<CR>')
-    call remote_foreground('GVIM')
-    quit
-endif
-
 set encoding=utf-8 fileencoding=utf-8 fileformat=unix
 scriptencoding utf-8
 let g:mapleader = ','
@@ -120,6 +112,19 @@ function! s:KazuakiMBufEnter() abort "{{{
         quit
     endif
 
+    " Duplicate ban
+    if v:servername is 'GVIM1'
+        setlocal viminfo=
+        call remote_send('GVIM', '<ESC>:tabnew '.expand('%:p').'<CR>')
+        call remote_foreground('GVIM')
+        quit
+    elseif v:servername is 'VIM1'
+        setlocal viminfo=
+        call remote_send('VIM', '<ESC>:tabnew '.expand('%:p').'<CR>')
+        call remote_foreground('VIM')
+        quit
+    endif
+
     " If open direcotry, call NERDTree
     if isdirectory(expand('%:p'))
         call nerdtree#checkForBrowse(expand('<amatch>'))
@@ -133,7 +138,7 @@ function! s:KazuakiMBufEnter() abort "{{{
         setlocal filetype=mkd
     endif
 
-    " Forcibly update
+   " Forcibly update
     set ambiwidth=double formatoptions-=c formatoptions-=b formatoptions-=t formatoptions-=v textwidth=0
 
     " default encoding
