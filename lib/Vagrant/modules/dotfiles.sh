@@ -34,7 +34,7 @@ git clone https://github.com/Shougo/neobundle.vim.git $home/.vim/bundle/neobundl
 vim -N -u $home/.vimrc -c 'try | NeoBundleUpdate! | finally | qall! | endtry' -U NONE -i NONE -V1 -e -s >> $log 2>> $log && \
 wget http://jp2.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp/php_manual_ja.tar.gz          >> $log 2>> $log && \
 tar zxvf /tmp/php_manual_ja.tar.gz -C $home/.vim/vim-ref                                                >> $log 2>> $log && \
-wget http://cs.sensiolabs.org/get/php-cs-fixer.phar -O $home/.vim/vim-php-cs-fixer/php-cs-fixer         >> $log 2>> $log && \
+wget http://get.sensiolabs.org/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer            >> $log 2>> $log && \
 chmod a+x $home/.vim/vim-php-cs-fixer/php-cs-fixer                                                                       && \
 php $home/work/dotfiles/src/phpDict.php                                                                                  && \
 sh $home/work/dotfiles/src/htmlReference.sh                                                             >> $log 2>> $log
