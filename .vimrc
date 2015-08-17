@@ -110,10 +110,9 @@ function! s:KazuakiMBufEnter() abort "{{{
     " Auto close VimDiff or primary NERDTree
     if winnr('$') is 1 && (&l:diff || (exists('b:NERDTreeType') && b:NERDTreeType ==# 'primary'))
         quit
-    endif
 
     " Duplicate ban
-    if v:servername is 'GVIM1'
+    elseif v:servername is 'GVIM1'
         setlocal viminfo=
         call remote_send('GVIM', '<ESC>:tabnew '.expand('%:p').'<CR>')
         call remote_foreground('GVIM')
@@ -487,9 +486,6 @@ function! s:hooks.on_source(bundle) abort "{{{
 endfunction "}}}
 "}}}
 " vim-qfreplace {{{
-"
-" MEMO:I think I should operate 'vim-qfreplace'. It's so cool.
-"
 NeoBundleLazy 'thinca/vim-qfreplace', {'commands': 'Qfreplace'}
 nnoremap <Leader>qr :<C-u>Qfreplace<CR>
 "}}}
