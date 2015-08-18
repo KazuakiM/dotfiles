@@ -261,23 +261,24 @@ let g:php_htmlInStrings = 1
 let g:php_noShortTags   = 1
 let g:php_sql_query     = 1
 " disable plugin
-let g:loaded_2html_plugin      = 1
-let g:loaded_getscriptPlugin   = 1
-let g:loaded_gzip              = 1
-let g:loaded_matchparen        = 1
-let g:loaded_netrwPlugin       = 1
-let g:loaded_sql_completion    = 1
-let g:loaded_tarPlugin         = 1
-let g:loaded_vimballPlugin     = 1
-let g:loaded_zipPlugin         = 1
-let g:omni_sql_no_default_maps = 1
+let g:loaded_2html_plugin     = 1 "$VIMRUNTIME/plugin/tohtml.vim
+let g:loaded_getscriptPlugin  = 1 "$VIMRUNTIME/plugin/getscriptPlugin.vim
+let g:loaded_gzip             = 1 "$VIMRUNTIME/plugin/gzip.vim
+let g:loaded_matchparen       = 1 "$VIMRUNTIME/plugin/matchparen.vim
+let g:loaded_netrwPlugin      = 1 "$VIMRUNTIME/plugin/netrwPlugin.vim
+let g:loaded_spellfile_plugin = 1 "$VIMRUNTIME/plugin/spellfile.vim
+let g:loaded_sql_completion   = 1 "$VIMRUNTIME/autoload/sqlcomplete.vim
+let g:loaded_tarPlugin        = 1 "$VIMRUNTIME/plugin/tarPlugin.vim
+let g:loaded_vimballPlugin    = 1 "$VIMRUNTIME/plugin/vimballPlugin.vim
+let g:loaded_zipPlugin        = 1 "$VIMRUNTIME/plugin/zipPlugin.vim
+let g:vimsyn_embed            = 1 "$VIMRUNTIME/syntax/vim.vim
 " Vim
 nnoremap <SID>[vim] <Nop>
 nmap <Leader>f <SID>[vim]
 nnoremap <SID>[vim]e :<C-u>tabnew<Space>$MYVIMRC<CR>
 nnoremap <SID>[vim]s :<C-u>tabnew<Space>$HOME/.vim/vim-sqlfix/sqlfix.sql<CR>
 nnoremap <SID>[vim]h :<C-u>source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
-nnoremap <SID>[vim]c :<C-u>setlocal<Space>conceallevel=2<CR>
+nnoremap <SID>[vim]c :<C-u>IndentLinesEnable<CR>
 "}}}
 "
 "
