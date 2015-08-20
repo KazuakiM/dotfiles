@@ -556,7 +556,7 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:php_cs_fixer_dry_run                = 0
     let g:php_cs_fixer_enable_default_mapping = 0
     let g:php_cs_fixer_fixers_list            = 'align_equals,align_double_arrow'
-    let g:php_cs_fixer_level                  = 'all'
+    let g:php_cs_fixer_level                  = 'symfony'
     let g:php_cs_fixer_php_path               = 'php'
     let g:php_cs_fixer_verbose                = 0
 endfunction "}}}
