@@ -126,7 +126,7 @@ function! s:KazuakiMBufEnter() abort "{{{
 
     " If open direcotry, call NERDTree
     if isdirectory(expand('%:p'))
-        "TODO: error at the latest.
+        "XXX: Error the latest. lib and nerdtree_plugin are dead.
         "call nerdtree#checkForBrowse(expand('<amatch>'))
     endif
 
