@@ -445,6 +445,22 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:memolist_unite_option         = '-default-action=tabopen'
     let g:memolist_unite_source         = 'file_rec'
 endfunction "}}}
+" codec follow
+nnoremap <Leader>jj         :<C-u>call<Space>KazuakiMTranslate('')<Left><Left>
+nnoremap <silent><Leader>jk :<C-u>call<Space>KazuakiMTranslate(expand('<cword>'))<CR>
+function! KazuakiMTranslate(text) abort "{{{
+    if match(a:text, '\w.') is -1
+        let l:options = {'sl': 'ja', 'tl': 'en'}
+    else
+        let l:options = {'sl': 'en', 'tl': 'ja'}
+    endif
+    let l:response = vital#of('vital').import('Web.HTTP').post('http://translate.google.com/translate_a/t',
+        \ extend({'client': '0', 'q': a:text}, l:options),
+        \ {'User-Agent': 'Mozilla/5.0'})
+    if l:response.status is 200
+        PP vital#of('vital').import('Web.JSON').decode(l:response.content)
+    endif
+endfunction "}}}
 "}}}
 " vim-quickrun {{{
 NeoBundleLazy 'thinca/vim-quickrun', {'commands': 'QuickRun'}
