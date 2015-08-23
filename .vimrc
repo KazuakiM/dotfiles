@@ -483,10 +483,13 @@ let g:quickrun_config = {
 \        'exec':    '%c %o %s:p', 'errorformat': '%m\ in\ %f\ on\ line\ %l'}}
 "}}}
 " taglist.vim {{{
+"MEMO:$ ctags --list-maps : ctags supported filetype.
+"MEMO:$ ctags --list-kinds: ctags tlist setting.
 NeoBundleLazy 'vim-scripts/taglist.vim', {'commands': 'Tlist'}
 nnoremap <Leader>t :<C-u>Tlist<CR>
 let s:hooks = neobundle#get_hooks('taglist.vim')
 function! s:hooks.on_source(bundle) abort "{{{
+    let s:tlist_go_settings      = 'go;g:enum;s:struct;u:union;f:function;t:type;v:variable'
     let g:tlist_php_settings     = 'php;c:class;f:function;d:constant'
     let g:Tlist_Exit_OnlyWindow  = 1
     let g:Tlist_Show_One_File    = 1
@@ -603,11 +606,12 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:neocomplete#max_keyword_width                = 30
     let g:neocomplete#max_list                         = 8
     let g:neocomplete#min_keyword_length               = 3
-    let g:neocomplete#sources                          = {'_': ['ultisnips', 'file', 'dictionary', 'buffer']}
+    let g:neocomplete#sources                          = {'_': ['ultisnips', 'file', 'dictionary', 'buffer'], 'go': ['ultisnips', 'file', 'omni', 'buffer']}
     let g:neocomplete#sources#buffer#cache_limit_size  = 50000
     let g:neocomplete#sources#buffer#disabled_pattern  = '\.log\|\.jax'
     let g:neocomplete#sources#buffer#max_keyword_width = 30
     let g:neocomplete#sources#dictionary#dictionaries  = {'_': '', 'php': s:envHome.'/.vim/dict/php.dict'}
+    let g:neocomplete#sources#omni#input_patterns      = {'go': '\h\w\.\w*'}
     let g:neocomplete#use_vimproc                      = 1
 
     "neoinclude.vim
