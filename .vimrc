@@ -69,7 +69,7 @@ if has('vim_starting')
     let s:envHome = $HOME
 
     "Check $HOME
-    if s:envHome is '/' || s:envHome is 'C:\'
+    if s:envHome is# '/' || s:envHome is# 'C:\'
         call s:KazuakiMMinimal()
         echohl ErrorMsg
             echomsg '[WARNING]Would you check $HOME?'
@@ -108,16 +108,16 @@ endfunction "}}}
 
 function! s:KazuakiMBufEnter() abort "{{{
     " Auto close VimDiff or primary NERDTree
-    if winnr('$') is 1 && (&l:diff || (exists('b:NERDTreeType') && b:NERDTreeType ==# 'primary'))
+    if winnr('$') is# 1 && (&l:diff || (exists('b:NERDTreeType') && b:NERDTreeType ==# 'primary'))
         quit
 
     " Duplicate ban
-    elseif v:servername is 'GVIM1'
+    elseif v:servername is# 'GVIM1'
         setlocal viminfo=
         call remote_send('GVIM', '<ESC>:tabnew '.expand('%:p').'<CR>')
         call remote_foreground('GVIM')
         quit
-    elseif v:servername is 'VIM1'
+    elseif v:servername is# 'VIM1'
         setlocal viminfo=
         call remote_send('VIM', '<ESC>:tabnew '.expand('%:p').'<CR>')
         call remote_foreground('VIM')
@@ -126,14 +126,15 @@ function! s:KazuakiMBufEnter() abort "{{{
 
     " If open direcotry, call NERDTree
     if isdirectory(expand('%:p'))
-        call nerdtree#checkForBrowse(expand('<amatch>'))
+        "TODO: error at the latest.
+        "call nerdtree#checkForBrowse(expand('<amatch>'))
     endif
 
     " Move current file(/directory) path
     execute 'lcd '.fnameescape(expand('%:p:h'))
 
     " default filetype
-    if &filetype is ''
+    if &filetype is# ''
         setlocal filetype=mkd
     endif
 
@@ -294,10 +295,10 @@ if !has('gui_running')
 
     " http://d.hatena.ne.jp/thinca/20111204/1322932585
     function! s:KazuakiMTabpageLabelUpdate(tabNumber) abort "{{{
-        let l:highlight = a:tabNumber is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
+        let l:highlight = a:tabNumber is# tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
         let l:bufnrs    = tabpagebuflist(a:tabNumber)
         let l:bufnr     = len(l:bufnrs)
-        if l:bufnr is 1
+        if l:bufnr is# 1
             let l:bufnr = ''
         endif
         let l:modified = len(filter(copy(l:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
@@ -449,7 +450,7 @@ endfunction "}}}
 nnoremap <Leader>jj         :<C-u>call<Space>KazuakiMTranslate('')<Left><Left>
 nnoremap <silent><Leader>jk :<C-u>call<Space>KazuakiMTranslate(expand('<cword>'))<CR>
 function! KazuakiMTranslate(text) abort "{{{
-    if match(a:text, '\w') is -1
+    if match(a:text, '\w') is# -1
         let l:options = {'sl': 'ja', 'tl': 'en'}
     else
         let l:options = {'sl': 'en', 'tl': 'ja'}
@@ -457,7 +458,7 @@ function! KazuakiMTranslate(text) abort "{{{
     let l:response = vital#of('vital').import('Web.HTTP').post('http://translate.google.com/translate_a/t',
         \ extend({'client': '0', 'q': a:text}, l:options),
         \ {'User-Agent': 'Mozilla/5.0'})
-    if l:response.status is 200
+    if l:response.status is# 200
         PP vital#of('vital').import('Web.JSON').decode(l:response.content)
     endif
 endfunction "}}}
@@ -640,6 +641,9 @@ unlet s:hooks
 NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
 let g:vim_markdown_folding_disabled = 1
 "}}}
+" vim-go-extra {{{
+NeoBundleLazy 'vim-jp/vim-go-extra', {'filetypes': 'go'}
+"}}}
 "" vim-over {{{
 "NeoBundleLazy 'osyo-manga/vim-over', {'commands': 'OverCommandLine'}
 "nnoremap <expr><Leader>%s  ':OverCommandLine<CR>%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
@@ -749,9 +753,9 @@ nnoremap <F3> :<C-u>call<Space>KazuakiMCodeSwitch()<CR>
 
 function! KazuakiMCodeSwitch() abort "{{{
     let b:encodeIndex = ! exists('b:encodeIndex') ? 2 : b:encodeIndex + 1
-    if b:encodeIndex is 1
+    if b:encodeIndex is# 1
         execute 'edit ++bad=X ++encoding=utf-8'
-    elseif b:encodeIndex is 2
+    elseif b:encodeIndex is# 2
         if s:osType ==# 'win'
             execute 'edit ++bad=X ++encoding=cp932'
         else
@@ -768,9 +772,9 @@ nnoremap <F4> :<C-u>call<Space>KazuakiMNewLineSwitch()<CR>
 function! KazuakiMNewLineSwitch() abort "{{{
     if &modifiable
         let b:newLineIndex = ! exists('b:newLineIndex') ? 2 : b:newLineIndex + 1
-        if b:newLineIndex is 1
+        if b:newLineIndex is# 1
             setlocal fileformat=unix
-        elseif b:newLineIndex is 2
+        elseif b:newLineIndex is# 2
             setlocal fileformat=dos
         else
             setlocal fileformat=mac

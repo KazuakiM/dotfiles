@@ -130,6 +130,11 @@ case "${OSTYPE}" in
         if [ -d /usr/local/heroku/bin ]; then
             localPath="/usr/local/heroku/bin:$localPath"
         fi
+        #go applications
+        if [ -d /srv/php_bot ]; then
+            export GOPATH=/srv/php_bot
+            localPath="$GOPATH/bin:$localPath"
+        fi
         export PATH=$localPath$PATH
         export MYSQL_PS1="\d @\h> "
         #export MYSQL_PS1="\d @\h[\u] \n> "
