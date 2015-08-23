@@ -449,7 +449,7 @@ endfunction "}}}
 nnoremap <Leader>jj         :<C-u>call<Space>KazuakiMTranslate('')<Left><Left>
 nnoremap <silent><Leader>jk :<C-u>call<Space>KazuakiMTranslate(expand('<cword>'))<CR>
 function! KazuakiMTranslate(text) abort "{{{
-    if match(a:text, '\w.') is -1
+    if match(a:text, '\w') is -1
         let l:options = {'sl': 'ja', 'tl': 'en'}
     else
         let l:options = {'sl': 'en', 'tl': 'ja'}
