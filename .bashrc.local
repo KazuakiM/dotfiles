@@ -9,10 +9,12 @@
 #}}}
 
 ## ctags {{{
-#tagsCmd='ctags --languages=php -f'
+#tagsPhpCmd='ctags --languages=php -f'
+#tagsGoCmd=' ctags --languages=go  -f'
 #tagsVariable=''
-#tagsVariable="$tagsVariable cd $HOME/sample;                      $tagsCmd $HOME/.vim/tags/sample.tags   $HOME/sample;"
-#tagsVariable="$tagsVariable cd /directory/to/path/composer/vendor;$tagsCmd $HOME/.vim/tags/composer.tags /directory/to/path/composer/vendor;"
+#tagsVariable="$tagsVariable cd $HOME/sample1;                      $tagsPhpCmd $HOME/.vim/tags/sample1.tags  $HOME/sample1;"
+#tagsVariable="$tagsVariable cd /directory/to/path/composer/vendor; $tagsPhpCmd $HOME/.vim/tags/composer.tags /directory/to/path/composer/vendor;"
+#tagsVariable="$tagsVariable cd $HOME/sample2;                      $tagsGoCmd  $HOME/.vim/tags/sample2.tags  $HOME/sample2;"
 #tagsVariable="$tagsVariable cd;"
 #alias TAGS=$tagsVariable
 #}}}
