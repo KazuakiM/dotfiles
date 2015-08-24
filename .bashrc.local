@@ -1,21 +1,32 @@
-## Application Directory
+## Application Directory {{{
 #alias APP='cd $HOME/sample'
-#alias LOG='tail -F /tmp/sniplog'
+#}}}
 
-## ctags
+## Log {{{
+#logVariable=''
+#logVariable="$logVariable /tmp/sniplog"
+#alias LOG="tail -F $logVariable"
+#}}}
+
+## ctags {{{
 #tagsCmd='ctags --languages=php -f'
 #tagsVariable=''
-#tagsVariable=$tagsVariable"cd $HOME/sample;                      $tagsCmd $HOME/.vim/tags/sample.tags   $HOME/sample;"
-#tagsVariable=$tagsVariable"cd /directory/to/path/composer/vendor;$tagsCmd $HOME/.vim/tags/composer.tags /directory/to/path/composer/vendor;"
+#tagsVariable="$tagsVariable cd $HOME/sample;                      $tagsCmd $HOME/.vim/tags/sample.tags   $HOME/sample;"
+#tagsVariable="$tagsVariable cd /directory/to/path/composer/vendor;$tagsCmd $HOME/.vim/tags/composer.tags /directory/to/path/composer/vendor;"
+#tagsVariable="$tagsVariable cd;"
 #alias TAGS=$tagsVariable
+#}}}
 
-## git pull
+## git pull {{{
 #gitPullVariable=''
-#gitPullVariable=$gitPullVariable"echo 'Sample';cd $HOME/sample;git pull;"
+#gitPullVariable="$gitPullVariable echo 'Sample';cd $HOME/sample;git pull;"
+#gitPullVariable="$gitPullVariable cd;"
 #alias PULL=$gitPullVariable
+#}}}
 
-## git status
+## git status {{{
 #gitStatusVariable=''
 #gitStatusVariable=$gitStatusValiale"echo 'Sample';cd $HOME/sample;git stat;"
+#gitStatusVariable=$gitStatusValiale"cd;"
 #alias STAT=$gitStatusVariable
-
+#}}}
