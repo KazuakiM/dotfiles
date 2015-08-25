@@ -28,7 +28,7 @@
 
 ## git status {{{
 #gitStatusVariable=''
-#gitStatusVariable=$gitStatusValiale"echo 'Sample';cd $HOME/sample;git stat;"
-#gitStatusVariable=$gitStatusValiale"cd;"
+#gitStatusVariable="$gitStatusValiale echo 'Sample';cd $HOME/sample;git stat;"
+#gitStatusVariable="$gitStatusValiale cd;"
 #alias STAT=$gitStatusVariable
 #}}}
