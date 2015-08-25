@@ -175,6 +175,15 @@ case "${OSTYPE}" in
         alias vim="$HOME/src/vimStarter.sh"
         alias gvim="$HOME/src/vimStarter.sh"
         #}}}
+        # ssh-agent {{{
+        if [ -f $HOME/.ssh/.ssh-agent ]; then
+           . $HOME/.ssh/.ssh-agent > /dev/null
+        fi
+        if [ -z "$SSH_AGENT_PID" -o -z "`/usr/bin/ps -a|/usr/bin/egrep \"^[ ]+$SSH_AGENT_PID\"`" ]; then
+           /usr/bin/ssh-agent > $HOME/.ssh/.ssh-agent
+           . $HOME/.ssh/.ssh-agent > /dev/null
+        fi
+        #}}}
         ;;
 esac
 #}}}
