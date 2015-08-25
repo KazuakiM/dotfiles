@@ -145,6 +145,12 @@ function! s:KazuakiMBufEnter() abort "{{{
     execute 'setlocal encoding='.&fileencoding
 endfunction "}}}
 
+function! s:KazuakiMQuickfixCmdPost() abort "{{{
+    " qfixgrep {{{
+    let g:QFix_PreviewEnable = 1
+    "}}}
+endfunction "}}}
+
 function! s:KazuakiMVimEnter() abort "{{{
     call s:KazuakiMCheckString()
 endfunction "}}}
@@ -161,6 +167,7 @@ autocmd MyAutoCmd CmdwinLeave          * nunmap <ESC><ESC>
 autocmd MyAutoCmd FocusGained          * checktime
 autocmd MyAutoCmd InsertLeave          * set nopaste | if &l:diff | diffupdate | endif
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
+autocmd MyAutoCmd QuickfixCmdPost      * call s:KazuakiMQuickfixCmdPost()
 autocmd MyAutoCmd VimEnter             * call s:KazuakiMVimEnter()
 autocmd MyAutoCmd WinEnter             * call s:KazuakiMWinEnter()
 
@@ -459,7 +466,9 @@ function! KazuakiMTranslate(text) abort "{{{
         \ extend({'client': '0', 'q': a:text}, l:options),
         \ {'User-Agent': 'Mozilla/5.0'})
     if l:response.status is# 200
-        PP vital#of('vital').import('Web.JSON').decode(l:response.content)
+        cgetexpr PrettyPrint(vital#of('vital').import('Web.JSON').decode(l:response.content))
+        let g:QFix_PreviewEnable = 0
+        copen
     endif
 endfunction "}}}
 "}}}

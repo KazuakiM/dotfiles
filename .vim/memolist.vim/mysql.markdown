@@ -34,6 +34,18 @@ SHOW FULL PROCESSLIST;
 KILL xxxx;
 ```
 
+[Slave safely stop](http://qiita.com/catatsuy/items/8f2fbea88b9bc7b8acf7)
+```sql
+SET GLOBAL innodb_fast_shutdown=0;
+STOP SLAVE IO_THREAD;
+
+SHOW SLAVE STATUS\G
+
+    Read_Master_Log_PosとExec_Master_Log_Posが一致する事を確認
+
+STOP SLAVE ALL;
+```
+
 DELETE CRLF or CR or LF  
 TODO:meta words.
 ```sql
