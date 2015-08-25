@@ -3,7 +3,7 @@ xml
 
 ## XML 1.0
 
-standard words
+[standard words](http://qiita.com/mpyw/items/939c526dd5de6619b565)
 ```php
-return preg_replace('[^\x9\xA\xD\x20-\xD7FF\xE000-\xFFFD\x10000-\x10FFFF]', ' ', $subject);
+return htmlspecialchars($str, ENT_QUOTES | ENT_XML1 | ENT_DISALLOWED, 'UTF-8');
 ```
