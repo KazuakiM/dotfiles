@@ -182,6 +182,7 @@ case "${OSTYPE}" in
         if [ -z "$SSH_AGENT_PID" -o -z "`/usr/bin/ps -a|/usr/bin/egrep \"^[ ]+$SSH_AGENT_PID\"`" ]; then
            /usr/bin/ssh-agent > $HOME/.ssh/.ssh-agent
            . $HOME/.ssh/.ssh-agent > /dev/null
+           ssh-add $HOME/.ssh/id_rsa
         fi
         #}}}
         ;;

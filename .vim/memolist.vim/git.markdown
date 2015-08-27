@@ -253,9 +253,14 @@ git show --summary 候補のsha1
 git cherry-pick -n -m1 見つけたsha1
 ```
 
-退避ファイル復活&退避ファイル削除
+最新の退避ファイル復活&退避ファイル削除
 ```bash
 git stash pop
+```
+
+指定した退避ファイル復活&退避ファイル削除
+```bash
+git stash pop stash@{N}
 ```
 
 退避ファイルとの比較
