@@ -12,26 +12,19 @@ MySQL
 ## Best practice my.cnf
 
 * [kamipo-san's my.cnf](https://github.com/kamipo/etcfiles/blob/master/etc/my.cnf)
+ * [default_character_set, character_set_server](http://kamipo.github.io/talks/20150827-myna201508/#/step-12)
+> utf8mb4_bin or utf8mb4_general_ci
 * [yoku0825-san](https://github.com/yoku0825)
  * [dotfiles my.cnf](https://github.com/yoku0825/dotfiles/blob/master/my.cnf)
  * [my_setup my.cnf](https://github.com/yoku0825/my_setup/blob/master/my.cnf)
 
-## Tips
+## Slave/Master
 
 Slave or Master  
 Slave is shown at infomation. Master is empty.
 ```sql
 SHOW MASTER STATUS\G
 SHOW SLAVE  STATUS\G
-```
-
-[Trouble](http://qiita.com/muran001/items/14f19959d4723ffc29cc)
-```sql
-SHOW GLOBAL STATUS;
-SHOW PROCESSLIST;
-SHOW FULL PROCESSLIST;
-
-KILL xxxx;
 ```
 
 [Slave safely stop](http://qiita.com/catatsuy/items/8f2fbea88b9bc7b8acf7)
@@ -46,19 +39,15 @@ SHOW SLAVE STATUS\G
 STOP SLAVE ALL;
 ```
 
-DELETE CRLF or CR or LF  
-TODO:meta words.
+# Trobule
+
+[Check status](http://qiita.com/muran001/items/14f19959d4723ffc29cc)
 ```sql
-SELECT <tab1>.<Column1> FROM <Table1> AS <tab1> WHERE <tab1>.<Column1> LIKE '%\r%' OR <tab1>.<Column1> LIKE '%\n%';
+SHOW GLOBAL STATUS;
+SHOW PROCESSLIST;
+SHOW FULL PROCESSLIST;
 
-BEGIN;
-UPDATE <Table1> SET <Column1> = REPLACE(REPLACE(<Column1>, '\n', ''), '\r', '') WHERE <Column1> LIKE '%\r%' OR <Column1> LIKE '%\n%';
-
-SELECT <tab1>.<Column1> FROM <Table1> AS <tab1> WHERE <tab1>.<Column1> LIKE '%\r%' OR <tab1>.<Column1> LIKE '%\n%';
-SELECT <tab1>.<UniqueColumn1>, <tab1>.<Column1> FROM <Table1> AS <tab1> WHERE <tab1>.<UniqueColumn1> IN (...);
-
-
-COMMIT;
+KILL xxxx;
 ```
 
 ## TSV/CSV
@@ -609,6 +598,21 @@ Comma list string search3
 ex) 11 search
 
 SELECT <tab1>.* FROM <Table1> AS <tab1> WHERE CONCAT(',', <tab1>.<Column1>, ',') LIKE CONCAT('%,', 11, ',%');
+```
+
+DELETE CRLF or CR or LF  
+TODO:meta words.
+```sql
+SELECT <tab1>.<Column1> FROM <Table1> AS <tab1> WHERE <tab1>.<Column1> LIKE '%\r%' OR <tab1>.<Column1> LIKE '%\n%';
+
+BEGIN;
+UPDATE <Table1> SET <Column1> = REPLACE(REPLACE(<Column1>, '\n', ''), '\r', '') WHERE <Column1> LIKE '%\r%' OR <Column1> LIKE '%\n%';
+
+SELECT <tab1>.<Column1> FROM <Table1> AS <tab1> WHERE <tab1>.<Column1> LIKE '%\r%' OR <tab1>.<Column1> LIKE '%\n%';
+SELECT <tab1>.<UniqueColumn1>, <tab1>.<Column1> FROM <Table1> AS <tab1> WHERE <tab1>.<UniqueColumn1> IN (...);
+
+
+COMMIT;
 ```
 
 ## Other

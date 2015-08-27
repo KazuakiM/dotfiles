@@ -466,8 +466,10 @@ function! KazuakiMTranslate(text) abort "{{{
         \ extend({'client': '0', 'q': a:text}, l:options),
         \ {'User-Agent': 'Mozilla/5.0'})
     if l:response.status is# 200
-        cgetexpr PrettyPrint(vital#of('vital').import('Web.JSON').decode(l:response.content))
+        " qfixgrep {{{
         let g:QFix_PreviewEnable = 0
+        "}}}
+        cgetexpr PrettyPrint(vital#of('vital').import('Web.JSON').decode(l:response.content))
         copen
     endif
 endfunction "}}}
