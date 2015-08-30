@@ -352,8 +352,8 @@ endif
 " qfixgrep {{{
 let g:QFix_PreviewHeight = 20
 let g:QFixWin_EnableMode = 1
-nnoremap <expr> <Leader>grek ':grep! '. expand('<cword>') .' '. vital#of('vital').import('Prelude').path2project_directory('%') .'<C-b><Right><Right><Right><Right><Right><Right>'
-nnoremap <expr> <Leader>grel ':grep!  '. vital#of('vital').import('Prelude').path2project_directory('%') .'<C-b><Right><Right><Right><Right><Right><Right>'
+nnoremap <expr><Leader>grek ':grep! '. expand('<cword>') .' '. KazuakiMPath2ProjectDirectory('%') .'<C-b><Right><Right><Right><Right><Right><Right>'
+nnoremap <expr><Leader>grel ':grep!  '. KazuakiMPath2ProjectDirectory('%') .'<C-b><Right><Right><Right><Right><Right><Right>'
 "}}}
 " wildfire.vim {{{
 let g:wildfire_fuel_map  = '<Enter>'
@@ -384,6 +384,12 @@ let g:UltiSnipsJumpBackwardTrigger         = '<S-TAB>'
 let g:UltiSnipsJumpForwardTrigger          = '<TAB>'
 let g:UltiSnipsSnippetsDir                 = s:envHome .'/.vim/bundle/vim-snippets/UltiSnips'
 let g:UltiSnipsUsePythonVersion            = 2
+"}}}
+" vital.vim {{{
+function! KazuakiMPath2ProjectDirectory(path) abort "{{{
+    let s:Prelude = ! exists('s:Prelude') ? vital#of('vital').import('Prelude') : s:Prelude
+    return s:Prelude.path2project_directory(a:path)
+endfunction "}}}
 "}}}
 " indentLine {{{
 let g:indentLine_faster = 1
@@ -515,7 +521,7 @@ endfunction "}}}
 NeoBundleLazy 'scrooloose/nerdtree', {'commands': 'NERDTree'}
 nnoremap <SID>[nerdtree] <Nop>
 nmap <Leader>n <SID>[nerdtree]
-nnoremap <expr><SID>[nerdtree]n ':NERDTree '. vital#of('vital').import('Prelude').path2project_directory('%') .'<CR>'
+nnoremap <expr><SID>[nerdtree]n ':NERDTree '. KazuakiMPath2ProjectDirectory('%') .'<CR>'
 nnoremap       <SID>[nerdtree]b :<C-u>NERDTree<CR>
 let s:hooks = neobundle#get_hooks('nerdtree')
 function! s:hooks.on_source(bundle) abort "{{{
