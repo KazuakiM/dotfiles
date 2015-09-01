@@ -13,7 +13,9 @@ MySQL
 
 * [kamipo-san's my.cnf](https://github.com/kamipo/etcfiles/blob/master/etc/my.cnf)
  * [default_character_set, character_set_server](http://kamipo.github.io/talks/20150827-myna201508/#/step-12)
- > utf8mb4_bin or utf8mb4_general_ci
+
+   > utf8mb4_bin or utf8mb4_general_ci
+
 * [yoku0825-san](https://github.com/yoku0825)
  * [dotfiles my.cnf](https://github.com/yoku0825/dotfiles/blob/master/my.cnf)
  * [my_setup my.cnf](https://github.com/yoku0825/my_setup/blob/master/my.cnf)
