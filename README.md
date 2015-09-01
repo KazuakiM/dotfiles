@@ -216,7 +216,7 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 > |Safari > 環境設定|                                                                                   |                                        |
 > |                 |一般 > 新規ウィンドウを開く場合                                                    |ホームページ                            |
 > |                 |一般 > 新規タブを開く場合                                                          |空のページ                              |
-> |                 |一般 > ホームページ                                                                |file:///file/to/path/safariBookmark.html|
+> |                 |一般 > ホームページ                                                                |file:///file/to/path/bookmark.html      |
 > |ブックマーク     |ホームページの内容をブックマークに登録する([Alfred](http://www.alfredapp.com/)利用)|                                        |
 
 [Silverlight](http://www.microsoft.com/silverlight/)
