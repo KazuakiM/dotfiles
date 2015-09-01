@@ -135,7 +135,7 @@ function! s:KazuakiMBufEnter() abort "{{{
 
     " default filetype
     if &filetype is# ''
-        setlocal filetype=mkd
+        setlocal filetype=mkd.markdown
     endif
 
     " Forcibly update
@@ -753,11 +753,10 @@ call neobundle#end()
 "
 " FileType {{{
 filetype plugin indent on
-autocmd MyAutoCmd BufNewFile,BufRead *.coffee                                     setlocal filetype=coffee
-autocmd MyAutoCmd BufNewFile,BufRead *.{markdown,md,mdown,mdwn,mkd,mkdn,txt,text} setlocal filetype=mkd
-autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}                                    setlocal filetype=snippets
-autocmd MyAutoCmd BufNewFile,BufRead *.{vim*}                                     setlocal filetype=vim
-autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}                                  setlocal filetype=xxd
+autocmd MyAutoCmd BufNewFile,BufRead *.coffee    setlocal filetype=coffee
+autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}   setlocal filetype=snippets
+autocmd MyAutoCmd BufNewFile,BufRead *.{vim*}    setlocal filetype=vim
+autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe} setlocal filetype=xxd
 "}}}
 "
 "
