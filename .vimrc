@@ -124,12 +124,6 @@ function! s:KazuakiMBufEnter() abort "{{{
         quit
     endif
 
-    " If open direcotry, call NERDTree
-    if isdirectory(expand('%:p'))
-        "XXX: Error the latest. lib and nerdtree_plugin are dead.
-        "call nerdtree#checkForBrowse(expand('<amatch>'))
-    endif
-
     " Move current file(/directory) path
     execute 'lcd '. fnameescape(expand('%:p:h'))
 
@@ -398,6 +392,23 @@ let g:indentLine_faster = 1
 "
 "
 " NeoBundleLazy {{{
+" nerdtree {{{
+nnoremap <SID>[nerdtree] <Nop>
+nmap <Leader>n <SID>[nerdtree]
+nnoremap <expr><SID>[nerdtree]n ':NERDTree '. KazuakiMPath2ProjectDirectory('%') .'<CR>'
+nnoremap       <SID>[nerdtree]b :<C-u>NERDTree<CR>
+let g:NERDTreeBookmarksFile     = s:envHome .'/.vim/nerdtree/.NERDTreeBookmarks'
+let g:NERDTreeMinimalUI         = 1
+let g:NERDTreeRespectWildIgnore = 1
+let g:NERDTreeShowBookmarks     = 1
+let g:NERDTreeShowHidden        = 1
+let g:NERDTreeWinSize           = 20
+if isdirectory(expand('%:p'))
+    NeoBundle 'scrooloose/nerdtree'
+else
+    NeoBundleLazy 'scrooloose/nerdtree', {'commands': 'NERDTree'}
+endif
+"}}}
 " unite.vim
 " unite-help
 " codic-vim
@@ -515,22 +526,6 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:Tlist_Show_One_File    = 1
     let g:Tlist_Use_Right_Window = 1
     let g:Tlist_WinWidth         = 25
-endfunction "}}}
-"}}}
-" nerdtree {{{
-NeoBundleLazy 'scrooloose/nerdtree', {'commands': 'NERDTree'}
-nnoremap <SID>[nerdtree] <Nop>
-nmap <Leader>n <SID>[nerdtree]
-nnoremap <expr><SID>[nerdtree]n ':NERDTree '. KazuakiMPath2ProjectDirectory('%') .'<CR>'
-nnoremap       <SID>[nerdtree]b :<C-u>NERDTree<CR>
-let s:hooks = neobundle#get_hooks('nerdtree')
-function! s:hooks.on_source(bundle) abort "{{{
-    let g:NERDTreeBookmarksFile     = s:envHome .'/.vim/nerdtree/.NERDTreeBookmarks'
-    let g:NERDTreeMinimalUI         = 1
-    let g:NERDTreeRespectWildIgnore = 1
-    let g:NERDTreeShowBookmarks     = 1
-    let g:NERDTreeShowHidden        = 1
-    let g:NERDTreeWinSize           = 20
 endfunction "}}}
 "}}}
 " vim-qfreplace {{{
