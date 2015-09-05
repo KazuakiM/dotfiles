@@ -169,6 +169,13 @@ function! s:KazuakiMBufEnter() abort "{{{
 
     " Forcibly update
     set ambiwidth=double formatoptions-=c formatoptions-=b formatoptions-=t formatoptions-=v textwidth=0
+
+    " Set StatusLine
+    if &fileencoding is# 'utf-8'
+        highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Grey   guibg=Grey
+    else
+        highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow guibg=Yellow
+    endif
 endfunction "}}}
 
 function! s:KazuakiMBufReadPost() abort "{{{
