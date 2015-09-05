@@ -37,12 +37,47 @@ let s:date    = ! exists('s:date')    ? strftime('%Y%m%d%H%M%S', localtime()) : 
 "
 "
 " Common {{{
-set encoding=utf-8 fileencoding=utf-8 fileformat=unix
+set encoding=utf-8 fileencoding=utf-8 fileformats=unix,dos,mac
 scriptencoding utf-8
 let g:mapleader = ','
 augroup MyAutoCmd
     autocmd!
 augroup END
+
+" Zun wiki http://www.kawaz.jp/pukiwiki/?vim#cb691f26 {{{
+if &encoding !=# 'utf-8'
+    set encoding=japan fileencoding=japan
+endif
+if has('iconv')
+    let s:enc_euc = 'euc-jp'
+    let s:enc_jis = 'iso-2022-jp'
+    if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
+        let s:enc_euc = 'eucjp-ms'
+        let s:enc_jis = 'iso-2022-jp-3'
+    elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
+        let s:enc_euc = 'euc-jisx0213'
+        let s:enc_jis = 'iso-2022-jp-3'
+    endif
+    if &encoding ==# 'utf-8'
+        let s:fileencodings_default = &fileencodings
+        let &fileencodings          = s:enc_jis .','. s:enc_euc .',cp932'
+        let &fileencodings          = &fileencodings .','. s:fileencodings_default
+        unlet s:fileencodings_default
+    else
+        let &fileencodings = &fileencodings .','. s:enc_jis
+        set fileencodings+=utf-8,ucs-2le,ucs-2
+        if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
+            set fileencodings+=cp932 fileencodings-=euc-jp fileencodings-=euc-jisx0213 fileencodings-=eucjp-ms
+            let &encoding     = s:enc_euc
+            let &fileencoding = s:enc_euc
+        else
+            let &fileencodings = &fileencodings .','. s:enc_euc
+        endif
+    endif
+    unlet s:enc_euc
+    unlet s:enc_jis
+endif
+"}}}
 
 function! s:KazuakiMMinimal() abort "{{{
     setlocal noswapfile nobackup nowritebackup noundofile viminfo=
@@ -128,15 +163,25 @@ function! s:KazuakiMBufEnter() abort "{{{
     execute 'lcd '. fnameescape(expand('%:p:h'))
 
     " default filetype
-    if &filetype is# ''
+    if &filetype is# '' || &filetype is# 'text'
         setlocal filetype=mkd.markdown
     endif
 
     " Forcibly update
     set ambiwidth=double formatoptions-=c formatoptions-=b formatoptions-=t formatoptions-=v textwidth=0
+endfunction "}}}
 
-    " default encoding
-    execute 'setlocal encoding='. &fileencoding
+function! s:KazuakiMBufReadPost() abort "{{{
+    " memory cursol
+    if line("'\"") > 1 && line("'\"") <= line('$')
+        execute "normal! g`\""
+    endif
+
+    " Zun wiki http://www.kawaz.jp/pukiwiki/?vim#cb691f26 {{{
+    if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
+        let &fileencoding = &encoding
+    endif
+    "}}}
 endfunction "}}}
 
 function! s:KazuakiMQuickfixCmdPost() abort "{{{
@@ -155,7 +200,7 @@ function! s:KazuakiMWinEnter() abort "{{{
 endfunction "}}}
 
 autocmd MyAutoCmd BufEnter             * call s:KazuakiMBufEnter()
-autocmd MyAutoCmd BufReadPost          * if line("'\"") > 1 && line("'\"") <= line('$') | exe "normal! g`\"" | endif
+autocmd MyAutoCmd BufReadPost          * call s:KazuakiMBufReadPost()
 autocmd MyAutoCmd CmdwinEnter          * nmap <silent> <ESC><ESC> :quit<CR>
 autocmd MyAutoCmd CmdwinLeave          * nunmap <ESC><ESC>
 autocmd MyAutoCmd FocusGained          * checktime
@@ -169,6 +214,13 @@ function! KazuakiMStatuslineSyntax() abort "{{{
     return qfstatusline#Update()
 endfunction "}}}
 
+function! KazuakiMStatuslinePaste() abort "{{{
+    if &paste is# 1
+        return '(paste)'
+    endif
+    return ''
+endfunction "}}}
+
 " Basic
 set autoindent autoread backspace=indent,eol,start backup clipboard+=autoselect,unnamed cmdheight=1 completeopt=longest,menu diffopt=filler,context:5,iwhite,vertical
 set display=lastline expandtab fillchars+=diff:* foldmethod=marker grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m helplang=ja hidden history=1000 hlsearch ignorecase
@@ -178,7 +230,7 @@ set titleold= titlestring=%F ttyfast t_vb= undofile updatecount=30 updatetime=10
 set virtualedit+=block visualbell wildmenu wildmode=longest:full,full wrap wrapscan
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*.json'\ --exclude='*.log'\ --exclude='*min.js'\ --exclude='*min.css'
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,C,.DS_Store,.,..
-set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{KazuakiMStatuslineSyntax()}%=%Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
+set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{KazuakiMStatuslineSyntax()}%=\ %{KazuakiMStatuslinePaste()}\ \|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 if &l:diff
     set cursorline
 else
@@ -304,7 +356,7 @@ if !has('gui_running')
         endif
         let l:modified = len(filter(copy(l:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
         return '%'. a:tabNumber .'T'. l:highlight . l:bufnr .' '. fnamemodify(bufname(l:bufnrs[tabpagewinnr(a:tabNumber) - 1]), ':t') .' '. l:modified.
-        \ '%T%#TabLineFill#'
+        \    '%T%#TabLineFill#'
     endfunction "}}}
 
     function! KazuakiMTabLineUpdate() abort "{{{
@@ -757,6 +809,7 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe} setlocal filetype=xxd
 "
 " Function {{{
 nnoremap <F1> :<C-u>call<Space>KazuakiMDatabaseSwitch()<CR>
+set pastetoggle=<F2>
 
 " Database Switch (.vimrc.local)
 function! KazuakiMDatabaseSwitch() abort "{{{
@@ -766,40 +819,6 @@ function! KazuakiMDatabaseSwitch() abort "{{{
     endif
     let g:quickrun_config['sql/mysql']['cmdopt'] = g:KazuakiMDatabase[b:databaseIndex]
     echo g:KazuakiMDatabase[b:databaseIndex]
-endfunction "}}}
-
-nnoremap <F3> :<C-u>call<Space>KazuakiMCodeSwitch()<CR>
-
-function! KazuakiMCodeSwitch() abort "{{{
-    let b:encodeIndex = ! exists('b:encodeIndex') ? 2 : b:encodeIndex + 1
-    if b:encodeIndex is# 1
-        execute 'edit ++bad=X ++encoding=utf-8'
-    elseif b:encodeIndex is# 2
-        if s:osType ==# 'win'
-            execute 'edit ++bad=X ++encoding=cp932'
-        else
-            execute 'edit ++bad=X ++encoding=sjis'
-        endif
-    else
-        execute 'edit ++bad=X ++encoding=euc-jp'
-        let b:encodeIndex = 0
-    endif
-endfunction "}}}
-
-nnoremap <F4> :<C-u>call<Space>KazuakiMNewLineSwitch()<CR>
-
-function! KazuakiMNewLineSwitch() abort "{{{
-    if &modifiable
-        let b:newLineIndex = ! exists('b:newLineIndex') ? 2 : b:newLineIndex + 1
-        if b:newLineIndex is# 1
-            setlocal fileformat=unix
-        elseif b:newLineIndex is# 2
-            setlocal fileformat=dos
-        else
-            setlocal fileformat=mac
-            let b:newLineIndex = 0
-        endif
-    endif
 endfunction "}}}
 
 "}}}
