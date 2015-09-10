@@ -79,6 +79,23 @@ $ awk -F ',' '{print "INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES ("
 $ sed -i -e s/\'NULL\'/NULL/ /tmp/<dumpFile>.sql
 ```
 
+Big TSV
+```bash
+$ mysql --skip-column-names -u<Account> -h<Host> -p <DataBase> -e "
+<SQL>
+" > /tmp/<dumpFile>.tsv
+
+$ awk -F $"\t" '{print "(\47"$1"\47, "$2", \47"$3"\47),"}' /tmp/<dumpFile>.tsv > /tmp/<dumpfile>_param.txt
+$ sed -i -e s/\'NULL\'/NULL/ /tmp/<dumpfile>_param.txt
+$ split -l 10000 /tmp/<dumpfile>_param.txt /tmp/<dumpfile>_param_split.
+$ sed -i -e '1i INSERT INTO <Table1> VALUES' /tmp/<dumpfile>_param_split.*
+$ sed -i -e '$s/),/);/' /tmp/<dumpfile>_param_split.*
+
+#
+# この処理が未完成。方向性的には問題ないと思われる。
+#
+$ ls /tmp |grep <dumpfile>_param_split. | xargs mysql -u<Account> -h<Host> -p<Password> <DataBase>  < "$@"
+```
 
 ## Import File
 

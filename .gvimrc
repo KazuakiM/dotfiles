@@ -5,7 +5,9 @@
 set antialias cmdheight=1 guioptions-=b guioptions-=g guioptions-=l guioptions-=L guioptions-=m guioptions-=r guioptions-=R guioptions-=t guioptions-=T mouse=
 set showtabline=1 t_vb= winaltkeys=no
 " Color
-colorscheme kazuakim
+if getfsize(expand('%:p')) < 262144
+    colorscheme kazuakim
+endif
 " Mapping
 "  ESC
 inoremap <silent> <Esc> <Esc>`^
