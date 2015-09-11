@@ -90,11 +90,9 @@ $ sed -i -e s/\'NULL\'/NULL/ /tmp/<dumpfile>_param.txt
 $ split -l 10000 /tmp/<dumpfile>_param.txt /tmp/<dumpfile>_param_split.
 $ sed -i -e '1i INSERT INTO <Table1> VALUES' /tmp/<dumpfile>_param_split.*
 $ sed -i -e '$s/),/);/' /tmp/<dumpfile>_param_split.*
-
-#
-# この処理が未完成。方向性的には問題ないと思われる。
-#
-$ ls /tmp |grep <dumpfile>_param_split. | xargs mysql -u<Account> -h<Host> -p<Password> <DataBase>  < "$@"
+$ for f in <dumpfile>_param_split.* ; do
+    mysql -u<Account> -h<Host> -p<Password> <DataBase>  < $f
+done
 ```
 
 ## Import File
