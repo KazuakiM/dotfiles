@@ -35,6 +35,43 @@ I don't use "q" now.
 $ q 'SELECT c1, COUNT(*) AS count FROM ./<file.csv> WHERE c3 > 0 GROUP BY c1'
 ```
 
+### File merge
+
+vertical
+```bash
+$ cat file1.tsv
+1,neco
+3,cat
+2,nuko
+
+$ cat file2.tsv
+2,かわいい
+
+$ cat file1.tsv file2.tsv > file3.tsv
+$ cat file3.tsv
+1,neco
+3,cat
+2,nuko
+2,かわいい
+```
+
+horizontal
+```bash
+$ cat file1.tsv
+1,neco
+3,cat
+2,nuko
+
+$ cat file2.tsv
+2,かわいい
+
+$ paste file1.tsv file2.tsv > file3.tsv
+$ cat file3.tsv
+1,neco  2,かわいい
+3,cat   
+2,nuko  
+```
+
 ### File sort
 
 No make temporary file
