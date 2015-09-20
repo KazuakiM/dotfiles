@@ -388,7 +388,6 @@ I made Vagrantfile.
 > |                      |[Growl/GNTP](https://addons.mozilla.org/ja/firefox/addon/growlgntp/)                                  ||
 > |                      |[Hatena Bookmark](https://addons.mozilla.org/ja/firefox/addon/hatena-bookmark/)                       ||
 > |                      |[JSONView](https://addons.mozilla.org/ja/firefox/addon/jsonview/)                                     ||
-> |                      |[nclvauto](https://addons.mozilla.org/ja/firefox/addon/nclvauto/)                                     ||
 > |                      |[Quick Translator](https://addons.mozilla.org/ja/firefox/addon/quick-translator/)                     ||
 > |                      |[RESTClient](https://addons.mozilla.org/ja/firefox/addon/restclient/)                                 ||
 > |                      |[The Addon Bar(restored)](https://addons.mozilla.org/ja/firefox/addon/the-addon-bar/?src=hp-btn-promo)||
