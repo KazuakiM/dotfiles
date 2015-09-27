@@ -76,13 +76,6 @@ if has('iconv')
 endif
 "}}}
 
-function! s:KazuakiMMinimal() abort "{{{
-    setlocal noswapfile nobackup nowritebackup noundofile viminfo=
-    filetype off
-    filetype plugin indent off
-    syntax off
-endfunction "}}}
-
 function! s:KazuakiMAutoMkdir(dir) abort "{{{
     if !isdirectory(a:dir)
         call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
@@ -92,7 +85,7 @@ endfunction "}}}
 function! s:KazuakiMVimStart(backupDir, undoDir) abort "{{{
     "Check 256KB file size.
     if getfsize(expand('%:p')) >= 262144
-        call s:KazuakiMMinimal()
+        call kazuakim#Minimal()
         return 1
     endif
     call s:KazuakiMAutoMkdir(a:backupDir.s:date)
@@ -105,7 +98,7 @@ endfunction "}}}
 if has('vim_starting')
     "Check $HOME
     if s:envHome is# '/' || s:envHome is# 'C:\'
-        call s:KazuakiMMinimal()
+        call kazuakim#Minimal()
         echohl ErrorMsg
             echomsg '[WARNING]Would you check $HOME?'
         echohl None
@@ -188,12 +181,6 @@ function! s:KazuakiMBufReadPost() abort "{{{
     "}}}
 endfunction "}}}
 
-function! s:KazuakiMQuickfixCmdPost() abort "{{{
-    " qfixgrep {{{
-    let g:QFix_PreviewEnable = 1
-    "}}}
-endfunction "}}}
-
 function! s:KazuakiMVimEnter() abort "{{{
     call s:KazuakiMCheckString()
 endfunction "}}}
@@ -210,7 +197,7 @@ autocmd MyAutoCmd CmdwinLeave          * nunmap <ESC><ESC>
 autocmd MyAutoCmd FocusGained          * checktime
 autocmd MyAutoCmd InsertLeave          * set nopaste | if &l:diff | diffupdate | endif
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
-autocmd MyAutoCmd QuickfixCmdPost      * call s:KazuakiMQuickfixCmdPost()
+autocmd MyAutoCmd QuickfixCmdPost      * call kazuakim#QuickfixCmdPost()
 autocmd MyAutoCmd VimEnter             * call s:KazuakiMVimEnter()
 autocmd MyAutoCmd WinEnter             * call s:KazuakiMWinEnter()
 
@@ -397,8 +384,8 @@ endif
 " qfixgrep {{{
 let g:QFix_PreviewHeight = 20
 let g:QFixWin_EnableMode = 1
-nnoremap <expr><Leader>grek ':grep! '. expand('<cword>') .' '. KazuakiMPath2ProjectDirectory('%') .'<C-b><Right><Right><Right><Right><Right><Right>'
-nnoremap <expr><Leader>grel ':grep!  '. KazuakiMPath2ProjectDirectory('%') .'<C-b><Right><Right><Right><Right><Right><Right>'
+nnoremap <expr><Leader>grek ':grep! '. expand('<cword>') .' '. kazuakim#Path2ProjectDirectory('%') .'<C-b><Right><Right><Right><Right><Right><Right>'
+nnoremap <expr><Leader>grel ':grep!  '. kazuakim#Path2ProjectDirectory('%') .'<C-b><Right><Right><Right><Right><Right><Right>'
 "}}}
 " wildfire.vim {{{
 let g:wildfire_fuel_map  = '<Enter>'
@@ -430,12 +417,6 @@ let g:UltiSnipsJumpForwardTrigger          = '<TAB>'
 let g:UltiSnipsSnippetsDir                 = s:envHome .'/.vim/bundle/vim-snippets/UltiSnips'
 let g:UltiSnipsUsePythonVersion            = 2
 "}}}
-" vital.vim {{{
-function! KazuakiMPath2ProjectDirectory(path) abort "{{{
-    let s:Prelude = ! exists('s:Prelude') ? vital#of('vital').import('Prelude') : s:Prelude
-    return s:Prelude.path2project_directory(a:path)
-endfunction "}}}
-"}}}
 " indentLine {{{
 let g:indentLine_faster = 1
 "}}}
@@ -446,7 +427,7 @@ let g:indentLine_faster = 1
 " nerdtree {{{
 nnoremap <SID>[nerdtree] <Nop>
 nmap <Leader>n <SID>[nerdtree]
-nnoremap <expr><SID>[nerdtree]n ':NERDTree '. KazuakiMPath2ProjectDirectory('%') .'<CR>'
+nnoremap <expr><SID>[nerdtree]n ':NERDTree '. kazuakim#Path2ProjectDirectory('%') .'<CR>'
 nnoremap       <SID>[nerdtree]b :<C-u>NERDTree<CR>
 let g:NERDTreeBookmarksFile     = s:envHome .'/.vim/nerdtree/.NERDTreeBookmarks'
 let g:NERDTreeMinimalUI         = 1
@@ -481,7 +462,7 @@ nnoremap <SID>[unite] <Nop>
 nmap <Leader>u <SID>[unite]
 " default plugins
 nnoremap <silent> <SID>[unite]au  :<C-u>Unite<Space>output:autocmd<CR>
-nnoremap <silent> <SID>[unite]f   :<C-u>call<Space>KazuakiMUniteFileRecAsyncOrGit()<CR>
+nnoremap <silent> <SID>[unite]f   :<C-u>call<Space>kazuakim#UniteFileRecAsyncOrGit()<CR>
 nnoremap <silent> <SID>[unite]let :<C-u>Unite<Space>output:let<CR>
 nnoremap <silent> <SID>[unite]map :<C-u>Unite<Space>output:map\|map!\|lmap<CR>
 nnoremap <silent> <SID>[unite]msg :<C-u>Unite<Space>output:message<CR>
@@ -495,15 +476,6 @@ nnoremap <SID>[memolist] <Nop>
 nmap <Leader>m <SID>[memolist]
 nnoremap <SID>[memolist]n :<C-u>MemoNew<CR>
 nnoremap <SID>[memolist]l :<C-u>MemoList<CR>
-
-" http://qiita.com/yuku_t/items/9263e6d9105ba972aea8
-function! KazuakiMUniteFileRecAsyncOrGit() abort "{{{
-    if isdirectory(getcwd().'/.git')
-        Unite -default-action=tabopen file_rec/git
-    else
-        Unite -default-action=tabopen file_rec/async:!
-    endif
-endfunction "}}}
 
 let s:hooks = neobundle#get_hooks('unite.vim')
 function! s:hooks.on_source(bundle) abort "{{{
@@ -523,27 +495,8 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:memolist_unite_source         = 'file_rec'
 endfunction "}}}
 " codec follow
-nnoremap <Leader>jj         :<C-u>call<Space>KazuakiMTranslate('')<Left><Left>
-nnoremap <silent><Leader>jk :<C-u>call<Space>KazuakiMTranslate(expand('<cword>'))<CR>
-function! KazuakiMTranslate(text) abort "{{{
-    let s:HTTP = ! exists('s:HTTP') ? vital#of('vital').import('Web.HTTP') : s:HTTP
-    let s:JSON = ! exists('s:JSON') ? vital#of('vital').import('Web.JSON') : s:JSON
-    if match(a:text, '\w') is# -1
-        let l:options = {'sl': 'ja', 'tl': 'en'}
-    else
-        let l:options = {'sl': 'en', 'tl': 'ja'}
-    endif
-    let l:response = s:HTTP.post('http://translate.google.com/translate_a/t',
-    \    extend({'client': '0', 'q': a:text}, l:options),
-    \    {'User-Agent': 'Mozilla/5.0'})
-    if l:response.status is# 200
-        " qfixgrep {{{
-        let g:QFix_PreviewEnable = 0
-        "}}}
-        cgetexpr PrettyPrint(s:JSON.decode(l:response.content))
-        copen
-    endif
-endfunction "}}}
+nnoremap <Leader>jj         :<C-u>call<Space>kazuakim#Translate('')<Left><Left>
+nnoremap <silent><Leader>jk :<C-u>call<Space>kazuakim#Translate(expand('<cword>'))<CR>
 "}}}
 " vim-quickrun {{{
 NeoBundleLazy 'thinca/vim-quickrun', {'commands': 'QuickRun'}
@@ -809,19 +762,8 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe} setlocal filetype=xxd
 "
 "
 " Function {{{
-nnoremap <F1> :<C-u>call<Space>KazuakiMDatabaseSwitch()<CR>
+nnoremap <F1> :<C-u>call<Space>kazuakim#DatabaseSwitch()<CR>
 set pastetoggle=<F2>
-
-" Database Switch (.vimrc.local)
-function! KazuakiMDatabaseSwitch() abort "{{{
-    let b:databaseIndex = ! exists('b:databaseIndex') ? 0 : b:databaseIndex + 1
-    if len(g:KazuakiMDatabase) <= b:databaseIndex
-        let b:databaseIndex = 0
-    endif
-    let g:quickrun_config['sql/mysql']['cmdopt'] = g:KazuakiMDatabase[b:databaseIndex]
-    echo g:KazuakiMDatabase[b:databaseIndex]
-endfunction "}}}
-
 "}}}
 "
 "
