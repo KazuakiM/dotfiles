@@ -20,6 +20,14 @@ MySQL
  * [dotfiles my.cnf](https://github.com/yoku0825/dotfiles/blob/master/my.cnf)
  * [my_setup my.cnf](https://github.com/yoku0825/my_setup/blob/master/my.cnf)
 
+## Add plugin?
+
+* [semisync](https://dev.mysql.com/doc/refman/5.6/ja/replication-semisync-installation.html)
+* [HandlerSocket](https://github.com/DeNA/HandlerSocket-Plugin-for-MySQL)
+* [Mroonga](http://mroonga.org/ja/)
+* [Q4M](http://q4m.github.io/)
+* [InnoDB Memcached](http://dev.mysql.com/doc/refman/5.6/ja/innodb-memcached-setup.html)
+
 ## Slave/Master
 
 Slave or Master  
