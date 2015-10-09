@@ -75,11 +75,22 @@ $ awk -F '\t' '{print "INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES (
 $ sed -i -e s/\'NULL\'/NULL/ /tmp/<dumpFile>.sql
 ```
 
+CSV
+```bash
+$ mysql --skip-column-names -u<Account> -h<Host> -p <DataBase> -e "
+<SQL>
+" | sed -e 's/\t/,/g' > /tmp/<dumpFile>.csv
+
+$ sed -i -e '1d' /tmp/<dumpFile>.csv
+$ awk -F ',' '{print "INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES ("$1",\047"$2"\047,...);"}' /tmp/<dumpFile>.csv > /tmp/<dumpFile>.sql
+$ sed -i -e s/\'NULL\'/NULL/ /tmp/<dumpFile>.sql
+```
+
 CSV (Exist heder case)
 ```bash
 $ mysql -u<Account> -h<Host> -p <DataBase> -e "
 <SQL>
-INTO OUTFILE '/tmp/<dumpFile>.csv' FIELDS TERMINATED BY ',';
+INTO OUTFILE '/tmp/<dumpFile>.csv' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '';
 "
 
 $ sed -i -e '1d' /tmp/<dumpFile>.csv
