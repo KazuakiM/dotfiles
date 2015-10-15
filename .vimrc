@@ -365,7 +365,13 @@ let g:neobundle#log_filename          = s:envHome. '/.vim/neobundle.vim/neobundl
 "
 " NeoBundle {{{
 if neobundle#load_cache()
-    NeoBundle 'Shougo/vimproc.vim', {'build': {'mac': 'make -f make_mac.mak', 'unix': 'make -f make_unix.mak', 'cygwin': 'make -f make_cygwin.mak'}}
+    if s:osType !=# 'win'
+        NeoBundle 'Shougo/vimproc.vim', {'build': {'mac': 'make -f make_mac.mak', 'unix': 'make -f make_unix.mak', 'cygwin': 'make -f make_cygwin.mak'}}
+    else
+        "MEMO:ERROR
+        "http://www.kaoriya.net/news/2014/08/31/
+        "NeoBundle 'Shougo/vimproc.vim', {'rev': '74e53c1', 'build': {'mac': 'make -f make_mac.mak', 'unix': 'make -f make_unix.mak', 'cygwin': 'make -f make_cygwin.mak'}}
+    endif
     NeoBundle 'fuenor/qfixgrep'
     NeoBundle 'gcmt/wildfire.vim'
     NeoBundle 'KazuakiM/vim-qfstatusline'
