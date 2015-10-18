@@ -590,8 +590,8 @@ function! s:hooks.on_source(bundle) abort "{{{
 endfunction "}}}
 "}}}
 " previm {{{
-NeoBundleLazy 'kannokanno/previm', {'commands': 'PrevimOpen'}
-nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
+NeoBundleLazy 'kannokanno/previm', {'functions': 'previm#open'}
+nnoremap <silent> <Leader>pre :<C-u>call<Space>previm#open(previm#make_preview_file_path('index.html'))<CR>
 "}}}
 " vim-ref {{{
 NeoBundleLazy 'thinca/vim-ref', {'functions': 'ref#K'}
