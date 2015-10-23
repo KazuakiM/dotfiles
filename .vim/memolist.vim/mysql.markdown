@@ -218,6 +218,19 @@ ALTER TABLE <Table1> DROP PARTITION p201401, p201402;
 SHOW CREATE TABLE <Table1>;
 ```
 
+## Variable tips
+
+[Group columns row number](http://ja.stackoverflow.com/questions/11654/mysql%E3%81%AEsql%E3%81%AB%E3%81%A6%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E5%86%85%E3%81%A7%E9%80%A3%E7%95%AA%E3%82%92%E4%BB%98%E3%81%91%E3%81%9F%E3%81%84)
+```sql
+SET @seqno:=0;
+SET @id:=NULL;
+
+SELECT IF(@id <> <Tab1>.<Column>, @seqno:=1, @seqno:=@seqno+1) AS seqno,
+  @id:=<Tab1>.<Column> AS id
+FROM <Table1> AS <Tab1>
+ORDER BY <Tab1>.<Column> ASC;
+```
+
 ## INSERT
 
 (Bulk )All columns set
