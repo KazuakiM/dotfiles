@@ -63,49 +63,54 @@ KILL xxxx;
 ## TSV/CSV
 
 '\47' is SingleQuote.  
-$0 is all words. $1-N is separate words.
+$0 is all words. $1-N is separate words.  
+kazuakim_null isn't exist.
 
 TSV
 ```bash
 $ mysql --skip-column-names -u<Account> -h<Host> -p <DataBase> -e "
-<SQL>
+SELECT IFNULL(<Tab1>.<Column1>, 'kazuakim_null') AS Column1, IFNULL(<Tab1>.<Column2>, 'kazuakim_null') AS Column2
+FROM <Table1> AS <Tab1>
 " > /tmp/<dumpFile>.tsv
 
 $ awk -F '\t' '{print "INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES ("$1",\047"$2"\047,...);"}' /tmp/<dumpFile>.tsv > /tmp/<dumpFile>.sql
-$ sed -i -e s/\'NULL\'/NULL/ /tmp/<dumpFile>.sql
+$ sed -i -e s/\'kazuakim_null\'/NULL/ /tmp/<dumpFile>.sql
 ```
 
 CSV
 ```bash
 $ mysql --skip-column-names -u<Account> -h<Host> -p <DataBase> -e "
-<SQL>
+SELECT IFNULL(<Tab1>.<Column1>, 'kazuakim_null') AS Column1, IFNULL(<Tab1>.<Column2>, 'kazuakim_null') AS Column2
+FROM <Table1> AS <Tab1>
 " | sed -e 's/\t/,/g' > /tmp/<dumpFile>.csv
 
 $ sed -i -e '1d' /tmp/<dumpFile>.csv
 $ awk -F ',' '{print "INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES ("$1",\047"$2"\047,...);"}' /tmp/<dumpFile>.csv > /tmp/<dumpFile>.sql
-$ sed -i -e s/\'NULL\'/NULL/ /tmp/<dumpFile>.sql
+$ sed -i -e s/\'kazuakim_null\'/NULL/ /tmp/<dumpFile>.sql
 ```
 
 CSV (Exist heder case)
 ```bash
 $ mysql -u<Account> -h<Host> -p <DataBase> -e "
-<SQL>
+SELECT IFNULL(<Tab1>.<Column1>, 'kazuakim_null') AS Column1, IFNULL(<Tab1>.<Column2>, 'kazuakim_null') AS Column2
+FROM <Table1> AS <Tab1>
 INTO OUTFILE '/tmp/<dumpFile>.csv' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '';
 "
 
 $ sed -i -e '1d' /tmp/<dumpFile>.csv
 $ awk -F ',' '{print "INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES ("$1",\047"$2"\047,...);"}' /tmp/<dumpFile>.csv > /tmp/<dumpFile>.sql
-$ sed -i -e s/\'NULL\'/NULL/ /tmp/<dumpFile>.sql
+$ sed -i -e s/\'kazuakim_null\'/NULL/ /tmp/<dumpFile>.sql
 ```
 
 Big TSV
 ```bash
 $ mysql --skip-column-names -u<Account> -h<Host> -p <DataBase> -e "
-<SQL>
+SELECT IFNULL(<Tab1>.<Column1>, 'kazuakim_null') AS Column1, IFNULL(<Tab1>.<Column2>, 'kazuakim_null') AS Column2
+FROM <Table1> AS <Tab1>
 " > /tmp/<dumpFile>.tsv
 
 $ awk -F $"\t" '{print "(\47"$1"\47, "$2", \47"$3"\47),"}' /tmp/<dumpFile>.tsv > /tmp/<dumpfile>_param.txt
-$ sed -i -e s/\'NULL\'/NULL/ /tmp/<dumpfile>_param.txt
+$ sed -i -e s/\'kazuakim_null\'/NULL/ /tmp/<dumpfile>_param.txt
 $ split -l 10000 /tmp/<dumpfile>_param.txt /tmp/<dumpfile>_param_split.
 $ sed -i -e '1i INSERT INTO <Table1> VALUES' /tmp/<dumpfile>_param_split.*
 $ sed -i -e '$s/),/);/' /tmp/<dumpfile>_param_split.*
