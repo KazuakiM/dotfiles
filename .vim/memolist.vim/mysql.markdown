@@ -432,7 +432,7 @@ SHOW variables LIKE 'max_allowed_packet';
 
 DataBase
 ```sql
-CREATE DATABASE <DataBase1>, <DataBase2>;
+CREATE DATABASE <DataBase1>;
 ```
 
 Table  
