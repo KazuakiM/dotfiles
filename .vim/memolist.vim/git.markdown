@@ -34,6 +34,8 @@ gdiff master
 git rebase master
 
 git checkout master
+git merge xxxxx
+
 git push origin master
 ```
 
