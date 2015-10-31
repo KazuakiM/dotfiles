@@ -64,7 +64,10 @@ KILL xxxx;
 
 '\47' is SingleQuote.  
 $0 is all words. $1-N is separate words.  
-kazuakim_null isn't exist.
+Check kazuakim_null isn't exist.
+
+### Directly Import TSV/CSV file.
+Please check Import section.
 
 TSV
 ```bash
@@ -119,7 +122,7 @@ $ for f in <dumpfile>_param_split.* ; do
 done
 ```
 
-## Import File
+## Import
 
 CUI
 ```bash
@@ -142,6 +145,11 @@ SOURCE ./<dumpFile>
 
 
 COMMIT;
+```
+
+CSV([Required my.cnf setting](http://stackoverflow.com/questions/10762239/mysql-enable-load-data-local-infile))
+```sql
+LOAD DATA LOCAL INFILE '/tmp/<dumpFile>.csv' INTO TABLE <Table1> FIELDS TERMINATED BY ',' ENCLOSED BY '"' (<Column1>, <Column2>)
 ```
 
 ## Copy DataBase/Table
