@@ -696,6 +696,8 @@ Performance
 ```sql
 EXPLAIN
 SELECT ...
+
+SHOW WARNINGS;
 ```
 
 [Max/Min](http://nippondanji.blogspot.jp/2009/05/mysql.html) and [Storage Required Rule for MySQL5.7](http://dev.mysql.com/doc/refman/5.7/en/storage-requirements.html)
