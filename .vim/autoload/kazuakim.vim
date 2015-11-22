@@ -55,6 +55,16 @@ function! kazuakim#Translate(text) abort "{{{
 endfunction "}}}
 "}}}
 
+" gundo.vim {{{
+function! kazuakim#ClearUndo() abort "{{{
+    let s:oldUndolevels = &undolevels
+    set undolevels=-1
+    execute "normal a \<BS>\<Esc>"
+    let &undolevels = s:oldUndolevels
+    unlet s:oldUndolevels
+endfunction "}}}
+"}}}
+
 " Database Switch (.vimrc.local) "{{{
 function! kazuakim#DatabaseSwitch() abort "{{{
     let b:databaseIndex = ! exists('b:databaseIndex') ? 0 : b:databaseIndex + 1

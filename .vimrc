@@ -470,11 +470,8 @@ endif
 "
 " MEMO:If gVim for Windows italic fonts are deleted, I would move 'unite-highlight' to backup/.vimrc.
 "
-"MEMO:Unite for Windows check at Reading vimrc 2015-08-15!!!
-"call unite#custom#substitute('files', '[^~.* ]\ze/', '\0', -100)
-"call unite#custom#substitute('files', '/\ze[^~.* ]', '/', -100)
 NeoBundleLazy 'Shougo/unite.vim',           { 'commands': 'Unite'}
-NeoBundleLazy 'Shougo/unite-help',          { 'depends':  'Shougo/unite.vim', 'unite_sources':     'help'}
+NeoBundleLazy 'KazuakiM/unite-help',        { 'depends':  'Shougo/unite.vim', 'unite_sources':     'help'}
 NeoBundleLazy 'rhysd/unite-codic.vim',      { 'depends':  ['koron/codic-vim', 'Shougo/unite.vim'], 'unite_sources': 'codic'}
 NeoBundleLazy 'osyo-manga/unite-highlight', { 'depends':  'Shougo/unite.vim', 'unite_sources':     'highlight'}
 NeoBundleLazy 'glidenote/memolist.vim',     { 'commands': ['MemoNew',         'MemoList']}
@@ -505,6 +502,7 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:unite_source_grep_default_opts   = '--color=auto -i -I'
     let g:unite_source_grep_recursive_opt  = ''
     let g:unite_source_grep_max_candidates = 200
+    call unite#custom#source('help', 'ignore_pattern', 'in\ \(runtime\|vimdoc-ja\)')
 endfunction "}}}
 let s:hooks = neobundle#get_hooks('memolist.vim')
 function! s:hooks.on_source(bundle) abort "{{{
@@ -663,10 +661,10 @@ endfunction "}}}
 "}}}
 " gundo.vim {{{
 NeoBundleLazy 'sjl/gundo.vim', {'insert': 1}
+nnoremap cu :<C-u>call<Space>kazuakim#ClearUndo()<CR>
 let s:hooks = neobundle#get_hooks('gundo.vim')
 function! s:hooks.on_source(bundle) abort "{{{
     nnoremap u g-
-    nnoremap U :<C-u>GundoToggle<CR>
     nnoremap <C-r> g+
 endfunction "}}}
 "}}}
