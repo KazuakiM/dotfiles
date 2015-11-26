@@ -61,7 +61,7 @@ if has('iconv')
         let s:enc_jis = 'iso-2022-jp-3'
     endif
     if &encoding ==# 'utf-8'
-        let &fileencodings = s:enc_jis .','. s:enc_euc .','. &fileencodings .',cp932'
+        let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932,'. &fileencodings
     else
         let &fileencodings = &fileencodings .','. s:enc_jis
         set fileencodings+=utf-8,ucs-2le,ucs-2
