@@ -544,7 +544,7 @@ NeoBundleLazy 'vim-scripts/taglist.vim', {'commands': 'Tlist'}
 nnoremap <Leader>t :<C-u>Tlist<CR>
 let s:hooks = neobundle#get_hooks('taglist.vim')
 function! s:hooks.on_source(bundle) abort "{{{
-    let s:tlist_go_settings      = 'go;g:enum;s:struct;u:union;f:function;t:type;v:variable'
+    "let s:tlist_go_settings      = 'go;g:enum;s:struct;u:union;f:function;t:type;v:variable'
     let g:tlist_php_settings     = 'php;c:class;f:function;d:constant'
     let g:Tlist_Exit_OnlyWindow  = 1
     let g:Tlist_Show_One_File    = 1
@@ -634,6 +634,7 @@ NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['KazuakiM/vim-snippets', 'S
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle) abort "{{{
     "neocomplete.vim
+    autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     let g:neocomplete#auto_completion_start_length     = 3
     let g:neocomplete#data_directory                   = s:envHome .'/.vim/neocomplete.vim'
     let g:neocomplete#delimiter_patterns               = {'php': ['->', '::', '\']}
@@ -648,12 +649,15 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:neocomplete#max_keyword_width                = 30
     let g:neocomplete#max_list                         = 8
     let g:neocomplete#min_keyword_length               = 3
-    let g:neocomplete#sources                          = {'_': ['ultisnips', 'file', 'dictionary', 'buffer'], 'go': ['ultisnips', 'file', 'omni', 'buffer']}
+    let g:neocomplete#sources                          = {
+    \    '_':          ['ultisnips', 'file', 'buffer'],           'php': ['ultisnips', 'file', 'dictionary', 'buffer'],
+    \    'javascript': ['ultisnips', 'file', 'omni',    'buffer']}
+    "let g:neocomplete#sources                         = {'go': ['ultisnips', 'file', 'omni', 'buffer']}
     let g:neocomplete#sources#buffer#cache_limit_size  = 50000
     let g:neocomplete#sources#buffer#disabled_pattern  = '\.log\|\.jax'
     let g:neocomplete#sources#buffer#max_keyword_width = 30
     let g:neocomplete#sources#dictionary#dictionaries  = {'_': '', 'php': s:envHome .'/.vim/dict/php.dict'}
-    let g:neocomplete#sources#omni#input_patterns      = {'go': '\h\w\.\w*'}
+    "let g:neocomplete#sources#omni#input_patterns      = {'go': '\h\w\.\w*'}
     let g:neocomplete#use_vimproc                      = 1
 
     "neoinclude.vim
@@ -710,7 +714,7 @@ NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
 let g:vim_markdown_folding_disabled = 1
 "}}}
 " vim-go-extra {{{
-NeoBundleLazy 'vim-jp/vim-go-extra', {'filetypes': 'go'}
+"NeoBundleLazy 'vim-jp/vim-go-extra', {'filetypes': 'go'}
 "}}}
 "
 "
