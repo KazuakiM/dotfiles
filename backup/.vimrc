@@ -102,6 +102,19 @@ execute 'sign define '.get(g:qfsigns#Config,'name').' linehl=KazuakiMQFError tex
 "
 "
 " NeoBundleLazy {{{
+" vim-over {{{
+NeoBundleLazy 'osyo-manga/vim-over', {'commands': 'OverCommandLine'}
+nnoremap <expr><Leader>%s  ':OverCommandLine<CR>%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
+nnoremap <expr><Leader>%%s ':OverCommandLine<CR>%s/'.expand('<cword>').'//gc<Left><Left><Left>'
+let s:hooks = neobundle#get_hooks('vim-over')
+function! s:hooks.on_source(bundle) abort "{{{
+    let g:over#command_line#substitute#highlight_string = 'SpellCap'
+endfunction "}}}
+"}}}
+" incsearch.vim {{{
+NeoBundleLazy 'haya14busa/incsearch.vim', {'mappings': '<Plug>(incsearch-forward)'}
+nmap / <Plug>(incsearch-forward)
+"}}}
 " neosnippet-snippets
 " neosnippet.vim {{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['KazuakiM/neosnippet-snippets', 'Shougo/neosnippet.vim', 'Shougo/context_filetype.vim'], 'autoload': {'insert': 1}}
@@ -113,16 +126,6 @@ let g:neosnippet#data_directory           = $HOME.'/.vim/neosnippet.vim'
 let g:neosnippet#disable_runtime_snippets = {'_' : 1}
 let g:neosnippet#snippets_directory       = $HOME.'/.vim/bundle/neosnippet-snippets/neosnippets'
 "}}}
-" unite-tag {{{
-NeoBundleLazy 'tsukkee/unite-tag', {'depends': 'Shougo/unite.vim', 'unite_sources': 'tag'}
-nnoremap <silent> <SID>[unite]t :<C-u>Unite<Space>tag<CR>
-let s:hooks = neobundle#get_hooks('unite-tag')
-function! s:hooks.on_source(bundle)
-    let g:unite_source_tag_max_name_length  = 30
-    let g:unite_source_tag_max_fname_length = 128
-    let g:unite_source_tag_show_location    = 0
-endfunction
-"}}}
 " unite-webcolorname {{{
 NeoBundleLazy 'pasela/unite-webcolorname', {'depends': 'Shougo/unite.vim', 'unite_sources': 'webcolorname'}
 nnoremap <silent> <SID>[unite]web :<C-u>Unite<Space>webcolorname<CR>
@@ -130,13 +133,6 @@ nnoremap <silent> <SID>[unite]web :<C-u>Unite<Space>webcolorname<CR>
 " vim-editvar {{{
 NeoBundleLazy 'thinca/vim-editvar', 'depends': ['thinca/vim-prettyprint', 'Shougo/unite.vim'], 'unite_sources': 'variable'}
 nnoremap <silent> <SID>[unite]v   :<C-u>Unite<Space>-auto-preview<Space>variable<CR>
-"}}}
-" vim-hier {{{
-NeoBundleLazy 'jceb/vim-hier', {'commands' : 'HierUpdate'}
-" .vim/after/ftplugin/qf.vim
-augroup Hier
-    autocmd!
-augroup END
 "}}}
 " jazzradio.vim {{{
 NeoBundleLazy 'supermomonga/jazzradio.vim', {'unite_sources': 'jazzradio', 'commands': ['JazzradioUpdateChannels', 'JazzradioPlay']}
@@ -170,34 +166,6 @@ function! s:hooks.on_source(bundle)
     let g:vimshell_data_directory = $HOME.'/.vim/vimshell.vim/cache'
     let g:vimshell_vimshrc_path   = $HOME.'/.vim/vimshell.vim/vimshrc/.vimshrc'
 endfunction
-"}}}
-" emmet-vim {{{
-"# command memo
-"* URL: http://docs.emmet.io/cheat-sheet/
-"* <C+y>,  :execute trigger key
-"* html:5 <=入力後に<C+y>,
-"* div>ul>li.class#id_$$*5 <=入力後に<C+y>,
-NeoBundleLazy 'mattn/emmet-vim', {'filetypes': ['html', 'php', 'css', 'sass', 'scss', 'less']}
-let s:hooks = neobundle#get_hooks('emmet-vim')
-function! s:hooks.on_source(bundle)
-    let g:user_emmet_settings = {
-    \    'lang':        'ja',
-    \    'indentation': '    ',
-    \    'html':        {'filters': 'html'},
-    \    'css':         {'filters': 'fc'},
-    \    'php':         {
-    \        'filters': 'html',
-    \        'extends': 'html'}}
-    let g:user_emmet_mode        = 'a'
-    let g:use_emmet_complete_tag = 1
-    "let g:user_emmet_leader_key=''
-endfunction
-"}}}
-" vim-css3-syntax {{{
-NeoBundleLazy 'hail2u/vim-css3-syntax', {'filetypes': ['html', 'php', 'css', 'sass', 'scss', 'less']}
-"}}}
-" vim-javascript {{{
-NeoBundleLazy 'pangloss/vim-javascript', {'filetypes': ['html', 'php', 'javascript']}
 "}}}
 " sass-compile.vim {{{
 NeoBundleLazy 'AtsushiM/sass-compile.vim', {'filetypes': ['sass', 'scss']}

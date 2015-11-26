@@ -302,6 +302,8 @@ inoremap <silent><expr><C-v> '<ESC>:set<Space>paste<CR><Insert><Right><C-r>+<ESC
 cnoremap <M-v> <C-R><C-O>*
 "  Replace
 nnoremap R gR
+nnoremap <expr><Leader>%s  ':%s/'. expand('<cword>') .'/'. expand('<cword>') .'/gc<Left><Left><Left>'
+nnoremap <expr><Leader>%%s ':%s/'. expand('<cword>') .'//gc<Left><Left><Left>'
 "  Search
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
@@ -681,6 +683,28 @@ function! s:hooks.on_source(bundle) abort "{{{
 endfunction "}}}
 unlet s:hooks
 "}}}
+" emmet-vim {{{
+"
+" MEMO
+" * URL: http://docs.emmet.io/cheat-sheet/
+" * <C+y>,  :execute trigger key
+" * html:5 <=入力後に<C+y>,
+" * div>ul>li.class#id_$$*5 <=入力後に<C+y>,
+NeoBundleLazy 'mattn/emmet-vim', {'filetypes': ['html', 'php']}
+let s:hooks = neobundle#get_hooks('emmet-vim')
+function! s:hooks.on_source(bundle)
+    let g:use_emmet_complete_tag = 1
+    let g:user_emmet_settings    = {'lang': 'ja', 'indentation': '    ', 'html': {'filters': 'html'}}
+    let g:user_emmet_mode        = 'a'
+    "let g:user_emmet_leader_key = ''
+endfunction
+"}}}
+" vim-css3-syntax {{{
+NeoBundleLazy 'hail2u/vim-css3-syntax', {'filetypes': ['html', 'php', 'css']}
+"}}}
+" vim-javascript {{{
+NeoBundleLazy 'pangloss/vim-javascript', {'filetypes': ['html', 'php', 'javascript']}
+"}}}
 " vim-markdown {{{
 NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
 let g:vim_markdown_folding_disabled = 1
@@ -688,21 +712,6 @@ let g:vim_markdown_folding_disabled = 1
 " vim-go-extra {{{
 NeoBundleLazy 'vim-jp/vim-go-extra', {'filetypes': 'go'}
 "}}}
-"" vim-over {{{
-"NeoBundleLazy 'osyo-manga/vim-over', {'commands': 'OverCommandLine'}
-"nnoremap <expr><Leader>%s  ':OverCommandLine<CR>%s/'.expand('<cword>').'/'.expand('<cword>').'/gc<Left><Left><Left>'
-"nnoremap <expr><Leader>%%s ':OverCommandLine<CR>%s/'.expand('<cword>').'//gc<Left><Left><Left>'
-"let s:hooks = neobundle#get_hooks('vim-over')
-"function! s:hooks.on_source(bundle) abort "{{{
-"    let g:over#command_line#substitute#highlight_string = 'SpellCap'
-"endfunction "}}}
-""}}}
-"" incsearch.vim {{{
-"NeoBundleLazy 'haya14busa/incsearch.vim', {'mappings': '<Plug>(incsearch-forward)'}
-"nmap / <Plug>(incsearch-forward)
-""}}}
-nnoremap <expr><Leader>%s  ':%s/'. expand('<cword>') .'/'. expand('<cword>') .'/gc<Left><Left><Left>'
-nnoremap <expr><Leader>%%s ':%s/'. expand('<cword>') .'//gc<Left><Left><Left>'
 "
 "
 " Exclusive {{{
@@ -782,6 +791,7 @@ autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe} setlocal filetype=xxd
 " Function {{{
 nnoremap <F1> :<C-u>call<Space>kazuakim#DatabaseSwitch()<CR>
 set pastetoggle=<F2>
+nnoremap <F3> :<C-u>edit++enc=utf-8<CR>
 "}}}
 "
 "
