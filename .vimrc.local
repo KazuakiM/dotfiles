@@ -6,6 +6,7 @@
 
 "tags {{{
 "autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*.php          setlocal tags=$HOME/.vim/tags/sample.tags,$HOME/.vim/tags/composer.tags
+"autocmd MyAutoCmd BufNewFile,BufRead $HOME/huga/*.js             setlocal tags=$HOME/.vim/tags/huga.tags
 "autocmd MyAutoCmd BufNewFile,BufRead C:/usr/local/src/hoge/*.php setlocal tags=$HOME/.vim/tags/hoge.tags
 "}}}
 

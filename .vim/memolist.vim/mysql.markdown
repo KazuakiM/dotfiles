@@ -576,6 +576,11 @@ UTC+9(Japanese timezone)
 SELECT DATE_ADD(NOW(), INTERVAL 9 hour);
 ```
 
+Char date
+```sql
+SELECT CAST(CONCAT(<Column1>, '000000') AS DATE) FROM <Table1>;
+```
+
 DATE_FORMAT
 ```sql
 SELECT DATE_FORMAT(<Column1>, '%Y-%m-%d');

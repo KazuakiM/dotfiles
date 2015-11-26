@@ -1,6 +1,5 @@
 --exclude=.git
 --exclude=.svn
---exclude=*.js
 --recurse=yes
 --sort=yes
 --langdef=Go
@@ -8,6 +7,14 @@
 --regex-Go=/func([ \t]+\([^)]+\))?[ \t]+([\w]+)/\2/f,func/
 --regex-Go=/type[ \t]+([\l\u_][\w]+)/\1/t,type/
 --regex-Go=/var[ \t]+([\l\u_][\w]+)/\1/v,var/
+--langdef=js
+--langmap=js:.js.json
+--regex-js=/([A-Za-z0-9._$]+)[ \t]*[:=][ \t]*\{/\1/,object/
+--regex-js=/([A-Za-z0-9._$()]+)[ \t]*[:=][ \t]*function[ \t]*\(/\1/,function/
+--regex-js=/function[ \t]+([A-Za-z0-9._$]+)[ \t]*([^)])/\1/,function/
+--regex-js=/([A-Za-z0-9._$]+)[ \t]*[:=][ \t]*\[/\1/,array/
+--regex-js=/([^= ]+)[ \t]*=[ \t]*[^"]'[^']*/\1/,string/
+--regex-js=/([^= ]+)[ \t]*=[ \t]*[^']"[^"]*/\1/,string/
 --langmap=PHP:+.inc.tpl
 --regex-PHP=/const\s+([^ \t=]+)/\1/d/
 --php-kinds=cfd
