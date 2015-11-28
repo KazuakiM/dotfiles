@@ -692,8 +692,8 @@ unlet s:hooks
 " MEMO
 " * URL: http://docs.emmet.io/cheat-sheet/
 " * <C+y>,  :execute trigger key
-" * html:5 <=入力後に<C+y>,
-" * div>ul>li.class#id_$$*5 <=入力後に<C+y>,
+" * html:5  && <C+y>,
+" * div>ul>li.class#id_$$*5  && <C+y>,
 NeoBundleLazy 'mattn/emmet-vim', {'filetypes': ['html', 'php']}
 let s:hooks = neobundle#get_hooks('emmet-vim')
 function! s:hooks.on_source(bundle)
@@ -793,6 +793,7 @@ autocmd MyAutoCmd BufNewFile,BufRead *.coffee    setlocal filetype=coffee
 autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}   setlocal filetype=snippets
 autocmd MyAutoCmd BufNewFile,BufRead *.{vim*}    setlocal filetype=vim
 autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe} setlocal filetype=xxd
+autocmd MyAutoCmd FileType html,js,php,xml syntax sync minlines=500 maxlines=2000
 "}}}
 "
 "
