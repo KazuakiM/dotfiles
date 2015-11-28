@@ -698,7 +698,11 @@ NeoBundleLazy 'mattn/emmet-vim', {'filetypes': ['html', 'php']}
 let s:hooks = neobundle#get_hooks('emmet-vim')
 function! s:hooks.on_source(bundle)
     let g:use_emmet_complete_tag = 1
-    let g:user_emmet_settings    = {'lang': 'ja', 'indentation': '    ', 'html': {'filters': 'html'}}
+    let g:user_emmet_settings    = {
+    \    'variables': {'lang': 'ja', 'default_attributes': {
+    \        'a': {'href': ''}, 'link': [{'rel': 'stylesheet'}, {'href': ''}]}},
+    \    'html': {'filters': 'html', 'indentation': '    '},
+    \    'php' : {'extends': 'html', 'filters':     'html,c'}}
     let g:user_emmet_mode        = 'a'
     "let g:user_emmet_leader_key = ''
 endfunction
