@@ -615,7 +615,7 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:php_cs_fixer_config                 = 'default'
     let g:php_cs_fixer_dry_run                = 0
     let g:php_cs_fixer_enable_default_mapping = 0
-    let g:php_cs_fixer_fixers_list            = 'align_equals,align_double_arrow'
+    let g:php_cs_fixer_fixers_list            = 'align_equals,align_double_arrow,concat_with_spaces'
     "MEMO: view file editting case.
     "let g:php_cs_fixer_fixers_list           = 'align_equals,align_double_arrow,-braces'
     let g:php_cs_fixer_level                  = 'symfony'
