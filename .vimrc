@@ -327,6 +327,8 @@ vnoremap <C-w> "ay
 vnoremap <C-e> "by
 nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
 " Wildmenu
+cnoremap <Up>    <C-d>
+cnoremap <Down>  <C-d>
 cnoremap <Left>  <Space><BS><Left>
 cnoremap <Right> <Space><BS><Right>
 " Special word
