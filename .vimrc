@@ -716,7 +716,7 @@ NeoBundleLazy 'hail2u/vim-css3-syntax', {'filetypes': ['html', 'php', 'css']}
 NeoBundleLazy 'pangloss/vim-javascript', {'filetypes': ['html', 'php', 'javascript']}
 "}}}
 " vim-markdown {{{
-NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'mkd'}
+NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'markdown'}
 let g:vim_markdown_folding_disabled = 1
 "}}}
 " vim-go-extra {{{
