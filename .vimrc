@@ -160,7 +160,7 @@ function! s:KazuakiMBufEnter() abort "{{{
     endif
 
     " Forcibly update
-    set ambiwidth=double formatoptions-=c formatoptions-=b formatoptions-=t formatoptions-=v textwidth=0
+    set ambiwidth=double formatoptions-=c formatoptions-=b formatoptions+=j formatoptions-=t formatoptions-=v textwidth=0
 
     " Set StatusLine
     if &fileencoding is# 'utf-8'
@@ -245,7 +245,7 @@ set laststatus=2 lazyredraw
 set matchpairs+=<:> matchtime=1 mouse=
 set nobomb noequalalways noerrorbells nogdefault noimcmdline noimdisable noruler noswapfile number
 set pumheight=8
-set scrolloff=999 shellslash shiftwidth=4 shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4
+set scrolloff=999 shellslash shiftwidth=4 shortmess+=a shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4
 set tabline=%!KazuakiMTabLineUpdate() tabstop=4 title titleold= titlestring=%F ttyfast t_vb=
 set undofile updatecount=30 updatetime=1000
 set viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo virtualedit+=block visualbell
@@ -327,8 +327,6 @@ vnoremap <C-w> "ay
 vnoremap <C-e> "by
 nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
 " Wildmenu
-cnoremap <Up>    <C-d>
-cnoremap <Down>  <C-d>
 cnoremap <Left>  <Space><BS><Left>
 cnoremap <Right> <Space><BS><Right>
 " Special word
