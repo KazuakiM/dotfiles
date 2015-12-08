@@ -793,7 +793,7 @@ autocmd MyAutoCmd BufNewFile,BufRead *.coffee    setlocal filetype=coffee
 autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}   setlocal filetype=snippets
 autocmd MyAutoCmd BufNewFile,BufRead *.{vim*}    setlocal filetype=vim
 autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe} setlocal filetype=xxd
-autocmd MyAutoCmd FileType html,js,php,xml syntax sync minlines=500 maxlines=2000
+autocmd MyAutoCmd FileType html,js,php,xml syntax sync minlines=2000
 "}}}
 "
 "
