@@ -468,6 +468,11 @@ Table
 DROP TABLE <Table1>, <Table2>;
 ```
 
+IF Table exists
+```sql
+DROP TABLE IF EXISTS <Table1> CASCADE;
+```
+
 DataBase
 ```sql
 DROP DATABASE <DataBase1>, <DataBase2>;
