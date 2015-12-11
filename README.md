@@ -310,9 +310,32 @@ I made Vagrantfile.
 
 ## Windows
 
+### CMD
+
+```
+mkdir C:\usr\local\bin
+```
+
 ### Install packages
 
-> Cygwin
+> [Cygwin](https://cygwin.com/install.html)
+>  * tar
+>  * gnupg
+>  * gawk
+>  * wget
+> [Executor](http://executor.dk/)
+> [FireFox](https://www.mozilla.org/ja/firefox/new/)
+> [Chrome](https://www.google.co.jp/chrome/browser/desktop/index.html)
+> [Kaoriya-Vim](http://www.kaoriya.net/software/vim/)
+> [Wireshark](https://www.wireshark.org/download.html)
+> [Sizer](http://www.brianapps.net/sizer/)
+> [WinMerge](http://www.geocities.co.jp/SiliconValley-SanJose/8165/winmerge.html)
+> [JSONViewer](http://jsonviewer.codeplex.com/)
+> [X-Finder](http://www.vector.co.jp/soft/win95/util/se320392.html)
+> [SQLFix](http://www.vector.co.jp/soft/dl/win95/business/se266921.html)
+> [XMLFix](http://www.vector.co.jp/soft/dl/winnt/net/se342840.html)
+> [Poderosa](https://osdn.jp/projects/sfnet_poderosa/)
+> [FileZilla](https://osdn.jp/projects/filezilla/)
 
 ### Set environment variables
 
@@ -322,7 +345,14 @@ I made Vagrantfile.
 
 ### Operate Cygwin
 
+TODO:wgetオプションの確認  
+TODO:apt-cygのインストール状況を確認'apt-cyg show'
 > ```bash
+> $ cd /usr/local/bin/
+> $ wget https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg
+> $ chmod 0755 /usr/local/bin/apt-cyg
+> $ apt-cyg update
+> $ apt-cyg install make gcc-core gcc-g++ git ......
 > $ cd $HOME/..
 > $ tar zcvf <Account>.tar.gz <Account>
 > $ mv <Account>.tar.gz /tmp
