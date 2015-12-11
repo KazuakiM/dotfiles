@@ -318,24 +318,24 @@ mkdir C:\usr\local\bin
 
 ### Install packages
 
-> [Cygwin](https://cygwin.com/install.html)
+> * [Cygwin](https://cygwin.com/install.html)
 >  * tar
 >  * gnupg
 >  * gawk
 >  * wget
-> [Executor](http://executor.dk/)
-> [FireFox](https://www.mozilla.org/ja/firefox/new/)
-> [Chrome](https://www.google.co.jp/chrome/browser/desktop/index.html)
-> [Kaoriya-Vim](http://www.kaoriya.net/software/vim/)
-> [Wireshark](https://www.wireshark.org/download.html)
-> [Sizer](http://www.brianapps.net/sizer/)
-> [WinMerge](http://www.geocities.co.jp/SiliconValley-SanJose/8165/winmerge.html)
-> [JSONViewer](http://jsonviewer.codeplex.com/)
-> [X-Finder](http://www.vector.co.jp/soft/win95/util/se320392.html)
-> [SQLFix](http://www.vector.co.jp/soft/dl/win95/business/se266921.html)
-> [XMLFix](http://www.vector.co.jp/soft/dl/winnt/net/se342840.html)
-> [Poderosa](https://osdn.jp/projects/sfnet_poderosa/)
-> [FileZilla](https://osdn.jp/projects/filezilla/)
+> * [Executor](http://executor.dk/)
+> * [FireFox](https://www.mozilla.org/ja/firefox/new/)
+> * [Chrome](https://www.google.co.jp/chrome/browser/desktop/index.html)
+> * [Kaoriya-Vim](http://www.kaoriya.net/software/vim/)
+> * [Wireshark](https://www.wireshark.org/download.html)
+> * [Sizer](http://www.brianapps.net/sizer/)
+> * [WinMerge](http://www.geocities.co.jp/SiliconValley-SanJose/8165/winmerge.html)
+> * [JSONViewer](http://jsonviewer.codeplex.com/)
+> * [X-Finder](http://www.vector.co.jp/soft/win95/util/se320392.html)
+> * [SQLFix](http://www.vector.co.jp/soft/dl/win95/business/se266921.html)
+> * [XMLFix](http://www.vector.co.jp/soft/dl/winnt/net/se342840.html)
+> * [Poderosa](https://osdn.jp/projects/sfnet_poderosa/)
+> * [FileZilla](https://osdn.jp/projects/filezilla/)
 
 ### Set environment variables
 
