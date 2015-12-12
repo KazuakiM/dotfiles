@@ -271,6 +271,7 @@ $ cp -f  $HOME/work/dotfiles/.vimrc.local         $HOME/
 $ ln -sf $HOME/work/dotfiles/.w3m                 $HOME/.w3m
 $ ln -sf $HOME/work/dotfiles/lib/Vagrant          /srv/vagrant
 $ git clone https://github.com/Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
+$ ssh-keygen -t rsa
 $ wget http://jp2.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp/php_manual_ja.tar.gz
 $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
 $ wget http://get.sensiolabs.org/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
@@ -358,6 +359,7 @@ TODO:apt-cygのインストール状況を確認'apt-cyg show'
 > $ rm -rf <Account>
 > $ git clone https://github.com/KazuakiM/dotfiles.git <Account>
 > $ git clone https://github.com/Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
+> $ ssh-keygen -t rsa
 > $ cp -f $HOME/.gitconfig.org       $HOME/.gitconfig
 > $ cp -f $HOME/.gitconfig.local.org $HOME/.gitconfig.local
 >  Update local setting.
