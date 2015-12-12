@@ -348,11 +348,10 @@ mkdir C:\usr\local\bin
 TODO:wgetオプションの確認  
 TODO:apt-cygのインストール状況を確認'apt-cyg show'
 > ```bash
-> $ cd /usr/local/bin/
-> $ wget https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg
+> $ wget https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg -O /usr/local/bin
 > $ chmod 0755 /usr/local/bin/apt-cyg
-> $ apt-cyg update
-> $ apt-cyg install make gcc-core gcc-g++ git ......
+> $ wget https://raw.githubusercontent.com/KazuakiM/dotfiles/master/lib/Cygwin/aptCyg.sh -O /tmp
+> $ sh /tmp/aptCyg.sh
 > $ cd $HOME/..
 > $ tar zcvf <Account>.tar.gz <Account>
 > $ mv <Account>.tar.gz /tmp
