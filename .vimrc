@@ -127,7 +127,7 @@ endfunction "}}}
 
 function! s:KazuakiMBufEnter() abort "{{{
     " Auto close VimDiff or primary NERDTree
-    if winnr('$') is# 1 && (&l:diff || (exists('b:NERDTreeType') && b:NERDTreeType ==# 'primary'))
+    if winnr('$') is# 1 && (&l:diff || (exists('b:NERDTree') && b:NERDTree.isTabTree()))
         quit
 
     " Duplicate ban
