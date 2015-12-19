@@ -33,8 +33,9 @@
 "
 "
 " Variables {{{
-let s:envHome = ! exists('s:envHome') ? $HOME                                 : s:envHome
-let s:date    = ! exists('s:date')    ? strftime('%Y%m%d%H%M%S', localtime()) : s:date
+let s:envHome    = ! exists('s:envHome')    ? $HOME                                 : s:envHome
+let s:date       = ! exists('s:date')       ? strftime('%Y%m%d%H%M%S', localtime()) : s:date
+let s:lineUpdate = ! exists('s:lineUpdate') ? 0                                     : s:lineUpdate
 "}}}
 "
 "
@@ -98,15 +99,6 @@ function! s:KazuakiMVimStart(backupDir, undoDir) abort "{{{
 endfunction "}}}
 
 if has('vim_starting')
-    "Check $HOME
-    if s:envHome is# '/' || s:envHome is# 'C:\'
-        call kazuakim#Minimal()
-        echohl ErrorMsg
-            echomsg '[WARNING]Would you check $HOME?'
-        echohl None
-        finish
-    endif
-
     if has('win32') || has ('win64')
         if s:KazuakiMVimStart('C:\temp\backup\', 'C:\temp\undo\')
             finish
@@ -204,7 +196,17 @@ autocmd MyAutoCmd VimEnter             * call s:KazuakiMVimEnter()
 autocmd MyAutoCmd WinEnter             * call s:KazuakiMWinEnter()
 
 function! KazuakiMStatuslineSyntax() abort "{{{
-    return qfstatusline#Update()
+    let l:ret = qfstatusline#Update()
+    if 0 < len(l:ret)
+        if s:lineUpdate is# 0
+            highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta guibg=Magenta
+            let s:lineUpdate = 1
+        endif
+    elseif s:lineUpdate is# 1
+        highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Grey guibg=Grey
+        let s:lineUpdate = 0
+    endif
+    return l:ret
 endfunction "}}}
 
 function! KazuakiMStatuslinePaste() abort "{{{
@@ -371,7 +373,7 @@ nnoremap <SID>[vim]c :<C-u>IndentLinesEnable<CR>
 "
 "
 " NeoBundle START {{{
-call neobundle#begin(expand('$HOME/.vim/bundle/'))
+call neobundle#begin(expand(s:envHome . '/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 let g:neobundle#cache_file            = s:envHome. '/.vim/neobundle.vim/cache'
 let g:neobundle#install_max_processes = 3
