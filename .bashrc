@@ -82,7 +82,7 @@ case "${OSTYPE}" in
         alias composer='php -d memory_limit=1G /usr/local/opt/composer/libexec/composer.phar'
         alias HTTPD='sudo apachectl'
         alias MYSQL='mysql.server'
-        alias sqlfix="cd $HOME/.vim/bundle/vim-sqlfix/ && $HOME/.vim/bundle/vim-themis/bin/themis tests/sqlfix.vimspec -r --reporter dot"
+        alias sqlfix="cd $HOME/.vim/bundle/vim-sqlfix_4716dd7/ && $HOME/.vim/bundle/vim-themis/bin/themis tests/sqlfix.vimspec -r --reporter dot"
         #alias dev="sh $HOME/work/dotfiles/src/virutalBoxManageForMac.sh devmabu"
         #alias mabu="ssh -l mabulog -p 2222 localhost"
         if type htop >/dev/null 2>&1; then

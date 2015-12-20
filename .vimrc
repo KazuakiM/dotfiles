@@ -587,7 +587,7 @@ function! s:hooks.on_source(bundle) abort "{{{
 endfunction "}}}
 "}}}
 " vim-sqlfix {{{
-NeoBundleLazy 'KazuakiM/vim-sqlfix', {'commands': 'Sqlfix'}
+NeoBundleLazy 'KazuakiM/vim-sqlfix', {'rev' : '4716dd7', 'commands': 'Sqlfix'}
 let s:hooks = neobundle#get_hooks('vim-sqlfix')
 function! s:hooks.on_source(bundle) abort "{{{
     let g:sqlfix#Config = {'direcotry_path': s:envHome .'/.vim/vim-sqlfix'}
