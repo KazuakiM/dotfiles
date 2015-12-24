@@ -351,17 +351,23 @@ let g:omni_sql_no_default_maps    = 1
 "MEMO:This setting is cool at reading vimrc 2015-09-20. But fenced sytantx unfunctions.
 "let g:markdown_fenced_languages = ['c', 'cpp', 'cs', 'css', 'go', 'html', 'javascript', 'json', 'lua', 'mysql', 'php', 'python', 'ruby', 'vim', 'xml']
 " disable plugin
-let g:loaded_2html_plugin     = 1 "$VIMRUNTIME/plugin/tohtml.vim
-let g:loaded_getscriptPlugin  = 1 "$VIMRUNTIME/plugin/getscriptPlugin.vim
-let g:loaded_gzip             = 1 "$VIMRUNTIME/plugin/gzip.vim
-let g:loaded_matchparen       = 1 "$VIMRUNTIME/plugin/matchparen.vim
-let g:loaded_netrwPlugin      = 1 "$VIMRUNTIME/plugin/netrwPlugin.vim
-let g:loaded_spellfile_plugin = 1 "$VIMRUNTIME/plugin/spellfile.vim
-let g:loaded_sql_completion   = 1 "$VIMRUNTIME/autoload/sqlcomplete.vim
-let g:loaded_tarPlugin        = 1 "$VIMRUNTIME/plugin/tarPlugin.vim
-let g:loaded_vimballPlugin    = 1 "$VIMRUNTIME/plugin/vimballPlugin.vim
-let g:loaded_zipPlugin        = 1 "$VIMRUNTIME/plugin/zipPlugin.vim
-let g:vimsyn_embed            = 1 "$VIMRUNTIME/syntax/vim.vim
+let g:loaded_2html_plugin      = 1 "$VIMRUNTIME/plugin/tohtml.vim
+let g:loaded_getscriptPlugin   = 1 "$VIMRUNTIME/plugin/getscriptPlugin.vim
+let g:loaded_gzip              = 1 "$VIMRUNTIME/plugin/gzip.vim
+let g:loaded_matchparen        = 1 "$VIMRUNTIME/plugin/matchparen.vim
+let g:loaded_netrw             = 1 "$VIMRUNTIME/autoload/netrw.vim
+let g:loaded_netrwFileHandlers = 1 "$VIMRUNTIME/autoload/netrwFileHandlers.vim
+let g:loaded_netrwPlugin       = 1 "$VIMRUNTIME/plugin/netrwPlugin.vim
+let g:loaded_netrwSettings     = 1 "$VIMRUNTIME/autoload/netrwSettings.vim
+let g:loaded_spellfile_plugin  = 1 "$VIMRUNTIME/plugin/spellfile.vim
+let g:loaded_sql_completion    = 1 "$VIMRUNTIME/autoload/sqlcomplete.vim
+let g:loaded_tar               = 1 "$VIMRUNTIME/autoload/tar.vim
+let g:loaded_tarPlugin         = 1 "$VIMRUNTIME/plugin/tarPlugin.vim
+let g:loaded_vimball           = 1 "$VIMRUNTIME/autoload/vimball.vim
+let g:loaded_vimballPlugin     = 1 "$VIMRUNTIME/plugin/vimballPlugin.vim
+let g:loaded_zip               = 1 "$VIMRUNTIME/autoload/zip.vim
+let g:loaded_zipPlugin         = 1 "$VIMRUNTIME/plugin/zipPlugin.vim
+let g:vimsyn_embed             = 1 "$VIMRUNTIME/syntax/vim.vim
 " Vim
 nnoremap <SID>[vim] <Nop>
 nmap <Leader>f <SID>[vim]
