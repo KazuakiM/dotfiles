@@ -14,6 +14,7 @@ clear
 #}}}
 #Common {{{
 shopt -s cdspell
+export HISTFILE='/var/log/bash_history'
 alias cl='clear'
 alias lc='clear'
 alias cp='cp -i -p'
@@ -22,6 +23,8 @@ alias h='history'
 alias mv='mv -i'
 alias rm='rm -i'
 alias tree='tree -af'
+#}}}
+#find {{{
 findIgnore=''
 findIgnore=${findIgnore}'    -type d -iname ".git"     -prune'
 findIgnore=${findIgnore}' -o -type d -iname ".svn"     -prune'
@@ -30,19 +33,31 @@ findIgnore=${findIgnore}' -o -type f -iname "*.json"   -prune'
 findIgnore=${findIgnore}' -o -type f -iname "*min.js"  -prune'
 findIgnore=${findIgnore}' -o -type f -iname "*min.css" -prune'
 alias FIND='find ./ '${findIgnore}' -o -type f -print0 | xargs -0 grep --color -i -I -n "$@"'
+#}}}
+#diff {{{
 if type colordiff >/dev/null 2>&1; then
     alias diff='colordiff -u'
 else
     alias diff='diff -u'
 fi
+#}}}
+#grep {{{
 export GREP_OPTIONS='--color=auto -i -I'
 export GREP_COLOR='1;33'
 alias grep="grep $GREP_OPTIONS"
 unset GREP_OPTIONS
+#}}}
+#xml {{{
 export XMLLINT_INDENT='    '
 #}}}
-# Less {{{
+#history {{{
+export HISTCONTROL=erasedups
+export HISTSIZE=2000
+export HISTTIMEFORMAT='%F %T '
+#}}}
+#less {{{
 export LESS='-R --no-init'
+export LESSHISTFILE='/var/log/lesshst'
 man() {
     env \
         LESS_TERMCAP_mb=$(printf "\e[1;31m") \
@@ -66,6 +81,9 @@ if type tmux >/dev/null 2>&1; then
     alias tma2='tmux attach -d -t 2'
 fi
 #}}}
+#MySQL {{{
+export MYSQL_HISTFILE='/var/log/mysql_history'
+#}}}
 #OS Type {{{
 case "${OSTYPE}" in
     darwin*)
@@ -83,8 +101,6 @@ case "${OSTYPE}" in
         alias HTTPD='sudo apachectl'
         alias MYSQL='mysql.server'
         alias sqlfix="cd $HOME/.vim/bundle/vim-sqlfix/ && $HOME/.vim/bundle/vim-themis/bin/themis tests/sqlfix.vimspec -r --reporter dot"
-        #alias dev="sh $HOME/work/dotfiles/src/virutalBoxManageForMac.sh devmabu"
-        #alias mabu="ssh -l mabulog -p 2222 localhost"
         if type htop >/dev/null 2>&1; then
             alias top='sudo htop'
         fi
