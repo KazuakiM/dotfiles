@@ -85,7 +85,7 @@ brew 'mhash'
 brew 'mcrypt'
 brew 'mercurial'
 brew 'yasm'
-brew 'mplayer', args: ['with-libcaca', 'with-x11']
+brew 'mplayer', args: ['with-libcaca']
 brew 'nkf'
 brew 'node', args: ['with-debug']
 brew 'ossp-uuid'
@@ -108,7 +108,6 @@ brew 'tree'
 brew 'w3m'
 brew 'wget'
 brew 'wireshark', args: ['with-gtk+', 'with-lua', 'without-geoip', 'with-qt', 'with-headers']
-brew 'caskroom/cask/brew-cask'
 brew 'homebrew/dupes/zlib'
 brew 'homebrew/apache/httpd24'
 brew 'homebrew/dupes/grep', args: ['with-default-names']
@@ -122,7 +121,6 @@ brew 'homebrew/versions/bash-completion2'
 brew 'kazuakim/macvim/cmigemo-mk', args: ['HEAD']
 brew 'kazuakim/macvim/macvim-kaoriya', args: ['HEAD']
 cask 'alfred'
-cask 'amazon-music'
 cask 'android-file-transfer'
 cask 'appcleaner'
 cask 'bettertouchtool'
@@ -147,6 +145,7 @@ cask 'licecap'
 cask 'limechat'
 cask 'mysqlworkbench'
 cask 'night-owl'
+cask 'path-finder'
 cask 'silverlight'
 cask 'skitch'
 cask 'slack'
@@ -157,4 +156,3 @@ cask 'tunnelblick'
 cask 'vagrant'
 cask 'vagrant-manager'
 cask 'virtualbox'
-cask 'xtrafinder'
