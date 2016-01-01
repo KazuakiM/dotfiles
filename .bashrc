@@ -41,6 +41,11 @@ else
     alias diff='diff -u'
 fi
 #}}}
+#htop {{{
+if type htop >/dev/null 2>&1; then
+    alias top='sudo htop'
+fi
+#}}}
 #grep {{{
 export GREP_OPTIONS='--color=auto -i -I'
 export GREP_COLOR='1;33'
@@ -101,9 +106,6 @@ case "${OSTYPE}" in
         alias HTTPD='sudo apachectl'
         alias MYSQL='mysql.server'
         alias sqlfix="cd $HOME/.vim/bundle/vim-sqlfix/ && $HOME/.vim/bundle/vim-themis/bin/themis tests/sqlfix.vimspec -r --reporter dot"
-        if type htop >/dev/null 2>&1; then
-            alias top='sudo htop'
-        fi
         #}}}
         # open {{{
         alias VNC='open    -a Chicken'
@@ -163,9 +165,6 @@ case "${OSTYPE}" in
         alias sl='ls -AhX --color=auto'
         alias ll='ls -AhXl --color=auto'
         alias vi='vim'
-        if type htop >/dev/null 2>&1; then
-            alias top='htop'
-        fi
         #}}}
         # export {{{
         export EDITOR=vim
