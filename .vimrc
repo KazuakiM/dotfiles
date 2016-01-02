@@ -40,14 +40,11 @@ let s:lineUpdate = ! exists('s:lineUpdate') ? 0                                 
 "
 "
 " Common {{{
-set encoding=utf-8 fileencoding=utf-8 fileformats=unix,dos,mac
-scriptencoding utf-8
-let g:mapleader = ','
-augroup MyAutoCmd
-    autocmd!
-augroup END
-
 " Zun wiki http://www.kawaz.jp/pukiwiki/?vim#cb691f26 {{{
+set fileformats=unix,dos,mac
+if &encoding !=# 'utf-8'
+    set encoding=japan fileencoding=japan
+endif
 let s:enc_euc = 'euc-jp'
 let s:enc_jis = 'iso-2022-jp'
 if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
@@ -73,6 +70,12 @@ endif
 unlet s:enc_euc
 unlet s:enc_jis
 "}}}
+
+scriptencoding utf-8
+let g:mapleader = ','
+augroup MyAutoCmd
+    autocmd!
+augroup END
 
 function! s:KazuakiMAutoMkdir(dir) abort "{{{
     if !isdirectory(a:dir)
