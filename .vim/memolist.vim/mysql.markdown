@@ -87,7 +87,6 @@ SELECT IFNULL(<Tab1>.<Column1>, 'kazuakim_null') AS Column1, IFNULL(<Tab1>.<Colu
 FROM <Table1> AS <Tab1>
 " | sed -e 's/\t/,/g' > /tmp/<dumpFile>.csv
 
-$ sed -i -e '1d' /tmp/<dumpFile>.csv
 $ awk -F ',' '{print "INSERT INTO <Table1> (<Column1>, <Column2>, ...) VALUES ("$1",\047"$2"\047,...);"}' /tmp/<dumpFile>.csv > /tmp/<dumpFile>.sql
 $ sed -i -e s/\'kazuakim_null\'/NULL/ /tmp/<dumpFile>.sql
 ```

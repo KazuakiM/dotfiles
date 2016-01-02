@@ -141,6 +141,10 @@ case "${OSTYPE}" in
         if [ -d /usr/local/opt/gnu-tar/libexec/gnubin ]; then
             localPath="/usr/local/opt/gnu-tar/libexec/gnubin:$localPath"
         fi
+        #brew --prefix gnu-sed
+        if [ -d /usr/local/opt/gnu-sed/libexec/gnubin ]; then
+            localPath="/usr/local/opt/gnu-sed/libexec/gnubin:$localPath"
+        fi
         #brew --prefix svn
         if [ -d /usr/local/opt/subversion/bin ]; then
             localPath="/usr/local/opt/subversion/bin:$localPath"
