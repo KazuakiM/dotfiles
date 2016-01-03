@@ -172,7 +172,7 @@ function! s:KazuakiMBufReadPost() abort "{{{
     endif
     "}}}
 endfunction "}}}
-
+    
 function! s:KazuakiMVimEnter() abort "{{{
     call s:KazuakiMCheckString()
 endfunction "}}}
@@ -228,7 +228,7 @@ function! s:KazuakiMTabpageLabelUpdate(tabNumber) abort "{{{
 endfunction "}}}
 
 function! KazuakiMTabLineUpdate() abort "{{{
-    return join(map(range(1, tabpagenr('$')), 's:KazuakiMTabpageLabelUpdate(v:val)'), '|'). '%#TabLineFill#%T%='
+    return join(map(range(1, tabpagenr('$')), 's:KazuakiMTabpageLabelUpdate(v:val)'), '|') .'%#TabLineFill#%T%=%#TabLineSel# '. getcwd() .' '
 endfunction "}}}
 
 " Basic
@@ -243,10 +243,10 @@ set helplang=ja hidden history=1000 hlsearch
 set ignorecase iminsert=0 imsearch=-1 incsearch
 set laststatus=2 lazyredraw
 set matchpairs+=<:> matchtime=1 mouse=
-set nobomb noequalalways noerrorbells nogdefault noimcmdline noimdisable noruler noswapfile number
+set nobomb noequalalways noerrorbells nogdefault noimcmdline noimdisable noruler noswapfile notitle number
 set pumheight=8
-set scrolloff=999 shellslash shiftwidth=4 shortmess+=a shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4
-set tabline=%!KazuakiMTabLineUpdate() tabstop=4 title titleold= titlestring=%F ttyfast t_vb=
+set scrolloff=999 shellslash shiftwidth=4 shortmess+=a shortmess+=I showcmd showmatch showtabline=2 smartcase smartindent smarttab softtabstop=4
+set tabline=%!KazuakiMTabLineUpdate() tabstop=4 titleold= ttyfast t_vb=
 set undofile updatecount=30 updatetime=1000
 set viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo virtualedit+=block visualbell
 set wildmenu wildmode=longest:full,full wrap wrapscan
@@ -541,7 +541,7 @@ let g:quickrun_config = {
 \        'hook/qfstatusline_update/enable_exit': 1, 'hook/qfstatusline_update/priority_exit': 2, 'outputter/quickfix/open_cmd':    ''},
 \    'watchdogs_checker/php': {
 \        'command': 'php',        'cmdopt':      '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
-\        'exec':    '%c %o %s:p', 'errorformat': '%m\ in\ %f\ on\ line\ %l'}}
+\        'exec':    '%c %o %s:p'}}
 "}}}
 " taglist.vim {{{
 "MEMO:$ ctags --list-maps : ctags supported filetype.
