@@ -192,6 +192,18 @@ $ vi /tmp/<Table1>.dump
   Check execute results.
 ```
 
+## Character code
+
+["SET CHARACTER SET" is similar to "SET NAMES" but sets character_set_connection and collation_connection to character_set_database and collation_database.](http://dev.mysql.com/doc/refman/5.6/ja/charset-connection.html)  
+EUC-JP
+```sql
+SET NAMES ujis; SET CHARACTER SET ujis;
+```
+UTF-8
+```sql
+SET NAMES utf8; SET CHARACTER SET utf8;
+```
+
 ## PARTITIONS
 
 Check partitions
