@@ -41,10 +41,7 @@ let s:lineUpdate = ! exists('s:lineUpdate') ? 0                                 
 "
 " Common {{{
 " Zun wiki http://www.kawaz.jp/pukiwiki/?vim#cb691f26 {{{
-set fileformats=unix,dos,mac
-if &encoding !=# 'utf-8'
-    set encoding=japan fileencoding=japan
-endif
+set encoding=utf-8 fileencoding=utf-8 fileformats=unix,dos,mac
 let s:enc_euc = 'euc-jp'
 let s:enc_jis = 'iso-2022-jp'
 if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
@@ -54,19 +51,7 @@ elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
     let s:enc_euc = 'euc-jisx0213'
     let s:enc_jis = 'iso-2022-jp-3'
 endif
-if &encoding ==# 'utf-8'
-    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932,'. &fileencodings
-else
-    let &fileencodings = &fileencodings .','. s:enc_jis
-    set fileencodings+=utf-8,ucs-2le,ucs-2
-    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
-        set fileencodings+=cp932 fileencodings-=euc-jp fileencodings-=euc-jisx0213 fileencodings-=eucjp-ms
-        let &encoding     = s:enc_euc
-        let &fileencoding = s:enc_euc
-    else
-        let &fileencodings = &fileencodings .','. s:enc_euc
-    endif
-endif
+let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932,'. &fileencodings
 unlet s:enc_euc
 unlet s:enc_jis
 "}}}
@@ -150,7 +135,7 @@ function! s:KazuakiMBufEnter() abort "{{{
     endif
 
     " Forcibly update
-    set ambiwidth=double formatoptions-=c formatoptions-=b formatoptions+=j formatoptions-=t formatoptions-=v textwidth=0
+    set formatoptions-=c formatoptions-=b formatoptions+=j formatoptions-=t formatoptions-=v textwidth=0
 
     " Set StatusLine
     if &fileencoding is# 'utf-8'
@@ -172,8 +157,10 @@ function! s:KazuakiMBufReadPost() abort "{{{
     endif
     "}}}
 endfunction "}}}
-    
+
 function! s:KazuakiMVimEnter() abort "{{{
+    " Forcibly update
+    set ambiwidth=double showtabline=2
     call s:KazuakiMCheckString()
 endfunction "}}}
 
@@ -245,7 +232,7 @@ set laststatus=2 lazyredraw
 set matchpairs+=<:> matchtime=1 mouse=
 set nobomb noequalalways noerrorbells nogdefault noimcmdline noimdisable noruler noswapfile notitle number
 set pumheight=8
-set scrolloff=999 shellslash shiftwidth=4 shortmess+=a shortmess+=I showcmd showmatch showtabline=2 smartcase smartindent smarttab softtabstop=4
+set scrolloff=999 shellslash shiftwidth=4 shortmess+=a shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4
 set tabline=%!KazuakiMTabLineUpdate() tabstop=4 titleold= ttyfast t_vb=
 set undofile updatecount=30 updatetime=1000
 set viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo virtualedit+=block visualbell
@@ -387,13 +374,7 @@ let g:neobundle#log_filename          = s:envHome. '/.vim/neobundle.vim/neobundl
 "
 " NeoBundle {{{
 if neobundle#load_cache()
-    if s:osType !=# 'win'
-        NeoBundle 'Shougo/vimproc.vim', {'build': {'mac': 'make -f make_mac.mak', 'unix': 'make -f make_unix.mak', 'cygwin': 'make -f make_cygwin.mak'}}
-    else
-        "MEMO:ERROR
-        "http://www.kaoriya.net/news/2014/08/31/
-        "NeoBundle 'Shougo/vimproc.vim', {'rev': '74e53c1', 'build': {'mac': 'make -f make_mac.mak', 'unix': 'make -f make_unix.mak', 'cygwin': 'make -f make_cygwin.mak'}}
-    endif
+    NeoBundle 'Shougo/vimproc.vim', {'build': {'mac': 'make -f make_mac.mak', 'unix': 'make -f make_unix.mak', 'cygwin': 'make -f make_cygwin.mak'}}
     NeoBundle 'fuenor/qfixgrep'
     NeoBundle 'gcmt/wildfire.vim'
     NeoBundle 'KazuakiM/vim-qfstatusline'
@@ -760,7 +741,7 @@ if s:osType ==# 'macunix'
 
 elseif s:osType ==# 'win'
     " vimproc.vim {{{
-    let g:vimproc#dll_path = 'C:\usr\local\bin\Vim\plugins\vimproc\autoload\vimproc_win64.dll'
+    let g:vimproc#dll_path = 'C:\usr\local\bin\Vim\plugins\vimproc\lib\vimproc_win64.dll'
     "}}}
     " previm {{{
     let g:previm_open_cmd = 'C:/Program\ Files\ (x86)/Google/Chrome/Application/chrome.exe'
