@@ -395,6 +395,7 @@ let g:QFix_PreviewHeight = 20
 let g:QFixWin_EnableMode = 1
 nnoremap <expr><Leader>grek ':grep! '. expand('<cword>') .' '. kazuakim#Path2ProjectDirectory('%') .'<C-b><Right><Right><Right><Right><Right><Right>'
 nnoremap <expr><Leader>grel ':grep!  '. kazuakim#Path2ProjectDirectory('%') .'<C-b><Right><Right><Right><Right><Right><Right>'
+"MEMO:tabnew <C-w>gf
 "}}}
 " wildfire.vim {{{
 let g:wildfire_fuel_map  = '<Enter>'
