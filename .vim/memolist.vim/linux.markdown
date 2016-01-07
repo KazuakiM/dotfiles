@@ -126,7 +126,7 @@ $ ssh -p <port:22> <user2>@<host2>
 > HostName       host2.foo.bar
 > User           user2
 > IdentityFile   $HOME/.ssh/id_rsa
-> ProxyCommand   ssh -CW %h:%p host1@user1
+> ProxyCommand   ssh -CW %h:%p host@user1
 > #}}}
 > ```
 
@@ -156,9 +156,9 @@ $ traceroute -d -p <port> <host>
 
 Tcpdump
 ```bash
-$ tcpdump -s0 -A -w /tmp/tcpdump_%Y%m%d_%H%M.cap port <port:80> host <host>
-$ tcpdump -s0 -A -w /tmp/tcpdump_%Y%m%d_%H%M.cap port <port:80> dst host <host>
-$ tcpdump -s0 -A -w /tmp/tcpdump_%Y%m%d_%H%M.cap port <port:80> src host <host>
+$ sudo tcpdump -s0 -A -w /tmp/tcpdump_`date +%Y%m%d_%H%M`.cap port <port:80> host <host>
+$ sudo tcpdump -s0 -A -w /tmp/tcpdump_`date +%Y%m%d_%H%M`.cap port <port:80> dst host <host>
+$ sudo tcpdump -s0 -A -w /tmp/tcpdump_`date +%Y%m%d_%H%M`.cap port <port:80> src host <host>
 ```
 
 ## File size
