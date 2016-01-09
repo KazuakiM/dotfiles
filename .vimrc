@@ -162,6 +162,10 @@ function! s:KazuakiMVimEnter() abort "{{{
     " Forcibly update
     set ambiwidth=double showtabline=2
     call s:KazuakiMCheckString()
+
+    if &l:diff
+        wincmd h
+    endif
 endfunction "}}}
 
 function! s:KazuakiMWinEnter() abort "{{{
