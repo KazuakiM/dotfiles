@@ -131,7 +131,7 @@ function! s:KazuakiMBufEnter() abort "{{{
 
     " default filetype
     if &filetype is# '' || &filetype is# 'text'
-        setlocal filetype=mkd.markdown
+        setlocal filetype=markdown
     endif
 
     " Forcibly update
@@ -361,6 +361,7 @@ let g:vimsyn_embed             = 1 "$VIMRUNTIME/syntax/vim.vim
 nnoremap <SID>[vim] <Nop>
 nmap <Leader>f <SID>[vim]
 nnoremap <SID>[vim]e :<C-u>tabnew<Space>$MYVIMRC<CR>
+nnoremap <SID>[vim]w :<C-u>source<Space>$MYVIMRC<CR>
 nnoremap <SID>[vim]s :<C-u>tabnew<Space>$HOME/.vim/vim-sqlfix/sqlfix.sql<CR>
 nnoremap <SID>[vim]h :<C-u>source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
 nnoremap <SID>[vim]c :<C-u>IndentLinesEnable<CR>
@@ -600,7 +601,7 @@ function! s:hooks.on_source(bundle) abort "{{{
 endfunction "}}}
 "}}}
 " vim-php-cs-fixer {{{
-NeoBundleLazy 'stephpy/vim-php-cs-fixer', {'functions': 'PhpCsFixerFixFile'}
+NeoBundleLazy 'KazuakiM/vim-php-cs-fixer', {'functions': 'PhpCsFixerFixFile'}
 nnoremap <Leader>php :<C-u>call<Space>PhpCsFixerFixFile()<CR>
 let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
 function! s:hooks.on_source(bundle) abort "{{{
