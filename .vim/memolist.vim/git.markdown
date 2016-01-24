@@ -31,10 +31,26 @@ git branch
 git checkout xxxxx
 gdiff master
 
+git lg
+git rebase -i HEAD~n
+
+ (n回分を1つにまとめる)
+
+
+git log
+
+  Check commit message.
+
+
+git lg
+
+  Check graph.
+
+
 git rebase master
 
 git checkout master
-git merge --squash xxxxx
+git merge xxxxx
 
 git push origin master
 ```
@@ -85,9 +101,9 @@ git checkout -b xxxxx origin/xxxxx
 ```
 
 Create github.io pages
-* [GitHubにてリポジトリ新規作成](https://github.com/KazuakiM)
- * SlideShowリポジトリ名定義:SlideShow-XXX
-* 動作確認
+* [Create repository at GitHub.](https://github.com/KazuakiM)
+ * prefix:SlideShow-XXX
+* Confirm
  ```bash
  pwd
  git clone git@github.com:KazuakiM/SlideShow-XXX.git
@@ -110,17 +126,17 @@ Help
 git log --help
 ```
 
-修正ファイル
+Check modify file
 ```bash
 git log --stat
 ```
 
-件数
+Count
 ```bash
 git log -n 5
 ```
 
-ローカルリポジトリのコミットログ
+Check local repository log
 ```bash
 git log origin/master..xxxxx
 ```
@@ -211,35 +227,36 @@ Help
 git push --help
 ```
 
-マスターpush
+Push remote master branch.
 ```bash
 git push origin master
 ```
 
-リモートリポジトリpush
+Push remote branch.
 ```bash
 git push origin xxxxx
 ```
 
 ## git stash
 
-ファイル退避
+Base
 ```bash
+git status
 git stash
 git status
 ```
 
-退避状況確認
+List
 ```bash
 git stash list
 ```
 
-退避ファイル削除
+Delete
 ```bash
 git stash drop
 ```
 
-退避ファイル全て削除
+All delete(destroy)
 ```bash
 git stash clear
 ```
@@ -247,15 +264,19 @@ git stash clear
 誤って退避ファイル全てを削除してしまった場合
 ```bash
 git fsck | awk '/dangling commit/ {print $3}'
+
   候補のsha1 がいくつか出てくる
 
+
 git show --summary 候補のsha1
+
   一つ一つの sha1 の内容を確認
+
 
 git cherry-pick -n -m1 見つけたsha1
 ```
 
-最新の退避ファイル復活&退避ファイル削除
+Pop
 ```bash
 git stash pop
 ```
@@ -283,12 +304,12 @@ git checkout stash@{N} fuga.rb
 
 ## branch delete
 
-ローカルブランチ削除
+Delete local branch.
 ```bash
 git branch -d xxxxx
 ```
 
-リモートブランチ削除push
+Delete remote branch.
 ```bash
 git push origin :xxxxx
 ```

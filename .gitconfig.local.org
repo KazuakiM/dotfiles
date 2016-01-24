@@ -8,7 +8,7 @@
     name  = KazuakiM
     email = kazuaki_mabuchi_to_go@hotmail.co.jp
 [difftool "vimdiff"]
-    cmd = /Applications/MacVim.app/Contents/MacOS/vimdiff -O $LOCAL $REMOTE
+    cmd = /usr/local/opt/macvim-kaoriya/MacVim.app/Contents/MacOS/vimdiff -O $LOCAL $REMOTE
 [mergetool "vimdiff"]
-    cmd = /Applications/MacVim.app/Contents/MacOS/vimdiff -O $LOCAL $REMOTE
+    cmd = /usr/local/opt/macvim-kaoriya/MacVim.app/Contents/MacOS/vimdiff -O $LOCAL $REMOTE
 #}}}

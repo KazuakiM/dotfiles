@@ -98,10 +98,7 @@ case "${OSTYPE}" in
         alias ls='ls -AGh'
         alias sl='ls -AGh'
         alias lingr="sh $HOME/work/dotfiles/src/lingrStarter.sh"
-        alias vi="$HOME/work/dotfiles/src/macVimStater.sh"
-        alias vim='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-        alias vimdiff='/Applications/MacVim.app/Contents/MacOS/vimdiff'
-        alias gvim="$HOME/work/dotfiles/src/macVimStater.sh"
+        alias vi='gvim'
         alias composer='php -d memory_limit=1G /usr/local/opt/composer/libexec/composer.phar'
         alias HTTPD='sudo apachectl'
         alias MYSQL='mysql.server'
@@ -149,6 +146,10 @@ case "${OSTYPE}" in
         #brew --prefix svn
         if [ -d /usr/local/opt/subversion/bin ]; then
             localPath="/usr/local/opt/subversion/bin:$localPath"
+        fi
+        #brew --prefix macvim-kaoriya
+        if [ -d /usr/local/opt/macvim-kaoriya/MacVim.app/Contents/MacOS ]; then
+            localPath="/usr/local/opt/macvim-kaoriya/MacVim.app/Contents/MacOS:$localPath"
         fi
         if [ -d /usr/local/heroku/bin ]; then
             localPath="/usr/local/heroku/bin:$localPath"
