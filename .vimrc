@@ -87,7 +87,6 @@ if has('vim_starting')
             finish
         endif
         let s:osType = 'win'
-        set runtimepath^=$HOME/.vim runtimepath+=$HOME/.vim/after
     elseif has('macunix')
         if s:KazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
             finish
@@ -100,7 +99,6 @@ if has('vim_starting')
         let s:osType = 'unix'
     endif
     unlet s:date
-    set runtimepath+=$HOME/.vim/bundle/neobundle.vim
 endif
 
 function! s:KazuakiMCheckString() abort "{{{
@@ -236,6 +234,7 @@ set laststatus=2 lazyredraw
 set matchpairs+=<:> matchtime=1 mouse=
 set nobomb noequalalways noerrorbells nogdefault noimcmdline noimdisable noruler noswapfile notitle number
 set pumheight=8
+set runtimepath+=$HOME/.vim/bundle/neobundle.vim
 set scrolloff=999 shellslash shiftwidth=4 shortmess+=a shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4
 set tabline=%!KazuakiMTabLineUpdate() tabstop=4 titleold= ttyfast t_vb=
 set undofile updatecount=30 updatetime=1000
@@ -758,6 +757,7 @@ elseif s:osType ==# 'win'
     " neoinclude.vim {{{
     let g:neoinclude#delimiters = '/'
     "}}}
+    set runtimepath^=$HOME/.vim runtimepath+=$HOME/.vim/after
 
 elseif s:osType ==# 'unix'
 endif
