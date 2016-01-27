@@ -87,6 +87,7 @@ if has('vim_starting')
             finish
         endif
         let s:osType = 'win'
+        set runtimepath^=$HOME/.vim runtimepath+=$HOME/.vim/after
     elseif has('macunix')
         if s:KazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
             finish
@@ -757,7 +758,6 @@ elseif s:osType ==# 'win'
     " neoinclude.vim {{{
     let g:neoinclude#delimiters = '/'
     "}}}
-    set runtimepath^=$HOME/.vim runtimepath+=$HOME/.vim/after
 
 elseif s:osType ==# 'unix'
 endif
