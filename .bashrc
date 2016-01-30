@@ -163,6 +163,19 @@ case "${OSTYPE}" in
         export MYSQL_PS1="\d @\h> "
         #export MYSQL_PS1="\d @\h[\u] \n> "
         #}}}
+        # autocmd {{{
+        if type tmux >/dev/null 2>&1; then
+            tmux
+            if tmux has-session && tmux list-sessions; then
+                cat << EOS
+
+tmux list-sessions
+tmux attach -d -t xxx
+tmux kill-session -t xxx
+EOS
+            fi
+        fi
+        #}}}
         ;;
     linux*)
         # command {{{

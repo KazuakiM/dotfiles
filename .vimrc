@@ -51,7 +51,7 @@ elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
     let s:enc_euc = 'euc-jisx0213'
     let s:enc_jis = 'iso-2022-jp-3'
 endif
-let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932,'. &fileencodings
+let &fileencodings = &fileencodings .','. s:enc_jis .','. s:enc_euc .',cp932'
 unlet s:enc_euc
 unlet s:enc_jis
 "}}}
@@ -236,7 +236,7 @@ set matchpairs+=<:> matchtime=1 mouse=
 set nobomb noequalalways noerrorbells nogdefault noimcmdline noimdisable noruler noswapfile notitle number
 set pumheight=8
 set runtimepath+=$HOME/.vim/bundle/neobundle.vim
-set scrolloff=999 shellslash shiftwidth=4 shortmess+=a shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4
+set scrolloff=999 shellslash shiftwidth=4 shortmess+=a shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4 switchbuf=usetab
 set tabline=%!KazuakiMTabLineUpdate() tabstop=4 titleold= ttyfast t_vb=
 set undofile updatecount=30 updatetime=1000
 set viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo virtualedit+=block visualbell
@@ -601,7 +601,7 @@ function! s:hooks.on_source(bundle) abort "{{{
 endfunction "}}}
 "}}}
 " vim-php-cs-fixer {{{
-NeoBundleLazy 'KazuakiM/vim-php-cs-fixer', {'functions': 'PhpCsFixerFixFile'}
+NeoBundleLazy 'stephpy/vim-php-cs-fixer', {'functions': 'PhpCsFixerFixFile'}
 nnoremap <Leader>php :<C-u>call<Space>PhpCsFixerFixFile()<CR>
 let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
 function! s:hooks.on_source(bundle) abort "{{{
