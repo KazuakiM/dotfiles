@@ -1,10 +1,11 @@
 #!/bin/sh
 #--------------------------------
-# gVim Starter shell for MAC
+# tmux Starter shell
 #
 # @author kazuakiM
 #--------------------------------
-if [ ! -e $1 ] ; then
-    touch $1;
+if [ -z `tmux ls` ] ; then
+    tmux
+else
+    tmux attach
 fi
-open -a MacVim $1;

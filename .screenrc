@@ -21,7 +21,7 @@ shell -$SHELL
 #}}}
 #display {{{
 hardstatus on
-hardstatus alwayslastline '%{= gk} %w %{= w.} %= %{= c.} Prefix C-a %{= bw} %H %{= k.} Window %n '
+hardstatus alwayslastline '%{= gk} %w %{= w.} %= %{= m.} Prefix C-a %{= c.} %c %{= bw} %H %{= k.} Window %n '
 #}}}
 #log {{{
 deflog on

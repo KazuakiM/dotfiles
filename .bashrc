@@ -38,7 +38,7 @@ alias FIND='find ./ '${findIgnore}' -o -type f -print0 | xargs -0 grep --color -
 if type colordiff >/dev/null 2>&1; then
     alias diff='colordiff -u'
 else
-    alias diff='diff -u'
+    alias diff='diff      -u'
 fi
 #}}}
 #htop {{{
@@ -78,19 +78,19 @@ man() {
 #PS1(primary prompt string) {{{
 export PS1="\[\e[1;36m\]\u \$ \[\e[1;0m\]"
 #}}}
-#tmux {{{
+#tmux or screen {{{
 if type tmux >/dev/null 2>&1; then
-    alias tm='tmux'
+    alias tm="sh $HOME/work/dotfiles/src/tmuxStater.sh"
     alias tml='tmux list-sessions'
-    alias tma0='tmux attach -d -t 0'
-    alias tma1='tmux attach -d -t 1'
-    alias tma2='tmux attach -d -t 2'
-    alias tmd0='tmux detach -s 0'
-    alias tmd1='tmux detach -s 1'
-    alias tmd2='tmux detach -s 2'
-    alias tmk0='tmux kill-session -t 0'
-    alias tmk1='tmux kill-session -t 1'
-    alias tmk2='tmux kill-session -t 2'
+    alias tma='tmux attach -d    -t "$@"'
+    alias tmd='tmux detach -s       "$@"'
+    alias tmk='tmux kill-session -t "$@"'
+fi
+if type screen >/dev/null 2>&1; then
+    alias sc='screen'
+    alias scl='screen -ls'
+    alias sca='screen -r "$@"'
+    alias scd='screen -d "$@"'
 fi
 #}}}
 #MySQL {{{
@@ -100,7 +100,7 @@ export MYSQL_HISTFILE='/var/log/mysql_history'
 case "${OSTYPE}" in
     darwin*)
         #command {{{
-        alias l='ls -AGh'
+        alias l='ls  -AGh'
         alias ll='ls -AGhl'
         alias ls='ls -AGh'
         alias sl='ls -AGh'
@@ -170,25 +170,12 @@ case "${OSTYPE}" in
         export MYSQL_PS1="\d @\h> "
         #export MYSQL_PS1="\d @\h[\u] \n> "
         #}}}
-        # autocmd {{{
-        if type tmux >/dev/null 2>&1; then
-            tmux
-            if tmux has-session && tmux list-sessions; then
-                cat << EOS
-
-tmux list-sessions
-tmux attach -d -t xxx
-tmux kill-session -t xxx
-EOS
-            fi
-        fi
-        #}}}
         ;;
     linux*)
         # command {{{
-        alias l='ls -AhX --color=auto'
-        alias ls='ls -AhX --color=auto'
-        alias sl='ls -AhX --color=auto'
+        alias l='ls  -AhX  --color=auto'
+        alias ls='ls -AhX  --color=auto'
+        alias sl='ls -AhX  --color=auto'
         alias ll='ls -AhXl --color=auto'
         alias vi='vim'
         #}}}
@@ -208,9 +195,9 @@ EOS
         ;;
     cygwin)
         # command {{{
-        alias l='ls -Ak --color=auto'
-        alias ls='ls -Ak --color=auto'
-        alias sl='ls -Ak --color=auto'
+        alias l='ls  -Ak  --color=auto'
+        alias ls='ls -Ak  --color=auto'
+        alias sl='ls -Ak  --color=auto'
         alias ll='ls -Akl --color=auto'
         alias vi="$HOME/src/vimStarter.sh"
         alias vim="$HOME/src/vimStarter.sh"
