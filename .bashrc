@@ -81,9 +81,16 @@ export PS1="\[\e[1;36m\]\u \$ \[\e[1;0m\]"
 #tmux {{{
 if type tmux >/dev/null 2>&1; then
     alias tm='tmux'
+    alias tml='tmux list-sessions'
     alias tma0='tmux attach -d -t 0'
     alias tma1='tmux attach -d -t 1'
     alias tma2='tmux attach -d -t 2'
+    alias tmd0='tmux detach -s 0'
+    alias tmd1='tmux detach -s 1'
+    alias tmd2='tmux detach -s 2'
+    alias tmk0='tmux kill-session -t 0'
+    alias tmk1='tmux kill-session -t 1'
+    alias tmk2='tmux kill-session -t 2'
 fi
 #}}}
 #MySQL {{{
