@@ -80,7 +80,7 @@ export PS1="\[\e[1;36m\]\u \$ \[\e[1;0m\]"
 #}}}
 #tmux or screen {{{
 if type tmux >/dev/null 2>&1; then
-    alias tm="sh $HOME/work/dotfiles/src/tmuxStater.sh"
+    alias tm="sh $HOME/work/dotfiles/src/tmuxStarter.sh"
     alias tml='tmux list-sessions'
     alias tma='tmux attach -d    -t "$@"'
     alias tmd='tmux detach -s       "$@"'
