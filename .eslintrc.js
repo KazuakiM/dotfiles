@@ -1,4 +1,22 @@
-{
+/*+
+ * ESLINT
+ *
+ * @usage
+ *   # CentOS
+ *   $ yum install --enablerepo=epel nodejs npm
+ *   $ npm install -g eslint
+ *   $ npm install -g eslint-plugin-react
+ *
+ *   # Mac
+ *   $ brew install node
+ *   $ npm install -g eslint
+ *   $ npm install -g eslint-plugin-react
+ *
+ * @url https://github.com/eslint/eslint
+ * @url http://eslint.org/docs/rules/
+ * @url https://github.com/yannickcr/eslint-plugin-react
+ */
+module.exports = {
     "env": {
         "es6": true},
     "parserOptions": {
@@ -7,6 +25,21 @@
     "plugins": [
         "react"],
     "rules": {
+        //Possible Errors
+        "comma-dangle":      [2, "never"],
+        "no-dupe-args":      2,
+        "no-dupe-keys":      2,
+        "no-duplicate-case": 2,
+        "no-empty":          2,
+        "no-ex-assign":      2,
+        //Best Practices
+        "consistent-return": 2,
+        "curly":             2,
+        "dot-location":      [2, "property"],
+        "eqeqeq":            [2, "allow-null"],
+        //Strict Mode
+        "strict": true,
+        //eslint-plugin-react
         "react/display-name":                 1,
         "react/forbid-prop-types":            1,
         "react/jsx-boolean-value":            1,
@@ -45,4 +78,4 @@
         "react/self-closing-comp":            1,
         "react/sort-comp":                    1,
         "react/wrap-multilines":              1}
-}
+};
