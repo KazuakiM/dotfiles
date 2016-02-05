@@ -16,6 +16,9 @@
  * @url http://eslint.org/docs/rules/
  * @url https://github.com/yannickcr/eslint-plugin-react
  */
+
+"use strict";
+
 module.exports = {
     "env": {
         "es6": true},
@@ -38,7 +41,7 @@ module.exports = {
         "dot-location":      [2, "property"],
         "eqeqeq":            [2, "allow-null"],
         //Strict Mode
-        "strict": true,
+        "strict": [2, "global"],
         //eslint-plugin-react
         "react/display-name":                 1,
         "react/forbid-prop-types":            1,
