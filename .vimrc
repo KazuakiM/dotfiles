@@ -517,18 +517,43 @@ nnoremap <Leader>run :<C-u>QuickRun<CR>
 " Set g:quickrun_config at .vimrc.local .
 let g:quickrun_config = {
 \    '_': {
-\        'hook/close_buffer/enable_empty_data': 1,    'hook/close_buffer/enable_failure': 1,           'outputter': 'multi:buffer:quickfix',
-\        'outputter/buffer/close_on_empty':     1,    'outputter/buffer/split':           ':botright', 'runner':    'vimproc',
+\        'hook/close_buffer/enable_empty_data': 1,
+\        'hook/close_buffer/enable_failure':    1,
+\        'outputter':                           'multi:buffer:quickfix',
+\        'outputter/buffer/close_on_empty':     1,
+\        'outputter/buffer/split':              ':botright',
+\        'runner':                              'vimproc',
 \        'runner/vimproc/updatetime':           600},
-\    'php': {'command': 'phpunit', 'cmdopt': '--no-configuration', 'hook/close_buffer/enable_failure': 0, 'outputter/buffer/split': ':botright 7sp'},
-\    'sql': {'type': 'sql/mysql'},
-\    'sql/mysql': {'exec': "%c %o < %s | sed -e 's/\t/|/g'", 'outputter': 'buffer', 'outputter/buffer/into': 1},
+\    'javascript/watchdogs_checker': {
+\        'type': 'watchdogs_checker/javascript'},
+\    'php': {
+\        'command':                          'phpunit',
+\        'cmdopt':                           '--no-configuration',
+\        'hook/close_buffer/enable_failure': 0,
+\        'outputter/buffer/split':           ':botright 7sp'},
+\    'php/watchdogs_checker': {
+\        'type': 'watchdogs_checker/php'},
+\    'sql': {
+\        'type': 'sql/mysql'},
+\    'sql/mysql': {
+\        'exec':                  "%c %o < %s | sed -e 's/\t/|/g'",
+\        'outputter':             'buffer',
+\        'outputter/buffer/into': 1},
 \    'watchdogs_checker/_': {
-\        'hook/close_quickfix/enable_exit':      1, 'hook/back_window/enable_exit':           0, 'hook/back_window/priority_exit': 1,
-\        'hook/qfstatusline_update/enable_exit': 1, 'hook/qfstatusline_update/priority_exit': 2, 'outputter/quickfix/open_cmd':    ''},
+\        'hook/close_quickfix/enable_exit':        1,
+\        'hook/back_window/enable_exit':           0,
+\        'hook/back_window/priority_exit':         1,
+\        'hook/qfstatusline_update/enable_exit':   1,
+\        'hook/qfstatusline_update/priority_exit': 2,
+\        'outputter/quickfix/open_cmd':            ''},
 \    'watchdogs_checker/php': {
-\        'command': 'php',        'cmdopt':      '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
-\        'exec':    '%c %o %s:p'}}
+\        'command': 'php',
+\        'cmdopt':  '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
+\        'exec':    '%c %o %s:p'},
+\    'watchdogs_checker/javascript' : {
+\        'command':     'eslint',
+\        'exec':        '%c -f compact %o %s:p',
+\        'errorformat': '%E%f: line %l\, col %c\, Error - %m, %W%f: line %l\, col %c\, Warning - %m, %-G%.%#'}}
 "}}}
 " taglist.vim {{{
 "MEMO:$ ctags --list-maps : ctags supported filetype.
