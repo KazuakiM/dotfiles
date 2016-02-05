@@ -78,13 +78,23 @@ Prefix > Ctrl-d
 Prefix > Ctrl-k
 ```
 
-ウィンドウ垂直分割/水平分割
+ウィンドウリネーム
+```
+Prefix > Ctrl-w
+```
+
+ペイン垂直分割/水平分割
 ```
 Prefix > v
 Prefix > s
 ```
 
-ウィンドウリサイズ
+ペイン間移動
+```
+Prefix > o
+```
+
+ペインリサイズ
 ```
 Prefix > +
 Prefix > -
@@ -92,14 +102,9 @@ Prefix > >
 Prefix > <
 ```
 
-ウィンドウ分割解除
+ペイン分割解除
 ```
 Prefix > Ctrl-p
-```
-
-ウィンドウリネーム
-```
-Prefix > Ctrl-w
 ```
 
 ## Etc

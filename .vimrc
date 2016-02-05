@@ -552,7 +552,8 @@ let g:quickrun_config = {
 \        'exec':    '%c %o %s:p'},
 \    'watchdogs_checker/javascript' : {
 \        'command':     'eslint',
-\        'exec':        '%c -f compact %o %s:p',
+\        'cmdopt':      '--format compact --no-color',
+\        'exec':        '%c %o %s:p',
 \        'errorformat': '%E%f: line %l\, col %c\, Error - %m, %W%f: line %l\, col %c\, Warning - %m, %-G%.%#'}}
 "}}}
 " taglist.vim {{{
