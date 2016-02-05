@@ -704,7 +704,7 @@ endfunction
 NeoBundleLazy 'hail2u/vim-css3-syntax', {'filetypes': ['html', 'php', 'css']}
 "}}}
 " vim-javascript {{{
-NeoBundleLazy 'pangloss/vim-javascript', {'filetypes': ['html', 'php', 'javascript']}
+NeoBundleLazy 'othree/yajs.vim', {'filetypes': ['html', 'php', 'javascript']}
 "}}}
 " vim-markdown {{{
 NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'markdown'}
