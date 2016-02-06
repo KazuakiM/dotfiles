@@ -364,7 +364,7 @@ nnoremap <SID>[vim]e :<C-u>tabnew<Space>$MYVIMRC<CR>
 nnoremap <SID>[vim]w :<C-u>source<Space>$MYVIMRC<CR>
 nnoremap <SID>[vim]s :<C-u>tabnew<Space>$HOME/.vim/vim-sqlfix/sqlfix.sql<CR>
 nnoremap <SID>[vim]h :<C-u>source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
-nnoremap <SID>[vim]c :<C-u>IndentLinesEnable<CR>
+nnoremap <SID>[vim]c :<C-u>IndentLinesToggle<CR>
 "}}}
 "
 "
@@ -546,15 +546,15 @@ let g:quickrun_config = {
 \        'hook/qfstatusline_update/enable_exit':   1,
 \        'hook/qfstatusline_update/priority_exit': 2,
 \        'outputter/quickfix/open_cmd':            ''},
-\    'watchdogs_checker/php': {
-\        'command': 'php',
-\        'cmdopt':  '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
-\        'exec':    '%c %o %s:p'},
 \    'watchdogs_checker/javascript' : {
 \        'command':     'eslint',
 \        'cmdopt':      '--format compact --no-color',
 \        'exec':        '%c %o %s:p',
-\        'errorformat': '%E%f: line %l\, col %c\, Error - %m, %W%f: line %l\, col %c\, Warning - %m, %-G%.%#'}}
+\        'errorformat': '%E%f: line %l\, col %c\, Error - %m, %W%f: line %l\, col %c\, Warning - %m, %-G%.%#'},
+\    'watchdogs_checker/php': {
+\        'command': 'php',
+\        'cmdopt':  '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
+\        'exec':    '%c %o %s:p'}}
 "}}}
 " taglist.vim {{{
 "MEMO:$ ctags --list-maps : ctags supported filetype.
