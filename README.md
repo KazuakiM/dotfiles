@@ -44,6 +44,11 @@ $ cd $HOME/work/dotfiles/
 $ git status
 ```
 
+npm
+```bash
+$ npm install -g eslint eslint-plugin-react
+```
+
 Kindle Previewer
 * [Kindle Previewer](http://www.amazon.com/gp/feature.html?docId=1000765261)
 * [Java for OS X 2014-001](https://support.apple.com/kb/DL1572?locale=ja_JP)

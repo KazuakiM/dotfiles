@@ -1,17 +1,6 @@
 /*+
  * ESLINT
  *
- * @usage
- *   # CentOS
- *   $ yum install --enablerepo=epel nodejs npm
- *   $ npm install -g eslint
- *   $ npm install -g eslint-plugin-react
- *
- *   # Mac
- *   $ brew install node
- *   $ npm install -g eslint
- *   $ npm install -g eslint-plugin-react
- *
  * @url https://github.com/eslint/eslint
  * @url http://eslint.org/docs/rules/
  * @url https://github.com/yannickcr/eslint-plugin-react
