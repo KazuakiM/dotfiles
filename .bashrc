@@ -7,7 +7,7 @@ elif [ -f ~/.bashrc.local ]; then
 fi
 #}}}
 #User specific environment and startup programs {{{
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
+export LD_LIBRARY_PATH="/usr/local/lib"
 export LANG=ja_JP.UTF-8
 cd
 clear
