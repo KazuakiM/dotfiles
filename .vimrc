@@ -430,7 +430,6 @@ let g:UltiSnipsExpandTrigger               = '<TAB>'
 let g:UltiSnipsJumpBackwardTrigger         = '<S-TAB>'
 let g:UltiSnipsJumpForwardTrigger          = '<TAB>'
 let g:UltiSnipsSnippetsDir                 = s:envHome .'/.vim/bundle/vim-snippets/UltiSnips'
-let g:UltiSnipsUsePythonVersion            = 3
 "}}}
 " indentLine {{{
 let g:indentLine_faster = 1
@@ -749,6 +748,9 @@ if s:osType !=# 'macunix'
 endif
 
 if s:osType !=# 'win'
+    " ultisnips {{{
+    let g:UltiSnipsUsePythonVersion = 3
+    "}}}
     " memolist.vim {{{
     let g:memolist_path = s:envHome .'/.vim/memolist.vim'
     "}}}
