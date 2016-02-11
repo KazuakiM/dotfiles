@@ -109,7 +109,7 @@ endfunction "}}}
 
 function! s:KazuakiMBufEnter() abort "{{{
     " Auto close VimDiff or primary NERDTree
-    if winnr('$') is# 1 && (&l:diff || (exists('b:NERDTree') && b:NERDTree.isTabTree()))
+    if winnr('$') is# 1 && (&l:diff || (exists('b:NERDTree') && b:NERDTree.isTabTree()) || &filetype is# 'quickrun')
         quit
 
     " Duplicate ban
@@ -546,10 +546,12 @@ let g:quickrun_config = {
 \        'hook/qfstatusline_update/priority_exit': 2,
 \        'outputter/quickfix/open_cmd':            ''},
 \    'watchdogs_checker/javascript' : {
-\        'command':     'eslint',
-\        'cmdopt':      '--format compact --no-color',
-\        'exec':        '%c %o %s:p',
-\        'errorformat': '%E%f: line %l\, col %c\, Error - %m, %W%f: line %l\, col %c\, Warning - %m, %-G%.%#'},
+\        'command':                          'eslint',
+\        'cmdopt':                           '--format compact --no-color',
+\        'exec':                             '%c %o %s:p',
+\        'hook/close_buffer/enable_failure': 0,
+\        'outputter':                        'buffer',
+\        'outputter/buffer/split':           ':botright 5sp'},
 \    'watchdogs_checker/php': {
 \        'command': 'php',
 \        'cmdopt':  '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',

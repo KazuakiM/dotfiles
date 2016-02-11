@@ -3,10 +3,10 @@ if !exists("main_syntax") | let main_syntax = 'quickrun' | endif
 
 syntax case match
 
-syntax match PhpUnitOk       /OK.*/
-highlight PhpUnitOk       ctermfg=DarkGreen guifg=DarkGreen
-syntax match PhpUnitFailures /FAILURES.*\|.*failure:/
-highlight PhpUnitFailures ctermfg=DarkRed   guifg=DarkRed
+syntax match QuickrunOk       /.*OK.*/
+highlight QuickrunOk       ctermfg=DarkGreen guifg=DarkGreen
+syntax match QuickrunFailures /.*\(FAILURES\|failure\|Error\).*/
+highlight QuickrunFailures ctermfg=DarkRed   guifg=DarkRed
 
 let b:current_syntax = 'quickrun'
 if main_syntax == 'quickrun' | unlet main_syntax | endif
