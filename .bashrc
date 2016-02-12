@@ -14,7 +14,7 @@ clear
 #}}}
 #Common {{{
 shopt -s cdspell
-export HISTFILE='/var/log/bash_history'
+export HISTFILE="$HOME/.log/bash/bash_history"
 alias cl='clear'
 alias lc='clear'
 alias cp='cp -i -p'
@@ -62,7 +62,7 @@ export HISTTIMEFORMAT='%F %T '
 #}}}
 #less {{{
 export LESS='-R --no-init'
-export LESSHISTFILE='/var/log/lesshst'
+export LESSHISTFILE="$HOME/.log/less/lesshst"
 man() {
     env \
         LESS_TERMCAP_mb=$(printf "\e[1;31m") \
@@ -94,7 +94,7 @@ if type screen >/dev/null 2>&1; then
 fi
 #}}}
 #MySQL {{{
-export MYSQL_HISTFILE='/var/log/mysql_history'
+export MYSQL_HISTFILE="$HOME/.log/mysql/mysql_history"
 #}}}
 #OS Type {{{
 case "${OSTYPE}" in

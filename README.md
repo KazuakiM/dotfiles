@@ -268,6 +268,7 @@ $ cp -f  $HOME/work/dotfiles/.gitconfig.local.org $HOME/.gitconfig.local
 $ ln -sf $HOME/work/dotfiles/.gvimrc              $HOME/.gvimrc
 $ ln -sf $HOME/work/dotfiles/.htoprc              $HOME/.htoprc
 $ ln -sf $HOME/work/dotfiles/.inputrc             $HOME/.inputrc
+$ ln -sf $HOME/work/dotfiles/.log                 $HOME/.log
 $ ln -sf $HOME/work/dotfiles/.mplayer             $HOME/.mplayer
 $ cp -f  $HOME/work/dotfiles/.netrc.org           $HOME/.netrc
 $ ln -sf $HOME/work/dotfiles/.screenrc            $HOME/.screenrc

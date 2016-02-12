@@ -5,6 +5,9 @@ C:/
 .DS_Store
 .gitconfig
 .gitconfig.local
+.log/bash/
+.log/less/
+.log/mysql/
 .netrc
 .ssh/
 .vimrc.win
