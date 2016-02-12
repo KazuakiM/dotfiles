@@ -548,7 +548,7 @@ let g:quickrun_config = {
 \    'watchdogs_checker/javascript' : {
 \        'command': 'eslint',
 \        'cmdopt':
-\            '--cache --cache-file .eslintignore --cache-location ' . s:envHome . '/.cache/eslint/ --format compact --max-warnings 1 --no-color --no-ignore --quiet',
+\            '--cache --cache-location ' . s:envHome . '/.cache/eslint/.eslintcache --format compact --max-warnings 1 --no-color --no-ignore --quiet',
 \        'exec':                             '%c %o %s:p',
 \        'hook/close_buffer/enable_failure': 0,
 \        'outputter':                        'buffer',
