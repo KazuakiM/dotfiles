@@ -546,8 +546,9 @@ let g:quickrun_config = {
 \        'hook/qfstatusline_update/priority_exit': 2,
 \        'outputter/quickfix/open_cmd':            ''},
 \    'watchdogs_checker/javascript' : {
-\        'command':                          'eslint',
-\        'cmdopt':                           '--format compact --no-color',
+\        'command': 'eslint',
+\        'cmdopt':
+\            '--cache --cache-file .eslintignore --cache-location ' . s:envHome . '/.cache/eslint/ --format compact --max-warnings 1 --no-color --no-ignore --quiet',
 \        'exec':                             '%c %o %s:p',
 \        'hook/close_buffer/enable_failure': 0,
 \        'outputter':                        'buffer',

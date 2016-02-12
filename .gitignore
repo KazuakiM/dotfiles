@@ -1,6 +1,7 @@
 .bash_history
 .bashrc.win
 C:/
+.cache/eslint/
 .DS_Store
 .gitconfig
 .gitconfig.local
