@@ -55,6 +55,29 @@ function! kazuakim#Translate(text) abort "{{{
 endfunction "}}}
 "}}}
 
+" vim-quickrun {{{
+function! kazuakim#PhpCsFixer(mode) abort "{{{
+    let l:quickrun_config_backup = g:quickrun_config['php']
+    let g:quickrun_config['php'] = {
+    \    'command':               'php-cs-fixer',
+    \    'cmdopt':                'fix --config=default --level=symfony',
+    \    'exec':                  '%c %o %s:p',
+    \    'outputter':             'buffer',
+    \    'outputter/buffer/into': 1,
+    \    'runner':                'system'}
+    if a:mode ==# 'normal'
+        let g:quickrun_config['php']['cmdopt'] = g:quickrun_config['php']['cmdopt'] .' --fixers=align_equals,align_double_arrow,concat_with_spaces'
+    else
+        let g:quickrun_config['php']['cmdopt'] = g:quickrun_config['php']['cmdopt'] .' --fixers=align_equals,align_double_arrow,-braces'
+    endif
+    let g:quickrun_config['php']['cmdopt'] = g:quickrun_config['php']['cmdopt']
+
+    QuickRun
+
+    let g:quickrun_config['php'] = l:quickrun_config_backup
+endfunction "}}}
+"}}}
+
 " gundo.vim {{{
 function! kazuakim#ClearUndo() abort "{{{
     let s:oldUndolevels = &undolevels

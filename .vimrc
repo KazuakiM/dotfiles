@@ -509,7 +509,9 @@ nnoremap <silent><Leader>jk :<C-u>call<Space>kazuakim#Translate(expand('<cword>'
 "}}}
 " vim-quickrun {{{
 NeoBundleLazy 'thinca/vim-quickrun', {'commands': 'QuickRun'}
-nnoremap <Leader>run :<C-u>QuickRun<CR>
+nnoremap <Leader>run  :<C-u>QuickRun<CR>
+nnoremap <Leader>php  :<C-u>call<Space>kazuakim#PhpCsFixer('normal')<CR>
+nnoremap <Leader>phpt :<C-u>call<Space>kazuakim#PhpCsFixer('template')<CR>
 " Set g:quickrun_config at .vimrc.local .
 let s:quickrun_config_javascript = {
 \    'command':     'eslint',
@@ -630,21 +632,6 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:ref_phpmanual_path  = s:envHome .'/.vim/vim-ref/php-chunked-xhtml'
 endfunction "}}}
 "}}}
-" vim-php-cs-fixer {{{
-NeoBundleLazy 'stephpy/vim-php-cs-fixer', {'functions': 'PhpCsFixerFixFile'}
-nnoremap <Leader>php :<C-u>call<Space>PhpCsFixerFixFile()<CR>
-let s:hooks = neobundle#get_hooks('vim-php-cs-fixer')
-function! s:hooks.on_source(bundle) abort "{{{
-    let g:php_cs_fixer_config                 = 'default'
-    let g:php_cs_fixer_dry_run                = 0
-    let g:php_cs_fixer_enable_default_mapping = 0
-    let g:php_cs_fixer_fixers_list            = 'align_equals,align_double_arrow,concat_with_spaces'
-    "MEMO: view file editting case.
-    "let g:php_cs_fixer_fixers_list           = 'align_equals,align_double_arrow,-braces'
-    let g:php_cs_fixer_level                  = 'symfony'
-    let g:php_cs_fixer_php_path               = 'php'
-    let g:php_cs_fixer_verbose                = 0
-endfunction "}}}
 "}}}
 " open-browser.vim {{{
 NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'openbrowser#_keymapping_smart_search'}
