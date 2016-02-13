@@ -463,11 +463,9 @@ endif
 "
 " MEMO:If gVim for Windows italic fonts are deleted, I would move 'unite-highlight' to backup/.vimrc.
 "
-NeoBundleLazy 'Shougo/unite.vim',           { 'commands': 'Unite'}
-NeoBundleLazy 'KazuakiM/unite-help',        { 'depends':  'Shougo/unite.vim', 'unite_sources':     'help'}
-NeoBundleLazy 'rhysd/unite-codic.vim',      { 'depends':  ['koron/codic-vim', 'Shougo/unite.vim'], 'unite_sources': 'codic'}
-NeoBundleLazy 'osyo-manga/unite-highlight', { 'depends':  'Shougo/unite.vim', 'unite_sources':     'highlight'}
-NeoBundleLazy 'glidenote/memolist.vim',     { 'commands': ['MemoNew',         'MemoList']}
+NeoBundleLazy 'Shougo/unite.vim', {'commands': 'Unite', 'depends':  [
+\    'koron/codic-vim', 'rhysd/unite-codic.vim', 'KazuakiM/unite-help', 'osyo-manga/unite-highlight']}
+NeoBundleLazy 'glidenote/memolist.vim', { 'commands': ['MemoNew', 'MemoList']}
 nnoremap <SID>[unite] <Nop>
 nmap <Leader>u <SID>[unite]
 " default plugins
@@ -513,6 +511,11 @@ nnoremap <silent><Leader>jk :<C-u>call<Space>kazuakim#Translate(expand('<cword>'
 NeoBundleLazy 'thinca/vim-quickrun', {'commands': 'QuickRun'}
 nnoremap <Leader>run :<C-u>QuickRun<CR>
 " Set g:quickrun_config at .vimrc.local .
+let s:quickrun_config_javascript = {
+\    'command':     'eslint',
+\    'cmdopt':      '--cache --cache-location '. s:envHome .'/.cache/eslint/.eslintcache --format compact --max-warnings 1 --no-color --no-ignore --quiet',
+\    'errorformat': '%E%f: line %l\, col %c\, Error - %m,%W%f: line %l\, col %c\, Warning - %m,%-G%.%#',
+\    'exec':        '%c %o %s:p'}
 let g:quickrun_config = {
 \    '_': {
 \        'hook/close_buffer/enable_empty_data': 1,
@@ -522,6 +525,12 @@ let g:quickrun_config = {
 \        'outputter/buffer/split':              ':botright',
 \        'runner':                              'vimproc',
 \        'runner/vimproc/updatetime':           600},
+\    'javascript': {
+\        'command':     s:quickrun_config_javascript['command'],
+\        'cmdopt':      s:quickrun_config_javascript['cmdopt'] .' --fix',
+\        'errorformat': s:quickrun_config_javascript['errorformat'],
+\        'exec':        s:quickrun_config_javascript['exec'],
+\        'runner':      'system'},
 \    'javascript/watchdogs_checker': {
 \        'type': 'watchdogs_checker/javascript'},
 \    'php': {
@@ -544,18 +553,12 @@ let g:quickrun_config = {
 \        'hook/qfstatusline_update/enable_exit':   1,
 \        'hook/qfstatusline_update/priority_exit': 2,
 \        'outputter/quickfix/open_cmd':            ''},
-\    'watchdogs_checker/javascript' : {
-\        'command': 'eslint',
-\        'cmdopt':
-\            '--cache --cache-location ' . s:envHome . '/.cache/eslint/.eslintcache --format compact --max-warnings 1 --no-color --no-ignore --quiet',
-\        'exec':                             '%c %o %s:p',
-\        'hook/close_buffer/enable_failure': 0,
-\        'outputter':                        'buffer',
-\        'outputter/buffer/split':           ':botright 5sp'},
-\    'watchdogs_checker/php': {
+\    'watchdogs_checker/javascript': s:quickrun_config_javascript,
+\    'watchdogs_checker/php':        {
 \        'command': 'php',
 \        'cmdopt':  '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
 \        'exec':    '%c %o %s:p'}}
+unlet s:quickrun_config_javascript
 "}}}
 " taglist.vim {{{
 "MEMO:$ ctags --list-maps : ctags supported filetype.
@@ -691,6 +694,7 @@ nnoremap cu :<C-u>call<Space>kazuakim#ClearUndo()<CR>
 let s:hooks = neobundle#get_hooks('gundo.vim')
 function! s:hooks.on_source(bundle) abort "{{{
     nnoremap u g-
+    nnoremap U g-
     nnoremap <C-r> g+
 endfunction "}}}
 "}}}
