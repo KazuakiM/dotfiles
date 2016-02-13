@@ -59,12 +59,13 @@ endfunction "}}}
 function! kazuakim#PhpCsFixer(mode) abort "{{{
     let l:quickrun_config_backup = g:quickrun_config['php']
     let g:quickrun_config['php'] = {
-    \    'command':               'php-cs-fixer',
-    \    'cmdopt':                'fix --config=default --level=symfony',
-    \    'exec':                  '%c %o %s:p',
-    \    'outputter':             'buffer',
-    \    'outputter/buffer/into': 1,
-    \    'runner':                'system'}
+    \    'command':                'php-cs-fixer',
+    \    'cmdopt':                 'fix --config=default --level=symfony',
+    \    'exec':                   '%c %o %s:p',
+    \    'outputter':              'buffer',
+    \    'outputter/buffer/into':  1,
+    \    'outputter/buffer/split': ':botright 4sp',
+    \    'runner':                 'system'}
     if a:mode ==# 'normal'
         let g:quickrun_config['php']['cmdopt'] = g:quickrun_config['php']['cmdopt'] .' --fixers=align_equals,align_double_arrow,concat_with_spaces'
     else
