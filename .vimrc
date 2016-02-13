@@ -99,7 +99,6 @@ if has('vim_starting')
         endif
         let s:osType = 'unix'
     endif
-    unlet s:date
 endif
 
 function! s:KazuakiMCheckString() abort "{{{

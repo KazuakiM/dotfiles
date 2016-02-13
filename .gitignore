@@ -2,10 +2,13 @@
 .bashrc.win
 C:/
 .cache/eslint/
+.config/filezilla/lockfile
+.config/filezilla/queue.sqlite3
 .DS_Store
 .gitconfig
 .gitconfig.local
 .log/bash/
+.log/filezilla/
 .log/less/
 .log/mysql/
 .netrc

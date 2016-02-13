@@ -261,6 +261,7 @@ $ ln -sf $HOME/work/dotfiles/.bash_profile        $HOME/.bash_profile
 $ ln -sf $HOME/work/dotfiles/.bashrc              $HOME/.bashrc
 $ cp -f  $HOME/work/dotfiles/.bashrc.local        $HOME/
 $ ln -sf $HOME/work/dotfiles/.cache               $HOME/.cache
+$ ln -sf $HOME/work/dotfiles/.config              $HOME/.config
 $ ln -sf $HOME/work/dotfiles/.ctags               $HOME/.ctags
 $ ln -sf $HOME/work/dotfiles/.eslintrc.js         $HOME/.eslintrc.js
 $ ln -sf $HOME/work/dotfiles/.gitconfig.org       $HOME/.gitconfig
