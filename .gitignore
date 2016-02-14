@@ -11,6 +11,7 @@ C:/
 .log/filezilla/
 .log/less/
 .log/mysql/
+.log/tmux/
 .netrc
 .ssh/
 .vimrc.win
