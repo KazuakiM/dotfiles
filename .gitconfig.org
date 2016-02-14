@@ -2,8 +2,6 @@
     # from 1.7.10
     path = ~/.gitconfig.local
 [alias]
-    df  = diff --ignore-space-at-eol --ignore-space-change
-    #df  = diff --ignore-space-at-eol --ignore-space-change --ignore-blank-lines
     dff = difftool
     lg  = log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 [core]
