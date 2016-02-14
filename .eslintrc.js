@@ -81,7 +81,7 @@ module.exports = {
         // no-labels
         // no-lone-blocks (es6)
         // no-loop-func (es6)
-        //XXX: "no-magic-numbers": 2,
+        "no-magic-numbers": [2, {"ignoreArrayIndexes": true }],
         // no-multi-spaces
         "no-multi-str": 2,
         // no-native-reassign
