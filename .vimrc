@@ -212,7 +212,7 @@ function! s:KazuakiMTabpageLabelUpdate(tabNumber) abort "{{{
         let l:bufnr = ''
     endif
     let l:modified = len(filter(copy(l:bufnrs), 'getbufvar(v:val, "&modified")')) ? '[+]' : ''
-    return '%'. a:tabNumber .'T'. l:highlight . l:bufnr .' '. fnamemodify(bufname(l:bufnrs[tabpagewinnr(a:tabNumber) - 1]), ':t') .' '. l:modified.
+    return '%'. a:tabNumber .'T'. l:highlight . l:bufnr .' '. fnamemodify(bufname(l:bufnrs[tabpagewinnr(a:tabNumber) - 1]), ':t') .' '. l:modified .
     \    '%T%#TabLineFill#'
 endfunction "}}}
 
@@ -632,7 +632,6 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:ref_phpmanual_path  = s:envHome .'/.vim/vim-ref/php-chunked-xhtml'
 endfunction "}}}
 "}}}
-"}}}
 " open-browser.vim {{{
 NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'openbrowser#_keymapping_smart_search'}
 nnoremap <Leader>gx :<C-u>call<Space>openbrowser#_keymapping_smart_search('n')<CR>
@@ -722,7 +721,7 @@ endfunction
 NeoBundleLazy 'hail2u/vim-css3-syntax', {'filetypes': ['html', 'php', 'css']}
 "}}}
 " vim-javascript {{{
-NeoBundleLazy 'othree/yajs.vim', {'filetypes': ['html', 'php', 'javascript']}
+NeoBundleLazy 'pangloss/vim-javascript', {'filetypes': ['html', 'php', 'javascript']}
 "}}}
 " vim-markdown {{{
 NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'markdown'}
@@ -730,6 +729,7 @@ let g:vim_markdown_folding_disabled = 1
 "}}}
 " vim-go-extra {{{
 "NeoBundleLazy 'vim-jp/vim-go-extra', {'filetypes': 'go'}
+"}}}
 "}}}
 "
 "
@@ -782,7 +782,6 @@ elseif s:osType ==# 'win'
 
 elseif s:osType ==# 'unix'
 endif
-"}}}
 "}}}
 "
 "

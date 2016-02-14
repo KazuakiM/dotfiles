@@ -60,18 +60,15 @@ function! kazuakim#PhpCsFixer(mode) abort "{{{
     let l:quickrun_config_backup = g:quickrun_config['php']
     let g:quickrun_config['php'] = {
     \    'command':                'php-cs-fixer',
-    \    'cmdopt':                 'fix --config=default --level=symfony',
+    \    'cmdopt':                 'fix --config=default --level=symfony --fixers=align_double_arrow,align_equals,concat_with_spaces,ordered_use,short_array_syntax',
     \    'exec':                   '%c %o %s:p',
     \    'outputter':              'buffer',
     \    'outputter/buffer/into':  1,
     \    'outputter/buffer/split': ':botright 4sp',
     \    'runner':                 'system'}
-    if a:mode ==# 'normal'
-        let g:quickrun_config['php']['cmdopt'] = g:quickrun_config['php']['cmdopt'] .' --fixers=align_equals,align_double_arrow,concat_with_spaces'
-    else
-        let g:quickrun_config['php']['cmdopt'] = g:quickrun_config['php']['cmdopt'] .' --fixers=align_equals,align_double_arrow,-braces'
+    if a:mode ==# 'template'
+        let g:quickrun_config['php']['cmdopt'] = g:quickrun_config['php']['cmdopt'] .',-braces'
     endif
-    let g:quickrun_config['php']['cmdopt'] = g:quickrun_config['php']['cmdopt']
 
     QuickRun
 
