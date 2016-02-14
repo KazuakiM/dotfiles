@@ -85,19 +85,51 @@ module.exports = {
         // no-multi-spaces
         "no-multi-str": 2,
         // no-native-reassign
-        //
-        //TODO: I'm give up.
-        //
+        // no-new-func
+        // no-new-wrappers
+        "no-new": 2,
+        // no-octal-escape
+        "no-octal": 2,
+        // no-param-reassign
+        "no-process-env": 2,
+        "no-proto":       2,
+        "no-redeclare":   [2, {"builtinGlobals": true }],
+        // no-return-assign
+        // no-script-url
+        //XXX: "no-self-assign": 2,
+        "no-self-compare": 2,
+        // no-sequences
+        // no-throw-literal (es6)
+        // no-unmodified-loop-condition
+        // no-unused-expressions
+        // no-unused-labels
+        // no-useless-call
+        // no-useless-concat (es6)
+        // no-void
+        // no-warning-comments
+        "no-with": 2,
+        // radix
+        // vars-on-top
+        // wrap-iife
+        // yoda
         //}}}
         //Strict Mode {{{
         "strict": [2, "global"],
         //}}}
-        //Stylistic Issues
+        //Variables {{{
+        //
+        //TODO:now writing.
+        //
+        //}}}
+        //Node.js and CommonJS {{{
+        //}}}
+        //Stylistic Issues {{{
         "array-bracket-spacing": [2, "never"],
         "block-spacing":         [2, "never"],
         "brace-style":           [2, "stroustrup"],
         "jsx-quotes":            [1, "prefer-double"],
-        //eslint-plugin-react
+        //}}}
+        //eslint-plugin-react {{{
         "react/display-name":                 1,
         "react/forbid-prop-types":            1,
         "react/jsx-boolean-value":            1,
@@ -134,5 +166,7 @@ module.exports = {
         "react/require-extension":            1,
         "react/self-closing-comp":            1,
         "react/sort-comp":                    1,
-        "react/wrap-multilines":              1}
+        "react/wrap-multilines":              1
+        //}}}
+    }
 };
