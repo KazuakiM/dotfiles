@@ -1,5 +1,6 @@
 --exclude=.git
 --exclude=.svn
+--exclude=*min.js
 --recurse=yes
 --sort=yes
 --langdef=Go
