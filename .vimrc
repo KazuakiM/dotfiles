@@ -129,7 +129,7 @@ function! s:KazuakiMBufEnter() abort "{{{
 
     " default filetype
     if &filetype is# '' || &filetype is# 'text'
-        setlocal filetype=markdown
+        setlocal filetype=markdown conceallevel=0
     endif
 
     " Forcibly update
