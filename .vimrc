@@ -569,12 +569,17 @@ NeoBundleLazy 'vim-scripts/taglist.vim', {'commands': 'Tlist'}
 nnoremap <Leader>t :<C-u>Tlist<CR>
 let s:hooks = neobundle#get_hooks('taglist.vim')
 function! s:hooks.on_source(bundle) abort "{{{
-    "let s:tlist_go_settings      = 'go;g:enum;s:struct;u:union;f:function;t:type;v:variable'
-    let g:tlist_php_settings     = 'php;c:class;f:function;d:constant'
-    let g:Tlist_Exit_OnlyWindow  = 1
-    let g:Tlist_Show_One_File    = 1
-    let g:Tlist_Use_Right_Window = 1
-    let g:Tlist_WinWidth         = 25
+    "let s:tlist_go_settings        = 'go;g:enum;s:struct;u:union;f:function;t:type;v:variable'
+    let g:tlist_javascript_settings = 'js;f:function'
+    let g:tlist_php_settings        = 'php;c:class;f:function;d:constant'
+    let g:Tlist_Exit_OnlyWindow     = 1
+    let g:Tlist_Show_One_File       = 1
+    let g:Tlist_Use_Right_Window    = 1
+    if &filetype is# 'javascript'
+        let g:Tlist_WinWidth        = 50
+    else
+        let g:Tlist_WinWidth        = 25
+    endif
 endfunction "}}}
 "}}}
 " vim-qfreplace {{{
@@ -640,10 +645,12 @@ nnoremap <Leader>gx :<C-u>call<Space>openbrowser#_keymapping_smart_search('n')<C
 " neoinclude.vim
 " neocomplete.vim {{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['KazuakiM/vim-snippets', 'Shougo/neoinclude.vim'], 'insert': 1}
+"TODO: next stage neosnippet.
+"inoremap <expr><C-Space> pumvisible() ? "\<C-x>" : "\<C-Space>"
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle) abort "{{{
     "neocomplete.vim
-    autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd MyAutoCmd FileType {javascript,html} setlocal omnifunc=javascriptcomplete#CompleteJS
     let g:neocomplete#auto_completion_start_length     = 3
     let g:neocomplete#data_directory                   = s:envHome .'/.vim/neocomplete.vim'
     let g:neocomplete#delimiter_patterns               = {'php': ['->', '::', '\']}
@@ -653,6 +660,7 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:neocomplete#enable_auto_select               = 0
     let g:neocomplete#enable_fuzzy_completion          = 0
     let g:neocomplete#enable_smart_case                = 1
+    let g:neocomplete#fallback_mappings                = ["\<C-x>\<C-o>", "\<C-x>\<C-n>"]
     let g:neocomplete#keyword_patterns                 = {'_': '\h\w*'}
     let g:neocomplete#lock_buffer_name_pattern         = '\.log\|.*quickrun.*\|.jax'
     let g:neocomplete#max_keyword_width                = 30

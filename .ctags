@@ -8,21 +8,10 @@
 --regex-Go=/func([ \t]+\([^)]+\))?[ \t]+([\w]+)/\2/f,func/
 --regex-Go=/type[ \t]+([\l\u_][\w]+)/\1/t,type/
 --regex-Go=/var[ \t]+([\l\u_][\w]+)/\1/v,var/
---langmap=JavaScript:+.json.jsx.html
---regex-JavaScript=/[ \t.]([A-Z][A-Z0-9._$]+)[ \t]*[=:][ \t]*([0-9"'\[\{]|null)/\1/n,constant/
---regex-JavaScript=/\.([A-Za-z0-9._$]+)[ \t]*=[ \t]*\{/\1/o,object/
---regex-JavaScript=/['"]*([A-Za-z0-9_$]+)['"]*[ \t]*:[ \t]*\{/\1/o,object/
---regex-JavaScript=/([A-Za-z0-9._$]+)\[["']([A-Za-z0-9_$]+)["']\][ \t]*=[ \t]*\{/\1\.\2/o,object/
---regex-JavaScript=/([A-Za-z0-9._$]+)[ \t]*=[ \t]*\(function\(\)/\1/c,class/
---regex-JavaScript=/['"]*([A-Za-z0-9_$]+)['"]*:[ \t]*\(function\(\)/\1/c,class/
---regex-JavaScript=/class[ \t]+([A-Za-z0-9._$]+)[ \t]*/\1/c,class/
---regex-JavaScript=/([A-Za-z$][A-Za-z0-9_$()]+)[ \t]*=[ \t]*[Rr]eact.createClass[ \t]*\(/\1/c,class/
---regex-JavaScript=/([A-Z][A-Za-z0-9_$]+)[ \t]*=[ \t]*[A-Za-z0-9_$]*[ \t]*[{(]/\1/c,class/
---regex-JavaScript=/([A-Z][A-Za-z0-9_$]+)[ \t]*:[ \t]*[A-Za-z0-9_$]*[ \t]*[{(]/\1/c,class/
---regex-JavaScript=/([A-Za-z$][A-Za-z0-9_$]+)[ \t]*=[ \t]*function[ \t]*\(/\1/f,function/
---regex-JavaScript=/(function)*[ \t]*([A-Za-z$_][A-Za-z0-9_$]+)[ \t]*\([^)]*\)[ \t]*\{/\2/f,function/
---regex-JavaScript=/['"]*([A-Za-z$][A-Za-z0-9_$]+)['"]*:[ \t]*function[ \t]*\(/\1/m,method/
---regex-JavaScript=/([A-Za-z0-9_$]+)\[["']([A-Za-z0-9_$]+)["']\][ \t]*=[ \t]*function[ \t]*\(/\2/m,method/
+--languages=-JavaScript
+--langdef=js
+--langmap=js:.js.json.jsx.html
+--regex-js=/['"]*([A-Za-z$][A-Za-z0-9_$]+)['"]*[ \t]*[:=][ \t]*function[ \t]*\(/\1/f,function/
 --langmap=PHP:+.inc.tpl
 --regex-PHP=/const\s+([^ \t=]+)/\1/d/
 --php-kinds=cfd
