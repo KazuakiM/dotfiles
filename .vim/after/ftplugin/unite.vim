@@ -1,2 +1,2 @@
-nmap <silent> <buffer> <ESC><ESC> :quit<CR>
+nmap <silent> <buffer> <ESC><ESC> <Plug>(unite_exit)
 imap <silent> <buffer> <Tab><Tab> <Plug>(unite_complete)/
