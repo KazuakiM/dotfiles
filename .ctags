@@ -11,6 +11,7 @@
 --languages=-JavaScript
 --langdef=js
 --langmap=js:.js.json.jsx.html
+--regex-js=/^(var[ \t]+)*([A-Za-z$][A-Za-z0-9_$]+)[ \t]*=[ \t]*([A-Za-z$][A-Za-z0-9_$]+)*[ \t]*[|]*[ \t]*\{/\2/o,object/
 --regex-js=/['"]*([A-Za-z$][A-Za-z0-9_$]+)['"]*[ \t]*[:=][ \t]*function[ \t]*\(/\1/f,function/
 --langmap=PHP:+.inc.tpl
 --regex-PHP=/const\s+([^ \t=]+)/\1/d/

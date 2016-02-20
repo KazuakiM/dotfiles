@@ -570,16 +570,12 @@ nnoremap <Leader>t :<C-u>Tlist<CR>
 let s:hooks = neobundle#get_hooks('taglist.vim')
 function! s:hooks.on_source(bundle) abort "{{{
     "let s:tlist_go_settings        = 'go;g:enum;s:struct;u:union;f:function;t:type;v:variable'
-    let g:tlist_javascript_settings = 'js;f:function'
+    let g:tlist_javascript_settings = 'js;o:object;f:function'
     let g:tlist_php_settings        = 'php;c:class;f:function;d:constant'
     let g:Tlist_Exit_OnlyWindow     = 1
     let g:Tlist_Show_One_File       = 1
     let g:Tlist_Use_Right_Window    = 1
-    if &filetype is# 'javascript'
-        let g:Tlist_WinWidth        = 50
-    else
-        let g:Tlist_WinWidth        = 25
-    endif
+    let g:Tlist_WinWidth            = 25
 endfunction "}}}
 "}}}
 " vim-qfreplace {{{
