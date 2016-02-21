@@ -184,11 +184,9 @@ autocmd MyAutoCmd WinEnter             * call s:KazuakiMWinEnter()
 
 function! KazuakiMStatuslineSyntax() abort "{{{
     let l:ret = qfstatusline#Update()
-    if 0 < len(l:ret)
-        if s:lineUpdate is# 0
-            highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta guibg=Magenta
-            let s:lineUpdate = 1
-        endif
+    if 0 < len(l:ret) && s:lineUpdate is# 0
+        highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta guibg=Magenta
+        let s:lineUpdate = 1
     elseif s:lineUpdate is# 1
         highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Grey guibg=Grey
         let s:lineUpdate = 0
