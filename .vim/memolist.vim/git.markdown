@@ -23,6 +23,9 @@ Rebase branch to master
 ```bash
 pwd
 git status
+git push origin xxxxx
+
+  Insurance for rebase error.
 
 git checkout master
 git pull
@@ -34,20 +37,25 @@ gdiff master
 git lg
 git rebase -i HEAD~n
 
- (n回分を1つにまとめる)
-
+  Summarized in one.
 
 git log
 
   Check commit message.
 
-
 git lg
 
   Check graph.
 
-
 git rebase master
+git lg
+
+  Check graph.
+
+git push -f origin xxxxx
+git lg
+
+  Check graph.
 
 git checkout master
 git merge xxxxx
@@ -87,8 +95,7 @@ git branch -a
 
 git fetch fork_master
 
-git merge fork_master/master
-
+git rebase fork_master/master
 ```
 
 Checkout remote branch repository
