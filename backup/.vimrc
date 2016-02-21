@@ -84,19 +84,25 @@ call smartinput#define_rule({'at': '(\%#)',      'char': '<BS>', 'input': '<Del>
 call smartinput#define_rule({'at': '{\%#}',      'char': '<BS>', 'input': '<Del>'                                  })
 call smartinput#define_rule({'at': '\[\%#\]',    'char': '<BS>', 'input': '<Del>'                                  })
 "}}}
-" vim-tags {{{
-NeoBundle 'szw/vim-tags'
-let g:vim_tags_auto_generate = 1
-let g:vim_tags_cache_dir     = $HOME.'/.vim/vim-tags'
-"}}}
-" webapi-vim {{{
-NeoBundle 'mattn/webapi-vim'
-"}}}
 "vim-qfsigns {{{
 NeoBundle 'KazuakiM/vim-qfsigns'
 nnoremap <Leader>sy :QfsignsJunmp<CR>
 let g:qfsigns#Config = {'id': '5050', 'name': 'KazuakiMQFError',}
 execute 'sign define '.get(g:qfsigns#Config,'name').' linehl=KazuakiMQFError texthl=KazuakiMQFError text=>>'
+"}}}
+" ultisnips {{{
+NeoBundle 'SirVer/ultisnips'
+let g:did_UltiSnips_snipmate_compatibility = 1
+let g:UltiSnipsEditSplit                   = 'vertical'
+let g:UltiSnipsExpandTrigger               = '<TAB>'
+let g:UltiSnipsJumpBackwardTrigger         = '<S-TAB>'
+let g:UltiSnipsJumpForwardTrigger          = '<TAB>'
+let g:UltiSnipsSnippetsDir                 = s:envHome .'/.vim/bundle/vim-snippets/UltiSnips'
+let g:UltiSnipsUsePythonVersion            = 3
+"neocomplete
+let g:neocomplete#sources                  = {
+\    '_':          ['ultisnips', 'file', 'buffer'],           'php': ['ultisnips', 'file', 'dictionary', 'buffer'],
+\    'javascript': ['ultisnips', 'file', 'omni',    'buffer']}
 "}}}
 "}}}
 "
@@ -114,17 +120,6 @@ endfunction "}}}
 " incsearch.vim {{{
 NeoBundleLazy 'haya14busa/incsearch.vim', {'mappings': '<Plug>(incsearch-forward)'}
 nmap / <Plug>(incsearch-forward)
-"}}}
-" neosnippet-snippets
-" neosnippet.vim {{{
-NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['KazuakiM/neosnippet-snippets', 'Shougo/neosnippet.vim', 'Shougo/context_filetype.vim'], 'autoload': {'insert': 1}}
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ? '\<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '\<C-n>' : '\<TAB>'
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ? '\<Plug>(neosnippet_expand_or_jump)' : '\<TAB>'
-snoremap <ESC> <ESC>:NeoSnippetClearMarkers<CR>
-set conceallevel=2 concealcursor=i
-let g:neosnippet#data_directory           = $HOME.'/.vim/neosnippet.vim'
-let g:neosnippet#disable_runtime_snippets = {'_' : 1}
-let g:neosnippet#snippets_directory       = $HOME.'/.vim/bundle/neosnippet-snippets/neosnippets'
 "}}}
 " unite-webcolorname {{{
 NeoBundleLazy 'pasela/unite-webcolorname', {'depends': 'Shougo/unite.vim', 'unite_sources': 'webcolorname'}

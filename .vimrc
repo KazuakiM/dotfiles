@@ -129,7 +129,7 @@ function! s:KazuakiMBufEnter() abort "{{{
 
     " default filetype
     if &filetype is# '' || &filetype is# 'text'
-        setlocal filetype=markdown conceallevel=0
+        setlocal filetype=markdown
     endif
 
     " Forcibly update
@@ -223,7 +223,7 @@ endfunction "}}}
 " Basic
 set autoindent autoread
 set backspace=indent,eol,start backup
-set clipboard+=autoselect,unnamed cmdheight=1 completeopt=longest,menu
+set clipboard+=autoselect,unnamed cmdheight=1 concealcursor=i conceallevel=2 completeopt=longest,menu
 set diffopt=filler,context:5,iwhite,vertical display=lastline
 set expandtab
 set fillchars+=diff:* foldmethod=marker
@@ -384,7 +384,6 @@ if neobundle#load_cache()
     NeoBundle 'KazuakiM/vim-qfstatusline'
     NeoBundle 'LeafCage/yankround.vim'
     NeoBundle 'rhysd/clever-f.vim'
-    NeoBundle 'SirVer/ultisnips'
     NeoBundle 'thinca/vim-prettyprint'
     NeoBundle 'tpope/vim-surround'
     NeoBundle 'vim-jp/vimdoc-ja'
@@ -421,14 +420,6 @@ let g:yankround_use_region_hl       = 1
 let g:clever_f_across_no_line = 0
 let g:clever_f_smart_case     = 1
 let g:clever_f_use_migemo     = 0
-"}}}
-" ultisnips {{{
-let g:did_UltiSnips_snipmate_compatibility = 1
-let g:UltiSnipsEditSplit                   = 'vertical'
-let g:UltiSnipsExpandTrigger               = '<TAB>'
-let g:UltiSnipsJumpBackwardTrigger         = '<S-TAB>'
-let g:UltiSnipsJumpForwardTrigger          = '<TAB>'
-let g:UltiSnipsSnippetsDir                 = s:envHome .'/.vim/bundle/vim-snippets/UltiSnips'
 "}}}
 " indentLine {{{
 let g:indentLine_faster = 1
@@ -637,21 +628,32 @@ endfunction "}}}
 NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'openbrowser#_keymapping_smart_search'}
 nnoremap <Leader>gx :<C-u>call<Space>openbrowser#_keymapping_smart_search('n')<CR>
 "}}}
-" vim-snippets
+" neosnippet-snippets
+" neosnippet.vim
 " neoinclude.vim
 " neocomplete.vim {{{
-NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['KazuakiM/vim-snippets', 'Shougo/neoinclude.vim'], 'insert': 1}
-"TODO: next stage neosnippet.
-"inoremap <expr><C-Space> pumvisible() ? "\<C-x>" : "\<C-Space>"
+NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['KazuakiM/neosnippet-snippets', 'Shougo/neosnippet.vim', 'Shougo/neoinclude.vim'], 'insert': 1}
+imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB>                           neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+nmap <expr><TAB>                                                                   <Plug>(neosnippet_expand_or_jump)
+inoremap <silent> <CR> <C-r>=<SID>KazuakiMNeoComplete()<CR>
+function! s:KazuakiMNeoComplete() abort "{{{
+        return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction "}}}
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS>  neocomplete#smart_close_popup()."\<C-h>"
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle) abort "{{{
     "neocomplete.vim
     autocmd MyAutoCmd FileType {javascript,html} setlocal omnifunc=javascriptcomplete#CompleteJS
     let g:neocomplete#auto_completion_start_length     = 3
     let g:neocomplete#data_directory                   = s:envHome .'/.vim/neocomplete.vim'
-    let g:neocomplete#delimiter_patterns               = {'php': ['->', '::', '\']}
+    let g:neocomplete#delimiter_patterns               = {
+    \    'javascript': ['.'],
+    \    'php':        ['->', '::', '\'],
+    \    'ruby':       ['::']}
     let g:neocomplete#enable_at_startup                = 1
-    let g:neocomplete#enable_auto_close_preview        = 3
+    let g:neocomplete#enable_auto_close_preview        = 1
     let g:neocomplete#enable_auto_delimiter            = 1
     let g:neocomplete#enable_auto_select               = 0
     let g:neocomplete#enable_fuzzy_completion          = 0
@@ -663,19 +665,28 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:neocomplete#max_list                         = 8
     let g:neocomplete#min_keyword_length               = 3
     let g:neocomplete#sources                          = {
-    \    '_':          ['ultisnips', 'file', 'buffer'],           'php': ['ultisnips', 'file', 'dictionary', 'buffer'],
-    \    'javascript': ['ultisnips', 'file', 'omni',    'buffer']}
-    "let g:neocomplete#sources                         = {'go': ['ultisnips', 'file', 'omni', 'buffer']}
+    \    '_':          ['neosnippet', 'file', 'buffer'],
+    \    'php':        ['neosnippet', 'file', 'dictionary', 'buffer'],
+    \    'javascript': ['neosnippet', 'file', 'omni',       'buffer']}
+    "let g:neocomplete#sources                         = {'go': ['neosnippet', 'file', 'omni', 'buffer']}
     let g:neocomplete#sources#buffer#cache_limit_size  = 50000
     let g:neocomplete#sources#buffer#disabled_pattern  = '\.log\|\.jax'
     let g:neocomplete#sources#buffer#max_keyword_width = 30
-    let g:neocomplete#sources#dictionary#dictionaries  = {'_': '', 'php': s:envHome .'/.vim/dict/php.dict'}
-    "let g:neocomplete#sources#omni#input_patterns      = {'go': '\h\w\.\w*'}
+    let g:neocomplete#sources#dictionary#dictionaries  = {
+    \    '_':   '',
+    \    'php': s:envHome .'/.vim/dict/php.dict'}
+    "let g:neocomplete#sources#omni#input_patterns     = {'go': '\h\w\.\w*'}
     let g:neocomplete#use_vimproc                      = 1
 
     "neoinclude.vim
     let g:neoinclude#exts          = {'php': ['php', 'inc', 'tpl']}
     let g:neoinclude#max_processes = 5
+
+    "neosnippet.vim
+    let g:neosnippet#data_directory                = s:envHome.'/.vim/neosnippet.vim'
+    let g:neosnippet#enable_snipmate_compatibility = 1
+    let g:neosnippet#disable_runtime_snippets      = {'_' : 1}
+    let g:neosnippet#snippets_directory            = s:envHome.'/.vim/bundle/neosnippet-snippets/neosnippets'
 endfunction "}}}
 "}}}
 " gundo.vim {{{
@@ -745,9 +756,6 @@ if s:osType !=# 'macunix'
 endif
 
 if s:osType !=# 'win'
-    " ultisnips {{{
-    let g:UltiSnipsUsePythonVersion = 3
-    "}}}
     " memolist.vim {{{
     let g:memolist_path = s:envHome .'/.vim/memolist.vim'
     "}}}
@@ -791,7 +799,7 @@ endif
 "
 " NeoBundleFetch {{{
 NeoBundleFetch 'psychs/lingr-irc'
-NeoBundleFetch 'KazuakiM/neosnippet-snippets'
+NeoBundleFetch 'KazuakiM/vim-snippets'
 NeoBundleFetch 'KazuakiM/vim-qfsigns'
 NeoBundleFetch 'KazuakiM/vim-regexper'
 NeoBundleFetch 'Kuniwak/vint'
