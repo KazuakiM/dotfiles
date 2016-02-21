@@ -335,9 +335,6 @@ let g:ftplugin_sql_omni_key_left  = 1
 let g:ftplugin_sql_omni_key_right = 1
 let g:ftplugin_sql_statements     = 1
 let g:omni_sql_no_default_maps    = 1
-" $VIMRUNTIME/syntax/markdown.vim
-"MEMO:This setting is cool at reading vimrc 2015-09-20. But fenced sytantx unfunctions.
-"let g:markdown_fenced_languages = ['c', 'cpp', 'cs', 'css', 'go', 'html', 'javascript', 'json', 'lua', 'mysql', 'php', 'python', 'ruby', 'vim', 'xml']
 " disable plugin
 let g:loaded_2html_plugin      = 1 "$VIMRUNTIME/plugin/tohtml.vim
 let g:loaded_getscriptPlugin   = 1 "$VIMRUNTIME/plugin/getscriptPlugin.vim
@@ -560,7 +557,6 @@ NeoBundleLazy 'vim-scripts/taglist.vim', {'commands': 'Tlist'}
 nnoremap <Leader>t :<C-u>Tlist<CR>
 let s:hooks = neobundle#get_hooks('taglist.vim')
 function! s:hooks.on_source(bundle) abort "{{{
-    "let s:tlist_go_settings        = 'go;g:enum;s:struct;u:union;f:function;t:type;v:variable'
     let g:tlist_javascript_settings = 'js;o:object;f:function'
     let g:tlist_php_settings        = 'php;c:class;f:function;d:constant'
     let g:Tlist_Exit_OnlyWindow     = 1
@@ -645,48 +641,49 @@ inoremap <expr><BS>  neocomplete#smart_close_popup()."\<C-h>"
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle) abort "{{{
     "neocomplete.vim
-    autocmd MyAutoCmd FileType {javascript,html} setlocal omnifunc=javascriptcomplete#CompleteJS
-    let g:neocomplete#auto_completion_start_length     = 3
-    let g:neocomplete#data_directory                   = s:envHome .'/.vim/neocomplete.vim'
-    let g:neocomplete#delimiter_patterns               = {
+    autocmd MyAutoCmd FileType html       setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd MyAutoCmd FileType php        setlocal omnifunc=phpcomplete#CompletePHP
+    let g:neocomplete#auto_completion_start_length = 3
+    let g:neocomplete#data_directory               = s:envHome .'/.vim/neocomplete.vim'
+    let g:neocomplete#delimiter_patterns           = {
     \    'javascript': ['.'],
     \    'php':        ['->', '::', '\'],
     \    'ruby':       ['::']}
-    let g:neocomplete#enable_at_startup                = 1
-    let g:neocomplete#enable_auto_close_preview        = 1
-    let g:neocomplete#enable_auto_delimiter            = 1
-    let g:neocomplete#enable_auto_select               = 0
-    let g:neocomplete#enable_fuzzy_completion          = 0
-    let g:neocomplete#enable_smart_case                = 1
-    let g:neocomplete#fallback_mappings                = ["\<C-x>\<C-o>", "\<C-x>\<C-n>"]
-    let g:neocomplete#keyword_patterns                 = {'_': '\h\w*'}
-    let g:neocomplete#lock_buffer_name_pattern         = '\.log\|.*quickrun.*\|.jax'
-    let g:neocomplete#max_keyword_width                = 30
-    let g:neocomplete#max_list                         = 8
-    let g:neocomplete#min_keyword_length               = 3
-    let g:neocomplete#sources                          = {
+    let g:neocomplete#enable_at_startup         = 1
+    let g:neocomplete#enable_auto_close_preview = 1
+    let g:neocomplete#enable_auto_delimiter     = 1
+    let g:neocomplete#enable_auto_select        = 0
+    let g:neocomplete#enable_fuzzy_completion   = 0
+    let g:neocomplete#enable_smart_case         = 1
+    let g:neocomplete#fallback_mappings         = ["\<C-x>\<C-o>", "\<C-x>\<C-n>"]
+    let g:neocomplete#keyword_patterns          = {'_': '\h\w*'}
+    let g:neocomplete#lock_buffer_name_pattern  = '\.log\|.*quickrun.*\|.jax'
+    let g:neocomplete#max_keyword_width         = 30
+    let g:neocomplete#max_list                  = 8
+    let g:neocomplete#min_keyword_length        = 3
+    let g:neocomplete#sources                   = {
     \    '_':          ['neosnippet', 'file', 'buffer'],
-    \    'php':        ['neosnippet', 'file', 'dictionary', 'buffer'],
-    \    'javascript': ['neosnippet', 'file', 'omni',       'buffer']}
-    "let g:neocomplete#sources                         = {'go': ['neosnippet', 'file', 'omni', 'buffer']}
+    \    'html':       ['neosnippet', 'file', 'omni',       'buffer'],
+    \    'javascript': ['neosnippet', 'file', 'omni',       'buffer'],
+    \    'php':        ['neosnippet', 'file', 'dictionary', 'omni',    'buffer']}
     let g:neocomplete#sources#buffer#cache_limit_size  = 50000
     let g:neocomplete#sources#buffer#disabled_pattern  = '\.log\|\.jax'
     let g:neocomplete#sources#buffer#max_keyword_width = 30
     let g:neocomplete#sources#dictionary#dictionaries  = {
     \    '_':   '',
-    \    'php': s:envHome .'/.vim/dict/php.dict'}
-    "let g:neocomplete#sources#omni#input_patterns     = {'go': '\h\w\.\w*'}
-    let g:neocomplete#use_vimproc                      = 1
+    \    'php': s:envHome . '/.vim/dict/php.dict'}
+    let g:neocomplete#use_vimproc = 1
 
     "neoinclude.vim
     let g:neoinclude#exts          = {'php': ['php', 'inc', 'tpl']}
     let g:neoinclude#max_processes = 5
 
     "neosnippet.vim
-    let g:neosnippet#data_directory                = s:envHome.'/.vim/neosnippet.vim'
+    let g:neosnippet#data_directory                = s:envHome . '/.vim/neosnippet.vim'
     let g:neosnippet#enable_snipmate_compatibility = 1
     let g:neosnippet#disable_runtime_snippets      = {'_' : 1}
-    let g:neosnippet#snippets_directory            = s:envHome.'/.vim/bundle/neosnippet-snippets/neosnippets'
+    let g:neosnippet#snippets_directory            = s:envHome . '/.vim/bundle/neosnippet-snippets/neosnippets'
 endfunction "}}}
 "}}}
 " gundo.vim {{{
@@ -741,9 +738,6 @@ NeoBundleLazy 'pangloss/vim-javascript', {'filetypes': ['html', 'php', 'javascri
 " vim-markdown {{{
 NeoBundleLazy 'plasticboy/vim-markdown', {'filetypes': 'markdown'}
 let g:vim_markdown_folding_disabled = 1
-"}}}
-" vim-go-extra {{{
-"NeoBundleLazy 'vim-jp/vim-go-extra', {'filetypes': 'go'}
 "}}}
 "}}}
 "
