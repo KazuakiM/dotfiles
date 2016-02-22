@@ -36,6 +36,19 @@ svn log --stop-on-copy
 
 svn merge -r <old revision>:<latest revision> svn://<host>/<Project>/trunk
 svn stat | grep C
+
+#IF Conflict
+# svn revert -R .
+# svn up
+# svn info
+# svn merge -r <old revision>:<latest revision> svn://<host>/<Project>/trunk
+#   detail merge
+# svn stat | grep C
+# svn ci -m "Merged branch '<branch name>' into 'master' <old revision>:<latest revision>"
+# svn up
+# svn info
+# svn merge ....
+
 svn ci -m "Merged branch '<branch name>' into 'master' <old revision>:<latest revision>"
 svn up
 #
