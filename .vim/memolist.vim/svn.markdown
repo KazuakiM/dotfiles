@@ -6,9 +6,9 @@ Svn
 Create branch
 ```bash
 pwd
-svn stat
+svn status
 
-svn up
+svn update
 svn info
 
 NAME="`date +%Y%m%d`_XXX"
@@ -20,9 +20,9 @@ Merge branch to master
 ```bash
 pwd
 svn switch svn://<host>/<Project>/branches/<branch name>
-svn stat
+svn status
 
-svn up
+svn update
 #
 # latest revision check
 #
@@ -35,32 +35,35 @@ svn log --stop-on-copy
 #
 
 svn merge -r <old revision>:<latest revision> svn://<host>/<Project>/trunk
-svn stat | grep C
+svn status | grep C
+#
+# Check Conflict.
+#
 
 # IF Conflict
 #  svn revert -R .
-#  svn stat
+#  svn status
 #  svn status | grep '^?' | awk '{print $2}' | xargs rm -rf
-#  svn up
-#  svn stat
+#  svn update
+#  svn status
 #
 #  # IF ! file exist
 #  #  rm -rf xxxx
-#  #  svn up
-#  #  svn stat
+#  #  svn update
+#  #  svn status
 #
 #  svn info
 #  svn log --stop-on-copy
 #  svn merge -r <old revision>:<latest revision> svn://<host>/<Project>/trunk
 #    detail merge
-#  svn stat | grep C
-#  svn ci -m "Merged branch '<branch name>' into 'master' <old revision>:<latest revision>"
-#  svn up
+#  svn status | grep C
+#  svn commit -m "Merged branch '<branch name>' into 'master' <old revision>:<latest revision>"
+#  svn update
 #  svn info
 #  svn merge ....
 
-svn ci -m "Merged branch '<branch name>' into 'master' <old revision>:<latest revision>"
-svn up
+svn commit -m "Merged branch '<branch name>' into 'master' <old revision>:<latest revision>"
+svn update
 #
 # After merge revision check
 #
@@ -71,8 +74,8 @@ svn switch svn://<host>/<Project>/trunk
 svn merge svn://<host>/<Project>/trunk@<latest revision> svn://<host>/<Project>/branches/<branch name>@<after merge revision> .
 svn status
 svn diff
-svn ci -m "Merged branch 'master' into '<branch name>'"
-svn up
+svn commit -m "Merged branch 'master' into '<branch name>'"
+svn update
 ```
 
 ## svn add/rm
