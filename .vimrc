@@ -184,9 +184,11 @@ autocmd MyAutoCmd WinEnter             * call s:KazuakiMWinEnter()
 
 function! KazuakiMStatuslineSyntax() abort "{{{
     let l:ret = qfstatusline#Update()
-    if 0 < len(l:ret) && s:lineUpdate is# 0
-        highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta guibg=Magenta
-        let s:lineUpdate = 1
+    if 0 < len(l:ret)
+        if s:lineUpdate is# 0
+            highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta guibg=Magenta
+            let s:lineUpdate = 1
+        endif
     elseif s:lineUpdate is# 1
         highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Grey guibg=Grey
         let s:lineUpdate = 0
@@ -498,6 +500,7 @@ NeoBundleLazy 'thinca/vim-quickrun', {'commands': 'QuickRun'}
 nnoremap <Leader>run  :<C-u>QuickRun<CR>
 nnoremap <Leader>php  :<C-u>call<Space>kazuakim#PhpCsFixer('normal')<CR>
 nnoremap <Leader>phpt :<C-u>call<Space>kazuakim#PhpCsFixer('template')<CR>
+nnoremap <Leader>es   :<C-u>call<Space>kazuakim#EslintFix()<CR>
 " Set g:quickrun_config at .vimrc.local .
 let s:quickrun_config_javascript = {
 \    'command':     'eslint',
@@ -515,10 +518,9 @@ let g:quickrun_config = {
 \        'runner/vimproc/updatetime':           600},
 \    'javascript': {
 \        'command':     s:quickrun_config_javascript['command'],
-\        'cmdopt':      s:quickrun_config_javascript['cmdopt'] .' --fix',
+\        'cmdopt':      s:quickrun_config_javascript['cmdopt'] .' --config '. s:envHome .'/.eslintrc.js',
 \        'errorformat': s:quickrun_config_javascript['errorformat'],
-\        'exec':        s:quickrun_config_javascript['exec'],
-\        'runner':      'system'},
+\        'exec':        s:quickrun_config_javascript['exec']},
 \    'javascript/watchdogs_checker': {
 \        'type': 'watchdogs_checker/javascript'},
 \    'php': {
@@ -541,7 +543,11 @@ let g:quickrun_config = {
 \        'hook/qfstatusline_update/enable_exit':   1,
 \        'hook/qfstatusline_update/priority_exit': 2,
 \        'outputter/quickfix/open_cmd':            ''},
-\    'watchdogs_checker/javascript': s:quickrun_config_javascript,
+\    'watchdogs_checker/javascript': {
+\        'command':     s:quickrun_config_javascript['command'],
+\        'cmdopt':      s:quickrun_config_javascript['cmdopt'] .' --config '. s:envHome .'/.eslintrc.limit.js',
+\        'errorformat': s:quickrun_config_javascript['errorformat'],
+\        'exec':        s:quickrun_config_javascript['exec']},
 \    'watchdogs_checker/php':        {
 \        'command': 'php',
 \        'cmdopt':  '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
