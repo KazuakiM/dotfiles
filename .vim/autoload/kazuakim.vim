@@ -74,6 +74,16 @@ function! kazuakim#PhpCsFixer(mode) abort "{{{
 
     let g:quickrun_config['php'] = l:quickrun_config_backup
 endfunction "}}}
+
+function! kazuakim#EslintFix() abort "{{{
+    let l:quickrun_config_backup                  = g:quickrun_config['javascript']
+    let g:quickrun_config['javascript']['cmdopt'] = l:quickrun_config_backup['cmdopt'] .' --config '. $HOME .'/.eslintrc.js --fix'
+    let g:quickrun_config['javascript']['runner'] = 'system'
+
+    QuickRun
+
+    let g:quickrun_config['javascript'] = l:quickrun_config_backup
+endfunction "}}}
 "}}}
 
 " gundo.vim {{{

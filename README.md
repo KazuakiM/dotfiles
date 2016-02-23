@@ -264,6 +264,7 @@ $ ln -sf $HOME/work/dotfiles/.cache               $HOME/.cache
 $ ln -sf $HOME/work/dotfiles/.config              $HOME/.config
 $ ln -sf $HOME/work/dotfiles/.ctags               $HOME/.ctags
 $ ln -sf $HOME/work/dotfiles/.eslintrc.js         $HOME/.eslintrc.js
+$ ln -sf $HOME/work/dotfiles/.eslintrc.limit.js   $HOME/.eslintrc.limit.js
 $ ln -sf $HOME/work/dotfiles/.gitconfig.org       $HOME/.gitconfig
 $ cp -f  $HOME/work/dotfiles/.gitconfig.local.org $HOME/.gitconfig.local
 $ ln -sf $HOME/work/dotfiles/.gvimrc              $HOME/.gvimrc

@@ -57,7 +57,7 @@ module.exports = {
         // default-case
         "dot-location": [2, "property"],
         "dot-notation": 2,
-        "eqeqeq":       [2, "allow-null"],
+        //XXX: "eqeqeq":       [2, "allow-null"],
         // guard-for-in
         // no-alert
         // no-caller
@@ -81,7 +81,7 @@ module.exports = {
         // no-labels
         // no-lone-blocks (es6)
         // no-loop-func (es6)
-        "no-magic-numbers": [2, {"ignoreArrayIndexes": true }],
+        //XXX: "no-magic-numbers": [2, {"ignoreArrayIndexes": true }],
         // no-multi-spaces
         "no-multi-str": 2,
         // no-native-reassign
@@ -126,7 +126,7 @@ module.exports = {
         //Stylistic Issues {{{
         "array-bracket-spacing": [2, "never"],
         "block-spacing":         [2, "never"],
-        "brace-style":           [2, "stroustrup"],
+        "brace-style":           2,
         "jsx-quotes":            [1, "prefer-double"],
         //}}}
         //eslint-plugin-react {{{
