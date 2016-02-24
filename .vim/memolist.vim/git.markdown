@@ -24,8 +24,9 @@ Rebase branch to master
 pwd
 git status
 git push origin xxxxx
-
-  Insurance for rebase error.
+#
+# Insurance for rebase error.
+#
 
 git checkout master
 git pull
@@ -34,28 +35,56 @@ git branch
 git checkout xxxxx
 gdiff master
 
-git lg
-git rebase -i HEAD~n
+git lg --oneline -n 5
+# 5ce576e
+# 30ff21a
+# 95eaecd
+# adb04d8
+# 29102b1
+#
 
-  Summarized in one.
+git rebase -i HEAD~3
+#
+# 最新から3つ前のコミット(adb04d8以降)を1つにまとめる。
+# 最新のコミット以外はsquashに指定する。
+#
 
 git log
-
-  Check commit message.
+#
+# Check commit message.
+#
 
 git lg
+#
+#  Check graph.
+#
 
-  Check graph.
+# IF error
+#  git reset --hard ORIG_HEAD
+#  git log
+#  git lg
+#  git rebase -i HEAD~n
+#  git log
+#  #
+#  # Check commit message.
+#  #
+#
+#  git lg
+#  #
+#  #  Check graph.
+#  #
 
 git rebase master
 git lg
-
-  Check graph.
+#
+#  Check graph.
+#
 
 git push -f origin xxxxx
 git lg
-
-  Check graph.
+#
+#  Check graph.
+#
 
 git checkout master
 git merge xxxxx
@@ -117,7 +146,6 @@ Create github.io pages
  cd SlideShow-XXX
  git branch gh-pages
  git checkout gh-pages
-
  #
  # Copy other repositorys.
  #
@@ -217,14 +245,21 @@ Help
 git reset --help
 ```
 
-コミット取消
+Reset commit.
 ```bash
 git reset --hard
 ```
 
-file1の追加取消
+Reset additional file1.
 ```bash
 git reset HEAD file1
+```
+
+## git commit
+
+Currently update commit message.
+```bash
+git commit --amend "commit message..."
 ```
 
 ## git push
@@ -271,14 +306,14 @@ git stash clear
 誤って退避ファイル全てを削除してしまった場合
 ```bash
 git fsck | awk '/dangling commit/ {print $3}'
-
-  候補のsha1 がいくつか出てくる
-
+#
+# 候補のsha1 がいくつか出てくる
+#
 
 git show --summary 候補のsha1
-
-  一つ一つの sha1 の内容を確認
-
+#
+# 一つ一つの sha1 の内容を確認
+#
 
 git cherry-pick -n -m1 見つけたsha1
 ```
