@@ -96,7 +96,7 @@ CSV (Exist heder case)
 $ mysql -u<Account> -h<Host> -p <DataBase> -e "
 SELECT IFNULL(<Tab1>.<Column1>, 'kazuakim_null') AS Column1, IFNULL(<Tab1>.<Column2>, 'kazuakim_null') AS Column2
 FROM <Table1> AS <Tab1>
-INTO OUTFILE '/tmp/<dumpFile>.csv' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '';
+INTO OUTFILE '/tmp/<dumpFile>.csv' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '' LINES TERMINATED BY '\n';
 "
 
 $ sed -i -e '1d' /tmp/<dumpFile>.csv

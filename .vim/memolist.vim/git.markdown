@@ -259,7 +259,7 @@ git reset HEAD file1
 
 Currently update commit message.
 ```bash
-git commit --amend "commit message..."
+git commit --amend
 ```
 
 ## git push
