@@ -1,3 +1,38 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [MySQL](#mysql)
+  - [ER Diagram](#er-diagram)
+  - [Best practice my.cnf](#best-practice-mycnf)
+  - [Add plugin?](#add-plugin)
+  - [Slave/Master](#slavemaster)
+- [Trobule](#trobule)
+  - [TSV/CSV](#tsvcsv)
+    - [Directly Import TSV/CSV file.](#directly-import-tsvcsv-file)
+  - [Import](#import)
+  - [Copy DataBase/Table](#copy-databasetable)
+  - [Export File](#export-file)
+  - [Character code](#character-code)
+  - [PARTITIONS](#partitions)
+  - [Row](#row)
+  - [INSERT](#insert)
+  - [UPDATE](#update)
+  - [DELETE/TRUNCATE](#deletetruncate)
+  - [SELECT](#select)
+  - [SHOW](#show)
+  - [CREATE](#create)
+  - [DROP](#drop)
+  - [ALTER](#alter)
+  - [JOIN](#join)
+  - [CASE](#case)
+  - [IN](#in)
+  - [DATE](#date)
+  - [FUNCTION](#function)
+  - [Other](#other)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 MySQL
 ===
 
@@ -743,7 +778,7 @@ SHOW WARNINGS;
 | BIGINT UNSIGNED                        | 0                                                                   | 18446744073709551615                                                | 8 bytes |
 | FLOAT<br />(単精度<br />浮動小数点数)  | -3.402823466E<br />+38                                              | 3.402823466E<br />+38                                               | 4 bytes |
 | DOUBLE<br />(倍精度<br />浮動小数点数) | -1.7976931348623157E<br />+308                                      | 1.7976931348623157E<br />+308                                       | 8 bytes |
-| DECIMAL<br />([アンパック<br />浮動小数点数](http://nippondanji.blogspot.jp/2009/05/mysql.html))||||
+| DECIMAL<br />([アンパック浮動小数点数](http://nippondanji.blogspot.jp/2009/05/mysql.html))|                  |                                                                     |         |
 | DATE                                   | 1000-01-01                                                          | 9999-12-31                                                          |3 bytes  |
 | DATETIME                               | 1000-01-01 00:00:00                                                 | 9999-12-31 23:59:59                                                 |5 bytes + fractional seconds storage |
 

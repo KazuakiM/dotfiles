@@ -1,3 +1,13 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Moving](#moving)
+  - [住宅](#%E4%BD%8F%E5%AE%85)
+  - [手続](#%E6%89%8B%E7%B6%9A)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 Moving
 ===
 

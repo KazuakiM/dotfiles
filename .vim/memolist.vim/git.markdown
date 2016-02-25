@@ -1,3 +1,20 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Git](#git)
+  - [Tips](#tips)
+  - [git log](#git-log)
+  - [git diff](#git-diff)
+  - [git add/rm](#git-addrm)
+  - [git reset](#git-reset)
+  - [git commit](#git-commit)
+  - [git push](#git-push)
+  - [git stash](#git-stash)
+  - [branch delete](#branch-delete)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 Git
 ===
 
