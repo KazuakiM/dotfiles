@@ -61,10 +61,29 @@ git lg --oneline -n 5
 #
 
 git rebase -i HEAD~3
+# before
+# # pick 29102b1
+# # pick adb04d8
+# # pick 95eaecd
+#
+# after
+# # pick 29102b1
+# # s adb04d8
+# # s 95eaecd
 #
 # 最新から3つ前のコミット(adb04d8以降)を1つにまとめる。
-# 最新のコミット以外はsquashに指定する。
+# 基底となる最初のコミット以外はsquashに指定する。
+# squashは画面上にも説明文が表示されているが前のコミットに結合するという意味。
+# そのため、基底となる最初のコミットをpickのままとし、残りをsquashに指定する。
 #
+# IF git rebase -i error.
+#  "Interactive rebase already started"
+#
+#  # git rebase --abort
+#
+#  "Cannot 'squash' without a previous commit"
+#
+#  # git rebase --abort
 
 git log
 #
@@ -228,6 +247,11 @@ gdiff master xxxxx
 マスターリポジトリと現在のリポジトリのファイルdiff
 ```bash
 gdiff master <file1>
+```
+
+リモートブランチとの比較(rebase後とかに使う)
+```bash
+git df origin/<branch>
 ```
 
 ## git add/rm
