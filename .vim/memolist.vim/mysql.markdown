@@ -7,9 +7,8 @@
   - [Best practice my.cnf](#best-practice-mycnf)
   - [Add plugin?](#add-plugin)
   - [Slave/Master](#slavemaster)
-- [Trobule](#trobule)
+  - [Trobule](#trobule)
   - [TSV/CSV](#tsvcsv)
-    - [Directly Import TSV/CSV file.](#directly-import-tsvcsv-file)
   - [Import](#import)
   - [Copy DataBase/Table](#copy-databasetable)
   - [Export File](#export-file)
@@ -84,7 +83,7 @@ SHOW SLAVE STATUS\G
 STOP SLAVE ALL;
 ```
 
-# Trobule
+## Trobule
 
 [Check status](http://qiita.com/muran001/items/14f19959d4723ffc29cc)
 ```sql
@@ -97,12 +96,12 @@ KILL xxxx;
 
 ## TSV/CSV
 
+If you want to directly import TSV/CSV file.  
+Please check [Import](#import) section.
+
 '\47' is SingleQuote.  
 $0 is all words. $1-N is separate words.  
 Check kazuakim_null isn't exist.
-
-### Directly Import TSV/CSV file.
-Please check Import section.
 
 TSV
 ```bash
