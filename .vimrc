@@ -398,6 +398,7 @@ if neobundle#load_cache()
     NeoBundleSaveCache
 endif
 " qfixgrep {{{
+let g:disable_MyGrep     = 1
 let g:QFix_PreviewHeight = 20
 let g:QFixWin_EnableMode = 1
 nnoremap <expr><Leader>grek ':grep! '. expand('<cword>') .' '. kazuakim#Path2ProjectDirectory('%') .'<C-b><Right><Right><Right><Right><Right><Right>'
@@ -601,11 +602,11 @@ nnoremap <Space>M :<C-u>call<Space>quickhl#manual#reset()<CR>
 let s:hooks = neobundle#get_hooks('vim-quickhl')
 function! s:hooks.on_source(bundle) abort "{{{
     let g:quickhl_manual_colors = [
-    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=Blue    guibg=Blue',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Green   guibg=Green',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Cyan    guibg=Cyan',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta guibg=Magenta',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow  guibg=Yellow']
+    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=Blue     guibg=Blue',
+    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Cyan     guibg=Cyan',
+    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta  guibg=Magenta',
+    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow   guibg=Yellow',
+    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkBlue guibg=DarkBlue']
 endfunction "}}}
 "}}}
 " vim-sqlfix {{{
@@ -755,9 +756,6 @@ let g:vim_markdown_folding_disabled = 1
 "
 " Exclusive {{{
 if s:osType !=# 'macunix'
-    " vim-php-cs-fixer {{{
-    let g:php_cs_fixer_path = s:envHome .'/.vim/vim-php-cs-fixer/php-cs-fixer'
-    "}}}
 endif
 
 if s:osType !=# 'win'
@@ -778,9 +776,6 @@ endif
 if s:osType ==# 'macunix'
     " previm {{{
     let g:previm_open_cmd = 'open -a "Google Chrome"'
-    "}}}
-    " vim-php-cs-fixer {{{
-    let g:php_cs_fixer_path = '/usr/local/bin/php-cs-fixer'
     "}}}
 
 elseif s:osType ==# 'win'
