@@ -156,6 +156,13 @@ function! s:KazuakiMBufReadPost() abort "{{{
     "}}}
 endfunction "}}}
 
+function! s:KazuakiMInsertLeave() abort "{{{
+    set nopaste
+    if &l:diff
+        diffupdate
+    endif
+endfunction "}}}
+
 function! s:KazuakiMVimEnter() abort "{{{
     " Forcibly update
     set ambiwidth=double showtabline=2
@@ -176,7 +183,7 @@ autocmd MyAutoCmd BufReadPost          * call s:KazuakiMBufReadPost()
 autocmd MyAutoCmd CmdwinEnter          * nmap <silent> <ESC><ESC> :quit<CR>
 autocmd MyAutoCmd CmdwinLeave          * nunmap <ESC><ESC>
 autocmd MyAutoCmd FocusGained          * checktime
-autocmd MyAutoCmd InsertLeave          * set nopaste | if &l:diff | diffupdate | endif
+autocmd MyAutoCmd InsertLeave          * call s:KazuakiMInsertLeave()
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 autocmd MyAutoCmd QuickfixCmdPost      * call kazuakim#QuickfixCmdPost()
 autocmd MyAutoCmd VimEnter             * call s:KazuakiMVimEnter()
@@ -634,17 +641,20 @@ nnoremap <Leader>gx :<C-u>call<Space>openbrowser#_keymapping_smart_search('n')<C
 " neocomplete.vim {{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['KazuakiM/neosnippet-snippets', 'Shougo/neosnippet.vim', 'Shougo/neoinclude.vim'], 'insert': 1}
 imap <silent><expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <silent><expr><TAB>                           neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-nmap <silent><expr><TAB>                                                                   <Plug>(neosnippet_expand_or_jump)
-imap <silent><expr><CR>  pumvisible() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS>  neocomplete#smart_close_popup()."\<C-h>"
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle) abort "{{{
-    "neocomplete.vim
     autocmd MyAutoCmd FileType html       setlocal omnifunc=javascriptcomplete#CompleteJS
     autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     autocmd MyAutoCmd FileType php        setlocal omnifunc=phpcomplete#CompletePHP
+
+    smap <silent><expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    nmap <silent><expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    imap <silent><expr><CR> pumvisible()                         ? "\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
+    nmap <silent><S-TAB> <ESC>a<C-r>=neosnippet#commands#_clear_markers()<CR>
+    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+    inoremap <expr><BS>  neocomplete#smart_close_popup()."\<C-h>"
+
+    "neocomplete.vim
     let g:neocomplete#auto_completion_start_length = 3
     let g:neocomplete#data_directory               = s:envHome .'/.vim/neocomplete.vim'
     let g:neocomplete#delimiter_patterns           = {
