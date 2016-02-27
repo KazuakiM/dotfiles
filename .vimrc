@@ -242,7 +242,7 @@ set viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo virtual
 set wildmenu wildmode=longest:full,full wrap wrapscan
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*.json'\ --exclude='*.log'\ --exclude='*min.js'\ --exclude='*min.css'
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,C,.DS_Store,.,..
-set statusline=\ %t\ %m\ %r\ %h\ %w\ %q\ %{KazuakiMStatuslineSyntax()}%=\ %{KazuakiMStatuslinePaste()}\ \|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
+set statusline=\ %t\ %{KazuakiMStatuslinePaste()}\ %m\ %r\ %h\ %w\ %q\ %{KazuakiMStatuslineSyntax()}%=%l/%L\ \|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 if &l:diff
     set cursorline
 else
@@ -633,13 +633,10 @@ nnoremap <Leader>gx :<C-u>call<Space>openbrowser#_keymapping_smart_search('n')<C
 " neoinclude.vim
 " neocomplete.vim {{{
 NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['KazuakiM/neosnippet-snippets', 'Shougo/neosnippet.vim', 'Shougo/neoinclude.vim'], 'insert': 1}
-imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB>                           neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-nmap <expr><TAB>                                                                   <Plug>(neosnippet_expand_or_jump)
-inoremap <silent> <CR> <C-r>=<SID>KazuakiMNeoComplete()<CR>
-function! s:KazuakiMNeoComplete() abort "{{{
-        return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction "}}}
+imap <silent><expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <silent><expr><TAB>                           neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+nmap <silent><expr><TAB>                                                                   <Plug>(neosnippet_expand_or_jump)
+imap <silent><expr><CR>  pumvisible() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS>  neocomplete#smart_close_popup()."\<C-h>"
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
