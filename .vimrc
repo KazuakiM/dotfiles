@@ -384,7 +384,6 @@ if neobundle#load_cache()
     NeoBundle 'gcmt/wildfire.vim'
     NeoBundle 'KazuakiM/vim-qfstatusline'
     NeoBundle 'LeafCage/yankround.vim'
-    NeoBundle 'tpope/vim-surround'
     NeoBundle 'vim-jp/vimdoc-ja'
     NeoBundle 'vim-jp/vital.vim'
     NeoBundle 'vim-scripts/matchit.zip'
@@ -641,14 +640,16 @@ nnoremap <Leader>gx :<C-u>call<Space>openbrowser#_keymapping_smart_search('n')<C
 " clever-f.vim {{{
 NeoBundleLazy 'rhysd/clever-f.vim', {'on_map': '<Plug>(clever-f-f)'}
 nmap f <Plug>(clever-f-f)
-xmap f <Plug>(clever-f-f)
-omap f <Plug>(clever-f-f)
 let s:hooks = neobundle#get_hooks('clever-f.vim')
 function! s:hooks.on_source(bundle) abort "{{{
     let g:clever_f_across_no_line = 0
     let g:clever_f_smart_case     = 1
     let g:clever_f_use_migemo     = 0
 endfunction "}}}
+"}}}
+" vim-surround {{{
+NeoBundleLazy 'tpope/vim-surround', {'on_map': '<Plug>Csurround'}
+nmap cs <Plug>Csurround
 "}}}
 " vim-prettyprint {{{
 NeoBundleLazy 'thinca/vim-prettyprint', {'commands': 'PP'}
