@@ -384,8 +384,6 @@ if neobundle#load_cache()
     NeoBundle 'gcmt/wildfire.vim'
     NeoBundle 'KazuakiM/vim-qfstatusline'
     NeoBundle 'LeafCage/yankround.vim'
-    NeoBundle 'rhysd/clever-f.vim'
-    NeoBundle 'thinca/vim-prettyprint'
     NeoBundle 'tpope/vim-surround'
     NeoBundle 'vim-jp/vimdoc-ja'
     NeoBundle 'vim-jp/vital.vim'
@@ -417,11 +415,6 @@ nmap <C-n> <Plug>(yankround-next)
 let g:yankround_dir                 = s:envHome .'/.vim/yankround.vim'
 let g:yankround_region_hl_groupname = 'YankRoundRegion'
 let g:yankround_use_region_hl       = 1
-"}}}
-" clever-f.vim {{{
-let g:clever_f_across_no_line = 0
-let g:clever_f_smart_case     = 1
-let g:clever_f_use_migemo     = 0
 "}}}
 " indentLine {{{
 let g:indentLine_faster = 1
@@ -644,6 +637,21 @@ endfunction "}}}
 " open-browser.vim {{{
 NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'openbrowser#_keymapping_smart_search'}
 nnoremap <Leader>gx :<C-u>call<Space>openbrowser#_keymapping_smart_search('n')<CR>
+"}}}
+" clever-f.vim {{{
+NeoBundleLazy 'rhysd/clever-f.vim', {'on_map': '<Plug>(clever-f-f)'}
+nmap f <Plug>(clever-f-f)
+xmap f <Plug>(clever-f-f)
+omap f <Plug>(clever-f-f)
+let s:hooks = neobundle#get_hooks('clever-f.vim')
+function! s:hooks.on_source(bundle) abort "{{{
+    let g:clever_f_across_no_line = 0
+    let g:clever_f_smart_case     = 1
+    let g:clever_f_use_migemo     = 0
+endfunction "}}}
+"}}}
+" vim-prettyprint {{{
+NeoBundleLazy 'thinca/vim-prettyprint', {'commands': 'PP'}
 "}}}
 " neosnippet-snippets
 " neosnippet.vim
