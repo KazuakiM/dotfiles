@@ -314,9 +314,6 @@ nnoremap <C-k> [c
 nnoremap <C-j> ]c
 nnoremap <C-h> do
 nnoremap <C-l> dp
-"  Pretty print
-nnoremap <Leader>xml  :execute '%!xmllint --noblanks --nowrap --encode UTF-8 --format %'<CR>
-nnoremap <Leader>json :execute '%!python -m json.tool'<CR>
 "  Register
 nnoremap x "_x
 nnoremap X "_x
@@ -531,6 +528,12 @@ let g:quickrun_config = {
 \        'exec':        s:quickrun_config_javascript['exec']},
 \    'javascript/watchdogs_checker': {
 \        'type': 'watchdogs_checker/javascript'},
+\    'json': {
+\        'command':               'python',
+\        'cmdopt':                '-m json.tool',
+\        'exec':                  '%c %o %s:p',
+\        'outputter':             'buffer',
+\        'outputter/buffer/into': 1},
 \    'php': {
 \        'command':                          'phpunit',
 \        'cmdopt':                           '--no-configuration',
@@ -559,7 +562,13 @@ let g:quickrun_config = {
 \    'watchdogs_checker/php':        {
 \        'command': 'php',
 \        'cmdopt':  '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
-\        'exec':    '%c %o %s:p'}}
+\        'exec':    '%c %o %s:p'},
+\    'xml': {
+\        'command':               'xmllint',
+\        'cmdopt':                '--noblanks --nowrap --encode UTF-8 --format',
+\        'exec':                  '%c %o %s:p',
+\        'outputter':             'buffer',
+\        'outputter/buffer/into': 1}}
 unlet s:quickrun_config_javascript
 "}}}
 " taglist.vim {{{
