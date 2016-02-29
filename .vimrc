@@ -654,7 +654,7 @@ NeoBundleLazy 'tpope/vim-surround', {'on_map': '<Plug>Csurround'}
 nmap cs <Plug>Csurround
 "}}}
 " vim-prettyprint {{{
-NeoBundleLazy 'thinca/vim-prettyprint', {'commands': 'PP'}
+NeoBundleLazy 'thinca/vim-prettyprint', {'functions': 'PrettyPrint', 'commands': 'PP'}
 "}}}
 " neosnippet-snippets
 " neosnippet.vim
