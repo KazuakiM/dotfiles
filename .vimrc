@@ -448,9 +448,11 @@ endif
 "
 " MEMO:If gVim for Windows italic fonts are deleted, I would move 'unite-highlight' to backup/.vimrc.
 "
-NeoBundleLazy 'Shougo/unite.vim', {'commands': 'Unite', 'depends':  [
-\    'koron/codic-vim', 'rhysd/unite-codic.vim', 'KazuakiM/unite-help', 'osyo-manga/unite-highlight']}
-NeoBundleLazy 'glidenote/memolist.vim', { 'commands': ['MemoNew', 'MemoList']}
+NeoBundleLazy 'Shougo/unite.vim',           {'commands':  'Unite'}
+NeoBundleLazy 'rhysd/unite-codic.vim',      {'on_source': 'unite.vim', 'depends': 'koron/codic-vim'}
+NeoBundleLazy 'KazuakiM/unite-help',        {'on_source': 'unite.vim'}
+NeoBundleLazy 'osyo-manga/unite-highlight', {'on_source': 'unite.vim'}
+NeoBundleLazy 'glidenote/memolist.vim',     {'commands':  ['MemoNew',  'MemoList']}
 nnoremap <SID>[unite] <Nop>
 nmap <Leader>u <SID>[unite]
 " default plugins
