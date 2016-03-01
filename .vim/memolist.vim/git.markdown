@@ -47,10 +47,18 @@ git push origin xxxxx
 
 git checkout master
 git pull
-git branch
 
 git checkout xxxxx
 gdiff master
+#
+# Check diff.
+#
+
+git rebase master
+git push origin xxxxx
+#
+# Insurance for rebase error.
+#
 
 git lg --oneline -n 5
 # 5ce576e
@@ -99,21 +107,10 @@ git lg
 #  git reset --hard ORIG_HEAD
 #  git log
 #  git lg
-#  git rebase -i HEAD~n
-#  git log
-#  #
-#  # Check commit message.
-#  #
-#
-#  git lg
-#  #
-#  #  Check graph.
-#  #
 
-git rebase master
-git lg
+git dff origin/xxxxx
 #
-#  Check graph.
+# Make sure that it is the same.
 #
 
 git push -f origin xxxxx
