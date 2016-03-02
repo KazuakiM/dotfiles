@@ -88,6 +88,11 @@ if has('vim_starting')
             finish
         endif
         let s:osType = 'win'
+
+        " vimproc.vim {{{
+        "let g:vimproc#dll_path            = 'C:\usr\local\bin\Vim\plugins\vimproc\lib\vimproc_win64.dll'
+        let g:vimproc#download_windows_dll = 1
+        "}}}
     elseif has('macunix')
         if s:KazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
             finish
@@ -799,9 +804,6 @@ if s:osType ==# 'macunix'
     "}}}
 
 elseif s:osType ==# 'win'
-    " vimproc.vim {{{
-    let g:vimproc#dll_path = 'C:\usr\local\bin\Vim\plugins\vimproc\lib\vimproc_win64.dll'
-    "}}}
     " previm {{{
     let g:previm_open_cmd = 'C:/Program\ Files\ (x86)/Google/Chrome/Application/chrome.exe'
     "}}}

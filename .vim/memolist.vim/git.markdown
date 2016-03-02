@@ -49,7 +49,7 @@ git checkout master
 git pull
 
 git checkout xxxxx
-gdiff master
+git dff master
 #
 # Check diff.
 #
@@ -218,7 +218,7 @@ git diff --help
 
 ワークディレクトリとリポジトリのfile1のdiff
 ```bash
-gdiff file1
+git dff file1
 ```
 
 file1 のソース変更部分が表示される
@@ -228,22 +228,22 @@ git show (ハッシュ値)
 
 最新のコミットと現在のdiff
 ```bash
-gdiff HEAD^ HEAD
+git dff HEAD^ HEAD
 ```
 
 過去のコミットと現在のdiff
 ```bash
-gdiff (ハッシュ値) HEAD file1
+git dff (ハッシュ値) HEAD file1
 ```
 
 マスターリポジトリと現在のリポジトリのdiff
 ```bash
-gdiff master xxxxx
+git dff master xxxxx
 ```
 
 マスターリポジトリと現在のリポジトリのファイルdiff
 ```bash
-gdiff master <file1>
+git dff master <file1>
 ```
 
 リモートブランチとの比較(rebase後とかに使う)
