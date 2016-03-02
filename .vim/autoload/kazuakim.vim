@@ -1,9 +1,27 @@
 " minimal vim start {{{
 function! kazuakim#Minimal() abort "{{{
-    setlocal noswapfile nobackup nowritebackup noundofile viminfo=
+    setlocal hlsearch
+    setlocal ignorecase iminsert=0 imsearch=-1 incsearch
+    setlocal noswapfile nobackup nowritebackup noundofile
+    setlocal smartcase
+    setlocal viminfo=
     filetype off
     filetype plugin indent off
     syntax off
+
+    "  Replace
+    nnoremap R gR
+    nnoremap <expr><Leader>%s  ':%s/'. expand('<cword>') .'/'. expand('<cword>') .'/gc<Left><Left><Left>'
+    nnoremap <expr><Leader>%%s ':%s/'. expand('<cword>') .'//gc<Left><Left><Left>'
+    "  Search
+    cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
+    cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
+    "  Register
+    nnoremap x "_x
+    nnoremap X "_x
+    vnoremap <C-w> "ay
+    vnoremap <C-e> "by
+    nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
 endfunction "}}}
 "}}}
 
