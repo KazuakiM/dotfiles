@@ -62,11 +62,6 @@ augroup MyAutoCmd
     autocmd!
 augroup END
 
-" vimproc.vim {{{
-let g:vimproc#dll_path            = s:envHome . '/.vim/bundle/vimproc.vim/lib/vimproc_cygwin.dll'
-let g:vimproc#download_windows_dll = 1
-"}}}
-
 function! s:KazuakiMAutoMkdir(dir) abort "{{{
     if !isdirectory(a:dir)
         call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
@@ -93,6 +88,10 @@ if has('vim_starting')
             finish
         endif
         let s:osType = 'win'
+        " vimproc.vim {{{
+        let g:vimproc#dll_path             = s:envHome . '/.vim/bundle/vimproc.vim/lib/vimproc_win64.dll'
+        let g:vimproc#download_windows_dll = 1
+        "}}}
     elseif has('macunix')
         if s:KazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
             finish
@@ -384,7 +383,7 @@ let g:neobundle#log_filename          = s:envHome. '/.vim/neobundle.vim/neobundl
 "
 " NeoBundle {{{
 if neobundle#load_cache()
-    NeoBundle 'Shougo/vimproc.vim', {'build': {'mac': 'make -f make_mac.mak', 'unix': 'make -f make_unix.mak', 'cygwin': 'make -f make_cygwin.mak'}}
+    NeoBundle 'Shougo/vimproc.vim', {'build': {'mac': 'make -f make_mac.mak', 'unix': 'make -f make_unix.mak'}}
     NeoBundle 'fuenor/qfixgrep'
     NeoBundle 'gcmt/wildfire.vim'
     NeoBundle 'KazuakiM/vim-qfstatusline'
