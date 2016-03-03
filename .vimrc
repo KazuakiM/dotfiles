@@ -63,7 +63,7 @@ augroup MyAutoCmd
 augroup END
 
 " vimproc.vim {{{
-let g:vimproc#dll_path            = s:envHome . '/.vim/bundle/vimproc/lib/vimproc_cygwin.dll'
+let g:vimproc#dll_path            = s:envHome . '/.vim/bundle/vimproc.vim/lib/vimproc_cygwin.dll'
 let g:vimproc#download_windows_dll = 1
 "}}}
 
