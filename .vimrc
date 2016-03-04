@@ -624,14 +624,14 @@ function! s:hooks.on_source(bundle) abort "{{{
 endfunction "}}}
 "}}}
 " previm {{{
-NeoBundleLazy 'kannokanno/previm', {'functions': 'previm#open'}
-nnoremap <silent> <Leader>pre :<C-u>call<Space>previm#open(previm#make_preview_file_path('index.html'))<CR>
+NeoBundleLazy 'kannokanno/previm', {'commands': 'PrevimOpen'}
+nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
 "}}}
 " vim-ref {{{
-NeoBundleLazy 'thinca/vim-ref', {'functions': 'ref#K'}
+NeoBundleLazy 'thinca/vim-ref', {'functions': 'ref#K', 'on_map': '<Plug>(ref-keyword)'}
 let g:ref_no_default_key_mappings = 1
 inoremap <silent><C-k> <C-o>:call<Space>ref#K('normal')<CR><ESC>
-nnoremap <silent>K     :<C-u>call<Space>ref#K('normal')<CR>
+nmap <silent>K <Plug>(ref-keyword)
 let s:hooks = neobundle#get_hooks('vim-ref')
 function! s:hooks.on_source(bundle) abort "{{{
     let g:ref_cache_dir       = s:envHome .'/.vim/vim-ref/cache'
@@ -640,8 +640,8 @@ function! s:hooks.on_source(bundle) abort "{{{
 endfunction "}}}
 "}}}
 " open-browser.vim {{{
-NeoBundleLazy 'tyru/open-browser.vim', {'functions': 'openbrowser#_keymapping_smart_search'}
-nnoremap <Leader>gx :<C-u>call<Space>openbrowser#_keymapping_smart_search('n')<CR>
+NeoBundleLazy 'tyru/open-browser.vim', {'on_map': '<Plug>(openbrowser-open)'}
+nmap <Leader>gx <Plug>(openbrowser-open)
 "}}}
 " clever-f.vim {{{
 NeoBundleLazy 'rhysd/clever-f.vim', {'on_map': '<Plug>(clever-f-f)'}
