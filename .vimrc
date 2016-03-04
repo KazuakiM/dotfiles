@@ -268,7 +268,6 @@ colorscheme kazuakim
 "  ESC
 inoremap jk <Esc>
 inoremap kj <Esc>
-inoremap <CR> <CR>X<C-h>
 "  Fold
 nnoremap zx :foldopen<CR>
 "  Line
@@ -674,7 +673,7 @@ function! s:hooks.on_source(bundle) abort "{{{
 
     smap <silent><expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
     nmap <silent><expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-    imap <silent><expr><CR>  pumvisible() ? ( neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<Left>\<Right>" ) : "\<CR>"
+    imap <silent><expr><CR>  pumvisible() ? ( neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<Left>\<Right>" ) : "\<CR>X\<C-h>"
     nmap <silent><S-TAB> <ESC>a<C-r>=neosnippet#commands#_clear_markers()<CR>
     inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
     inoremap <expr><BS>  neocomplete#smart_close_popup()."\<C-h>"
