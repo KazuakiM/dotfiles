@@ -41,19 +41,14 @@ let s:lineUpdate = ! exists('s:lineUpdate') ? 0                                 
 "
 " Common {{{
 " Zun wiki http://www.kawaz.jp/pukiwiki/?vim#cb691f26 {{{
-set encoding=utf-8 fileencoding=utf-8 fileformats=unix,dos,mac
-let s:enc_euc = 'euc-jp'
-let s:enc_jis = 'iso-2022-jp'
+set encoding=utf-8 fileencoding=utf-8 fileencodings=ucs-bom,utf-8,default,latin1 fileformats=unix,dos,mac
 if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'eucjp-ms'
-    let s:enc_jis = 'iso-2022-jp-3'
+    set fileencodings+=iso-2022-jp-3,eucjp-ms,cp932
 elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'euc-jisx0213'
-    let s:enc_jis = 'iso-2022-jp-3'
+    set fileencodings+=iso-2022-jp-3,euc-jisx0213,cp932
+else
+    set fileencodings+=iso-2022-jp,euc-jp,cp932
 endif
-let &fileencodings = &fileencodings .','. s:enc_jis .','. s:enc_euc .',cp932'
-unlet s:enc_euc
-unlet s:enc_jis
 "}}}
 
 scriptencoding utf-8
@@ -62,20 +57,20 @@ augroup MyAutoCmd
     autocmd!
 augroup END
 
-function! s:KazuakiMAutoMkdir(dir) abort "{{{
+function! s:AutoMkdir(dir) abort "{{{
     if !isdirectory(a:dir)
-        call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
+        call mkdir(a:dir, 'p')
     endif
 endfunction "}}}
 
-function! s:KazuakiMVimStart(backupDir, undoDir) abort "{{{
+function! s:VimStart(backupDir, undoDir) abort "{{{
     "Check 256KB file size.
     if getfsize(expand('%:p')) >= 262144
         call kazuakim#Minimal()
         return 1
     endif
-    call s:KazuakiMAutoMkdir(a:backupDir.s:date)
-    call s:KazuakiMAutoMkdir(a:undoDir.  s:date)
+    call s:AutoMkdir(a:backupDir.s:date)
+    call s:AutoMkdir(a:undoDir.  s:date)
     let &backupdir = a:backupDir.s:date
     let &undodir   = a:undoDir.  s:date
     return 0
@@ -84,33 +79,33 @@ endfunction "}}}
 if has('vim_starting')
     if has('win32') || has ('win64')
         set runtimepath^=$HOME/.vim runtimepath+=$HOME/.vim/after
-        if s:KazuakiMVimStart('C:\temp\backup\', 'C:\temp\undo\')
+        if s:VimStart('C:\temp\backup\', 'C:\temp\undo\')
             finish
         endif
         let s:osType = 'win'
         " vimproc.vim {{{
-        let g:vimproc#dll_path             = s:envHome . '/.vim/bundle/vimproc.vim/lib/vimproc_win64.dll'
+        "let g:vimproc#dll_path            = s:envHome . '/.vim/bundle/vimproc.vim/lib/vimproc_win64.dll'
         let g:vimproc#download_windows_dll = 1
         "}}}
     elseif has('macunix')
-        if s:KazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
+        if s:VimStart('/tmp/backup/', '/tmp/undo/')
             finish
         endif
         let s:osType = 'macunix'
     else
-        if s:KazuakiMVimStart('/tmp/backup/', '/tmp/undo/')
+        if s:VimStart('/tmp/backup/', '/tmp/undo/')
             finish
         endif
         let s:osType = 'unix'
     endif
 endif
 
-function! s:KazuakiMCheckString() abort "{{{
+function! s:CheckString() abort "{{{
     let w:m1 = matchadd('KazuakiMCheckString', '\t\|\r\|\r\n\|\s\+$\|　')
     let w:m2 = matchadd('KazuakiMTodo',        'FIXME\|MEMO\|NOTE\|TODO\|XXX')
 endfunction "}}}
 
-function! s:KazuakiMBufEnter() abort "{{{
+function! s:BufEnter() abort "{{{
     " Auto close VimDiff or primary NERDTree
     if winnr('$') is# 1 && (&l:diff || (exists('b:NERDTree') && b:NERDTree.isTabTree()) || &filetype is# 'quickrun')
         quit
@@ -147,7 +142,7 @@ function! s:KazuakiMBufEnter() abort "{{{
     endif
 endfunction "}}}
 
-function! s:KazuakiMBufReadPost() abort "{{{
+function! s:BufReadPost() abort "{{{
     " memory cursol
     if line("'\"") > 1 && line("'\"") <= line('$')
         execute "normal! g`\""
@@ -160,38 +155,38 @@ function! s:KazuakiMBufReadPost() abort "{{{
     "}}}
 endfunction "}}}
 
-function! s:KazuakiMInsertLeave() abort "{{{
+function! s:InsertLeave() abort "{{{
     set nopaste
     if &l:diff
         diffupdate
     endif
 endfunction "}}}
 
-function! s:KazuakiMVimEnter() abort "{{{
+function! s:VimEnter() abort "{{{
     " Forcibly update
     set ambiwidth=double showtabline=2
-    call s:KazuakiMCheckString()
+    call s:CheckString()
 
     if &l:diff
         wincmd h
     endif
 endfunction "}}}
 
-function! s:KazuakiMWinEnter() abort "{{{
+function! s:WinEnter() abort "{{{
     checktime
-    call s:KazuakiMCheckString()
+    call s:CheckString()
 endfunction "}}}
 
-autocmd MyAutoCmd BufEnter             * call s:KazuakiMBufEnter()
-autocmd MyAutoCmd BufReadPost          * call s:KazuakiMBufReadPost()
+autocmd MyAutoCmd BufEnter             * call s:BufEnter()
+autocmd MyAutoCmd BufReadPost          * call s:BufReadPost()
 autocmd MyAutoCmd CmdwinEnter          * nmap <silent> <ESC><ESC> :quit<CR>
 autocmd MyAutoCmd CmdwinLeave          * nunmap <ESC><ESC>
 autocmd MyAutoCmd FocusGained          * checktime
-autocmd MyAutoCmd InsertLeave          * call s:KazuakiMInsertLeave()
+autocmd MyAutoCmd InsertLeave          * call s:InsertLeave()
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 autocmd MyAutoCmd QuickfixCmdPost      * call kazuakim#QuickfixCmdPost()
-autocmd MyAutoCmd VimEnter             * call s:KazuakiMVimEnter()
-autocmd MyAutoCmd WinEnter             * call s:KazuakiMWinEnter()
+autocmd MyAutoCmd VimEnter             * call s:VimEnter()
+autocmd MyAutoCmd WinEnter             * call s:WinEnter()
 
 function! KazuakiMStatuslineSyntax() abort "{{{
     let l:ret = qfstatusline#Update()
@@ -215,7 +210,7 @@ function! KazuakiMStatuslinePaste() abort "{{{
 endfunction "}}}
 
 " http://d.hatena.ne.jp/thinca/20111204/1322932585
-function! s:KazuakiMTabpageLabelUpdate(tabNumber) abort "{{{
+function! s:TabpageLabelUpdate(tabNumber) abort "{{{
     let l:highlight = a:tabNumber is# tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
     let l:bufnrs    = tabpagebuflist(a:tabNumber)
     let l:bufnr     = len(l:bufnrs)
@@ -228,7 +223,7 @@ function! s:KazuakiMTabpageLabelUpdate(tabNumber) abort "{{{
 endfunction "}}}
 
 function! KazuakiMTabLineUpdate() abort "{{{
-    return join(map(range(1, tabpagenr('$')), 's:KazuakiMTabpageLabelUpdate(v:val)'), '|') .'%#TabLineFill#%T%=%#TabLineSel# '. getcwd() .' '
+    return join(map(range(1, tabpagenr('$')), 's:TabpageLabelUpdate(v:val)'), '|') .'%#TabLineFill#%T%=%#TabLineSel# '. getcwd() .' '
 endfunction "}}}
 
 " Basic
@@ -276,18 +271,13 @@ noremap 1 ^
 nnoremap Y y$
 inoremap <C-u> <C-g>u<C-u>
 inoremap <C-w> <C-g>u<C-w>
-"  Tag
+"  Tab
 nnoremap gr gT
 "  Window Size
-nnoremap <SID>[ws] <Nop>
-nmap + <C-w>+<SID>[ws]
-nmap - <C-w>-<SID>[ws]
-nmap > <C-w>><SID>[ws]
-nmap < <C-w><<SID>[ws]
-nnoremap <script> <SID>[ws]+ <C-w>+<SID>[ws]
-nnoremap <script> <SID>[ws]- <C-w>-<SID>[ws]
-nnoremap <script> <SID>[ws]> <C-w>><SID>[ws]
-nnoremap <script> <SID>[ws]< <C-w><<SID>[ws]
+nnoremap + <C-w>+
+nnoremap - <C-w>-
+nnoremap > <C-w>>
+nnoremap < <C-w><
 "  Cursor
 nnoremap ga %
 noremap <Down>  <C-f>
@@ -346,6 +336,8 @@ let g:omni_sql_no_default_maps    = 1
 let g:loaded_2html_plugin      = 1 "$VIMRUNTIME/plugin/tohtml.vim
 let g:loaded_getscriptPlugin   = 1 "$VIMRUNTIME/plugin/getscriptPlugin.vim
 let g:loaded_gzip              = 1 "$VIMRUNTIME/plugin/gzip.vim
+"XXX: Check issues. https://github.com/vim-jp/issues/issues/862
+"let g:loaded_logipat          = 1 "$VIMRUNTIME/plugin/logiPat.vim
 let g:loaded_matchparen        = 1 "$VIMRUNTIME/plugin/matchparen.vim
 let g:loaded_netrw             = 1 "$VIMRUNTIME/autoload/netrw.vim
 let g:loaded_netrwFileHandlers = 1 "$VIMRUNTIME/autoload/netrwFileHandlers.vim
@@ -439,7 +431,7 @@ let g:NERDTreeWinSize           = 20
 if isdirectory(expand('%:p'))
     NeoBundle 'scrooloose/nerdtree'
 else
-    NeoBundleLazy 'scrooloose/nerdtree', {'commands': 'NERDTree'}
+    NeoBundleLazy 'scrooloose/nerdtree', {'on_cmd': 'NERDTree'}
 endif
 "}}}
 " unite.vim
@@ -451,11 +443,11 @@ endif
 "
 " MEMO:If gVim for Windows italic fonts are deleted, I would move 'unite-highlight' to backup/.vimrc.
 "
-NeoBundleLazy 'Shougo/unite.vim',           {'commands':  'Unite'}
+NeoBundleLazy 'Shougo/unite.vim',           {'on_cmd':    'Unite'}
 NeoBundleLazy 'rhysd/unite-codic.vim',      {'on_source': 'unite.vim', 'depends': 'koron/codic-vim'}
 NeoBundleLazy 'KazuakiM/unite-help',        {'on_source': 'unite.vim'}
 NeoBundleLazy 'osyo-manga/unite-highlight', {'on_source': 'unite.vim'}
-NeoBundleLazy 'glidenote/memolist.vim',     {'commands':  ['MemoNew',  'MemoList']}
+NeoBundleLazy 'glidenote/memolist.vim',     {'on_cmd':    ['MemoNew',  'MemoList']}
 nnoremap <SID>[unite] <Nop>
 nmap <Leader>u <SID>[unite]
 " default plugins
@@ -498,7 +490,7 @@ nnoremap <Leader>jj         :<C-u>call<Space>kazuakim#Translate('')<Left><Left>
 nnoremap <silent><Leader>jk :<C-u>call<Space>kazuakim#Translate(expand('<cword>'))<CR>
 "}}}
 " vim-quickrun {{{
-NeoBundleLazy 'thinca/vim-quickrun', {'commands': 'QuickRun'}
+NeoBundleLazy 'thinca/vim-quickrun', {'on_cmd': 'QuickRun'}
 nnoremap <Leader>run  :<C-u>QuickRun<CR>
 nnoremap <Leader>php  :<C-u>call<Space>kazuakim#PhpCsFixer('normal')<CR>
 nnoremap <Leader>phpt :<C-u>call<Space>kazuakim#PhpCsFixer('template')<CR>
@@ -571,7 +563,7 @@ unlet s:quickrun_config_javascript
 " taglist.vim {{{
 "MEMO:$ ctags --list-maps : ctags supported filetype.
 "MEMO:$ ctags --list-kinds: ctags tlist setting.
-NeoBundleLazy 'vim-scripts/taglist.vim', {'commands': 'Tlist'}
+NeoBundleLazy 'vim-scripts/taglist.vim', {'on_cmd': 'Tlist'}
 nnoremap <Leader>t :<C-u>Tlist<CR>
 let s:hooks = neobundle#get_hooks('taglist.vim')
 function! s:hooks.on_source(bundle) abort "{{{
@@ -584,11 +576,11 @@ function! s:hooks.on_source(bundle) abort "{{{
 endfunction "}}}
 "}}}
 " vim-qfreplace {{{
-NeoBundleLazy 'thinca/vim-qfreplace', {'commands': 'Qfreplace'}
+NeoBundleLazy 'thinca/vim-qfreplace', {'on_cmd': 'Qfreplace'}
 nnoremap <Leader>qr :<C-u>Qfreplace<CR>
 "}}}
 " vim-easy-align {{{
-NeoBundleLazy 'junegunn/vim-easy-align', {'commands': 'EasyAlign'}
+NeoBundleLazy 'junegunn/vim-easy-align', {'on_cmd': 'EasyAlign'}
 vnoremap <silent> <Leader>a :EasyAlign<CR>
 let g:easy_align_delimiters = {
 \    '=': {'pattern': '===\|!==\|<=>\|\(&&\|||\|<<\|>>\)=\|=\~[#?]\?\|=>\|[:+/*!%^=><&|.-]\?=[#?]\?', 'left_margin': 1, 'right_margin': 1, 'stick_to_left': 0},
@@ -602,7 +594,7 @@ let g:easy_align_delimiters = {
 \    'd': {'pattern': '\(\S\+\s*[;=]\)\@=',    'ignore_groups': ['String'], 'left_margin': 0, 'right_margin': 0}}
 "}}}
 " vim-quickhl {{{
-NeoBundleLazy 't9md/vim-quickhl', {'commands' : 'quickhl#manual#this'}
+NeoBundleLazy 't9md/vim-quickhl', {'on_func' : 'quickhl#manual#this'}
 nnoremap <Space>m :<C-u>call<Space>quickhl#manual#this('n')<CR>
 nnoremap <Space>M :<C-u>call<Space>quickhl#manual#reset()<CR>
 let s:hooks = neobundle#get_hooks('vim-quickhl')
@@ -616,18 +608,18 @@ function! s:hooks.on_source(bundle) abort "{{{
 endfunction "}}}
 "}}}
 " vim-sqlfix {{{
-NeoBundleLazy 'KazuakiM/vim-sqlfix', {'commands': 'Sqlfix'}
+NeoBundleLazy 'KazuakiM/vim-sqlfix', {'on_cmd': 'Sqlfix'}
 let s:hooks = neobundle#get_hooks('vim-sqlfix')
 function! s:hooks.on_source(bundle) abort "{{{
     let g:sqlfix#Config = {'direcotry_path': s:envHome .'/.vim/vim-sqlfix'}
 endfunction "}}}
 "}}}
 " previm {{{
-NeoBundleLazy 'kannokanno/previm', {'commands': 'PrevimOpen'}
+NeoBundleLazy 'kannokanno/previm', {'on_cmd': 'PrevimOpen'}
 nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
 "}}}
 " vim-ref {{{
-NeoBundleLazy 'thinca/vim-ref', {'functions': 'ref#K', 'on_map': '<Plug>(ref-keyword)'}
+NeoBundleLazy 'thinca/vim-ref', {'on_func': 'ref#K', 'on_map': '<Plug>(ref-keyword)'}
 let g:ref_no_default_key_mappings = 1
 inoremap <silent><C-k> <C-o>:call<Space>ref#K('normal')<CR><ESC>
 nmap <silent>K <Plug>(ref-keyword)
@@ -657,7 +649,7 @@ NeoBundleLazy 'tpope/vim-surround', {'on_map': '<Plug>Csurround'}
 nmap cs <Plug>Csurround
 "}}}
 " vim-prettyprint {{{
-NeoBundleLazy 'thinca/vim-prettyprint', {'functions': 'PrettyPrint', 'commands': 'PP'}
+NeoBundleLazy 'thinca/vim-prettyprint', {'on_func': 'PrettyPrint', 'on_cmd': 'PP'}
 "}}}
 " neosnippet-snippets
 " neosnippet.vim
@@ -754,7 +746,7 @@ unlet s:hooks
 NeoBundleLazy 'mattn/emmet-vim', {'filetypes': ['html', 'php']}
 let s:hooks = neobundle#get_hooks('emmet-vim')
 function! s:hooks.on_source(bundle)
-    let g:use_emmet_complete_tag = 1
+    let g:user_emmet_complete_tag = 1
     let g:user_emmet_settings    = {
     \    'variables': {'lang': 'ja', 'default_attributes': {
     \        'a': {'href': ''}, 'link': [{'rel': 'stylesheet'}, {'href': ''}]}},
@@ -835,8 +827,8 @@ call neobundle#end()
 " FileType {{{
 filetype plugin indent on
 autocmd MyAutoCmd BufNewFile,BufRead *.coffee    setlocal filetype=coffee
-autocmd MyAutoCmd BufNewFile,BufRead *.{snip*}   setlocal filetype=snippets
-autocmd MyAutoCmd BufNewFile,BufRead *.{vim*}    setlocal filetype=vim
+autocmd MyAutoCmd BufNewFile,BufRead *.snip*     setlocal filetype=snippets
+autocmd MyAutoCmd BufNewFile,BufRead *.vim*      setlocal filetype=vim
 autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe} setlocal filetype=xxd
 autocmd MyAutoCmd FileType html,js,php,xml syntax sync minlines=2000
 "}}}
