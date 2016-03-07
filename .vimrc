@@ -84,7 +84,7 @@ if has('vim_starting')
         endif
         let s:osType = 'win'
         " vimproc.vim {{{
-        "let g:vimproc#dll_path            = s:envHome . '/.vim/bundle/vimproc.vim/lib/vimproc_win64.dll'
+        let g:vimproc#dll_path             = s:envHome . '/.vim/bundle/vimproc.vim/lib/vimproc_win64.dll'
         let g:vimproc#download_windows_dll = 1
         "}}}
     elseif has('macunix')
