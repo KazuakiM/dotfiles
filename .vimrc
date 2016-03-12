@@ -627,13 +627,14 @@ let s:hooks = neobundle#get_hooks('vim-ref')
 function! s:hooks.on_source(bundle) abort "{{{
     let g:ref_cache_dir           = s:envHome .'/.vim/vim-ref/cache'
     let g:ref_detect_filetype     = {
-    \    'html':       'phpmanual',
-    \    'jquery':     'jquery',
-    \    'javascript': 'javascript',
-    \    'css':        'phpmanual'}
+    \    'css':        'phpmanual',
+    \    'html':       ['phpmanual',  'javascript', 'jquery'],
+    \    'javascript': ['javascript', 'jquery'],
+    \    'php':        ['phpmanual',  'javascript', 'jquery']}
     let g:ref_javascript_doc_path = s:envHome .'/.vim/bundle/jsref/htdocs'
     let g:ref_jquery_doc_path     = s:envHome .'/.vim/bundle/jqapi'
     let g:ref_phpmanual_path      = s:envHome .'/.vim/vim-ref/php-chunked-xhtml'
+    let g:ref_use_vimproc         = 1
 endfunction "}}}
 "}}}
 " open-browser.vim {{{
