@@ -30,6 +30,7 @@ git pull
 git branch
 
 NAME="`date +%Y%m%d`_XXX"
+echo $NAME
 
 git branch      $NAME
 git checkout    $NAME

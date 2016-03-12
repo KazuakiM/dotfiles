@@ -23,6 +23,7 @@ svn update
 svn info
 
 NAME="`date +%Y%m%d`_XXX"
+echo $NAME
 
 svn copy svn://<host>/<Project>/trunk svn://<host>/<Project>/branches/$NAME -m 'XXX'
 ```

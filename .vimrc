@@ -41,13 +41,13 @@ let s:lineUpdate = ! exists('s:lineUpdate') ? 0                                 
 "
 " Common {{{
 " Zun wiki http://www.kawaz.jp/pukiwiki/?vim#cb691f26 {{{
-set encoding=utf-8 fileencoding=utf-8 fileencodings=ucs-bom,utf-8,default,latin1 fileformats=unix,dos,mac
+set encoding=utf-8 fileencoding=utf-8 fileformats=unix,dos,mac
 if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
-    set fileencodings+=iso-2022-jp-3,eucjp-ms,cp932
+    set fileencodings=ucs-bom,utf-8,default,latin1,iso-2022-jp-3,eucjp-ms,cp932
 elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
-    set fileencodings+=iso-2022-jp-3,euc-jisx0213,cp932
+    set fileencodings=ucs-bom,utf-8,default,latin1,iso-2022-jp-3,euc-jisx0213,cp932
 else
-    set fileencodings+=iso-2022-jp,euc-jp,cp932
+    set fileencodings=ucs-bom,utf-8,default,latin1,iso-2022-jp,euc-jp,cp932
 endif
 "}}}
 
@@ -619,15 +619,21 @@ NeoBundleLazy 'kannokanno/previm', {'on_cmd': 'PrevimOpen'}
 nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
 "}}}
 " vim-ref {{{
-NeoBundleLazy 'thinca/vim-ref', {'on_func': 'ref#K', 'on_map': '<Plug>(ref-keyword)'}
+NeoBundleLazy 'thinca/vim-ref', {'depends': 'mojako/ref-sources.vim', 'on_func': 'ref#K', 'on_map': '<Plug>(ref-keyword)'}
 let g:ref_no_default_key_mappings = 1
 inoremap <silent><C-k> <C-o>:call<Space>ref#K('normal')<CR><ESC>
 nmap <silent>K <Plug>(ref-keyword)
 let s:hooks = neobundle#get_hooks('vim-ref')
 function! s:hooks.on_source(bundle) abort "{{{
-    let g:ref_cache_dir       = s:envHome .'/.vim/vim-ref/cache'
-    let g:ref_detect_filetype = {'html': 'phpmanual', 'javascript': 'phpmanual', 'css': 'phpmanual'}
-    let g:ref_phpmanual_path  = s:envHome .'/.vim/vim-ref/php-chunked-xhtml'
+    let g:ref_cache_dir           = s:envHome .'/.vim/vim-ref/cache'
+    let g:ref_detect_filetype     = {
+    \    'html':       'phpmanual',
+    \    'jquery':     'jquery',
+    \    'javascript': 'javascript',
+    \    'css':        'phpmanual'}
+    let g:ref_javascript_doc_path = s:envHome .'/.vim/bundle/jsref/htdocs'
+    let g:ref_jquery_doc_path     = s:envHome .'/.vim/bundle/jqapi'
+    let g:ref_phpmanual_path      = s:envHome .'/.vim/vim-ref/php-chunked-xhtml'
 endfunction "}}}
 "}}}
 " open-browser.vim {{{
@@ -810,6 +816,8 @@ endif
 "
 "
 " NeoBundleFetch {{{
+NeoBundleFetch 'tokuhirom/jsref'
+NeoBundleFetch 'mustardamus/jqapi'
 NeoBundleFetch 'psychs/lingr-irc'
 NeoBundleFetch 'KazuakiM/vim-snippets'
 NeoBundleFetch 'KazuakiM/vim-qfsigns'
