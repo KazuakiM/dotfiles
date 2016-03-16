@@ -241,7 +241,7 @@ set matchpairs+=<:> matchtime=1 mouse=
 set nobomb noequalalways noerrorbells nogdefault noimcmdline noimdisable noruler noswapfile notitle number
 set pumheight=8
 set runtimepath+=$HOME/.vim/bundle/neobundle.vim
-set scrolloff=999 shellslash shiftwidth=4 shortmess+=a shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4 switchbuf=usetab
+set scrolloff=999 shellslash shiftwidth=4 shortmess+=a shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4 switchbuf=usetab synmaxcol=300
 set tabline=%!KazuakiMTabLineUpdate() tabstop=4 titleold= ttyfast t_vb=
 set undofile updatecount=30 updatetime=1000
 set viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo virtualedit+=block visualbell
@@ -625,8 +625,8 @@ inoremap <silent><C-k> <C-o>:call<Space>ref#K('normal')<CR><ESC>
 nmap <silent>K <Plug>(ref-keyword)
 let s:hooks = neobundle#get_hooks('vim-ref')
 function! s:hooks.on_source(bundle) abort "{{{
-    let g:ref_cache_dir           = s:envHome .'/.vim/vim-ref/cache'
-    let g:ref_detect_filetype     = {
+    let g:ref_cache_dir       = s:envHome .'/.vim/vim-ref/cache'
+    let g:ref_detect_filetype = {
     \    'css':        'phpmanual',
     \    'html':       ['phpmanual',  'javascript', 'jquery'],
     \    'javascript': ['javascript', 'jquery'],
@@ -634,6 +634,7 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:ref_javascript_doc_path = s:envHome .'/.vim/bundle/jsref/htdocs'
     let g:ref_jquery_doc_path     = s:envHome .'/.vim/bundle/jqapi'
     let g:ref_phpmanual_path      = s:envHome .'/.vim/vim-ref/php-chunked-xhtml'
+    let g:ref_use_cache           = 1
     let g:ref_use_vimproc         = 1
 endfunction "}}}
 "}}}
@@ -715,8 +716,8 @@ function! s:hooks.on_source(bundle) abort "{{{
 
     "neosnippet.vim
     let g:neosnippet#data_directory                = s:envHome . '/.vim/neosnippet.vim'
-    let g:neosnippet#enable_snipmate_compatibility = 1
     let g:neosnippet#disable_runtime_snippets      = {'_' : 1}
+    let g:neosnippet#enable_snipmate_compatibility = 1
     let g:neosnippet#snippets_directory            = s:envHome . '/.vim/bundle/neosnippet-snippets/neosnippets'
 endfunction "}}}
 "}}}
@@ -754,7 +755,7 @@ NeoBundleLazy 'mattn/emmet-vim', {'filetypes': ['html', 'php']}
 let s:hooks = neobundle#get_hooks('emmet-vim')
 function! s:hooks.on_source(bundle)
     let g:user_emmet_complete_tag = 1
-    let g:user_emmet_settings    = {
+    let g:user_emmet_settings     = {
     \    'variables': {'lang': 'ja', 'default_attributes': {
     \        'a': {'href': ''}, 'link': [{'rel': 'stylesheet'}, {'href': ''}]}},
     \    'html': {'filters': 'html', 'indentation': '    '},
