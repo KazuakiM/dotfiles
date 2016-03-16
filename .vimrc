@@ -805,7 +805,7 @@ elseif s:osType ==# 'win'
     let g:previm_open_cmd = 'C:/Program\ Files\ (x86)/Google/Chrome/Application/chrome.exe'
     "}}}
     " memolist.vim {{{
-    let g:memolist_path = '/cygwin64/home/kazuakim/.vim/memolist.vim'
+    let g:memolist_path = '/cygwin64/home/' . $USER . '/.vim/memolist.vim'
     "}}}
     " neoinclude.vim {{{
     let g:neoinclude#delimiters = '/'
