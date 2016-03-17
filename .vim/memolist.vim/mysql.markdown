@@ -679,6 +679,15 @@ HAVING count >= (
         GROUP BY <having_sub_tab>.<Column1> ) AS <having_tab> );
 ```
 
+SUBSTRING - REVERSE
+```sql
+SELECT SUBSTRING(12345, -2, 2);
+ > 45
+
+SELECT REVERSE(SUBSTRING(12345, -2, 2));
+ > 54
+```
+
 TRIM
 ```sql
 SELECT TRIM(LEADING  '　' FROM '　I　love　Vim　');
