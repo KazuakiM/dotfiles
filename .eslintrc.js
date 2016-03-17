@@ -66,7 +66,7 @@ module.exports = {
         "no-else-return": 2,
         // no-empty-function
         // no-empty-pattern
-        "no-eq-null": 2,
+        //XXX: "no-eq-null": 2,
         "no-eval":    2,
         // no-extend-native
         // no-extra-bind (es6)
