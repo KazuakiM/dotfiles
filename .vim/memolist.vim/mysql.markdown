@@ -620,7 +620,7 @@ SELECT DATE_ADD(NOW(), INTERVAL 9 hour);
 
 Char date
 ```sql
-SELECT CAST(CONCAT(<Column1>, '000000') AS DATE) FROM <Table1>;
+SELECT CAST(CONCAT(<Column1>, '000000') AS DATETIME) FROM <Table1>;
 ```
 
 DATE_FORMAT
@@ -690,24 +690,53 @@ SELECT REVERSE(SUBSTRING(12345, -2, 2));
 
 TRIM
 ```sql
-SELECT TRIM(LEADING  '　' FROM '　I　love　Vim　');
+SELECT TRIM(LEADING '　' FROM '　I　love　Vim　');
+ > I　love　Vim　
+
 SELECT TRIM(TRAILING '　' FROM '　I　love　Vim　');
+ > 　I　love　Vim
+
 SELECT TRIM('_' FROM '_I_love_Vim_');
+ > I_love_Vim
+
 SELECT TRIM(' I love Vim ');
+ > I love Vim
 ```
 
-Comma list string search1(MySQL Only)
+LOWER, UPPER
 ```sql
-ex) 11 search
+SELECT LOWER('I love Vim.');
+ > i love vim.
 
-SELECT FIND_IN_SET(11, '1,2,11');
+SELECT UPPER('I love Vim.');
+ > I LOVE VIM.
 ```
 
-Pipe list string search(MySQL Only)
+LPAD, RPAD
 ```sql
-ex) 11 search
+SELECT LPAD('abc', 5 , 0);
+ > 00abc
+
+SELECT RPAD('abc', 5 , 0);
+ > abc00
+```
+
+LENGTH
+```sql
+SELECT LENGTH('I love Vim.');
+ > 11
+```
+
+FIND_IN_SET(MySQL Only)
+```sql
+SELECT FIND_IN_SET(11, '1,2,11,21');
+ > 3
+
+SELECT FIND_IN_SET(11, '1,2,21');
+ > 0
 
 SELECT FIND_IN_SET(11, REPLACE('1|2|11', '|', ','));
+ > 3
 ```
 
 Comma list string search2(MySQL Only?)
