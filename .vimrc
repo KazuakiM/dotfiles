@@ -672,9 +672,10 @@ function! s:hooks.on_source(bundle) abort "{{{
     autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     autocmd MyAutoCmd FileType php        setlocal omnifunc=phpcomplete#CompletePHP
 
-    smap <silent><expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-    nmap <silent><expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-    imap <silent><expr><CR>  pumvisible() ? ( neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<Left>\<Right>" ) : "\<CR>X\<C-h>"
+    smap <silent><expr><TAB>  neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    nmap <silent><expr><TAB>  neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    imap <silent><expr><C-x>  KazuakiMNeoCompleteCr()
+    imap <silent><expr><CR>   KazuakiMNeoCompleteCr()
     nmap <silent><S-TAB> <ESC>a<C-r>=neosnippet#commands#_clear_markers()<CR>
     inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
     inoremap <expr><BS>  neocomplete#smart_close_popup()."\<C-h>"
@@ -724,6 +725,15 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:neosnippet#disable_runtime_snippets      = {'_' : 1}
     let g:neosnippet#enable_snipmate_compatibility = 1
     let g:neosnippet#snippets_directory            = s:envHome . '/.vim/bundle/neosnippet-snippets/neosnippets'
+
+    function! KazuakiMNeoCompleteCr() abort "{{{
+        if pumvisible() is# 0
+            return "\<CR>X\<C-h>"
+        elseif neosnippet#expandable_or_jumpable()
+            return "\<Plug>(neosnippet_expand_or_jump)"
+        endif
+        return "\<Left>\<Right>"
+    endfunction "}}}
 endfunction "}}}
 "}}}
 " gundo.vim {{{
