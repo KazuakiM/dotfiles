@@ -1,6 +1,5 @@
 # Regularly update & git NG files. {{{
 /bundle/*
-/dict/*
 /neobundle.vim/*
 /neocomplete.vim/*
 /neosnippet.vim/*

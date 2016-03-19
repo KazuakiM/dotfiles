@@ -667,7 +667,8 @@ NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['KazuakiM/neosnippet-snippe
 imap <silent><expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle) abort "{{{
-    autocmd MyAutoCmd FileType html       setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd MyAutoCmd FileType css        setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd MyAutoCmd FileType html       setlocal omnifunc=htmlcomplete#CompleteTags
     autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     autocmd MyAutoCmd FileType php        setlocal omnifunc=phpcomplete#CompletePHP
 
@@ -698,16 +699,20 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:neocomplete#max_list                  = 8
     let g:neocomplete#min_keyword_length        = 3
     let g:neocomplete#sources                   = {
-    \    '_':          ['neosnippet', 'file', 'buffer'],
-    \    'html':       ['neosnippet', 'file', 'omni',       'buffer'],
-    \    'javascript': ['neosnippet', 'file', 'omni',       'buffer'],
-    \    'php':        ['neosnippet', 'file', 'dictionary', 'omni',    'buffer']}
+    \    '_':          ['neosnippet', 'file',                       'buffer'],
+    \    'css':        ['neosnippet',         'dictionary', 'omni', 'buffer'],
+    \    'html':       ['neosnippet', 'file', 'dictionary', 'omni', 'buffer'],
+    \    'javascript': ['neosnippet', 'file', 'dictionary', 'omni', 'buffer'],
+    \    'php':        ['neosnippet', 'file', 'dictionary', 'omni', 'buffer']}
     let g:neocomplete#sources#buffer#cache_limit_size  = 50000
     let g:neocomplete#sources#buffer#disabled_pattern  = '\.log\|\.jax'
     let g:neocomplete#sources#buffer#max_keyword_width = 30
     let g:neocomplete#sources#dictionary#dictionaries  = {
-    \    '_':   '',
-    \    'php': s:envHome . '/.vim/dict/php.dict'}
+    \    '_':          '',
+    \    'css':        s:envHome . '/.vim/dict/css.dict',
+    \    'html':       s:envHome . '/.vim/dict/html.dict',
+    \    'javascript': s:envHome . '/.vim/dict/javascript.dict',
+    \    'php':        s:envHome . '/.vim/dict/php.dict'}
     let g:neocomplete#use_vimproc = 1
 
     "neoinclude.vim
