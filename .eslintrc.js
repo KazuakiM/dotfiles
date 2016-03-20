@@ -68,7 +68,7 @@ module.exports = {
         // no-empty-function
         // no-empty-pattern
         //XXX: "no-eq-null": 2,
-        "no-eval":    2,
+        "no-eval": 2,
         // no-extend-native
         // no-extra-bind (es6)
         // no-extra-label
