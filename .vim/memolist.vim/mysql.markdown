@@ -512,7 +512,7 @@ DROP TABLE IF EXISTS <Table1> CASCADE;
 
 DataBase
 ```sql
-DROP DATABASE <DataBase1>, <DataBase2>;
+DROP DATABASE <DataBase>;
 ```
 
 ## ALTER
