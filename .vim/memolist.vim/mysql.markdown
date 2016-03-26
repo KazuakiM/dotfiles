@@ -290,16 +290,16 @@ ORDER BY <Tab1>.<Column1> ASC [, <Tab1>.<Column2> ASC ];
 
 ## Max
 
-2nd max size
+1st, 2nd MAX
 ```sql
-SELECT <Tab1>.<Col1>, MAX(<Tab1>.<Col2>) AS max
+SELECT <Tab1>.<Col1>, 1st_max, MAX(<Tab1>.<Col2>) AS 2nd_max
 FROM <Table1> AS <Tab1>
 INNER JOIN (
-    SELECT <SubTab1>.<Col1>, MAX(<SubTab1>.<Col2>) AS <Col2>
+    SELECT <SubTab1>.<Col1>, MAX(<SubTab1>.<Col2>) AS 1st_max
     FROM <Table1> AS <SubTab1>
     GROUP BY <SubTab1>.<Col1> ) AS <Tab2>
 ON <Tab1>.<Col1> = <Tab2>.<Col1>
-WHERE <Tab1>.<Col2> < <Tab2>.<Col2>
+WHERE <Tab1>.<Col2> < <Tab2>.1st_max
 GROUP BY <Tab1>.<Col1>;
 ```
 
