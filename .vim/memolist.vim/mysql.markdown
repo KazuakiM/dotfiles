@@ -15,6 +15,7 @@
   - [Character code](#character-code)
   - [PARTITIONS](#partitions)
   - [Row](#row)
+  - [Max](#max)
   - [INSERT](#insert)
   - [UPDATE](#update)
   - [DELETE/TRUNCATE](#deletetruncate)
@@ -285,6 +286,21 @@ SELECT IF(@variable1 <> <Tab1>.<Column1> [ AND @variable2 <> <Tab1>.<Column2> ],
    [, @variable2:=<Tab1>.<Column2> AS <Col2> ]
 FROM <Table1> AS <Tab1>
 ORDER BY <Tab1>.<Column1> ASC [, <Tab1>.<Column2> ASC ];
+```
+
+## Max
+
+2nd max size
+```sql
+SELECT <Tab1>.<Col1>, MAX(<Tab1>.<Col2>) AS max
+FROM <Table1> AS <Tab1>
+INNER JOIN (
+    SELECT <SubTab1>.<Col1>, MAX(<SubTab1>.<Col2>) AS <Col2>
+    FROM <Table1> AS <SubTab1>
+    GROUP BY <SubTab1>.<Col1> ) AS <Tab2>
+ON <Tab1>.<Col1> = <Tab2>.<Col1>
+WHERE <Tab1>.<Col2> < <Tab2>.<Col2>
+GROUP BY <Tab1>.<Col1>;
 ```
 
 ## INSERT
