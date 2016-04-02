@@ -236,7 +236,7 @@ set fillchars+=diff:* foldmethod=marker
 set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m guioptions+=M
 set helplang=ja hidden history=1000 hlsearch
 set ignorecase iminsert=0 imsearch=-1 incsearch
-set laststatus=2 lazyredraw
+set laststatus=2 nolazyredraw
 set matchpairs+=<:> matchtime=1 mouse=
 set nobomb noequalalways noerrorbells nogdefault noimcmdline noimdisable noruler notitle number
 set pumheight=8
@@ -526,8 +526,8 @@ let g:quickrun_config = {
 \        'outputter/buffer/into': 1},
 \    'php': {
 \        'command':                          'phpunit',
-\        'cmdopt':                           '--no-configuration',
 \        'hook/close_buffer/enable_failure': 0,
+\        'outputter':                        'buffer',
 \        'outputter/buffer/split':           ':botright 7sp'},
 \    'php/watchdogs_checker': {
 \        'type': 'watchdogs_checker/php'},
