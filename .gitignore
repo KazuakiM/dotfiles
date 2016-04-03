@@ -2,6 +2,7 @@
 .bashrc.win
 C:/
 .cache/eslint/
+.cache/fontconfig/
 .config/filezilla/lockfile
 .config/filezilla/queue.sqlite3
 .DS_Store

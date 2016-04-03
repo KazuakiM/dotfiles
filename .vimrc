@@ -238,7 +238,7 @@ set helplang=ja hidden history=1000 hlsearch
 set ignorecase iminsert=0 imsearch=-1 incsearch
 set laststatus=2 nolazyredraw
 set matchpairs+=<:> matchtime=1 mouse=
-set nobomb noequalalways noerrorbells nogdefault noimcmdline noimdisable noruler notitle number
+set nobomb noequalalways noerrorbells nofixendofline nogdefault noimcmdline noimdisable noruler notitle number
 set pumheight=8
 set runtimepath+=$HOME/.vim/bundle/neobundle.vim
 set scrolloff=999 shellslash shiftwidth=4 shortmess+=a shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile switchbuf=usetab
