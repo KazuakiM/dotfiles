@@ -271,6 +271,11 @@ SHOW CREATE TABLE <Table1>;
 
 ## Row
 
+All table records.
+```sql
+SELECT tab.table_name, tab.table_rows FROM INFORMATION_SCHEMA.TABLES AS tab WHERE tab.TABLE_SCHEMA = DATABASE();
+```
+
 row number
 ```sql
 SET @row_number:=0;
