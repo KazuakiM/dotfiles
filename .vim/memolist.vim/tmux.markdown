@@ -95,6 +95,11 @@ Prefix > Ctrl-k
 Prefix > Ctrl-w
 ```
 
+ウィンドウ削除
+```
+Prefix > &
+```
+
 ペイン垂直分割/水平分割
 ```
 Prefix > v

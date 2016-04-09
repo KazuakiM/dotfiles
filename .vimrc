@@ -352,6 +352,7 @@ let g:loaded_vimball           = 1 "$VIMRUNTIME/autoload/vimball.vim
 let g:loaded_vimballPlugin     = 1 "$VIMRUNTIME/plugin/vimballPlugin.vim
 let g:loaded_zip               = 1 "$VIMRUNTIME/autoload/zip.vim
 let g:loaded_zipPlugin         = 1 "$VIMRUNTIME/plugin/zipPlugin.vim
+let g:omni_sql_no_default_maps = 1 "$VIMRUNTIME/ftplugin/sql.vim
 let g:vimsyn_embed             = 1 "$VIMRUNTIME/syntax/vim.vim
 " Vim
 nnoremap <SID>[vim] <Nop>
@@ -672,6 +673,7 @@ function! s:hooks.on_source(bundle) abort "{{{
     autocmd MyAutoCmd FileType html       setlocal omnifunc=htmlcomplete#CompleteTags
     autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     autocmd MyAutoCmd FileType php        setlocal omnifunc=phpcomplete#CompletePHP
+    autocmd MyAutoCmd FileType sql        setlocal omnifunc=
 
     smap <silent><expr><TAB>  neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
     nmap <silent><expr><TAB>  neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"

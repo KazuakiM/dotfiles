@@ -297,7 +297,7 @@ ORDER BY <Tab1>.<Column1> ASC [, <Tab1>.<Column2> ASC ];
 
 1st, 2nd MAX
 ```sql
-SELECT <Tab1>.<Col1>, 1st_max, MAX(<Tab1>.<Col2>) AS 2nd_max
+SELECT <Tab1>.<Col1>, <Tab2>.1st_max, MAX(<Tab1>.<Col2>) AS 2nd_max
 FROM <Table1> AS <Tab1>
 INNER JOIN (
     SELECT <SubTab1>.<Col1>, MAX(<SubTab1>.<Col2>) AS 1st_max
