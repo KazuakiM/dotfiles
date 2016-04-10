@@ -33,9 +33,10 @@
 "
 "
 " Variables {{{
-let s:envHome    = ! exists('s:envHome')    ? $HOME                                 : s:envHome
-let s:date       = ! exists('s:date')       ? strftime('%Y%m%d%H%M%S', localtime()) : s:date
-let s:lineUpdate = ! exists('s:lineUpdate') ? 0                                     : s:lineUpdate
+let s:envHome      = ! exists('s:envHome')      ? $HOME                                 : s:envHome
+let s:date         = ! exists('s:date')         ? strftime('%Y%m%d%H%M%S', localtime()) : s:date
+let s:lineUpdate   = ! exists('s:lineUpdate')   ? 0                                     : s:lineUpdate
+let s:swapFilePath = ! exists('s:swapFilePath') ? ''                                    : s:swapFilePath
 "}}}
 "
 "
@@ -170,6 +171,11 @@ function! s:VimEnter() abort "{{{
     if &l:diff
         wincmd h
     endif
+
+    if 0 < len(s:swapFilePath)
+        call delete(s:swapFilePath)
+        let s:swapFilePath = ''
+    endif
 endfunction "}}}
 
 function! s:WinEnter() abort "{{{
@@ -182,6 +188,7 @@ autocmd MyAutoCmd BufReadPost          * call s:BufReadPost()
 autocmd MyAutoCmd CmdwinEnter          * nmap <silent> <ESC><ESC> :quit<CR>
 autocmd MyAutoCmd CmdwinLeave          * nunmap <ESC><ESC>
 autocmd MyAutoCmd FocusGained          * checktime
+autocmd MyAutoCmd SwapExists           * let s:swapFilePath = v:swapname
 autocmd MyAutoCmd InsertLeave          * call s:InsertLeave()
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 autocmd MyAutoCmd QuickfixCmdPost      * call kazuakim#QuickfixCmdPost()
