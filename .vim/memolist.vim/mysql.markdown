@@ -269,6 +269,16 @@ ALTER TABLE <Table1> DROP PARTITION p201401, p201402;
 SHOW CREATE TABLE <Table1>;
 ```
 
+New partitions table.
+```sql
+CREATE TABLE <Table1> (
+ ...
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8
+PARTITION BY RANGE COLUMNS(created_at) (
+    PARTITION p201401 VALUES LESS THAN ('2014-02-01'),
+    PARTITION p201402 VALUES LESS THAN ('2014-03-01'));
+```
+
 ## Row
 
 All table records.
@@ -561,6 +571,17 @@ ALTER TABLE <Table1> DROP <Column1>;
 Delete Index
 ```sql
 ALTER TABLE <Table1> DROP INDEX <Index1>;
+```
+
+Delete auto_increment PRIMARY KEY & new PRIMARY KEY with PARTITION
+```sql
+ALTER TABLE <Table1> MODIFY `id` int(10) unsigned NOT NULL;
+ALTER TABLE <Table1> DROP PRIMARY KEY;
+ALTER TABLE <Table1> ADD PRIMARY KEY (id, created_at);
+ALTER TABLE <Table1> MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+ALTER TABLE <Table1> PARTITION BY RANGE COLUMNS(created_at) (
+    PARTITION p201401 VALUES LESS THAN ('2014-02-01') ENGINE = InnoDB,
+    PARTITION p201402 VALUES LESS THAN ('2014-03-01') ENGINE = InnoDB);
 ```
 
 Update auto_increment
