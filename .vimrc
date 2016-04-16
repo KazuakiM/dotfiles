@@ -333,6 +333,8 @@ let g:php_baselib       = 1
 let g:php_htmlInStrings = 1
 let g:php_noShortTags   = 1
 let g:php_sql_query     = 1
+" $VIMRUNTIME/syntax/vim.vim
+let g:vimsyn_embed = 1
 " $VIMRUNTIME/ftplugin/sql.vim
 let g:ftplugin_sql_objects        = 1
 let g:ftplugin_sql_omni_key       = 1
@@ -344,8 +346,7 @@ let g:omni_sql_no_default_maps    = 1
 let g:loaded_2html_plugin      = 1 "$VIMRUNTIME/plugin/tohtml.vim
 let g:loaded_getscriptPlugin   = 1 "$VIMRUNTIME/plugin/getscriptPlugin.vim
 let g:loaded_gzip              = 1 "$VIMRUNTIME/plugin/gzip.vim
-"XXX: Check issues. https://github.com/vim-jp/issues/issues/862
-"let g:loaded_logipat          = 1 "$VIMRUNTIME/plugin/logiPat.vim
+let g:loaded_logiPat           = 1 "$VIMRUNTIME/plugin/logiPat.vim
 let g:loaded_matchparen        = 1 "$VIMRUNTIME/plugin/matchparen.vim
 let g:loaded_netrw             = 1 "$VIMRUNTIME/autoload/netrw.vim
 let g:loaded_netrwFileHandlers = 1 "$VIMRUNTIME/autoload/netrwFileHandlers.vim
@@ -359,8 +360,6 @@ let g:loaded_vimball           = 1 "$VIMRUNTIME/autoload/vimball.vim
 let g:loaded_vimballPlugin     = 1 "$VIMRUNTIME/plugin/vimballPlugin.vim
 let g:loaded_zip               = 1 "$VIMRUNTIME/autoload/zip.vim
 let g:loaded_zipPlugin         = 1 "$VIMRUNTIME/plugin/zipPlugin.vim
-let g:omni_sql_no_default_maps = 1 "$VIMRUNTIME/ftplugin/sql.vim
-let g:vimsyn_embed             = 1 "$VIMRUNTIME/syntax/vim.vim
 " Vim
 nnoremap <SID>[vim] <Nop>
 nmap <Leader>f <SID>[vim]
@@ -679,7 +678,6 @@ function! s:hooks.on_source(bundle) abort "{{{
     autocmd MyAutoCmd FileType css        setlocal omnifunc=csscomplete#CompleteCSS
     autocmd MyAutoCmd FileType html       setlocal omnifunc=htmlcomplete#CompleteTags
     autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd MyAutoCmd FileType php        setlocal omnifunc=phpcomplete#CompletePHP
     autocmd MyAutoCmd FileType sql        setlocal omnifunc=
 
     smap <silent><expr><TAB>  neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
@@ -714,7 +712,7 @@ function! s:hooks.on_source(bundle) abort "{{{
     \    'css':        ['neosnippet',         'dictionary', 'omni', 'buffer'],
     \    'html':       ['neosnippet', 'file', 'dictionary', 'omni', 'buffer'],
     \    'javascript': ['neosnippet', 'file', 'dictionary', 'omni', 'buffer'],
-    \    'php':        ['neosnippet', 'file', 'dictionary', 'omni', 'buffer']}
+    \    'php':        ['neosnippet', 'file', 'dictionary',         'buffer']}
     let g:neocomplete#sources#buffer#cache_limit_size  = 50000
     let g:neocomplete#sources#buffer#disabled_pattern  = '\.log\|\.jax'
     let g:neocomplete#sources#buffer#max_keyword_width = 30
