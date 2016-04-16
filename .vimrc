@@ -675,11 +675,6 @@ NeoBundleLazy 'Shougo/neocomplete.vim', {'depends': ['KazuakiM/neosnippet-snippe
 imap <silent><expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 let s:hooks = neobundle#get_hooks('neocomplete.vim')
 function! s:hooks.on_source(bundle) abort "{{{
-    autocmd MyAutoCmd FileType css        setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd MyAutoCmd FileType html       setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd MyAutoCmd FileType sql        setlocal omnifunc=
-
     smap <silent><expr><TAB>  neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
     nmap <silent><expr><TAB>  neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
     imap <silent><expr><C-x>  KazuakiMNeoCompleteCr()
@@ -708,11 +703,11 @@ function! s:hooks.on_source(bundle) abort "{{{
     let g:neocomplete#max_list                  = 8
     let g:neocomplete#min_keyword_length        = 3
     let g:neocomplete#sources                   = {
-    \    '_':          ['neosnippet', 'file',                       'buffer'],
-    \    'css':        ['neosnippet',         'dictionary', 'omni', 'buffer'],
-    \    'html':       ['neosnippet', 'file', 'dictionary', 'omni', 'buffer'],
-    \    'javascript': ['neosnippet', 'file', 'dictionary', 'omni', 'buffer'],
-    \    'php':        ['neosnippet', 'file', 'dictionary',         'buffer']}
+    \    '_':          ['neosnippet', 'file',               'buffer'],
+    \    'css':        ['neosnippet',         'dictionary', 'buffer'],
+    \    'html':       ['neosnippet', 'file', 'dictionary', 'buffer'],
+    \    'javascript': ['neosnippet', 'file', 'dictionary', 'buffer'],
+    \    'php':        ['neosnippet', 'file', 'dictionary', 'buffer']}
     let g:neocomplete#sources#buffer#cache_limit_size  = 50000
     let g:neocomplete#sources#buffer#disabled_pattern  = '\.log\|\.jax'
     let g:neocomplete#sources#buffer#max_keyword_width = 30
