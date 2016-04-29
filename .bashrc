@@ -169,6 +169,7 @@ case "${OSTYPE}" in
         export PATH=$localPath$PATH
         export MYSQL_PS1="\d @\h> "
         #export MYSQL_PS1="\d @\h[\u] \n> "
+        export HOMEBREW_NO_ANALYTICS=1
         #}}}
         ;;
     linux*)
