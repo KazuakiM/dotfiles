@@ -271,6 +271,8 @@ colorscheme kazuakim
 "  ESC
 inoremap jk <Esc>
 inoremap kj <Esc>
+"  Visual
+xnoremap Y y`>
 "  Fold
 nnoremap zx :foldopen<CR>
 "  Line
