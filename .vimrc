@@ -245,7 +245,7 @@ set helplang=ja hidden history=1000 hlsearch
 set ignorecase iminsert=0 imsearch=-1 incsearch
 set laststatus=2 nolazyredraw
 set matchpairs+=<:> matchtime=1 mouse=
-set nobomb noequalalways noerrorbells nofixendofline nogdefault noimcmdline noimdisable noruler notitle number
+set nobomb noequalalways noerrorbells nofixendofline nogdefault noimcmdline noimdisable noruler notitle nowrap number
 set pumheight=8
 set runtimepath+=$HOME/.vim/bundle/neobundle.vim
 set scrolloff=999 shellslash shiftwidth=4 shortmess+=a shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile switchbuf=usetab
@@ -253,7 +253,7 @@ set synmaxcol=300
 set tabline=%!KazuakiMTabLineUpdate() tabstop=4 titleold= ttyfast t_vb=
 set undofile updatecount=30 updatetime=1000
 set viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo virtualedit+=block visualbell
-set wildmenu wildmode=longest:full,full wrap wrapscan
+set wildmenu wildmode=longest:full,full wrapscan
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*.json'\ --exclude='*.log'\ --exclude='*min.js'\ --exclude='*min.css'
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,C,.DS_Store,.,..
 set statusline=\ %t\ %{KazuakiMStatuslinePaste()}\ %m\ %r\ %h\ %w\ %q\ %{KazuakiMStatuslineSyntax()}%=%l/%L\ \|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
