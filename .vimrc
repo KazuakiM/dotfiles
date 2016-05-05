@@ -344,6 +344,9 @@ let g:ftplugin_sql_omni_key_left  = 1
 let g:ftplugin_sql_omni_key_right = 1
 let g:ftplugin_sql_statements     = 1
 let g:omni_sql_no_default_maps    = 1
+" dummy functions.
+function! SQL_SetType() abort "{{{
+endfunction "}}}
 " disable plugin
 let g:loaded_2html_plugin      = 1 "$VIMRUNTIME/plugin/tohtml.vim
 let g:loaded_getscriptPlugin   = 1 "$VIMRUNTIME/plugin/getscriptPlugin.vim
