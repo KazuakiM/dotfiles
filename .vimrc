@@ -479,6 +479,7 @@ nnoremap <SID>[memolist]l :<C-u>MemoList<CR>
 
 let s:hooks = neobundle#get_hooks('unite.vim')
 function! s:hooks.on_source(bundle) abort "{{{
+    let g:loaded_unite_source_bookmark     = 1
     let g:unite_data_directory             = s:envHome .'/.vim/unite.vim'
     let g:unite_enable_start_insert        = 1
     let g:unite_source_grep_command        = 'grep'
