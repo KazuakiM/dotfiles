@@ -5,7 +5,7 @@
 # @author kazuakiM
 #--------------------------------
 if [ -z `tmux ls` ] ; then
-    tmux
+    tmux -f $HOME/.config/tmux/.tmux.conf
 else
-    tmux attach
+    tmux -f $HOME/.config/tmux/.tmux.conf attach
 fi

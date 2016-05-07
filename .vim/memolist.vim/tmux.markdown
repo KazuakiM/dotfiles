@@ -17,12 +17,12 @@ tmux
 
 起動
 ```bash
-$ tmux
+$ tm
 ```
 
 セッション一覧
 ```bash
-$ tmux ls
+$ tml
 ```
 
 接続中のセッション一覧
@@ -37,17 +37,14 @@ Prefix > Ctrl-u
 
 アタッチ
 ```bash
-$ tmux attach -t <id>
+$ tml
+$ tma <id>
 ```
 
 現在接続中のセッション削除
 ```bash
-$ tmux kill-session
-```
-
-指定したセッション削除
-```bash
-$ tmux kill-session -t <id>
+$ tml
+$ tmk <id>
 ```
 
 全てのセッション削除
