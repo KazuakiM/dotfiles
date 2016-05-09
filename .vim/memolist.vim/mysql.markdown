@@ -318,6 +318,31 @@ WHERE <Tab1>.<Col2> < <Tab2>.1st_max
 GROUP BY <Tab1>.<Col1>;
 ```
 
+the Group-wise Maximum of a Certain Column
+```sql
+-- 相関サブクエリー
+SELECT <Tab1>.<Col1>, <Tab1>.<Col2>
+FROM <Table1> AS <Tab1>
+WHERE <Tab1>.<Col2> IN (
+    SELECT MAX(<SubTab1>.<Col2>)
+    FROM <Table1> AS <SubTab1>
+    GROUP BY <Tab1>.<Col1>)
+
+or
+
+-- 非相関サブクエリー
+SELECT <Tab1>.<Col1>, <Tab1>.<Col2>
+FROM <Table1> AS <Tab1>
+INNER JOIN (
+    SELECT <SubTab1>.<Col1>, MAX(<SubTab1>.<Col2>) AS <Col2>
+    FROM <Table1> AS <SubTab1>
+    GROUP BY <SubTab1>.<Col1>) AS <Tab2>
+ON (
+    <Tab1>.<Col1> = <Tab2>.<Col1>
+    AND <Tab1>.<Col2> = <Tab2>.<Col2>);
+
+```
+
 ## INSERT
 
 (Bulk )All columns set
