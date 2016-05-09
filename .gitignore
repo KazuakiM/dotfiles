@@ -16,6 +16,8 @@ C:/
 .log/tmux/
 .netrc
 .ssh/
+.subversion/
 .vimrc.win
+.wget-hsts
 lib/Vagrant/ssh.config
 lib/Vagrant/.vagrant

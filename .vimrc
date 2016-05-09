@@ -44,11 +44,11 @@ let s:swapFilePath = ! exists('s:swapFilePath') ? ''                            
 " Zun wiki http://www.kawaz.jp/pukiwiki/?vim#cb691f26 {{{
 set encoding=utf-8 fileencoding=utf-8 fileformats=unix,dos,mac
 if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
-    set fileencodings=ucs-bom,utf-8,default,latin1,iso-2022-jp-3,eucjp-ms,cp932
+    set fileencodings=ucs-bom,utf-8,default,eucjp-ms,latin1,iso-2022-jp-3,cp932
 elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
-    set fileencodings=ucs-bom,utf-8,default,latin1,iso-2022-jp-3,euc-jisx0213,cp932
+    set fileencodings=ucs-bom,utf-8,default,euc-jisx0213,latin1,iso-2022-jp-3,cp932
 else
-    set fileencodings=ucs-bom,utf-8,default,latin1,iso-2022-jp,euc-jp,cp932
+    set fileencodings=ucs-bom,utf-8,default,euc-jp,latin1,iso-2022-jp,cp932
 endif
 "}}}
 
