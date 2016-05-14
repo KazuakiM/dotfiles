@@ -106,11 +106,11 @@ endfunction "}}}
 
 " gundo.vim {{{
 function! kazuakim#ClearUndo() abort "{{{
-    let s:oldUndolevels = &undolevels
-    set undolevels=-1
-    execute "normal a \<BS>\<Esc>"
-    let &undolevels = s:oldUndolevels
-    unlet s:oldUndolevels
+    let l:oldUndolevels = &l:undolevels
+    setlocal undolevels=-1
+    execute "normal! a \<BS>\<Esc>"
+    let &l:undolevels = l:oldUndolevels
+    unlet l:oldUndolevels
 endfunction "}}}
 "}}}
 
