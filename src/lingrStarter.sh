@@ -4,10 +4,8 @@
 #
 # @author kazuakiM
 #--------------------------------
-logFile="/Trashes/#vim/`date +%Y-%m-%d`_Lingr.txt"
+logFile="/Trashes/#vim-jp_reading-vimrc/`date +%Y-%m-%d`_Gitter.txt"
 
-# Log file delete
-rm -f /Trashes/#vim/`date -v-4d +%Y-%m-%d`_Lingr.txt
 # Log file make
 touch $logFile
 # LimeChat Start
