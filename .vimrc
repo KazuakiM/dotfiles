@@ -755,19 +755,6 @@ function! s:hooks.on_source(bundle) abort "{{{
     nnoremap <C-r> g+
 endfunction "}}}
 "}}}
-" shabadou.vim
-" vim-watchdogs {{{
-NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': 'osyo-manga/shabadou.vim', 'insert': 1}
-let s:hooks = neobundle#get_hooks('vim-watchdogs')
-function! s:hooks.on_source(bundle) abort "{{{
-    "vim-watchdogs
-    let g:watchdogs_check_BufWritePost_enable  = 1
-    let g:watchdogs_check_BufWritePost_enables = {'vim': 0}
-    let g:watchdogs_check_CursorHold_enable    = 1
-    let g:watchdogs_check_CursorHold_enables   = {'vim': 0}
-endfunction "}}}
-unlet s:hooks
-"}}}
 " emmet-vim {{{
 "
 " MEMO
@@ -812,6 +799,18 @@ if s:osType !=# 'win'
     " neoinclude.vim {{{
     let g:neoinclude#delimiters = '\'
     "}}}
+    " shabadou.vim
+    " vim-watchdogs {{{
+    NeoBundleLazy 'osyo-manga/vim-watchdogs', {'depends': 'osyo-manga/shabadou.vim', 'insert': 1}
+    let s:hooks = neobundle#get_hooks('vim-watchdogs')
+    function! s:hooks.on_source(bundle) abort "{{{
+        "vim-watchdogs
+        let g:watchdogs_check_BufWritePost_enable  = 1
+        let g:watchdogs_check_BufWritePost_enables = {'vim': 0}
+        let g:watchdogs_check_CursorHold_enable    = 1
+        let g:watchdogs_check_CursorHold_enables   = {'vim': 0}
+    endfunction "}}}
+    "}}}
 endif
 
 if s:osType !=# 'unix'
@@ -854,6 +853,7 @@ NeoBundleFetch 'thinca/vim-themis'
 "
 "
 " NeoBundle END {{{
+unlet s:hooks
 call neobundle#end()
 "}}}
 "
