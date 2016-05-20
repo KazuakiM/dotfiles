@@ -4,6 +4,7 @@
 [alias]
     dff = difftool
     lg  = log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+    st  = status
 [core]
     precomposeunicode = true
     editor            = vim
