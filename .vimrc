@@ -692,18 +692,16 @@ function! s:hooks.on_source(bundle) abort "{{{
     "neocomplete.vim
     let g:neocomplete#auto_completion_start_length = 3
     let g:neocomplete#data_directory               = s:envHome .'/.vim/neocomplete.vim'
-    "MEMO:omni補完エラー動作検証
-    "let g:neocomplete#delimiter_patterns           = {
-    "\    'javascript': ['.'],
-    "\    'php':        ['->', '::', '\'],
-    "\    'ruby':       ['::']}
+    let g:neocomplete#delimiter_patterns           = {
+    \    'javascript': ['.'],
+    \    'php':        ['->', '::', '\'],
+    \    'ruby':       ['::']}
     let g:neocomplete#enable_at_startup         = 1
     let g:neocomplete#enable_auto_close_preview = 1
     let g:neocomplete#enable_auto_delimiter     = 1
     let g:neocomplete#enable_auto_select        = 0
     let g:neocomplete#enable_fuzzy_completion   = 0
     let g:neocomplete#enable_smart_case         = 1
-    let g:neocomplete#fallback_mappings         = ["\<C-x>\<C-o>", "\<C-x>\<C-n>"]
     let g:neocomplete#keyword_patterns          = {'_': '\h\w*'}
     let g:neocomplete#lock_buffer_name_pattern  = '\.log\|.*quickrun.*\|.jax'
     let g:neocomplete#max_keyword_width         = 30
