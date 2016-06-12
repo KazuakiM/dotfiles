@@ -142,6 +142,8 @@ case "${OSTYPE}" in
         #brew --prefix perl
         if [ -d /usr/local/opt/perl/bin ]; then
             localPath="/usr/local/opt/perl/bin:$localPath"
+            PERL_MM_OPT="INSTALL_BASE=$HOME/.lib/perl" cpan local::lib
+            eval "$(perl -I$HOME/.lib/perl -Mlocal::lib)";
         fi
         #brew --prefix gnu-tar
         if [ -d /usr/local/opt/gnu-tar/libexec/gnubin ]; then
