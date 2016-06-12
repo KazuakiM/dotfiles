@@ -109,6 +109,7 @@ function! kazuakim#ClearUndo() abort "{{{
     let l:oldUndolevels = &l:undolevels
     setlocal undolevels=-1
     execute "normal! a \<BS>\<Esc>"
+    write
     let &l:undolevels = l:oldUndolevels
     unlet l:oldUndolevels
 endfunction "}}}
