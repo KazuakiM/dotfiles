@@ -9,6 +9,7 @@ C:/
 .DS_Store
 .gitconfig
 .gitconfig.local
+.lib/perl/
 .log/bash/
 .log/filezilla/
 .log/less/
