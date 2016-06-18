@@ -161,6 +161,11 @@ case "${OSTYPE}" in
         if [ -d /usr/local/opt/macvim-kaoriya/MacVim.app/Contents/MacOS ]; then
             localPath="/usr/local/opt/macvim-kaoriya/MacVim.app/Contents/MacOS:$localPath"
         fi
+        #
+        if [ -d /usr/local/share/git-core/contrib/diff-highlight ]; then
+            localPath="/usr/local/share/git-core/contrib/diff-highlight:$localPath"
+        fi
+        #heroku
         if [ -d /usr/local/heroku/bin ]; then
             localPath="/usr/local/heroku/bin:$localPath"
         fi

@@ -6,13 +6,14 @@
     lg  = log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
     st  = status
 [core]
-    precomposeunicode = true
     editor            = vim
+    precomposeunicode = true
 [color]
     ui = auto
 [diff]
-    algorithm = histogram
-    tool      = vimdiff
+    algorithm           = histogram
+    compactionHeuristic = true
+    tool                = vimdiff
 [merge]
     # from 1.7.6
     ff   = false
@@ -22,3 +23,7 @@
 [pull]
     # from 1.7.9
     rebase = true
+[pager]
+    diff = diff-highlight | less
+    log  = diff-highlight | less
+    show = diff-highlight | less
