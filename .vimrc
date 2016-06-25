@@ -349,6 +349,7 @@ function! SQL_SetType() abort "{{{
 endfunction "}}}
 " disable plugin
 let g:loaded_2html_plugin      = 1 "$VIMRUNTIME/plugin/tohtml.vim
+let g:loaded_getscript         = 1 "$VIMRUNTIME/autoload/getscript.vim
 let g:loaded_getscriptPlugin   = 1 "$VIMRUNTIME/plugin/getscriptPlugin.vim
 let g:loaded_gzip              = 1 "$VIMRUNTIME/plugin/gzip.vim
 let g:loaded_logiPat           = 1 "$VIMRUNTIME/plugin/logiPat.vim
@@ -357,8 +358,10 @@ let g:loaded_netrw             = 1 "$VIMRUNTIME/autoload/netrw.vim
 let g:loaded_netrwFileHandlers = 1 "$VIMRUNTIME/autoload/netrwFileHandlers.vim
 let g:loaded_netrwPlugin       = 1 "$VIMRUNTIME/plugin/netrwPlugin.vim
 let g:loaded_netrwSettings     = 1 "$VIMRUNTIME/autoload/netrwSettings.vim
+let g:loaded_rrhelper          = 1 "$VIMRUNTIME/plugin/rrhelper.vim
 let g:loaded_spellfile_plugin  = 1 "$VIMRUNTIME/plugin/spellfile.vim
 let g:loaded_sql_completion    = 1 "$VIMRUNTIME/autoload/sqlcomplete.vim
+let g:loaded_syntax_completion = 1 "$VIMRUNTIME/autoload/syntaxcomplete.vim
 let g:loaded_tar               = 1 "$VIMRUNTIME/autoload/tar.vim
 let g:loaded_tarPlugin         = 1 "$VIMRUNTIME/plugin/tarPlugin.vim
 let g:loaded_vimball           = 1 "$VIMRUNTIME/autoload/vimball.vim

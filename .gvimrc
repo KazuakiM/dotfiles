@@ -26,11 +26,13 @@ nnoremap <S-Right> :<C-u>call KazuakiMSetWindow( 0,  3)<CR>
 " OS type {{{
 if has("win32") || has ("win64")
     let s:KazuakiMWindow  = {'lines' : 45, 'columns': 98}
-    execute 'set guifont=Source_Code_Pro:h12:cANSI lines='.get(s:KazuakiMWindow,'lines').' columns='.get(s:KazuakiMWindow,'columns')
+    set guifont=Source_Code_Pro:h12:cANSI guifontwide=Source_Code_Pro:h12:cANSI
+    execute 'set lines='.get(s:KazuakiMWindow,'lines').' columns='.get(s:KazuakiMWindow,'columns')
     winpos 1120 0
 else
     let s:KazuakiMWindow  = {'lines' : 44, 'columns': 170}
-    execute 'set guifont=Ricty\ Diminished\ Discord\ Regular:h16 lines='.get(s:KazuakiMWindow,'lines').' columns='.get(s:KazuakiMWindow,'columns')
+    set guifont=Ricty\ Diminished\ Discord\ Regular:h16 guifontwide=Ricty\ Diminished\ Discord\ Regular:h16
+    execute 'set lines='.get(s:KazuakiMWindow,'lines').' columns='.get(s:KazuakiMWindow,'columns')
     winpos 0 23
 endif
 "}}}
