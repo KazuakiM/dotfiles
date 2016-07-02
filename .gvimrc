@@ -26,7 +26,7 @@ nnoremap <S-Right> :<C-u>call KazuakiMSetWindow( 0,  3)<CR>
 " OS type {{{
 if has("win32") || has ("win64")
     let s:KazuakiMWindow  = {'lines' : 45, 'columns': 98}
-    set guifont=Source_Code_Pro:h12:cANSI guifontwide=Source_Code_Pro:h12:cANSI
+    set guifont=Source_Code_Pro:h12:cANSI
     execute 'set lines='.get(s:KazuakiMWindow,'lines').' columns='.get(s:KazuakiMWindow,'columns')
     winpos 1120 0
 else
