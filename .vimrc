@@ -376,6 +376,7 @@ nnoremap <SID>[vim]w :<C-u>source<Space>$MYVIMRC<CR>
 nnoremap <SID>[vim]s :<C-u>tabnew<Space>$HOME/.vim/vim-sqlfix/sqlfix.sql<CR>
 nnoremap <SID>[vim]h :<C-u>source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
 nnoremap <SID>[vim]c :<C-u>IndentLinesToggle<CR>
+nnoremap <SID>[vim]p :<C-u>echo<Space>substitute(&runtimepath,<Space>',',<Space>'\n',<Space>'g')<CR>
 "}}}
 "
 "
