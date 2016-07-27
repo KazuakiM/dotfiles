@@ -89,6 +89,12 @@ svn diff
 svn commit -m "Merged branch 'master' into '<branch name>'"
 svn update
 ```
+## svn branch
+
+diff master branch
+```
+svn diff svn://<host>/<Project>/trunk svn://<host>/<Project>/branches/<branch name> --summarize
+```
 
 ## svn add/rm
 
