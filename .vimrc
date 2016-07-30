@@ -823,6 +823,11 @@ endif
 "
 " Only {{{
 if s:osType ==# 'macunix'
+    " mapping {{{
+    nnoremap ao :<C-u>!open<Space>-a<Space>
+    nnoremap aq :<C-u>!osascript<Space>-e<Space>'tell<Space>application<Space>""<Space>to<Space>quit'<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+    nnoremap af :<C-u>!osascript<Space>-e<Space>'tell<Space>application<Space>""<Space>to<Space>activate'<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+    "}}}
     " previm {{{
     let g:previm_open_cmd = 'open -a "Google Chrome"'
     "}}}
