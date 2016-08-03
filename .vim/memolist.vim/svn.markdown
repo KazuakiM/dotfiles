@@ -108,3 +108,9 @@ svn delete <file1>
 svn diff svn://<host>/<Project>/trunk@<latest revision> svn://<host>/<Project>/branches/<branch name>@<after merge revision> |grep +++
 ```
 
+## svn log
+
+ログ件数指定
+```bash
+svn log --limit 5
+```
