@@ -29,10 +29,13 @@ NameVirtualHost 127.0.0.1
     <Directory '[/file/to/path/public]'>
         Options FollowSymLinks
         AllowOverride All
-        Order allow,deny
-        Allow from all
+        #2.4.* {{{
         Require all granted
+        #}}}
+        #2.2.* {{{
+        #Order allow,deny
+        #Allow from all
+        #}}}
     </Directory>
 </VirtualHost>
-```
-
+``
