@@ -138,6 +138,8 @@ case "${OSTYPE}" in
             export RBENV_ROOT=/usr/local/bin
             eval "$(rbenv init -)";
         fi
+        export HOMEBREW_CASK_OPTS="--caskroom=/opt/homebrew-cask/Caskroom"
+
         localPath=''
         #brew --prefix perl
         if [ -d /usr/local/opt/perl/bin ]; then
@@ -161,7 +163,6 @@ case "${OSTYPE}" in
         if [ -d /usr/local/opt/macvim-kaoriya/MacVim.app/Contents/MacOS ]; then
             localPath="/usr/local/opt/macvim-kaoriya/MacVim.app/Contents/MacOS:$localPath"
         fi
-        #
         if [ -d /usr/local/share/git-core/contrib/diff-highlight ]; then
             localPath="/usr/local/share/git-core/contrib/diff-highlight:$localPath"
         fi
