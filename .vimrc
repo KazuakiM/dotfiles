@@ -34,6 +34,7 @@
 "
 " Variables {{{
 let s:envHome      = ! exists('s:envHome')      ? $HOME                                 : s:envHome
+let s:envUser      = ! exists('s:envUser')      ? $USER                                 : s:envUser
 let s:date         = ! exists('s:date')         ? strftime('%Y%m%d%H%M%S', localtime()) : s:date
 let s:lineUpdate   = ! exists('s:lineUpdate')   ? 0                                     : s:lineUpdate
 let s:swapFilePath = ! exists('s:swapFilePath') ? ''                                    : s:swapFilePath
@@ -70,10 +71,10 @@ function! s:VimStart(backupDir, undoDir) abort "{{{
         call kazuakim#Minimal()
         return 1
     endif
-    call s:AutoMkdir(a:backupDir.s:date)
-    call s:AutoMkdir(a:undoDir.  s:date)
-    let &backupdir = a:backupDir.s:date
-    let &undodir   = a:undoDir.  s:date
+    call s:AutoMkdir(a:backupDir.s:envUser.'_'.s:date)
+    call s:AutoMkdir(a:undoDir.  s:envUser.'_'.s:date)
+    let &backupdir = a:backupDir.s:envUser.'_'.s:date
+    let &undodir   = a:undoDir.  s:envUser.'_'.s:date
     return 0
 endfunction "}}}
 
