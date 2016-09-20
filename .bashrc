@@ -7,7 +7,8 @@ elif [ -f ~/.bashrc.local ]; then
 fi
 #}}}
 #User specific environment and startup programs {{{
-export LD_LIBRARY_PATH="/usr/local/lib"
+export BREW_PREFIX=`brew --prefix`
+export LD_LIBRARY_PATH='/usr/local/lib'
 export LANG=ja_JP.UTF-8
 cd
 clear
@@ -107,7 +108,7 @@ case "${OSTYPE}" in
         alias sl='ls -AGh'
         alias lingr="sh $HOME/work/dotfiles/src/lingrStarter.sh"
         alias vi='gvim'
-        alias composer='php -d memory_limit=1G /usr/local/opt/composer/libexec/composer.phar'
+        alias composer="php -d memory_limit=1G $BREW_PREFIX/opt/composer/libexec/composer.phar"
         alias HTTPD='sudo apachectl'
         alias MYSQL='mysql.server'
         alias sqlfix="cd $HOME/.vim/bundle/vim-sqlfix/       && $HOME/.vim/bundle/vim-themis/bin/themis tests/ -r --reporter dot"
@@ -131,44 +132,54 @@ case "${OSTYPE}" in
         alias VB='open     -a VirtualBox'
         #}}}
         # export {{{
-        export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
         export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+        export HOMEBREW_CASK_OPTS='--caskroom=/opt/homebrew-cask/Caskroom'
+        export HOMEBREW_NO_ANALYTICS=1
+        export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
+        export MYSQL_PS1="\d @\h> "
+        #export MYSQL_PS1="\d @\h[\u] \n> "
         export VIM=$HOME
+
         if type rbenv >/dev/null 2>&1; then
-            export RBENV_ROOT=/usr/local/bin
+            export RBENV_ROOT=$BREW_PREFIX/bin
             eval "$(rbenv init -)";
         fi
-        export HOMEBREW_CASK_OPTS="--caskroom=/opt/homebrew-cask/Caskroom"
+        #TODO: error
+        #brew --prefix bash-completion2
+        #if [ -d $BREW_PREFIX/opt/bash-completion2 ]; then
+        #    $BREW_PREFIX/opt/bash-completion2/share/bash-completion/bash_completion
+        #fi
 
         localPath=''
         #brew --prefix perl
-        if [ -d /usr/local/opt/perl/bin ]; then
-            localPath="/usr/local/opt/perl/bin:$localPath"
+        if [ -d $BREW_PREFIX/opt/perl/bin ]; then
+            localPath="$BREW_PREFIX/opt/perl/bin:$localPath"
             #PERL_MM_OPT="INSTALL_BASE=$HOME/.lib/perl" cpan local::lib
             #eval "$(perl -I$HOME/.lib/perl -Mlocal::lib)";
         fi
         #brew --prefix gnu-tar
-        if [ -d /usr/local/opt/gnu-tar/libexec/gnubin ]; then
-            localPath="/usr/local/opt/gnu-tar/libexec/gnubin:$localPath"
+        if [ -d $BREW_PREFIX/opt/gnu-tar/libexec/gnubin ]; then
+            localPath="$BREW_PREFIX/opt/gnu-tar/libexec/gnubin:$localPath"
         fi
         #brew --prefix gnu-sed
-        if [ -d /usr/local/opt/gnu-sed/libexec/gnubin ]; then
-            localPath="/usr/local/opt/gnu-sed/libexec/gnubin:$localPath"
+        if [ -d $BREW_PREFIX/opt/gnu-sed/libexec/gnubin ]; then
+            localPath="$BREW_PREFIX/opt/gnu-sed/libexec/gnubin:$localPath"
         fi
         #brew --prefix svn
-        if [ -d /usr/local/opt/subversion/bin ]; then
-            localPath="/usr/local/opt/subversion/bin:$localPath"
+        if [ -d $BREW_PREFIX/opt/subversion/bin ]; then
+            localPath="$BREW_PREFIX/opt/subversion/bin:$localPath"
         fi
         #brew --prefix macvim-kaoriya
-        if [ -d /usr/local/opt/macvim-kaoriya/MacVim.app/Contents/MacOS ]; then
-            localPath="/usr/local/opt/macvim-kaoriya/MacVim.app/Contents/MacOS:$localPath"
+        if [ -d $BREW_PREFIX/opt/macvim-kaoriya/MacVim.app/Contents/MacOS ]; then
+            localPath="$BREW_PREFIX/opt/macvim-kaoriya/MacVim.app/Contents/MacOS:$localPath"
         fi
-        if [ -d /usr/local/share/git-core/contrib/diff-highlight ]; then
-            localPath="/usr/local/share/git-core/contrib/diff-highlight:$localPath"
+        #git diff-highlight
+        if [ -d $BREW_PREFIX/share/git-core/contrib/diff-highlight ]; then
+            localPath="$BREW_PREFIX/share/git-core/contrib/diff-highlight:$localPath"
         fi
         #heroku
-        if [ -d /usr/local/heroku/bin ]; then
-            localPath="/usr/local/heroku/bin:$localPath"
+        if [ -d $BREW_PREFIX/heroku/bin ]; then
+            localPath="$BREW_PREFIX/heroku/bin:$localPath"
         fi
         #go applications
         if [ -d /srv/php_bot ]; then
@@ -176,9 +187,6 @@ case "${OSTYPE}" in
             localPath="$GOPATH/bin:$localPath"
         fi
         export PATH=$localPath$PATH
-        export MYSQL_PS1="\d @\h> "
-        #export MYSQL_PS1="\d @\h[\u] \n> "
-        export HOMEBREW_NO_ANALYTICS=1
         #}}}
         ;;
     linux*)
@@ -191,16 +199,16 @@ case "${OSTYPE}" in
         #}}}
         # export {{{
         export EDITOR=vim
+        export MYSQL_PS1="\d> "
         localPath=''
-        if [ -d /usr/local/rbenv/bin ]; then
-            localPath="/usr/local/rbenv/bin:$localPath"
+        if [ -d $BREW_PREFIX/rbenv/bin ]; then
+            localPath="$BREW_PREFIX/rbenv/bin:$localPath"
         fi
         export PATH=$localPath$PATH
         if type rbenv >/dev/null 2>&1; then
-            export RBENV_ROOT=/usr/local/rbenv
+            export RBENV_ROOT=$BREW_PREFIX/rbenv
             eval "$(rbenv init -)";
         fi
-        export MYSQL_PS1="\d> "
         #}}}
         ;;
     cygwin)
