@@ -6,6 +6,7 @@
   - [Tips](#tips)
   - [svn add/rm](#svn-addrm)
   - [svn diff](#svn-diff)
+  - [svn log](#svn-log)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
