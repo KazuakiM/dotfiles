@@ -7,7 +7,6 @@ elif [ -f ~/.bashrc.local ]; then
 fi
 #}}}
 #User specific environment and startup programs {{{
-export BREW_PREFIX=`brew --prefix`
 export LD_LIBRARY_PATH='/usr/local/lib'
 export LANG=ja_JP.UTF-8
 cd
@@ -101,6 +100,7 @@ export MYSQL_HISTFILE="$HOME/.log/mysql/mysql_history"
 #OS Type {{{
 case "${OSTYPE}" in
     darwin*)
+        export BREW_PREFIX=`brew --prefix`
         #command {{{
         alias l='ls  -AGh'
         alias ll='ls -AGhl'
@@ -190,6 +190,7 @@ case "${OSTYPE}" in
         #}}}
         ;;
     linux*)
+        export LOCAL_PREFIX=/usr/local
         # command {{{
         alias l='ls  -AhX  --color=auto'
         alias ls='ls -AhX  --color=auto'
@@ -201,12 +202,12 @@ case "${OSTYPE}" in
         export EDITOR=vim
         export MYSQL_PS1="\d> "
         localPath=''
-        if [ -d $BREW_PREFIX/rbenv/bin ]; then
-            localPath="$BREW_PREFIX/rbenv/bin:$localPath"
+        if [ -d $LOCAL_PREFIX/rbenv/bin ]; then
+            localPath="$LOCAL_PREFIX/rbenv/bin:$localPath"
         fi
         export PATH=$localPath$PATH
         if type rbenv >/dev/null 2>&1; then
-            export RBENV_ROOT=$BREW_PREFIX/rbenv
+            export RBENV_ROOT=$LOCAL_PREFIX/rbenv
             eval "$(rbenv init -)";
         fi
         #}}}
