@@ -71,6 +71,10 @@ Slave is shown at infomation. Master is empty.
 SHOW MASTER STATUS\G
 SHOW SLAVE  STATUS\G
 ```
+OR
+```sql
+SHOW VARIABLES WHERE variable_name = 'innodb_read_only';
+```
 
 [Slave safely stop](http://qiita.com/catatsuy/items/8f2fbea88b9bc7b8acf7)
 ```sql
