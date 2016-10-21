@@ -242,6 +242,11 @@ git dff (ハッシュ値) HEAD file1
 git dff master xxxxx
 ```
 
+マスターリポジトリと現在のリポジトリの更新ファイルのdiff
+```bash
+git dff --name-only master xxxxx
+```
+
 マスターリポジトリと現在のリポジトリのファイルdiff
 ```bash
 git dff master <file1>
