@@ -127,6 +127,22 @@ sort and uniq
 $ uniq <(sort file1) > output
 ```
 
+### File word count
+
+word count
+```bash
+$ cat <file>
+apple
+orange
+orange
+apple
+melon
+$ sort <file> | uniq -c
+2 apple
+1 melon
+2 orange
+```
+
 ## SSH
 
 ```bash
