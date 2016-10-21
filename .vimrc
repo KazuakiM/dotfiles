@@ -238,7 +238,7 @@ endfunction "}}}
 set autoindent autoread
 set backspace=indent,eol,start backup belloff=all
 set clipboard+=autoselect,unnamed cmdheight=1 concealcursor=i conceallevel=2 completeopt=longest,menu
-set diffopt=filler,context:5,iwhite,vertical directory=$HOME/.vim/swap display=lastline
+set diffopt=filler,context:5,iwhite,horizontal directory=$HOME/.vim/swap display=lastline
 set expandtab
 set fillchars+=diff:* foldmethod=marker
 set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m guioptions+=M
