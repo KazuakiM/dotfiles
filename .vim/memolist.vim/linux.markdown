@@ -10,6 +10,7 @@
     - [File merge](#file-merge)
     - [File sort](#file-sort)
     - [File uniq](#file-uniq)
+    - [File word count](#file-word-count)
   - [SSH](#ssh)
   - [SSH(Step by step)](#sshstep-by-step)
   - [Grep](#grep)

@@ -28,6 +28,7 @@
   - [CASE](#case)
   - [IN](#in)
   - [DATE](#date)
+  - [端数処理](#%E7%AB%AF%E6%95%B0%E5%87%A6%E7%90%86)
   - [FUNCTION](#function)
   - [Other](#other)
 
@@ -712,6 +713,48 @@ DATE Exsample
 |the end of the previous month   |SELECT LAST_DAY(ADDDATE(CURDATE(), INTERVAL -1 MONTH));                |
 |the end of the now month        |SELECT LAST_DAY(CURDATE());                                            |
 |the end of the next month       |SELECT LAST_DAY(ADDDATE(CURDATE(), INTERVAL 1 MONTH));                 |
+
+## 端数処理
+
+四捨五入
+```sql
+SELECT TRUNCATE(1.54+0.5, 0) AS positive_number, TRUNCATE(1.54+0.05, 1) AS first_decimal_place, TRUNCATE(1.54+0.005, 2) AS second_decimal_place;
+ >      positive_number: 2
+ >  first_decimal_place: 1.5
+ > second_decimal_place: 1.54
+```
+
+切り上げ
+```sql
+SELECT TRUNCATE(10.345678+0.999999, 0) AS positive_number, TRUNCATE(10.345678+0.099999, 1) AS first_decimal_place, TRUNCATE(10.345678+0.009999, 2) AS second_decimal_place;
+ >      positive_number: 11
+ >  first_decimal_place: 10.4
+ > second_decimal_place: 10.35
+```
+
+切り捨て
+```sql
+SELECT TRUNCATE(1.53, 0) AS positive_number, TRUNCATE(1.54, 1) AS first_decimal_place, TRUNCATE(1.54, 2) AS second_decimal_place;
+ >      positive_number: 1
+ >  first_decimal_place: 1.5
+ > second_decimal_place: 1.54
+```
+
+絶対値
+```sql
+SELECT ABS(123) AS absolute1, ABS(-123) AS absolute2;
+ > absolute1: 123
+ > absolute2: 123
+```
+
+余り
+```sql
+SELECT MOD(123, 10) AS remainder;
+ > remainder: 3
+```
+
+URL
+* [SAK Streets](http://sak.cool.coocan.jp/w_sak3/doc/sysbrd/mysql_13.htm)
 
 ## FUNCTION
 
