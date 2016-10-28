@@ -259,7 +259,7 @@ else
     set nocursorline
 endif
 "set foldopen-=search
-"helptags $HOME/.vim/bundle/vimdoc-ja/doc
+"helptags $HOME/.vim/dein.vim/repos/github.com/vim-jp/vimdoc-ja/doc
 " Color
 colorscheme kazuakim
 " Mapping
@@ -399,13 +399,10 @@ if dein#load_state(s:deinDir)
     call dein#add('rhysd/unite-codic.vim')
     call dein#add('scrooloose/nerdtree')
     call dein#add('Shougo/dein.vim')
-    call dein#add('Shougo/neoinclude.vim')
     call dein#add('Shougo/neocomplete.vim')
+    call dein#add('Shougo/neoinclude.vim')
     call dein#add('Shougo/neosnippet.vim')
-    call dein#add('Shougo/vimproc.vim', {'build': {
-    \    'mac':  'make -f make_mac.mak',
-    \    'unix': 'make -f make_unix.mak'
-    \ }})
+    call dein#add('Shougo/vimproc.vim', {'build': 'make'})
     call dein#add('Shougo/unite.vim')
     call dein#add('sjl/gundo.vim')
     call dein#add('t9md/vim-quickhl')
@@ -675,8 +672,8 @@ let g:ref_detect_filetype         = {
 \    'javascript': ['javascript', 'jquery'],
 \    'php':        ['phpmanual',  'javascript', 'jquery']
 \}
-let g:ref_javascript_doc_path = s:envHome . '/.vim/bundle/jsref/htdocs'
-let g:ref_jquery_doc_path     = s:envHome . '/.vim/bundle/jqapi'
+let g:ref_javascript_doc_path = s:envHome . '/.vim/dein.vim/repos/github.com/tokuhirom/jsref/htdocs'
+let g:ref_jquery_doc_path     = s:envHome . '/.vim/dein.vim/repos/github.com/mustardamus/jqapi'
 let g:ref_phpmanual_path      = s:envHome . '/.vim/vim-ref/php-chunked-xhtml'
 let g:ref_use_cache           = 1
 let g:ref_use_vimproc         = 1
@@ -716,7 +713,8 @@ let g:neocomplete#data_directory               = s:envHome .'/.vim/neocomplete.v
 let g:neocomplete#delimiter_patterns           = {
 \    'javascript': ['.'],
 \    'php':        ['->', '::', '\'],
-\    'ruby':       ['::']}
+\    'ruby':       ['::']
+\}
 let g:neocomplete#enable_at_startup         = 1
 let g:neocomplete#enable_auto_close_preview = 1
 let g:neocomplete#enable_auto_delimiter     = 1
@@ -733,7 +731,8 @@ let g:neocomplete#sources                   = {
 \    'css':        ['neosnippet',         'dictionary', 'buffer'],
 \    'html':       ['neosnippet', 'file', 'dictionary', 'buffer'],
 \    'javascript': ['neosnippet', 'file', 'dictionary', 'buffer'],
-\    'php':        ['neosnippet', 'file', 'dictionary', 'buffer']}
+\    'php':        ['neosnippet', 'file', 'dictionary', 'buffer']
+\}
 let g:neocomplete#sources#buffer#cache_limit_size  = 50000
 let g:neocomplete#sources#buffer#disabled_pattern  = '\.log\|\.jax'
 let g:neocomplete#sources#buffer#max_keyword_width = 30
@@ -742,7 +741,8 @@ let g:neocomplete#sources#dictionary#dictionaries  = {
 \    'css':        s:envHome . '/.vim/dict/css.dict',
 \    'html':       s:envHome . '/.vim/dict/html.dict',
 \    'javascript': s:envHome . '/.vim/dict/javascript.dict',
-\    'php':        s:envHome . '/.vim/dict/php.dict'}
+\    'php':        s:envHome . '/.vim/dict/php.dict'
+\}
 let g:neocomplete#use_vimproc = 1
 "neoinclude.vim
 let g:neoinclude#exts          = {'php': ['php', 'inc', 'tpl']}
@@ -751,8 +751,7 @@ let g:neoinclude#max_processes = 5
 let g:neosnippet#data_directory                = s:envHome . '/.vim/neosnippet.vim'
 let g:neosnippet#disable_runtime_snippets      = {'_' : 1}
 let g:neosnippet#enable_snipmate_compatibility = 1
-let g:neosnippet#snippets_directory            = s:envHome . '/.vim/bundle/neosnippet-snippets/neosnippets'
-
+let g:neosnippet#snippets_directory            = s:envHome . '/.vim/dein.vim/repos/github.com/KazuakiM/neosnippet-snippets/neosnippets'
 function! KazuakiMNeoCompleteCr() abort "{{{
     if pumvisible() is# 0
         return "\<CR>X\<C-h>"

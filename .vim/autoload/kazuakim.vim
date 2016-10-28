@@ -83,7 +83,8 @@ function! kazuakim#PhpCsFixer(mode) abort "{{{
     \    'outputter':              'buffer',
     \    'outputter/buffer/into':  1,
     \    'outputter/buffer/split': ':botright 4sp',
-    \    'runner':                 'system'}
+    \    'runner':                 'system'
+    \}
     if a:mode ==# 'template'
         let g:quickrun_config['php']['cmdopt'] = g:quickrun_config['php']['cmdopt'] .',-braces'
     endif
