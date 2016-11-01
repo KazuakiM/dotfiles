@@ -646,11 +646,17 @@ let g:easy_align_delimiters = {
 nnoremap <Space>m :<C-u>call<Space>quickhl#manual#this('n')<CR>
 nnoremap <Space>M :<C-u>call<Space>quickhl#manual#reset()<CR>
     let g:quickhl_manual_colors = [
-    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=Blue     guibg=Blue',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Cyan     guibg=Cyan',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta  guibg=Magenta',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow   guibg=Yellow',
-    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkBlue guibg=DarkBlue']
+    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=Blue        guibg=Blue',
+    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Cyan        guibg=Cyan',
+    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta     guibg=Magenta',
+    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow      guibg=Yellow',
+    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkBlue    guibg=DarkBlue',
+    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkCyan    guibg=DarkCyan',
+    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkMagenta guibg=DarkMagenta',
+    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkRed     guibg=DarkRed',
+    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkGreen   guibg=DarkGreen',
+    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=Brown       guibg=Brown',
+    \]
 "}}}
 
 " vim-sqlfix {{{
