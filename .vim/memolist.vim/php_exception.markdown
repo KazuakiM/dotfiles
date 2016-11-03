@@ -1,7 +1,7 @@
 php_exception
 ===
 
-[マニュアル](http://php.net/manual/ja/spl.exceptions.php)
+## [Exception](http://php.net/manual/ja/spl.exceptions.php)
 
 |     |     |     |                                                                                                                                   |note                                                                                                                                                                                                                                                |
 | :-- | :-- | :-- | :-------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -20,3 +20,12 @@ php_exception
 |     |     | [UnderflowException](http://php.net/manual/ja/class.underflowexception.php)                                                            ||空のコンテナ上で無効な操作 (要素の削除など) を試みたときにスローされる例外です。                                                                                                                                                                    |
 |     |     | [UnexpectedValueException](http://php.net/manual/ja/class.unexpectedvalueexception.php)                                                ||いくつかの値のセットに一致しない値であった際にスローされる例外です。 これが発生する例としては、ある関数が別の関数をコールしていて、 その関数の返り値が特定の型や値である (そして計算やバッファ関連のエラーがない) ことを想定している場合があります。|
 
+## Enum
+
+ENUM型を導入する事で、引数を制約し、コード内でin_arrayをするのではなく、PHP7の引数宣言段階で制限させる。
+
+* [PHP7で堅牢なコードを書く - 例外処理、表明プログラミング、契約による設計 / PHP Conference 2016 // Speaker Deck](https://speakerdeck.com/twada/php-conference-2016)
+* [PHPで列挙型(enum)を作る - Qiita](http://qiita.com/Hiraku/items/71e385b56dcaa37629fe)
+
+## Reference
+![PHP7で堅牢なコードを書く - 例外処理、表明プログラミング、契約による設計](http://www.codeproject.com/KB/database/Visual_SQL_Joins/Visual_SQL_JOINS_V2.png)
