@@ -24,8 +24,6 @@ php_exception
 
 ENUM型を導入する事で、引数を制約し、コード内でin_arrayをするのではなく、PHP7の引数宣言段階で制限させる。
 
-* [PHP7で堅牢なコードを書く - 例外処理、表明プログラミング、契約による設計 / PHP Conference 2016 // Speaker Deck](https://speakerdeck.com/twada/php-conference-2016)
+* [PHP7で堅牢なコードを書く - 例外処理、表明プログラミング、契約による設計 / PHP Conference 2016 // Speaker Deck](https://speakerdeck.com/twada/php-conference-2016) [[PDF](https://raw.githubusercontent.com/KazuakiM/dotfiles/beebaa064db0f7c328de3d3b92cc8a9e3f43d3c0/.vim/memolist.vim/phpcon2016-twada-php7-reliable-programming.pdf)]
 * [PHPで列挙型(enum)を作る - Qiita](http://qiita.com/Hiraku/items/71e385b56dcaa37629fe)
 
-## Reference
-![PHP7で堅牢なコードを書く - 例外処理、表明プログラミング、契約による設計](http://www.codeproject.com/KB/database/Visual_SQL_Joins/Visual_SQL_JOINS_V2.png)
