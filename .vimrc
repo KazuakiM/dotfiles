@@ -528,10 +528,11 @@ nnoremap <silent><Leader>jk :<C-u>call<Space>kazuakim#Translate(expand('<cword>'
 "}}}
 
 " vim-quickrun {{{
-nnoremap <Leader>run  :<C-u>QuickRun<CR>
-nnoremap <Leader>php  :<C-u>call<Space>kazuakim#PhpCsFixer('normal')<CR>
-nnoremap <Leader>phpt :<C-u>call<Space>kazuakim#PhpCsFixer('template')<CR>
-nnoremap <Leader>es   :<C-u>call<Space>kazuakim#EslintFix()<CR>
+nnoremap <Leader>run     :<C-u>QuickRun<CR>
+nnoremap <Leader>php     :<C-u>call<Space>kazuakim#PhpCsFixer('normal')<CR>
+nnoremap <Leader>phpt    :<C-u>call<Space>kazuakim#PhpCsFixer('template')<CR>
+nnoremap <Leader>phpinfo :<C-u>call<Space>kazuakim#PhpInfo()<CR>
+nnoremap <Leader>es      :<C-u>call<Space>kazuakim#EslintFix()<CR>
 " Set g:quickrun_config at .vimrc.local .
 let s:quickrun_config_javascript = {
 \    'command':     'eslint',

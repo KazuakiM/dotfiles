@@ -11,7 +11,7 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-PHP
+PHP framework
 ===
 
 ## 書き途中
@@ -58,10 +58,15 @@ LaravelのカスタムValidationの言及中。来週更にblash upするけど�
 > {
 >     "autoload": {
 >         "psr-4": {
->             "Application\\": "app"}},
+>             "Application\\": "app"
+>         }
+>     },
 >     "autoload-dev": {
 >         "psr-4": {
->             "__Test\\": "app/tests"}}}
+>             "__Test\\": "app/tests"
+>         }
+>     }
+> }
 > ```
 > app/extensions/validates/rules/User.php
 > ```php
@@ -75,12 +80,14 @@ LaravelのカスタムValidationの言及中。来週更にblash upするけど�
 >     public $userValidateRules = [
 >         'username' => 'required',
 >         'password' => 'required',
->         'email'    => 'required|email',];
+>         'email'    => 'required|email'
+>     ];
 >     public $userValidateMessages = [
 >         'username.required' => self::USERNAME.'を入力してください',
 >         'password.required' => self::PASSWORD.'を入力してください',
 >         'email.required'    => self::EMAAIL.  'を入力してください',
->         'email.email'       => self::EMAAIL.  'を正しく入力してください',];
+>         'email.email'       => self::EMAAIL.  'を正しく入力してください'
+>     ];
 > }
 > ```
 > app/controller/ExampleController.php
@@ -117,7 +124,7 @@ LaravelのカスタムValidationの言及中。来週更にblash upするけど�
 >     public function register() {}
 >     public function boot() //{{{
 >     {
->         $this->app->validator->resolver(function( $translator, $data, $rules, $messages = array()) {
+>         $this->app->validator->resolver(function( $translator, $data, $rules, $messages = []) {
 >             return new \Extensions\Validates\CustomValidator($translator, $data, $rules, $messages);
 >         });
 >     } //}}}

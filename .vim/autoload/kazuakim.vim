@@ -94,6 +94,28 @@ function! kazuakim#PhpCsFixer(mode) abort "{{{
     let g:quickrun_config['php'] = l:quickrun_config_backup
 endfunction "}}}
 
+function! kazuakim#PhpInfo() abort "{{{
+    let l:quickrun_config_backup = g:quickrun_config['php']
+    let g:quickrun_config['php'] = {
+    \    'command':                'php',
+    \    'cmdopt':                 '-info',
+    \    'exec':                   '%c %o',
+    \    'outputter':              'buffer',
+    \    'outputter/buffer/into':  1,
+    \    'outputter/buffer/split': ':botright'
+    \}
+    " qfixgrep {{{
+    let g:QFix_PreviewEnable = 0
+    "}}}
+
+    QuickRun
+
+    let g:quickrun_config['php'] = l:quickrun_config_backup
+    " qfixgrep {{{
+    let g:QFix_PreviewEnable = 1
+    "}}}
+endfunction "}}}
+
 function! kazuakim#EslintFix() abort "{{{
     let l:quickrun_config_backup                  = g:quickrun_config['javascript']
     let g:quickrun_config['javascript']['cmdopt'] = l:quickrun_config_backup['cmdopt'] .' --config '. $HOME .'/.eslintrc.js --fix'
