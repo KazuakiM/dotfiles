@@ -302,6 +302,7 @@ nnoremap <expr><Leader>%%s ':%s/' . expand('<cword>') . '//gc<Left><Left><Left>'
 "  Search
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
+nnoremap ** *N
 "  Tags
 nnoremap <Leader>] <C-]>
 nnoremap <Leader>: :<C-u>tab<Space>stj<Space><C-R>=expand('<cword>')<CR><CR>
