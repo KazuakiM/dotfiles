@@ -41,6 +41,12 @@ Receiver
 ```bash
 $ nc foobar.com 3000 | pv > <File>
 ```
+### FTP
+
+Sender
+```bash
+$ ftp -A ftp://<user>:<password>@<host>:<port:21>/tmp/
+```
 
 ### scp
 

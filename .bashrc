@@ -61,7 +61,7 @@ export HISTSIZE=2000
 export HISTTIMEFORMAT='%F %T '
 #}}}
 #less {{{
-export LESS='-R --no-init'
+export LESS='--ignore-case --RAW-CONTROL-CHARS --no-init'
 export LESSHISTFILE="$HOME/.log/less/lesshst"
 man() {
     env \

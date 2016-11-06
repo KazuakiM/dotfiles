@@ -21,7 +21,10 @@ MODE = {
   'MYSQL'  => true,
   'PHP'    => true,
   'RUBY'   => false,
-  'DEV'    => false}
+  'FTP'    => false,
+  'DOTS'   => true,
+  'DEV'    => false
+}
 VAGRANTFILE_API_VERSION = 2
 VAGRANTFILE_LOG         = "/var/log/vagrantfile.log"
 ACCOUNT                 = "vagrant"
@@ -34,7 +37,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
   config.vm.network :private_network, ip: "192.168.1.1"
   config.vm.network  "forwarded_port", guest: 80,   host: 2223
+  config.vm.network  "forwarded_port", guest: 21,   host: 2224
   config.vm.network  "forwarded_port", guest: 3000, host: 3000
+  config.vm.synced_folder ".", "/vagrant", type: "nfs"
   config.vm.provider "virtualbox" do |vb|
     vb.customize ["modifyvm", :id, "--natdnsproxy1",        "on"]
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
@@ -72,6 +77,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provision "shell", path:'modules/rubyonrails.sh'
   end #}}}
 
+  if MODE['FTP'] then #{{{
+    config.vm.provision "shell", path:'modules/ftp.sh'
+  end #}}}
+
+  if MODE['DOTS'] then #{{{
+    config.vm.provision "shell", path:'modules/dotfiles.sh'
+  end #}}}
+
   if MODE['DEV'] then #{{{
     config.vm.provision "shell", inline: <<-SHELL
       echo "q install ..."
@@ -79,7 +92,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     SHELL
     config.vm.provision "shell", path:'modules/luajit.sh'
     config.vm.provision "shell", path:'modules/vim.sh'
-    config.vm.provision "shell", path:'modules/dotfiles.sh'
   end #}}}
 
   #After {{{
