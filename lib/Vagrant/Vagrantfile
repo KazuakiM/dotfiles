@@ -32,11 +32,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   if Vagrant.has_plugin?("vagrant-cachier")
     config.cache.scope = :box
   end
+  config.vm.network :private_network, ip: "192.168.1.1"
   config.vm.network  "forwarded_port", guest: 80,   host: 2223
   config.vm.network  "forwarded_port", guest: 3000, host: 3000
   config.vm.provider "virtualbox" do |vb|
-    vb.gui    = false
-    vb.memory = "4096"
+    vb.customize ["modifyvm", :id, "--natdnsproxy1",        "on"]
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    vb.customize ["modifyvm", :id, "--memory",              "2048"]
   end
 
   #Before {{{

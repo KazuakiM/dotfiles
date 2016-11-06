@@ -8,7 +8,7 @@
 log=/var/log/vagrantfile.log
 #}}}
 echo "Vim install ..."
-yum -y --enablerepo=epel,remi,rpmforge install \
+yum -y --enablerepo=epel,remi install \
     perl perl-core perl-devel python python-devel \
     ruby ruby-devel                                                                                >> $log 2>> $log && \
 git clone https://github.com/vim/vim.git /usr/local/src/vim                                        >> $log 2>> $log && \
