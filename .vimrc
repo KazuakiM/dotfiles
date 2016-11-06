@@ -294,7 +294,7 @@ nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null
 "  Paste
 nnoremap <silent><expr><Leader>v  ':set<Space>paste<CR><Insert><Right><C-r>+<ESC>'
 inoremap <silent><expr><C-v> '<ESC>:set<Space>paste<CR><Insert><Right><C-r>+<ESC><Insert><Right>'
-cnoremap <M-v> <C-R><C-O>*
+cmap <M-v> <C-R><C-O>*
 "  Replace
 nnoremap R gR
 nnoremap <expr><Leader>%s  ':%s/' . expand('<cword>') . '/' . expand('<cword>') . '/gc<Left><Left><Left>'
@@ -302,7 +302,7 @@ nnoremap <expr><Leader>%%s ':%s/' . expand('<cword>') . '//gc<Left><Left><Left>'
 "  Search
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
-nnoremap ** *N
+nnoremap +* *N
 "  Tags
 nnoremap <Leader>] <C-]>
 nnoremap <Leader>: :<C-u>tab<Space>stj<Space><C-R>=expand('<cword>')<CR><CR>

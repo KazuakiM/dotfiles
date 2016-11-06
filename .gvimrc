@@ -3,7 +3,7 @@
 " Common {{{
 " Basic
 set antialias cmdheight=1 guioptions-=b guioptions-=e guioptions-=g guioptions-=l guioptions-=L guioptions-=m guioptions-=r guioptions-=R guioptions-=t guioptions-=T
-set mouse= showtabline=1 t_vb= winaltkeys=no
+set macmeta mouse= showtabline=1 t_vb= winaltkeys=no
 " Color
 if getfsize(expand('%:p')) < 262144
     colorscheme kazuakim
