@@ -3,7 +3,7 @@
 " Common {{{
 " Basic
 set antialias cmdheight=1 guioptions-=b guioptions-=e guioptions-=g guioptions-=l guioptions-=L guioptions-=m guioptions-=r guioptions-=R guioptions-=t guioptions-=T
-set macmeta mouse= showtabline=1 t_vb= winaltkeys=no
+set mouse= showtabline=1 t_vb= winaltkeys=no
 " Color
 if getfsize(expand('%:p')) < 262144
     colorscheme kazuakim
@@ -31,7 +31,7 @@ if has("win32") || has ("win64")
     winpos 1120 0
 else
     let s:KazuakiMWindow  = {'lines' : 44, 'columns': 170}
-    set guifont=Ricty\ Diminished\ Discord\ Regular:h16 guifontwide=Ricty\ Diminished\ Discord\ Regular:h16
+    set guifont=Ricty\ Diminished\ Discord\ Regular:h16 guifontwide=Ricty\ Diminished\ Discord\ Regular:h16 macmeta
     execute 'set lines='.get(s:KazuakiMWindow,'lines').' columns='.get(s:KazuakiMWindow,'columns')
     winpos 0 23
 endif
