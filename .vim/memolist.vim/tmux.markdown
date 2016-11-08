@@ -78,8 +78,7 @@ Prefix > <ウィンドウ番号>
 
 ウィンドウ前へ/次へ
 ```
-Prefix > Ctrl-s
-Prefix > Ctrl-d
+Ctrl-s
 ```
 
 ウィンドウ作成
@@ -89,7 +88,7 @@ Prefix > Ctrl-k
 
 ウィンドウリネーム
 ```
-Prefix > Ctrl-w
+Prefix > Ctrl-e
 ```
 
 ウィンドウ削除
@@ -99,8 +98,8 @@ Prefix > &
 
 ペイン垂直分割/水平分割
 ```
-Prefix > v
-Prefix > s
+Ctrl-_
+Ctrl-h
 ```
 
 ペイン間移動
