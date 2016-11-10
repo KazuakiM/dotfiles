@@ -34,11 +34,11 @@ $ cd $HOME/work/dotfiles/lib/Homebrew/
 $ brew update
 $ brew upgrade --all
 $ brew doctor
-$ brew tap Homebrew/brewdler
-$ brew brewdle
+$ brew tap Homebrew/bundle
+$ brew bundle
 $ brew doctor
 $ cd /tmp
-$ brew brewdle dump
+$ brew bundle dump
 $ cp -p Brewfile $HOME/work/dotfiles/lib/Homebrew/
 $ cd $HOME/work/dotfiles/
 $ git status
