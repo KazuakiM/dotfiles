@@ -51,31 +51,6 @@ function! kazuakim#UniteFileRecAsyncOrGit() abort "{{{
 endfunction "}}}
 "}}}
 
-" codic-vim {{{
-function! kazuakim#Translate(text) abort "{{{
-    let s:HTTP = ! exists('s:HTTP') ? vital#of('vital').import('Web.HTTP') : s:HTTP
-    let s:JSON = ! exists('s:JSON') ? vital#of('vital').import('Web.JSON') : s:JSON
-    if match(a:text, '\w') is# -1
-        let l:options = '#en/ja'
-    else
-        let l:options = '#ja/en'
-    endif
-
-    let l:response = s:HTTP.post('https://translate.google.com/' . l:options . '/' . a:text,
-    \    {},
-    \    {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:49.0) Gecko/20100101 Firefox/49.0'}
-    \)
-    PP l:response
-    if l:response.status is# 200
-        " qfixgrep {{{
-        let g:QFix_PreviewEnable = 0
-        "}}}
-        cgetexpr PrettyPrint(s:JSON.decode(l:response.content))
-        copen
-    endif
-endfunction "}}}
-"}}}
-
 " vim-quickrun {{{
 function! kazuakim#PhpCsFixer(mode) abort "{{{
     let l:quickrun_config_backup = g:quickrun_config['php']

@@ -523,9 +523,6 @@ let g:memolist_template_dir_path    = s:envHome .'/.vim/memolist.vim'
 let g:memolist_unite                = 1
 let g:memolist_unite_option         = '-default-action=tabopen'
 let g:memolist_unite_source         = 'file_rec'
-" codec follow
-nnoremap <Leader>jj         :<C-u>call<Space>kazuakim#Translate('')<Left><Left>
-nnoremap <silent><Leader>jk :<C-u>call<Space>kazuakim#Translate(expand('<cword>'))<CR>
 "}}}
 
 " vim-quickrun {{{
