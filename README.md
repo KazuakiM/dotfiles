@@ -273,7 +273,7 @@ $ ln -sf $HOME/work/dotfiles/.inputrc             $HOME/.inputrc
 $ ln -sf $HOME/work/dotfiles/.lib                 $HOME/.lib
 $ ln -sf $HOME/work/dotfiles/.log                 $HOME/.log
 $ ln -sf $HOME/work/dotfiles/.mplayer             $HOME/.mplayer
-$ cp -f  $HOME/work/dotfiles/.netrc.org           $HOME/.netrc
+$ cp -f  $HOME/.config/netrc/.netrc.org           $HOME/.config/netrc/.netrc
 $ ln -sf $HOME/work/dotfiles/.vim                 $HOME/.vim
 $ ln -sf $HOME/work/dotfiles/.vimrc               $HOME/.vimrc
 $ cp -f  $HOME/work/dotfiles/.vimrc.local         $HOME/
@@ -380,7 +380,7 @@ TODO:apt-cygのインストール状況を確認'apt-cyg show'
 > $ wget http://get.sensiolabs.org/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 > $ chmod a+x $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 > $ cp -f $HOME/.vimrc.local $HOME/.vimrc.win
-> $ cp -f $HOME/.netrc.org   $HOME/.netrc
+> $ cp -f $HOME/.config/netrc/.netrc.org $HOME/.config/netrc/.netrc
 > $ php $HOME/src/phpDict.php
 > $ sh $HOME/src/htmlReference.sh
 > $ sh $HOME/.vim/bundle/neobundle.vim/bin/neoinstall
