@@ -212,6 +212,9 @@ case "${OSTYPE}" in
             eval "$(rbenv init -)";
         fi
         #}}}
+        # PHP7.1 {{{
+        source /opt/remi/php71/enable
+        #}}}
         ;;
     cygwin)
         # command {{{

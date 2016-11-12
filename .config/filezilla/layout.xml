@@ -1,28 +1,22 @@
 <?xml version="1.0"?>
-<FileZilla3 version="3.15.0.2" platform="*nix">
-	<Layout Builddate="2016-02-10" Buildtime="20:47:36">
+<FileZilla3 version="3.22.2.2" platform="*nix">
+	<Layout Builddate="2016-11-01" Buildtime="19:13:49">
 		<Resources>
-			<xrc file="certificate.xrc" date="1455133806" />
-			<xrc file="dialogs.xrc" date="1455133806" />
-			<xrc file="inputdialog.xrc" date="1455133806" />
-			<xrc file="menus.xrc" date="1455133806" />
-			<xrc file="netconfwizard.xrc" date="1455133806" />
-			<xrc file="quickconnectbar.xrc" date="1455133806" />
-			<xrc file="settings.xrc" date="1455133806" />
-			<xrc file="sitemanager.xrc" date="1455133806" />
-			<xrc file="toolbar.xrc" date="1455133806" />
-			<xrc file="update.xrc" date="1455133806" />
+			<xrc file="certificate.xrc" date="1478938370" />
+			<xrc file="dialogs.xrc" date="1478938370" />
+			<xrc file="inputdialog.xrc" date="1478938370" />
+			<xrc file="menus.xrc" date="1478938370" />
+			<xrc file="netconfwizard.xrc" date="1478938370" />
+			<xrc file="quickconnectbar.xrc" date="1478938370" />
+			<xrc file="settings.xrc" date="1478938370" />
+			<xrc file="sitemanager.xrc" date="1478938370" />
+			<xrc file="toolbar.xrc" date="1478938370" />
+			<xrc file="update.xrc" date="1478938370" />
 		</Resources>
-		<Language id="default" date="">
-			<Font font="0;13;70;90;90;0;.SF NS Text;50" width="778" height="21" />
-			<Dialog name="Settings" width="567" />
-			<Dialog name="Netconf" width="562" />
-			<Dialog name="Site Manager" width="659" />
-		</Language>
-		<Language id="ja_JP" date="1455133830">
-			<Font font="0;13;70;90;90;0;.SF NS Text;50" width="778" height="21" />
+		<Language id="ja_JP" date="1478938370">
+			<Font font="0;13;70;90;90;0;.SF NS Text;49" width="778" height="21" />
+			<Dialog name="Site Manager" width="745" />
 			<Dialog name="Settings" width="547" />
-			<Dialog name="Site Manager" width="744" />
 		</Language>
 	</Layout>
 </FileZilla3>

@@ -3,8 +3,7 @@
 C:/
 .cache/eslint/
 .cache/fontconfig/
-.config/filezilla/lockfile
-.config/filezilla/queue.sqlite3
+.config/filezilla/
 .config/gtk-2.0/
 .DS_Store
 .gitconfig

@@ -25,7 +25,6 @@ ln -sf $home/work/dotfiles/.gitconfig.org       $home/.gitconfig                
 cp -f  $home/work/dotfiles/.gitconfig.local.org $home/.gitconfig.local              && \
 ln -sf $home/work/dotfiles/.gvimrc              $home/.gvimrc                       && \
 ln -sf $home/work/dotfiles/.inputrc             $home/.inputrc                      && \
-cp -f  $home/work/dotfiles/.netrc.org           $home/.netrc                        && \
 ln -sf $home/work/dotfiles/.vim                 $home/.vim                          && \
 ln -sf $home/work/dotfiles/.vimrc               $home/.vimrc                        && \
 cp -f  $home/work/dotfiles/.vimrc.local         $home/                              && \
