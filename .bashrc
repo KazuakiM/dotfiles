@@ -213,7 +213,9 @@ case "${OSTYPE}" in
         fi
         #}}}
         # PHP7.1 {{{
-        source /opt/remi/php71/enable
+        if [ -d /opt/remi/php71 ]; then
+            source /opt/remi/php71/enable
+        fi
         #}}}
         ;;
     cygwin)

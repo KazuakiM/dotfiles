@@ -54,7 +54,7 @@
 		<Setting name="Auto Ascii dotfiles">1</Setting>
 		<Setting name="Theme" />
 		<Setting name="Language Code">ja_JP</Setting>
-		<Setting name="Last Server Path" />
+		<Setting name="Last Server Path"></Setting>
 		<Setting name="Concurrent download limit">1</Setting>
 		<Setting name="Concurrent upload limit">1</Setting>
 		<Setting name="Update Check">1</Setting>
@@ -74,14 +74,14 @@ release 3.22.2.2 http://downloads.sourceforge.net/filezilla/FileZilla_3.22.2.2_m
 		<Setting name="Show Tree Remote">0</Setting>
 		<Setting name="File Pane Layout">0</Setting>
 		<Setting name="File Pane Swap">0</Setting>
-		<Setting name="Last local directory">/Users/mabuchikazuaki/</Setting>
+		<Setting name="Last local directory">/tmp/</Setting>
 		<Setting name="Filelist directory sort">0</Setting>
 		<Setting name="Filelist name sort">1</Setting>
 		<Setting name="Queue successful autoclear">0</Setting>
 		<Setting name="Queue column widths">180 60 180 80 60 150</Setting>
 		<Setting name="Local filelist colwidths">120 80 100 120</Setting>
 		<Setting name="Remote filelist colwidths">80 75 80 100 80 80</Setting>
-		<Setting name="Window position and size">0 327 22 1038 666 </Setting>
+		<Setting name="Window position and size">0 1366 22 1009 670 </Setting>
 		<Setting name="Splitter positions (v2)">214 -132 500000000 158 158 500000000</Setting>
 		<Setting name="Local filelist sortorder">0 0</Setting>
 		<Setting name="Remote filelist sortorder">0 0</Setting>
@@ -95,10 +95,10 @@ release 3.22.2.2 http://downloads.sourceforge.net/filezilla/FileZilla_3.22.2.2_m
 		<Setting name="Custom file associations" />
 		<Setting name="Comparison mode">1</Setting>
 		<Setting name="Comparison threshold">1</Setting>
-		<Setting name="Site Manager position">0 422 144 847 475 </Setting>
+		<Setting name="Site Manager position">0 1366 146 847 475 </Setting>
 		<Setting name="Theme icon size">16x16</Setting>
 		<Setting name="Timestamp in message log">1</Setting>
-		<Setting name="Sitemanager last selected">0/FTP</Setting>
+		<Setting name="Sitemanager last selected">0/FTPS</Setting>
 		<Setting name="Local filelist shown columns">1111</Setting>
 		<Setting name="Remote filelist shown columns">111111</Setting>
 		<Setting name="Local filelist column order">0,1,2,3</Setting>
@@ -107,7 +107,7 @@ release 3.22.2.2 http://downloads.sourceforge.net/filezilla/FileZilla_3.22.2.2_m
 		<Setting name="Filter toggle state">0</Setting>
 		<Setting name="Show quickconnect bar">0</Setting>
 		<Setting name="Messagelog position">0</Setting>
-		<Setting name="Last connected site">0/FTP</Setting>
+		<Setting name="Last connected site">0/FTPS</Setting>
 		<Setting name="File doubleclock action">2</Setting>
 		<Setting name="Dir doubleclock action">0</Setting>
 		<Setting name="Minimize to tray">0</Setting>
@@ -122,7 +122,7 @@ release 3.22.2.2 http://downloads.sourceforge.net/filezilla/FileZilla_3.22.2.2_m
 		<Setting name="Filteredit window size" />
 		<Setting name="Enable invalid char filter">1</Setting>
 		<Setting name="Invalid char replace">_</Setting>
-		<Setting name="Already connected choice">0</Setting>
+		<Setting name="Already connected choice">1</Setting>
 		<Setting name="Edit status dialog size" />
 		<Setting name="Display current speed">0</Setting>
 		<Setting name="Toolbar hidden">0</Setting>
@@ -137,7 +137,7 @@ release 3.22.2.2 http://downloads.sourceforge.net/filezilla/FileZilla_3.22.2.2_m
 		<LastServer>
 			<Host>192.168.1.2</Host>
 			<Port>2224</Port>
-			<Protocol>4</Protocol>
+			<Protocol>0</Protocol>
 			<Type>0</Type>
 			<User>vagrant</User>
 			<Pass encoding="base64">dmFncmFudA==</Pass>
@@ -147,7 +147,7 @@ release 3.22.2.2 http://downloads.sourceforge.net/filezilla/FileZilla_3.22.2.2_m
 			<MaximumMultipleConnections>0</MaximumMultipleConnections>
 			<EncodingType>Auto</EncodingType>
 			<BypassProxy>0</BypassProxy>
-			<Name>FTP</Name>
+			<Name>FTPS</Name>
 		</LastServer>
 		<Setting name="Last automatic update version">3.22.2.2</Setting>
 	</Settings>

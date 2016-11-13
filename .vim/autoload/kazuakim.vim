@@ -52,24 +52,48 @@ endfunction "}}}
 "}}}
 
 " vim-quickrun {{{
-function! kazuakim#PhpCsFixer(mode) abort "{{{
-    let l:quickrun_config_backup = g:quickrun_config['php']
-    let g:quickrun_config['php'] = {
-    \    'command':                'php-cs-fixer',
-    \    'cmdopt':                 'fix --config=default --level=symfony --fixers=align_double_arrow,align_equals,concat_with_spaces,ordered_use,short_array_syntax',
-    \    'exec':                   '%c %o %s:p',
-    \    'outputter':              'buffer',
-    \    'outputter/buffer/into':  1,
-    \    'outputter/buffer/split': ':botright 4sp',
-    \    'runner':                 'system'
-    \}
-    if a:mode ==# 'template'
-        let g:quickrun_config['php']['cmdopt'] = g:quickrun_config['php']['cmdopt'] .',-braces'
+function! kazuakim#Test() abort "{{{
+    let l:quickrun_config_backup = g:quickrun_config[&filetype]
+    if &filetype is# 'php'
+        let g:quickrun_config['php'] = {
+        \        'command':                          'phpunit',
+        \        'hook/close_buffer/enable_failure': 0,
+        \        'outputter':                        'buffer',
+        \        'outputter/buffer/split':           ':botright 7sp'
+        \}
+    endif
+
+    let g:QFix_PreviewEnable = 0
+    QuickRun
+    let g:QFix_PreviewEnable = 1
+
+    if &filetype is# 'php'
+        let g:quickrun_config['php'] = l:quickrun_config_backup
+    endif
+endfunction "}}}
+
+function! kazuakim#Lint() abort "{{{
+    let l:quickrun_config_backup = g:quickrun_config[&filetype]
+    if &filetype is# 'php'
+        let g:quickrun_config['php'] = {
+        \    'command':                'php-cs-fixer',
+        \    'cmdopt':                 'fix --config=default --level=symfony --fixers=align_double_arrow,align_equals,concat_with_spaces,ordered_use,short_array_syntax',
+        \    'exec':                   '%c %o %s:p',
+        \    'outputter':              'buffer',
+        \    'outputter/buffer/into':  1,
+        \    'outputter/buffer/split': ':botright 4sp',
+        \    'runner':                 'system'
+        \}
+    elseif &filetype is# 'javascript'
+        let g:quickrun_config['javascript']['cmdopt'] = l:quickrun_config_backup['cmdopt'] .' --config '. $HOME .'/.eslintrc.js --fix'
+        let g:quickrun_config['javascript']['runner'] = 'system'
     endif
 
     QuickRun
 
-    let g:quickrun_config['php'] = l:quickrun_config_backup
+    if 0 < count(['php', 'javascript'], &filetype)
+        let g:quickrun_config[&filetype] = l:quickrun_config_backup
+    endif
 endfunction "}}}
 
 function! kazuakim#PhpInfo() abort "{{{
@@ -92,16 +116,6 @@ function! kazuakim#PhpInfo() abort "{{{
     " qfixgrep {{{
     let g:QFix_PreviewEnable = 1
     "}}}
-endfunction "}}}
-
-function! kazuakim#EslintFix() abort "{{{
-    let l:quickrun_config_backup                  = g:quickrun_config['javascript']
-    let g:quickrun_config['javascript']['cmdopt'] = l:quickrun_config_backup['cmdopt'] .' --config '. $HOME .'/.eslintrc.js --fix'
-    let g:quickrun_config['javascript']['runner'] = 'system'
-
-    QuickRun
-
-    let g:quickrun_config['javascript'] = l:quickrun_config_backup
 endfunction "}}}
 "}}}
 

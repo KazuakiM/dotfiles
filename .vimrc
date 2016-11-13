@@ -526,11 +526,10 @@ let g:memolist_unite_source         = 'file_rec'
 "}}}
 
 " vim-quickrun {{{
-nnoremap <Leader>run     :<C-u>QuickRun<CR>
-nnoremap <Leader>php     :<C-u>call<Space>kazuakim#PhpCsFixer('normal')<CR>
-nnoremap <Leader>phpt    :<C-u>call<Space>kazuakim#PhpCsFixer('template')<CR>
-nnoremap <Leader>phpinfo :<C-u>call<Space>kazuakim#PhpInfo()<CR>
-nnoremap <Leader>es      :<C-u>call<Space>kazuakim#EslintFix()<CR>
+nnoremap <Leader>run  :<C-u>QuickRun<CR>
+nnoremap <Leader>runt :<C-u>call<Space>kazuakim#Test()<CR>
+nnoremap <Leader>runl :<C-u>call<Space>kazuakim#Lint()<CR>
+nnoremap <Leader>phpi :<C-u>call<Space>kazuakim#PhpInfo()<CR>
 " Set g:quickrun_config at .vimrc.local .
 let s:quickrun_config_javascript = {
 \    'command':     'eslint',
@@ -565,10 +564,14 @@ let g:quickrun_config = {
 \        'outputter/buffer/into': 1
 \    },
 \    'php': {
-\        'command':                          'phpunit',
-\        'hook/close_buffer/enable_failure': 0,
-\        'outputter':                        'buffer',
-\        'outputter/buffer/split':           ':botright 7sp'
+\        'command':                             'php',
+\        'exec':                                '%c %s:p',
+\        'hook/close_buffer/enable_empty_data': 0,
+\        'hook/close_buffer/enable_failure':    0,
+\        'outputter':                           'buffer',
+\        'outputter/buffer/close_on_empty':     0,
+\        'outputter/buffer/into':               1,
+\        'outputter/buffer/split':              ':botright 7sp'
 \    },
 \    'php/watchdogs_checker': {
 \        'type': 'watchdogs_checker/php'

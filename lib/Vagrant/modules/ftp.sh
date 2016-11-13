@@ -2,7 +2,7 @@
 #--------------------------------
 # FTP setting
 #
-# $ ftp -A ftp://vagrant:vagrant@127.0.0.1:2224
+# $ ftp -A ftp://vagrant:vagrant@192.168.1.1:2224
 #
 # @author KazuakiM
 #--------------------------------
