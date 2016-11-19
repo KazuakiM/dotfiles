@@ -54,7 +54,7 @@
 		<Setting name="Auto Ascii dotfiles">1</Setting>
 		<Setting name="Theme" />
 		<Setting name="Language Code">ja_JP</Setting>
-		<Setting name="Last Server Path"></Setting>
+		<Setting name="Last Server Path">1 0 3 tmp</Setting>
 		<Setting name="Concurrent download limit">1</Setting>
 		<Setting name="Concurrent upload limit">1</Setting>
 		<Setting name="Update Check">1</Setting>
@@ -95,10 +95,10 @@ release 3.22.2.2 http://downloads.sourceforge.net/filezilla/FileZilla_3.22.2.2_m
 		<Setting name="Custom file associations" />
 		<Setting name="Comparison mode">1</Setting>
 		<Setting name="Comparison threshold">1</Setting>
-		<Setting name="Site Manager position">0 1366 146 847 475 </Setting>
+		<Setting name="Site Manager position">0 1447 146 847 475 </Setting>
 		<Setting name="Theme icon size">16x16</Setting>
 		<Setting name="Timestamp in message log">1</Setting>
-		<Setting name="Sitemanager last selected">0/FTPS</Setting>
+		<Setting name="Sitemanager last selected">0/SFTP</Setting>
 		<Setting name="Local filelist shown columns">1111</Setting>
 		<Setting name="Remote filelist shown columns">111111</Setting>
 		<Setting name="Local filelist column order">0,1,2,3</Setting>
@@ -107,7 +107,7 @@ release 3.22.2.2 http://downloads.sourceforge.net/filezilla/FileZilla_3.22.2.2_m
 		<Setting name="Filter toggle state">0</Setting>
 		<Setting name="Show quickconnect bar">0</Setting>
 		<Setting name="Messagelog position">0</Setting>
-		<Setting name="Last connected site">0/FTPS</Setting>
+		<Setting name="Last connected site">0/SFTP</Setting>
 		<Setting name="File doubleclock action">2</Setting>
 		<Setting name="Dir doubleclock action">0</Setting>
 		<Setting name="Minimize to tray">0</Setting>
@@ -135,9 +135,9 @@ release 3.22.2.2 http://downloads.sourceforge.net/filezilla/FileZilla_3.22.2.2_m
 		<Setting name="Kiosk mode">0</Setting>
 		<Setting name="Disable update check">0</Setting>
 		<LastServer>
-			<Host>192.168.1.2</Host>
-			<Port>2224</Port>
-			<Protocol>0</Protocol>
+			<Host>127.0.0.1</Host>
+			<Port>2222</Port>
+			<Protocol>1</Protocol>
 			<Type>0</Type>
 			<User>vagrant</User>
 			<Pass encoding="base64">dmFncmFudA==</Pass>
@@ -147,7 +147,7 @@ release 3.22.2.2 http://downloads.sourceforge.net/filezilla/FileZilla_3.22.2.2_m
 			<MaximumMultipleConnections>0</MaximumMultipleConnections>
 			<EncodingType>Auto</EncodingType>
 			<BypassProxy>0</BypassProxy>
-			<Name>FTPS</Name>
+			<Name>SFTP</Name>
 		</LastServer>
 		<Setting name="Last automatic update version">3.22.2.2</Setting>
 	</Settings>
