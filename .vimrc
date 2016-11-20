@@ -110,12 +110,12 @@ function! s:BufEnter() abort "{{{
 
     " Duplicate ban
     elseif v:servername is# 'GVIM1'
-        setlocal viminfo=
+        setlocal noswapfile viminfo=
         call remote_send('GVIM', '<ESC>:tabnew '.expand('%:p').'<CR>')
         call remote_foreground('GVIM')
         quit
     elseif v:servername is# 'VIM1'
-        setlocal viminfo=
+        setlocal noswapfile viminfo=
         call remote_send('VIM', '<ESC>:tabnew '.expand('%:p').'<CR>')
         call remote_foreground('VIM')
         quit
