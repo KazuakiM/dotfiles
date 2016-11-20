@@ -6,7 +6,7 @@
 #--------------------------------
 gitRevParse=`git rev-parse --show-toplevel 2>/dev/null|tr -d '\n'`
 if [ 0 < $gitRevParse ]; then
-    echo `basename $gitRevParse`
+    echo "R:`basename $gitRevParse`"
 else
-    echo `basename $(pwd)`
+    echo "L:`basename $(pwd)`"
 fi
