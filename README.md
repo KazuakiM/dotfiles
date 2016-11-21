@@ -279,7 +279,9 @@ $ ln -sf $HOME/work/dotfiles/.vimrc               $HOME/.vimrc
 $ cp -f  $HOME/work/dotfiles/.vimrc.local         $HOME/
 $ ln -sf $HOME/work/dotfiles/.w3m                 $HOME/.w3m
 $ ln -sf $HOME/work/dotfiles/lib/Vagrant          /srv/vagrant
-$ git clone https://github.com/Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
+$ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+$ sh ./installer.sh $HOME/.vim/dein.vim/
+$ rm installer.sh
 $ ssh-keygen -t rsa
 $ wget http://jp2.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp/php_manual_ja.tar.gz
 $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
@@ -287,7 +289,6 @@ $ wget http://get.sensiolabs.org/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixe
 $ chmod a+x $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 $ php $HOME/work/dotfiles/src/phpDict.php
 $ sh $HOME/work/dotfiles/src/htmlReference.sh
-$ sh $HOME/.vim/bundle/neobundle.vim/bin/neoinstall
 ```
 
 ### Vagrant
@@ -369,7 +370,9 @@ TODO:apt-cygのインストール状況を確認'apt-cyg show'
 > $ mv <Account>.tar.gz /tmp
 > $ rm -rf <Account>
 > $ git clone https://github.com/KazuakiM/dotfiles.git <Account>
-> $ git clone https://github.com/Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
+> $ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+> $ sh ./installer.sh $HOME/.vim/dein.vim/
+> $ rm installer.sh
 > $ ssh-keygen -t rsa
 > $ cp -f $HOME/.gitconfig.org       $HOME/.gitconfig
 > $ cp -f $HOME/.gitconfig.local.org $HOME/.gitconfig.local
@@ -383,7 +386,6 @@ TODO:apt-cygのインストール状況を確認'apt-cyg show'
 > $ cp -f $HOME/.config/netrc/.netrc.org $HOME/.config/netrc/.netrc
 > $ php $HOME/src/phpDict.php
 > $ sh $HOME/src/htmlReference.sh
-> $ sh $HOME/.vim/bundle/neobundle.vim/bin/neoinstall
 > $ git clone https://github.com/yascentur/RictyDiminished.git /tmp/RictyDiminished
 >  Copy font directory
 >
