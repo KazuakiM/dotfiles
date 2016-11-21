@@ -6,7 +6,8 @@
 #--------------------------------
 #variable {{{
 log=/var/log/vagrantfile.log
-home=/home/vagrant
+account=`whoami`
+home=/home/$account
 #}}}
 echo "dotfiles setting..."
 mkdir -p $home/work
@@ -29,4 +30,4 @@ ln -sf $home/work/dotfiles/.vim                 $home/.vim                      
 ln -sf $home/work/dotfiles/.vimrc               $home/.vimrc                        && \
 cp -f  $home/work/dotfiles/.vimrc.local         $home/                              && \
 ln -sf $home/work/dotfiles/.w3m                 $home/.w3m                          && \
-chown -R vagrant:vagrant $home
+chown -R $account:$account $home

@@ -1,0 +1,42 @@
+# vi: set ft=ruby:fdl=0:sts=2:sw=2:ts=2
+#-----------------------------------------------------------------------------------------------
+# The most common configuration options are documented and commented below.
+# For a complete reference, please see the online documentation at
+#  https://docs.vagrantup.com
+#
+# Every Vagrant development environment requires a box. You can search for boxes at
+#  https://atlas.hashicorp.com/search
+#-----------------------------------------------------------------------------------------------
+MODE = {
+  'DOTS' => true,
+  'PHP'  => true
+}
+VAGRANTFILE_API_VERSION = 2
+ACCOUNT                 = "ubuntu"
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "ubuntu/xenial64"
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+  end
+  config.vm.network :private_network, ip: "192.168.1.3"
+  # ssh(22) , host 2222
+  config.vm.network  "forwarded_port", guest: 80, host: 2223
+  config.vm.network  "forwarded_port", guest: 21, host: 2224
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--natdnsproxy1",        "on"]
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    vb.customize ["modifyvm", :id, "--memory",              "2048"]
+  end
+
+  #TODO:引数をセットして、アカウント名はVagrantファイルで管理する。
+  #FIXME:おそらくrootで実行されるため、chownとかいろいろヘボい結果になりそう。
+  config.vm.provision "shell", path:'modules/aptGet.sh', args: ACCOUNT
+
+  if MODE['DOTS'] then #{{{
+    config.vm.provision "shell", path:'modules/dotfiles.sh'
+  end #}}}
+
+  if MODE['PHP'] then #{{{
+    config.vm.provision "shell", path:'modules/php.sh'
+  end #}}}
+end

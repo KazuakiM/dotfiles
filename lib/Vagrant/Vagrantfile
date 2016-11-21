@@ -2,10 +2,10 @@
 #-----------------------------------------------------------------------------------------------
 # The most common configuration options are documented and commented below.
 # For a complete reference, please see the online documentation at
-#  https://docs.vagrantup.com.
+#  https://docs.vagrantup.com
 #
 # Every Vagrant development environment requires a box. You can search for boxes at
-#  https://atlas.hashicorp.com/search.
+#  https://atlas.hashicorp.com/search
 #
 # Repository List
 #  @epel     http://ftp.riken.jp/Linux/fedora/epel
