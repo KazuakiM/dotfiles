@@ -198,6 +198,9 @@ case "${OSTYPE}" in
         alias sl='ls -AhX  --color=auto'
         alias ll='ls -AhXl --color=auto'
         alias vi='vim'
+        if [ -f $LOCAL_PREFIX/bin/composer.phar ]; then
+            alias composer="php -d memory_limit=1G $LOCAL_PREFIX/bin/composer.phar"
+        fi
         #}}}
         # export {{{
         export EDITOR=vim
