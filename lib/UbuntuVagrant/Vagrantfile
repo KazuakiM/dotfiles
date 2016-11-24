@@ -28,12 +28,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ["modifyvm", :id, "--memory",              "2048"]
   end
 
-  #TODO:引数をセットして、アカウント名はVagrantファイルで管理する。
-  #FIXME:おそらくrootで実行されるため、chownとかいろいろヘボい結果になりそう。
   config.vm.provision "shell", path:'modules/aptGet.sh', args: ACCOUNT
 
   if MODE['DOTS'] then #{{{
-    config.vm.provision "shell", path:'modules/dotfiles.sh'
+    config.vm.provision "shell", path:'modules/dotfiles.sh', args: ACCOUNT
   end #}}}
 
   if MODE['PHP'] then #{{{

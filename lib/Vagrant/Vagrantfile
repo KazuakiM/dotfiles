@@ -85,7 +85,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end #}}}
 
   if MODE['DOTS'] then #{{{
-    config.vm.provision "shell", path:'modules/dotfiles.sh'
+    config.vm.provision "shell", path:'modules/dotfiles.sh', args: ACCOUNT
   end #}}}
 
   if MODE['DEV'] then #{{{

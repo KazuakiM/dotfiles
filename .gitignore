@@ -20,6 +20,7 @@ C:/
 .vimrc.win
 .wget-hsts
 lib/UbuntuVagrant/.vagrant
+lib/UbuntuVagrant/ssh.config
 lib/UbuntuVagrant/ubuntu-xenial-16.04-cloudimg-console.log
-lib/Vagrant/ssh.config
 lib/Vagrant/.vagrant
+lib/Vagrant/ssh.config
