@@ -71,8 +71,10 @@ applets
 apply
 arguments
 arity
+as
 asin
 assign
+async
 atan
 atan2
 atob
@@ -82,6 +84,7 @@ availHeight
 availLeft
 availTop
 availWidth
+await
 back
 backgroundColor
 bgColor
@@ -159,6 +162,7 @@ colorDepth
 compatMode
 complete
 concat
+configurable
 confirm
 console
 const
@@ -197,6 +201,7 @@ default
 defaultCharset
 defaultStatus
 defaultView
+defineProperty
 delegate
 delete
 deleteCaption
@@ -226,6 +231,7 @@ encodeURI
 encodeURIComponent
 encoding
 enctype
+enumerable
 escape
 eval
 evaluate
@@ -267,6 +273,8 @@ forward
 frame
 frameElement
 frames
+freeze
+from
 fromCharCode
 fromElement
 function
@@ -347,9 +355,11 @@ instanceof
 isChar
 isCollapsed
 isFinite
+isInteger
 isMap
 isNaN
 isPrototypeOf
+isSafeInteger
 italics
 item
 javaEnabled
@@ -531,7 +541,6 @@ prependTo
 preventBubble
 preventCapture
 preventDefault
-preventDefault
 previousElementSibling
 previousSibling
 print
@@ -632,6 +641,7 @@ setYear
 shift
 shiftKey
 sidebar
+sign
 sin
 sizeToContent
 slice
@@ -652,10 +662,10 @@ status
 statusbar
 stop
 stopPropagation
+strict
 strike
 stringify
 style
-styleSheets
 styleSheets
 sub
 submit
@@ -700,6 +710,7 @@ toUpperCase
 toolbar
 top
 true
+trunc
 try
 type
 typeof
@@ -710,10 +721,12 @@ unshift
 unwatch
 updateCommands
 updateInterval
+use
 useMap
 userAgent
 userLanguage
 userProfile
+value
 valueOf
 var
 vendor
@@ -729,5 +742,6 @@ while
 width
 window
 with
+writable
 write
 writeln
