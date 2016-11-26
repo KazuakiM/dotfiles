@@ -9,6 +9,7 @@
 #-----------------------------------------------------------------------------------------------
 MODE = {
   'DOTS' => true,
+  'FTP'  => true,
   'PHP'  => true
 }
 VAGRANTFILE_API_VERSION = 2
@@ -32,6 +33,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   if MODE['DOTS'] then #{{{
     config.vm.provision "shell", path:'modules/dotfiles.sh', args: ACCOUNT
+  end #}}}
+
+  if MODE['FTP'] then #{{{
+    config.vm.provision "shell", path:'modules/ftp.sh', args: ACCOUNT
   end #}}}
 
   if MODE['PHP'] then #{{{
