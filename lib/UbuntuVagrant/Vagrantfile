@@ -9,8 +9,8 @@
 #-----------------------------------------------------------------------------------------------
 MODE = {
   'DOTS' => true,
-  'FTP'  => true,
-  'PHP'  => true
+  'PHP'  => true,
+  'FTP'  => false
 }
 VAGRANTFILE_API_VERSION = 2
 ACCOUNT                 = "ubuntu"
@@ -35,11 +35,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provision "shell", path:'modules/dotfiles.sh', args: ACCOUNT
   end #}}}
 
-  if MODE['FTP'] then #{{{
-    config.vm.provision "shell", path:'modules/ftp.sh', args: ACCOUNT
-  end #}}}
-
   if MODE['PHP'] then #{{{
     config.vm.provision "shell", path:'modules/php.sh'
+  end #}}}
+
+  if MODE['FTP'] then #{{{
+    #FIXME: Configure画面が表示され、処理が止まる。
+    config.vm.provision "shell", path:'modules/ftp.sh', args: ACCOUNT
   end #}}}
 end

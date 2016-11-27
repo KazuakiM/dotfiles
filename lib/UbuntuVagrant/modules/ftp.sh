@@ -12,9 +12,9 @@ account=$1
 #}}}
 echo "FTP setting ..."
 echo "\taccount:$account"
-apt-get install -yqq proftpd                                                                            >> $log 2>> $log && \
-mkdir -p /tmp/ftp                                                                                       >> $log 2>> $log && \
-chmod 777 /tmp/ftp                                                                                      >> $log 2>> $log && \
+apt-get install -yqq proftpd
+mkdir -p /tmp/ftp
+chmod 777 /tmp/ftp
 echo pass | ftpasswd --file /tmp/ftpd.passwd --passwd --name fate --uid $(id -u) -gid $(id -g) --home /tmp/ftp --shell /bin/sh --stdin
 ftpasswd --file /tmp/ftpd.group --group --name nogroup --gid $(id -g)
 cat <<EOS > /tmp/proftpd.conf
