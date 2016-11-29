@@ -18,6 +18,8 @@
     # from 1.7.6
     ff   = false
     tool = vimdiff
+[merge "ours"]
+    driver = true
 [mergetool]
     keepBackup = true
 [pull]
