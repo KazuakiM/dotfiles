@@ -57,6 +57,8 @@ function! kazuakim#Test() abort "{{{
     if &filetype is# 'php'
         let g:quickrun_config['php'] = {
         \        'command':                          'phpunit',
+        \        'cmdopt':                           '--configuration ' . kazuakim#Path2ProjectDirectory('%') . '/phpunit.xml.dist',
+        \        'exec':                             '%c %o %s:p',
         \        'hook/close_buffer/enable_failure': 0,
         \        'outputter':                        'buffer',
         \        'outputter/buffer/split':           ':botright 7sp'

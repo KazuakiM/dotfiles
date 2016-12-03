@@ -30,9 +30,9 @@ if has("win32") || has ("win64")
     execute 'set lines='.get(s:KazuakiMWindow,'lines').' columns='.get(s:KazuakiMWindow,'columns')
     winpos 1120 0
 else
-    let s:KazuakiMWindow  = {'lines' : 44, 'columns': 170}
+    let s:KazuakiMWindow  = {'lines' : 44, 'columns': 130}
     set guifont=Ricty\ Diminished\ Discord\ Regular:h16 guifontwide=Ricty\ Diminished\ Discord\ Regular:h16 macmeta
     execute 'set lines='.get(s:KazuakiMWindow,'lines').' columns='.get(s:KazuakiMWindow,'columns')
-    winpos 0 23
+    winpos 320 0
 endif
 "}}}
