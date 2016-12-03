@@ -390,6 +390,11 @@ git checkout stash@{N} fuga.rb
 
 ## branch delete
 
+Sync Remote
+```bash
+git fetch --prune
+```
+
 Delete local branch.
 ```bash
 git branch -d xxxxx
