@@ -165,6 +165,10 @@ case "${OSTYPE}" in
         if [ -d $BREW_PREFIX/opt/gnu-sed/libexec/gnubin ]; then
             localPath="$BREW_PREFIX/opt/gnu-sed/libexec/gnubin:$localPath"
         fi
+        #brew --prefix ruby
+        if [ -d $BREW_PREFIX/opt/ruby/bin ]; then
+            localPath="$BREW_PREFIX/opt/ruby/bin:$localPath"
+        fi
         #brew --prefix svn
         if [ -d $BREW_PREFIX/opt/subversion/bin ]; then
             localPath="$BREW_PREFIX/opt/subversion/bin:$localPath"
