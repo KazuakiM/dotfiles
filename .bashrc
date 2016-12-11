@@ -24,6 +24,7 @@ alias h='history'
 alias mv='mv -i'
 alias rm='rm -i'
 alias tree='tree -af'
+localPath=''
 #}}}
 #find {{{
 findIgnore=''
@@ -97,6 +98,12 @@ fi
 #MySQL {{{
 export MYSQL_HISTFILE="$HOME/.log/mysql/mysql_history"
 #}}}
+#composer {{{
+export COMPOSER_HOME="$HOME/.config/composer"
+if [ -d $HOME/.config/composer/vendor/bin ]; then
+    localPath="$HOME/.config/composer/vendor/bin:$localPath"
+fi
+#}}}
 #OS Type {{{
 case "${OSTYPE}" in
     darwin*)
@@ -150,7 +157,6 @@ case "${OSTYPE}" in
         #    $BREW_PREFIX/opt/bash-completion2/share/bash-completion/bash_completion
         #fi
 
-        localPath=''
         #brew --prefix perl
         if [ -d $BREW_PREFIX/opt/perl/bin ]; then
             localPath="$BREW_PREFIX/opt/perl/bin:$localPath"
@@ -208,7 +214,6 @@ case "${OSTYPE}" in
         # export {{{
         export EDITOR=vim
         export MYSQL_PS1="\d> "
-        localPath=''
         if [ -d $LOCAL_PREFIX/rbenv/bin ]; then
             localPath="$LOCAL_PREFIX/rbenv/bin:$localPath"
         fi
