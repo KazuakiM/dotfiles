@@ -3,11 +3,5 @@
 --exclude=*min.js
 --recurse=yes
 --sort=yes
---languages=-JavaScript
---langdef=js
---langmap=js:.js.json.jsx.html
---regex-js=/^(var[ \t]+)?([a-zA-Z$][a-zA-Z0-9_$]*)[ \t]*=[ \ta-zA-Z0-9_$|]*\{/\2/o,object/
---regex-js=/['"]*([a-zA-Z$][a-zA-Z0-9_$]*)['"]*[ \t]*[:=][ \t]*function[ \t]*\(/\1/f,function/
---regex-js=/[a-zA-Z$][a-zA-Z0-9_$]*\.prototype\.[:=][ \t]*=[ \t]*function[ \t]*\(/\1/f,function/
---regex-js=/function[ \t]+([A-Za-z0-9_$]+)[ \t]*\(/\1/f,function/
+--langmap=JavaScript:.js.json.jsx.html
 --langmap=PHP:+.inc.tpl

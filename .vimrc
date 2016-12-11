@@ -618,7 +618,7 @@ unlet s:quickrun_config_javascript
 "MEMO:$ ctags --list-maps : ctags supported filetype.
 "MEMO:$ ctags --list-kinds: ctags tlist setting.
 nnoremap <Leader>t :<C-u>Tlist<CR>
-let g:tlist_javascript_settings = 'js;o:object;f:function'
+let g:tlist_javascript_settings = 'javascript;c:classes;f:function;p:propertie;m:methods;C:constant;v:variable'
 let g:tlist_php_settings        = 'php;n:namespace;c:class;i:interface;t:trait;f:function;d:constant;v:variable'
 let g:Tlist_Exit_OnlyWindow     = 1
 let g:Tlist_Show_One_File       = 1
