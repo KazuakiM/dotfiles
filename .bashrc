@@ -157,12 +157,12 @@ case "${OSTYPE}" in
         #    $BREW_PREFIX/opt/bash-completion2/share/bash-completion/bash_completion
         #fi
 
-        #brew --prefix perl
-        if [ -d $BREW_PREFIX/opt/perl/bin ]; then
-            localPath="$BREW_PREFIX/opt/perl/bin:$localPath"
-            #PERL_MM_OPT="INSTALL_BASE=$HOME/.lib/perl" cpan local::lib
-            #eval "$(perl -I$HOME/.lib/perl -Mlocal::lib)";
-        fi
+        ##brew --prefix perl
+        #if [ -d $BREW_PREFIX/opt/perl/bin ]; then
+        #    localPath="$BREW_PREFIX/opt/perl/bin:$localPath"
+        #    #PERL_MM_OPT="INSTALL_BASE=$HOME/.lib/perl" cpan local::lib
+        #    #eval "$(perl -I$HOME/.lib/perl -Mlocal::lib)";
+        #fi
         #brew --prefix gnu-tar
         if [ -d $BREW_PREFIX/opt/gnu-tar/libexec/gnubin ]; then
             localPath="$BREW_PREFIX/opt/gnu-tar/libexec/gnubin:$localPath"
@@ -171,14 +171,14 @@ case "${OSTYPE}" in
         if [ -d $BREW_PREFIX/opt/gnu-sed/libexec/gnubin ]; then
             localPath="$BREW_PREFIX/opt/gnu-sed/libexec/gnubin:$localPath"
         fi
-        #brew --prefix ruby
-        if [ -d $BREW_PREFIX/opt/ruby/bin ]; then
-            localPath="$BREW_PREFIX/opt/ruby/bin:$localPath"
-        fi
-        #brew --prefix svn
-        if [ -d $BREW_PREFIX/opt/subversion/bin ]; then
-            localPath="$BREW_PREFIX/opt/subversion/bin:$localPath"
-        fi
+        ##brew --prefix ruby
+        #if [ -d $BREW_PREFIX/opt/ruby/bin ]; then
+        #    localPath="$BREW_PREFIX/opt/ruby/bin:$localPath"
+        #fi
+        ##brew --prefix svn
+        #if [ -d $BREW_PREFIX/opt/subversion/bin ]; then
+        #    localPath="$BREW_PREFIX/opt/subversion/bin:$localPath"
+        #fi
         #brew --prefix macvim-kaoriya
         if [ -d $BREW_PREFIX/opt/macvim-kaoriya/MacVim.app/Contents/MacOS ]; then
             localPath="$BREW_PREFIX/opt/macvim-kaoriya/MacVim.app/Contents/MacOS:$localPath"
@@ -187,16 +187,25 @@ case "${OSTYPE}" in
         if [ -d $BREW_PREFIX/share/git-core/contrib/diff-highlight ]; then
             localPath="$BREW_PREFIX/share/git-core/contrib/diff-highlight:$localPath"
         fi
-        #heroku
-        if [ -d $BREW_PREFIX/heroku/bin ]; then
-            localPath="$BREW_PREFIX/heroku/bin:$localPath"
-        fi
-        #go applications
-        if [ -d /srv/php_bot ]; then
-            export GOPATH=/srv/php_bot
-            localPath="$GOPATH/bin:$localPath"
-        fi
+        ##heroku
+        #if [ -d $BREW_PREFIX/heroku/bin ]; then
+        #    localPath="$BREW_PREFIX/heroku/bin:$localPath"
+        #fi
+        ##go applications
+        #if [ -d /srv/php_bot ]; then
+        #    export GOPATH=/srv/php_bot
+        #    localPath="$GOPATH/bin:$localPath"
+        #fi
         export PATH=$localPath$PATH
+
+        ## git pull {{{
+        gitPullVariable=''
+        gitPullVariable="$gitPullVariable echo 'dotfiles' && cd $HOME/work/dotfiles/ && git pull;"
+        gitPullVariable="$gitPullVariable echo 'homebrew' && cd $HOME && brew update && brew upgrade && brew cleanup && brew cask cleanup && brew doctor && brew cask doctor;"
+        gitPullVariable="$gitPullVariable echo 'composer' && cd $HOME && composer global update;"
+        gitPullVariable="$gitPullVariable cd;"
+        alias UP=$gitPullVariable
+        #}}}
         #}}}
         ;;
     linux*)

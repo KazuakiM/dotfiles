@@ -1,5 +1,6 @@
 {
     "require": {
-        "friendsofphp/php-cs-fixer": "^2.0"
+        "friendsofphp/php-cs-fixer": "*",
+        "phpunit/phpunit": "*"
     }
 }
