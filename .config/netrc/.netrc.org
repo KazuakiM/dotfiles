@@ -1,4 +1,0 @@
-machine gitlab.com
-login kazuakim
-password xxx
-protocol https
