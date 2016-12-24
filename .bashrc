@@ -9,6 +9,7 @@ fi
 #User specific environment and startup programs {{{
 export LD_LIBRARY_PATH='/usr/local/lib'
 export LANG=ja_JP.UTF-8
+export NETRC="$HOME/.config/netrc/.netrc"
 cd
 clear
 #}}}
