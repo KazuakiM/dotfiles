@@ -44,11 +44,6 @@ $ cd $HOME/work/dotfiles/
 $ git status
 ```
 
-npm
-```bash
-$ npm install -g eslint eslint-plugin-react
-```
-
 Kindle Previewer
 * [Kindle Previewer](http://www.amazon.com/gp/feature.html?docId=1000765261)
 * [Java for OS X 2014-001](https://support.apple.com/kb/DL1572?locale=ja_JP)
@@ -278,6 +273,7 @@ $ ln -sf $HOME/work/dotfiles/.vim                 $HOME/.vim
 $ ln -sf $HOME/work/dotfiles/.vimrc               $HOME/.vimrc
 $ cp -f  $HOME/work/dotfiles/.vimrc.local         $HOME/
 $ ln -sf $HOME/work/dotfiles/.w3m                 $HOME/.w3m
+$ cp -f  $HOME/work/dotfiles/package.json         $HOME/package.json
 $ ln -sf $HOME/work/dotfiles/lib/Vagrant          /srv/vagrant
 $ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 $ sh ./installer.sh $HOME/.vim/dein.vim/
@@ -289,6 +285,18 @@ $ wget http://get.sensiolabs.org/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixe
 $ chmod a+x $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 $ php $HOME/work/dotfiles/src/phpDict.php
 $ sh $HOME/work/dotfiles/src/htmlReference.sh
+```
+
+### Composer
+
+```bash
+$ curl -sS https://getcomposer.org/installer | php
+$ composer global update
+```
+### npm
+
+```bash
+$ npm install -g
 ```
 
 ### Vagrant
