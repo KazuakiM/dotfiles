@@ -118,8 +118,6 @@ case "${OSTYPE}" in
         alias composer="php -d memory_limit=1G $BREW_PREFIX/opt/composer/libexec/composer.phar"
         alias HTTPD='sudo apachectl'
         alias MYSQL='mysql.server'
-        alias sqlfix="cd $HOME/.vim/dein.vim/repos/github.com/vim-sqlfix/       && $HOME/.vim/dein.vim/repos/github.com/thinca/vim-themis/bin/themis tests/ -r --reporter dot"
-        alias csfix=" cd $HOME/.vim/dein.vim/repos/github.com/vim-php-cs-fixer/ && $HOME/.vim/dein.vim/repos/github.com/thinca/vim-themis/bin/themis tests/ -r --reporter dot"
         #}}}
         # open {{{
         alias VNC='open    -a Chicken'

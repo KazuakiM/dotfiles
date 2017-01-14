@@ -109,10 +109,10 @@ Prefix > o
 
 ペインリサイズ
 ```
-Prefix > +
-Prefix > -
-Prefix > >
-Prefix > <
+Prefix > K
+Prefix > J
+Prefix > H
+Prefix > L
 ```
 
 ペイン分割解除
