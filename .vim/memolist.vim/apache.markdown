@@ -21,7 +21,6 @@ Group [Group]
 ```apache
 NameVirtualHost 127.0.0.1
 <VirtualHost *:80>
-    ServerAdmin  kazuaki_mabuchi_to_go@hotmail.co.jp
     DocumentRoot [/file/to/path/public]
     ServerName   [domain name]
     ErrorLog     /var/log/httpd/error_log
@@ -37,5 +36,12 @@ NameVirtualHost 127.0.0.1
         #Allow from all
         #}}}
     </Directory>
+
+    Alias /repository /file/to/otherPath/
+    <Directory '[/file/to/otherPath]'>
+        Options FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
 </VirtualHost>
-``
+```
