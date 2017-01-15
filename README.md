@@ -273,7 +273,7 @@ $ ln -sf $HOME/work/dotfiles/.vim                 $HOME/.vim
 $ ln -sf $HOME/work/dotfiles/.vimrc               $HOME/.vimrc
 $ cp -f  $HOME/work/dotfiles/.vimrc.local         $HOME/
 $ ln -sf $HOME/work/dotfiles/.w3m                 $HOME/.w3m
-$ cp -f  $HOME/work/dotfiles/package.json         $HOME/package.json
+$ ln -sf $HOME/work/dotfiles/package.json         $HOME/package.json
 $ cp -f  $HOME/work/dotfiles/ssh/config.org       $HOME/.ssh/config
 $ ln -sf $HOME/work/dotfiles/lib/Vagrant          /srv/vagrant
 $ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
