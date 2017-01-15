@@ -51,6 +51,8 @@ MySQL
  * [default_character_set, character_set_server](http://kamipo.github.io/talks/20150827-myna201508/#/step-12)
 
    > utf8mb4_bin or utf8mb4_general_ci
+   >
+   > MySQL8.0 : introducing utf8mb4_900_ai_ci
 
 * [yoku0825-san](https://github.com/yoku0825)
  * [dotfiles my.cnf](https://github.com/yoku0825/dotfiles/blob/master/my.cnf)
