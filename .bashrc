@@ -110,6 +110,9 @@ else
     curl -sS https://getcomposer.org/installer | php -- --install-dir=$LOCAL_PREFIX/bin
 fi
 #}}}
+#node.js {{{
+export NODE_PATH="$HOME/.config/node/node_modules"
+#}}}
 #OS Type {{{
 case "${OSTYPE}" in
     darwin*)
