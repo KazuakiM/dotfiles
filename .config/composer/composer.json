@@ -1,6 +1,7 @@
 {
     "require": {
         "friendsofphp/php-cs-fixer": "*",
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "*",
+        "hirak/prestissimo": "^0.3"
     }
 }

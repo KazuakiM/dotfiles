@@ -10,6 +10,7 @@ fi
 export LD_LIBRARY_PATH='/usr/local/lib'
 export LANG=ja_JP.UTF-8
 export NETRC="$HOME/.config/netrc/.netrc"
+export LOCAL_PREFIX=/usr/local
 cd
 clear
 #}}}
@@ -103,6 +104,11 @@ export COMPOSER_HOME="$HOME/.config/composer"
 if [ -d $HOME/.config/composer/vendor/bin ]; then
     localPath="$HOME/.config/composer/vendor/bin:$localPath"
 fi
+if [ -f $LOCAL_PREFIX/bin/composer.phar ]; then
+    alias composer="php -d memory_limit=1G $LOCAL_PREFIX/bin/composer.phar"
+else
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=$LOCAL_PREFIX/bin
+fi
 #}}}
 #OS Type {{{
 case "${OSTYPE}" in
@@ -115,7 +121,6 @@ case "${OSTYPE}" in
         alias sl='ls -AGh'
         alias lingr="sh $HOME/work/dotfiles/src/lingrStarter.sh"
         alias vi='gvim'
-        alias composer="php -d memory_limit=1G $BREW_PREFIX/opt/composer/libexec/composer.phar"
         alias HTTPD='sudo apachectl'
         alias MYSQL='mysql.server'
         #}}}
@@ -199,7 +204,7 @@ case "${OSTYPE}" in
         ## git pull {{{
         gitPullVariable=''
         gitPullVariable="$gitPullVariable echo 'dotfiles' && cd $HOME/work/dotfiles/ && git pull;"
-        gitPullVariable="$gitPullVariable echo 'composer' && cd $HOME && composer global update;"
+        gitPullVariable="$gitPullVariable echo 'composer' && cd $HOME && composer self-update && composer global update;"
         gitPullVariable="$gitPullVariable echo 'npm'      && cd $HOME && npm update -g;"
         gitPullVariable="$gitPullVariable echo 'homebrew' && cd $HOME && brew update && brew upgrade && brew cleanup && brew cask cleanup && brew doctor && brew cask doctor;"
         gitPullVariable="$gitPullVariable cd;"
@@ -208,16 +213,12 @@ case "${OSTYPE}" in
         #}}}
         ;;
     linux*)
-        export LOCAL_PREFIX=/usr/local
         # command {{{
         alias l='ls  -AhX  --color=auto'
         alias ls='ls -AhX  --color=auto'
         alias sl='ls -AhX  --color=auto'
         alias ll='ls -AhXl --color=auto'
         alias vi='vim'
-        if [ -f $LOCAL_PREFIX/bin/composer.phar ]; then
-            alias composer="php -d memory_limit=1G $LOCAL_PREFIX/bin/composer.phar"
-        fi
         #}}}
         # export {{{
         export EDITOR=vim
