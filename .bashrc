@@ -111,7 +111,8 @@ else
 fi
 #}}}
 #node.js {{{
-export NODE_PATH="$HOME/.config/node/node_modules"
+#export NODE_PATH="$HOME/.config/node/node_modules"
+#export NPM_PATH="$HOME/.config/node/.npm"
 #}}}
 #OS Type {{{
 case "${OSTYPE}" in
