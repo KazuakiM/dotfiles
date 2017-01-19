@@ -15,4 +15,7 @@ npm list --global
 npm list
 ```
 
-
+Check npm config
+```bash
+npm config list
+```
