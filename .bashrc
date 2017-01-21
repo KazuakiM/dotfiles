@@ -113,7 +113,7 @@ fi
 #node.js {{{
 #export NODE_PATH="$HOME/.config/node/node_modules"
 #export NPM_PATH="$HOME/.config/node/.npm"
-export npm_config_userconfig="$HOME/.config/node/.npmrc"
+export NPM_CONFIG_USERCONFIG="$HOME/.config/node/.npmrc"
 #}}}
 #OS Type {{{
 case "${OSTYPE}" in
