@@ -99,7 +99,7 @@ fi
 #MySQL {{{
 export MYSQL_HISTFILE="$HOME/.log/mysql/mysql_history"
 #}}}
-#composer {{{
+#PHP {{{
 export COMPOSER_HOME="$HOME/.config/composer"
 if [ -d $HOME/.config/composer/vendor/bin ]; then
     localPath="$HOME/.config/composer/vendor/bin:$localPath"
@@ -114,6 +114,9 @@ fi
 #export NODE_PATH="$HOME/.config/node/node_modules"
 #export NPM_PATH="$HOME/.config/node/.npm"
 export NPM_CONFIG_USERCONFIG="$HOME/.config/node/.npmrc"
+#}}}
+#Ruby {{{
+export GEM_HOME="$HOME/.cache/gem"
 #}}}
 #OS Type {{{
 case "${OSTYPE}" in
