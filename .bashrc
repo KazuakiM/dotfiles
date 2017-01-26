@@ -113,7 +113,7 @@ fi
 #node.js {{{
 #export NODE_PATH="$HOME/.config/node/node_modules"
 #export NPM_PATH="$HOME/.config/node/.npm"
-export NPM_CONFIG_USERCONFIG="$HOME/.config/node/.npmrc"
+export NPM_CONFIG_USERCONFIG="$HOME/.config/npm/.npmrc"
 #}}}
 #Ruby {{{
 export GEM_HOME="$HOME/.cache/gem"

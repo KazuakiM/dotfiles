@@ -10,7 +10,7 @@ C:/
 .config/filezilla/
 .config/gtk-2.0/
 .config/netrc/
-.config/node/node_modules/
+.config/npm/lib/node_modules/
 .DS_Store
 .gitconfig
 .gitconfig.local
