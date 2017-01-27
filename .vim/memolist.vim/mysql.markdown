@@ -546,6 +546,11 @@ CREATE DATABASE <DataBase1>;
 Table  
 > Don't use direct CREATE TABLE commands and should use ER Diagram(check top page).
 
+Don't error, if table exists!
+```sql
+CREATE TABLE IF NOT EXISTS
+```
+
 TEMPORARY TABLE - SELECT
 ```sql
 CREATE TEMPORARY TABLE tmp_<Table1> (
