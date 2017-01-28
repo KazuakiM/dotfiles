@@ -119,6 +119,9 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 > |:----------------------------------|:-------------------------------------------|:-----------------------------|
 > |Preferences > General > Preferences|                                            |                              |
 > |                                   |Load preferences from a custom folder or URL|$HOME/work/dotfiles/lib/iTerm2|
+> |Preferences > Keys > Key Mappings  |                                            |                              |
+> |                                   |⌘w                                          |Ignore                        |
+
 
 [Karabiner](https://pqrs.org/osx/karabiner/index.html.ja)
 > Application設定
