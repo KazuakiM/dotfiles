@@ -1,4 +1,0 @@
-machine github.com
-login KazuakiM
-password xxxx
-
