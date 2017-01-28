@@ -20,6 +20,11 @@ Git
 
 ## Tips
 
+Create SSH Key
+```bash
+ssh-keygen -t rsa -b 4096 -C "xxxx@xxx"
+```
+
 Create branch
 ```bash
 pwd
