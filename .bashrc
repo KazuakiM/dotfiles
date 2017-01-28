@@ -210,7 +210,6 @@ case "${OSTYPE}" in
 
         ## git pull {{{
         gitPullVariable=''
-        gitPullVariable="$gitPullVariable echo 'git'      && ssh-add $HOME/.ssh/id_rsa;"
         gitPullVariable="$gitPullVariable echo 'dotfiles' && cd $HOME/work/dotfiles/ && git pull;"
         gitPullVariable="$gitPullVariable echo 'composer' && cd $HOME && composer self-update && composer global update;"
         gitPullVariable="$gitPullVariable echo 'npm'      && cd $HOME && npm update -g;"
@@ -258,12 +257,12 @@ case "${OSTYPE}" in
         #}}}
         # ssh-agent {{{
         if [ -f $HOME/.ssh/.ssh-agent ]; then
-           . $HOME/.ssh/.ssh-agent > /dev/null
+            . $HOME/.ssh/.ssh-agent > /dev/null
         fi
         if [ -z "$SSH_AGENT_PID" -o -z "`/usr/bin/ps -a|/usr/bin/egrep \"^[ ]+$SSH_AGENT_PID\"`" ]; then
-           /usr/bin/ssh-agent > $HOME/.ssh/.ssh-agent
-           . $HOME/.ssh/.ssh-agent > /dev/null
-           ssh-add $HOME/.ssh/id_rsa
+            /usr/bin/ssh-agent > $HOME/.ssh/.ssh-agent
+            . $HOME/.ssh/.ssh-agent > /dev/null
+            ssh-add $HOME/.ssh/id_rsa
         fi
         #}}}
         ;;

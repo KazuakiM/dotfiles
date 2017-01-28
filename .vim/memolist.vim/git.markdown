@@ -30,6 +30,7 @@ pbcopy < $HOME/.ssh/id_rsa.pub
 >  https://github.com/settings/keys
 
 ssh -T git@github.com
+ssh-add -K $HOME/.ssh/id_rsa.pub
 ```
 
 Create branch
