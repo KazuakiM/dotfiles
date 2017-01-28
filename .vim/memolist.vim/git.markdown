@@ -23,6 +23,13 @@ Git
 Create SSH Key
 ```bash
 ssh-keygen -t rsa -b 4096 -C "xxxx@xxx"
+ssh-keygen -l -f $HOME/.ssh/id_rsa.pub
+pbcopy < $HOME/.ssh/id_rsa.pub
+
+> Add SSH Key
+>  https://github.com/settings/keys
+
+ssh -T git@github.com
 ```
 
 Create branch
