@@ -9,7 +9,9 @@ C:/
 .config/composer/
 .config/filezilla/
 .config/gtk-2.0/
+.config/npm/bin/
 .config/npm/lib/node_modules/
+.config/npm/share/
 .DS_Store
 .gitconfig
 .gitconfig.local
