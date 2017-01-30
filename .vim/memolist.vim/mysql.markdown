@@ -449,6 +449,27 @@ UPDATE <Table1> AS <tab1>
     WHERE <UniqueColumn1> = <UniqueColumnData1>;
 ```
 
+Big data table for None Index column.
+本番環境以外にdumpファイルを突っ込み、インデックスをはって、更新対象を洗い出す。
+もちろん前提として、本番環境のデータが更新されない事(ログ系)
+```
+count=0
+colum1Arr=(70074 70075)
+colum2Arr=(67083 67084)
+for i in ${colum1Arr[@]}
+do
+    sql="SELECT id FROM <Table1> WHERE <NoneIndexColumn1> = ${colum1Arr[$count]} [ AND <NoneIndexColumn2> = ${colum2Arr[$count]} ];"
+    echo "${sql}"
+
+    mysql --skip-column-names -u<Account> -h<Host> -p<Password> <DataBase> -e "${sql}" >> out.$count
+    sed -i -e ':loop; N; $!b loop; s/\n/,\n/g' out.$count
+    sed -i -e "1i UPDATE <Table1> SET status = 1 WHERE id IN (" out.$count
+    echo ");" >> out.$count
+
+    count=$(( count+ 1 ))
+done
+```
+
 ## DELETE/TRUNCATE
 
 Delete
