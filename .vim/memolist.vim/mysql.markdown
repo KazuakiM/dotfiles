@@ -449,8 +449,8 @@ UPDATE <Table1> AS <tab1>
     WHERE <UniqueColumn1> = <UniqueColumnData1>;
 ```
 
-Big data table for None Index column.
-本番環境以外にdumpファイルを突っ込み、インデックスをはって、更新対象を洗い出す。
+Big data table for None Index column.  
+本番環境以外にdumpファイルを突っ込み、専用にインデックスをはって、更新対象を洗い出す。  
 もちろん前提として、本番環境のデータが更新されない事(ログ系)
 ```
 count=0
