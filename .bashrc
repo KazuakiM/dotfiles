@@ -210,6 +210,7 @@ case "${OSTYPE}" in
 
         # ssh-agent {{{
         if [ -z "$SSH_AUTH_SOCK" ] ; then
+            eval `ssh-agent`
             ssh-add -K $HOME/.ssh/id_rsa.pub
         fi
         #}}}
