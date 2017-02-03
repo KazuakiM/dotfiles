@@ -208,6 +208,12 @@ case "${OSTYPE}" in
         #fi
         export PATH=$localPath$PATH
 
+        # ssh-agent {{{
+        if [ -z "$SSH_AUTH_SOCK" ] ; then
+            ssh-add -K $HOME/.ssh/id_rsa.pub
+        fi
+        #}}}
+
         ## git pull {{{
         gitPullVariable=''
         gitPullVariable="$gitPullVariable echo 'dotfiles' && cd $HOME/work/dotfiles/ && git pull;"
