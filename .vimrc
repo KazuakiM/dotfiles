@@ -539,8 +539,8 @@ let s:quickrun_config_javascript = {
 \}
 let g:quickrun_config = {
 \    '_': {
-\        'hook/close_buffer/enable_empty_data': 1,
-\        'hook/close_buffer/enable_failure':    1,
+\        'hook/close_buffer/enable_empty_data': 0,
+\        'hook/close_buffer/enable_failure':    0,
 \        'outputter':                           'multi:buffer:quickfix',
 \        'outputter/buffer/close_on_empty':     1,
 \        'outputter/buffer/split':              ':botright',

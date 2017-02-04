@@ -79,7 +79,7 @@ function! kazuakim#Lint() abort "{{{
     if &filetype is# 'php'
         let g:quickrun_config['php'] = {
         \    'command':                'php-cs-fixer',
-        \    'cmdopt':                 'fix --config=default --level=symfony --fixers=align_double_arrow,align_equals,concat_with_spaces,ordered_use,short_array_syntax',
+        \    'cmdopt':                 'fix',
         \    'exec':                   '%c %o %s:p',
         \    'outputter':              'buffer',
         \    'outputter/buffer/into':  1,
