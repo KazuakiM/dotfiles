@@ -1,7 +1,4 @@
---exclude=.git
---exclude=.svn
 --exclude=*min.js
 --recurse=yes
---sort=yes
---langmap=JavaScript:.js.json.jsx.html
+--langmap=JavaScript:+.html.json.php
 --langmap=PHP:+.inc.tpl
