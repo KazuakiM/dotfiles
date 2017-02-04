@@ -110,9 +110,10 @@ else
 fi
 #}}}
 #node.js {{{
-#export NODE_PATH="$HOME/.config/node/node_modules"
-#export NPM_PATH="$HOME/.config/node/.npm"
 export NPM_CONFIG_USERCONFIG="$HOME/.config/npm/.npmrc"
+if [ -d $HOME/.config/npm/bin ]; then
+    localPath="$HOME/.config/npm/bin:$localPath"
+fi
 #}}}
 #Ruby {{{
 export GEM_HOME="$HOME/.cache/gem"
