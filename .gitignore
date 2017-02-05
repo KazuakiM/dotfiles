@@ -23,7 +23,6 @@ C:/
 .log/tmux/
 .ssh/
 .subversion/
-.vimrc.win
 .wget-hsts
 lib/UbuntuVagrant/.vagrant
 lib/UbuntuVagrant/ssh.config

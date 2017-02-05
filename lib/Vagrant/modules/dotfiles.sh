@@ -25,10 +25,8 @@ ln -sf $home/work/dotfiles/.eslintrc.js         $home/.eslintrc.js        && \
 ln -sf $home/work/dotfiles/.eslintrc.limit.js   $home/.eslintrc.limit.js  && \
 ln -sf $home/work/dotfiles/.gitconfig.org       $home/.gitconfig          && \
 cp -f  $home/work/dotfiles/.gitconfig.local.org $home/.gitconfig.local    && \
-ln -sf $home/work/dotfiles/.gvimrc              $home/.gvimrc             && \
 ln -sf $home/work/dotfiles/.inputrc             $home/.inputrc            && \
 ln -sf $home/work/dotfiles/.vim                 $home/.vim                && \
-ln -sf $home/work/dotfiles/.vimrc               $home/.vimrc              && \
-cp -f  $home/work/dotfiles/.vimrc.local         $home/                    && \
+cp -f  $home/work/dotfiles/.vim/vimrc.local.org $home/.vim/vimrc.local    && \
 ln -sf $home/work/dotfiles/.w3m                 $home/.w3m                && \
 chown -R $account:$account $home

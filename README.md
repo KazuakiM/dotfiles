@@ -265,7 +265,6 @@ $ ln -sf $HOME/work/dotfiles/.eslintrc.js         $HOME/.eslintrc.js
 $ ln -sf $HOME/work/dotfiles/.eslintrc.limit.js   $HOME/.eslintrc.limit.js
 $ ln -sf $HOME/work/dotfiles/.gitconfig.org       $HOME/.gitconfig
 $ cp -f  $HOME/work/dotfiles/.gitconfig.local.org $HOME/.gitconfig.local
-$ ln -sf $HOME/work/dotfiles/.gvimrc              $HOME/.gvimrc
 $ ln -sf $HOME/work/dotfiles/.htoprc              $HOME/.htoprc
 $ ln -sf $HOME/work/dotfiles/.inputrc             $HOME/.inputrc
 $ ln -sf $HOME/work/dotfiles/.lib                 $HOME/.lib
@@ -273,8 +272,7 @@ $ ln -sf $HOME/work/dotfiles/.log                 $HOME/.log
 $ ln -sf $HOME/work/dotfiles/.mplayer             $HOME/.mplayer
 $ ln -sf $HOME/work/dotfiles/.ssh                 $HOME/.ssh
 $ ln -sf $HOME/work/dotfiles/.vim                 $HOME/.vim
-$ ln -sf $HOME/work/dotfiles/.vimrc               $HOME/.vimrc
-$ cp -f  $HOME/work/dotfiles/.vimrc.local         $HOME/
+$ cp -f  $HOME/work/dotfiles/.vim/vimrc.local.org $HOME/.vim/vimrc.local
 $ ln -sf $HOME/work/dotfiles/.w3m                 $HOME/.w3m
 $ ln -sf $HOME/work/dotfiles/package.json         $HOME/package.json
 $ cp -f  $HOME/work/dotfiles/ssh/config.org       $HOME/.ssh/config
@@ -394,7 +392,6 @@ TODO:apt-cygのインストール状況を確認'apt-cyg show'
 > $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
 > $ wget http://get.sensiolabs.org/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 > $ chmod a+x $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
-> $ cp -f $HOME/.vimrc.local $HOME/.vimrc.win
 > $ php $HOME/src/phpDict.php
 > $ sh $HOME/src/htmlReference.sh
 > $ git clone https://github.com/yascentur/RictyDiminished.git /tmp/RictyDiminished

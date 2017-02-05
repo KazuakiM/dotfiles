@@ -888,9 +888,5 @@ nnoremap <F3> :<C-u>edit++enc=utf-8<CR>
 
 " Other setting files {{{
 " Environment setting file
-if s:osType ==# 'win'
-    source ~/.vimrc.win
-else
-    source ~/.vimrc.local
-endif
+source ~/.vim/vimrc.local
 "}}}
