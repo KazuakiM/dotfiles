@@ -21,6 +21,7 @@ C:/
 .log/less/
 .log/mysql/
 .log/tmux/
+.log/wget/
 .ssh/
 .subversion/
 .wget-hsts

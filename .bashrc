@@ -24,6 +24,7 @@ alias h='history'
 alias mv='mv -i'
 alias rm='rm -i'
 alias tree='tree -af'
+alias wget="wget --hsts-file=$HOME/.log/wget/wget-hsts"
 localPath=''
 #}}}
 #find {{{
