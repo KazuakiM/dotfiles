@@ -157,6 +157,7 @@ case "${OSTYPE}" in
         export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
         export MYSQL_PS1="\d @\h> "
         #export MYSQL_PS1="\d @\h[\u] \n> "
+        export VAGRANT_HOME="$HOME/.cache/vagrant/vagrant.d"
         export VIM=$HOME
 
         if type rbenv >/dev/null 2>&1; then

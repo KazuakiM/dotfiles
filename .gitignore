@@ -5,6 +5,7 @@ C:/
 .cache/fontconfig/
 .cache/gem/
 .cache/npm/
+.cache/vagrant/
 .config/configstore/
 .config/composer/
 .config/filezilla/
