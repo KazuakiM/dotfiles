@@ -533,7 +533,7 @@ nnoremap <Leader>phpi :<C-u>call<Space>kazuakim#PhpInfo()<CR>
 " Set g:quickrun_config at .vimrc.local .
 let s:quickrun_config_javascript = {
 \    'command':     'eslint',
-\    'cmdopt':      '--cache --cache-location ' . s:envHome . '/.cache/eslint/.eslintcache --format compact --max-warnings 1 --no-color --no-ignore --quiet',
+\    'cmdopt':      '--cache --cache-location ' . s:envHome . '/.cache/eslint/eslintcache --format compact --max-warnings 1 --no-color --no-ignore --quiet',
 \    'errorformat': '%E%f: line %l\, col %c\, Error - %m,%W%f: line %l\, col %c\, Warning - %m,%-G%.%#',
 \    'exec':        '%c %o %s:p'
 \}

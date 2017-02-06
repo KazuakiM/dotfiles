@@ -8,7 +8,7 @@
 also=development
 cache=~/.cache/npm
 engine-strict=true
-init-module=~/.config/npm/.npm-init.js
+init-module=~/.config/npm/npm-init.js
 prefix=~/.config/npm
 progress=false
 save=true

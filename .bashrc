@@ -83,17 +83,17 @@ export PS1="\[\e[1;36m\]\u \$ \[\e[1;0m\]"
 #tmux or screen {{{
 if type tmux >/dev/null 2>&1; then
     alias tm="sh $HOME/work/dotfiles/src/tmuxStarter.sh"
-    alias tml="tmux -f $HOME/.config/tmux/.tmux.conf list-sessions"
-    alias tma="tmux -f $HOME/.config/tmux/.tmux.conf attach -d    -t \"\$@\""
-    alias tmd="tmux -f $HOME/.config/tmux/.tmux.conf detach -s       \"\$@\""
-    alias tmk="tmux -f $HOME/.config/tmux/.tmux.conf kill-session -t \"\$@\""
+    alias tml="tmux -f $HOME/.config/tmux/tmux.conf list-sessions"
+    alias tma="tmux -f $HOME/.config/tmux/tmux.conf attach -d    -t \"\$@\""
+    alias tmd="tmux -f $HOME/.config/tmux/tmux.conf detach -s       \"\$@\""
+    alias tmk="tmux -f $HOME/.config/tmux/tmux.conf kill-session -t \"\$@\""
 fi
 if type screen >/dev/null 2>&1; then
     alias sc='screen'
     alias scl='screen -ls'
     alias sca='screen -r "$@"'
     alias scd='screen -d "$@"'
-    export SCREENRC="$HOME/.config/screen/.screenrc"
+    export SCREENRC="$HOME/.config/screen/screenrc"
 fi
 #}}}
 #MySQL {{{
@@ -111,7 +111,7 @@ else
 fi
 #}}}
 #node.js {{{
-export NPM_CONFIG_USERCONFIG="$HOME/.config/npm/.npmrc"
+export NPM_CONFIG_USERCONFIG="$HOME/.config/npm/npmrc"
 if [ -d $HOME/.config/npm/bin ]; then
     localPath="$HOME/.config/npm/bin:$localPath"
 fi

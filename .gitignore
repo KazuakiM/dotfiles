@@ -24,9 +24,12 @@ C:/
 .log/wget/
 .ssh/
 .subversion/
-.wget-hsts
 lib/UbuntuVagrant/.vagrant
 lib/UbuntuVagrant/ssh.config
 lib/UbuntuVagrant/ubuntu-xenial-16.04-cloudimg-console.log
 lib/Vagrant/.vagrant
 lib/Vagrant/ssh.config
+
+# temp
+.vimrc
+.gvimrc
