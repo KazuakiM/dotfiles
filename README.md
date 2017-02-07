@@ -271,11 +271,11 @@ $ ln -sf $HOME/work/dotfiles/.lib                 $HOME/.lib
 $ ln -sf $HOME/work/dotfiles/.log                 $HOME/.log
 $ ln -sf $HOME/work/dotfiles/.mplayer             $HOME/.mplayer
 $ ln -sf $HOME/work/dotfiles/.ssh                 $HOME/.ssh
+$ cp -f  $HOME/.ssh/config.mac                    $HOME/.ssh/config
 $ ln -sf $HOME/work/dotfiles/.vim                 $HOME/.vim
 $ cp -f  $HOME/work/dotfiles/.vim/vimrc.local.org $HOME/.vim/vimrc.local
 $ ln -sf $HOME/work/dotfiles/.w3m                 $HOME/.w3m
 $ ln -sf $HOME/work/dotfiles/package.json         $HOME/package.json
-$ cp -f  $HOME/work/dotfiles/ssh/config.org       $HOME/.ssh/config
 $ ln -sf $HOME/work/dotfiles/lib/Vagrant          /srv/vagrant
 $ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 $ sh ./installer.sh $HOME/.vim/dein.vim/
