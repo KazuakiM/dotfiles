@@ -13,6 +13,7 @@ C:/
 .config/npm/bin/
 .config/npm/lib/node_modules/
 .config/npm/share/
+.config/travisci/
 .DS_Store
 .gitconfig
 .gitconfig.local
