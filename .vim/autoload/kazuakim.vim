@@ -33,6 +33,21 @@ function! kazuakim#QuickfixCmdPost() abort "{{{
 endfunction "}}}
 "}}}
 
+" tags {{{
+function! kazuakim#TagJumper() abort "{{{
+    let l:cw = expand('<cword>')
+    let l:tli = taglist('^' . l:cw . '$')
+    if len(l:tli) ==# 1 && l:tli[0].name ==# l:cw
+        if expand('%:p') ==# l:tli[0].filename
+            return 'tjump ' . l:cw
+        else
+            return 'tab stjump ' . l:cw
+        endif
+    endif
+    return 'tselect ' . l:cw
+endfunction "}}}
+"}}}
+
 " vital.vim {{{
 function! kazuakim#Path2ProjectDirectory(path) abort "{{{
     let s:Prelude = ! exists('s:Prelude') ? vital#of('vital').import('Prelude') : s:Prelude

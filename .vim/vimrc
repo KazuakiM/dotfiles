@@ -305,8 +305,8 @@ cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 nnoremap +* *N
 "  Tags
 nnoremap <Leader>] <C-]>
-nnoremap <Leader>: :<C-u>tab<Space>stj<Space><C-R>=expand('<cword>')<CR><CR>
 nnoremap <Leader>[ <C-o>
+nmap <expr><Leader>: ':' . kazuakim#TagJumper() . '<CR>'
 "  Diff
 nnoremap <Leader>df :<C-u>diffsplit<Space>
 nnoremap <C-k> [c
