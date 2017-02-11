@@ -1,4 +1,4 @@
 --exclude=*min.js
 --recurse=yes
 --langmap=JavaScript:+.html.json.php
---langmap=PHP:+.inc.tpl
+--langmap=PHP:+.php.inc.tpl
