@@ -44,7 +44,7 @@ function! kazuakim#TagJumper() abort "{{{
             return 'tab stjump ' . l:cw
         endif
     endif
-    return 'tselect ' . l:cw
+    return 'tab stselect ' . l:cw
 endfunction "}}}
 "}}}
 
