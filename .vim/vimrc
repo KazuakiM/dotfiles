@@ -151,6 +151,9 @@ function! s:BufReadPost() abort "{{{
         let &fileencoding = &encoding
     endif
     "}}}
+
+    "TODO: delte duplicate tab & window & buffer
+    " http://kannokanno.hatenablog.com/entry/2013/05/31/205858
 endfunction "}}}
 
 function! s:InsertLeave() abort "{{{
