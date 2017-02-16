@@ -18,7 +18,7 @@
     tool                = vimdiff
 [merge]
     # from 1.7.6
-    ff   = false
+    ff   = true
     tool = vimdiff
 [merge "ours"]
     driver = true
