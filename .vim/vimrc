@@ -195,6 +195,9 @@ autocmd MyAutoCmd QuickfixCmdPost      * call kazuakim#QuickfixCmdPost()
 autocmd MyAutoCmd VimEnter             * call s:VimEnter()
 autocmd MyAutoCmd WinEnter             * call s:WinEnter()
 
+autocmd MyAutoCmd BufNewFile,BufRead $HOME/.config/composer/vendor/*.php               setlocal tags=$HOME/.vim/tags/global.tags
+autocmd MyAutoCmd BufNewFile,BufRead $HOME/work/dotfiles/.config/composer/vendor/*.php setlocal tags=$HOME/.vim/tags/global.tags
+
 function! KazuakiMStatuslineSyntax() abort "{{{
     let l:ret = qfstatusline#Update()
     if 0 < len(l:ret)
