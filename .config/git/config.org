@@ -1,6 +1,6 @@
 [include]
     # from 1.7.10
-    path = ~/.gitconfig.local
+    path = ~/.config/git/gitconfig.local
 [alias]
     dff = difftool
     lg  = log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'

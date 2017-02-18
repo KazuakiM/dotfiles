@@ -10,6 +10,7 @@ fi
 export LD_LIBRARY_PATH='/usr/local/lib'
 export LANG=ja_JP.UTF-8
 export LOCAL_PREFIX=/usr/local
+export XDG_CONFIG_HOME="$HOME/.config"
 cd
 clear
 #}}}

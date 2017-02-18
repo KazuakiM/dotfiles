@@ -9,6 +9,7 @@ C:/
 .config/configstore/
 .config/composer/
 .config/filezilla/
+.config/git/
 .config/gtk-2.0/
 .config/npm/bin/
 .config/npm/lib/node_modules/
