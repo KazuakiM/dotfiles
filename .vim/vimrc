@@ -654,16 +654,26 @@ let g:easy_align_delimiters = {
 nnoremap <Space>m :<C-u>call<Space>quickhl#manual#this('n')<CR>
 nnoremap <Space>M :<C-u>call<Space>quickhl#manual#reset()<CR>
     let g:quickhl_manual_colors = [
-    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=Blue        guibg=Blue',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Cyan        guibg=Cyan',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta     guibg=Magenta',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow      guibg=Yellow',
-    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkBlue    guibg=DarkBlue',
-    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkCyan    guibg=DarkCyan',
-    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkMagenta guibg=DarkMagenta',
-    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkRed     guibg=DarkRed',
-    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkGreen   guibg=DarkGreen',
-    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=Brown       guibg=Brown',
+    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Green        guibg=Green',
+    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta      guibg=Magenta',
+    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow       guibg=Yellow',
+    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Cyan         guibg=Cyan',
+    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=Brown        guibg=Brown',
+    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Grey         guibg=Grey',
+    \    'cterm=NONE gui=NONE ctermfg=Grey  guifg=Grey  ctermbg=Blue         guibg=Blue',
+    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkGreen    guibg=DarkGreen',
+    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkMagenta  guibg=DarkMagenta',
+    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkRed      guibg=DarkRed',
+    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkCyan     guibg=DarkCyan',
+    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=DarkGray     guibg=DarkGray',
+    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkBlue     guibg=DarkBlue',
+    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightGreen   guibg=LightGreen',
+    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightMagenta guibg=LightMagenta',
+    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightRed     guibg=LightRed',
+    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightYellow  guibg=LightYellow',
+    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightCyan    guibg=LightCyan',
+    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightGray    guibg=LightGray',
+    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightBlue    guibg=LightBlue'
     \]
 "}}}
 
