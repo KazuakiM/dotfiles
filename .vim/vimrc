@@ -284,6 +284,7 @@ inoremap <C-u> <C-g>u<C-u>
 inoremap <C-w> <C-g>u<C-w>
 "  Tab
 nnoremap gr gT
+nnoremap ge :<C-u>call<Space>kazuakim#TabMove()<CR>
 "  Window Size
 nnoremap + <C-w>+
 nnoremap - <C-w>-

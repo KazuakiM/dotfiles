@@ -33,6 +33,19 @@ function! kazuakim#QuickfixCmdPost() abort "{{{
 endfunction "}}}
 "}}}
 
+" Tab {{{
+function! kazuakim#TabMove() abort "{{{
+    let l:nowCount = tabpagenr()
+    let l:maxCount = tabpagenr("$")
+
+    if l:nowCount < l:maxCount
+        +tabmove
+    else
+        0tabmove
+    endif
+endfunction "}}}
+"}}}
+
 " tags {{{
 function! kazuakim#TagJumper() abort "{{{
     let l:cw = expand('<cword>')
