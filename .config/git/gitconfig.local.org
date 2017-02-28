@@ -3,9 +3,9 @@
 [core]
     autocrlf = input
 [alias]
-    df  = diff --ignore-space-at-eol --ignore-space-change
+    #df = diff --ignore-space-at-eol --ignore-space-change
     # from 1.8.4
-    #df = diff --ignore-space-at-eol --ignore-space-change --ignore-blank-lines
+    df  = diff --ignore-space-at-eol --ignore-space-change --ignore-blank-lines
 
 # Mac (GitHub) {{{
 [user]
@@ -16,3 +16,4 @@
 [mergetool "vimdiff"]
     cmd = /usr/local/opt/macvim-kaoriya/MacVim.app/Contents/MacOS/vimdiff -O $LOCAL $REMOTE
 #}}}
+# vim:ft=gitconfig

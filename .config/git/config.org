@@ -4,6 +4,7 @@
 [alias]
     dff = difftool
     lg  = log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+    llg = !git log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' origin/master..`git rev-parse --abbrev-ref HEAD`
     st  = status
 [branch]
     autosetuprebase = always
@@ -16,6 +17,9 @@
     algorithm           = histogram
     compactionHeuristic = true
     tool                = vimdiff
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
 [merge]
     # from 1.7.6
     ff   = true
@@ -24,6 +28,9 @@
     driver = true
 [mergetool]
     keepBackup = true
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
 [pull]
     # from 1.7.9
     rebase = true
@@ -31,3 +38,4 @@
     diff = diff-highlight | less
     log  = diff-highlight | less
     show = diff-highlight | less
+# vim:ft=gitconfig

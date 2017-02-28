@@ -263,8 +263,8 @@ $ ln -sf $HOME/work/dotfiles/.config              $HOME/.config
 $ ln -sf $HOME/work/dotfiles/.ctags               $HOME/.ctags
 $ ln -sf $HOME/work/dotfiles/.eslintrc.js         $HOME/.eslintrc.js
 $ ln -sf $HOME/work/dotfiles/.eslintrc.limit.js   $HOME/.eslintrc.limit.js
-$ cd $HOME/.config/git && ln -sf config.org       config
-$ cp -f  $HOME/work/dotfiles/.config/git/gitconfig.local.org $HOME/work/dotfiles/.config/git/gitconfig.local
+$ cd $HOME/.config/git && ln -sf config.org          config
+$ cd $HOME/.config/git && ln -sf gitconfig.local.org gitconfig.local
 $ ln -sf $HOME/work/dotfiles/.htoprc              $HOME/.htoprc
 $ ln -sf $HOME/work/dotfiles/.inputrc             $HOME/.inputrc
 $ ln -sf $HOME/work/dotfiles/.lib                 $HOME/.lib
@@ -384,8 +384,8 @@ TODO:apt-cygのインストール状況を確認'apt-cyg show'
 > $ sh ./installer.sh $HOME/.vim/dein.vim/
 > $ rm installer.sh
 > $ ssh-keygen -t rsa -b 4096 -C "xxxx@xxx"
-> $ cd $HOME/.config/git && ln -sf config.org config
-> $ cd $HOME/.config/git && cp -f gitconfig.local.org gitconfig.local
+> $ cd $HOME/.config/git && ln -sf config.org          config
+> $ cd $HOME/.config/git && ln -sf gitconfig.local.org gitconfig.local
 >  Update local setting.
 >
 > $ wget http://jp2.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp
