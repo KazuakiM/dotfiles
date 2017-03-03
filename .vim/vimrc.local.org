@@ -5,7 +5,15 @@
 "}}}
 
 "tags {{{
-"autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*.php          setlocal tags=$HOME/.vim/tags/sample.tags,$HOME/.vim/tags/composer.tags
+function! s:setTags(name, other) abort "{{{
+    if match(expand('%:p:h'), 'tests') > 0
+        let &l:tags = $HOME . '/.vim/tags/' . a:name . 'Test.tags' . a:other
+    else
+        let &l:tags = $HOME . '/.vim/tags/' . a:name . '.tags' . a:other
+    endif
+endfunction "}}}
+
+"autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*.php          call s:setTags('sample', ',' . $HOME . '/.vim/tags/global.tags')
 "autocmd MyAutoCmd BufNewFile,BufRead $HOME/huga/*.{js,json,html} setlocal tags=$HOME/.vim/tags/huga.tags
 "autocmd MyAutoCmd BufNewFile,BufRead C:/usr/local/src/hoge/*.php setlocal tags=$HOME/.vim/tags/hoge.tags
 "}}}
