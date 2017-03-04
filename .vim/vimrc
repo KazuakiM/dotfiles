@@ -257,13 +257,7 @@ set viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo virtual
 set wildmenu wildmode=longest:full,full wrapscan
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*.log'\ --exclude='*min.js'\ --exclude='*min.css'
 set wildignore+=*.bmp,*.gif,*.git,*.ico,*.jpeg,*.jpg,*.log,*.mp3,*.ogg,*.otf,*.pdf,*.png,*.qpf2,*.svn,*.ttf,*.wav,C,.DS_Store,.,..
-set statusline=\ %t\ %{KazuakiMStatuslinePaste()}\ %m\ %r\ %h\ %w\ %q\ %{KazuakiMStatuslineSyntax()}%=%l/%L\ \|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 let &runtimepath = &runtimepath . ',' . s:deinDir . '/repos/github.com/Shougo/dein.vim'
-if &l:diff
-    set cursorline
-else
-    set nocursorline
-endif
 "set foldopen-=search
 "helptags $HOME/.vim/dein.vim/repos/github.com/vim-jp/vimdoc-ja/doc
 " Color
@@ -316,10 +310,6 @@ nnoremap <Leader>[ <C-o>
 nmap <expr><Leader>: ':' . kazuakim#TagJumper() . '<CR>'
 "  Diff
 nnoremap <Leader>df :<C-u>diffsplit<Space>
-nnoremap <C-k> [c
-nnoremap <C-j> ]c
-nnoremap <C-h> do
-nnoremap <C-l> dp
 "  Register
 nnoremap x "_x
 nnoremap X "_x
@@ -381,6 +371,22 @@ nnoremap <SID>[vim]s :<C-u>tabnew<Space>$HOME/.vim/vim-sqlfix/sqlfix.sql<CR>
 nnoremap <SID>[vim]h :<C-u>source<Space>$VIMRUNTIME/syntax/colortest.vim<CR>
 nnoremap <SID>[vim]c :<C-u>IndentLinesToggle<CR>
 nnoremap <SID>[vim]p :<C-u>echo<Space>substitute(&runtimepath,<Space>',',<Space>'\n',<Space>'g')<CR>
+"}}}
+
+" VimDiff {{{
+if &l:diff
+    set cursorline
+    set statusline=\ %t\ %{KazuakiMStatuslinePaste()}\ %m\ %r\ %h\ %w\ %q%=%l/%L\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
+    nnoremap <C-k> [c
+    nnoremap <C-j> ]c
+    nnoremap <C-h> do
+    nnoremap <C-l> dp
+
+    finish
+else
+    set nocursorline
+    set statusline=\ %t\ %{KazuakiMStatuslinePaste()}\ %m\ %r\ %h\ %w\ %q\ %{KazuakiMStatuslineSyntax()}%=%l/%L\ \|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
+endif
 "}}}
 
 " dein.vim {{{
