@@ -9,17 +9,14 @@
 #}}}
 
 ## ctags {{{
-tagsPhpCmd='ctags --languages=php -f'
-tagsPhpTestCmd='ctags --languages=php --exclude=tests -f'
-tagsGoCmd=' ctags --languages=go  -f'
-tagsJsCmd=' ctags --languages=js  -f'
+tagsPhpCmd='ctags --languages=php --exclude=tests'
+tagsPhpTestCmd='ctags --languages=php'
+tagsJsCmd='ctags --languages=js'
 tagsVariable=''
-tagsVariable="$tagsVariable cd $HOME/.config/composer/vendor; $tagsPhpCmd $HOME/.vim/tags/global.tags $HOME/.config/composer/vendor;"
-#tagsVariable="$tagsVariable cd $HOME/sample1;                      $tagsPhpCmd     $HOME/.vim/tags/sample1.tags      $HOME/sample1;"
-#tagsVariable="$tagsVariable cd $HOME/sample1;                      $tagsPhpTestCmd $HOME/.vim/tags/sample1Test.tags  $HOME/sample1;"
-#tagsVariable="$tagsVariable cd /directory/to/path/composer/vendor; $tagsPhpCmd     $HOME/.vim/tags/composer.tags     /directory/to/path/composer/vendor;"
-#tagsVariable="$tagsVariable cd $HOME/sample2;                      $tagsGoCmd      $HOME/.vim/tags/sample2.tags      $HOME/sample2;"
-#tagsVariable="$tagsVariable cd;"
+tagsVariable="$tagsVariable cd $HOME/.config/composer/vendor; $tagsPhpCmd -f $HOME/.vim/tags/global.tags $HOME/.config/composer/vendor;"
+#tagsVariable="$tagsVariable cd $HOME/sample1; $tagsPhpCmd     -f $HOME/.vim/tags/sample1.tags     $HOME/sample1;"
+#tagsVariable="$tagsVariable cd $HOME/sample1; $tagsPhpTestCmd -f $HOME/.vim/tags/sample1Test.tags $HOME/sample1;"
+tagsVariable="$tagsVariable cd;"
 alias TAGS=$tagsVariable
 #}}}
 
