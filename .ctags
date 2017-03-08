@@ -1,4 +1,5 @@
 --exclude=*min.js
---recurse=yes
+--input-encoding=UTF-8
 --langmap=JavaScript:+.html.json.php
 --langmap=PHP:+.php.inc.tpl
+--recurse=yes
