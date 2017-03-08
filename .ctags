@@ -2,4 +2,5 @@
 --input-encoding=UTF-8
 --langmap=JavaScript:+.html.json.php
 --langmap=PHP:+.php.inc.tpl
+--pattern-length-limit=300
 --recurse=yes
