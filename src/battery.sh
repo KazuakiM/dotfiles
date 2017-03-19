@@ -19,4 +19,6 @@ fi
 
 if [ "$charge" = 'discharging' -a "$battery" -lt 35 ]; then
     growlnotify --name Battery!
+elif [ "$charge" = '' -a "$battery" -gt 95 ]; then
+    growlnotify --name Battery!
 fi
