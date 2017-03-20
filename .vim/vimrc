@@ -340,6 +340,10 @@ let g:omni_sql_no_default_maps    = 1
 " dummy functions.
 function! SQL_SetType() abort "{{{
 endfunction "}}}
+function! sqlcomplete#ResetCacheSyntax() abort "{{{
+endfunction "}}}
+function! sqlcomplete#PreCacheSyntax() abort "{{{
+endfunction "}}}
 " disable plugin
 let g:did_install_default_menus = 1 "$VIMRUNTIME/menu.vim
 let g:loaded_2html_plugin       = 1 "$VIMRUNTIME/plugin/tohtml.vim
