@@ -403,6 +403,7 @@ if dein#load_state(s:deinDir)
     call dein#add('junegunn/vim-easy-align')
     call dein#add('kannokanno/previm')
     call dein#add('KazuakiM/neosnippet-snippets')
+    call dein#add('KazuakiM/vim-ms-translator')
     call dein#add('KazuakiM/vim-qfstatusline')
     call dein#add('KazuakiM/vim-sqlfix')
     call dein#add('KazuakiM/unite-help')
@@ -472,6 +473,10 @@ let g:wildfire_water_map = '<BS>'
 
 " vim-qfstatusline {{{
 let g:Qfstatusline#UpdateCmd = function('KazuakiMStatuslineSyntax')
+"}}}
+
+" vim-ms-translator {{{
+nnoremap <silent> <Leader>jj :<C-u>Mstranslator<CR>
 "}}}
 
 " yankround.vim {{{

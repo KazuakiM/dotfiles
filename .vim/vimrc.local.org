@@ -18,12 +18,10 @@ endfunction "}}}
 "autocmd MyAutoCmd BufNewFile,BufRead C:/usr/local/src/hoge/*.php setlocal tags=$HOME/.vim/tags/hoge.tags
 "}}}
 
-"ALL TEST {{{
-" Laravel
-"autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*.php let g:quickrun_config['php']['exec'] = '%c %o --bootstrap '$HOME/sample/bootstrap/autoload.php' $HOME/sample/app/tests'
+"vim-ms-translator {{{
+" @url https://portal.azure.com
+"let g:mstranslator#Config = {
+"\     'subscription_key': 'check Google Drive'
+"\ }
 "}}}
 
-"SINGLE TEST {{{
-" Laravel
-"autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*Test.php let g:quickrun_config['php']['exec'] = '%c %o --bootstrap '$HOME/sample/bootstrap/autoload.php' %s'
-"}}}
