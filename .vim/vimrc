@@ -638,6 +638,10 @@ let g:quickrun_config = {
 unlet s:quickrun_config_javascript
 "}}}
 
+" vital.vim {{{
+let g:vitalizer#vital_dir = s:envHome . '/.vim/dein.vim/repos/github.com/vim-jp/vital.vim'
+"}}}
+
 " taglist.vim {{{
 "MEMO:$ ctags --list-maps : ctags supported filetype.
 "MEMO:$ ctags --list-kinds: ctags tlist setting.
