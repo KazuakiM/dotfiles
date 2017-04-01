@@ -20,8 +20,5 @@ endfunction "}}}
 
 "vim-ms-translator {{{
 " @url https://portal.azure.com
-"let g:mstranslator#Config = {
-"\     'subscription_key': 'check Google Drive'
-"\ }
+"let g:mstranslator#Config.subscription_key = 'check Google Drive'
 "}}}
-
