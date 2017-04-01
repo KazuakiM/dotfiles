@@ -293,8 +293,7 @@ noremap <Left>  ^
 "  Sudo Write
 nnoremap <Leader>w :<C-u>w<Space>!sudo<Space>tee<Space>%<Space>><Space>/dev/null<CR>
 "  Paste
-nnoremap <silent><expr><Leader>v  ':set<Space>paste<CR><Insert><Right><C-r>+<ESC>'
-inoremap <silent><expr><C-v> '<ESC>:set<Space>paste<CR><Insert><Right><C-r>+<ESC><Insert><Right>'
+nnoremap <silent><expr><Leader>v ':set<Space>paste<CR><Insert><Right><C-r>+<ESC>'
 cmap <M-v> <C-R><C-O>*
 "  Replace
 nnoremap R gR

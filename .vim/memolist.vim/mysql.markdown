@@ -104,6 +104,9 @@ KILL xxxx;
 
 ## TSV/CSV
 
+TSV/CSVを直接インポートするコマンドがMySQLにはある。  
+詳しくは[ここ](#import)参照です。
+
 '\47' is SingleQuote.  
 $0 is all words. $1-N is separate words.  
 Check kazuakim_null isn't exist.
@@ -161,6 +164,15 @@ done
 ```
 
 ## Import
+
+[Import](https://dev.mysql.com/doc/refman/5.6/ja/mysqlimport.html)
+```
+$ ls
+  <dumpFile>
+$ mysqlimport -u<Account> -h<Host> -p <DataBase> \
+  --columns=<Column1>,<Column2> \
+  --fields-enclosed-by='"' --fields-terminated-by=',' --lines-terminated-by="\n" ./<dumpFile>
+```
 
 CUI
 ```bash
