@@ -475,8 +475,8 @@ let g:Qfstatusline#UpdateCmd = function('KazuakiMStatuslineSyntax')
 "}}}
 
 " vim-ms-translator {{{
-nnoremap <silent> <Leader>jj :<C-u>Mstranslator<CR>
-nnoremap <silent> <Leader>jk :<C-u>Mstranslator<Space>
+nnoremap <Leader>jj :<C-u>Mstranslator<CR>
+nnoremap <Leader>jk :<C-u>Mstranslator<Space>
 let g:mstranslator#Config = {
 \    'timers': 1
 \}
