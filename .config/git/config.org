@@ -11,6 +11,7 @@
 [core]
     editor            = vim
     precomposeunicode = true
+    excludesfile      =  ~/.config/git/gitignore_global
 [color]
     ui = auto
 [diff]
