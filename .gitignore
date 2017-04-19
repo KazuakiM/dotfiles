@@ -8,6 +8,7 @@ C:/
 .cache/vagrant/
 .config/configstore/
 .config/composer/
+.config/doxygen/
 .config/filezilla/
 .config/git/
 .config/gtk-2.0/
