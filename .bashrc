@@ -245,6 +245,10 @@ case "${OSTYPE}" in
         if [ -d $LOCAL_PREFIX/rbenv/bin ]; then
             localPath="$LOCAL_PREFIX/rbenv/bin:$localPath"
         fi
+        #git diff-highlight
+        if [ -d /usr/share/doc/git/contrib/diff-highlight ]; then
+            localPath="/usr/share/doc/git/contrib/diff-highlight:$localPath"
+        fi
         export PATH=$localPath$PATH
         if type rbenv >/dev/null 2>&1; then
             export RBENV_ROOT=$LOCAL_PREFIX/rbenv
