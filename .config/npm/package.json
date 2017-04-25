@@ -15,8 +15,9 @@
   "devDependencies": {
     "babel": "^5.6.23",
     "doctoc": "^1.2.0",
-    "eslint": "^3.13.1",
-    "eslint-config-eslint": "^3.0.0",
+    "eslint": "^3.19.0",
+    "eslint-config-eslint": "^3.19.0",
+    "eslint-config-fixable-all": "^3.19.0",
     "npm": "^4.1.2",
     "npm-check-updates": "^2.8.9"
   }
