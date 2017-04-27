@@ -594,6 +594,16 @@ CREATE TEMPORARY TABLE tmp_<Table1> (
     SELECT <ColumnData1>, <ColumnData2>, ...;
 ```
 
+AUTO created_at, updated_at
+```sql
+CREATE TABLE <Table1> (
+    <Column1> INT UNSIGNED AUTO_INCREMENT NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (<Column1>)
+);
+```
+
 INDEX
 ```sql
 CREATE INDEX <Index1> ON <Table1>(<Column1>);
