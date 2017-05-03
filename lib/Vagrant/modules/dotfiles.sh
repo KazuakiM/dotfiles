@@ -22,8 +22,6 @@ ln -sf $home/work/dotfiles/.cache               $home/.cache              && \
 ln -sf $home/work/dotfiles/.config              $home/.config             && \
 ln -sf $home/work/dotfiles/.ctags               $home/.ctags              && \
 ln -sf $home/work/dotfiles/.dir_colors          $home/.dir_colors         && \
-ln -sf $home/work/dotfiles/.eslintrc.js         $home/.eslintrc.js        && \
-ln -sf $home/work/dotfiles/.eslintrc.limit.js   $home/.eslintrc.limit.js  && \
 ln -sf $home/work/dotfiles/.inputrc             $home/.inputrc            && \
 ln -sf $home/work/dotfiles/.vim                 $home/.vim                && \
 cp -f  $home/work/dotfiles/.vim/vimrc.local.org $home/.vim/vimrc.local    && \

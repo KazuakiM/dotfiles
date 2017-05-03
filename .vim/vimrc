@@ -103,6 +103,17 @@ function! s:CheckString() abort "{{{
     let w:m2 = matchadd('KazuakiMTodo',        'FIXME\|MEMO\|NOTE\|TODO\|XXX')
 endfunction "}}}
 
+function! s:FileTypeSyntaxOn() abort "{{{
+    filetype plugin indent on
+    syntax enable
+endfunction "}}}
+
+function! s:FileTypeSyntaxOff() abort "{{{
+    filetype off
+    filetype plugin indent off
+    syntax off
+endfunction "}}}
+
 function! s:BufEnter() abort "{{{
     " Auto close VimDiff or primary NERDTree
     if winnr('$') is# 1 && (&l:diff || (exists('b:NERDTree') && b:NERDTree.isTabTree()) || &filetype is# 'quickrun')
@@ -137,6 +148,13 @@ function! s:BufEnter() abort "{{{
         highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Grey   guibg=Grey
     else
         highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow guibg=Yellow
+    endif
+
+    " Change Big file or Normal file.
+    if 262144 <= getfsize(expand('%:p'))
+        call s:FileTypeSyntaxOff()
+    else
+        call s:FileTypeSyntaxOn()
     endif
 endfunction "}}}
 
@@ -557,9 +575,14 @@ nnoremap <Leader>runt :<C-u>call<Space>kazuakim#Test()<CR>
 nnoremap <Leader>runl :<C-u>call<Space>kazuakim#Lint()<CR>
 nnoremap <Leader>phpi :<C-u>call<Space>kazuakim#PhpInfo()<CR>
 " Set g:quickrun_config at .vimrc.local .
+"
+" ESLINT limited edition.
+"
+" @url https://github.com/eslint/eslint
+" @url http://eslint.org/docs/rules/
 let s:quickrun_config_javascript = {
 \    'command':     'eslint',
-\    'cmdopt':      '--cache --cache-location ' . s:envHome . '/.cache/eslint/eslintcache --format compact --max-warnings 1 --no-color --no-ignore --quiet',
+\    'cmdopt':      '--cache --cache-file ' . s:envHome . '/.cache/eslint/eslintcache --format compact --max-warnings 1 --no-color --no-ignore --quiet',
 \    'errorformat': '%E%f: line %l\, col %c\, Error - %m,%W%f: line %l\, col %c\, Warning - %m,%-G%.%#',
 \    'exec':        '%c %o %s:p'
 \}
@@ -575,7 +598,7 @@ let g:quickrun_config = {
 \    },
 \    'javascript': {
 \        'command':     s:quickrun_config_javascript['command'],
-\        'cmdopt':      s:quickrun_config_javascript['cmdopt'] . ' --config ' . s:envHome . '/.eslintrc.js',
+\        'cmdopt':      s:quickrun_config_javascript['cmdopt'] . ' --config ' . s:envHome . '/.config/eslint/eslintrc',
 \        'errorformat': s:quickrun_config_javascript['errorformat'],
 \        'exec':        s:quickrun_config_javascript['exec']
 \    },
@@ -620,7 +643,7 @@ let g:quickrun_config = {
 \    },
 \    'watchdogs_checker/javascript': {
 \        'command':     s:quickrun_config_javascript['command'],
-\        'cmdopt':      s:quickrun_config_javascript['cmdopt'] . ' --config ' . s:envHome . '/.eslintrc.limit.js',
+\        'cmdopt':      s:quickrun_config_javascript['cmdopt'] . ' --config ' . s:envHome . '/.config/eslint/eslintrc.limit',
 \        'errorformat': s:quickrun_config_javascript['errorformat'],
 \        'exec':        s:quickrun_config_javascript['exec']
 \    },

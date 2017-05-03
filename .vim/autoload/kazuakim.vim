@@ -115,7 +115,7 @@ function! kazuakim#Lint() abort "{{{
         \    'runner':                 'system'
         \}
     elseif &filetype is# 'javascript'
-        let g:quickrun_config['javascript']['cmdopt'] = l:quickrun_config_backup['cmdopt'] .' --config '. $HOME .'/.eslintrc.js --fix'
+        let g:quickrun_config['javascript']['cmdopt'] = l:quickrun_config_backup['cmdopt'] . ' --config ' . $HOME . '/.config/eslint/eslintrc --fix'
         let g:quickrun_config['javascript']['runner'] = 'system'
     endif
 
