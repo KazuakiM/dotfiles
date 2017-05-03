@@ -77,7 +77,7 @@ endfunction "}}}
 if has('vim_starting')
     if has('win32') || has ('win64')
         set runtimepath^=$HOME\.vim runtimepath+=$HOME\.vim\after
-        if s:VimStart('C:\temp\backup\', 'C:\temp\undo\')
+        if s:VimStart(s:envHome . '\.vim\backup\', s:envHome . '\.vim\undo\')
             finish
         endif
         let s:osType = 'win'
@@ -86,12 +86,12 @@ if has('vim_starting')
         let g:vimproc#download_windows_dll = 1
         "}}}
     elseif has('macunix')
-        if s:VimStart('/tmp/backup/', '/tmp/undo/')
+        if s:VimStart(s:envHome . '/.vim/backup/', s:envHome . '/.vim/undo/')
             finish
         endif
         let s:osType = 'macunix'
     else
-        if s:VimStart('/tmp/backup/', '/tmp/undo/')
+        if s:VimStart(s:envHome . '/.vim/backup/', s:envHome . '/.vim/undo/')
             finish
         endif
         let s:osType = 'unix'

@@ -1,10 +1,12 @@
 # Regularly update & git NG files. {{{
+/backup/*
 /dein.vim/*
 /neocomplete.vim/*
 /neosnippet.vim/*
 /nerdtree/*
 /swap/*
 /tags/*
+/undo/*
 /unite.vim/*
 /unite.vimtag/*
 /vim-php-cs-fixer/*
