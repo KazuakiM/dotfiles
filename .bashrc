@@ -97,6 +97,9 @@ if type screen >/dev/null 2>&1; then
     export SCREENRC="$HOME/.config/screen/screenrc"
 fi
 #}}}
+#Subversion {{{
+export SUBVERSION_HOME="$HOME/.config/subversion"
+#}}}
 #MySQL {{{
 export MYSQL_HISTFILE="$HOME/.log/mysql/mysql_history"
 #}}}
