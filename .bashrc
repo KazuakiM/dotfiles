@@ -133,7 +133,6 @@ case "${OSTYPE}" in
         alias ls='ls -AGh'
         alias sl='ls -AGh'
         alias lingr="sh $HOME/work/dotfiles/src/lingrStarter.sh"
-        alias vi='gvim'
         alias HTTPD='sudo apachectl'
         alias MYSQL='mysql.server'
         #}}}
@@ -163,6 +162,9 @@ case "${OSTYPE}" in
         export VAGRANT_HOME="$HOME/.cache/vagrant/vagrant.d"
         export VIM=$HOME
 
+        if [ -d $BREW_PREFIX/opt/macvim-kaoriya/bin ]; then
+            alias vi=$BREW_PREFIX/opt/macvim-kaoriya/bin/gvim
+        fi
         if type rbenv >/dev/null 2>&1; then
             export RBENV_ROOT=$BREW_PREFIX/bin
             eval "$(rbenv init -)";
