@@ -1,5 +1,7 @@
 .bash_history
 .bashrc.win
+.DS_Store
+.sudo_as_admin_successful
 C:/
 .cache/eslint/
 .cache/fontconfig/
@@ -19,9 +21,6 @@ C:/
 .config/subversion/
 .config/travisci/
 .config/wireshark/
-.DS_Store
-.gitconfig
-.gitconfig.local
 .lib/perl/
 .log/bash/
 .log/filezilla/
@@ -38,5 +37,7 @@ lib/Vagrant/.vagrant
 lib/Vagrant/ssh.config
 
 # temp
-.vimrc
+.gitconfig
+.gitconfig.local
 .gvimrc
+.vimrc
