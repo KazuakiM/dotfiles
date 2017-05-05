@@ -12,11 +12,13 @@ C:/
 .config/filezilla/
 .config/git/
 .config/gtk-2.0/
+.config/java/
 .config/npm/bin/
 .config/npm/lib/node_modules/
 .config/npm/share/
 .config/subversion/
 .config/travisci/
+.config/wireshark/
 .DS_Store
 .gitconfig
 .gitconfig.local

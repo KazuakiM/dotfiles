@@ -103,6 +103,9 @@ export SUBVERSION_HOME="$HOME/.config/subversion"
 #MySQL {{{
 export MYSQL_HISTFILE="$HOME/.log/mysql/mysql_history"
 #}}}
+#Java {{{
+export JAVA_HOME="$HOME/.config/java"
+#}}}
 #PHP {{{
 export COMPOSER_HOME="$HOME/.config/composer"
 if [ -d $HOME/.config/composer/vendor/bin ]; then

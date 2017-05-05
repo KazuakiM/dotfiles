@@ -21,6 +21,7 @@ App
 * [Growl](https://itunes.apple.com/jp/app/growl/id467939042?mt=12)
 * [TweetDeck](https://itunes.apple.com/jp/app/tweetdeck-by-twitter/id485812721?mt=12)
 * [Xcode](https://developer.apple.com/jp/xcode/downloads/)
+* [Wireshark](https://www.wireshark.org/download.html)
 
 homebrew
 ```bash
@@ -46,14 +47,6 @@ $ git status
 
 Kindle Previewer
 * [Kindle Previewer](http://www.amazon.com/gp/feature.html?docId=1000765261)
-* [Java for OS X 2014-001](https://support.apple.com/kb/DL1572?locale=ja_JP)
-```bash
-$ /usr/libexec/java_home -v 1.6
-$ vim /Applications/Kindle\ Previewer.app/Contents/MacOS/Launcher
-
-   export DYLD_LIBRARY_PATH=.
-   export JAVA_HOME=/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
-```
 
 Auto start
 * /Applications/Growl.app
