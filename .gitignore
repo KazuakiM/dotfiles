@@ -8,6 +8,8 @@ C:/
 .cache/gem/
 .cache/npm/
 .cache/vagrant/
+.config/atom/home/
+.config/atom/resource/
 .config/configstore/
 .config/composer/
 .config/doxygen/

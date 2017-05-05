@@ -100,6 +100,10 @@ fi
 #Subversion {{{
 export SUBVERSION_HOME="$HOME/.config/subversion"
 #}}}
+#Atom {{{
+export ATOM_DEV_RESOURCE_PATH="$HOME/.config/atom/resource"
+export ATOM_HOME="$HOME/.config/atom/home"
+#}}}
 #MySQL {{{
 export MYSQL_HISTFILE="$HOME/.log/mysql/mysql_history"
 #}}}
