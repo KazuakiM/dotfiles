@@ -84,36 +84,36 @@ export PS1="\[\e[1;36m\]\u \$ \[\e[1;0m\]"
 #tmux or screen {{{
 if type tmux >/dev/null 2>&1; then
     alias tm="sh $HOME/work/dotfiles/src/tmuxStarter.sh"
-    alias tml="tmux -f $HOME/.config/tmux/tmux.conf list-sessions"
-    alias tma="tmux -f $HOME/.config/tmux/tmux.conf attach -d    -t \"\$@\""
-    alias tmd="tmux -f $HOME/.config/tmux/tmux.conf detach -s       \"\$@\""
-    alias tmk="tmux -f $HOME/.config/tmux/tmux.conf kill-session -t \"\$@\""
+    alias tml="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf list-sessions"
+    alias tma="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf attach -d    -t \"\$@\""
+    alias tmd="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf detach -s       \"\$@\""
+    alias tmk="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf kill-session -t \"\$@\""
 fi
 if type screen >/dev/null 2>&1; then
     alias sc='screen'
     alias scl='screen -ls'
     alias sca='screen -r "$@"'
     alias scd='screen -d "$@"'
-    export SCREENRC="$HOME/.config/screen/screenrc"
+    export SCREENRC="$XDG_CONFIG_HOME/screen/screenrc"
 fi
 #}}}
 #Subversion {{{
-export SUBVERSION_HOME="$HOME/.config/subversion"
+export SUBVERSION_HOME="$XDG_CONFIG_HOME/subversion"
 #}}}
 #Atom {{{
-export ATOM_DEV_RESOURCE_PATH="$HOME/.config/atom/resource"
-export ATOM_HOME="$HOME/.config/atom/home"
+export ATOM_DEV_RESOURCE_PATH="$XDG_CONFIG_HOME/atom/resource"
+export ATOM_HOME="$XDG_CONFIG_HOME/atom/home"
 #}}}
 #MySQL {{{
 export MYSQL_HISTFILE="$HOME/.log/mysql/mysql_history"
 #}}}
 #Java {{{
-export JAVA_HOME="$HOME/.config/java"
+export JAVA_HOME="$XDG_CONFIG_HOME/java"
 #}}}
 #PHP {{{
-export COMPOSER_HOME="$HOME/.config/composer"
-if [ -d $HOME/.config/composer/vendor/bin ]; then
-    localPath="$HOME/.config/composer/vendor/bin:$localPath"
+export COMPOSER_HOME="$XDG_CONFIG_HOME/composer"
+if [ -d $XDG_CONFIG_HOME/composer/vendor/bin ]; then
+    localPath="$XDG_CONFIG_HOME/composer/vendor/bin:$localPath"
 fi
 if [ -f $LOCAL_PREFIX/bin/composer.phar ]; then
     alias composer="php -d memory_limit=1G $LOCAL_PREFIX/bin/composer.phar"
@@ -122,13 +122,18 @@ else
 fi
 #}}}
 #node.js {{{
-export NPM_CONFIG_USERCONFIG="$HOME/.config/npm/npmrc"
-if [ -d $HOME/.config/npm/bin ]; then
-    localPath="$HOME/.config/npm/bin:$localPath"
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+if [ -d $XDG_CONFIG_HOME/npm/bin ]; then
+    localPath="$XDG_CONFIG_HOME/npm/bin:$localPath"
 fi
 #}}}
 #Ruby {{{
 export GEM_HOME="$HOME/.cache/gem"
+#}}}
+#Go {{{
+#export GOROOT
+#export PATH="$GOROOT/bin:$PATH"
+export GOPATH='/srv/go'
 #}}}
 #OS Type {{{
 case "${OSTYPE}" in
@@ -165,7 +170,7 @@ case "${OSTYPE}" in
         export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
         export MYSQL_PS1="\d @\h> "
         #export MYSQL_PS1="\d @\h[\u] \n> "
-        export TRAVIS_CONFIG_PATH="$HOME/.config/travisci"
+        export TRAVIS_CONFIG_PATH="$XDG_CONFIG_HOME/travisci"
         export VAGRANT_HOME="$HOME/.cache/vagrant/vagrant.d"
         export VIM=$HOME
 
@@ -176,6 +181,7 @@ case "${OSTYPE}" in
             export RBENV_ROOT=$BREW_PREFIX/bin
             eval "$(rbenv init -)";
         fi
+
         #TODO: error
         #brew --prefix bash-completion2
         #if [ -d $BREW_PREFIX/opt/bash-completion2 ]; then
@@ -211,6 +217,11 @@ case "${OSTYPE}" in
         #git diff-highlight
         if [ -d $BREW_PREFIX/share/git-core/contrib/diff-highlight ]; then
             localPath="$BREW_PREFIX/share/git-core/contrib/diff-highlight:$localPath"
+        fi
+        #brew --prefix go
+        if [ -d $BREW_PREFIX/opt/go ]; then
+            export GOROOT="$BREW_PREFIX/opt/go/libexec"
+            localPath="$GOROOT/bin:$localPath"
         fi
         ##heroku
         #if [ -d $BREW_PREFIX/heroku/bin ]; then
