@@ -420,7 +420,7 @@ if dein#load_state(s:deinDir)
     call dein#add('junegunn/vim-easy-align')
     call dein#add('kannokanno/previm')
     call dein#add('KazuakiM/neosnippet-snippets')
-    call dein#add('KazuakiM/vim-ms-translator')
+    "call dein#add('KazuakiM/vim-ms-translator')
     call dein#add('KazuakiM/vim-qfstatusline')
     call dein#add('KazuakiM/vim-sqlfix')
     call dein#add('KazuakiM/unite-help')
@@ -493,11 +493,11 @@ let g:Qfstatusline#UpdateCmd = function('KazuakiMStatuslineSyntax')
 "}}}
 
 " vim-ms-translator {{{
-nnoremap <Leader>jj :<C-u>Mstranslator<CR>
-nnoremap <Leader>jk :<C-u>Mstranslator<Space>
-let g:mstranslator#Config = {
-\    'timers': 1
-\}
+"nnoremap <Leader>jj :<C-u>Mstranslator<CR>
+"nnoremap <Leader>jk :<C-u>Mstranslator<Space>
+"let g:mstranslator#Config = {
+"\    'timers': 1
+"\}
 "}}}
 
 " yankround.vim {{{

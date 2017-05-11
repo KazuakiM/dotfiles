@@ -100,6 +100,9 @@ fi
 #Subversion {{{
 export SUBVERSION_HOME="$XDG_CONFIG_HOME/subversion"
 #}}}
+#Mercurial {{{
+export HGRCPATH="$XDG_CONFIG_HOME/hg/hgrc"
+#}}}
 #Atom {{{
 export ATOM_DEV_RESOURCE_PATH="$XDG_CONFIG_HOME/atom/resource"
 export ATOM_HOME="$XDG_CONFIG_HOME/atom/home"
