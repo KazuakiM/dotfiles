@@ -5,6 +5,7 @@
     dff = difftool
     lg  = log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
     llg = !git log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' origin/master..`git rev-parse --abbrev-ref HEAD`
+    rbi = !git rebase -i $(git merge-base master HEAD)
     st  = status
 [branch]
     autosetuprebase = always
