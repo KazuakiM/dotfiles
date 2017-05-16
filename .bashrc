@@ -84,10 +84,10 @@ export PS1="\[\e[1;36m\]\u \$ \[\e[1;0m\]"
 #tmux or screen {{{
 if type tmux >/dev/null 2>&1; then
     alias tm="sh $HOME/work/dotfiles/src/tmuxStarter.sh"
-    alias tml="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf list-sessions"
-    alias tma="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf attach -d    -t \"\$@\""
-    alias tmd="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf detach -s       \"\$@\""
-    alias tmk="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf kill-session -t \"\$@\""
+    alias tml="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf list-sessions"
+    alias tma="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf attach -d    -t \"\$@\""
+    alias tmd="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf detach -s       \"\$@\""
+    alias tmk="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf kill-session -t \"\$@\""
 fi
 if type screen >/dev/null 2>&1; then
     alias sc='screen'
