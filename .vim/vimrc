@@ -175,7 +175,7 @@ function! s:BufReadPost() abort "{{{
 endfunction "}}}
 
 function! s:CursorHold() abort "{{{
-    if v:servername is# 'VIM1' && $TMUX !=# ''
+    if v:servername is# '' && $TMUX !=# ''
         redraw!
     endif
 endfunction "}}}
