@@ -1,186 +1,143 @@
-tap 'caskroom/cask'
-tap 'caskroom/fonts'
-tap 'caskroom/versions'
-tap 'homebrew/apache'
-tap 'homebrew/brewdler'
-tap 'homebrew/bundle'
-tap 'homebrew/completions'
-tap 'homebrew/core'
-tap 'homebrew/dupes'
-tap 'homebrew/php'
-tap 'homebrew/versions'
-tap 'kazuakim/macvim'
-tap 'tldr-pages/tldr'
-tap 'universal-ctags/universal-ctags'
-cask 'xquartz'
-brew 'android-sdk'
-brew 'apr'
-brew 'cmake'
-brew 'openssl'
-brew 'mysql'
-brew 'icu4c'
-brew 'readline'
-brew 'sqlite'
-brew 'unixodbc'
-brew 'apr-util'
-brew 'gettext'
-brew 'libffi'
-brew 'pcre'
-brew 'pkg-config'
-brew 'glib'
-brew 'libpng'
-brew 'freetype'
-brew 'fontconfig'
-brew 'pixman'
-brew 'cairo'
-brew 'git'
-brew 'gobject-introspection'
-brew 'atk'
-brew 'autoconf'
-brew 'automake'
-brew 'libatomic_ops'
-brew 'bdw-gc'
-brew 'boost'
-brew 'brew-gem'
-brew 'c-ares'
-brew 'colordiff'
-brew 'cscope'
-brew 'libidn'
-brew 'libmetalink'
-brew 'libressl'
-brew 'libssh2', args: ['with-libressl']
-brew 'jansson'
-brew 'jemalloc'
-brew 'libev'
-brew 'libevent'
-brew 'gdbm'
-brew 'xz'
-brew 'python3'
-brew 'libtool'
-brew 'spdylay'
-brew 'nghttp2'
-brew 'rtmpdump'
-brew 'curl'
-brew 'libsodium'
-brew 'libpgm'
-brew 'zeromq', args: ['with-libpgm']
-brew 'czmq'
-brew 'dbus'
-brew 'flex'
-brew 'jpeg'
-brew 'libtiff'
-brew 'shared-mime-info'
-brew 'gdk-pixbuf'
-brew 'geoipupdate'
-brew 'geoip', args: ['with-geoipupdate']
-brew 'giflib'
-brew 'gmp'
-brew 'gnu-sed'
-brew 'gnu-tar'
-brew 'libunistring'
-brew 'guile'
-brew 'libtasn1'
-brew 'nettle'
-brew 'gnutls', args: ['with-guile']
-brew 'go'
-brew 'hicolor-icon-theme'
-brew 'jasper'
-brew 'harfbuzz'
-brew 'pango'
-brew 'gtk+', args: ['with-jasper']
-brew 'htop-osx'
-brew 'perl'
-brew 'imagemagick'
-brew 'imap-uw'
-brew 'imlib2'
-brew 'libcaca', args: ['with-imlib2']
-brew 'libgpg-error'
-brew 'libgcrypt'
-brew 'python'
-brew 'libxml2', args: ['with-python']
-brew 'libyaml'
-brew 'libzip'
-brew 'lua'
-brew 'luajit'
-brew 'lynx'
-brew 'mhash'
-brew 'mcrypt'
-brew 'mercurial'
-brew 'yasm'
-brew 'mplayer', args: ['with-libcaca']
-brew 'nkf'
-brew 'node', args: ['with-debug', 'with-full-icu']
-brew 'ossp-uuid'
-brew 'p11-kit'
-brew 'pstree'
-brew 'pv'
-brew 'q'
-brew 'qt', args: ['with-d-bus', 'with-mysql', 'with-qt3support']
-brew 'qt5'
-brew 'ruby-build'
-brew 'rbenv'
-brew 're2c'
-brew 'reattach-to-user-namespace'
-brew 'ruby'
-brew 'scons'
-brew 'subversion'
-brew 'swig'
-brew 'the_silver_searcher'
-brew 'utf8proc'
-brew 'tmux'
-brew 'tree'
-brew 'w3m'
-brew 'wget'
-brew 'wireshark', args: ['with-gtk+', 'with-headers', 'with-lua', 'without-geoip']
-brew 'homebrew/dupes/zlib'
-brew 'homebrew/apache/httpd24'
-brew 'homebrew/dupes/grep', args: ['with-default-names']
-brew 'homebrew/php/composer'
-brew 'homebrew/php/php-cs-fixer'
-brew 'homebrew/php/php71', args: ['HEAD', 'with-homebrew-curl', 'with-homebrew-libressl', 'with-homebrew-libxml2', 'with-homebrew-libxslt', 'with-imap', 'with-pear', 'with-thread-safety']
-brew 'homebrew/php/php71-ssh2', args: ['HEAD']
-brew 'homebrew/php/php71-xdebug', args: ['HEAD']
-brew 'homebrew/php/phpunit'
-brew 'homebrew/php/phpunit-skeleton-generator'
-brew 'homebrew/versions/bash-completion2'
-brew 'homebrew/versions/bison27'
-brew 'kazuakim/macvim/cmigemo-mk', args: ['HEAD']
-brew 'universal-ctags/universal-ctags/universal-ctags', args: ['HEAD']
-brew 'kazuakim/macvim/macvim-kaoriya', args: ['HEAD']
-brew 'tldr-pages/tldr/tldr'
-cask 'alfred'
-cask 'android-file-transfer'
-cask 'appcleaner'
-cask 'bathyscaphe'
-cask 'bettertouchtool'
-cask 'cheatsheet'
-cask 'chicken'
-cask 'cooviewer'
-cask 'dwihn0r-keepassx'
-cask 'filezilla'
-cask 'firefox-ja'
-cask 'flash-player'
-cask 'font-ricty-diminished'
-cask 'gimp'
-cask 'google-chrome'
-cask 'google-drive'
-cask 'google-japanese-ime'
-cask 'iterm2'
-cask 'karabiner'
-cask 'keycast'
-cask 'kindle'
-cask 'libreoffice'
-cask 'licecap'
-cask 'limechat'
-cask 'mysqlworkbench'
-cask 'night-owl'
-cask 'silverlight'
-cask 'skitch'
-cask 'slack'
-cask 'sony-ericsson-bridge'
-cask 'the-unarchiver'
-cask 'thunderbird-ja'
-cask 'tunnelblick'
-cask 'vagrant'
-cask 'vagrant-manager'
-cask 'virtualbox'
+tap "caskroom/cask"
+tap "caskroom/fonts"
+tap "caskroom/versions"
+tap "hhvm/hhvm"
+tap "homebrew/apache"
+tap "homebrew/bundle"
+tap "homebrew/completions"
+tap "homebrew/core"
+tap "homebrew/dupes"
+tap "homebrew/php"
+tap "homebrew/services"
+tap "homebrew/versions"
+tap "kazuakim/macvim"
+tap "kazuakim/universal-ctags"
+tap "tldr-pages/tldr"
+brew "apr"
+brew "apr-util"
+brew "docbook"
+brew "asciidoc"
+brew "fontconfig"
+brew "gettext"
+brew "libffi"
+brew "glib"
+brew "pixman"
+brew "cairo"
+brew "perl"
+brew "git"
+brew "gdbm"
+brew "sqlite"
+brew "python"
+brew "atk"
+brew "autoconf"
+brew "automake"
+brew "bash-completion@2"
+brew "bdw-gc"
+brew "bison@2.7"
+brew "boost"
+brew "brew-gem"
+brew "c-ares"
+brew "cmake"
+brew "colordiff"
+brew "cscope"
+brew "curl"
+brew "zeromq", args: ["with-libpgm"]
+brew "czmq"
+brew "dbus"
+brew "docbook-xsl"
+brew "flex"
+brew "gmp"
+brew "jpeg"
+brew "shared-mime-info"
+brew "gdk-pixbuf"
+brew "geoip", args: ["with-geoipupdate"]
+brew "geoipupdate"
+brew "giflib"
+brew "gnu-getopt"
+brew "gnu-sed"
+brew "gnu-tar"
+brew "libtasn1"
+brew "libtool"
+brew "libunistring"
+brew "nettle"
+brew "gnutls", args: ["with-guile"]
+brew "go"
+brew "graphviz"
+brew "grep", args: ["with-default-names"]
+brew "icu4c"
+brew "harfbuzz"
+brew "hicolor-icon-theme"
+brew "pango"
+brew "gtk+", args: ["with-jasper"]
+brew "guile"
+brew "htop-osx"
+brew "xz"
+brew "imagemagick"
+brew "imap-uw"
+brew "imlib2"
+brew "jasper"
+brew "jemalloc"
+brew "oniguruma"
+brew "jq"
+brew "libatomic_ops"
+brew "libcaca", args: ["with-imlib2"]
+brew "libev"
+brew "libevent"
+brew "libgpg-error"
+brew "libgcrypt"
+brew "libidn"
+brew "libmetalink"
+brew "libpgm"
+brew "libressl"
+brew "libsmi"
+brew "libsodium"
+brew "libssh2", args: ["with-libressl"]
+brew "libxml2"
+brew "libyaml"
+brew "libzip"
+brew "llvm", args: ["HEAD"]
+brew "lua"
+brew "luajit"
+brew "lynx"
+brew "mhash"
+brew "mcrypt"
+brew "mercurial"
+brew "mplayer", args: ["with-libcaca"]
+brew "mysql"
+brew "python3"
+brew "spdylay"
+brew "nghttp2"
+brew "nkf"
+brew "node"
+brew "ossp-uuid"
+brew "pstree"
+brew "pv"
+brew "q"
+brew "qt"
+brew "ruby-build"
+brew "rbenv"
+brew "re2c"
+brew "reattach-to-user-namespace"
+brew "rtmpdump"
+brew "ruby"
+brew "scons"
+brew "subversion"
+brew "swig"
+brew "the_silver_searcher"
+brew "tmux"
+brew "tree"
+brew "unixodbc"
+brew "utf8proc"
+brew "w3m"
+brew "wget"
+brew "xmlto"
+brew "yasm"
+brew "zlib"
+brew "hhvm/hhvm/hhvm"
+brew "homebrew/apache/httpd24"
+brew "homebrew/php/php71", args: ["HEAD"]
+brew "homebrew/php/php71-ssh2", args: ["HEAD"]
+brew "homebrew/php/php71-xdebug", args: ["HEAD"]
+brew "kazuakim/macvim/macvim-kaoriya", args: ["HEAD"]
+brew "kazuakim/universal-ctags/universal-ctags", args: ["HEAD"]
+brew "tldr-pages/tldr/tldr"
