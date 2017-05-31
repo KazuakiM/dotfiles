@@ -6,7 +6,7 @@
 
 "tags {{{
 function! s:setTags(name, other) abort "{{{
-    if match(expand('%:p:h'), 'tests') > 0
+    if match(expand('%:p:h'), 'test') > 0
         let &l:tags = $HOME . '/.vim/tags/' . a:name . 'Test.tags' . a:other
     else
         let &l:tags = $HOME . '/.vim/tags/' . a:name . '.tags' . a:other
