@@ -287,7 +287,7 @@ endfunction "}}}
 
 " Basic
 set autoindent autoread
-set backspace=indent,eol,start backup backupdir=$HOME/.vim/backup belloff=all
+set backspace=indent,eol,start backup backupdir=$HOME/.vim/backup belloff=all breakindentopt=shift:0
 set clipboard+=autoselect,unnamed cmdheight=1 concealcursor=i conceallevel=2 completeopt=longest,menu
 set diffopt=filler,context:5,iwhite,horizontal directory=$HOME/.vim/swap display=lastline
 set expandtab
@@ -299,7 +299,7 @@ set laststatus=2 nolazyredraw
 set matchpairs+=<:> matchtime=1 mouse=
 set nobomb noequalalways nofixendofline nogdefault noimcmdline noimdisable noruler notitle nowrap number
 set pumheight=8
-set scrolloff=999 shellslash shiftwidth=4 shortmess+=a shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile switchbuf=usetab
+set scrolloff=999 shellslash shiftwidth=4 shortmess+=a shortmess+=I showbreak=> showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile switchbuf=usetab
 set synmaxcol=300
 set tabline=%!KazuakiMTabLineUpdate() tabstop=4 titleold= ttyfast t_vb=
 set undodir=$HOME/.vim/undo undofile updatecount=30 updatetime=1000
@@ -979,6 +979,7 @@ autocmd MyAutoCmd FileType html,js,php,xml syntax sync minlines=2000
 nnoremap <F1> :<C-u>call<Space>kazuakim#DatabaseSwitch()<CR>
 set pastetoggle=<F2>
 nnoremap <F3> :<C-u>edit++enc=utf-8<CR>
+nnoremap <F4> :<C-u>call<Space>kazuakim#WrapSwitch()<CR>
 "}}}
 
 " Other setting files {{{
