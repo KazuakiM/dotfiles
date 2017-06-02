@@ -30,12 +30,44 @@
 "}}}
 
 " Variables {{{
-let s:envHome      = ! exists('s:envHome')      ? $HOME                                 : s:envHome
-let s:envUser      = ! exists('s:envUser')      ? $USER                                 : s:envUser
-let s:date         = ! exists('s:date')         ? strftime('%Y%m%d%H%M%S', localtime()) : s:date
-let s:lineUpdate   = ! exists('s:lineUpdate')   ? 0                                     : s:lineUpdate
-let s:swapFilePath = ! exists('s:swapFilePath') ? ''                                    : s:swapFilePath
-let s:deinDir      = ! exists('s:deinDir')      ? s:envHome . '/.vim/dein.vim'          : s:deinDir
+if has('win32') || has ('win64')
+    let s:osType = 'win'
+elseif has('macunix')
+    let s:osType = 'macunix'
+else
+    let s:osType = 'unix'
+endif
+
+function! s:GetTablineRight() abort "{{{
+    let s:tablineRight = '%#TabLine# ' . strftime('%y-%m-%d %H:%M', s:currentTime) . ' '
+    if s:osType ==# 'macunix'
+        let l:battery = system("pmset -g ps|egrep -o '[0-9]{1,3}%'|egrep -o '[0-9]{1,3}'|tr -d '\n'")
+        let l:charge  = system("pmset -g ps|egrep -o 'discharging'|tr -d '\n'")
+        if l:battery < 20
+            if l:charge ==# 'discharging'
+                let s:tablineRight = s:tablineRight . '%#KazuakiMError# ' . l:battery . '%% '
+            else
+                let s:tablineRight = s:tablineRight . '%#KazuakiMWarning# ' . l:battery . '%% '
+            endif
+        else
+            let s:tablineRight = s:tablineRight . '%#KazuakiMInfo# ' . l:battery . '%% '
+        endif
+    endif
+    return s:tablineRight
+endfunction "}}}
+
+let s:currentTime  = ! exists('s:currentTime')  ? localtime() : s:currentTime
+let s:envHome      = ! exists('s:envHome')      ? $HOME       : s:envHome
+let s:envUser      = ! exists('s:envUser')      ? $USER       : s:envUser
+let s:lineUpdate   = ! exists('s:lineUpdate')   ? 0           : s:lineUpdate
+let s:swapFilePath = ! exists('s:swapFilePath') ? ''          : s:swapFilePath
+let s:deinDir      = ! exists('s:deinDir')      ? s:envHome . '/.vim/dein.vim' : s:deinDir
+
+if has('gui_running')
+    let s:tablineRight = ! exists('s:tablineRight') ? s:GetTablineRight() : s:tablineRight
+else
+    let s:tablineRight = ''
+endif
 "}}}
 
 " Common {{{
@@ -67,34 +99,23 @@ function! s:VimStart(backupDir, undoDir) abort "{{{
         call kazuakim#Minimal()
         return 1
     endif
-    call s:AutoMkdir(a:backupDir.s:envUser.'_'.s:date)
-    call s:AutoMkdir(a:undoDir.  s:envUser.'_'.s:date)
-    let &backupdir = a:backupDir.s:envUser.'_'.s:date
-    let &undodir   = a:undoDir.  s:envUser.'_'.s:date
     return 0
 endfunction "}}}
 
 if has('vim_starting')
-    if has('win32') || has ('win64')
+    if s:osType ==# 'win'
         set runtimepath^=$HOME\.vim runtimepath+=$HOME\.vim\after
         if s:VimStart(s:envHome . '\.vim\backup\', s:envHome . '\.vim\undo\')
             finish
         endif
-        let s:osType = 'win'
         " vimproc.vim {{{
         let g:vimproc#dll_path             = s:deinDir . '/repos/github.com/Shougo/vimproc.vim/lib/vimproc_win64.dll'
         let g:vimproc#download_windows_dll = 1
         "}}}
-    elseif has('macunix')
-        if s:VimStart(s:envHome . '/.vim/backup/', s:envHome . '/.vim/undo/')
-            finish
-        endif
-        let s:osType = 'macunix'
     else
         if s:VimStart(s:envHome . '/.vim/backup/', s:envHome . '/.vim/undo/')
             finish
         endif
-        let s:osType = 'unix'
     endif
 endif
 
@@ -257,12 +278,16 @@ function! s:TabpageLabelUpdate(tabNumber) abort "{{{
 endfunction "}}}
 
 function! KazuakiMTabLineUpdate() abort "{{{
-    return join(map(range(1, tabpagenr('$')), 's:TabpageLabelUpdate(v:val)'), '|') . '%#TabLineFill#%T%=%#TabLineSel# ' . getcwd() . ' '
+    if has('gui_running') && 60 < abs(localtime() - s:currentTime)
+        let s:currentTime  = localtime()
+        let s:tablineRight = s:GetTablineRight()
+    endif
+    return join(map(range(1, tabpagenr('$')), 's:TabpageLabelUpdate(v:val)'), '|') . '%#TabLineFill#%T%=%#TabLineSel# ' . getcwd() . ' ' . s:tablineRight
 endfunction "}}}
 
 " Basic
 set autoindent autoread
-set backspace=indent,eol,start backup belloff=all
+set backspace=indent,eol,start backup backupdir=$HOME/.vim/backup belloff=all
 set clipboard+=autoselect,unnamed cmdheight=1 concealcursor=i conceallevel=2 completeopt=longest,menu
 set diffopt=filler,context:5,iwhite,horizontal directory=$HOME/.vim/swap display=lastline
 set expandtab
@@ -277,7 +302,7 @@ set pumheight=8
 set scrolloff=999 shellslash shiftwidth=4 shortmess+=a shortmess+=I showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile switchbuf=usetab
 set synmaxcol=300
 set tabline=%!KazuakiMTabLineUpdate() tabstop=4 titleold= ttyfast t_vb=
-set undofile updatecount=30 updatetime=1000
+set undodir=$HOME/.vim/undo undofile updatecount=30 updatetime=1000
 set viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo virtualedit+=block
 set wildmenu wildmode=longest:full,full wrapscan
 set grepprg=grep\ -rnIH\ --exclude-dir=.svn\ --exclude-dir=.git\ --exclude='*.log'\ --exclude='*min.js'\ --exclude='*min.css'

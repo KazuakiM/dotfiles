@@ -17,7 +17,7 @@ else
     echo "#[fg=colour234,bg=colour2,bold] $battery%"
 fi
 
-if [ "$charge" = 'discharging' -a "$battery" -lt 35 ]; then
+if [ "$charge" = 'discharging' -a "$battery" -lt 25 ]; then
     growlnotify --name Battery!
 elif [ "$charge" = '' -a "$battery" -gt 95 ]; then
     growlnotify --name Battery!
