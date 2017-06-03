@@ -215,11 +215,12 @@ INSERT INTO  <New DataBase>.<New Table1> SELECT * FROM <DataBase1>.<Table1>;
 
 --skip-add-drop-table:Do not write DROP TABLE statements.  
 --no-create-info:     Do not write CREATE TABLE statements.
+--master-data=2:      Using GTID
 
 Tables dump
 ```bash
 $ mysqldump -u<Account> -h<Host> -p <DataBase> \
- --default-character-set=utf8 --single-transaction --skip-lock-tables -c -e -q --result-file='/tmp/<dumpFile>.dump' --tables \
+ --default-character-set=utf8 --master-data=2 --single-transaction --skip-lock-tables -c -e -q --result-file='/tmp/<dumpFile>.dump' --tables \
  <Table1> <Table2>;
 $ vi /tmp/<dumpFile>.dump
   Check execute results.
