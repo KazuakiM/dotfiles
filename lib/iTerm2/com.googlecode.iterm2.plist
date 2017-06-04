@@ -1020,7 +1020,7 @@
 	<key>MaxVertically</key>
 	<false/>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/work/dotfiles/.log/iterm2</string>
+	<string>~/.log/iterm2</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -1390,7 +1390,7 @@
 				</dict>
 			</dict>
 			<key>Log Directory</key>
-	    <string>~/work/dotfiles/.log/iterm2</string>
+			<string>~/.log/iterm2</string>
 			<key>Minimum Contrast</key>
 			<real>0.0</real>
 			<key>Mouse Reporting</key>
@@ -1887,7 +1887,7 @@
 				</dict>
 			</dict>
 			<key>Log Directory</key>
-	    <string>~/work/dotfiles/.log/iterm2</string>
+			<string>~/.log/iterm2</string>
 			<key>Minimum Contrast</key>
 			<real>0.0</real>
 			<key>Mouse Reporting</key>
@@ -2113,7 +2113,7 @@
 	<key>PointerActions</key>
 	<dict/>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/mabuchikazuaki/work/dotfiles/lib/iTerm2</string>
+	<string>~/.lib/iTerm2</string>
 	<key>PromptOnClose</key>
 	<false/>
 	<key>PromptOnQuit</key>

@@ -266,7 +266,6 @@ $ cp -f  $HOME/.ssh/config.mac                    $HOME/.ssh/config
 $ ln -sf $HOME/work/dotfiles/.vim                 $HOME/.vim
 $ cp -f  $HOME/work/dotfiles/.vim/vimrc.local.org $HOME/.vim/vimrc.local
 $ ln -sf $HOME/work/dotfiles/.w3m                 $HOME/.w3m
-$ cd && ln -sf .log log
 $ ln -sf $HOME/work/dotfiles/lib/Vagrant          /srv/vagrant
 $ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 $ sh ./installer.sh $HOME/.vim/dein.vim/
