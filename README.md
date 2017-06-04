@@ -266,12 +266,12 @@ $ cp -f  $HOME/.ssh/config.mac                    $HOME/.ssh/config
 $ ln -sf $HOME/work/dotfiles/.vim                 $HOME/.vim
 $ cp -f  $HOME/work/dotfiles/.vim/vimrc.local.org $HOME/.vim/vimrc.local
 $ ln -sf $HOME/work/dotfiles/.w3m                 $HOME/.w3m
-$ ln -sf $HOME/work/dotfiles/package.json         $HOME/package.json
+$ cd && ln -sf .log log
 $ ln -sf $HOME/work/dotfiles/lib/Vagrant          /srv/vagrant
 $ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 $ sh ./installer.sh $HOME/.vim/dein.vim/
 $ rm installer.sh
-$ ssh-keygen -t rsa
+$ ssh-keygen -t rsa -b 4096 -C "xxxx@xxx"
 $ wget http://jp2.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp/php_manual_ja.tar.gz
 $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
 $ wget http://get.sensiolabs.org/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer

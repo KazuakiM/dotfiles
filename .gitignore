@@ -27,6 +27,7 @@ C:/
 .lib/perl/
 .log/bash/
 .log/filezilla/
+.log/iterm2/
 .log/less/
 .log/mysql/
 .log/tmux/
