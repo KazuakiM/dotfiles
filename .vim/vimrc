@@ -195,11 +195,11 @@ function! s:BufReadPost() abort "{{{
     " http://kannokanno.hatenablog.com/entry/2013/05/31/205858
 endfunction "}}}
 
-function! s:CursorHold() abort "{{{
-    if v:servername is# '' && $TMUX !=# ''
-        redraw!
-    endif
-endfunction "}}}
+"function! s:CursorHold() abort "{{{
+"   if v:servername is# '' && $TMUX !=# ''
+"       redraw!
+"   endif
+"endfunction "}}}
 
 function! s:InsertLeave() abort "{{{
     set nopaste
@@ -232,7 +232,7 @@ autocmd MyAutoCmd BufEnter             * call s:BufEnter()
 autocmd MyAutoCmd BufReadPost          * call s:BufReadPost()
 autocmd MyAutoCmd CmdwinEnter          * nmap <silent> <ESC><ESC> :quit<CR>
 autocmd MyAutoCmd CmdwinLeave          * nunmap <ESC><ESC>
-autocmd MyAutoCmd CursorHold           * call s:CursorHold()
+"autocmd MyAutoCmd CursorHold          * call s:CursorHold()
 autocmd MyAutoCmd FocusGained          * checktime
 autocmd MyAutoCmd SwapExists           * let s:swapFilePath = v:swapname
 autocmd MyAutoCmd InsertLeave          * call s:InsertLeave()
