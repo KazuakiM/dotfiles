@@ -12,7 +12,7 @@ $ pwd
 /Users/<Account>
 $ sudo visudo
 
-   <Account> ALL=(root) NOPASSWD: ALL
+   <Account> ALL=(root) NOPASSWD: /usr/local/bin/htop,/usr/bin/find
 ```
 
 ### Install packages
@@ -23,10 +23,9 @@ App
 * [Xcode](https://developer.apple.com/jp/xcode/downloads/)
 * [Wireshark](https://www.wireshark.org/download.html)
 
-homebrew
+[homebrew](https://brew.sh/index_ja.html)
 ```bash
 $ sudo chown -R $USER:staff /usr/local
-$ xcode-select --install
 $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 $ mkdir -p $HOME/work
 $ git clone https://github.com/KazuakiM/dotfiles.git $HOME/work/dotfiles
@@ -45,9 +44,6 @@ $ cd $HOME/work/dotfiles/
 $ git status
 ```
 
-Kindle Previewer
-* [Kindle Previewer](http://www.amazon.com/gp/feature.html?docId=1000765261)
-
 Auto start
 * /Applications/Growl.app
 * /Applications/Karabiner.app
@@ -59,6 +55,76 @@ Auto start
 * /Users/xxxxx/Applications/Google Drive.app
 * /Users/xxxxx/Applications/iTerm.app
 * /Users/xxxxx/Applications/KeePassX.app
+
+Dock
+> Disabled none using app.
+
+システム環境設定
+> | 大項目                         | 小項目                                                 |                                     |
+> |:-------------------------------|:-------------------------------------------------------|------------------------------------:|
+> | 一般                           |                                                        |                                     |
+> |                                | サイドバーのアイコンサイズ                             | 小                                  |
+> |                                | アプリケーションを終了するときにウィンドウを閉じる     | チェック外し                        |
+> | デスクトップとスクリーンセーバ |                                                        |                                     |
+> |                                | 開始までの時間                                         | 開始しない                          |
+> | Dock                           |                                                        |                                     |
+> |                                | サイズ                                                 | 適当に小さく                        |
+> |                                | 拡大                                                   | 適当に大きく                        |
+> |                                | Dockを自動的に隠す/表示                                | チェック                            |
+> | 省エネルギー                   |                                                        |                                     |
+> |                                | ディスプレイをオフにするまでの時間                     | しない                              |
+> | キーボード                     |                                                        |                                     |
+> |                                | キーのリピート                                         | 速い                                |
+> |                                | リピート入力認識までの時間                             | 速い                                |
+> |                                | メニューバーにキーボードビューアと絵文字ビューアを表示 | 速い                                |
+> | トラックパッド                 |                                                        |                                     |
+> |                                | ポイントとクリック > 調べる&データ検出                 | 無効                                |
+> |                                | ポイントとクリック > 副ボタンのクリック                | 2本指でクリックまたはタップ         |
+> |                                | ポイントとクリック > タップでクリック                  | 1本指でタップ                       |
+> |                                | ポイントとクリック > クリック & 軌跡の速さ             | 速い                                |
+> |                                | その他のジェスチャ > ページ間をスワイプ                | チェック外し                        |
+> |                                | その他のジェスチャ > アプリケーションExpose            | チェック                            |
+> |                                | その他のジェスチャ > デスクトップを表示                | チェック外し                        |
+> | iCloud                         |                                                        |                                     |
+> |                                | 写真 > オプション                                      | 全チェック外し                      |
+> |                                | 連絡先                                                 | チェック外し                        |
+> |                                | カレンダー                                             | チェック外し                        |
+> |                                | リマインダー                                           | チェック外し                        |
+> |                                | Safari                                                 | チェック外し                        |
+> |                                | メモ                                                   | チェック外し                        |
+> |                                | Macを探す                                              | チェック外し                        |
+> | App Store                      |                                                        |                                     |
+> |                                | 設定 & ロック                                          | 適切に設定してロック                |
+> | 機能拡張                       |                                                        |                                     |
+> |                                | 共有メニュー                                           | 全チェック外し                      |
+> |                                | 今日                                                   | iTunes                              |
+> |                                |                                                        | 天気                                |
+> |                                |                                                        | 計算機                              |
+> | 共有                           |                                                        |                                     |
+> |                                | コンピュータ名                                         | イカした名前                        |
+> | ユーザとグループ               |                                                        |                                     |
+> |                                | アイコン画像                                           | GitHubからDLして、ドラッグ&ドロップ |
+
+Finder
+> 環境設定
+> | 大項目                             | 小項目                                                   |                               |
+> |:-----------------------------------|:---------------------------------------------------------|------------------------------:|
+> | 一般                               |                                                          |                               |
+> |                                    | デスクトップに表示する項目                               | 全チェック外し                |
+> |                                    | 新規Finderウィンドウで次を表示                           | デスクトップ                  |
+> | タグ                               |                                                          |                               |
+> |                                    | サイドバーに表示するタグ                                 | 全チェック削除                |
+> | サイドバー                         |                                                          |                               |
+> |                                    | マイファイル                                             | チェック外し                  |
+> |                                    | AirDrop                                                  | チェック外し                  |
+> |                                    | ホーム                                                   | チェック                      |
+> |                                    | 共有                                                     | 全チェック外し                |
+> |                                    | PC名                                                     | チェック                      |
+> |                                    | 外部ディスク                                             | チェック外し                  |
+> |                                    | CD、DVD、およびiPad                                      | チェック外し                  |
+> |                                    | タグ                                                     | チェック外し                  |
+> | 詳細                               |                                                          |                               |
+> |                                    | すべてのファイル名拡張子を表示                           | チェック                      |
 
 [Alfred](http://www.alfredapp.com/)
 > Application設定
@@ -215,8 +281,6 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 > |                 |一般 > ホームページ                                                                |file:///file/to/path/bookmark.html      |
 > |ブックマーク     |ホームページの内容をブックマークに登録する([Alfred](http://www.alfredapp.com/)利用)|                                        |
 
-[Silverlight](http://www.microsoft.com/silverlight/)
-
 [Skitch](http://evernote.com/skitch/)
 > Application設定
 >
@@ -231,18 +295,7 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 
 [The Unarchiver](http://unarchiver.c3.cx/)
 
-[Thunderbird](http://www.mozilla.jp/thunderbird/)
-> |大項目                |小項目                                 |                                                                       |
-> |:---------------------|:--------------------------------------|:----------------------------------------------------------------------|
-> |Thunderbird > 環境設定|                                       |                                                                       |
-> |                      |表示 > 書式 > デフォルト フォント      |[RictyDiminished](https://github.com/yascentur/RictyDiminished)        |
-> |                      |表示 > 書式 > 詳細設定                 |[RictyDiminished](https://github.com/yascentur/RictyDiminished) & UTF-8|
-> |                      |編集 > 一般 > フォント                 |[RictyDiminished](https://github.com/yascentur/RictyDiminished)        |
-> |                      |編集 > 一般 > 送信テキスト形式         |プレーンテキストに変換して送信する                                     |
-
-[tunnelblick](https://code.google.com/p/tunnelblick/)
-
-[XtraFinder](http://www.trankynam.com/xtrafinder/)
+[tunnelblick](https://tunnelblick.net/)
 
 ### Set dotfiles
 
@@ -404,7 +457,6 @@ TODO:apt-cygのインストール状況を確認'apt-cyg show'
 > |                      |設定 > デザイン > ホームボタンを表示する           |check                                                                    |
 > |                      |設定 > デザイン > ホームボタンを表示する > 変更する|file:///file/to/path/bookmark.html                                       |
 > |拡張機能              |                                                   |                                                                         |
-> |                      |[Adblock Plus](https://chrome.google.com/webstore/detail/adblock-plus/cfhdojbkjhnklbpkdaibdccddilifddb)                     ||
 > |                      |[Awesome Screenshot](https://chrome.google.com/webstore/detail/awesome-screenshot-screen/alelhddbbhepgpmgidjdcjakblofbmce)  ||
 > |                      |[Text Link Plus](https://chrome.google.com/webstore/detail/text-link/ikfmghnmgeicocakijcebpkmbfljnogk)                      ||
 > |                      |[User-Agent Switcher](https://chrome.google.com/webstore/detail/user-agent-switcher/lkmofgnohbedopheiphabfhfjgkhfcgf)       ||
@@ -424,7 +476,6 @@ TODO:apt-cygのインストール状況を確認'apt-cyg show'
 > |                      |コンテンツ > フォントとカラー > デフォルトフォント|[RictyDiminished](https://github.com/yascentur/RictyDiminished)|
 > |                      |コンテンツ > 言語 > 言語設定           |Add Japanese[ja]                                               |
 > |add-on                |                                       |                                                               |
-> |                      |[Adblock Plus](https://addons.mozilla.org/ja/firefox/addon/adblock-plus/)                             ||
 > |                      |[Firebug](https://addons.mozilla.org/ja/firefox/addon/firebug/)                                       ||
 > |                      |[FireMobileSimulator](https://addons.mozilla.org/ja/firefox/addon/firemobilesimulator/)               ||
 > |                      |[Growl/GNTP](https://addons.mozilla.org/ja/firefox/addon/growlgntp/)                                  ||
