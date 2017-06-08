@@ -22,6 +22,7 @@ App
 * [TweetDeck](https://itunes.apple.com/jp/app/tweetdeck-by-twitter/id485812721?mt=12)
 * [Xcode](https://developer.apple.com/jp/xcode/downloads/)
 * [Wireshark](https://www.wireshark.org/download.html)
+* [BetterTourchTool](https://www.boastr.net/downloads/)
 
 [homebrew](https://brew.sh/index_ja.html)
 ```bash
