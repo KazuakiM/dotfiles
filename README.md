@@ -48,13 +48,17 @@ $ git status
 ```
 
 Auto start
-* /Applications/Growl.app
-* /Users/xxxxx/Applications/Alfred 3.app
-* /Users/xxxxx/Applications/BetterTouchTool.app
-* /Users/xxxxx/Applications/CheatSheet.app
-* /Users/xxxxx/Applications/Google Drive.app
-* /Users/xxxxx/Applications/iTerm.app
-* /Users/xxxxx/Applications/KeePassX.app
+* ~/Applications/Alfred 3.app
+* ~/Applications/BetterTouchTool.app
+* ~/Applications/CheatSheet.app
+* ~/Applications/Google Drive.app
+* ~/Applications/Growl.app
+* ~/Applications/iTerm.app
+* ~/Applications/KeePassX.app
+* ~/Applications/LINE.app
+
+License
+> * BetterTouchTool
 
 Dock
 > Disabled none using app.
@@ -136,14 +140,12 @@ Finder
 > |Features   |                                  |                        |
 > |           |Default Results > Essentials > Bookmarks - Safari |Check   |
 
-[AppCleaner](http://www.freemacsoft.net/appcleaner/)
-
 [BetterTouchTool](http://www.bettertouchtool.net/)
 > Application設定
 >
 > |大項目                                                 |小項目                            |   |
 > |:------------------------------------------------------|:---------------------------------|--:|
-> |Action Settings(Window Snapping etc.) > Window Snapping|                                  |   |
+> |Advanced > Advanced Settings > Window Snapping         |                                  |   |
 > |                                                       |Normal Snapping / Moving          |   |
 > |                                                       |Left width                        |24%|
 > |                                                       |Right width                       |76%|
@@ -168,6 +170,19 @@ Finder
 [Google drive](https://drive.google.com/)
 
 [Google 日本語IME](https://www.google.co.jp/ime/)
+システム環境設定
+> | 大項目    | 小項目    |                       |
+> |:----------|:----------|----------------------:|
+> | キーボード|           |                       |
+> |           | 入力ソース| 英数(Google) 追加     |
+> |           |           | ひらがな(Google) 追加 |
+> |           |           | 日本語 削除           |
+
+メニューバー
+> | 大項目    | 小項目                         |                   |
+> |:----------|:-------------------------------|------------------:|
+> | 辞書ツール|                                |                   |
+> |           | 管理 > 選択した辞書にインポート| Google Drive 参照 |
 
 TODO: [GrowlNotify](http://growl.info/downloads)
 
@@ -181,16 +196,6 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 > |Preferences > Keys > Key Mappings  |                                            |                              |
 > |                                   |⌘w                                          |Ignore                        |
 
-
-[Karabiner](https://pqrs.org/osx/karabiner/index.html.ja)
-> Application設定
->
-> |大項目                                       |小項目            |     |
-> |:--------------------------------------------|:-----------------|----:|
-> |Key Repeat > Basic Configurations > KeyRepeat|                  |     |
-> |                                             |Delay Until Repeat|200ms|
-> |                                             |Key Repeat        | 25ms|
-
 [KeyCast](https://github.com/cho45/KeyCast)
 > Application設定
 >
@@ -202,10 +207,15 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 > |                     |Font  |[RictyDiminished](https://github.com/yascentur/RictyDiminished) 15px|
 
 [KeePassX](http://www.keepassx.org/)
+> Preferences
+>
+> |大項目                |小項目 |                                                                    |
+> |:---------------------|:------|-------------------------------------------------------------------:|
+> |KeePassX > Preferences|       |                                                                    |
+> |                      |一般(1)|全チェック                                                          |
+> |                      |言語   |日本語(日本)                                                        |
 
 [Kindle](https://www.amazon.com/gp/digital/fiona/kcp-landing-page)
-
-[LibreOffice](https://www.libreoffice.org/)
 
 [LimeChat](http://limechat.net/mac/)
 > Application設定
@@ -231,42 +241,16 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 > |                      |Details > Encoding           |UTF-8                                                                |
 > |                      |Details > Fallback encoding  |Don't Fallback                                                       |
 
-[夜フクロウ(Night 0wl)](https://sites.google.com/site/yorufukurou/home-en)
-> Application設定
+[LINE](https://itunes.apple.com/jp/app/line/id539883307)
+複数PCからのログインブロックの機構があるため、要注意
+> 設定
 >
-> |大項目                               |小項目                                            |                   |
-> |:------------------------------------|:-------------------------------------------------|:------------------|
-> |環境設定 > 一般                      |                                                  |                   |
-> |                                     |リアルタイム更新を有効化する                      |check              |
-> |                                     |投稿した後リストに自動フォーカスする              |no check           |
-> |                                     |更新時に一番上にスクロールする                    |check              |
-> |環境設定 > アカウント                |                                                  |                   |
-> |                                     |タイムラインタブを未読管理する                    |no check           |
-> |環境設定 > 表示                      |                                                  |                   |
-> |                                     |片思いバッジを表示する                            |check              |
-> |                                     |ミニビューを使用する                              |check              |
-> |                                     |リストに表示する名前                              |ユーザID           |
-> |環境設定 > タブ                      |                                                  |                   |
-> |                                     |起動時に取得したツイートを既読状態にする          |check              |
-> |                                     |市場鵺にスクロールした際にツイートを既読状態にする|check              |
-> |                                     |Favoritesタブを表示する(要再起動)                 |no check           |
-> |環境設定 > テキスト入力              |                                                  |                   |
-> |                                     |ツイート入力                                      |check              |
-> |                                     |フォントサイズ                                    |11pt               |
-> |                                     |投稿に使用するキー                                |⌘ + Return         |
-> |環境設定 > 色                        |                                                  |                   |
-> |                                     |リストの表示スタイル                              |ダーク             |
-> |                                     |デフォルトの色設定                                |ダーク             |
-> |環境設定 > 通知                      |                                                  |                   |
-> |                                     |音量                                              |5%                 |
-> |環境設定 > 詳細                      |                                                  |                   |
-> |                                     |ダブルクリック時の挙動                            |会話ビューオン/オフ|
-> |                                     |ツイートのコピー形式                              |ツイートのURL      |
-> |表示                                 |                                                  |                   |
-> |                                     |ツールバーを表示する/隠す                         |選択               |
-> |                                     |縮小                                              |選択               |
-> |ツイートボックス > ⚙                 |                                                  |                   |
-> |                                     |ハッシュタグを保持                                |                   |
+> |大項目  |小項目              |               |
+> |:-------|:-------------------|:--------------|
+> |基本設定|同じウィンドウで開く|チェック       |
+> |通知    |サウンドの通知      |チェック外し   |
+> |トーク  |サイズ              |小             |
+> |トーク  |送信方法            |Command + Enter|
 
 [RictyDiminished](https://github.com/yascentur/RictyDiminished)
 
@@ -284,12 +268,12 @@ TODO: [GrowlNotify](http://growl.info/downloads)
 [Skitch](http://evernote.com/skitch/)
 > Application設定
 >
-> |大項目           |小項目                                                                        |        |
-> |:----------------|:-----------------------------------------------------------------------------|:-------|
-> |Skitch > 環境設定|                                                                              |        |
-> |                 |一般設定 > Skitch Helper > コンピュータのログイン時に Skitch Helper を起動する|no check|
-> |                 |同期 > 新しい Skitch ノートを Evernote に保存                                 |手動    |
-> |                 |同期 > Evernote との動機頻度                                                  |手動    |
+> |大項目           |小項目                                       |              |
+> |:----------------|:--------------------------------------------|:-------------|
+> |Skitch > 環境設定|                                             |              |
+> |                 |一般設定 > Skitch Helper                     |全チェック外し|
+> |                 |同期 > 新しい Skitch ノートを Evernote に保存|手動          |
+> |                 |同期 > Evernote との動機頻度                 |手動          |
 
 [Sony Ericsson Bridge for Mac](http://support.sonymobile.com/au/tools/bridge-for-mac/)
 
@@ -320,22 +304,32 @@ $ ln -sf $HOME/work/dotfiles/.vim                 $HOME/.vim
 $ cp -f  $HOME/work/dotfiles/.vim/vimrc.local.org $HOME/.vim/vimrc.local
 $ ln -sf $HOME/work/dotfiles/.w3m                 $HOME/.w3m
 $ ln -sf $HOME/work/dotfiles/lib/Vagrant          /srv/vagrant
+$ cd $HOME
 $ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 $ sh ./installer.sh $HOME/.vim/dein.vim/
 $ rm installer.sh
+#MEMO: https://github.com/KazuakiM/dotfiles/blob/master/.vim/memolist.vim/git.markdown#tips
 $ ssh-keygen -t rsa -b 4096 -C "xxxx@xxx"
+$ ssh-keygen -l -f $HOME/.ssh/id_rsa.pub
+$ pbcopy < $HOME/.ssh/id_rsa.pub
+
+> Add SSH Key
+>  https://github.com/settings/keys
+
+$ ssh -T git@github.com
+$ ssh-add -K $HOME/.ssh/id_rsa.pub
 $ wget http://jp2.php.net/distributions/manual/php_manual_ja.tar.gz -O /tmp/php_manual_ja.tar.gz
 $ tar zxvf /tmp/php_manual_ja.tar.gz -C $HOME/.vim/vim-ref
-$ wget http://get.sensiolabs.org/php-cs-fixer.phar -O $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
-$ chmod a+x $HOME/.vim/vim-php-cs-fixer/php-cs-fixer
 $ php $HOME/work/dotfiles/src/phpDict.php
 $ sh $HOME/work/dotfiles/src/htmlReference.sh
+$ exit
 ```
 
 ### Composer
 
 ```bash
-$ curl -sS https://getcomposer.org/installer | php
+$ cd /usr/local/bin
+$ php -r "readfile('https://getcomposer.org/installer');" | php
 $ composer global update
 ```
 ### npm
@@ -467,27 +461,34 @@ TODO:apt-cygのインストール状況を確認'apt-cyg show'
 [FireFox](https://www.mozilla.org/ja/firefox/)
 > Application設定
 >
-> |大項目                |小項目                                 |                                                               |
-> |:---------------------|:--------------------------------------|:--------------------------------------------------------------|
-> |Required sync setting |                                       |                                                               |
-> |Firefox > 環境設定    |                                       |                                                               |
-> |                      |一般 > ホームページ                    |file:///file/to/path/bookmark.html                             |
-> |                      |検索                                   |Google以外Remove                                               |
-> |                      |コンテンツ > フォントとカラー > デフォルトフォント|[RictyDiminished](https://github.com/yascentur/RictyDiminished)|
-> |                      |コンテンツ > 言語 > 言語設定           |Add Japanese[ja]                                               |
-> |add-on                |                                       |                                                               |
-> |                      |[Firebug](https://addons.mozilla.org/ja/firefox/addon/firebug/)                                       ||
-> |                      |[FireMobileSimulator](https://addons.mozilla.org/ja/firefox/addon/firemobilesimulator/)               ||
-> |                      |[Growl/GNTP](https://addons.mozilla.org/ja/firefox/addon/growlgntp/)                                  ||
-> |                      |[Hatena Bookmark](https://addons.mozilla.org/ja/firefox/addon/hatena-bookmark/)                       ||
-> |                      |[JSONView](https://addons.mozilla.org/ja/firefox/addon/jsonview/)                                     ||
-> |                      |[Quick Translator](https://addons.mozilla.org/ja/firefox/addon/quick-translator/)                     ||
-> |                      |[RESTClient](https://addons.mozilla.org/ja/firefox/addon/restclient/)                                 ||
-> |                      |[The Addon Bar(restored)](https://addons.mozilla.org/ja/firefox/addon/the-addon-bar/?src=hp-btn-promo)||
-> |                      |[Web Developer](https://addons.mozilla.org/ja/firefox/addon/web-developer/)                           ||
-> |                      |[テキストリンク](https://addons.mozilla.org/ja/firefox/addon/text-link/)                              ||
-> |about:config          |                                       |                                                               |
-> |                      |browser.tabs.closeWindowWithLastTab    |false                                                          |
+> |大項目                |小項目                                             |                                                                    |
+> |:---------------------|:--------------------------------------------------|:-------------------------------------------------------------------|
+> |Required sync setting |                                                   |                                                                    |
+> |Firefox > 環境設定    |                                                   |                                                                    |
+> |                      |一般 > ホームページ                                |file:///file/to/path/bookmark.html                                  |
+> |                      |検索                                               |Google以外Remove                                                    |
+> |                      |検索 > ロケーションバーに検索候補を表示する        |チェック                                                            |
+> |                      |コンテンツ > フォントとカラー > デフォルトフォント |[RictyDiminished](https://github.com/yascentur/RictyDiminished)     |
+> |                      |コンテンツ > 言語 > 言語設定                       |Add Japanese[ja]                                                    |
+> |add-on                |                                                   |                                                                    |
+> |                      |[FireMobileSimulator](https://addons.mozilla.org/ja/firefox/addon/firemobilesimulator/)                                ||
+> |                      |[Hatena Bookmark](https://addons.mozilla.org/ja/firefox/addon/hatena-bookmark/)                                        ||
+> |                      |                                                   |全般 > 検索機能を有効にする チェック外し                            |
+> |                      |                                                   |全般 > Ctrl + Shift キーによる検索ショートカットを使う チェック外し |
+> |                      |                                                   |全般 > 右クリックメニューを拡張する チェック外し                    |
+> |                      |                                                   |全般 > ブックマークやリンクを新しいタブで開く チェック外し          |
+> |                      |                                                   |Web閲覧 > ブックマークされた数を表示する チェック外し               |
+> |                      |                                                   |Web閲覧 > コメントビューワーで表示 ボタンを表示する チェック外し    |
+> |                      |                                                   |Web閲覧 > リンク チェック外し                                       |
+> |                      |                                                   |ショートカット > サイドバー表示の切り替え √⌘  + B                  |
+> |                      |[JSONView](https://addons.mozilla.org/ja/firefox/addon/jsonview/)                                                      ||
+> |                      |[Quick Translator](https://addons.mozilla.org/ja/firefox/addon/quick-translator/)                                      ||
+> |                      |[RESTClient](https://addons.mozilla.org/ja/firefox/addon/restclient/)                                                  ||
+> |                      |[The Addon Bar(restored)](https://addons.mozilla.org/ja/firefox/addon/the-addon-bar/?src=hp-btn-promo)                 ||
+> |                      |[Web Developer](https://addons.mozilla.org/ja/firefox/addon/web-developer/)                                            ||
+> |                      |[テキストリンク](https://addons.mozilla.org/ja/firefox/addon/text-link/)                                               ||
+> |about:config          |                                                   |                                                                    |
+> |                      |browser.tabs.closeWindowWithLastTab                |false                                                               |
 
 ## TODO
 

@@ -443,6 +443,7 @@ endif
 "}}}
 
 " dein.vim {{{
+let g:dein#install_process_timeout = 600
 if dein#load_state(s:deinDir)
     call dein#begin(s:deinDir)
     call dein#add('fuenor/qfixgrep')
