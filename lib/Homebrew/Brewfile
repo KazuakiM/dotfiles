@@ -1,18 +1,13 @@
 tap "caskroom/cask"
 tap "caskroom/fonts"
-tap "caskroom/versions"
-tap "hhvm/hhvm"
 tap "homebrew/apache"
 tap "homebrew/bundle"
-tap "homebrew/completions"
 tap "homebrew/core"
-tap "homebrew/dupes"
 tap "homebrew/php"
 tap "homebrew/services"
 tap "homebrew/versions"
 tap "kazuakim/macvim"
 tap "kazuakim/universal-ctags"
-tap "tldr-pages/tldr"
 brew "apr"
 brew "apr-util"
 brew "docbook"
@@ -135,11 +130,9 @@ brew "wget"
 brew "xmlto"
 brew "yasm"
 brew "zlib"
-brew "hhvm/hhvm/hhvm"
 brew "homebrew/apache/httpd24"
 brew "homebrew/php/php71", args: ["HEAD"]
 brew "homebrew/php/php71-ssh2", args: ["HEAD"]
 brew "homebrew/php/php71-xdebug", args: ["HEAD"]
 brew "kazuakim/macvim/macvim-kaoriya", args: ["HEAD"]
 brew "kazuakim/universal-ctags/universal-ctags", args: ["HEAD"]
-brew "tldr-pages/tldr/tldr"

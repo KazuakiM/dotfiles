@@ -85,7 +85,7 @@ export PS1="\[\e[1;36m\]\u \$ \[\e[1;0m\]"
 if type tmux >/dev/null 2>&1; then
     alias tm="sh $HOME/work/dotfiles/src/tmuxStarter.sh"
     alias tml="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf list-sessions"
-    alias tma="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf attach -d    -t \"\$@\""
+    alias tma="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf attach -d       \"\$@\""
     alias tmd="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf detach -s       \"\$@\""
     alias tmk="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf kill-session -t \"\$@\""
 fi
@@ -168,7 +168,6 @@ case "${OSTYPE}" in
         #}}}
         # export {{{
         export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
-        export HOMEBREW_CASK_OPTS='--caskroom=/opt/homebrew-cask/Caskroom'
         export HOMEBREW_NO_ANALYTICS=1
         export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
         export MYSQL_PS1="\d @\h> "

@@ -32,10 +32,11 @@ $ git clone https://github.com/KazuakiM/dotfiles.git $HOME/work/dotfiles
 $ sudo cp -f $HOME/work/dotfiles/etc/paths /etc/paths
 $ cd $HOME/work/dotfiles/lib/Homebrew/
 $ brew update
-$ brew upgrade --all
+$ brew upgrade
 $ brew doctor
-$ brew tap Homebrew/bundle
-$ brew bundle
+
+$ open -a safari "https://gist.github.com/KazuakiM/a689e22ebd22e02fdbd2fdd878d12900"
+
 $ brew doctor
 $ cd /tmp
 $ brew bundle dump
