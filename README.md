@@ -18,11 +18,12 @@ $ sudo visudo
 ### Install packages
 
 App
-* [Growl](https://itunes.apple.com/jp/app/growl/id467939042?mt=12)
-* [TweetDeck](https://itunes.apple.com/jp/app/tweetdeck-by-twitter/id485812721?mt=12)
-* [Xcode](https://developer.apple.com/jp/xcode/downloads/)
-* [Wireshark](https://www.wireshark.org/download.html)
 * [BetterTourchTool](https://www.boastr.net/downloads/)
+* [Growl](https://itunes.apple.com/jp/app/growl/id467939042)
+* [LINE](https://itunes.apple.com/jp/app/line/id539883307)
+* [TweetDeck](https://itunes.apple.com/jp/app/tweetdeck-by-twitter/id485812721)
+* [Wireshark](https://www.wireshark.org/download.html)
+* [Xcode](https://itunes.apple.com/jp/app/xcode/id497799835)
 
 [homebrew](https://brew.sh/index_ja.html)
 ```bash
@@ -48,10 +49,7 @@ $ git status
 
 Auto start
 * /Applications/Growl.app
-* /Applications/Karabiner.app
-* /Applications/Vagrant Manager.app
-* /Applications/XtraFinder.app
-* /Users/xxxxx/Applications/Alfred 2.app
+* /Users/xxxxx/Applications/Alfred 3.app
 * /Users/xxxxx/Applications/BetterTouchTool.app
 * /Users/xxxxx/Applications/CheatSheet.app
 * /Users/xxxxx/Applications/Google Drive.app
