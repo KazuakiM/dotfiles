@@ -6,7 +6,13 @@
 #--------------------------------
 #variable {{{
 log=/var/log/vagrantfile.log
+account=$1
+home="/home/$account"
 #}}}
+echo "dotfiles setting..."
+ln -sf $home/work/dotfiles/.ctags               $home/.ctags           && \
+ln -sf $home/work/dotfiles/.vim                 $home/.vim             && \
+cp -f  $home/work/dotfiles/.vim/vimrc.local.org $home/.vim/vimrc.local
 echo "Vim install ..."
 yum -y --enablerepo=epel,remi install \
     perl perl-core perl-devel python python-devel \
@@ -20,4 +26,3 @@ ln -s /usr/local/bin/luajit /usr/bin/luajit                                     
   --with-lua-prefix=/usr/local                                                                     >> $log 2>> $log && \
 make                                                                                               >> $log 2>> $log && \
 make install                                                                                       >> $log 2>> $log
-

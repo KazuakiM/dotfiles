@@ -347,8 +347,7 @@ $ exit
 ### Composer
 
 ```bash
-$ cd /usr/local/bin
-$ php -r "readfile('https://getcomposer.org/installer');" | php
+$ php -r "readfile('https://getcomposer.org/installer');" | php -- --install-dir=/usr/local/bin
 $ composer global update
 ```
 ### npm

@@ -8,8 +8,7 @@
 log=/var/log/vagrantfile.log
 #}}}
 echo "yum install ..."
-rpm --import http://ftp.riken.jp/Linux/fedora/epel/RPM-GPG-KEY-EPEL-7                          >> $log 2>> $log && \
-rpm -ivh http://ftp.riken.jp/Linux/fedora/epel/7/x86_64/e/epel-release-7-8.noarch.rpm          >> $log 2>> $log && \
+yum -y install epel-release                                                                    >> $log 2>> $log && \
 rpm --import http://rpms.famillecollet.com/RPM-GPG-KEY-remi                                    >> $log 2>> $log && \
 rpm -ivh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm                           >> $log 2>> $log && \
 yum clean all                                                                                  >> $log 2>> $log && \
