@@ -178,6 +178,33 @@ $ ssh -p <port:22> <user2>@<host2>
 > #}}}
 > ```
 
+## SSHFS
+
+mount
+```bash
+$ sshfs -o follow_symlinks -p <port:22> <user>@<host>:/<RemoteDirectory> ./<LocalDirectory>
+
+# Vagrant
+$ vagrant ssh-config
+Host default
+  HostName 127.0.0.1
+  User vagrant
+  Port 2222
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile /path/to/path/private_key
+  IdentitiesOnly yes
+  LogLevel FATAL
+
+$ sshfs -o follow_symlinks -o IdentitiesOnly=yes -o IdentityFile=/path/to/path/private_key -p 2222 vagrant@127.0.0.1:/<RemoteDirectory> ./<LocalDirectory>
+```
+
+unmount
+```bash
+$ diskutil unmount ./<directory>
+```
+
 ## Grep
 
 file grep using alias

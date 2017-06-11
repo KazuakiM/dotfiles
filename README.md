@@ -57,6 +57,7 @@ Auto start
 * ~/Applications/iTerm.app
 * ~/Applications/KeePassX.app
 * ~/Applications/LINE.app
+* ~/Applications/スティッキーズ
 
 License
 > * BetterTouchTool
@@ -114,6 +115,9 @@ Dock
 > |                                | コンピュータ名                                          | イカした名前                        |
 > | ユーザとグループ               |                                                         |                                     |
 > |                                | アイコン画像                                            | GitHubからDLして、ドラッグ&ドロップ |
+> | 日付と時刻                     |                                                         |                                     |
+> |                                | 時計 > 日付を表示                                       | チェック                            |
+
 
 Finder
 > 環境設定
@@ -507,6 +511,7 @@ TODO:apt-cygのインストール状況を確認'apt-cyg show'
 > |                      |[テキストリンク](https://addons.mozilla.org/ja/firefox/addon/text-link/)                                               ||
 > |about:config          |                                                   |                                                                    |
 > |                      |browser.tabs.closeWindowWithLastTab                |false                                                               |
+> |                      |browser.bookmarks.showRecentlyBookmarked           |false                                                               |
 
 ## TODO
 
