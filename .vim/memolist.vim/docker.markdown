@@ -6,6 +6,11 @@ Docker
 
 * [Docker Hab](https://hub.docker.com/)
 
+# share directory
+
+Preferences > File sharing  
+Add ```/srv/xxx```
+
 # pull
 
 ```bash
