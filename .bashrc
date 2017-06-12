@@ -81,7 +81,15 @@ man() {
 #PS1(primary prompt string) {{{
 export PS1="\[\e[1;36m\]\u \$ \[\e[1;0m\]"
 #}}}
-#tmux or screen {{{
+#docker, tmux or screen {{{
+if type docker >/dev/null 2>&1; then
+    alias dcl="docker ps -a"
+    alias dca="docker attach                           \"\$@\""
+    alias dcr="docker run -d -i -t --privileged --name \"\$@\""
+    alias dcs="docker start                            \"\$@\""
+    alias dce="docker stop                             \"\$@\""
+fi
+
 if type tmux >/dev/null 2>&1; then
     alias tm="sh $HOME/work/dotfiles/src/tmuxStarter.sh"
     alias tml="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf list-sessions"

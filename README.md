@@ -307,6 +307,7 @@ iThunes
 ### Set dotfiles
 
 ```bash
+$ cd $HOME
 $ ln -sf $HOME/work/dotfiles/.bash_logout         $HOME/.bash_logout
 $ ln -sf $HOME/work/dotfiles/.bash_profile        $HOME/.bash_profile
 $ ln -sf $HOME/work/dotfiles/.bashrc              $HOME/.bashrc
@@ -316,6 +317,7 @@ $ ln -sf $HOME/work/dotfiles/.config              $HOME/.config
 $ ln -sf $HOME/work/dotfiles/.ctags               $HOME/.ctags
 $ cd $HOME/.config/git && ln -sf config.org          config
 $ cd $HOME/.config/git && ln -sf gitconfig.local.org gitconfig.local
+$ cd $HOME
 $ ln -sf $HOME/work/dotfiles/.htoprc              $HOME/.htoprc
 $ ln -sf $HOME/work/dotfiles/.inputrc             $HOME/.inputrc
 $ ln -sf $HOME/work/dotfiles/.lib                 $HOME/.lib
@@ -326,11 +328,9 @@ $ cp -f  $HOME/.ssh/config.mac                    $HOME/.ssh/config
 $ ln -sf $HOME/work/dotfiles/.vim                 $HOME/.vim
 $ cp -f  $HOME/work/dotfiles/.vim/vimrc.local.org $HOME/.vim/vimrc.local
 $ ln -sf $HOME/work/dotfiles/.w3m                 $HOME/.w3m
-$ ln -sf $HOME/work/dotfiles/lib/Vagrant          /srv/vagrant
-$ cd $HOME
-$ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-$ sh ./installer.sh $HOME/.vim/dein.vim/
-$ rm installer.sh
+$ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > $HOME/installer.sh
+$ sh $HOME/installer.sh $HOME/.vim/dein.vim/
+$ rm $HOME/installer.sh
 #MEMO: https://github.com/KazuakiM/dotfiles/blob/master/.vim/memolist.vim/git.markdown#tips
 $ ssh-keygen -t rsa -b 4096 -C "xxxx@xxx"
 $ ssh-keygen -l -f $HOME/.ssh/id_rsa.pub
@@ -510,8 +510,9 @@ TODO:apt-cygのインストール状況を確認'apt-cyg show'
 > |                      |[Web Developer](https://addons.mozilla.org/ja/firefox/addon/web-developer/)                                            ||
 > |                      |[テキストリンク](https://addons.mozilla.org/ja/firefox/addon/text-link/)                                               ||
 > |about:config          |                                                   |                                                                    |
-> |                      |browser.tabs.closeWindowWithLastTab                |false                                                               |
 > |                      |browser.bookmarks.showRecentlyBookmarked           |false                                                               |
+> |                      |browser.link.open_newwindow.restriction            |0                                                                   |
+> |                      |browser.tabs.closeWindowWithLastTab                |false                                                               |
 
 ## TODO
 

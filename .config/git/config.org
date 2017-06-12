@@ -7,6 +7,9 @@
     llg = !git log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' origin/master..`git rev-parse --abbrev-ref HEAD`
     rbi = !git rebase -i $(git merge-base master HEAD)
     st  = status
+    #MEMO:http://pocke.hatenablog.com/entry/2017/06/10/214322
+    #fpr = "!f(){ git fetch origin pull/$1/head:$1 && git checkout $1; };f"
+    #up  = "!{ git pull && git status;};"
 [branch]
     autosetuprebase = always
 [core]
