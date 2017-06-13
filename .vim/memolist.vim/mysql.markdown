@@ -685,6 +685,40 @@ Modify table name
 ALTER TABLE <Table1> RENAME <Table2>;
 ```
 
+## USER
+
+blank password user
+```sql
+CREATE USER 'travis'@'localhost';
+```
+
+normal user
+```sql
+CREATE USER '<Account>'@'<Host>' IDENTIFIED BY PASSWORD '<Password>';
+```
+
+## GRANT
+
+travis sample
+```sql
+SHOW GRANTS FOR 'travis'@'localhost'\G
+*************************** 1. row ***************************
+Grants for travis@localhost: GRANT USAGE ON *.* TO 'travis'@'localhost'
+
+GRANT SELECT,INSERT,UPDATE,DELETE,DROP,CREATE ON test.* TO 'travis'@'localhost';
+
+SHOW GRANTS FOR 'travis'@'localhost'\G
+*************************** 1. row ***************************
+Grants for travis@localhost: GRANT USAGE ON *.* TO 'travis'@'localhost'
+*************************** 2. row ***************************
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP ON `test`.* TO 'travis'@'localhost'
+```
+
+ALL
+```sql
+GRANT ALL ON test.* TO 'travis'@'localhost';
+```
+
 ## JOIN
 
 ![JOIN Image](doc/Visual_SQL_JOINS_V2.png)

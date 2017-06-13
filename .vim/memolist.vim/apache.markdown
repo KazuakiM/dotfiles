@@ -19,12 +19,11 @@ Group [Group]
 ```
 /etc/httpd/conf.d/httpd-vhosts.conf
 ```apache
-NameVirtualHost 127.0.0.1
 <VirtualHost *:80>
     DocumentRoot [/file/to/path/public]
     ServerName   [domain name]
-    ErrorLog     /var/log/httpd/error_log
-    CustomLog    /var/log/httpd/access_log common
+    ErrorLog     /Users/<User>/.log/httpd/error_log
+    CustomLog    /Users/<User>/.log/httpd/access_log common
     <Directory '[/file/to/path/public]'>
         Options FollowSymLinks
         AllowOverride All
