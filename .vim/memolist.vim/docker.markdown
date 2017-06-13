@@ -1,3 +1,22 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Docker](#docker)
+- [Links](#links)
+- [share directory](#share-directory)
+- [pull](#pull)
+- [build](#build)
+- [run](#run)
+- [start](#start)
+- [stop](#stop)
+- [attach](#attach)
+- [detach](#detach)
+- [commit](#commit)
+- [delete](#delete)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 Docker
 ===
 
@@ -31,7 +50,8 @@ docker build [ -t <ImageName>[:<TagName>]] <DockerfilePath>
 
 -d : detach  
 -v < host_path >:< remote_path > : mount  
- ex) -v /home/spam/test:/root/test
+> [Check share direcotry!](#share-directory)
+
 ```bash
 $ docker run -i -t --privileged --name <ContainerName> <ImageName>[:<TagName>] /bin/bash
 

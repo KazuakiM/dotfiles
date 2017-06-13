@@ -1,5 +1,6 @@
 " minimal vim start {{{
 function! kazuakim#Minimal() abort "{{{
+    setlocal clipboard+=autoselect,unnamed
     setlocal hlsearch
     setlocal ignorecase iminsert=0 imsearch=-1 incsearch
     setlocal noswapfile nobackup nowritebackup noundofile

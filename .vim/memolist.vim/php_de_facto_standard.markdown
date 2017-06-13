@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [PHP de facto standard](#php-de-facto-standard)
+  - [php.ini ディレクティブ](#phpini-%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%86%E3%82%A3%E3%83%96)
+  - [Exception](#exception)
+  - [関数の引数](#%E9%96%A2%E6%95%B0%E3%81%AE%E5%BC%95%E6%95%B0)
+  - [Enum](#enum)
+  - [assert()](#assert)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 PHP de facto standard
 ===
 
