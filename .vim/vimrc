@@ -561,8 +561,8 @@ let g:indentLine_faster = 1
 " nerdtree {{{
 nnoremap <SID>[nerdtree] <Nop>
 nmap <Leader>n <SID>[nerdtree]
-nnoremap       <SID>[nerdtree]n :<C-u>NERDTree<CR>
-nnoremap <expr><SID>[nerdtree]b ':NERDTree ' . fnameescape(expand('%:p:h')) . '<CR>'
+nnoremap <SID>[nerdtree]n :<C-u>NERDTree<CR>
+nnoremap <SID>[nerdtree]b :<C-u>call<Space>kazuakim#NerdTreeCurrentDir()<CR>
 let g:NERDTreeBookmarksFile     = s:envHome . '/.vim/nerdtree/.NERDTreeBookmarks'
 let g:NERDTreeMinimalUI         = 1
 let g:NERDTreeRespectWildIgnore = 1

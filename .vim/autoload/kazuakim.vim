@@ -62,6 +62,12 @@ function! kazuakim#TagJumper() abort "{{{
 endfunction "}}}
 "}}}
 
+" nerdtree {{{
+function! kazuakim#NerdTreeCurrentDir() abort "{{{
+    execute 'NERDTree ' . fnameescape(expand('%:p:h'))
+endfunction "}}}
+"}}}
+
 " unite.vim {{{
 " http://qiita.com/yuku_t/items/9263e6d9105ba972aea8
 function! kazuakim#UniteFileRecAsyncOrGit() abort "{{{
