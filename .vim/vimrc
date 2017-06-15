@@ -99,6 +99,7 @@ function! s:VimStart(backupDir, undoDir) abort "{{{
         call kazuakim#Minimal()
         return 1
     endif
+    let s:syntaxToggle = 0
     return 0
 endfunction "}}}
 
@@ -127,12 +128,14 @@ endfunction "}}}
 function! s:FileTypeSyntaxOn() abort "{{{
     filetype plugin indent on
     syntax enable
+    let s:syntaxToggle = 0
 endfunction "}}}
 
 function! s:FileTypeSyntaxOff() abort "{{{
     filetype off
     filetype plugin indent off
     syntax off
+    let s:syntaxToggle = 1
 endfunction "}}}
 
 function! s:BufEnter() abort "{{{
@@ -172,9 +175,9 @@ function! s:BufEnter() abort "{{{
     endif
 
     " Change Big file or Normal file.
-    if 262144 <= getfsize(expand('%:p'))
+    if 262144 <= getfsize(expand('%:p')) && s:syntaxToggle ==# 0
         call s:FileTypeSyntaxOff()
-    else
+    elseif s:syntaxToggle ==# 1
         call s:FileTypeSyntaxOn()
     endif
 endfunction "}}}
@@ -647,7 +650,7 @@ let g:quickrun_config = {
 \    },
 \    'php': {
 \        'command':                             'php',
-\        'exec':                                '%c %s:p',
+\        'exec':                                '%c %:p',
 \        'hook/close_buffer/enable_empty_data': 0,
 \        'hook/close_buffer/enable_failure':    0,
 \        'outputter':                           'buffer',
@@ -731,30 +734,30 @@ let g:easy_align_delimiters = {
 "}}}
 
 " vim-quickhl {{{
-nnoremap <Space>m :<C-u>call<Space>quickhl#manual#this('n')<CR>
-nnoremap <Space>M :<C-u>call<Space>quickhl#manual#reset()<CR>
-    let g:quickhl_manual_colors = [
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Green        guibg=Green',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta      guibg=Magenta',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow       guibg=Yellow',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Cyan         guibg=Cyan',
-    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=Brown        guibg=Brown',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Grey         guibg=Grey',
-    \    'cterm=NONE gui=NONE ctermfg=Grey  guifg=Grey  ctermbg=Blue         guibg=Blue',
-    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkGreen    guibg=DarkGreen',
-    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkMagenta  guibg=DarkMagenta',
-    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkRed      guibg=DarkRed',
-    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkCyan     guibg=DarkCyan',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=DarkGray     guibg=DarkGray',
-    \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkBlue     guibg=DarkBlue',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightGreen   guibg=LightGreen',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightMagenta guibg=LightMagenta',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightRed     guibg=LightRed',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightYellow  guibg=LightYellow',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightCyan    guibg=LightCyan',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightGray    guibg=LightGray',
-    \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightBlue    guibg=LightBlue'
-    \]
+nmap <Space>m <Plug>(quickhl-manual-this)
+nmap <Space>M <Plug>(quickhl-manual-reset)
+let g:quickhl_manual_colors = [
+\    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Green        guibg=Green',
+\    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta      guibg=Magenta',
+\    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow       guibg=Yellow',
+\    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Cyan         guibg=Cyan',
+\    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=Brown        guibg=Brown',
+\    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Grey         guibg=Grey',
+\    'cterm=NONE gui=NONE ctermfg=Grey  guifg=Grey  ctermbg=Blue         guibg=Blue',
+\    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkGreen    guibg=DarkGreen',
+\    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkMagenta  guibg=DarkMagenta',
+\    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkRed      guibg=DarkRed',
+\    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkCyan     guibg=DarkCyan',
+\    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=DarkGray     guibg=DarkGray',
+\    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkBlue     guibg=DarkBlue',
+\    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightGreen   guibg=LightGreen',
+\    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightMagenta guibg=LightMagenta',
+\    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightRed     guibg=LightRed',
+\    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightYellow  guibg=LightYellow',
+\    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightCyan    guibg=LightCyan',
+\    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightGray    guibg=LightGray',
+\    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightBlue    guibg=LightBlue'
+\]
 "}}}
 
 " vim-sqlfix {{{

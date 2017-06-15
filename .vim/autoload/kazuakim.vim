@@ -83,24 +83,14 @@ endfunction "}}}
 " vim-quickrun {{{
 function! kazuakim#Test() abort "{{{
     let l:quickrun_config_backup = g:quickrun_config[&filetype]
-    if &filetype is# 'php'
-        let g:quickrun_config['php'] = {
-        \        'command':                          'phpunit',
-        \        'cmdopt':                           '--configuration ' . kazuakim#Path2ProjectDirectory('%') . '/phpunit.xml.dist',
-        \        'exec':                             '%c %o %s:p',
-        \        'hook/close_buffer/enable_failure': 0,
-        \        'outputter':                        'buffer',
-        \        'outputter/buffer/split':           ':botright 7sp'
-        \}
-    endif
 
     let g:QFix_PreviewEnable = 0
     QuickRun
     let g:QFix_PreviewEnable = 1
 
-    if &filetype is# 'php'
-        let g:quickrun_config['php'] = l:quickrun_config_backup
-    endif
+    "if &filetype is# 'php'
+    "    let g:quickrun_config['php'] = l:quickrun_config_backup
+    "endif
 endfunction "}}}
 
 function! kazuakim#Lint() abort "{{{
