@@ -161,6 +161,7 @@ git status
 git branch -a
 
 git remote add fork_master git://github.com/xxxxx/xxxxx
+git fetch fork_master
 ```
 
 Update fork repository
