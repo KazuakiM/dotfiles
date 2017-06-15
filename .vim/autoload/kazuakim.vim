@@ -62,13 +62,6 @@ function! kazuakim#TagJumper() abort "{{{
 endfunction "}}}
 "}}}
 
-" vital.vim {{{
-function! kazuakim#Path2ProjectDirectory(path) abort "{{{
-    let s:Prelude = ! exists('s:Prelude') ? vital#of('vital').import('Prelude') : s:Prelude
-    return s:Prelude.path2project_directory(a:path)
-endfunction "}}}
-"}}}
-
 " unite.vim {{{
 " http://qiita.com/yuku_t/items/9263e6d9105ba972aea8
 function! kazuakim#UniteFileRecAsyncOrGit() abort "{{{
@@ -83,14 +76,21 @@ endfunction "}}}
 " vim-quickrun {{{
 function! kazuakim#Test() abort "{{{
     let l:quickrun_config_backup = g:quickrun_config[&filetype]
+    if &filetype is# 'php'
+        let g:quickrun_config['php'] = {
+        \    'command':                'phpunit',
+        \    'exec':                   '%c %s',
+        \    'outputter':              'buffer',
+        \    'outputter/buffer/split': ':botright 7sp',
+        \    'runner':                 'vimproc'
+        \}
+    endif
 
-    let g:QFix_PreviewEnable = 0
     QuickRun
-    let g:QFix_PreviewEnable = 1
 
-    "if &filetype is# 'php'
-    "    let g:quickrun_config['php'] = l:quickrun_config_backup
-    "endif
+    if &filetype is# 'php'
+        let g:quickrun_config[&filetype] = l:quickrun_config_backup
+    endif
 endfunction "}}}
 
 function! kazuakim#Lint() abort "{{{
@@ -120,23 +120,15 @@ endfunction "}}}
 function! kazuakim#PhpInfo() abort "{{{
     let l:quickrun_config_backup = g:quickrun_config['php']
     let g:quickrun_config['php'] = {
-    \    'command':                'php',
-    \    'cmdopt':                 '-info',
-    \    'exec':                   '%c %o',
-    \    'outputter':              'buffer',
-    \    'outputter/buffer/into':  1,
-    \    'outputter/buffer/split': ':botright'
+    \    'command':   'php',
+    \    'cmdopt':    '-info',
+    \    'exec':      '%c %o',
+    \    'outputter': 'buffer'
     \}
-    " qfixgrep {{{
-    let g:QFix_PreviewEnable = 0
-    "}}}
 
     QuickRun
 
     let g:quickrun_config['php'] = l:quickrun_config_backup
-    " qfixgrep {{{
-    let g:QFix_PreviewEnable = 1
-    "}}}
 endfunction "}}}
 "}}}
 
