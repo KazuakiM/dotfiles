@@ -1,6 +1,9 @@
 [include]
     # from 1.7.10
     path = ~/.config/git/gitconfig.local
+# from 2.13.0   https://git-scm.com/docs/git-config#_conditional_includes
+#[includeIf "gitdir:/path/to/foo/.git"]
+#   path = ~/company/setting
 [alias]
     dff = difftool
     lg  = log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
