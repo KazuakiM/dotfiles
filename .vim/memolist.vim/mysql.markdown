@@ -48,15 +48,15 @@ MySQL
 ## Best practice my.cnf
 
 * [kamipo-san's my.cnf](https://github.com/kamipo/etcfiles/blob/master/etc/my.cnf)
- * [default_character_set, character_set_server](http://kamipo.github.io/talks/20150827-myna201508/#/step-12)
+  * [default_character_set, character_set_server](http://kamipo.github.io/talks/20150827-myna201508/#/step-12)
 
    > utf8mb4_bin or utf8mb4_general_ci
    >
    > MySQL8.0 : introducing utf8mb4_900_ai_ci
 
 * [yoku0825-san](https://github.com/yoku0825)
- * [dotfiles my.cnf](https://github.com/yoku0825/dotfiles/blob/master/my.cnf)
- * [my_setup my.cnf](https://github.com/yoku0825/my_setup/blob/master/my.cnf)
+  * [dotfiles my.cnf](https://github.com/yoku0825/dotfiles/blob/master/my.cnf)
+  * [my_setup my.cnf](https://github.com/yoku0825/my_setup/blob/master/my.cnf)
 
 ## Add plugin?
 
@@ -93,6 +93,7 @@ STOP SLAVE ALL;
 
 ## Trobule
 
+[Check Okuno-san's slide](https://www.slideshare.net/nippondanji/mysql-57-77003983)  
 [Check status](http://qiita.com/muran001/items/14f19959d4723ffc29cc)
 ```sql
 SHOW GLOBAL STATUS;
