@@ -441,7 +441,7 @@ nnoremap <SID>[vim]p :<C-u>echo<Space>substitute(&runtimepath,<Space>',',<Space>
 " VimDiff {{{
 if &l:diff
     set cursorline
-    set statusline=\ %t\ %{KazuakiMStatuslinePaste()}\ %m\ %r\ %h\ %w\ %q%=%F\ \|\ %l/%L\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
+    set statusline=\ %t\ %{KazuakiMStatuslinePaste()}\ %m\ %r\ %h\ %w\ %q%=%l/%L\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
     nnoremap <C-k> [c
     nnoremap <C-j> ]c
     nnoremap <C-h> do
@@ -450,7 +450,7 @@ if &l:diff
     finish
 else
     set nocursorline
-    set statusline=\ %t\ %{KazuakiMStatuslinePaste()}\ %m\ %r\ %h\ %w\ %q\ %{KazuakiMStatuslineSyntax()}%=%l/%L\ \|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
+    set statusline=\ %t\ %{KazuakiMStatuslinePaste()}\ %m\ %r\ %h\ %w\ %q\ %{KazuakiMStatuslineSyntax()}%=%F\ \|\ %l/%L\ \|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
 endif
 "}}}
 
