@@ -512,6 +512,7 @@ TODO:apt-cygのインストール状況を確認'apt-cyg show'
 > |about:config          |                                                   |                                                                    |
 > |                      |browser.bookmarks.showRecentlyBookmarked           |false                                                               |
 > |                      |browser.link.open_newwindow.restriction            |0                                                                   |
+> |                      |browser.showQuitWarning                            |true                                                                |
 > |                      |browser.tabs.closeWindowWithLastTab                |false                                                               |
 
 ## TODO
