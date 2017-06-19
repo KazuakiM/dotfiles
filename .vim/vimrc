@@ -60,6 +60,7 @@ let s:currentTime  = ! exists('s:currentTime')  ? localtime() : s:currentTime
 let s:envHome      = ! exists('s:envHome')      ? $HOME       : s:envHome
 let s:envUser      = ! exists('s:envUser')      ? $USER       : s:envUser
 let s:lineUpdate   = ! exists('s:lineUpdate')   ? 0           : s:lineUpdate
+let s:statuslineSwitch = ! exists('s:statuslineSwitch') ? 1   : s:lineUpdate
 let s:swapFilePath = ! exists('s:swapFilePath') ? ''          : s:swapFilePath
 let s:deinDir      = ! exists('s:deinDir')      ? s:envHome . '/.vim/dein.vim' : s:deinDir
 
@@ -272,9 +273,19 @@ endfunction "}}}
 
 function! KazuakiMStatuslinePaste() abort "{{{
     if &paste is# 1
-        return '(paste)'
+        return '[paste]'
     endif
     return ''
+endfunction "}}}
+
+function! KazuakiMStatuslineSwitch() abort "{{{
+    if s:statuslineSwitch ==# 1
+        setlocal statusline=\ %t%{KazuakiMStatuslinePaste()}%m%r%h%w%q\ %{KazuakiMStatuslineSyntax()}%<%=%l/%L\ 
+        let s:statuslineSwitch = 0
+    else
+        setlocal statusline=\ %t%{KazuakiMStatuslinePaste()}%m%r%h%w%q\ %{KazuakiMStatuslineSyntax()}%<%=%F\ \|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ \|\ %l/%L\ 
+        let s:statuslineSwitch = 1
+    endif
 endfunction "}}}
 
 " http://d.hatena.ne.jp/thinca/20111204/1322932585
@@ -450,7 +461,7 @@ if &l:diff
     finish
 else
     set nocursorline
-    set statusline=\ %t\ %{KazuakiMStatuslinePaste()}\ %m\ %r\ %h\ %w\ %q\ %{KazuakiMStatuslineSyntax()}%=%F\ \|\ %l/%L\ \|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
+    call KazuakiMStatuslineSwitch()
 endif
 "}}}
 
@@ -993,6 +1004,7 @@ nnoremap <F1> :<C-u>call<Space>kazuakim#DatabaseSwitch()<CR>
 set pastetoggle=<F2>
 nnoremap <F3> :<C-u>edit++enc=utf-8<CR>
 nnoremap <F4> :<C-u>call<Space>kazuakim#WrapSwitch()<CR>
+nnoremap <F5> :<C-u>call<Space>KazuakiMStatuslineSwitch()<CR>
 "}}}
 
 " Other setting files {{{
