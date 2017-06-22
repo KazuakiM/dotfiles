@@ -158,6 +158,7 @@ case "${OSTYPE}" in
         alias lingr="sh $HOME/work/dotfiles/src/lingrStarter.sh"
         alias HTTPD='sudo apachectl'
         alias MYSQL='mysql.server'
+        alias MEC="sh $HOME/work/dotfiles/src/launchctlMemcached.sh \"\$@\""
         #}}}
         # open {{{
         alias VNC='open    -a Chicken'
