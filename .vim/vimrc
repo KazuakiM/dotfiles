@@ -1000,11 +1000,12 @@ autocmd MyAutoCmd FileType html,js,php,xml syntax sync minlines=2000
 "}}}
 
 " Function {{{
-nnoremap <F1> :<C-u>call<Space>kazuakim#DatabaseSwitch()<CR>
+nnoremap <F1> :<C-u>echo<Space>"\tFunction Key Help\nF1:Help(here!)\nF2:Paste\nF3:UTF-8\nF4:Wrap\nF5:StatusLine\nF6:DataBase"<CR>
 set pastetoggle=<F2>
 nnoremap <F3> :<C-u>edit++enc=utf-8<CR>
 nnoremap <F4> :<C-u>call<Space>kazuakim#WrapSwitch()<CR>
 nnoremap <F5> :<C-u>call<Space>KazuakiMStatuslineSwitch()<CR>
+nnoremap <F6> :<C-u>call<Space>kazuakim#DatabaseSwitch()<CR>
 "}}}
 
 " Other setting files {{{
