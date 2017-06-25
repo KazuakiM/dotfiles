@@ -18,7 +18,7 @@ else
 fi
 
 if [ "$charge" = 'discharging' -a "$battery" -lt 25 ]; then
-    growlnotify -m 'Battery!'
+    growlnotify -m 'Battery!' --image $(dirname $0)/../img/Art\ of\ Chemistry.ico
 elif [ "$charge" = '' -a "$battery" -gt 95 ]; then
-    growlnotify -m 'Battery!'
+    growlnotify -m 'Battery!' --image $(dirname $0)/../img/Art\ of\ Chemistry.ico
 fi
