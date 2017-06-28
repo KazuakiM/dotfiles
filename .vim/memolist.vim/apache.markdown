@@ -14,8 +14,20 @@ Apache
 
 /etc/httpd/conf/httpd.conf
 ```apache
+# Set User and Group
 User  [User]
 Group [Group]
+
+# Update homebrew setting (minor version ignore), add FileMatch and update IfModule
+#LoadModule php7_module /usr/local/Cellar/php71/7.1.6_18/libexec/apache2/libphp7.so
+LoadModule php7_module /usr/local/opt/php71/libexec/apache2/libphp7.so
+
+<FilesMatch .php$>
+    SetHandler application/x-httpd-php
+</FilesMatch>
+<IfModule dir_module>
+    DirectoryIndex index.php index.html
+</IfModule>
 ```
 /etc/httpd/conf.d/httpd-vhosts.conf
 ```apache
@@ -42,5 +54,17 @@ Group [Group]
         AllowOverride All
         Require all granted
     </Directory>
+
+    #XXX: I don't confirm it!
+    #User  [User]
+    #Group [Group]
+    #LoadModule php7_module /usr/local/opt/php71/libexec/apache2/libphp7.so
+    #<FilesMatch .php$>
+    #    SetHandler application/x-httpd-php
+    #</FilesMatch>
+    #<IfModule dir_module>
+    #    DirectoryIndex index.php index.html
+    #</IfModule>
 </VirtualHost>
 ```
+
