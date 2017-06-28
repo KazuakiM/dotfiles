@@ -28,3 +28,18 @@ Check npm config
 ```bash
 npm config list
 ```
+
+# Install/Uninstall
+
+install
+```bash
+npm install <package> [ --global] --save-dev
+```
+
+uninstall
+```bash
+# Remove devDependencies
+npm uninstall <package> [ --global] --save
+# Remove Dependencies
+npm uninstall <package> [ --global] --save-dev
+```

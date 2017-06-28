@@ -147,6 +147,7 @@ Finder
 > |:----------|:---------------------------------|-----------------------:|
 > |Preferences|                                  |                        |
 > |           |General >Where are you            |Japan                   |
+> |           |詳細 > デフォルトのエンコーディング |Unicode(UTF-8)        |
 > |Features   |                                  |                        |
 > |           |Default Results > Essentials > Bookmarks - Safari |Check   |
 
@@ -479,6 +480,8 @@ TODO:apt-cygのインストール状況を確認'apt-cyg show'
 > |                      |[はてなブックマーク](https://chrome.google.com/webstore/detail/%E3%81%AF%E3%81%A6%E3%81%AA%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF-googlechrome-%E6%8B%A1%E5%BC%B5/dnlfpnhinnjdgmjfpccajboogcjocdla)||
 > |設定                  |                                                   |                                                                         |
 > |                      |ウェブコンテンツ                                   |フォント: [RictyDiminished](https://github.com/yascentur/RictyDiminished)|
+> |開発ツール            |                                                   |                                                                         |
+> |                      |Customize and control DevTools > Settings > Preferences > Theme|Dark                                                         |
 
 [FireFox](https://www.mozilla.org/ja/firefox/)
 > Application設定
@@ -492,6 +495,11 @@ TODO:apt-cygのインストール状況を確認'apt-cyg show'
 > |                      |検索 > ロケーションバーに検索候補を表示する        |チェック                                                            |
 > |                      |コンテンツ > フォントとカラー > デフォルトフォント |[RictyDiminished](https://github.com/yascentur/RictyDiminished)     |
 > |                      |コンテンツ > 言語 > 言語設定                       |Add Japanese[ja]                                                    |
+> |開発ツール            |                                                   |                                                                    |
+> |                      |開発ツールのオプション > テーマ                    |Dark                                                                |
+> |                      |開発ツールのオプション > エディター設定 > タブ幅   |4                                                                   |
+> |                      |開発ツールのオプション > スクリーンショットの動作 > カメラのシャッター音を再生 |チェック外し                            |
+> |                      |開発ツールのオプション > 利用可能なツールボックスのボタン > ページ全体のスクリーンショットを撮ります |チェック          |
 > |add-on                |                                                   |                                                                    |
 > |                      |[FireMobileSimulator](https://addons.mozilla.org/ja/firefox/addon/firemobilesimulator/)                                ||
 > |                      |[Hatena Bookmark](https://addons.mozilla.org/ja/firefox/addon/hatena-bookmark/)                                        ||
