@@ -407,6 +407,11 @@ git checkout stash@{N} fuga.rb
 Sync Remote
 ```bash
 git fetch --prune
+
+git remote show origin
+git remote prune origin --dry-run
+git remote prune origin
+git branch -a
 ```
 
 Delete local branch.
