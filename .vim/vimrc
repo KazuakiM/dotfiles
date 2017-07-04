@@ -451,7 +451,7 @@ nnoremap <SID>[vim]p :<C-u>echo<Space>substitute(&runtimepath,<Space>',',<Space>
 
 " VimDiff {{{
 if &l:diff
-    set cursorline
+    set clipboard+=autoselect,unnamed cursorline
     set statusline=\ %t\ %{KazuakiMStatuslinePaste()}\ %m\ %r\ %h\ %w\ %q%=%l/%L\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
     nnoremap <C-k> [c
     nnoremap <C-j> ]c
