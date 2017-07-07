@@ -303,6 +303,11 @@ Help
 git reset --help
 ```
 
+Local keep & Reset commit.
+```bash
+git reset --soft HEAD~
+```
+
 Reset commit.
 ```bash
 git reset --hard
@@ -318,6 +323,21 @@ git reset HEAD file1
 Currently update commit message.
 ```bash
 git commit --amend
+```
+
+git管理下でワークディレクトリの修正を無視する。
+```bash
+git update-index --assume-unchanged <file1>
+```
+
+git管理下でワークディレクトリの修正を無視を解除する。
+```bash
+git update-index --no-assume-unchanged <file1>
+```
+
+git管理下でワークディレトリの修正を無視する設定状況確認
+```bash
+git ls-files -v|\grep ^h
 ```
 
 ## git push
