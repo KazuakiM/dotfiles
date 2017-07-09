@@ -12,8 +12,8 @@
     name  = KazuakiM
     email = kazuaki_mabuchi_to_go@hotmail.co.jp
 [difftool "vimdiff"]
-    cmd = /usr/local/opt/macvim-kaoriya/bin/vimdiff -O $LOCAL $REMOTE
+    cmd = /usr/local/bin/vimdiff -O $LOCAL $REMOTE
 [mergetool "vimdiff"]
-    cmd = /usr/local/opt/macvim-kaoriya/bin/vimdiff -O $LOCAL $REMOTE
+    cmd = /usr/local/bin/vimdiff -O $LOCAL $REMOTE
 #}}}
 # vim:ft=gitconfig
