@@ -1,7 +1,9 @@
 {
     "require": {
         "friendsofphp/php-cs-fixer": "*",
+        "hirak/prestissimo": "^0.3",
+        "kazuakiM/xml-phpdoc": "dev-master",
         "phpunit/phpunit": "*",
-        "hirak/prestissimo": "^0.3"
+        "ukko/phpredis-phpdoc": "dev-master"
     }
 }
