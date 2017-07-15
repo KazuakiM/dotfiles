@@ -255,7 +255,7 @@ case "${OSTYPE}" in
         gitPullVariable=''
         gitPullVariable="$gitPullVariable echo 'dotfiles' && cd $HOME/work/dotfiles/ && git fetch --prune && git pull;"
         gitPullVariable="$gitPullVariable echo 'composer' && cd $HOME && composer self-update && composer global update;"
-        gitPullVariable="$gitPullVariable echo 'npm'      && cd $HOME && npm update -g;"
+        gitPullVariable="$gitPullVariable echo 'npm'      && cd $HOME && npm i -g npm && npm update -g;"
         gitPullVariable="$gitPullVariable echo 'homebrew' && cd $HOME && brew update && brew upgrade && brew cleanup && brew cask cleanup && brew doctor && brew cask doctor;"
         gitPullVariable="$gitPullVariable cd;"
         alias UP=$gitPullVariable
