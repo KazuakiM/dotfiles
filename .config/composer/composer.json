@@ -6,7 +6,6 @@
         "kazuakim/extension-phpdoc": "dev-master",
         "kazuakim/reddish": "^0.1",
         "phpunit/phpunit": "*",
-        "roave/better-reflection": "@dev",
-        "ukko/phpredis-phpdoc": "dev-master"
+        "roave/better-reflection": "@dev"
     }
 }
