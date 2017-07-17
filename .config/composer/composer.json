@@ -1,9 +1,12 @@
 {
     "require": {
+        "apigen/apigen": "5.0.0-RC3",
         "friendsofphp/php-cs-fixer": "*",
         "hirak/prestissimo": "^0.3",
-        "kazuakiM/extension-phpdoc": "dev-master",
+        "kazuakim/extension-phpdoc": "dev-master",
+        "kazuakim/reddish": "^0.1",
         "phpunit/phpunit": "*",
+        "roave/better-reflection": "@dev",
         "ukko/phpredis-phpdoc": "dev-master"
     }
 }
