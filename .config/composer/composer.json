@@ -4,7 +4,6 @@
         "friendsofphp/php-cs-fixer": "*",
         "hirak/prestissimo": "^0.3",
         "kazuakim/extension-phpdoc": "dev-master",
-        "kazuakim/reddish": "^0.1",
         "phpunit/phpunit": "*",
         "roave/better-reflection": "@dev"
     }
