@@ -6,14 +6,4 @@
     #df = diff --ignore-space-at-eol --ignore-space-change
     # from 1.8.4
     df  = diff --ignore-space-at-eol --ignore-space-change --ignore-blank-lines
-
-# Mac (GitHub) {{{
-[user]
-    name  = KazuakiM
-    email = kazuaki_mabuchi_to_go@hotmail.co.jp
-[difftool "vimdiff"]
-    cmd = /usr/local/bin/vimdiff -O $LOCAL $REMOTE
-[mergetool "vimdiff"]
-    cmd = /usr/local/bin/vimdiff -O $LOCAL $REMOTE
-#}}}
 # vim:ft=gitconfig

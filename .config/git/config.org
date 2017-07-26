@@ -26,9 +26,8 @@
     algorithm           = histogram
     compactionHeuristic = true
     tool                = vimdiff
-[difftool "sourcetree"]
-    cmd  = opendiff \"$LOCAL\" \"$REMOTE\"
-    path =
+[difftool "vimdiff"]
+    cmd = /usr/local/bin/vimdiff -O $LOCAL $REMOTE
 [merge]
     # from 1.7.6
     ff   = true
@@ -37,9 +36,8 @@
     driver = true
 [mergetool]
     keepBackup = true
-[mergetool "sourcetree"]
-    cmd           = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-    trustExitCode = true
+[mergetool "vimdiff"]
+    cmd = /usr/local/bin/vimdiff -O $LOCAL $REMOTE
 [pull]
     # from 1.7.9
     rebase = true
@@ -49,4 +47,7 @@
     show = diff-highlight | less
 [rerere]
     enabled = true
+[user]
+    name = KazuakiM
+    email = kazuaki_mabuchi_to_go@hotmail.co.jp
 # vim:ft=gitconfig
