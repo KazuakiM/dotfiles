@@ -280,10 +280,10 @@ endfunction "}}}
 
 function! KazuakiMStatuslineSwitch() abort "{{{
     if s:statuslineSwitch ==# 1
-        setlocal statusline=\ %t%{KazuakiMStatuslinePaste()}%m%r%h%w%q\ %{KazuakiMStatuslineSyntax()}%<%=%l/%L\ 
+        set statusline=\ %t%{KazuakiMStatuslinePaste()}%m%r%h%w%q\ %{KazuakiMStatuslineSyntax()}%<%=%l/%L\ 
         let s:statuslineSwitch = 0
     else
-        setlocal statusline=\ %t%{KazuakiMStatuslinePaste()}%m%r%h%w%q\ %{KazuakiMStatuslineSyntax()}%<%=%F\ \|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ \|\ %l/%L\ 
+        set statusline=\ %t%{KazuakiMStatuslinePaste()}%m%r%h%w%q\ %{KazuakiMStatuslineSyntax()}%<%=%F\ \|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ \|\ %l/%L\ 
         let s:statuslineSwitch = 1
     endif
 endfunction "}}}
