@@ -475,6 +475,8 @@ if dein#load_state(s:deinDir)
     call dein#add('glidenote/memolist.vim')
     call dein#add('hail2u/vim-css3-syntax')
     call dein#add('junegunn/vim-easy-align')
+    "TODO:kana-san http://inside.pixiv.net/entry/2016/12/10/000000
+    "call dein#add('kana/vim-better-tag-jump')
     call dein#add('kannokanno/previm')
     call dein#add('KazuakiM/neosnippet-snippets')
     "call dein#add('KazuakiM/vim-ms-translator')

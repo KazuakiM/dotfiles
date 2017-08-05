@@ -3,6 +3,7 @@
 .DS_Store
 .sudo_as_admin_successful
 C:/
+.cache/babl/
 .cache/eslint/
 .cache/fontconfig/
 .cache/gem/
