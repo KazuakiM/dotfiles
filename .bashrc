@@ -118,6 +118,9 @@ export ATOM_HOME="$XDG_CONFIG_HOME/atom/home"
 #MySQL {{{
 export MYSQL_HISTFILE="$HOME/.log/mysql/mysql_history"
 #}}}
+#Redis {{{
+export REDISCLI_HISTFILE="$HOME/.log/redis/rediscli_history"
+#}}}
 #Java {{{
 export JAVA_HOME="$XDG_CONFIG_HOME/java"
 #}}}

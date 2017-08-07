@@ -32,6 +32,7 @@ C:/
 .log/iterm2/
 .log/less/
 .log/mysql/
+.log/redis/
 .log/tmux/
 .log/wget/
 .ssh/
