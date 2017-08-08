@@ -178,7 +178,7 @@ case "${OSTYPE}" in
         alias VB='open     -a VirtualBox'
         #}}}
         # export {{{
-        export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+        export EDITOR=/usr/local/opt/macvim-kaoriya/MacVim.app/Contents/MacOS/vim
         export HOMEBREW_NO_ANALYTICS=1
         export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
         export MYSQL_PS1="\d @\h> "
