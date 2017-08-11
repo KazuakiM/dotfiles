@@ -121,6 +121,13 @@ function! s:KazuakimPhpTagJump(cw, tli)
 endfunction
 "}}}
 
+" vital.vim {{{
+function! kazuakim#Path2ProjectDirectory(path) abort "{{{
+    let s:Prelude = ! exists('s:Prelude') ? vital#of('vital').import('Prelude') : s:Prelude
+    return s:Prelude.path2project_directory(a:path)
+endfunction "}}}
+"}}}
+
 " nerdtree {{{
 function! kazuakim#NerdTreeCurrentDir() abort "{{{
     execute 'NERDTree ' . fnameescape(expand('%:p:h'))

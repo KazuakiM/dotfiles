@@ -94,15 +94,6 @@ function! s:AutoMkdir(dir) abort "{{{
     endif
 endfunction "}}}
 
-function! KazuakiMPath2ProjectDirectory(path) abort "{{{
-    if &l:diff
-        return fnameescape(expand('%:p:h'))
-    endif
-
-    let s:Prelude = ! exists('s:Prelude') ? vital#of('vital').import('Prelude') : s:Prelude
-    return s:Prelude.path2project_directory(a:path)
-endfunction "}}}
-
 function! s:VimStart(backupDir, undoDir) abort "{{{
     "Check 256KB file size.
     if 262144 <= getfsize(expand('%:p'))
@@ -167,7 +158,7 @@ function! s:BufEnter() abort "{{{
     endif
 
     " Move current file(/directory) path
-    execute 'lcd '. KazuakiMPath2ProjectDirectory('%')
+    execute 'lcd '. fnameescape(expand('%:p:h'))
 
     " default filetype
     if &filetype is# '' || &filetype is# 'text'
@@ -533,8 +524,8 @@ syntax enable
 let g:disable_MyGrep     = 1
 let g:QFix_PreviewHeight = 20
 let g:QFixWin_EnableMode = 1
-nnoremap <expr><Leader>grek ':grep! '. expand('<cword>') .' '. KazuakiMPath2ProjectDirectory('%') .'<C-b><Right><Right><Right><Right><Right><Right>'
-nnoremap <expr><Leader>grel ':grep!  '. KazuakiMPath2ProjectDirectory('%') .'<C-b><Right><Right><Right><Right><Right><Right>'
+nnoremap <expr><Leader>grek ':grep! '. expand('<cword>') .' '. kazuakim#Path2ProjectDirectory('%') .'<C-b><Right><Right><Right><Right><Right><Right>'
+nnoremap <expr><Leader>grel ':grep!  '. kazuakim#Path2ProjectDirectory('%') .'<C-b><Right><Right><Right><Right><Right><Right>'
 nnoremap <expr><Leader>greh ':grep! '. expand('<cword>') .' '. expand('%:p')
 "MEMO:tabnew <C-w>gf
 "}}}
@@ -573,8 +564,8 @@ let g:indentLine_faster = 1
 " nerdtree {{{
 nnoremap <SID>[nerdtree] <Nop>
 nmap <Leader>n <SID>[nerdtree]
-nnoremap <SID>[nerdtree]n :<C-u>NERDTree<CR>
-nnoremap <SID>[nerdtree]b :<C-u>call<Space>kazuakim#NerdTreeCurrentDir()<CR>
+nnoremap <expr><SID>[nerdtree]n ':NERDTree ' . kazuakim#Path2ProjectDirectory('%') . '<CR>'
+nnoremap <SID>[nerdtree]b :<C-u>NERDTree<CR>
 let g:NERDTreeBookmarksFile     = s:envHome . '/.vim/nerdtree/.NERDTreeBookmarks'
 let g:NERDTreeMinimalUI         = 1
 let g:NERDTreeRespectWildIgnore = 1
