@@ -53,13 +53,72 @@ function! kazuakim#TagJumper() abort "{{{
     let l:tli = taglist('^' . l:cw . '$')
     if len(l:tli) ==# 1 && l:tli[0].name ==# l:cw
         if expand('%:p') ==# l:tli[0].filename
-            return 'tjump ' . l:cw
+            execute 'tjump ' . l:cw
         else
-            return 'tab stjump ' . l:cw
+            execute 'tab stjump ' . l:cw
         endif
+        return
     endif
-    return 'tab stselect ' . l:cw
+
+    if &filetype is# 'php'
+        call s:KazuakimPhpTagJump(l:cw, l:tli)
+    else
+        execute 'tab stselect ' . l:cw
+    endif
 endfunction "}}}
+
+" http://inside.pixiv.net/entry/2016/12/10/000000
+let g:mabuchi = {}
+function! s:_KazuakimGuessClassName(cw)
+    let l:line = getline('.')
+    let l:cword_start_pos = searchpos('\V' . escape(a:cw, '\'), 'bcW', line('.'))
+    let l:prefix_end_index = l:cword_start_pos[1] - 2
+    let l:prefix = l:prefix_end_index >= 0 ? l:line[:l:prefix_end_index] : ''
+
+    if l:prefix =~# '\<self::$' || l:prefix =~# '$this->$'
+        normal! 999[{
+        if search('\<class\>', 'bW') == 0
+            return ''
+        endif
+        normal! W
+        return expand('<cword>')
+    elseif l:prefix =~# ' extends ' || l:prefix =~# ' implements '
+        return a:cw
+    elseif l:prefix =~# '\<\k\+::$'
+        return matchstr(l:prefix, '\<\zs\k\+\ze::$')
+    endif
+    return ''
+endfunction
+
+function! s:KazuakimGuessClassName(cw)
+    let l:cursor_pos = getpos('.')
+    let l:class_name = s:_KazuakimGuessClassName(a:cw)
+    call setpos('.', l:cursor_pos)
+    return l:class_name
+endfunction
+
+function! s:KazuakimPhpTagJump(cw, tli)
+    let l:class_name = s:KazuakimGuessClassName(a:cw)
+    if l:class_name != ''
+        for l:tag in a:tli
+            if (has_key(l:tag, 'class') && l:tag.class ==# l:class_name)||
+                \ (l:tag.kind ==# 'c' && l:tag.name ==# l:class_name)
+                "FIXME:tagnew
+                "if expand('%:p') !=# l:tag.filename
+                "    tabnew
+                "    "lcd fnameescape(expand('%:p:h'))
+                "    "setlocal filetype=php tags=xxx
+                "    "execute 'normal! a' . a:cw
+                "endif
+                let l:jc = index(a:tli, l:tag) + 1
+                execute 'normal!' l:jc."\<C-]>"
+                return
+            endif
+        endfor
+    else
+        execute 'tab stselect ' . a:cw
+    endif
+endfunction
 "}}}
 
 " nerdtree {{{
