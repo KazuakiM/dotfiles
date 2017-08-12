@@ -13,9 +13,9 @@ function! s:setTags(name, other) abort "{{{
     endif
 endfunction "}}}
 
-"autocmd MyAutoCmd BufNewFile,BufRead $HOME/sample/*.php          call s:setTags('sample', ',' . $HOME . '/.vim/tags/global.tags')
-"autocmd MyAutoCmd BufNewFile,BufRead $HOME/huga/*.{js,json,html} setlocal tags=$HOME/.vim/tags/huga.tags
-"autocmd MyAutoCmd BufNewFile,BufRead C:/usr/local/src/hoge/*.php setlocal tags=$HOME/.vim/tags/hoge.tags
+"autocmd MyAutoCmd BufNewFile,BufRead,TabNew $HOME/sample/*.php          call s:setTags('sample', ',' . $HOME . '/.vim/tags/global.tags')
+"autocmd MyAutoCmd BufNewFile,BufRead,TabNew $HOME/huga/*.{js,json,html} setlocal tags=$HOME/.vim/tags/huga.tags
+"autocmd MyAutoCmd BufNewFile,BufRead,TabNew C:/usr/local/src/hoge/*.php setlocal tags=$HOME/.vim/tags/hoge.tags
 "}}}
 
 "vim-ms-translator {{{

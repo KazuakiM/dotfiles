@@ -103,15 +103,19 @@ function! s:KazuakimPhpTagJump(cw, tli)
         for l:tag in a:tli
             if (has_key(l:tag, 'class') && l:tag.class ==# l:class_name)||
                 \ (l:tag.kind ==# 'c' && l:tag.name ==# l:class_name)
-                "FIXME:tagnew
-                "if expand('%:p') !=# l:tag.filename
-                "    tabnew
-                "    "lcd fnameescape(expand('%:p:h'))
-                "    "setlocal filetype=php tags=xxx
-                "    "execute 'normal! a' . a:cw
-                "endif
+                let l:bufDel = 0
+                if expand('%:p') !=# l:tag.filename
+                    tabnew kazuakim_dummy.php
+                    execute 'normal! a' . a:cw
+                    let l:bufDel = 1
+                endif
+
                 let l:jc = index(a:tli, l:tag) + 1
                 execute 'normal!' l:jc."\<C-]>"
+
+                if l:bufDel ==# 1
+                    bdelete! kazuakim_dummy.php
+                endif
                 return
             endif
         endfor
