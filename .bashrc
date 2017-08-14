@@ -207,6 +207,10 @@ case "${OSTYPE}" in
         #    #PERL_MM_OPT="INSTALL_BASE=$HOME/.lib/perl" cpan local::lib
         #    #eval "$(perl -I$HOME/.lib/perl -Mlocal::lib)";
         #fi
+        #brew --prefix curl
+        if [ -d $BREW_PREFIX/opt/curl/bin ]; then
+            localPath="$BREW_PREFIX/opt/curl/bin:$localPath"
+        fi
         #brew --prefix gnu-tar
         if [ -d $BREW_PREFIX/opt/gnu-tar/libexec/gnubin ]; then
             localPath="$BREW_PREFIX/opt/gnu-tar/libexec/gnubin:$localPath"
@@ -215,17 +219,17 @@ case "${OSTYPE}" in
         if [ -d $BREW_PREFIX/opt/gnu-sed/libexec/gnubin ]; then
             localPath="$BREW_PREFIX/opt/gnu-sed/libexec/gnubin:$localPath"
         fi
-        ##brew --prefix ruby
-        #if [ -d $BREW_PREFIX/opt/ruby/bin ]; then
-        #    localPath="$BREW_PREFIX/opt/ruby/bin:$localPath"
-        #fi
-        ##brew --prefix svn
-        #if [ -d $BREW_PREFIX/opt/subversion/bin ]; then
-        #    localPath="$BREW_PREFIX/opt/subversion/bin:$localPath"
-        #fi
+        #brew --prefix icu4c
+        if [ -d $BREW_PREFIX/opt/icu4c/bin ]; then
+            localPath="$BREW_PREFIX/opt/icu4c/bin:$BREW_PREFIX/opt/icu4c/sbin:$localPath"
+        fi
         #brew --prefix macvim-kaoriya
         if [ -d $BREW_PREFIX/opt/macvim-kaoriya/MacVim.app/Contents/MacOS ]; then
             localPath="$BREW_PREFIX/opt/macvim-kaoriya/MacVim.app/Contents/MacOS:$localPath"
+        fi
+        #brew --prefix sqlite
+        if [ -d $BREW_PREFIX/opt/sqlite/bin ]; then
+            localPath="$BREW_PREFIX/opt/sqlite/bin:$localPath"
         fi
         #git diff-highlight
         if [ -d $BREW_PREFIX/share/git-core/contrib/diff-highlight ]; then
