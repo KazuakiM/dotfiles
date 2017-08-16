@@ -68,8 +68,7 @@ function! kazuakim#TagJumper() abort "{{{
 endfunction "}}}
 
 " http://inside.pixiv.net/entry/2016/12/10/000000
-let g:mabuchi = {}
-function! s:_KazuakimGuessClassName(cw)
+function! s:_KazuakimGuessClass(cw)
     let l:line = getline('.')
     let l:cword_start_pos = searchpos('\V' . escape(a:cw, '\'), 'bcW', line('.'))
     let l:prefix_end_index = l:cword_start_pos[1] - 2
@@ -81,47 +80,55 @@ function! s:_KazuakimGuessClassName(cw)
             return ''
         endif
         normal! W
-        return expand('<cword>')
-    elseif l:prefix =~# ' extends ' || l:prefix =~# ' implements '
-        return a:cw
+        return {'kind': 'c', 'name': expand('<cword>')}
+    elseif l:prefix =~# ' extends '
+        return {'kind': 'c', 'name': a:cw}
+    elseif l:prefix =~# ' implements '
+        return {'kind': 'i', 'name': a:cw}
     elseif l:prefix =~# '\<\k\+::$'
-        return matchstr(l:prefix, '\<\zs\k\+\ze::$')
+        return {'kind': 'c', 'name': matchstr(l:prefix, '\<\zs\k\+\ze::$')}
     endif
-    return ''
+    return {'kind': 'c', 'name': ''}
 endfunction
 
-function! s:KazuakimGuessClassName(cw)
+function! s:KazuakimGuessClass(cw)
     let l:cursor_pos = getpos('.')
-    let l:class_name = s:_KazuakimGuessClassName(a:cw)
+    let l:class = s:_KazuakimGuessClass(a:cw)
     call setpos('.', l:cursor_pos)
-    return l:class_name
+    return l:class
 endfunction
 
 function! s:KazuakimPhpTagJump(cw, tli)
-    let l:class_name = s:KazuakimGuessClassName(a:cw)
-    if l:class_name != ''
-        for l:tag in a:tli
-            if (has_key(l:tag, 'class') && l:tag.class ==# l:class_name)||
-                \ (l:tag.kind ==# 'c' && l:tag.name ==# l:class_name)
-                let l:bufDel = 0
-                if expand('%:p') !=# l:tag.filename
-                    tabnew kazuakim_dummy.php
-                    execute 'normal! a' . a:cw
-                    let l:bufDel = 1
-                endif
-
-                let l:jc = index(a:tli, l:tag) + 1
-                execute 'normal!' l:jc."\<C-]>"
-
-                if l:bufDel ==# 1
-                    bdelete! kazuakim_dummy.php
-                endif
-                return
-            endif
-        endfor
-    else
+    let l:class = s:KazuakimGuessClass(a:cw)
+    let l:mul = 0
+    for l:tag in a:tli
+        if l:tag.kind ==# l:class.kind && l:tag.name ==# l:class.name
+            let l:mul += 1
+        endif
+    endfor
+    if l:class.name ==# '' || 1 < l:mul
         execute 'tab stselect ' . a:cw
+        return
     endif
+
+    for l:tag in a:tli
+        if l:tag.kind ==# l:class.kind && l:tag.name ==# l:class.name
+            let l:bufDel = 0
+            if expand('%:p') !=# l:tag.filename
+                tabnew kazuakim_dummy.php
+                execute 'normal! a' . a:cw
+                let l:bufDel = 1
+            endif
+
+            let l:jc = index(a:tli, l:tag) + 1
+            execute 'normal!' l:jc."\<C-]>"
+
+            if l:bufDel ==# 1
+                bdelete! kazuakim_dummy.php
+            endif
+            return
+        endif
+    endfor
 endfunction
 "}}}
 
