@@ -59,8 +59,7 @@ endfunction "}}}
 let s:currentTime  = ! exists('s:currentTime')  ? localtime() : s:currentTime
 let s:envHome      = ! exists('s:envHome')      ? $HOME       : s:envHome
 let s:envUser      = ! exists('s:envUser')      ? $USER       : s:envUser
-let s:lineUpdate   = ! exists('s:lineUpdate')   ? 0           : s:lineUpdate
-let s:statuslineSwitch = ! exists('s:statuslineSwitch') ? 1   : s:lineUpdate
+let s:statuslineSwitch = ! exists('s:statuslineSwitch') ? 1   : s:statuslineSwitch
 let s:swapFilePath = ! exists('s:swapFilePath') ? ''          : s:swapFilePath
 let s:deinDir      = ! exists('s:deinDir')      ? s:envHome . '/.vim/dein.vim' : s:deinDir
 
@@ -251,13 +250,9 @@ autocmd MyAutoCmd BufNewFile,BufRead $HOME/work/dotfiles/.config/composer/vendor
 function! KazuakiMStatuslineSyntax() abort "{{{
     let l:ret = qfstatusline#Update()
     if 0 < len(l:ret)
-        if s:lineUpdate is# 0
-            highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta guibg=Magenta
-            let s:lineUpdate = 1
-        endif
-    elseif s:lineUpdate is# 1
+        highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta guibg=Magenta
+    else
         highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Grey guibg=Grey
-        let s:lineUpdate = 0
     endif
     return l:ret
 endfunction "}}}
