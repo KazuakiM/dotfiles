@@ -77,18 +77,20 @@ function! s:_KazuakimGuessClass(cw)
     if l:prefix =~# '\<self::$' || l:prefix =~# '$this->$'
         normal! 999[{
         if search('\<class\>', 'bW') == 0
-            return ''
+            return {'kind': ['c'], 'name': ''}
         endif
         normal! W
-        return {'kind': 'c', 'name': expand('<cword>')}
-    elseif l:prefix =~# ' extends '
-        return {'kind': 'c', 'name': a:cw}
-    elseif l:prefix =~# ' implements '
-        return {'kind': 'i', 'name': a:cw}
+        return {'kind': ['c'], 'name': expand('<cword>')}
+    elseif l:prefix =~# '\<use\>'
+        return {'kind': ['c', 't', 'i'], 'name': a:cw}
+    elseif l:prefix =~# '\<extends\>'
+        return {'kind': ['c'], 'name': a:cw}
+    elseif l:prefix =~# '\<implements\>'
+        return {'kind': ['i'], 'name': a:cw}
     elseif l:prefix =~# '\<\k\+::$'
-        return {'kind': 'c', 'name': matchstr(l:prefix, '\<\zs\k\+\ze::$')}
+        return {'kind': ['c'], 'name': matchstr(l:prefix, '\<\zs\k\+\ze::$')}
     endif
-    return {'kind': 'c', 'name': ''}
+    return {'kind': ['c'], 'name': ''}
 endfunction
 
 function! s:KazuakimGuessClass(cw)
@@ -102,7 +104,7 @@ function! s:KazuakimPhpTagJump(cw, tli)
     let l:class = s:KazuakimGuessClass(a:cw)
     let l:mul = 0
     for l:tag in a:tli
-        if l:tag.kind ==# l:class.kind && l:tag.name ==# l:class.name
+        if -1 < index(l:class.kind, l:tag.kind) && l:tag.name ==# l:class.name
             let l:mul += 1
         endif
     endfor
@@ -112,7 +114,7 @@ function! s:KazuakimPhpTagJump(cw, tli)
     endif
 
     for l:tag in a:tli
-        if l:tag.kind ==# l:class.kind && l:tag.name ==# l:class.name
+        if -1 < index(l:class.kind, l:tag.kind) && l:tag.name ==# l:class.name
             let l:bufDel = 0
             if expand('%:p') !=# l:tag.filename
                 tabnew kazuakim_dummy.php
