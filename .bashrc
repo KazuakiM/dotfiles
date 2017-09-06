@@ -195,11 +195,10 @@ case "${OSTYPE}" in
             eval "$(rbenv init -)";
         fi
 
-        #TODO: error
         #brew --prefix bash-completion2
-        #if [ -d $BREW_PREFIX/opt/bash-completion2 ]; then
-        #    $BREW_PREFIX/opt/bash-completion2/share/bash-completion/bash_completion
-        #fi
+        if [ -d $BREW_PREFIX/opt/bash-completion2 ]; then
+            $BREW_PREFIX/opt/bash-completion2/share/bash-completion/bash_completion
+        fi
 
         ##brew --prefix perl
         #if [ -d $BREW_PREFIX/opt/perl/bin ]; then
