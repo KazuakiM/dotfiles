@@ -10,7 +10,9 @@ function! s:system(cmd, message) "{{{
     catch /E117.*/
         return system(a:cmd)
     finally
-        "echohl WarningMsg | echomsg '['. strftime('%H:%M:%S', localtime()) . '] ' . a:message | echohl None
+        setlocal cmdheight=2
+        echohl WarningMsg | echomsg '['. strftime('%H:%M:%S', localtime()) . '] ' . a:message | echohl None
+        set cmdheight=1
     endtry
 endfunction "}}}
 
