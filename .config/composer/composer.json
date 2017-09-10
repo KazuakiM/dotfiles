@@ -1,10 +1,8 @@
 {
     "require": {
-        "apigen/apigen": "5.0.0-RC3",
         "friendsofphp/php-cs-fixer": "*",
         "hirak/prestissimo": "^0.3",
-        "kazuakim/extension-phpdoc": "dev-master",
-        "phpunit/phpunit": "*",
-        "roave/better-reflection": "@dev"
+        "jetbrains/phpstorm-stubs": "dev-master",
+        "phpunit/phpunit": "*"
     }
 }

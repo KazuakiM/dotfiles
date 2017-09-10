@@ -80,17 +80,18 @@ function! s:_KazuakimGuessClass(cw)
             return {'kind': ['c'], 'name': ''}
         endif
         normal! W
-        return {'kind': ['c'], 'name': expand('<cword>')}
+        return {'kind': ['c'], 'name': expand('<cword>'), 'namespace': ''}
     elseif l:prefix =~# '\<use\>'
-        return {'kind': ['c', 't', 'i'], 'name': a:cw}
+        return {'kind': ['c', 't', 'i'], 'name': a:cw, 'namespace': join(split(l:prefix[stridx(l:prefix, 'use ')+4:], '\'), '\\')}
     elseif l:prefix =~# '\<extends\>'
-        return {'kind': ['c'], 'name': a:cw}
+        return {'kind': ['c'], 'name': a:cw, 'namespace': ''}
     elseif l:prefix =~# '\<implements\>'
-        return {'kind': ['i'], 'name': a:cw}
+        return {'kind': ['i'], 'name': a:cw, 'namespace': ''}
     elseif l:prefix =~# '\<\k\+::$'
-        return {'kind': ['c'], 'name': matchstr(l:prefix, '\<\zs\k\+\ze::$')}
+        return {'kind': ['c'], 'name': matchstr(l:prefix, '\<\zs\k\+\ze::$'), 'namespace': ''}
     endif
-    return {'kind': ['c'], 'name': ''}
+
+    return {'kind': ['c'], 'name': '', 'namespace': ''}
 endfunction
 
 function! s:KazuakimGuessClass(cw)
@@ -104,7 +105,7 @@ function! s:KazuakimPhpTagJump(cw, tli)
     let l:class = s:KazuakimGuessClass(a:cw)
     let l:mul = 0
     for l:tag in a:tli
-        if -1 < index(l:class.kind, l:tag.kind) && l:tag.name ==# l:class.name
+        if -1 < index(l:class.kind, l:tag.kind) && l:tag.name ==# l:class.name && ((0 < strlen(l:class.namespace) && l:tag.namespace ==# l:class.namespace) || 0 ==# strlen(l:class.namespace))
             let l:mul += 1
         endif
     endfor
@@ -114,7 +115,7 @@ function! s:KazuakimPhpTagJump(cw, tli)
     endif
 
     for l:tag in a:tli
-        if -1 < index(l:class.kind, l:tag.kind) && l:tag.name ==# l:class.name
+        if -1 < index(l:class.kind, l:tag.kind) && l:tag.name ==# l:class.name && ((0 < strlen(l:class.namespace) && l:tag.namespace ==# l:class.namespace) || 0 ==# strlen(l:class.namespace))
             let l:bufDel = 0
             if expand('%:p') !=# l:tag.filename
                 tabnew kazuakim_dummy.php
