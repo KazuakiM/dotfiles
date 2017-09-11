@@ -12,7 +12,16 @@ function! s:setTags(name, other) abort "{{{
     endif
 endfunction "}}}
 
-"autocmd MyAutoCmd BufWritePost /srv/doc/* call vimproc#system('rsync -rlpz --delete --exclude=".git/" /srv/doc/ /Users/mabuchikazuaki/work/test')
+function! s:rsync(from, to) "{{{
+    let g:quickrun_config['rsync'] = {
+    \   'command': 'rsync',
+    \   'cmdopt' : '-rlpz --delete --exclude=".git/" ' . a:from . ' ' . a:to,
+    \   'exec':    '%c %o'
+    \}
+    QuickRun rsync
+endfunction "}}}
+
+"autocmd MyAutoCmd BufWritePost /srv/doc/* call s:rsync('/srv/doc/', '/Users/mabuchikazuaki/work/test')
 
 "autocmd MyAutoCmd BufNewFile,BufRead,TabNew $HOME/sample/*.php          call s:setTags('sample', ',' . $HOME . '/.vim/tags/global.tags')
 "autocmd MyAutoCmd BufNewFile,BufRead,TabNew $HOME/huga/*.{js,json,html} setlocal tags=$HOME/.vim/tags/huga.tags
