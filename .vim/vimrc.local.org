@@ -14,9 +14,11 @@ endfunction "}}}
 
 function! s:rsync(from, to) "{{{
     let g:quickrun_config['rsync'] = {
-    \   'command': 'rsync',
-    \   'cmdopt' : '-rlpz --delete --exclude=".git/" ' . a:from . ' ' . a:to,
-    \   'exec':    '%c %o'
+    \   'command':               'rsync',
+    \   'cmdopt':                '-rlpz --delete --exclude=".git/" ' . a:from . ' ' . a:to,
+    \   'exec':                  '%c %o',
+    \   'outputter':             'error',
+    \   'outputter/error/error': 'quickfix'
     \}
     QuickRun rsync
 endfunction "}}}
