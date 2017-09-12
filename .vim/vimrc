@@ -30,29 +30,30 @@
 "}}}
 
 " Variables {{{
-if has('win32') || has ('win64')
-    let s:osType = 'win'
-elseif has('macunix')
-    let s:osType = 'macunix'
-else
-    let s:osType = 'unix'
-endif
+"if has('win32') || has ('win64')
+"    let s:osType = 'win'
+"elseif has('macunix')
+"if has('macunix')
+let s:osType = 'macunix'
+"else
+"    let s:osType = 'unix'
+"endif
 
 function! s:GetTablineRight() abort "{{{
     let s:tablineRight = '%#TabLine# ' . strftime('%y-%m-%d %H:%M', s:currentTime) . ' '
-    if s:osType ==# 'macunix'
-        let l:battery = system("pmset -g ps|egrep -o '[0-9]{1,3}%'|egrep -o '[0-9]{1,3}'|tr -d '\n'")
-        let l:charge  = system("pmset -g ps|egrep -o 'discharging'|tr -d '\n'")
-        if l:battery < 20
-            if l:charge ==# 'discharging'
-                let s:tablineRight = s:tablineRight . '%#KazuakiMError# ' . l:battery . '%% '
-            else
-                let s:tablineRight = s:tablineRight . '%#KazuakiMWarning# ' . l:battery . '%% '
-            endif
+    "if s:osType ==# 'macunix'
+    let l:battery = system("pmset -g ps|egrep -o '[0-9]{1,3}%'|egrep -o '[0-9]{1,3}'|tr -d '\n'")
+    let l:charge  = system("pmset -g ps|egrep -o 'discharging'|tr -d '\n'")
+    if l:battery < 20
+        if l:charge ==# 'discharging'
+            let s:tablineRight = s:tablineRight . '%#KazuakiMError# ' . l:battery . '%% '
         else
-            let s:tablineRight = s:tablineRight . '%#KazuakiMInfo# ' . l:battery . '%% '
+            let s:tablineRight = s:tablineRight . '%#KazuakiMWarning# ' . l:battery . '%% '
         endif
+    else
+        let s:tablineRight = s:tablineRight . '%#KazuakiMInfo# ' . l:battery . '%% '
     endif
+    "endif
     return s:tablineRight
 endfunction "}}}
 
@@ -104,20 +105,20 @@ function! s:VimStart(backupDir, undoDir) abort "{{{
 endfunction "}}}
 
 if has('vim_starting')
-    if s:osType ==# 'win'
-        set runtimepath^=$HOME\.vim runtimepath+=$HOME\.vim\after
-        if s:VimStart(s:envHome . '\.vim\backup\', s:envHome . '\.vim\undo\')
-            finish
-        endif
-        " vimproc.vim {{{
-        let g:vimproc#dll_path             = s:deinDir . '/repos/github.com/Shougo/vimproc.vim/lib/vimproc_win64.dll'
-        let g:vimproc#download_windows_dll = 1
-        "}}}
-    else
-        if s:VimStart(s:envHome . '/.vim/backup/', s:envHome . '/.vim/undo/')
-            finish
-        endif
+    "if s:osType ==# 'win'
+    "    set runtimepath^=$HOME\.vim runtimepath+=$HOME\.vim\after
+    "    if s:VimStart(s:envHome . '\.vim\backup\', s:envHome . '\.vim\undo\')
+    "        finish
+    "    endif
+    "    " vimproc.vim {{{
+    "    let g:vimproc#dll_path             = s:deinDir . '/repos/github.com/Shougo/vimproc.vim/lib/vimproc_win64.dll'
+    "    let g:vimproc#download_windows_dll = 1
+    "    "}}}
+    "else
+    if s:VimStart(s:envHome . '/.vim/backup/', s:envHome . '/.vim/undo/')
+        finish
     endif
+    "endif
 endif
 
 function! s:CheckString() abort "{{{
@@ -158,11 +159,6 @@ function! s:BufEnter() abort "{{{
 
     " Move current file(/directory) path
     execute 'lcd '. fnameescape(expand('%:p:h'))
-
-    " default filetype
-    if &filetype is# '' || &filetype is# 'text'
-        setlocal filetype=markdown
-    endif
 
     " Forcibly update
     set formatoptions-=c formatoptions-=b formatoptions+=j formatoptions-=t formatoptions-=v textwidth=0
@@ -496,10 +492,10 @@ if dein#load_state(s:deinDir)
     call dein#add('vim-scripts/matchit.zip')
     call dein#add('vim-scripts/taglist.vim')
     call dein#add('Yggdroot/indentLine')
-    if s:osType !=# 'win'
-        call dein#add('osyo-manga/shabadou.vim')
-        call dein#add('osyo-manga/vim-watchdogs')
-    endif
+    "if s:osType !=# 'win'
+    call dein#add('osyo-manga/shabadou.vim')
+    call dein#add('osyo-manga/vim-watchdogs')
+    "endif
 
     call dein#add('KazuakiM/vim-qfsigns',  {'lazy':1})
     call dein#add('KazuakiM/vim-regexper', {'lazy':1})
@@ -746,7 +742,6 @@ nmap <Space>M <Plug>(quickhl-manual-reset)
 let g:quickhl_manual_colors = [
 \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Green        guibg=Green',
 \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta      guibg=Magenta',
-\    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow       guibg=Yellow',
 \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Cyan         guibg=Cyan',
 \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=Brown        guibg=Brown',
 \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Grey         guibg=Grey',
@@ -757,6 +752,7 @@ let g:quickhl_manual_colors = [
 \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkCyan     guibg=DarkCyan',
 \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=DarkGray     guibg=DarkGray',
 \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=DarkBlue     guibg=DarkBlue',
+\    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Yellow       guibg=Yellow',
 \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightGreen   guibg=LightGreen',
 \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightMagenta guibg=LightMagenta',
 \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightRed     guibg=LightRed',
@@ -926,53 +922,53 @@ let g:vim_markdown_folding_disabled = 1
 "}}}
 
 " Exclusive {{{
-if s:osType !=# 'macunix'
-endif
-
-if s:osType !=# 'win'
-    " memolist.vim {{{
-    let g:memolist_path = s:envHome .'/.vim/memolist.vim'
-    "}}}
-    " neoinclude.vim {{{
-    let g:neoinclude#delimiters = '\'
-    "}}}
-    " shabadou.vim
-    " vim-watchdogs {{{
-    let g:watchdogs_check_BufWritePost_enable  = 1
-    let g:watchdogs_check_BufWritePost_enables = {'vim': 0}
-    let g:watchdogs_check_CursorHold_enable    = 1
-    let g:watchdogs_check_CursorHold_enables   = {'vim': 0}
-    "}}}
-endif
-
-if s:osType !=# 'unix'
-endif
+"if s:osType !=# 'macunix'
+"endif
+"
+"if s:osType !=# 'win'
+"    " memolist.vim {{{
+"    let g:memolist_path = s:envHome .'/.vim/memolist.vim'
+"    "}}}
+"    " neoinclude.vim {{{
+"    let g:neoinclude#delimiters = '\'
+"    "}}}
+"    " shabadou.vim
+"    " vim-watchdogs {{{
+"    let g:watchdogs_check_BufWritePost_enable  = 1
+"    let g:watchdogs_check_BufWritePost_enables = {'vim': 0}
+"    let g:watchdogs_check_CursorHold_enable    = 1
+"    let g:watchdogs_check_CursorHold_enables   = {'vim': 0}
+"    "}}}
+"endif
+"
+"if s:osType !=# 'unix'
+"endif
 "}}}
 
 " Only {{{
-if s:osType ==# 'macunix'
-    " mapping {{{
-    nnoremap ao :<C-u>!open<Space>-a<Space>
-    nnoremap aq :<C-u>!osascript<Space>-e<Space>'tell<Space>application<Space>""<Space>to<Space>quit'<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
-    nnoremap af :<C-u>!osascript<Space>-e<Space>'tell<Space>application<Space>""<Space>to<Space>activate'<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
-    "}}}
-    " previm {{{
-    let g:previm_open_cmd = 'open -a "Google Chrome"'
-    "}}}
+"if s:osType ==# 'macunix'
+" mapping {{{
+nnoremap ao :<C-u>!open<Space>-a<Space>
+nnoremap aq :<C-u>!osascript<Space>-e<Space>'tell<Space>application<Space>""<Space>to<Space>quit'<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+nnoremap af :<C-u>!osascript<Space>-e<Space>'tell<Space>application<Space>""<Space>to<Space>activate'<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+"}}}
+" previm {{{
+let g:previm_open_cmd = 'open -a "Google Chrome"'
+"}}}
 
-elseif s:osType ==# 'win'
-    " previm {{{
-    let g:previm_open_cmd = 'C:/Program\ Files\ (x86)/Google/Chrome/Application/chrome.exe'
-    "}}}
-    " memolist.vim {{{
-    let g:memolist_path = '/cygwin64/home/' . $USER . '/.vim/memolist.vim'
-    "}}}
-    " neoinclude.vim {{{
-    let g:neoinclude#delimiters = '/'
-    "}}}
-
-elseif s:osType ==# 'unix'
-endif
+"elseif s:osType ==# 'win'
+"    " previm {{{
+"    let g:previm_open_cmd = 'C:/Program\ Files\ (x86)/Google/Chrome/Application/chrome.exe'
+"    "}}}
+"    " memolist.vim {{{
+"    let g:memolist_path = '/cygwin64/home/' . $USER . '/.vim/memolist.vim'
+"    "}}}
+"    " neoinclude.vim {{{
+"    let g:neoinclude#delimiters = '/'
+"    "}}}
+"
+"elseif s:osType ==# 'unix'
+"endif
 "}}}
 
 "}}}
