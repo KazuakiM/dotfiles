@@ -122,7 +122,7 @@ export MYSQL_HISTFILE="$HOME/.log/mysql/mysql_history"
 export REDISCLI_HISTFILE="$HOME/.log/redis/rediscli_history"
 #}}}
 #Java {{{
-export JAVA_HOME="$XDG_CONFIG_HOME/java"
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 #}}}
 #PHP {{{
 export COMPOSER_HOME="$XDG_CONFIG_HOME/composer"
