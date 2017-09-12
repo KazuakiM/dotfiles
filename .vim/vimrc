@@ -926,19 +926,19 @@ let g:vim_markdown_folding_disabled = 1
 "endif
 "
 "if s:osType !=# 'win'
-"    " memolist.vim {{{
-"    let g:memolist_path = s:envHome .'/.vim/memolist.vim'
-"    "}}}
-"    " neoinclude.vim {{{
-"    let g:neoinclude#delimiters = '\'
-"    "}}}
-"    " shabadou.vim
-"    " vim-watchdogs {{{
-"    let g:watchdogs_check_BufWritePost_enable  = 1
-"    let g:watchdogs_check_BufWritePost_enables = {'vim': 0}
-"    let g:watchdogs_check_CursorHold_enable    = 1
-"    let g:watchdogs_check_CursorHold_enables   = {'vim': 0}
-"    "}}}
+" memolist.vim {{{
+let g:memolist_path = s:envHome .'/.vim/memolist.vim'
+"}}}
+" neoinclude.vim {{{
+let g:neoinclude#delimiters = '\'
+"}}}
+" shabadou.vim
+" vim-watchdogs {{{
+let g:watchdogs_check_BufWritePost_enable  = 1
+let g:watchdogs_check_BufWritePost_enables = {'vim': 0}
+let g:watchdogs_check_CursorHold_enable    = 1
+let g:watchdogs_check_CursorHold_enables   = {'vim': 0}
+"}}}
 "endif
 "
 "if s:osType !=# 'unix'
