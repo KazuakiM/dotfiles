@@ -245,11 +245,11 @@ autocmd MyAutoCmd BufNewFile,BufRead $HOME/work/dotfiles/.config/composer/vendor
 
 function! KazuakiMStatuslineSyntax() abort "{{{
     let l:ret = qfstatusline#Update()
-    if 0 < len(l:ret)
-        highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta guibg=Magenta
-    else
-        highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Grey guibg=Grey
-    endif
+    "if 0 < len(l:ret)
+    "    highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta guibg=Magenta
+    "else
+    "    highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Grey guibg=Grey
+    "endif
     return l:ret
 endfunction "}}}
 
