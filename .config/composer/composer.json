@@ -3,6 +3,7 @@
         "friendsofphp/php-cs-fixer": "*",
         "hirak/prestissimo": "^0.3",
         "jetbrains/phpstorm-stubs": "dev-master",
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "*",
+        "sstalle/php7cc": "^1.2"
     }
 }
