@@ -1,9 +1,4 @@
-[push]
-    default = simple
-[core]
-    autocrlf = input
-[alias]
-    #df = diff --ignore-space-at-eol --ignore-space-change
-    # from 1.8.4
-    df  = diff --ignore-space-at-eol --ignore-blank-lines --ignore-all-space
+[user]
+    name  = KazuakiM
+    email = kazuaki_mabuchi_to_go@hotmail.co.jp
 # vim:ft=gitconfig

@@ -1,10 +1,12 @@
+# @url https://git-scm.com/docs/git-config#_conditional_includes
+#[includeIf "gitdir:/path/to/foo/.git"]
+#   path = ~/company/setting
+
 [include]
     # from 1.7.10
     path = ~/.config/git/gitconfig.local
-# from 2.13.0   https://git-scm.com/docs/git-config#_conditional_includes
-#[includeIf "gitdir:/path/to/foo/.git"]
-#   path = ~/company/setting
 [alias]
+    df  = diff --ignore-space-at-eol --ignore-blank-lines --ignore-all-space
     dff = difftool
     lg  = log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset'
     llg = !git log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset' origin/master..`git rev-parse --abbrev-ref HEAD`
@@ -16,6 +18,7 @@
 [branch]
     autosetuprebase = always
 [core]
+    autocrlf          = input
     editor            = vim
     precomposeunicode = true
     excludesfile      =  ~/.config/git/gitignore_global
@@ -29,7 +32,6 @@
 [difftool "vimdiff"]
     cmd = /usr/local/bin/vimdiff -O $LOCAL $REMOTE
 [merge]
-    # from 1.7.6
     ff   = true
     tool = vimdiff
 [merge "ours"]
@@ -39,12 +41,13 @@
 [mergetool "vimdiff"]
     cmd = /usr/local/bin/vimdiff -O $LOCAL $REMOTE
 [pull]
-    # from 1.7.9
     rebase = true
 [pager]
     diff = diff-highlight | less
     log  = diff-highlight | less
     show = diff-highlight | less
+[push]
+    default = simple
 [rerere]
     enabled = true
 [user]
