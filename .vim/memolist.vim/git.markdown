@@ -33,6 +33,11 @@ ssh -T git@github.com
 ssh-add -K $HOME/.ssh/id_rsa.pub
 ```
 
+GitHub page ignore Space
+```
+https://github.com/xxxxx/xxxxx/pull/<number>/files?w=1
+```
+
 Create branch
 ```bash
 pwd
