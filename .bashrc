@@ -158,7 +158,6 @@ case "${OSTYPE}" in
         alias ll='ls -AGhl'
         alias ls='ls -AGh'
         alias sl='ls -AGh'
-        alias lingr="sh $HOME/work/dotfiles/src/lingrStarter.sh"
         alias HTTPD='sudo apachectl'
         alias MYSQL='mysql.server'
         #}}}
