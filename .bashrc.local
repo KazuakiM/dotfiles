@@ -1,3 +1,7 @@
+## GitHub {{{
+#export HOMEBREW_GITHUB_API_TOKEN=
+#}}}
+
 ## Application Directory {{{
 #alias APP='cd $HOME/sample'
 #}}}
