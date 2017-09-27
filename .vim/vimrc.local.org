@@ -12,14 +12,14 @@ function! s:setTags(name, other) abort "{{{
     endif
 endfunction "}}}
 
+let g:quickrun_config['rsync'] = {
+\   'command':               'rsync',
+\   'exec':                  '%c %o',
+\   'outputter':             'error',
+\   'outputter/error/error': 'quickfix'
+\}
 function! s:rsync(from, to) "{{{
-    let g:quickrun_config['rsync'] = {
-    \   'command':               'rsync',
-    \   'cmdopt':                '-rlpz --delete --exclude=".git/" ' . a:from . ' ' . a:to,
-    \   'exec':                  '%c %o',
-    \   'outputter':             'error',
-    \   'outputter/error/error': 'quickfix'
-    \}
+    let g:quickrun_config.rsync.cmdopt = '-rlpz --delete --exclude="logs/" --exclude="log/" --exclude=".git/" ' . a:from . ' ' . a:to
     QuickRun rsync
 endfunction "}}}
 

@@ -631,8 +631,7 @@ let g:quickrun_config = {
 \        'outputter':                           'multi:buffer:quickfix',
 \        'outputter/buffer/close_on_empty':     1,
 \        'outputter/buffer/split':              ':botright',
-\        'runner':                              'vimproc',
-\        'runner/vimproc/updatetime':           60
+\        'runner':                              'job'
 \    },
 \    'javascript': {
 \        'command':     s:quickrun_config_javascript['command'],
