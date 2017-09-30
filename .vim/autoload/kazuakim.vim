@@ -74,14 +74,7 @@ function! s:_KazuakimGuessClass(cw)
     let l:prefix_end_index = l:cword_start_pos[1] - 2
     let l:prefix = l:prefix_end_index >= 0 ? l:line[:l:prefix_end_index] : ''
 
-    if l:prefix =~# '\<self::$'
-        normal! 999[{
-        if search('\<class\>', 'bW') == 0
-            return {'kind': ['c'], 'name': ''}
-        endif
-        normal! W
-        return {'kind': ['c'], 'name': expand('<cword>'), 'namespace': ''}
-    elseif l:prefix =~# '\<use\>'
+    if l:prefix =~# '\<use\>'
         return {'kind': ['c', 't', 'i'], 'name': a:cw, 'namespace': join(split(l:prefix[stridx(l:prefix, 'use ')+4:], '\'), '\\')}
     elseif l:prefix =~# '\<extends\>'
         return {'kind': ['c', 'i'], 'name': a:cw, 'namespace': ''}

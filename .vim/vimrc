@@ -84,6 +84,8 @@ endif
 scriptencoding utf-8
 
 let g:mapleader = ','
+noremap <Subleader> <Nop>
+map <Space> <Subleader>
 augroup MyAutoCmd
     autocmd!
 augroup END
@@ -244,7 +246,7 @@ autocmd MyAutoCmd BufNewFile,BufRead $HOME/.config/composer/vendor/*.php        
 autocmd MyAutoCmd BufNewFile,BufRead $HOME/work/dotfiles/.config/composer/vendor/*.php setlocal tags=$HOME/.vim/tags/global.tags
 
 function! KazuakiMStatuslineSyntax() abort "{{{
-    let l:ret = qfstatusline#Update()
+    let l:ret = ale#statusline#Status()
     "if 0 < len(l:ret)
     "    highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta guibg=Magenta
     "else
@@ -460,7 +462,6 @@ if dein#load_state(s:deinDir)
     call dein#add('kannokanno/previm')
     call dein#add('KazuakiM/neosnippet-snippets')
     "call dein#add('KazuakiM/vim-ms-translator')
-    call dein#add('KazuakiM/vim-qfstatusline')
     call dein#add('KazuakiM/vim-sqlfix')
     call dein#add('KazuakiM/unite-help')
     call dein#add('koron/codic-vim')
@@ -491,19 +492,16 @@ if dein#load_state(s:deinDir)
     call dein#add('vim-jp/vital.vim')
     call dein#add('vim-scripts/matchit.zip')
     call dein#add('vim-scripts/taglist.vim')
+    call dein#add('w0rp/ale')
     call dein#add('Yggdroot/indentLine')
-    "if s:osType !=# 'win'
-    call dein#add('osyo-manga/shabadou.vim')
-    call dein#add('osyo-manga/vim-watchdogs')
-    "endif
-
-    call dein#add('KazuakiM/vim-qfsigns',  {'lazy':1})
-    call dein#add('KazuakiM/vim-regexper', {'lazy':1})
-    call dein#add('KazuakiM/vim-snippets', {'lazy':1})
-    call dein#add('Kuniwak/vint',          {'lazy':1})
-    call dein#add('mustardamus/jqapi',     {'lazy':1})
-    call dein#add('thinca/vim-themis',     {'lazy':1})
-    call dein#add('tokuhirom/jsref',       {'lazy':1})
+    call dein#add('KazuakiM/vim-qfsigns',      {'lazy':1})
+    call dein#add('KazuakiM/vim-qfstatusline', {'lazy':1})
+    call dein#add('KazuakiM/vim-regexper',     {'lazy':1})
+    call dein#add('KazuakiM/vim-snippets',     {'lazy':1})
+    call dein#add('Kuniwak/vint',              {'lazy':1})
+    call dein#add('mustardamus/jqapi',         {'lazy':1})
+    call dein#add('thinca/vim-themis',         {'lazy':1})
+    call dein#add('tokuhirom/jsref',           {'lazy':1})
     call dein#end()
     call dein#save_state()
 endif
@@ -524,10 +522,6 @@ nnoremap <expr><Leader>greh ':grep! '. expand('<cword>') .' '. expand('%:p')
 let g:wildfire_fuel_map  = '<Enter>'
 let g:wildfire_objects   = ["i'", 'i"', 'i`', 'i,', 'i)', 'i}', 'i]', 'i>', 'ip', 'it']
 let g:wildfire_water_map = '<BS>'
-"}}}
-
-" vim-qfstatusline {{{
-let g:Qfstatusline#UpdateCmd = function('KazuakiMStatuslineSyntax')
 "}}}
 
 " vim-ms-translator {{{
@@ -618,12 +612,6 @@ nnoremap <Leader>phpi :<C-u>call<Space>kazuakim#PhpInfo()<CR>
 "
 " @url https://github.com/eslint/eslint
 " @url http://eslint.org/docs/rules/
-let s:quickrun_config_javascript = {
-\    'command':     'eslint',
-\    'cmdopt':      '--cache --cache-file ' . s:envHome . '/.cache/eslint/eslintcache --format compact --max-warnings 1 --no-color --no-ignore --quiet',
-\    'errorformat': '%E%f: line %l\, col %c\, Error - %m,%W%f: line %l\, col %c\, Warning - %m,%-G%.%#',
-\    'exec':        '%c %o %s:p'
-\}
 let g:quickrun_config = {
 \    '_': {
 \        'hook/close_buffer/enable_empty_data': 0,
@@ -634,10 +622,10 @@ let g:quickrun_config = {
 \        'runner':                              'job'
 \    },
 \    'javascript': {
-\        'command':     s:quickrun_config_javascript['command'],
-\        'cmdopt':      s:quickrun_config_javascript['cmdopt'] . ' --config ' . s:envHome . '/.config/eslint/eslintrc',
-\        'errorformat': s:quickrun_config_javascript['errorformat'],
-\        'exec':        s:quickrun_config_javascript['exec']
+\        'command':     'eslint',
+\        'cmdopt':      '--cache --cache-file ' . s:envHome . '/.cache/eslint/eslintcache --format compact --max-warnings 1 --no-color --no-ignore --quiet --config ' . s:envHome . '/.config/eslint/eslintrc',
+\        'errorformat': '%E%f: line %l\, col %c\, Error - %m,%W%f: line %l\, col %c\, Warning - %m,%-G%.%#',
+\        'exec':        '%c %o %s:p'
 \    },
 \    'javascript/watchdogs_checker': {
 \        'type': 'watchdogs_checker/javascript'
@@ -670,25 +658,6 @@ let g:quickrun_config = {
 \        'outputter':             'buffer',
 \        'outputter/buffer/into': 1
 \    },
-\    'watchdogs_checker/_': {
-\        'hook/close_quickfix/enable_exit':        1,
-\        'hook/back_window/enable_exit':           0,
-\        'hook/back_window/priority_exit':         1,
-\        'hook/qfstatusline_update/enable_exit':   1,
-\        'hook/qfstatusline_update/priority_exit': 2,
-\        'outputter/quickfix/open_cmd':            ''
-\    },
-\    'watchdogs_checker/javascript': {
-\        'command':     s:quickrun_config_javascript['command'],
-\        'cmdopt':      s:quickrun_config_javascript['cmdopt'] . ' --config ' . s:envHome . '/.config/eslint/eslintrc.limit',
-\        'errorformat': s:quickrun_config_javascript['errorformat'],
-\        'exec':        s:quickrun_config_javascript['exec']
-\    },
-\    'watchdogs_checker/php': {
-\        'command': 'php',
-\        'cmdopt':  '-l -d error_reporting=E_ALL -d display_errors=1 -d display_startup_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
-\        'exec':    '%c %o %s:p'
-\    },
 \    'xml': {
 \        'command':               'xmllint',
 \        'cmdopt':                '--noblanks --nowrap --encode UTF-8 --format',
@@ -697,7 +666,6 @@ let g:quickrun_config = {
 \        'outputter/buffer/into': 1
 \    }
 \}
-unlet s:quickrun_config_javascript
 "}}}
 
 " vital.vim {{{
@@ -735,8 +703,8 @@ let g:easy_align_delimiters = {
 "}}}
 
 " vim-quickhl {{{
-nmap <Space>m <Plug>(quickhl-manual-this)
-nmap <Space>M <Plug>(quickhl-manual-reset)
+nmap <Subleader>m <Plug>(quickhl-manual-this)
+nmap <Subleader>M <Plug>(quickhl-manual-reset)
 let g:quickhl_manual_colors = [
 \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Green        guibg=Green',
 \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta      guibg=Magenta',
@@ -870,6 +838,46 @@ function! KazuakiMNeoCompleteCr() abort "{{{
 endfunction "}}}
 "}}}
 
+" ale {{{
+let g:ale_echo_cursor              = 0
+let g:ale_emit_conflict_warnings   = 0
+let g:ale_history_enabled          = 0
+let g:ale_history_log_output       = 0
+let g:ale_lint_on_enter            = 0
+let g:ale_lint_on_filetype_changed = 0
+let g:ale_lint_on_text_changed     = 'never'
+let g:ale_linters                  = {
+\    'javascript': ['eslint'],
+\    'php':        ['php']
+\}
+let g:ale_max_buffer_history_size = 0
+let g:ale_pattern_options         = {
+\    '\.min.js$': {'ale_enabled': 0}
+\}
+let g:ale_pattern_options_enabled        = 1
+let g:ale_set_highlights                 = 1
+let g:ale_set_signs                      = 1
+let g:ale_warn_about_trailing_whitespace = 0
+" override functions.
+function! ale#statusline#Status() abort "{{{
+    let l:errorDict = {'lnum': 9999, 'text': ''}
+    if has_key(g:ale_buffer_info, bufnr('')) && has_key(g:ale_buffer_info[bufnr('')], 'loclist')
+        for l:row in g:ale_buffer_info[bufnr('')].loclist
+            if l:row.lnum <= l:errorDict.lnum
+                let l:errorDict = {'lnum': l:row.lnum, 'text': l:row.text}
+            endif
+        endfor
+        if l:errorDict.lnum < 9999
+            return '[ ' . l:errorDict.lnum . ' ]' . l:errorDict.text
+        endif
+    endif
+    return ''
+endfunction "}}}
+nmap <silent> <Subleader>N <Plug>(ale_previous)
+nmap <silent> <Subleader>n <Plug>(ale_next)
+nmap <silent> <Subleader>a <Plug>(ale_toggle)
+"}}}
+
 " gundo.vim {{{
 nnoremap cu :<C-u>call<Space>kazuakim#ClearUndo()<CR>
 nnoremap u g-
@@ -929,13 +937,6 @@ let g:memolist_path = s:envHome .'/.vim/memolist.vim'
 "}}}
 " neoinclude.vim {{{
 let g:neoinclude#delimiters = '\'
-"}}}
-" shabadou.vim
-" vim-watchdogs {{{
-let g:watchdogs_check_BufWritePost_enable  = 1
-let g:watchdogs_check_BufWritePost_enables = {'vim': 0}
-let g:watchdogs_check_CursorHold_enable    = 1
-let g:watchdogs_check_CursorHold_enables   = {'vim': 0}
 "}}}
 "endif
 "
