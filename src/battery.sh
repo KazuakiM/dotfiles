@@ -17,8 +17,8 @@ else
     echo "#[fg=colour234,bg=colour2,bold] $battery%"
 fi
 
-#if [ "$charge" = 'discharging' -a "$battery" -lt 25 ]; then
-#    growlnotify -m 'Battery!' --image $(dirname $0)/../img/Art\ of\ Chemistry.ico
-#elif [ "$charge" = '' -a "$battery" -gt 95 ]; then
-#    growlnotify -m 'Battery!' --image $(dirname $0)/../img/Art\ of\ Chemistry.ico
-#fi
+if [ "$charge" = 'discharging' -a "$battery" -lt 25 ]; then
+    growlnotify -m 'Battery!' --image $(dirname $0)/../img/Art\ of\ Chemistry.ico
+elif [ "$charge" = '' -a "$battery" -gt 95 ]; then
+    growlnotify -m 'Battery!' --image $(dirname $0)/../img/Art\ of\ Chemistry.ico
+fi
