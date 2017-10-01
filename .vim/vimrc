@@ -861,8 +861,9 @@ let g:ale_warn_about_trailing_whitespace = 0
 " override functions.
 function! ale#statusline#Status() abort "{{{
     let l:errorDict = {'lnum': 9999, 'text': ''}
-    if has_key(g:ale_buffer_info, bufnr('')) && has_key(g:ale_buffer_info[bufnr('')], 'loclist')
-        for l:row in g:ale_buffer_info[bufnr('')].loclist
+    let l:bufnr = bufnr('')
+    if has_key(g:ale_buffer_info, l:bufnr) && has_key(g:ale_buffer_info[l:bufnr], 'loclist')
+        for l:row in g:ale_buffer_info[l:bufnr].loclist
             if l:row.lnum <= l:errorDict.lnum
                 let l:errorDict = {'lnum': l:row.lnum, 'text': l:row.text}
             endif
