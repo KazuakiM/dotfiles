@@ -3,9 +3,9 @@
         "friendsofphp/php-cs-fixer": "*",
         "hirak/prestissimo": "^0.3",
         "jetbrains/phpstorm-stubs": "dev-master",
+        "phan/phan": "^0.9.4",
         "phpunit/phpunit": "*",
-        "sstalle/php7cc": "^1.2",
-        "etsy/phan": "^0.9.4"
+        "sstalle/php7cc": "^1.2"
     },
     "require-dev": {
     }
