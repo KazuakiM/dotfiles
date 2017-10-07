@@ -606,12 +606,6 @@ nnoremap <Leader>run  :<C-u>QuickRun<CR>
 nnoremap <Leader>runt :<C-u>call<Space>kazuakim#Test()<CR>
 nnoremap <Leader>runl :<C-u>call<Space>kazuakim#Lint()<CR>
 nnoremap <Leader>phpi :<C-u>call<Space>kazuakim#PhpInfo()<CR>
-" Set g:quickrun_config at .vimrc.local .
-"
-" ESLINT limited edition.
-"
-" @url https://github.com/eslint/eslint
-" @url http://eslint.org/docs/rules/
 let g:quickrun_config = {
 \    '_': {
 \        'hook/close_buffer/enable_empty_data': 0,
@@ -620,15 +614,6 @@ let g:quickrun_config = {
 \        'outputter/buffer/close_on_empty':     1,
 \        'outputter/buffer/split':              ':botright',
 \        'runner':                              'job'
-\    },
-\    'javascript': {
-\        'command':     'eslint',
-\        'cmdopt':      '--cache --cache-file ' . s:envHome . '/.cache/eslint/eslintcache --format compact --max-warnings 1 --no-color --no-ignore --quiet --config ' . s:envHome . '/.config/eslint/eslintrc',
-\        'errorformat': '%E%f: line %l\, col %c\, Error - %m,%W%f: line %l\, col %c\, Warning - %m,%-G%.%#',
-\        'exec':        '%c %o %s:p'
-\    },
-\    'javascript/watchdogs_checker': {
-\        'type': 'watchdogs_checker/javascript'
 \    },
 \    'json': {
 \        'command':               'python',
@@ -646,9 +631,6 @@ let g:quickrun_config = {
 \        'outputter/buffer/close_on_empty':     0,
 \        'outputter/buffer/into':               0,
 \        'outputter/buffer/split':              ':botright 7sp'
-\    },
-\    'php/watchdogs_checker': {
-\        'type': 'watchdogs_checker/php'
 \    },
 \    'sql': {
 \        'type': 'sql/mysql'
@@ -843,11 +825,12 @@ let g:ale_echo_cursor              = 0
 let g:ale_emit_conflict_warnings   = 0
 let g:ale_history_enabled          = 0
 let g:ale_history_log_output       = 0
+let g:ale_javascript_eslint_options = '--cache --cache-file ' . s:envHome . '/.cache/eslint/eslintcache --config ' . s:envHome . '/.config/eslint/eslintrc --format compact --max-warnings 1 --no-color --no-ignore --quiet'
 let g:ale_lint_on_enter            = 0
 let g:ale_lint_on_filetype_changed = 0
 let g:ale_lint_on_text_changed     = 'never'
 let g:ale_linters                  = {
-\    'javascript': [],
+\    'javascript': ['eslint'],
 \    'php':        ['php']
 \}
 let g:ale_max_buffer_history_size = 0
