@@ -152,65 +152,6 @@ function! kazuakim#UniteFileRecAsyncOrGit() abort "{{{
 endfunction "}}}
 "}}}
 
-" vim-quickrun {{{
-function! kazuakim#Test() abort "{{{
-    let l:quickrun_config_backup = g:quickrun_config[&filetype]
-    if &filetype is# 'php'
-        let g:quickrun_config['php'] = {
-        \    'command':                'phpunit',
-        \    'exec':                   '%c %s',
-        \    'outputter':              'buffer',
-        \    'outputter/buffer/split': ':botright 7sp',
-        \    'runner':                 'vimproc'
-        \}
-    endif
-
-    QuickRun
-
-    if &filetype is# 'php'
-        let g:quickrun_config[&filetype] = l:quickrun_config_backup
-    endif
-endfunction "}}}
-
-function! kazuakim#Lint() abort "{{{
-    let l:quickrun_config_backup = g:quickrun_config[&filetype]
-    if &filetype is# 'php'
-        let g:quickrun_config['php'] = {
-        \    'command':                'php-cs-fixer',
-        \    'cmdopt':                 'fix',
-        \    'exec':                   '%c %o %s:p',
-        \    'outputter':              'buffer',
-        \    'outputter/buffer/into':  1,
-        \    'outputter/buffer/split': ':botright 4sp',
-        \    'runner':                 'system'
-        \}
-    elseif &filetype is# 'javascript'
-        let g:quickrun_config['javascript']['cmdopt'] = l:quickrun_config_backup['cmdopt'] . ' --config ' . $HOME . '/.config/eslint/eslintrc --fix'
-        let g:quickrun_config['javascript']['runner'] = 'system'
-    endif
-
-    QuickRun
-
-    if 0 < count(['php', 'javascript'], &filetype)
-        let g:quickrun_config[&filetype] = l:quickrun_config_backup
-    endif
-endfunction "}}}
-
-function! kazuakim#PhpInfo() abort "{{{
-    let l:quickrun_config_backup = g:quickrun_config['php']
-    let g:quickrun_config['php'] = {
-    \    'command':   'php',
-    \    'cmdopt':    '-info',
-    \    'exec':      '%c %o',
-    \    'outputter': 'buffer'
-    \}
-
-    QuickRun
-
-    let g:quickrun_config['php'] = l:quickrun_config_backup
-endfunction "}}}
-"}}}
-
 " gundo.vim {{{
 function! kazuakim#ClearUndo() abort "{{{
     let l:oldUndolevels = &l:undolevels
