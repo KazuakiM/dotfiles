@@ -217,6 +217,11 @@ case "${OSTYPE}" in
         if [ -d $BREW_PREFIX/opt/gnu-sed/libexec/gnubin ]; then
             localPath="$BREW_PREFIX/opt/gnu-sed/libexec/gnubin:$localPath"
         fi
+        #brew --prefix go
+        if [ -d $BREW_PREFIX/opt/go ]; then
+            export GOROOT="$BREW_PREFIX/opt/go/libexec"
+            localPath="$GOROOT/bin:$localPath"
+        fi
         #brew --prefix icu4c
         if [ -d $BREW_PREFIX/opt/icu4c/bin ]; then
             localPath="$BREW_PREFIX/opt/icu4c/bin:$BREW_PREFIX/opt/icu4c/sbin:$localPath"
@@ -224,6 +229,10 @@ case "${OSTYPE}" in
         #brew --prefix macvim-kaoriya
         if [ -d $BREW_PREFIX/opt/macvim-kaoriya/MacVim.app/Contents/MacOS ]; then
             localPath="$BREW_PREFIX/opt/macvim-kaoriya/MacVim.app/Contents/MacOS:$localPath"
+        fi
+        #brew --prefix ncurses
+        if [ -d $BREW_PREFIX/opt/ncurses/bin ]; then
+            localPath="$BREW_PREFIX/opt/ncurses/bin:$localPath"
         fi
         #brew --prefix sqlite
         if [ -d $BREW_PREFIX/opt/sqlite/bin ]; then
@@ -233,20 +242,6 @@ case "${OSTYPE}" in
         if [ -d $BREW_PREFIX/share/git-core/contrib/diff-highlight ]; then
             localPath="$BREW_PREFIX/share/git-core/contrib/diff-highlight:$localPath"
         fi
-        #brew --prefix go
-        if [ -d $BREW_PREFIX/opt/go ]; then
-            export GOROOT="$BREW_PREFIX/opt/go/libexec"
-            localPath="$GOROOT/bin:$localPath"
-        fi
-        ##heroku
-        #if [ -d $BREW_PREFIX/heroku/bin ]; then
-        #    localPath="$BREW_PREFIX/heroku/bin:$localPath"
-        #fi
-        ##go applications
-        #if [ -d /srv/php_bot ]; then
-        #    export GOPATH=/srv/php_bot
-        #    localPath="$GOPATH/bin:$localPath"
-        #fi
         export PATH=$localPath$PATH
 
         # ssh-agent {{{
