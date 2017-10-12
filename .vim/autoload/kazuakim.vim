@@ -129,9 +129,25 @@ endfunction
 "}}}
 
 " vital.vim {{{
+"function! kazuakim#Path2ProjectDirectory(path) abort "{{{
+"    let s:Prelude = ! exists('s:Prelude') ? vital#of('vital').import('Prelude') : s:Prelude
+"    return s:Prelude.path2project_directory(a:path)
+"endfunction "}}}
+
 function! kazuakim#Path2ProjectDirectory(path) abort "{{{
-    let s:Prelude = ! exists('s:Prelude') ? vital#of('vital').import('Prelude') : s:Prelude
-    return s:Prelude.path2project_directory(a:path)
+  let l:search_directory = isdirectory(a:path) ? a:path : fnamemodify(a:path, ':p:h')
+
+  while 1
+    let l:path = l:search_directory . '/.git'
+    if isdirectory(l:path) || filereadable(l:path)
+      return l:search_directory
+    endif
+    let l:next = fnamemodify(l:search_directory, ':h')
+    if l:next == l:search_directory
+      return ''
+    endif
+    let l:search_directory = l:next
+  endwhile
 endfunction "}}}
 "}}}
 
