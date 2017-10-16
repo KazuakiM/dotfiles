@@ -25,6 +25,7 @@ C:/
 .config/subversion/
 .config/travisci/
 .config/wireshark/
+.ctags.d/_.ctags
 .lib/perl/
 .log/bash/
 .log/filezilla/
