@@ -43,9 +43,3 @@ lib/UbuntuVagrant/ssh.config
 lib/UbuntuVagrant/ubuntu-xenial-16.04-cloudimg-console.log
 lib/Vagrant/.vagrant
 lib/Vagrant/ssh.config
-
-# temp
-.gitconfig
-.gitconfig.local
-.gvimrc
-.vimrc

@@ -142,8 +142,8 @@ function! s:FileTypeSyntaxOff() abort "{{{
 endfunction "}}}
 
 function! s:BufEnter() abort "{{{
-    " Auto close VimDiff or primary NERDTree
-    if winnr('$') is# 1 && (&l:diff || (exists('b:NERDTree') && b:NERDTree.isTabTree()) || &filetype is# 'quickrun')
+    " Auto close VimDiff
+    if winnr('$') is# 1 && (&l:diff || &filetype is# 'quickrun')
         quit
 
     " Duplicate ban
@@ -462,23 +462,19 @@ if dein#load_state(s:deinDir)
     "call dein#add('kannokanno/previm')
     call dein#add('KazuakiM/neosnippet-snippets')
     call dein#add('KazuakiM/vim-sqlfix')
-    "call dein#add('KazuakiM/unite-help')
     call dein#add('koron/codic-vim')
     call dein#add('LeafCage/yankround.vim')
     "call dein#add('mattn/emmet-vim')
     call dein#add('mojako/ref-sources.vim')
-    "call dein#add('osyo-manga/unite-highlight')
     "call dein#add('pangloss/vim-javascript')
     "call dein#add('plasticboy/vim-markdown')
     call dein#add('rhysd/clever-f.vim')
-    call dein#add('rhysd/unite-codic.vim')
-    call dein#add('scrooloose/nerdtree')
     call dein#add('Shougo/dein.vim')
     call dein#add('Shougo/neocomplete.vim')
     call dein#add('Shougo/neoinclude.vim')
     call dein#add('Shougo/neosnippet.vim')
     call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-    call dein#add('Shougo/unite.vim')
+    call dein#add('Shougo/denite.nvim')
     call dein#add('sjl/gundo.vim')
     call dein#add('t9md/vim-quickhl')
     call dein#add('thinca/vim-quickrun')
@@ -488,7 +484,6 @@ if dein#load_state(s:deinDir)
     call dein#add('tyru/open-browser.vim')
     "call dein#add('vim-jp/vital.vim')
     call dein#add('vim-scripts/matchit.zip')
-    call dein#add('vim-scripts/taglist.vim')
     call dein#add('w0rp/ale')
     call dein#add('Yggdroot/indentLine')
 
@@ -552,50 +547,22 @@ let g:yankround_use_region_hl       = 1
 let g:indentLine_faster = 1
 "}}}
 
-" nerdtree {{{
-nnoremap <SID>[nerdtree] <Nop>
-nmap <Leader>n <SID>[nerdtree]
-nnoremap <expr><SID>[nerdtree]n ':NERDTree ' . kazuakim#Path2ProjectDirectory('%') . '<CR>'
-nnoremap <SID>[nerdtree]b :<C-u>NERDTree<CR>
-let g:NERDTreeBookmarksFile     = s:envHome . '/.vim/nerdtree/.NERDTreeBookmarks'
-let g:NERDTreeMinimalUI         = 1
-let g:NERDTreeRespectWildIgnore = 1
-let g:NERDTreeShowBookmarks     = 1
-let g:NERDTreeShowHidden        = 1
-let g:NERDTreeWinSize           = 20
+" codic-vim {{{
+nnoremap <expr><Leader>dic ':Codic ' . expand('<cword>')
 "}}}
 
-" unite.vim
-" unite-help
-" codic-vim
-" unite-codic.vim
-" unite-highlight
+" dein.vim
 " memolist.vim {{{
-"
-" MEMO:If gVim for Windows italic fonts are deleted, I would move 'unite-highlight' to backup/.vimrc.
-"
 nnoremap <SID>[unite] <Nop>
 nmap <Leader>u <SID>[unite]
-" default plugins
-nnoremap <silent> <SID>[unite]au  :<C-u>Unite<Space>output:autocmd<CR>
-nnoremap <silent> <SID>[unite]f   :<C-u>call<Space>kazuakim#UniteFileRecAsyncOrGit()<CR>
-nnoremap <silent> <SID>[unite]let :<C-u>Unite<Space>output:let<CR>
-nnoremap <silent> <SID>[unite]map :<C-u>Unite<Space>output:map\|map!\|lmap<CR>
-nnoremap <silent> <SID>[unite]msg :<C-u>Unite<Space>output:message<CR>
-nnoremap <silent> <SID>[unite]s   :<C-u>Unite<Space>-default-action=ex<Space>output:scriptnames<CR>
-" add plugins
-nnoremap <silent> <SID>[unite]dic :<C-u>Unite<Space>codic<CR>
-"nnoremap <silent> <SID>[unite]h   :<C-u>Unite<Space>help<CR>
-"nnoremap <silent> <SID>[unite]hl  :<C-u>Unite<Space>highlight<CR>
-" unite.vim
-let g:loaded_unite_source_bookmark     = 1
-let g:unite_data_directory             = s:envHome .'/.vim/unite.vim'
-let g:unite_enable_start_insert        = 1
-let g:unite_source_grep_command        = 'grep'
-let g:unite_source_grep_default_opts   = '--color=auto -i -I'
-let g:unite_source_grep_recursive_opt  = ''
-let g:unite_source_grep_max_candidates = 200
-call unite#custom#source('help', 'ignore_pattern', 'in\ \(runtime\|vimdoc-ja\)')
+call denite#custom#option('default', 'prompt', '>')
+call denite#custom#map('insert', "<C-t>", '<denite:do_action:tabopen>')
+call denite#custom#map('insert', 'jj',    '<denite:enter_mode:normal>')
+call denite#custom#map('insert', "<C-j>", '<denite:move_to_next_line>')
+call denite#custom#map('insert', "<C-k>", '<denite:move_to_previous_line>')
+call denite#custom#var('file_rec', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
+nnoremap <expr><SID>[unite]f ':Denite file_rec:' . kazuakim#Path2ProjectDirectory('%') . '<CR>'
+
 " memolist
 nnoremap <SID>[memolist] <Nop>
 nmap <Leader>m <SID>[memolist]
@@ -603,9 +570,9 @@ nnoremap <SID>[memolist]n :<C-u>MemoNew<CR>
 nnoremap <SID>[memolist]l :<C-u>MemoList<CR>
 let g:memolist_filename_prefix_none = 1
 let g:memolist_template_dir_path    = s:envHome .'/.vim/memolist.vim'
-let g:memolist_unite                = 1
-let g:memolist_unite_option         = '-default-action=tabopen'
-let g:memolist_unite_source         = 'file_rec'
+let g:memolist_denite               = 1
+let g:memolist_denite_option        = '-default-action=tabopen'
+let g:memolist_denite_source        = 'file_rec'
 "}}}
 
 " vim-quickrun {{{
@@ -679,18 +646,6 @@ let g:quickrun_config = {
 
 " vital.vim {{{
 "let g:vitalizer#vital_dir = s:envHome . '/.vim/dein.vim/repos/github.com/vim-jp/vital.vim'
-"}}}
-
-" taglist.vim {{{
-"MEMO:$ ctags --list-maps : ctags supported filetype.
-"MEMO:$ ctags --list-kinds: ctags tlist setting.
-nnoremap <Leader>t :<C-u>Tlist<CR>
-let g:tlist_javascript_settings = 'javascript;c:classes;f:function;p:propertie;m:methods;C:constant;v:variable'
-let g:tlist_php_settings        = 'php;n:namespace;c:class;i:interface;t:trait;f:function;d:constant;v:variable'
-let g:Tlist_Exit_OnlyWindow     = 1
-let g:Tlist_Show_One_File       = 1
-let g:Tlist_Use_Right_Window    = 1
-let g:Tlist_WinWidth            = 25
 "}}}
 
 " vim-qfreplace {{{

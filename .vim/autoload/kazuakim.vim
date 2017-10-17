@@ -129,11 +129,6 @@ endfunction
 "}}}
 
 " vital.vim {{{
-"function! kazuakim#Path2ProjectDirectory(path) abort "{{{
-"    let s:Prelude = ! exists('s:Prelude') ? vital#of('vital').import('Prelude') : s:Prelude
-"    return s:Prelude.path2project_directory(a:path)
-"endfunction "}}}
-
 function! kazuakim#Path2ProjectDirectory(path) abort "{{{
   let l:search_directory = isdirectory(a:path) ? a:path : fnamemodify(a:path, ':p:h')
 
@@ -148,23 +143,6 @@ function! kazuakim#Path2ProjectDirectory(path) abort "{{{
     endif
     let l:search_directory = l:next
   endwhile
-endfunction "}}}
-"}}}
-
-" nerdtree {{{
-function! kazuakim#NerdTreeCurrentDir() abort "{{{
-    execute 'NERDTree ' . fnameescape(expand('%:p:h'))
-endfunction "}}}
-"}}}
-
-" unite.vim {{{
-" http://qiita.com/yuku_t/items/9263e6d9105ba972aea8
-function! kazuakim#UniteFileRecAsyncOrGit() abort "{{{
-    if isdirectory(getcwd().'/.git')
-        Unite -default-action=tabopen file_rec/git
-    else
-        Unite -default-action=tabopen file_rec/async:!
-    endif
 endfunction "}}}
 "}}}
 

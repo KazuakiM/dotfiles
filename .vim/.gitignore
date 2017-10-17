@@ -3,13 +3,9 @@
 /dein.vim/*
 /neocomplete.vim/*
 /neosnippet.vim/*
-/nerdtree/*
 /swap/*
 /tags/*
 /undo/*
-/unite.vim/*
-/unite.vimtag/*
-/vim-php-cs-fixer/*
 /vim-ref/cache/*
 /vim-ref/php-chunked-xhtml/*
 /vim-sqlfix/*
