@@ -555,13 +555,24 @@ nnoremap <expr><Leader>dic ':Codic ' . expand('<cword>')
 " memolist.vim {{{
 nnoremap <SID>[unite] <Nop>
 nmap <Leader>u <SID>[unite]
+call denite#custom#alias('source', 'file_rec/git',      'file_rec')
+call denite#custom#alias('source', 'file_rec/memolist', 'file_rec')
 call denite#custom#option('default', 'prompt', '>')
 call denite#custom#map('insert', "<C-t>", '<denite:do_action:tabopen>')
 call denite#custom#map('insert', 'jj',    '<denite:enter_mode:normal>')
 call denite#custom#map('insert', "<C-j>", '<denite:move_to_next_line>')
 call denite#custom#map('insert', "<C-k>", '<denite:move_to_previous_line>')
-call denite#custom#var('file_rec', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
-nnoremap <expr><SID>[unite]f ':Denite file_rec:' . kazuakim#Path2ProjectDirectory('%') . '<CR>'
+call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
+nnoremap <SID>[unite]f :<C-u>call<Space>KazuakiMDeniteFileRecGit()<CR>
+function! KazuakiMDeniteFileRecGit() abort "{{{
+    if finddir('.git', ';') != ''
+        execute 'Denite file_rec/git:' . kazuakim#Path2ProjectDirectory('%') . ' -default-action=tabopen'
+    else
+        Denite file_rec -default-action=tabopen
+    endif
+endfunction "}}}
+
+
 
 " memolist
 nnoremap <SID>[memolist] <Nop>
@@ -572,7 +583,7 @@ let g:memolist_filename_prefix_none = 1
 let g:memolist_template_dir_path    = s:envHome .'/.vim/memolist.vim'
 let g:memolist_denite               = 1
 let g:memolist_denite_option        = '-default-action=tabopen'
-let g:memolist_denite_source        = 'file_rec'
+let g:memolist_denite_source        = 'file_rec/memolist'
 "}}}
 
 " vim-quickrun {{{
