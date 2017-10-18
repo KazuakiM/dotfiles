@@ -4,6 +4,16 @@
 "let g:quickrun_config['sql/mysql']['cmdopt'] = g:KazuakiMDatabase[0]
 "}}}
 
+let s:KazuakiMBookmark = [
+\    {'text': 'dotfiles', 'filename': $HOME . '/work/dotfiles'},
+\    {'text': 'dein',     'filename': $HOME . '/work/dotfiles/.vim/dein.vim/repos/github.com/KazuakiM'},
+\    {'text': 'hosts',    'filename': '/etc/hosts'}
+\]
+function! KazuakimBookMark() abort "{{{
+    call setqflist(s:KazuakiMBookmark)
+    copen
+endfunction "}}}
+
 function! s:setTags(name, other) abort "{{{
     if match(expand('%:p:h'), 'test') > 0
         let &l:tags = $HOME . '/.vim/tags/' . a:name . 'Test.tags' . a:other

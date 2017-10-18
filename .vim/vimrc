@@ -377,6 +377,8 @@ cnoremap <Left>  <Space><BS><Left>
 cnoremap <Right> <Space><BS><Right>
 " Special word
 noremap! ¥ \
+" BookMark
+noremap <Leader>b :<C-u>call<Space>KazuakimBookMark()<CR>
 " $VIMRUNTIME/syntax/sql.vim
 let g:sql_type_default = 'mysql'
 " $VIMRUNTIME/syntax/php.vim
@@ -571,8 +573,6 @@ function! KazuakiMDeniteFileRecGit() abort "{{{
         Denite file_rec -default-action=tabopen
     endif
 endfunction "}}}
-
-
 
 " memolist
 nnoremap <SID>[memolist] <Nop>
@@ -970,4 +970,7 @@ nnoremap <F6> :<C-u>call<Space>kazuakim#DatabaseSwitch()<CR>
 " Other setting files {{{
 " Environment setting file
 source ~/.vim/vimrc.local
+if isdirectory(expand('%:p')) ==# 1
+    call KazuakimBookMark()
+endif
 "}}}
