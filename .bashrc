@@ -226,6 +226,10 @@ case "${OSTYPE}" in
         if [ -d $BREW_PREFIX/opt/icu4c/bin ]; then
             localPath="$BREW_PREFIX/opt/icu4c/bin:$BREW_PREFIX/opt/icu4c/sbin:$localPath"
         fi
+        #brew --prefix libxml2
+        if [ -d $BREW_PREFIX/opt/libxml2/bin ]; then
+            localPath="$BREW_PREFIX/opt/libxml2/bin:$localPath"
+        fi
         #brew --prefix macvim-kaoriya
         if [ -d $BREW_PREFIX/opt/macvim-kaoriya/MacVim.app/Contents/MacOS ]; then
             localPath="$BREW_PREFIX/opt/macvim-kaoriya/MacVim.app/Contents/MacOS:$localPath"

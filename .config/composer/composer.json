@@ -4,8 +4,7 @@
         "hirak/prestissimo": "^0.3",
         "jetbrains/phpstorm-stubs": "dev-master",
         "phan/phan": "^0.9.4",
-        "phpunit/phpunit": "*",
-        "sstalle/php7cc": "^1.2"
+        "phpunit/phpunit": "*"
     },
     "require-dev": {
     }
