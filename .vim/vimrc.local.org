@@ -6,8 +6,10 @@
 
 let s:KazuakiMBookmark = [
 \    {'text': 'dotfiles', 'filename': $HOME . '/work/dotfiles'},
-\    {'text': 'dein',     'filename': $HOME . '/work/dotfiles/.vim/dein.vim/repos/github.com/KazuakiM'},
-\    {'text': 'hosts',    'filename': '/etc/hosts'}
+\    {'text': 'vimrc',    'lnum': 1, 'col': 1, 'filename': $HOME . '/.vim/vimrc'},
+\    {'text': 'dein',     'filename': $HOME . '/.vim/dein.vim/repos/github.com/KazuakiM'},
+\    {'text': 'snippets', 'lnum': 1, 'col': 1, 'filename': $HOME . '/.vim/dein.vim/repos/github.com/KazuakiM/neosnippet-snippets/neosnippets/php.snip'},
+\    {'text': 'hosts',    'lnum': 1, 'col': 1, 'filename': '/etc/hosts'}
 \]
 function! KazuakimBookMark() abort "{{{
     call setqflist(s:KazuakiMBookmark)
