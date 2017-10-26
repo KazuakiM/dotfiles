@@ -307,7 +307,7 @@ set matchpairs+=<:> matchtime=1 mouse=
 set nobomb noequalalways nofixendofline nogdefault noimcmdline noimdisable noruler notitle nowrap number
 set pumheight=8
 set scrolloff=999 shellslash shiftwidth=4 shortmess+=a shortmess+=I showbreak=> showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile switchbuf=usetab
-set synmaxcol=200
+set synmaxcol=350
 set tabline=%!KazuakiMTabLineUpdate() tabstop=4 titleold= ttyfast t_vb=
 set undodir=$HOME/.vim/undo undofile updatecount=30 updatetime=1000
 set viminfo='10,/100,:100,@100,c,f1,h,<100,s100,n~/.vim/viminfo/.viminfo virtualedit+=block
