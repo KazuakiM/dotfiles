@@ -33,6 +33,11 @@ ssh -T git@github.com
 ssh-add -K $HOME/.ssh/id_rsa.pub
 ```
 
+Pull Request Local DL
+```
+git fetch origin pull/<ID>/head:<Blanch name>
+```
+
 GitHub page ignore Space
 ```
 https://github.com/xxxxx/xxxxx/pull/<number>/files?w=1
