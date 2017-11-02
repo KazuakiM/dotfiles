@@ -162,21 +162,6 @@ case "${OSTYPE}" in
         alias HTTPD='sudo apachectl'
         alias MYSQL='mysql.server'
         #}}}
-        # open {{{
-        alias VNC='open    -a Chicken'
-        alias BOOK='open   -a cooViewer'
-        alias DIFF='open   -a FileMerge'
-        alias FTP='open    -a FileZilla'
-        alias FF='open     -a Firefox'
-        alias IT='open     -a iTunes'
-        alias KINDLE='open -a Kindle'
-        alias LIBRE='open  -a LibreOffice'
-        alias OFFICE='open -a LibreOffice'
-        alias TT='open     -a TweetDeck'
-        alias TWI='open    -a TweetDeck'
-        alias VPN='open    -a Tunnelblick'
-        alias VB='open     -a VirtualBox'
-        #}}}
         # export {{{
         export EDITOR=/usr/local/opt/macvim-kaoriya/MacVim.app/Contents/MacOS/vim
         export HOMEBREW_NO_ANALYTICS=1
@@ -238,6 +223,10 @@ case "${OSTYPE}" in
         #brew --prefix ncurses
         if [ -d $BREW_PREFIX/opt/ncurses/bin ]; then
             localPath="$BREW_PREFIX/opt/ncurses/bin:$localPath"
+        fi
+        #brew --prefix openssl@1.1
+        if [ -d  $BREW_PREFIX/opt/openssl@1.1/bin ]; then
+            localPath="$BREW_PREFIX/opt/openssl@1.1/bin:$localPath"
         fi
         #brew --prefix sqlite
         if [ -d $BREW_PREFIX/opt/sqlite/bin ]; then
