@@ -461,6 +461,7 @@ if dein#load_state(s:deinDir)
     call dein#add('glidenote/memolist.vim')
     call dein#add('junegunn/vim-easy-align')
     call dein#add('KazuakiM/neosnippet-snippets')
+    call dein#add('KazuakiM/vim-ibm-bluemix')
     call dein#add('KazuakiM/vim-sqlfix')
     call dein#add('koron/codic-vim')
     call dein#add('LeafCage/yankround.vim')
@@ -482,6 +483,7 @@ if dein#load_state(s:deinDir)
     call dein#add('vim-scripts/matchit.zip')
     call dein#add('w0rp/ale')
     call dein#add('Yggdroot/indentLine')
+
 
     " HTML/CSS/JavaScript
     call dein#add('hail2u/vim-css3-syntax',  {'lazy':1})
@@ -711,6 +713,15 @@ let g:quickhl_manual_colors = [
 \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightGray    guibg=LightGray',
 \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=LightBlue    guibg=LightBlue'
 \]
+"}}}
+
+"vim-ibm-bluemix {{{
+nmap <Subleader>tt <C-o>:call<Space>ibm_bluemix#execute()<CR>
+nmap <Subleader>tk <C-o>:call<Space>ibm_bluemix#execute('')<Left><Left>
+let g:ibm_bluemix#config = {
+\    'source': 'ja',
+\    'target': 'en',
+\}
 "}}}
 
 " vim-sqlfix {{{

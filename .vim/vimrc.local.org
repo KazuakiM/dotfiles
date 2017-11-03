@@ -41,6 +41,11 @@ endfunction "}}}
 "autocmd MyAutoCmd BufNewFile,BufRead,TabNew $HOME/huga/*.{js,json,html} setlocal tags=$HOME/.vim/tags/huga.tags
 "autocmd MyAutoCmd BufNewFile,BufRead,TabNew C:/usr/local/src/hoge/*.php setlocal tags=$HOME/.vim/tags/hoge.tags
 
+"vim-ibm-bluemix {{{
+let g:ibm_bluemix#config.username = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+let g:ibm_bluemix#config.password = 'xxxxxxxxxxxx'
+"}}}
+
 "vim-ms-translator {{{
 " @url https://portal.azure.com
 "let g:mstranslator#Config.subscription_key = 'check Google Drive'
