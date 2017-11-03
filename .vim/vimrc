@@ -459,17 +459,12 @@ if dein#load_state(s:deinDir)
     call dein#add('fuenor/qfixgrep')
     call dein#add('gcmt/wildfire.vim')
     call dein#add('glidenote/memolist.vim')
-    "call dein#add('hail2u/vim-css3-syntax')
     call dein#add('junegunn/vim-easy-align')
-    "call dein#add('kannokanno/previm')
     call dein#add('KazuakiM/neosnippet-snippets')
     call dein#add('KazuakiM/vim-sqlfix')
     call dein#add('koron/codic-vim')
     call dein#add('LeafCage/yankround.vim')
-    "call dein#add('mattn/emmet-vim')
     call dein#add('mojako/ref-sources.vim')
-    "call dein#add('pangloss/vim-javascript')
-    "call dein#add('plasticboy/vim-markdown')
     call dein#add('rhysd/clever-f.vim')
     call dein#add('Shougo/dein.vim')
     call dein#add('Shougo/neocomplete.vim')
@@ -484,10 +479,18 @@ if dein#load_state(s:deinDir)
     call dein#add('thinca/vim-ref')
     call dein#add('tpope/vim-surround')
     call dein#add('tyru/open-browser.vim')
-    "call dein#add('vim-jp/vital.vim')
     call dein#add('vim-scripts/matchit.zip')
     call dein#add('w0rp/ale')
     call dein#add('Yggdroot/indentLine')
+
+    " HTML/CSS/JavaScript
+    call dein#add('hail2u/vim-css3-syntax',  {'lazy':1})
+    call dein#add('mattn/emmet-vim',         {'lazy':1})
+    call dein#add('pangloss/vim-javascript', {'lazy':1})
+
+    " Markdown
+    call dein#add('kannokanno/previm',       {'lazy':1})
+    call dein#add('plasticboy/vim-markdown', {'lazy':1})
 
     " Manual pages.
     call dein#add('mustardamus/jqapi', {'lazy':1})
@@ -498,6 +501,7 @@ if dein#load_state(s:deinDir)
     call dein#add('thinca/vim-prettyprint', {'lazy':1})
     call dein#add('thinca/vim-themis',      {'lazy':1})
     call dein#add('vim-jp/vimdoc-ja',       {'lazy':1})
+    call dein#add('vim-jp/vital.vim',       {'lazy':1})
 
     " Backup
     call dein#add('KazuakiM/vim-ms-translator', {'lazy':1})
@@ -661,7 +665,7 @@ let g:quickrun_config = {
 "}}}
 
 " vital.vim {{{
-"let g:vitalizer#vital_dir = s:envHome . '/.vim/dein.vim/repos/github.com/vim-jp/vital.vim'
+let g:vitalizer#vital_dir = s:envHome . '/.vim/dein.vim/repos/github.com/vim-jp/vital.vim'
 "}}}
 
 " vim-qfreplace {{{
