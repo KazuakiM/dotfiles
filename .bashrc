@@ -191,6 +191,11 @@ case "${OSTYPE}" in
         #    #PERL_MM_OPT="INSTALL_BASE=$HOME/.lib/perl" cpan local::lib
         #    #eval "$(perl -I$HOME/.lib/perl -Mlocal::lib)";
         #fi
+
+        #brew --prefix apr-util
+        if [ -d $BREW_PREFIX/opt/apr-util/bin ]; then
+            localPath="$BREW_PREFIX/opt/apr-util/bin:$localPath"
+        fi
         #brew --prefix curl
         if [ -d $BREW_PREFIX/opt/curl/bin ]; then
             localPath="$BREW_PREFIX/opt/curl/bin:$localPath"
