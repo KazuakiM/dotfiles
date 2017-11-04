@@ -237,6 +237,7 @@ autocmd MyAutoCmd CmdwinLeave          * nunmap <ESC><ESC>
 autocmd MyAutoCmd FocusGained          * checktime
 autocmd MyAutoCmd SwapExists           * let s:swapFilePath = v:swapname
 autocmd MyAutoCmd InsertLeave          * call s:InsertLeave()
+autocmd MyAutoCmd InsertLeave          * syntax clear neosnippetConcealExpandSnippets
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 autocmd MyAutoCmd QuickfixCmdPost      * call kazuakim#QuickfixCmdPost()
 autocmd MyAutoCmd VimEnter             * call s:VimEnter()
@@ -485,7 +486,8 @@ if dein#load_state(s:deinDir)
     call dein#add('Yggdroot/indentLine')
 
 
-    " HTML/CSS/JavaScript
+    " Syntax Highlight
+    call dein#add('StanAngeloff/php.vim')
     call dein#add('hail2u/vim-css3-syntax',  {'lazy':1})
     call dein#add('mattn/emmet-vim',         {'lazy':1})
     call dein#add('pangloss/vim-javascript', {'lazy':1})
