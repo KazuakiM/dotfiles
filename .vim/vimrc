@@ -237,7 +237,6 @@ autocmd MyAutoCmd CmdwinLeave          * nunmap <ESC><ESC>
 autocmd MyAutoCmd FocusGained          * checktime
 autocmd MyAutoCmd SwapExists           * let s:swapFilePath = v:swapname
 autocmd MyAutoCmd InsertLeave          * call s:InsertLeave()
-autocmd MyAutoCmd InsertLeave          * syntax clear neosnippetConcealExpandSnippets
 autocmd MyAutoCmd QuickfixCmdPost *grep* cwindow
 autocmd MyAutoCmd QuickfixCmdPost      * call kazuakim#QuickfixCmdPost()
 autocmd MyAutoCmd VimEnter             * call s:VimEnter()
@@ -450,6 +449,8 @@ if &l:diff
 else
     set nocursorline
     call KazuakiMStatuslineSwitch()
+
+    autocmd MyAutoCmd InsertLeave * syntax clear neosnippetConcealExpandSnippets
 endif
 "}}}
 

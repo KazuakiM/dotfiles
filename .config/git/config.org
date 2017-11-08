@@ -6,15 +6,16 @@
     # from 1.7.10
     path = ~/.config/git/gitconfig.local
 [alias]
-    co  = checkout
-    cm  = commit --message
-    df  = diff --ignore-space-at-eol --ignore-blank-lines --ignore-all-space
-    dff = difftool
-    pr  = "!f(){ git fetch origin pull/$1/head:pr-$1 && git checkout pr-$1; };f"
-    lg  = log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset'
-    llg = !git log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset' origin/master..`git rev-parse --abbrev-ref HEAD`
-    rbi = !git rebase --interactive $(git merge-base master HEAD)
-    st  = status
+    co   = checkout
+    cm   = commit --message
+    df   = diff --ignore-space-at-eol --ignore-blank-lines --ignore-all-space
+    dff  = difftool
+    pr   = "!f(){ git fetch origin pull/$1/head:pr-$1 && git checkout pr-$1; };f"
+    lg   = log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset'
+    llg  = !git log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset' origin/master..`git rev-parse --abbrev-ref HEAD`
+    lllg = log --follow --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset'
+    rbi  = !git rebase --interactive $(git merge-base master HEAD)
+    st   = status
 [branch]
     autosetuprebase = always
 [core]
