@@ -33,9 +33,22 @@ ssh -T git@github.com
 ssh-add -K $HOME/.ssh/id_rsa.pub
 ```
 
-Pull Request Local DL
+Pull Request local DL and checkout
 ```
-git fetch origin pull/<ID>/head:<Blanch name>
+git pr <ID>
+```
+
+Rename (Move) file tips
+```
+git mv <file>.html <file>.php
+commit
+
+#
+# 履歴を残します。 git log --follow で追えるようになります。
+# もし、履歴を残し忘れた場合にはダミーブランチを生やして、履歴を作成し取り込みたいブランチをrebaseします。
+# その際に、新規に追加したファイルと既に生成済みでコンフリクトするため、事前にoriginにマスター情報を用意し、
+# 慎重に対応します。
+# originが保証されている場合には、 git df origin/<blanch> で問題なく行えたかが分かります。
 ```
 
 GitHub page ignore Space
