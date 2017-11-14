@@ -11,12 +11,14 @@ export LD_LIBRARY_PATH='/usr/local/lib'
 export LANG=ja_JP.UTF-8
 export LOCAL_PREFIX=/usr/local
 export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_LOG_HOME="$HOME/.log"
 cd
 clear
 #}}}
 #Common {{{
 shopt -s cdspell
-export HISTFILE="$HOME/.log/bash/bash_history"
+export HISTFILE="$XDG_LOG_HOME/bash/bash_history"
 alias cl='clear'
 alias lc='clear'
 alias cp='cp -i -p'
@@ -25,7 +27,7 @@ alias h='history'
 alias mv='mv -i'
 alias rm='rm -i'
 alias tree='tree -af'
-alias wget="wget --hsts-file=$HOME/.log/wget/wget-hsts"
+alias wget="wget --hsts-file=$XDG_LOG_HOME/wget/wget-hsts"
 localPath=''
 #}}}
 #find {{{
@@ -66,7 +68,7 @@ export HISTTIMEFORMAT='%F %T '
 #}}}
 #less {{{
 export LESS='--ignore-case --RAW-CONTROL-CHARS --no-init'
-export LESSHISTFILE="$HOME/.log/less/lesshst"
+export LESSHISTFILE="$XDG_LOG_HOME/less/lesshst"
 man() {
     env \
         LESS_TERMCAP_mb=$(printf "\e[1;31m") \
@@ -117,10 +119,10 @@ export ATOM_DEV_RESOURCE_PATH="$XDG_CONFIG_HOME/atom/resource"
 export ATOM_HOME="$XDG_CONFIG_HOME/atom/home"
 #}}}
 #MySQL {{{
-export MYSQL_HISTFILE="$HOME/.log/mysql/mysql_history"
+export MYSQL_HISTFILE="$XDG_LOG_HOME/mysql/mysql_history"
 #}}}
 #Redis {{{
-export REDISCLI_HISTFILE="$HOME/.log/redis/rediscli_history"
+export REDISCLI_HISTFILE="$XDG_LOG_HOME/redis/rediscli_history"
 #}}}
 #Java {{{
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
@@ -143,7 +145,7 @@ if [ -d $XDG_CONFIG_HOME/npm/bin ]; then
 fi
 #}}}
 #Ruby {{{
-export GEM_HOME="$HOME/.cache/gem"
+export GEM_HOME="$XDG_CACHE_HOME/gem"
 #}}}
 #Go {{{
 #export GOROOT
@@ -172,7 +174,7 @@ case "${OSTYPE}" in
         export MYSQL_PS1="\d @\h> "
         #export MYSQL_PS1="\d @\h[\u] \n> "
         export TRAVIS_CONFIG_PATH="$XDG_CONFIG_HOME/travisci"
-        export VAGRANT_HOME="$HOME/.cache/vagrant/vagrant.d"
+        export VAGRANT_HOME="$XDG_CACHE_HOME/vagrant/vagrant.d"
         export VIM=$HOME
 
         if [ -d $BREW_PREFIX/opt/macvim-kaoriya/bin ]; then
