@@ -150,6 +150,9 @@ export GEM_HOME="$HOME/.cache/gem"
 #export PATH="$GOROOT/bin:$PATH"
 export GOPATH='/srv/go'
 #}}}
+#Python {{{
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
+#}}}
 #OS Type {{{
 case "${OSTYPE}" in
     darwin*)
