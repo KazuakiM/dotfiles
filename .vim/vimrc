@@ -980,6 +980,7 @@ autocmd MyAutoCmd BufNewFile,BufRead *.snip*     setlocal filetype=snippets
 autocmd MyAutoCmd BufNewFile,BufRead *.vim*      setlocal filetype=vim
 autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe} setlocal filetype=xxd
 autocmd MyAutoCmd FileType html,js,php,xml syntax sync minlines=2000
+"autocmd MyAutoCmd FileType php            let b:match_words = "\<\(if\|while\|for\|foreach\|switch\)\>:\<\(elseif\|case\)\>:\<\(else\|default\)\>:\<\(endif\|endwhile\|endfor\|endforeach\|endswitch\)\>"
 autocmd MyAutoCmd FileType php             let b:match_words = &matchpairs . ",if:elseif:else:endif,while:endwhile,for:endfor,foreach:endforeach,switch:case:endswitch"
 "}}}
 
