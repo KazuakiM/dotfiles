@@ -2,6 +2,28 @@
 #export HOMEBREW_GITHUB_API_TOKEN=
 #}}}
 
+#ssh {{{
+ssh() {
+    if [[ -n $(printenv TMUX) ]] ; then
+        local pane_id=$(tmux display -p '#{pane_id}')
+        #local window_name=$(tmux display -p '#{window_name}')
+        if [[ `echo $1 | grep 'dev'` ]] ; then
+            tmux select-pane -P 'bg=colour234,fg=white'
+        else
+            tmux select-pane -P 'bg=colour52,fg=white'
+        fi
+
+        #tmux rename-window -t $pane_id $window_name
+        command ssh $@
+        tmux select-pane -t $pane_id -P 'default'
+        #tmux rename-window -t $pane_id 'local'
+    else
+        command ssh $@
+    fi
+}
+#}}}
+
+
 ## Application Directory {{{
 #alias APP='cd $HOME/sample'
 #}}}
