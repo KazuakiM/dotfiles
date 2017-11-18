@@ -85,7 +85,9 @@ scriptencoding utf-8
 
 let g:mapleader = ','
 noremap <Subleader> <Nop>
+noremap <Neoleader> <Nop>
 map <Space> <Subleader>
+map ; <Neoleader>
 augroup MyAutoCmd
     autocmd!
 augroup END
@@ -354,8 +356,6 @@ nmap <silent><expr><Leader>v ':set<Space>paste<CR><Insert><Right><C-r>+<ESC>'
 cmap <M-v> <C-R><C-O>*
 "  Replace
 nnoremap R gR
-nnoremap <expr><Leader>%s  ':%s/' . expand('<cword>') . '/' . expand('<cword>') . '/gc<Left><Left><Left>'
-nnoremap <expr><Leader>%%s ':%s/' . expand('<cword>') . '//gc<Left><Left><Left>'
 "  Search
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
@@ -369,9 +369,6 @@ nnoremap <Leader>df :<C-u>diffsplit<Space>
 "  Register
 nnoremap x "_x
 nnoremap X "_x
-vnoremap <C-w> "ay
-vnoremap <C-e> "by
-nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
 " Wildmenu
 cnoremap <Left>  <Space><BS><Left>
 cnoremap <Right> <Space><BS><Right>
@@ -468,6 +465,7 @@ if dein#load_state(s:deinDir)
     call dein#add('koron/codic-vim')
     call dein#add('LeafCage/yankround.vim')
     call dein#add('mojako/ref-sources.vim')
+    call dein#add('osyo-manga/vim-over')
     call dein#add('rhysd/clever-f.vim')
     call dein#add('Shougo/dein.vim')
     call dein#add('Shougo/neocomplete.vim')
@@ -762,6 +760,15 @@ nmap f <Plug>(clever-f-f)
 let g:clever_f_across_no_line = 0
 let g:clever_f_smart_case     = 1
 let g:clever_f_use_migemo     = 0
+"}}}
+
+" vim-over {{{
+vnoremap <C-w> "ay
+vnoremap <C-e> "by
+nnoremap <expr><Leader>s    ':OverCommandLine<CR>%s/' . expand('<cword>') . '/' . expand('<cword>') . '/gc<Left><Left><Left>'
+nnoremap <Leader>%s         :<C-u>OverCommandLine<CR>
+nnoremap <expr><Subleader>s ':OverCommandLine<CR>%s/' . expand('<cword>') . '//gc<Left><Left><Left>'
+nnoremap <Neoleader>s       :<C-u>OverCommandLine<CR>%s/<C-r>a/<C-r>b/gc
 "}}}
 
 " vim-surround {{{
