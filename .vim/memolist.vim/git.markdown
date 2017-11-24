@@ -304,6 +304,14 @@ Help
 git diff --help
 ```
 
+Compare URL例。ハッシュでも可能だけど、rebase主義の兼ね合いで、下記の方が都合が良い。
+そもそもこれが必要になる理由はリネーム対応においてGitHub上でのdiffが困難な事が要因orz。
+※も含めてPRに記載する事。
+```bash
+https://github.com/xxxxx/xxxxx/compare/<blanch>~...<blanch>?w=1
+※ ~ (チルダ)は修正数に応じて追加する必要があります。
+```
+
 ワークディレクトリとリポジトリのfile1のdiff
 ```bash
 git dff file1
