@@ -40,15 +40,65 @@ git pr <ID>
 
 Rename (Move) file tips
 ```
-git mv <file>.html <file>.php
-commit
+# リネーム時の履歴を残し、 git log --follow で追えるようにします。
 
+# バックアップのため、リモートブランチを最新にします。
+git st
+git rbi
+git push -f origin <blanch>
+
+# masterブランチとの差分を確認し、移行前ファイルと移行後ファイルを確認します。
+
+git df master --stat
+tar zcvf archive.tar.gz \
+ xxx \
+ yyy
+mv archive.tar.gz /tmp
+git st
+
+# バックアップがすでにありますが、保険として操作しているディレクトリ以外に<blanch>をcloneしておきます。
+# ※それほど怖い対応です。
+
+# ステップブランチにて移行ファイルをコミットします。
+# リモートブランチへのpushは不要です。
+git checkout master
+git branch step
+
+git mv xxx yyy
+
+git commit
+git st
+
+# 一旦、修正を取り消し、ステップブランチを取り込みます。
+git checkout <blanch>
+git reset --hard HEAD~
+
+# 先程、tarで固めた移行ファイルの修正を取り消します。
+# 修正を取り消す理由は<step>ブランチを取り込む際に<step>ブランチでリネームした事実があるため、
+# <blanch>上からその事実を消し去る必要があります。
 #
-# 履歴を残します。 git log --follow で追えるようになります。
-# もし、履歴を残し忘れた場合にはダミーブランチを生やして、履歴を作成し取り込みたいブランチをrebaseします。
-# その際に、新規に追加したファイルと既に生成済みでコンフリクトするため、事前にoriginにマスター情報を用意し、
-# 慎重に対応します。
-# originが保証されている場合には、 git df origin/<blanch> で問題なく行えたかが分かります。
+# ここはウル覚えのため、要確認・更新
+git checkout xxx
+
+# 修正ファイルをコミットします。
+# stepブランチを取り込みます。
+git cm ' Will delte...' .
+git rebase step
+cp /tmp/archive.tar.gz .
+tar zxvf archive.tar.gz
+git cm ' xxxxxxxxxxx' .
+
+# この時点でリモートブランチとの差分は無いはずで、
+# あった場合には操作ミスが予想されます。
+git df origin/<blanch>
+
+# 問題なければ、"Will delete" を squash します。
+# この時点で master ブランチから見ると 2commit 進んだ形になっているはずです。
+# tar で固めるファイルを修正ファイル全部でやって1回にまとめれるかも。
+git rebase HEAD~
+
+# <step>ブランチを削除
+git branch -d step
 ```
 
 GitHub page ignore Space
