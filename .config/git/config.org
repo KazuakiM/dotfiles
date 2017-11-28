@@ -10,7 +10,7 @@
     cm   = commit --message
     df   = diff --ignore-space-at-eol --ignore-blank-lines --ignore-all-space
     dff  = difftool
-    pr   = "!f(){ git fetch origin pull/$1/head:pr-$1 && git checkout pr-$1; };f"
+    pr   = "!f(){ git checkout master && git fetch origin pull/$1/head:pr-$1 && git checkout pr-$1; };f"
     lg   = log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset'
     llg  = !git log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset' origin/master..`git rev-parse --abbrev-ref HEAD`
     lllg = log --follow --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset'
