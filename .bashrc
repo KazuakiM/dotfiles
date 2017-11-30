@@ -149,6 +149,7 @@ export GEM_HOME="$XDG_CACHE_HOME/gem"
 #}}}
 #Go {{{
 export GOPATH="$XDG_CONFIG_HOME/go"
+export PATH="$GOPATH/bin:$PATH"
 #}}}
 #Python {{{
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
