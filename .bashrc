@@ -131,6 +131,12 @@ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export COMPOSER_HOME="$XDG_CONFIG_HOME/composer"
 if [ -d $XDG_CONFIG_HOME/composer/vendor/bin ]; then
     localPath="$XDG_CONFIG_HOME/composer/vendor/bin:$localPath"
+    if [ -d $XDG_CONFIG_HOME/composer/phan/vendor/bin ]; then
+        localPath="$XDG_CONFIG_HOME/composer/phan/vendor/bin:$localPath"
+    fi
+    if [ -d $XDG_CONFIG_HOME/composer/phpDocumentor/vendor/bin ]; then
+        localPath="$XDG_CONFIG_HOME/composer/phpDocumentor/vendor/bin:$localPath"
+    fi
 fi
 if [ -f $LOCAL_PREFIX/bin/composer.phar ]; then
     alias composer="php -d memory_limit=1G $LOCAL_PREFIX/bin/composer.phar"

@@ -1,10 +1,9 @@
 {
     "require": {
-        "friendsofphp/php-cs-fixer": "*",
         "hirak/prestissimo": "^0.3",
         "jetbrains/phpstorm-stubs": "dev-master",
-        "phan/phan": "^0.9.4",
-        "phpunit/phpunit": "*"
+        "friendsofphp/php-cs-fixer": "^2.8",
+        "phpunit/phpunit": "^6.5"
     },
     "require-dev": {
     }
