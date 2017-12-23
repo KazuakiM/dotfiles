@@ -392,13 +392,6 @@ let g:ftplugin_sql_omni_key_left  = 1
 let g:ftplugin_sql_omni_key_right = 1
 let g:ftplugin_sql_statements     = 1
 let g:omni_sql_no_default_maps    = 1
-" dummy functions.
-function! SQL_SetType() abort "{{{
-endfunction "}}}
-function! sqlcomplete#ResetCacheSyntax() abort "{{{
-endfunction "}}}
-function! sqlcomplete#PreCacheSyntax() abort "{{{
-endfunction "}}}
 " disable plugin
 let g:did_install_default_menus = 1 "$VIMRUNTIME/menu.vim
 let g:loaded_2html_plugin       = 1 "$VIMRUNTIME/plugin/tohtml.vim
@@ -864,22 +857,6 @@ let g:ale_pattern_options_enabled        = 1
 let g:ale_set_highlights                 = 1
 let g:ale_set_signs                      = 1
 let g:ale_warn_about_trailing_whitespace = 0
-" override functions.
-function! ale#statusline#Status() abort "{{{
-    let l:errorDict = {'lnum': 9999, 'text': ''}
-    let l:bufnr = bufnr('')
-    if has_key(g:ale_buffer_info, l:bufnr) && has_key(g:ale_buffer_info[l:bufnr], 'loclist')
-        for l:row in g:ale_buffer_info[l:bufnr].loclist
-            if l:row.lnum <= l:errorDict.lnum
-                let l:errorDict = {'lnum': l:row.lnum, 'text': l:row.text}
-            endif
-        endfor
-        if l:errorDict.lnum < 9999
-            return '[ ' . l:errorDict.lnum . ' ]' . l:errorDict.text
-        endif
-    endif
-    return ''
-endfunction "}}}
 nmap <silent> <Subleader>N <Plug>(ale_previous)
 nmap <silent> <Subleader>n <Plug>(ale_next)
 nmap <silent> <Subleader>a <Plug>(ale_toggle)
