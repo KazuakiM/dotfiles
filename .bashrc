@@ -160,6 +160,9 @@ export PATH="$GOPATH/bin:$PATH"
 #Python {{{
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
 #}}}
+#PlantUML {{{
+export PLANTUML_LIMIT_SIZE=8192
+#}}}
 #OS Type {{{
 case "${OSTYPE}" in
     darwin*)
