@@ -448,6 +448,7 @@ endif
 let g:dein#install_process_timeout = 600
 if dein#load_state(s:deinDir)
     call dein#begin(s:deinDir)
+    call dein#add('fatih/vim-go')
     call dein#add('fuenor/qfixgrep')
     call dein#add('gcmt/wildfire.vim')
     call dein#add('glidenote/memolist.vim')
@@ -846,6 +847,7 @@ let g:ale_lint_on_enter            = 0
 let g:ale_lint_on_filetype_changed = 0
 let g:ale_lint_on_text_changed     = 'never'
 let g:ale_linters                  = {
+\    'go':         ['gofmt', 'govet', 'golint'],
 \    'javascript': ['eslint'],
 \    'php':        ['php']
 \}
