@@ -38,6 +38,7 @@ endfunction "}}}
 "autocmd MyAutoCmd BufWritePost /srv/doc/* call s:rsync('/srv/doc/', '/Users/mabuchikazuaki/work/test')
 
 "autocmd MyAutoCmd BufNewFile,BufRead,TabNew $HOME/sample/*.php          call s:setTags('sample', ',' . $HOME . '/.vim/tags/global.tags')
+"autocmd MyAutoCmd BufNewFile,BufRead,TabNew $HOME/sample/*.go           setlocal tags=sample.tags
 "autocmd MyAutoCmd BufNewFile,BufRead,TabNew $HOME/huga/*.{js,json,html} setlocal tags=$HOME/.vim/tags/huga.tags
 "autocmd MyAutoCmd BufNewFile,BufRead,TabNew C:/usr/local/src/hoge/*.php setlocal tags=$HOME/.vim/tags/hoge.tags
 

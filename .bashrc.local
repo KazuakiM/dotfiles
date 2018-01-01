@@ -38,10 +38,12 @@ ssh() {
 tagsPhpCmd='ctags --languages=php --exclude=tests'
 tagsPhpTestCmd='ctags --languages=php'
 tagsJsCmd='ctags --languages=js'
+tagsGoCmd='ctags --languages=go'
 tagsVariable=''
 tagsVariable="$tagsVariable cd $HOME/.config/composer/vendor; $tagsPhpCmd -f $HOME/.vim/tags/global.tags $HOME/.config/composer/vendor;"
 #tagsVariable="$tagsVariable cd $HOME/sample1; $tagsPhpCmd     -f $HOME/.vim/tags/sample1.tags     $HOME/sample1;"
 #tagsVariable="$tagsVariable cd $HOME/sample1; $tagsPhpTestCmd -f $HOME/.vim/tags/sample1Test.tags $HOME/sample1;"
+#tagsVariable="$tagsVariable cd $HOME/sample1  $tagsGoCmd      -f $HOME/.vim/tags/sample.tags      $HOME/sample1;"
 tagsVariable="$tagsVariable cd;"
 alias TAGS=$tagsVariable
 #}}}
