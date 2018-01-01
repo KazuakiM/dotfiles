@@ -459,6 +459,7 @@ if dein#load_state(s:deinDir)
     call dein#add('koron/codic-vim')
     call dein#add('LeafCage/yankround.vim')
     call dein#add('mojako/ref-sources.vim')
+    call dein#add('nsf/gocode', {'rtp': 'vim/'})
     call dein#add('osyo-manga/vim-over')
     call dein#add('rhysd/clever-f.vim')
     call dein#add('Shougo/dein.vim')
@@ -478,7 +479,6 @@ if dein#load_state(s:deinDir)
     call dein#add('w0rp/ale')
     call dein#add('Yggdroot/indentLine')
 
-
     " Syntax Highlight
     call dein#add('StanAngeloff/php.vim')
     call dein#add('hail2u/vim-css3-syntax',  {'lazy':1})
@@ -489,16 +489,16 @@ if dein#load_state(s:deinDir)
     call dein#add('kannokanno/previm',       {'lazy':1})
     call dein#add('plasticboy/vim-markdown', {'lazy':1})
 
-    " Manual pages.
-    call dein#add('mustardamus/jqapi', {'lazy':1})
-    call dein#add('tokuhirom/jsref',   {'lazy':1})
-
-    " Vim coding
+    " Vim
     call dein#add('Kuniwak/vint',           {'lazy':1})
     call dein#add('thinca/vim-prettyprint', {'lazy':1})
     call dein#add('thinca/vim-themis',      {'lazy':1})
     call dein#add('vim-jp/vimdoc-ja',       {'lazy':1})
     call dein#add('vim-jp/vital.vim',       {'lazy':1})
+
+    " Manual pages.
+    call dein#add('mustardamus/jqapi', {'lazy':1})
+    call dein#add('tokuhirom/jsref',   {'lazy':1})
 
     " Backup
     call dein#add('KazuakiM/vim-ms-translator', {'lazy':1})
@@ -512,6 +512,20 @@ if dein#load_state(s:deinDir)
 endif
 filetype plugin indent on
 syntax enable
+
+" vim-go {{{
+let g:go_bin_path = $GOPATH . '/bin'
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_types = 1
+let g:go_highlight_variable_assignments = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+let g:go_snippet_engine = 'neosnippet'
+"}}}
 
 " qfixgrep {{{
 let g:disable_MyGrep     = 1
@@ -804,6 +818,7 @@ let g:neocomplete#min_keyword_length        = 3
 let g:neocomplete#sources                   = {
 \    '_':          ['neosnippet', 'file',               'buffer'],
 \    'css':        ['neosnippet',         'dictionary', 'buffer'],
+\    'go':         ['neosnippet', 'file', 'omni',       'buffer'],
 \    'html':       ['neosnippet', 'file', 'dictionary', 'buffer'],
 \    'javascript': ['neosnippet', 'file', 'dictionary', 'buffer'],
 \    'php':        ['neosnippet', 'file', 'dictionary', 'buffer']
@@ -818,6 +833,7 @@ let g:neocomplete#sources#dictionary#dictionaries  = {
 \    'javascript': s:envHome . '/.vim/dict/javascript.dict',
 \    'php':        s:envHome . '/.vim/dict/php.dict'
 \}
+let g:neocomplete#sources#omni#input_patterns = {'go': '\h\w\.\w*'}
 let g:neocomplete#use_vimproc = 1
 "neoinclude.vim
 let g:neoinclude#exts          = {'php': ['php', 'inc', 'tpl']}
@@ -847,7 +863,7 @@ let g:ale_lint_on_enter            = 0
 let g:ale_lint_on_filetype_changed = 0
 let g:ale_lint_on_text_changed     = 'never'
 let g:ale_linters                  = {
-\    'go':         ['gofmt', 'govet', 'golint'],
+\    'go':         [],
 \    'javascript': ['eslint'],
 \    'php':        ['php']
 \}

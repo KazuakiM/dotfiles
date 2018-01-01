@@ -242,30 +242,6 @@ iThunes
 
 [Kindle](https://www.amazon.com/gp/digital/fiona/kcp-landing-page)
 
-[LimeChat](http://limechat.net/mac/)
-> Application設定
->
-> |大項目                |小項目                       |                                                                     |
-> |:---------------------|:----------------------------|:--------------------------------------------------------------------|
-> |LimeChat > Preferences|                             |                                                                     |
-> |                      |Log > Show job/leave events  |no check                                                             |
-> |                      |Log > Show rename events     |no check                                                             |
-> |                      |Log > Log transcripts        |Trashes                                                              |
-> |                      |Theme > Current theme        |Spring Night                                                         |
-> |                      |Theme > Override log font    |[RictyDiminished](https://github.com/yascentur/RictyDiminished) 13px |
-> |                      |Theme > Override input font  |[RictyDiminished](https://github.com/yascentur/RictyDiminished) 13px |
-> |Server > Add Server   |                             |                                                                     |
-> |                      |General > Network name       |Lingr                                                                |
-> |                      |General > Connect on start up|check                                                                |
-> |                      |General > Server             |localhost                                                            |
-> |                      |General > Port               |26667                                                                |
-> |                      |General > Server Password    |\* \* \* \*                                                          |
-> |                      |General > Nickname           |kazuakiM                                                             |
-> |                      |General > Login name         |kazuakiM                                                             |
-> |                      |General > Real name          |kazuakiM                                                             |
-> |                      |Details > Encoding           |UTF-8                                                                |
-> |                      |Details > Fallback encoding  |Don't Fallback                                                       |
-
 [LINE](https://itunes.apple.com/jp/app/line/id539883307)
 複数PCからのログインブロックの機構があるため、要注意
 > 設定
@@ -333,6 +309,7 @@ $ ln -sf $HOME/work/dotfiles/.w3m                 $HOME/.w3m
 $ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > $HOME/installer.sh
 $ sh $HOME/installer.sh $HOME/.vim/dein.vim/
 $ rm $HOME/installer.sh
+$ go get github.com/nsf/gocode
 #MEMO: https://github.com/KazuakiM/dotfiles/blob/master/.vim/memolist.vim/git.markdown#tips
 $ ssh-keygen -t rsa -b 4096 -C "xxxx@xxx"
 $ ssh-keygen -l -f $HOME/.ssh/id_rsa.pub
