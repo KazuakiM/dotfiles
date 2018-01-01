@@ -448,65 +448,56 @@ endif
 let g:dein#install_process_timeout = 600
 if dein#load_state(s:deinDir)
     call dein#begin(s:deinDir)
-    call dein#add('fatih/vim-go')
-    call dein#add('fuenor/qfixgrep')
-    call dein#add('gcmt/wildfire.vim')
-    call dein#add('glidenote/memolist.vim')
-    call dein#add('junegunn/vim-easy-align')
-    call dein#add('KazuakiM/neosnippet-snippets')
-    call dein#add('KazuakiM/vim-ibm-bluemix')
-    call dein#add('KazuakiM/vim-sqlfix')
-    call dein#add('koron/codic-vim')
-    call dein#add('LeafCage/yankround.vim')
-    call dein#add('mojako/ref-sources.vim')
-    call dein#add('nsf/gocode', {'rtp': 'vim/'})
-    call dein#add('osyo-manga/vim-over')
-    call dein#add('rhysd/clever-f.vim')
-    call dein#add('Shougo/dein.vim')
-    call dein#add('Shougo/neocomplete.vim')
-    call dein#add('Shougo/neoinclude.vim')
-    call dein#add('Shougo/neosnippet.vim')
-    call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-    call dein#add('Shougo/denite.nvim')
-    call dein#add('sjl/gundo.vim')
-    call dein#add('t9md/vim-quickhl')
-    call dein#add('thinca/vim-quickrun')
-    call dein#add('thinca/vim-qfreplace')
-    call dein#add('thinca/vim-ref')
-    call dein#add('tpope/vim-surround')
-    call dein#add('tyru/open-browser.vim')
-    call dein#add('vim-scripts/matchit.zip')
-    call dein#add('w0rp/ale')
-    call dein#add('Yggdroot/indentLine')
-
-    " Syntax Highlight
-    call dein#add('StanAngeloff/php.vim')
-    call dein#add('hail2u/vim-css3-syntax',  {'lazy':1})
-    call dein#add('mattn/emmet-vim',         {'lazy':1})
-    call dein#add('pangloss/vim-javascript', {'lazy':1})
-
-    " Markdown
-    call dein#add('kannokanno/previm',       {'lazy':1})
-    call dein#add('plasticboy/vim-markdown', {'lazy':1})
-
-    " Vim
-    call dein#add('Kuniwak/vint',           {'lazy':1})
-    call dein#add('thinca/vim-prettyprint', {'lazy':1})
-    call dein#add('thinca/vim-themis',      {'lazy':1})
-    call dein#add('vim-jp/vimdoc-ja',       {'lazy':1})
-    call dein#add('vim-jp/vital.vim',       {'lazy':1})
-
-    " Manual pages.
-    call dein#add('mustardamus/jqapi', {'lazy':1})
-    call dein#add('tokuhirom/jsref',   {'lazy':1})
-
-    " Backup
-    call dein#add('KazuakiM/vim-ms-translator', {'lazy':1})
-    call dein#add('KazuakiM/vim-qfsigns',       {'lazy':1})
-    call dein#add('KazuakiM/vim-qfstatusline',  {'lazy':1})
-    call dein#add('KazuakiM/vim-regexper',      {'lazy':1})
-    call dein#add('KazuakiM/vim-snippets',      {'lazy':1})
-
+    call dein#load_dict({
+    \    'fatih/vim-go':                 {'on_ft': 'go'},
+    \    'fuenor/qfixgrep':              {},
+    \    'gcmt/wildfire.vim':            {},
+    \    'glidenote/memolist.vim':       {},
+    \    'junegunn/vim-easy-align':      {},
+    \    'kannokanno/previm':            {'on_ft': 'markdown'},
+    \    'KazuakiM/neosnippet-snippets': {'on_i': 1},
+    \    'KazuakiM/vim-qfstatusline':    {},
+    \    'KazuakiM/vim-sqlfix':          {},
+    \    'koron/codic-vim':              {},
+    \    'Kuniwak/vint':                 {'on_ft': 'vim'},
+    \    'LeafCage/yankround.vim':       {'on_i': 1},
+    \    'mojako/ref-sources.vim':       {},
+    \    'nsf/gocode':                   {'on_ft': 'go', 'rtp': 'vim/'},
+    \    'osyo-manga/vim-over':          {},
+    \    'plasticboy/vim-markdown':      {'on_ft': 'markdown'},
+    \    'rhysd/clever-f.vim':           {},
+    \    'Shougo/dein.vim':              {},
+    \    'Shougo/neocomplete.vim':       {'on_i': 1},
+    \    'Shougo/neoinclude.vim':        {'on_i': 1},
+    \    'Shougo/neosnippet.vim':        {'on_i': 1},
+    \    'Shougo/vimproc.vim':           {'build': 'make'},
+    \    'Shougo/denite.nvim':           {},
+    \    'sjl/gundo.vim':                {'on_i': 1},
+    \    'StanAngeloff/php.vim':         {'on_ft': 'php'},
+    \    't9md/vim-quickhl':             {},
+    \    'thinca/vim-prettyprint':       {'on_ft': 'vim'},
+    \    'thinca/vim-quickrun':          {},
+    \    'thinca/vim-qfreplace':         {},
+    \    'thinca/vim-ref':               {},
+    \    'tpope/vim-surround':           {},
+    \    'tyru/open-browser.vim':        {},
+    \    'vim-scripts/matchit.zip':      {},
+    \    'w0rp/ale':                     {},
+    \    'Yggdroot/indentLine':          {},
+    \    'hail2u/vim-css3-syntax':       {'lazy':1},
+    \    'mattn/emmet-vim':              {'lazy':1},
+    \    'mustardamus/jqapi':            {'lazy':1},
+    \    'pangloss/vim-javascript':      {'lazy':1},
+    \    'thinca/vim-themis':            {'lazy':1},
+    \    'tokuhirom/jsref':              {'lazy':1},
+    \    'vim-jp/vimdoc-ja':             {'lazy':1},
+    \    'vim-jp/vital.vim':             {'lazy':1},
+    \    'KazuakiM/vim-ibm-bluemix':     {'lazy':1},
+    \    'KazuakiM/vim-ms-translator':   {'lazy':1},
+    \    'KazuakiM/vim-qfsigns':         {'lazy':1},
+    \    'KazuakiM/vim-regexper':        {'lazy':1},
+    \    'KazuakiM/vim-snippets':        {'lazy':1},
+    \})
     call dein#end()
     call dein#save_state()
 endif
@@ -794,47 +785,49 @@ nmap <silent><expr><TAB>  neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnip
 imap <silent><expr><C-x>  KazuakiMNeoCompleteCr()
 imap <silent><expr><CR>   KazuakiMNeoCompleteCr()
 nmap <silent><S-TAB> <ESC>a<C-r>=neosnippet#commands#_clear_markers()<CR>
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS>  neocomplete#smart_close_popup()."\<C-h>"
-"neocomplete.vim
-let g:neocomplete#auto_completion_start_length = 3
-let g:neocomplete#data_directory               = s:envHome .'/.vim/neocomplete.vim'
-let g:neocomplete#delimiter_patterns           = {
-\    'javascript': ['.'],
-\    'php':        ['->', '::', '\'],
-\    'ruby':       ['::']
-\}
-let g:neocomplete#enable_at_startup         = 1
-let g:neocomplete#enable_auto_close_preview = 1
-let g:neocomplete#enable_auto_delimiter     = 1
-let g:neocomplete#enable_auto_select        = 0
-let g:neocomplete#enable_fuzzy_completion   = 0
-let g:neocomplete#enable_smart_case         = 1
-let g:neocomplete#keyword_patterns          = {'_': '\h\w*'}
-let g:neocomplete#lock_buffer_name_pattern  = '\.log\|.*quickrun.*\|.jax'
-let g:neocomplete#max_keyword_width         = 30
-let g:neocomplete#max_list                  = 8
-let g:neocomplete#min_keyword_length        = 3
-let g:neocomplete#sources                   = {
-\    '_':          ['neosnippet', 'file',               'buffer'],
-\    'css':        ['neosnippet',         'dictionary', 'buffer'],
-\    'go':         ['neosnippet', 'file', 'omni',       'buffer'],
-\    'html':       ['neosnippet', 'file', 'dictionary', 'buffer'],
-\    'javascript': ['neosnippet', 'file', 'dictionary', 'buffer'],
-\    'php':        ['neosnippet', 'file', 'dictionary', 'buffer']
-\}
-let g:neocomplete#sources#buffer#cache_limit_size  = 50000
-let g:neocomplete#sources#buffer#disabled_pattern  = '\.log\|\.jax'
-let g:neocomplete#sources#buffer#max_keyword_width = 30
-let g:neocomplete#sources#dictionary#dictionaries  = {
-\    '_':          '',
-\    'css':        s:envHome . '/.vim/dict/css.dict',
-\    'html':       s:envHome . '/.vim/dict/html.dict',
-\    'javascript': s:envHome . '/.vim/dict/javascript.dict',
-\    'php':        s:envHome . '/.vim/dict/php.dict'
-\}
-let g:neocomplete#sources#omni#input_patterns = {'go': '\h\w\.\w*'}
-let g:neocomplete#use_vimproc = 1
+if &filetype is# 'go'
+    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+    inoremap <expr><BS>  neocomplete#smart_close_popup()."\<C-h>"
+    "neocomplete.vim
+    let g:neocomplete#auto_completion_start_length = 3
+    let g:neocomplete#data_directory               = s:envHome .'/.vim/neocomplete.vim'
+    let g:neocomplete#delimiter_patterns           = {
+    \    'javascript': ['.'],
+    \    'php':        ['->', '::', '\'],
+    \    'ruby':       ['::']
+    \}
+    let g:neocomplete#enable_at_startup         = 1
+    let g:neocomplete#enable_auto_close_preview = 1
+    let g:neocomplete#enable_auto_delimiter     = 1
+    let g:neocomplete#enable_auto_select        = 0
+    let g:neocomplete#enable_fuzzy_completion   = 0
+    let g:neocomplete#enable_smart_case         = 1
+    let g:neocomplete#keyword_patterns          = {'_': '\h\w*'}
+    let g:neocomplete#lock_buffer_name_pattern  = '\.log\|.*quickrun.*\|.jax'
+    let g:neocomplete#max_keyword_width         = 30
+    let g:neocomplete#max_list                  = 8
+    let g:neocomplete#min_keyword_length        = 3
+    let g:neocomplete#sources                   = {
+    \    '_':          ['neosnippet', 'file',               'buffer'],
+    \    'css':        ['neosnippet',         'dictionary', 'buffer'],
+    \    'go':         ['neosnippet', 'file', 'omni',       'buffer'],
+    \    'html':       ['neosnippet', 'file', 'dictionary', 'buffer'],
+    \    'javascript': ['neosnippet', 'file', 'dictionary', 'buffer'],
+    \    'php':        ['neosnippet', 'file', 'dictionary', 'buffer']
+    \}
+    let g:neocomplete#sources#buffer#cache_limit_size  = 50000
+    let g:neocomplete#sources#buffer#disabled_pattern  = '\.log\|\.jax'
+    let g:neocomplete#sources#buffer#max_keyword_width = 30
+    let g:neocomplete#sources#dictionary#dictionaries  = {
+    \    '_':          '',
+    \    'css':        s:envHome . '/.vim/dict/css.dict',
+    \    'html':       s:envHome . '/.vim/dict/html.dict',
+    \    'javascript': s:envHome . '/.vim/dict/javascript.dict',
+    \    'php':        s:envHome . '/.vim/dict/php.dict'
+    \}
+    let g:neocomplete#sources#omni#input_patterns = {'go': '\h\w\.\w*'}
+    let g:neocomplete#use_vimproc = 1
+endif
 "neoinclude.vim
 let g:neoinclude#exts          = {'php': ['php', 'inc', 'tpl']}
 let g:neoinclude#max_processes = 5
