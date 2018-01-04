@@ -851,19 +851,20 @@ endfunction "}}}
 "}}}
 
 " ale {{{
-let g:ale_echo_cursor              = 0
-let g:ale_emit_conflict_warnings   = 0
-let g:ale_history_enabled          = 0
-let g:ale_history_log_output       = 0
+let g:ale_echo_cursor               = 0
+let g:ale_emit_conflict_warnings    = 0
+let g:ale_go_gometalinter_options   = '--fast --enable=megacheck --enable=errcheck'
+let g:ale_history_enabled           = 0
+let g:ale_history_log_output        = 0
 let g:ale_javascript_eslint_options = '--cache --cache-file ' . s:envHome . '/.cache/eslint/eslintcache --config ' . s:envHome . '/.config/eslint/eslintrc --format compact --max-warnings 1 --no-color --no-ignore --quiet'
-let g:ale_lint_on_enter            = 0
-let g:ale_lint_on_filetype_changed = 0
-let g:ale_lint_on_text_changed     = 'never'
-let g:ale_linters                  = {
-\    'go':         ['gofmt', 'govet', 'golint'],
+let g:ale_linters                   = {
+\    'go':         ['gometalinter'],
 \    'javascript': ['eslint'],
 \    'php':        ['php']
 \}
+let g:ale_lint_on_enter            = 0
+let g:ale_lint_on_filetype_changed = 0
+let g:ale_lint_on_text_changed     = 'never'
 let g:ale_max_buffer_history_size = 0
 let g:ale_pattern_options         = {
 \    '\.min.js$': {'ale_enabled': 0}
@@ -1003,12 +1004,9 @@ autocmd MyAutoCmd FileType php             let b:match_words = s:match_words
 "}}}
 
 " Function {{{
-nnoremap <F1> :<C-u>echo<Space>"\tFunction Key Help\nF1:Help(here!)\nF2:Paste\nF3:UTF-8\nF4:Wrap\nF5:StatusLine\nF6:DataBase"<CR>
-set pastetoggle=<F2>
-nnoremap <F3> :<C-u>edit++enc=utf-8<CR>
-nnoremap <F4> :<C-u>call<Space>kazuakim#WrapSwitch()<CR>
-nnoremap <F5> :<C-u>call<Space>KazuakiMStatuslineSwitch()<CR>
-nnoremap <F6> :<C-u>call<Space>kazuakim#DatabaseSwitch()<CR>
+nnoremap <F1> :<C-u>echo<Space>"\tFunction Key Help\nF1:Help(here!)\nF2:StatusLine\nF3:DataBase"<CR>
+nnoremap <F2> :<C-u>call<Space>KazuakiMStatuslineSwitch()<CR>
+nnoremap <F3> :<C-u>call<Space>kazuakim#DatabaseSwitch()<CR>
 "}}}
 
 " Other setting files {{{

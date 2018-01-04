@@ -167,17 +167,3 @@ function! kazuakim#DatabaseSwitch() abort "{{{
     echo g:KazuakiMDatabase[b:databaseIndex]
 endfunction "}}}
 "}}}
-
-" Wrap Switch "{{{
-function! kazuakim#WrapSwitch() abort "{{{
-    if &wrap ==# 1
-        set nowrap nobreakindent
-        unmap j
-        unmap k
-    else
-        set wrap breakindent
-        nmap j gj
-        nmap k gk
-    endif
-endfunction "}}}
-"}}}

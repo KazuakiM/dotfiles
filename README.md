@@ -309,7 +309,9 @@ $ ln -sf $HOME/work/dotfiles/.w3m                 $HOME/.w3m
 $ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > $HOME/installer.sh
 $ sh $HOME/installer.sh $HOME/.vim/dein.vim/
 $ rm $HOME/installer.sh
-$ go get github.com/nsf/gocode
+$ go get -u github.com/nsf/gocode
+$ go get -u github.com/alecthomas/gometalinter
+$ gometalinter --install
 #MEMO: https://github.com/KazuakiM/dotfiles/blob/master/.vim/memolist.vim/git.markdown#tips
 $ ssh-keygen -t rsa -b 4096 -C "xxxx@xxx"
 $ ssh-keygen -l -f $HOME/.ssh/id_rsa.pub
