@@ -246,6 +246,10 @@ case "${OSTYPE}" in
         if [ -d  $BREW_PREFIX/opt/openssl@1.1/bin ]; then
             localPath="$BREW_PREFIX/opt/openssl@1.1/bin:$localPath"
         fi
+        #brew --prefix python
+        if [ -d  $BREW_PREFIX/opt/python/libexec/bin ]; then
+            localPath="$BREW_PREFIX/opt/python/libexec/bin:$localPath"
+        fi
         #brew --prefix sqlite
         if [ -d $BREW_PREFIX/opt/sqlite/bin ]; then
             localPath="$BREW_PREFIX/opt/sqlite/bin:$localPath"
