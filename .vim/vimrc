@@ -732,7 +732,7 @@ let g:sqlfix#Config = {'direcotry_path': s:envHome . '/.vim/vim-sqlfix'}
 "}}}
 
 " previm {{{
-"nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
+nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
 "}}}
 
 " vim-ref {{{
