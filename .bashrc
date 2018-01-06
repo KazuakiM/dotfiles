@@ -1,4 +1,6 @@
 # .bashrc
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
+
 # Get the aliases and functions {{{
 if [ -f ~/.bashrc.win ]; then
     . ~/.bashrc.win
@@ -154,8 +156,13 @@ fi
 export GEM_HOME="$XDG_CACHE_HOME/gem"
 #}}}
 #Go {{{
-export GOPATH="$XDG_CONFIG_HOME/go"
-export PATH="$GOPATH/bin:$PATH"
+goPath="$XDG_CONFIG_HOME/go"
+export PATH="$goPath/bin:$PATH"
+if [ -z "${GOPATH+x}" ] ; then
+    export GOPATH=$goPath
+else
+    export GOPATH="$GOPATH:$goPath"
+fi
 #}}}
 #Python {{{
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
