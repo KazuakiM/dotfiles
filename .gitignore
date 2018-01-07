@@ -17,7 +17,9 @@ C:/
 .config/doxygen/
 .config/filezilla/
 .config/git/
-.config/go/
+.config/go/bin/
+.config/go/pkg/
+.config/go/src/
 .config/gtk-2.0/
 .config/java/
 .config/npm/bin/
