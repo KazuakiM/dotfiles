@@ -26,7 +26,6 @@ ssh() {
 #Go project directory {{{
 #goPath="$HOME/sample1"
 #if [ -d $goPath ]; then
-#    export GOPATH=$goPath
 #    export PATH="$goPath/bin:$PATH"
 #fi
 #}}}

@@ -155,15 +155,6 @@ fi
 #Ruby {{{
 export GEM_HOME="$XDG_CACHE_HOME/gem"
 #}}}
-#Go {{{
-goPath="$XDG_CONFIG_HOME/go"
-export PATH="$goPath/bin:$PATH"
-if [ -z "${GOPATH+x}" ] ; then
-    export GOPATH=$goPath
-else
-    export GOPATH="$GOPATH:$goPath"
-fi
-#}}}
 #Python {{{
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
 #}}}
@@ -195,9 +186,14 @@ case "${OSTYPE}" in
         if [ -d $BREW_PREFIX/opt/macvim-kaoriya/bin ]; then
             alias vi=$BREW_PREFIX/opt/macvim-kaoriya/bin/gvim
         fi
+        #rbenv
         if type rbenv >/dev/null 2>&1; then
             export RBENV_ROOT=$BREW_PREFIX/bin
             eval "$(rbenv init -)";
+        fi
+        #direnv
+        if type direnv >/dev/null 2>&1; then
+            eval "$(direnv hook bash)";
         fi
 
         #brew --prefix bash-completion2
