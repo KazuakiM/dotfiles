@@ -155,6 +155,9 @@ fi
 #Ruby {{{
 export GEM_HOME="$XDG_CACHE_HOME/gem"
 #}}}
+#Go {{{
+export PATH="$XDG_CONFIG_HOME/go/bin:$PATH"
+#}}}
 #Python {{{
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
 #}}}

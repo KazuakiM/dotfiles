@@ -296,6 +296,7 @@ $ ln -sf $HOME/work/dotfiles/.ctags.d             $HOME/.ctags.d
 $ cd $HOME/.config/git && ln -sf config.org          config
 $ cd $HOME/.config/git && ln -sf gitconfig.local.org gitconfig.local
 $ cd $HOME
+$ ln -sf $HOME/work/dotfiles/.envrc.org           $HOME/.envrc.org
 $ ln -sf $HOME/work/dotfiles/.htoprc              $HOME/.htoprc
 $ ln -sf $HOME/work/dotfiles/.inputrc             $HOME/.inputrc
 $ ln -sf $HOME/work/dotfiles/.lib                 $HOME/.lib
