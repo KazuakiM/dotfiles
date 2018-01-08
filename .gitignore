@@ -1,8 +1,6 @@
 .bash_history
 .bashrc.win
 .DS_Store
-.sudo_as_admin_successful
-C:/
 .cache/babl/
 .cache/eslint/
 .cache/fontconfig/
@@ -20,6 +18,7 @@ C:/
 .config/go/bin/
 .config/go/pkg/
 .config/go/src/
+.config/go/vendor/
 .config/gtk-2.0/
 .config/java/
 .config/npm/bin/
@@ -40,7 +39,10 @@ C:/
 .log/tmux/
 .log/wget/
 .ssh/
+.sudo_as_admin_successful
 .subversion/
+C:/
+glide.lock
 lib/UbuntuVagrant/.vagrant
 lib/UbuntuVagrant/ssh.config
 lib/UbuntuVagrant/ubuntu-xenial-16.04-cloudimg-console.log
