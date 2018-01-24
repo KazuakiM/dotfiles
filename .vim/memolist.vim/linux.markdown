@@ -62,6 +62,11 @@ Receiver
 $ scp -P <port:22> <host>:/file/to/pasth/<file> /tmp/
 ```
 
+帯域制限
+```bash
+$ scp -l 20000 -P <port:22> <host>:/file/to/pasth/<file> /tmp/
+```
+
 ### File SQL "[ q ](https://github.com/harelba/q)([ SS ](http://www.slideshare.net/serima1/87php-lt))"
 
 I don't use "q" now.

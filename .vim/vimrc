@@ -608,6 +608,18 @@ let g:quickrun_config = {
 \        'outputter/buffer/split':              ':botright',
 \        'runner':                              'job'
 \    },
+\    'go': {
+\        'command':                         'go',
+\        'cmdopt':                          'run',
+\        'exec':                            '%c %o %s:p:t %a',
+\        'hook/cd/directory':               '%S:p:h',
+\        'hook/output_encode/encoding':     'utf-8',
+\        'outputter':                       'buffer',
+\        'outputter/buffer/close_on_empty': 0,
+\        'outputter/buffer/into':           0,
+\        'outputter/buffer/split':          ':botright 7sp',
+\        'tempfile':                        '%{tempname()}.go',
+\    },
 \    'json': {
 \        'command':               'python',
 \        'cmdopt':                '-m json.tool',
