@@ -162,7 +162,9 @@ function! s:BufEnter() abort "{{{
     endif
 
     " Move current file(/directory) path
-    execute 'lcd '. fnameescape(expand('%:p:h'))
+    if &filetype !=# 'go'
+        execute 'lcd '. fnameescape(expand('%:p:h'))
+    endif
 
     " Forcibly update
     set formatoptions-=c formatoptions-=b formatoptions+=j formatoptions-=t formatoptions-=v textwidth=0
@@ -612,13 +614,11 @@ let g:quickrun_config = {
 \        'command':                         'go',
 \        'cmdopt':                          'run',
 \        'exec':                            '%c %o %s:p:t %a',
-\        'hook/cd/directory':               '%S:p:h',
-\        'hook/output_encode/encoding':     'utf-8',
 \        'outputter':                       'buffer',
 \        'outputter/buffer/close_on_empty': 0,
 \        'outputter/buffer/into':           0,
 \        'outputter/buffer/split':          ':botright 7sp',
-\        'tempfile':                        '%{tempname()}.go',
+\        'tempfile':                        '%{tempname()}.go'
 \    },
 \    'json': {
 \        'command':               'python',
