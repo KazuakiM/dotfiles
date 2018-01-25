@@ -132,6 +132,7 @@ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 #}}}
 #PHP {{{
 export COMPOSER_HOME="$XDG_CONFIG_HOME/composer"
+export PHAN_ALLOW_XDEBUG=1
 if [ -d $XDG_CONFIG_HOME/composer/vendor/bin ]; then
     localPath="$XDG_CONFIG_HOME/composer/vendor/bin:$localPath"
     if [ -d $XDG_CONFIG_HOME/composer/phan/vendor/bin ]; then
