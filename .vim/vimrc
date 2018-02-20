@@ -597,10 +597,10 @@ let g:memolist_denite_source        = 'file_rec/memolist'
 "}}}
 
 " vim-quickrun {{{
-nnoremap <Leader>run  :<C-u>QuickRun<CR>
-nnoremap <Leader>phpf :<C-u>QuickRun<Space>phpfixer<CR>
-nnoremap <Leader>phpi :<C-u>QuickRun<Space>phpinfo<CR>
-nnoremap <Leader>phpt :<C-u>QuickRun<Space>phpunit<CR>
+nnoremap <Leader>n  :<C-u>QuickRun<CR>
+nnoremap <Leader>nf :<C-u>QuickRun<Space>phpfixer<CR>
+nnoremap <Leader>ni :<C-u>QuickRun<Space>phpinfo<CR>
+nnoremap <Leader>nt :<C-u>QuickRun<Space>phpunit<CR>
 let g:quickrun_config = {
 \    '_': {
 \        'hook/close_buffer/enable_empty_data': 0,
@@ -862,7 +862,7 @@ endfunction "}}}
 " ale {{{
 let g:ale_echo_cursor               = 0
 let g:ale_emit_conflict_warnings    = 0
-let g:ale_go_gometalinter_options   = '--fast --enable=megacheck --enable=errcheck'
+let g:ale_go_gometalinter_options   = '--fast --enable=megacheck --enable=errcheck --disable=gotype'
 let g:ale_history_enabled           = 0
 let g:ale_history_log_output        = 0
 let g:ale_javascript_eslint_options = '--cache --cache-file ' . s:envHome . '/.cache/eslint/eslintcache --config ' . s:envHome . '/.config/eslint/eslintrc --format compact --max-warnings 1 --no-color --no-ignore --quiet'
