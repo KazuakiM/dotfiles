@@ -450,6 +450,8 @@ endif
 let g:dein#install_process_timeout = 600
 if dein#load_state(s:deinDir)
     call dein#begin(s:deinDir)
+    "Not support yet.
+    "'jodosha/vim-godebug': {'on_ft': 'go'},
     call dein#load_dict({
     \    'fatih/vim-go':                 {'on_ft': 'go'},
     \    'fuenor/qfixgrep':              {},
