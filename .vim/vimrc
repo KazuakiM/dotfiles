@@ -523,9 +523,7 @@ let g:go_jump_to_error = 0
 let g:go_snippet_engine = 'neosnippet'
 "MEMO:I think ale is better than vim-go. Because vim-go checks all project-files.
 "let g:go_metalinter_autosave = 1
-nnoremap <SID>[vim-go] <Nop>
-nmap <Subleader>f <SID>[vim-go]
-nnoremap <SID>[vim-go]i :<C-u>GoImport<CR>
+nnoremap <expr><Subleader>fi ':GoImport ' . expand('<cword>')
 nnoremap <expr><Subleader>fk ':GoDoc ' . expand('<cword>')
 nnoremap <expr><Subleader>fd ':GoDocBrowser ' . expand('<cword>')
 "}}}
