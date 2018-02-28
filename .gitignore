@@ -37,6 +37,7 @@
 .log/iterm2/
 .log/less/
 .log/mysql/
+.log/php/
 .log/redis/
 .log/tmux/
 .log/wget/
