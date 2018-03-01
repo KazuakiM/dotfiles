@@ -15,11 +15,6 @@
 .config/doxygen/
 .config/filezilla/
 .config/git/
-.config/go/bin/
-.config/go/pkg/
-.config/go/src/
-.config/go/vendor/
-.config/go/glide.yaml
 .config/google/
 .config/gtk-2.0/
 .config/java/

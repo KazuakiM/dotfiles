@@ -230,6 +230,11 @@ case "${OSTYPE}" in
         if [ -d $BREW_PREFIX/opt/go ]; then
             export GOROOT="$BREW_PREFIX/opt/go/libexec"
             localPath="$GOROOT/bin:$localPath"
+
+            if [ -d $HOME/go ]; then
+                export GOPATH="$HOME/go"
+                export PATH="$GOPATH/bin:$PATH"
+            fi
         fi
         #brew --prefix icu4c
         if [ -d $BREW_PREFIX/opt/icu4c/bin ]; then

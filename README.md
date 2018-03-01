@@ -306,6 +306,7 @@ $ cp -f  $HOME/.ssh/config.mac                    $HOME/.ssh/config
 $ ln -sf $HOME/work/dotfiles/.vim                 $HOME/.vim
 $ cp -f  $HOME/work/dotfiles/.vim/vimrc.local.org $HOME/.vim/vimrc.local
 $ ln -sf $HOME/work/dotfiles/.w3m                 $HOME/.w3m
+$ ln -sf $HOME/work/dotfiles/go                   $HOME/go
 $ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > $HOME/installer.sh
 $ sh $HOME/installer.sh $HOME/.vim/dein.vim/
 $ rm $HOME/installer.sh
