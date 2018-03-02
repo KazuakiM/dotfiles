@@ -293,6 +293,7 @@ $ cp -f  $HOME/work/dotfiles/.bashrc.local        $HOME/
 $ ln -sf $HOME/work/dotfiles/.cache               $HOME/.cache
 $ ln -sf $HOME/work/dotfiles/.config              $HOME/.config
 $ ln -sf $HOME/work/dotfiles/.ctags.d             $HOME/.ctags.d
+$ ln -sf $HOME/work/dotfiles/.config/docker       $HOME/.docker
 $ cd $HOME/.config/git && ln -sf config.org          config
 $ cd $HOME/.config/git && ln -sf gitconfig.local.org gitconfig.local
 $ cd $HOME

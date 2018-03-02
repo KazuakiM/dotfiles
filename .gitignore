@@ -12,6 +12,7 @@
 .config/configstore/
 .config/composer/
 .config/direnv/
+.config/docker/
 .config/doxygen/
 .config/filezilla/
 .config/git/
