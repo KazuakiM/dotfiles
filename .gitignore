@@ -41,7 +41,8 @@
 .sudo_as_admin_successful
 .subversion/
 C:/
-glide.lock
+go/bin/
+go/src/
 lib/UbuntuVagrant/.vagrant
 lib/UbuntuVagrant/ssh.config
 lib/UbuntuVagrant/ubuntu-xenial-16.04-cloudimg-console.log

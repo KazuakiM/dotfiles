@@ -233,7 +233,7 @@ case "${OSTYPE}" in
 
             if [ -d $HOME/go ]; then
                 export GOPATH="$HOME/go"
-                export PATH="$GOPATH/bin:$PATH"
+                localPath="$GOPATH/bin:$localPath"
             fi
         fi
         #brew --prefix icu4c
