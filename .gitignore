@@ -42,6 +42,7 @@
 .subversion/
 C:/
 go/bin/
+go/pkg/
 go/src/
 lib/UbuntuVagrant/.vagrant
 lib/UbuntuVagrant/ssh.config
