@@ -62,13 +62,15 @@ function! kazuakim#TagJumper() abort "{{{
 
     if &filetype is# 'php'
         call s:KazuakimPhpTagJump(l:cw, l:tli)
+    elseif &filetype is# 'go'
+        call go#def#Jump("tab")
     else
         execute 'tab stselect ' . l:cw
     endif
 endfunction "}}}
 
 " http://inside.pixiv.net/entry/2016/12/10/000000
-function! s:_KazuakimGuessClass(cw)
+function! s:_KazuakimPhpGuessClass(cw)
     let l:line = getline('.')
     let l:cword_start_pos = searchpos('\V' . escape(a:cw, '\'), 'bcW', line('.'))
     let l:prefix_end_index = l:cword_start_pos[1] - 2
@@ -87,15 +89,15 @@ function! s:_KazuakimGuessClass(cw)
     return {'kind': ['c'], 'name': '', 'namespace': ''}
 endfunction
 
-function! s:KazuakimGuessClass(cw)
+function! s:KazuakimPhpGuessClass(cw)
     let l:cursor_pos = getpos('.')
-    let l:class = s:_KazuakimGuessClass(a:cw)
+    let l:class = s:_KazuakimPhpGuessClass(a:cw)
     call setpos('.', l:cursor_pos)
     return l:class
 endfunction
 
 function! s:KazuakimPhpTagJump(cw, tli)
-    let l:class = s:KazuakimGuessClass(a:cw)
+    let l:class = s:KazuakimPhpGuessClass(a:cw)
     let l:mul = 0
     for l:tag in a:tli
         if -1 < index(l:class.kind, l:tag.kind) && l:tag.name ==# l:class.name && ((0 < strlen(l:class.namespace) && l:tag.namespace ==# l:class.namespace) || 0 ==# strlen(l:class.namespace))
