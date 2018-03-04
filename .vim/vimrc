@@ -604,10 +604,10 @@ let g:memolist_denite_source        = 'file_rec/memolist'
 " vim-quickrun {{{
 nnoremap <SID>[quickrun] <Nop>
 nmap <Subleader>t <SID>[quickrun]
-nnoremap <SID>[quickrun]r :<C-u>QuickRun<CR>
+nnoremap <SID>[quickrun]t :<C-u>QuickRun<CR>
 nnoremap <SID>[quickrun]f :<C-u>QuickRun<Space>phpfixer<CR>
 nnoremap <SID>[quickrun]i :<C-u>QuickRun<Space>phpinfo<CR>
-nnoremap <SID>[quickrun]t :<C-u>QuickRun<Space>phpunit<CR>
+nnoremap <SID>[quickrun]r :<C-u>QuickRun<Space>phpunit<CR>
 let g:quickrun_config = {
 \    '_': {
 \        'hook/close_buffer/enable_empty_data': 0,
