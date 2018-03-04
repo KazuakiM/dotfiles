@@ -130,6 +130,23 @@ function! s:CheckString() abort "{{{
     let w:m2 = matchadd('KazuakiMTodo',        'FIXME\|MEMO\|NOTE\|TODO\|XXX')
 endfunction "}}}
 
+function! KazuakiMGoDoc(cw) abort "{{{
+    let l:line = getline('.')
+    let l:cword_start_pos = searchpos('\V' . escape(a:cw, '\'), 'bcW', line('.'))
+    let l:prefix_end_index = l:cword_start_pos[1] - 2
+    let l:prefix = l:prefix_end_index >= 0 ? l:line[:l:prefix_end_index] : ''
+
+    return matchstr(l:prefix, '\zs\k\+\ze\.$') . ' ' . a:cw
+endfunction "}}}
+
+function! s:RefMapping() abort "{{{
+    if &filetype is# 'go'
+        nmap <silent>K :<C-u>call<Space>go#doc#Open("new", "split", KazuakiMGoDoc(expand('<cword>')))<CR>
+    else
+        nmap <silent>K <Plug>(ref-keyword)
+    endif
+endfunction "}}}
+
 function! s:FileTypeSyntaxOn() abort "{{{
     filetype plugin indent on
     syntax enable
@@ -182,6 +199,8 @@ function! s:BufEnter() abort "{{{
     elseif s:syntaxToggle ==# 1
         call s:FileTypeSyntaxOn()
     endif
+
+    call s:RefMapping()
 endfunction "}}}
 
 function! s:BufReadPost() abort "{{{
@@ -217,6 +236,7 @@ function! s:VimEnter() abort "{{{
     " Forcibly update
     set ambiwidth=double showtabline=2
     call s:CheckString()
+    call s:RefMapping()
 
     if &l:diff
         wincmd h
@@ -231,6 +251,7 @@ endfunction "}}}
 function! s:WinEnter() abort "{{{
     checktime
     call s:CheckString()
+    call s:RefMapping()
 endfunction "}}}
 
 autocmd MyAutoCmd BufEnter             * call s:BufEnter()
@@ -508,6 +529,7 @@ filetype plugin indent on
 syntax enable
 
 " vim-go {{{
+let g:go_doc_keywordprg_enabled = 0
 let g:go_fmt_autosave = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_fields = 1
@@ -524,7 +546,6 @@ let g:go_snippet_engine = 'neosnippet'
 "MEMO:I think ale is better than vim-go. Because vim-go checks all project-files.
 "let g:go_metalinter_autosave = 1
 nnoremap <expr><Subleader>fi ':GoImport ' . expand('<cword>')
-nnoremap <expr><Subleader>fk ':GoDoc ' . expand('<cword>')
 "}}}
 
 " qfixgrep {{{
@@ -754,8 +775,6 @@ nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
 "}}}
 
 " vim-ref {{{
-inoremap <silent><C-k> <C-o>:call<Space>ref#K('normal')<CR><ESC>
-nmap <silent>K <Plug>(ref-keyword)
 let g:ref_no_default_key_mappings = 1
 let g:ref_cache_dir               = s:envHome . '/.vim/vim-ref/cache'
 let g:ref_detect_filetype         = {
