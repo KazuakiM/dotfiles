@@ -686,6 +686,15 @@ Modify table name
 ALTER TABLE <Table1> RENAME <Table2>;
 ```
 
+Modify table name
+```sql
+RENAME TABLE
+    <Table1> TO _<Table1>,
+    <Table2> TO <Table1>;
+
+ALTER TABLE <Table1> RENAME <Table2>;
+```
+
 ## USER
 
 blank password user
