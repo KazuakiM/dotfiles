@@ -156,6 +156,7 @@ fi
 #}}}
 #Ruby {{{
 export GEM_HOME="$XDG_CACHE_HOME/gem"
+localPath="$XDG_CACHE_HOME/gem/bin:$localPath"
 #}}}
 #Python {{{
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"

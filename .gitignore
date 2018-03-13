@@ -15,6 +15,7 @@
 .config/docker/
 .config/doxygen/
 .config/filezilla/
+.config/fluentd/
 .config/git/
 .config/google/
 .config/gtk-2.0/
