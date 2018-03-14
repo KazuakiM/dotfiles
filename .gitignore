@@ -30,6 +30,7 @@
 .lib/perl/
 .log/bash/
 .log/filezilla/
+.log/fluentd/
 .log/httpd/
 .log/iterm2/
 .log/less/
