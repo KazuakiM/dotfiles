@@ -25,6 +25,7 @@ alias cl='clear'
 alias lc='clear'
 alias cp='cp -i -p'
 alias df='df -h'
+alias diff='diff --color=always --ignore-all-space --ignore-blank-lines --ignore-space-change --ignore-tab-expansion --ignore-trailing-space --unified'
 alias h='history'
 alias mv='mv -i'
 alias rm='rm -i'
@@ -42,13 +43,6 @@ findIgnore=${findIgnore}' -o -type f -iname "*.log"    -prune'
 findIgnore=${findIgnore}' -o -type f -iname "*min.js"  -prune'
 findIgnore=${findIgnore}' -o -type f -iname "*min.css" -prune'
 alias FIND='find ./ '${findIgnore}' -o -type f -print0 | xargs -0 grep --color -i -I -n "$@"'
-#}}}
-#diff {{{
-if type colordiff >/dev/null 2>&1; then
-    alias diff='colordiff -u'
-else
-    alias diff='diff      -u'
-fi
 #}}}
 #htop {{{
 if type htop >/dev/null 2>&1; then
