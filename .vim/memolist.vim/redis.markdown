@@ -23,3 +23,7 @@ $ redis-cli HGET sample 2
 (nil)
 ```
 
+全データ削除
+```bash
+$ redis-cli flushdb
+```
