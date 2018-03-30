@@ -504,6 +504,8 @@ TODO:apt-cygのインストール状況を確認'apt-cyg show'
 > |                      |browser.link.open_newwindow.restriction            |0                                                                   |
 > |                      |browser.showQuitWarning                            |true                                                                |
 > |                      |browser.tabs.closeWindowWithLastTab                |false                                                               |
+> |                      |dom.push.enabled                                   |false                                                               |
+> |                      |dom.webnotifications.enabled                       |false                                                               |
 
 ## TODO
 
