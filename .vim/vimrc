@@ -485,6 +485,7 @@ if dein#load_state(s:deinDir)
     \    'KazuakiM/vim-sqlfix':          {},
     \    'koron/codic-vim':              {},
     \    'Kuniwak/vint':                 {'on_ft': 'vim'},
+    \    'lervag/vimtex':                {'on_ft': 'tex'},
     \    'LeafCage/yankround.vim':       {},
     \    'mojako/ref-sources.vim':       {},
     \    'osyo-manga/vim-over':          {},
@@ -1034,9 +1035,10 @@ autocmd MyAutoCmd BufNewFile,BufRead *.coffee    setlocal filetype=coffee
 autocmd MyAutoCmd BufNewFile,BufRead *.tpl       setlocal filetype=php
 autocmd MyAutoCmd BufNewFile,BufRead *.plantuml  setlocal filetype=plantuml
 autocmd MyAutoCmd BufNewFile,BufRead *.snip*     setlocal filetype=snippets
+autocmd MyAutoCmd BufNewFile,BufRead *.tex       setlocal filetype=tex
 autocmd MyAutoCmd BufNewFile,BufRead *.vim*      setlocal filetype=vim
 autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe} setlocal filetype=xxd
-autocmd MyAutoCmd FileType html,js,php,xml syntax sync minlines=2000
+autocmd MyAutoCmd FileType html,js,php,xml syntax sync minlines=4000
 autocmd MyAutoCmd FileType php             let b:match_words = s:match_words
 "}}}
 
