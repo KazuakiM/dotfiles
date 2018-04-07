@@ -247,6 +247,11 @@ case "${OSTYPE}" in
         if [ -d $BREW_PREFIX/opt/ncurses/bin ]; then
             localPath="$BREW_PREFIX/opt/ncurses/bin:$localPath"
         fi
+        #brew --prefix openssl
+        if [ -d  $BREW_PREFIX/opt/openssl/bin ]; then
+            localPath="$BREW_PREFIX/opt/openssl/bin:$localPath"
+        fi
+
         #brew --prefix openssl@1.1
         if [ -d  $BREW_PREFIX/opt/openssl@1.1/bin ]; then
             localPath="$BREW_PREFIX/opt/openssl@1.1/bin:$localPath"
