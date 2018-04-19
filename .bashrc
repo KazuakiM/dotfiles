@@ -248,16 +248,20 @@ case "${OSTYPE}" in
             localPath="$BREW_PREFIX/opt/ncurses/bin:$localPath"
         fi
         #brew --prefix openssl
-        if [ -d  $BREW_PREFIX/opt/openssl/bin ]; then
+        if [ -d $BREW_PREFIX/opt/openssl/bin ]; then
             localPath="$BREW_PREFIX/opt/openssl/bin:$localPath"
         fi
-
         #brew --prefix openssl@1.1
-        if [ -d  $BREW_PREFIX/opt/openssl@1.1/bin ]; then
+        if [ -d $BREW_PREFIX/opt/openssl@1.1/bin ]; then
             localPath="$BREW_PREFIX/opt/openssl@1.1/bin:$localPath"
         fi
+        #brew --prefix php@7.0
+        if [ -d $BREW_PREFIX/opt/php@7.0/bin ]; then
+            localPath="$BREW_PREFIX/opt/php@7.0/bin:$localPath"
+            localPath="$BREW_PREFIX/opt/php@7.0/sbin:$localPath"
+        fi
         #brew --prefix python
-        if [ -d  $BREW_PREFIX/opt/python/libexec/bin ]; then
+        if [ -d $BREW_PREFIX/opt/python/libexec/bin ]; then
             localPath="$BREW_PREFIX/opt/python/libexec/bin:$localPath"
         fi
         #brew --prefix sqlite
