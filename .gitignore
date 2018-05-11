@@ -16,6 +16,7 @@
 .config/doxygen/
 .config/filezilla/
 .config/fluentd/
+.config/gcloud/
 .config/git/
 .config/google/
 .config/gtk-2.0/
