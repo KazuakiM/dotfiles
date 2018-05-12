@@ -297,7 +297,6 @@ $ ln -sf $HOME/work/dotfiles/.config/docker       $HOME/.docker
 $ cd $HOME/.config/git && ln -sf config.org          config
 $ cd $HOME/.config/git && ln -sf gitconfig.local.org gitconfig.local
 $ cd $HOME
-$ ln -sf $HOME/work/dotfiles/.htoprc              $HOME/.htoprc
 $ ln -sf $HOME/work/dotfiles/.inputrc             $HOME/.inputrc
 $ ln -sf $HOME/work/dotfiles/.lib                 $HOME/.lib
 $ ln -sf $HOME/work/dotfiles/.local               $HOME/.local
