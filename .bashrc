@@ -169,6 +169,9 @@ export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 #MPlayer {{{
 export MPLAYER_HOME="$XDG_CONFIG_HOME/mplayer"
 #}}}
+#readline {{{
+export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
+#}}}
 #OS Type {{{
 case "${OSTYPE}" in
     darwin*)
