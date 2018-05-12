@@ -31,6 +31,7 @@
 .config/wireshark/
 .ctags.d/_.ctags
 .lib/perl/
+.local/share/gem/
 .log/bash/
 .log/filezilla/
 .log/fluentd/

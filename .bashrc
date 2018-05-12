@@ -14,6 +14,7 @@ export LANG=ja_JP.UTF-8
 export LOCAL_PREFIX=/usr/local
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_LOG_HOME="$HOME/.log"
 cd
 clear
@@ -149,8 +150,9 @@ if [ -d $XDG_CONFIG_HOME/npm/bin ]; then
 fi
 #}}}
 #Ruby {{{
-export GEM_HOME="$XDG_CACHE_HOME/gem"
-localPath="$XDG_CACHE_HOME/gem/bin:$localPath"
+export GEM_HOME="$XDG_DATA_HOME/gem"
+export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
+localPath="$GEM_SPEC_CACHE/bin:$localPath"
 #}}}
 #Python {{{
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
