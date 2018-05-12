@@ -18,6 +18,7 @@
 .config/fluentd/
 .config/gcloud/
 .config/git/
+.config/gnupg/
 .config/google/
 .config/gradle/
 .config/gtk-2.0/

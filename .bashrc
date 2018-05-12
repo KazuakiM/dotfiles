@@ -161,6 +161,9 @@ export PLANTUML_LIMIT_SIZE=8192
 #Gradle {{{
 export GRADLE_USER_HOME="$XDG_CONFIG_HOME/gradle"
 #}}}
+#GnuPG {{{
+export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
+#}}}
 #OS Type {{{
 case "${OSTYPE}" in
     darwin*)
