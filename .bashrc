@@ -158,6 +158,9 @@ export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
 #PlantUML {{{
 export PLANTUML_LIMIT_SIZE=8192
 #}}}
+#Gradle {{{
+export GRADLE_USER_HOME="$XDG_CONFIG_HOME/gradle"
+#}}}
 #OS Type {{{
 case "${OSTYPE}" in
     darwin*)

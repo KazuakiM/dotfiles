@@ -19,6 +19,7 @@
 .config/gcloud/
 .config/git/
 .config/google/
+.config/gradle/
 .config/gtk-2.0/
 .config/java/
 .config/npm/bin/
