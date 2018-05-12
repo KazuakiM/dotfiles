@@ -302,7 +302,6 @@ $ ln -sf $HOME/work/dotfiles/.inputrc             $HOME/.inputrc
 $ ln -sf $HOME/work/dotfiles/.lib                 $HOME/.lib
 $ ln -sf $HOME/work/dotfiles/.local               $HOME/.local
 $ ln -sf $HOME/work/dotfiles/.log                 $HOME/.log
-$ ln -sf $HOME/work/dotfiles/.mplayer             $HOME/.mplayer
 $ ln -sf $HOME/work/dotfiles/.ssh                 $HOME/.ssh
 $ cp -f  $HOME/.ssh/config.mac                    $HOME/.ssh/config
 $ ln -sf $HOME/work/dotfiles/.vim                 $HOME/.vim

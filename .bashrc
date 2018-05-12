@@ -166,6 +166,9 @@ export GRADLE_USER_HOME="$XDG_CONFIG_HOME/gradle"
 #GnuPG {{{
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 #}}}
+#MPlayer {{{
+export MPLAYER_HOME="$XDG_CONFIG_HOME/mplayer"
+#}}}
 #OS Type {{{
 case "${OSTYPE}" in
     darwin*)
