@@ -43,7 +43,8 @@ findIgnore=${findIgnore}' -o -type f -iname "*.cache"  -prune'
 findIgnore=${findIgnore}' -o -type f -iname "*.log"    -prune'
 findIgnore=${findIgnore}' -o -type f -iname "*min.js"  -prune'
 findIgnore=${findIgnore}' -o -type f -iname "*min.css" -prune'
-alias FIND='find ./ '${findIgnore}' -o -type f -print0 | xargs -0 grep --color -i -I -n "$@"'
+alias FIND='find -L ./ '${findIgnore}' -o -type f -print0 | xargs -0 grep --color -i -I -n "$@"'
+alias find='find -L'
 #}}}
 #htop {{{
 if type htop >/dev/null 2>&1; then
