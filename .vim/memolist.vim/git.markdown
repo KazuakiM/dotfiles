@@ -33,6 +33,16 @@ ssh -T git@github.com
 ssh-add -K $HOME/.ssh/id_rsa.pub
 ```
 
+Make empty commit & empty PR
+```
+# オペレーションのみを依頼する場合に口頭になりがち問題を解決
+git branch <blanch>
+git chckout <blanch>
+git commit --allow-empty -m ''
+git push origin <blanch>
+# PR作成
+```
+
 Pull Request local DL and checkout
 ```
 git pr <ID>
