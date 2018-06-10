@@ -23,6 +23,15 @@ function! kazuakim#Minimal() abort "{{{
     vnoremap <C-w> "ay
     vnoremap <C-e> "by
     nnoremap <expr>;s ':%s/<C-r>a/<C-r>b/gc'
+
+    if &l:diff
+        set cursorline
+        "set clipboard+=autoselect,unnamed cursorline
+        nnoremap <C-k> [c
+        nnoremap <C-j> ]c
+        nnoremap <C-h> do
+        nnoremap <C-l> dp
+    endif
 endfunction "}}}
 "}}}
 
