@@ -285,6 +285,16 @@ Create github.io pages
  git push origin gh-pages
  ```
 
+git log edit
+```bash
+$ git commit --amend
+or
+$ git rbi
+  pick to edit
+$ git commit --amend -m '...'
+$ git rebase --continue
+```
+
 ## git log
 
 Help
