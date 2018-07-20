@@ -479,7 +479,7 @@ if dein#load_state(s:deinDir)
     \    'gcmt/wildfire.vim':            {},
     \    'glidenote/memolist.vim':       {},
     \    'junegunn/vim-easy-align':      {},
-    \    'kannokanno/previm':            {'on_ft': 'markdown'},
+    \    'previm/previm':                {'on_ft': 'markdown'},
     \    'KazuakiM/neosnippet-snippets': {'on_i': 1},
     \    'KazuakiM/vim-qfstatusline':    {},
     \    'KazuakiM/vim-sqlfix':          {},
