@@ -280,6 +280,14 @@ $ disown <PID>
 $ sed -i -e 's/xxx/XXX/g' <file1>
 ```
 
+## curl
+
+PUT
+```bash
+curl xxx --data '{
+}'
+```
+
 ## awk
 
 '\47' is SingleQuote.
