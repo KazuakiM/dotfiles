@@ -186,7 +186,7 @@ case "${OSTYPE}" in
         alias MYSQL='mysql.server'
         #}}}
         # export {{{
-        export EDITOR=/usr/local/opt/macvim-kaoriya/MacVim.app/Contents/MacOS/vim
+        export EDITOR=/usr/local/opt/macvim/MacVim.app/Contents/MacOS/vim
         export HOMEBREW_NO_ANALYTICS=1
         export LSCOLORS=DxgxcxdxcxCxfxBxFxhxfx
         export MYSQL_PS1="\d @\h> "
@@ -195,8 +195,8 @@ case "${OSTYPE}" in
         export VAGRANT_HOME="$XDG_CACHE_HOME/vagrant/vagrant.d"
         export VIM=$HOME
 
-        if [ -d $BREW_PREFIX/opt/macvim-kaoriya/bin ]; then
-            alias vi=$BREW_PREFIX/opt/macvim-kaoriya/bin/gvim
+        if [ -d $BREW_PREFIX/opt/macvim/bin ]; then
+            alias vi=$BREW_PREFIX/opt/macvim/bin/gvim
         fi
         #rbenv
         if type rbenv >/dev/null 2>&1; then
@@ -258,10 +258,6 @@ case "${OSTYPE}" in
         #brew --prefix libxml2
         if [ -d $BREW_PREFIX/opt/libxml2/bin ]; then
             localPath="$BREW_PREFIX/opt/libxml2/bin:$localPath"
-        fi
-        #brew --prefix macvim-kaoriya
-        if [ -d $BREW_PREFIX/opt/macvim-kaoriya/MacVim.app/Contents/MacOS ]; then
-            localPath="$BREW_PREFIX/opt/macvim-kaoriya/MacVim.app/Contents/MacOS:$localPath"
         fi
         #brew --prefix ncurses
         if [ -d $BREW_PREFIX/opt/ncurses/bin ]; then
