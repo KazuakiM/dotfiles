@@ -310,6 +310,7 @@ $ chkconfig --list
 ## File compress/decompress
 
 List
+
 | 拡張子       | 圧縮                                  | 解凍                                                   |
 | :------------| :------------------------------------ | :----------------------------------------------------- |
 |.bz2          | $ bzip2    file1                      | $ bzip2 -dc  archive.bz2<br />$ bunzip2 -c archive.bz2 |
