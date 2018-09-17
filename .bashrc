@@ -220,6 +220,10 @@ case "${OSTYPE}" in
         #    #eval "$(perl -I$HOME/.lib/perl -Mlocal::lib)";
         #fi
 
+        #brew --prefix apr
+        if [ -d $BREW_PREFIX/opt/apr/bin ]; then
+            localPath="$BREW_PREFIX/opt/apr/bin:$localPath"
+        fi
         #brew --prefix apr-util
         if [ -d $BREW_PREFIX/opt/apr-util/bin ]; then
             localPath="$BREW_PREFIX/opt/apr-util/bin:$localPath"
@@ -305,7 +309,7 @@ case "${OSTYPE}" in
         fi
         gitPullVariable="$gitPullVariable echo 'composer' && cd $HOME   && composer self-update && composer global update;"
         gitPullVariable="$gitPullVariable echo 'npm'      && cd $HOME   && npm i -g npm && npm update -g;"
-        gitPullVariable="$gitPullVariable echo 'homebrew' && cd $HOME   && brew update && brew upgrade && brew cleanup && brew cask cleanup && brew doctor && brew cask doctor;"
+        gitPullVariable="$gitPullVariable echo 'homebrew' && cd $HOME   && brew update && brew upgrade && brew cleanup && brew doctor && brew cask doctor;"
         gitPullVariable="$gitPullVariable cd;"
         alias UP=$gitPullVariable
         #}}}
