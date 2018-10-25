@@ -6,6 +6,8 @@
     # from 1.7.10
     path = ~/.config/git/gitconfig.local
 [alias]
+    br   = branch
+    bra  = branch --all
     co   = checkout
     cm   = commit --message
     df   = diff --ignore-space-at-eol --ignore-blank-lines --ignore-all-space
