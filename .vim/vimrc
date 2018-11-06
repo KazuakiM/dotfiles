@@ -810,6 +810,7 @@ nnoremap <expr><Leader>s    ':OverCommandLine<CR>%s/' . expand('<cword>') . '/' 
 nnoremap <Leader>%s         :<C-u>OverCommandLine<CR>
 nnoremap <expr><Subleader>s ':OverCommandLine<CR>%s/' . expand('<cword>') . '//gc<Left><Left><Left>'
 nnoremap <Neoleader>s       :<C-u>OverCommandLine<CR>%s/<C-r>a/<C-r>b/gc
+nnoremap <expr><Neoleader>r ':' . line('.') . 's/<C-r>a/<C-r>b/gc<C-b>'
 "}}}
 
 " vim-surround {{{
