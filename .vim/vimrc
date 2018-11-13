@@ -488,7 +488,6 @@ if dein#load_state(s:deinDir)
     \    'lervag/vimtex':                {'on_ft': 'tex'},
     \    'LeafCage/yankround.vim':       {},
     \    'mojako/ref-sources.vim':       {},
-    \    'osyo-manga/vim-over':          {},
     \    'plasticboy/vim-markdown':      {'on_ft': 'markdown'},
     \    'rhysd/clever-f.vim':           {},
     \    'Shougo/dein.vim':              {},
@@ -806,10 +805,9 @@ let g:clever_f_use_migemo     = 0
 " vim-over {{{
 vnoremap <C-w> "ay
 vnoremap <C-e> "by
-nnoremap <expr><Leader>s    ':OverCommandLine<CR>%s/' . expand('<cword>') . '/' . expand('<cword>') . '/gc<Left><Left><Left>'
-nnoremap <Leader>%s         :<C-u>OverCommandLine<CR>
-nnoremap <expr><Subleader>s ':OverCommandLine<CR>%s/' . expand('<cword>') . '//gc<Left><Left><Left>'
-nnoremap <Neoleader>s       :<C-u>OverCommandLine<CR>%s/<C-r>a/<C-r>b/gc
+nnoremap <expr><Leader>s    ':%s/' . expand('<cword>') . '/' . expand('<cword>') . '/gc<Left><Left><Left>'
+nnoremap <expr><Subleader>s ':%s/' . expand('<cword>') . '//gc<Left><Left><Left>'
+nnoremap <Neoleader>s       :%s/<C-r>a/<C-r>b/gc
 nnoremap <expr><Neoleader>r ':' . line('.') . 's/<C-r>a/<C-r>b/gc<C-b>'
 "}}}
 
