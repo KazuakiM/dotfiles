@@ -259,6 +259,14 @@ case "${OSTYPE}" in
         if [ -d $BREW_PREFIX/opt/icu4c/bin ]; then
             localPath="$BREW_PREFIX/opt/icu4c/bin:$BREW_PREFIX/opt/icu4c/sbin:$localPath"
         fi
+        #brew --prefix libpq
+        if [ -d $BREW_PREFIX/opt/libpq/bin ]; then
+            localPath="$BREW_PREFIX/opt/libpq/bin:$localPath"
+        fi
+        #brew --prefix libiconv
+        if [ -d $BREW_PREFIX/opt/libiconv/bin ]; then
+            localPath="$BREW_PREFIX/opt/libiconv/bin:$localPath"
+        fi
         #brew --prefix libxml2
         if [ -d $BREW_PREFIX/opt/libxml2/bin ]; then
             localPath="$BREW_PREFIX/opt/libxml2/bin:$localPath"
@@ -266,6 +274,10 @@ case "${OSTYPE}" in
         #brew --prefix ncurses
         if [ -d $BREW_PREFIX/opt/ncurses/bin ]; then
             localPath="$BREW_PREFIX/opt/ncurses/bin:$localPath"
+        fi
+        #brew --prefix openldap
+        if [ -d $BREW_PREFIX/opt/openldap/bin ]; then
+            localPath="$BREW_PREFIX/opt/openldap/bin:$BREW_PREFIX/opt/openldap/sbin:$localPath"
         fi
         #brew --prefix openssl
         if [ -d $BREW_PREFIX/opt/openssl/bin ]; then
