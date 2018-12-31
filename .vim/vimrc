@@ -1027,7 +1027,7 @@ function! s:GetMatchWords() abort "{{{
 endfunction "}}}
 
 let s:match_words_php_list  = [['do', 'while', 'endwhile'], ['for', 'endfor'], ['foreach', 'endforeach'], ['if', 'elseif', 'else', 'endif'], ['switch', 'case', 'default', 'endswitch']]
-let s:match_words_html_list = [['<div', '</div>'], ['<form', '</form>'], ['<ol', '</ol>'], ['<p', '</p>'], ['<span', '</span>'], ['<table', '</table>'], ['<tbody', '</tbody>'],
+let s:match_words_html_list = [['<article', '</article>'], ['<div', '</div>'], ['<form', '</form>'], ['<ol', '</ol>'], ['<p', '</p>'], ['<span', '</span>'], ['<table', '</table>'], ['<tbody', '</tbody>'],
 \    ['<td', '</td>'], ['<thead', '</thead>'], ['<th', '</th>'], ['<tr', '</tr>'], ['<ul', '</ul>']]
 let s:match_words = s:GetMatchWords()
 
