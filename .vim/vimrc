@@ -39,36 +39,36 @@ let s:osType = 'macunix'
 "    let s:osType = 'unix'
 "endif
 
-function! s:GetTablineRight() abort "{{{
-    let s:tablineRight = '%#TabLine# ' . strftime('%y-%m-%d %H:%M', s:currentTime) . ' '
-    "if s:osType ==# 'macunix'
-    let l:battery = system("pmset -g ps|egrep -o '[0-9]{1,3}%'|egrep -o '[0-9]{1,3}'|tr -d '\n'")
-    let l:charge  = system("pmset -g ps|egrep -o 'discharging'|tr -d '\n'")
-    if l:battery < 20
-        if l:charge ==# 'discharging'
-            let s:tablineRight = s:tablineRight . '%#KazuakiMError# ' . l:battery . '%% '
-        else
-            let s:tablineRight = s:tablineRight . '%#KazuakiMWarning# ' . l:battery . '%% '
-        endif
-    else
-        let s:tablineRight = s:tablineRight . '%#KazuakiMInfo# ' . l:battery . '%% '
-    endif
-    "endif
-    return s:tablineRight
-endfunction "}}}
+"function! s:GetTablineRight() abort "{{{
+"    let s:tablineRight = '%#TabLine# ' . strftime('%y-%m-%d %H:%M', s:currentTime) . ' '
+"    "if s:osType ==# 'macunix'
+"    let l:battery = system("pmset -g ps|egrep -o '[0-9]{1,3}%'|egrep -o '[0-9]{1,3}'|tr -d '\n'")
+"    let l:charge  = system("pmset -g ps|egrep -o 'discharging'|tr -d '\n'")
+"    if l:battery < 20
+"        if l:charge ==# 'discharging'
+"            let s:tablineRight = s:tablineRight . '%#KazuakiMError# ' . l:battery . '%% '
+"        else
+"            let s:tablineRight = s:tablineRight . '%#KazuakiMWarning# ' . l:battery . '%% '
+"        endif
+"    else
+"        let s:tablineRight = s:tablineRight . '%#KazuakiMInfo# ' . l:battery . '%% '
+"    endif
+"    "endif
+"    return s:tablineRight
+"endfunction "}}}
 
-let s:currentTime  = ! exists('s:currentTime')  ? localtime() : s:currentTime
+"let s:currentTime  = ! exists('s:currentTime')  ? localtime() : s:currentTime
 let s:envHome      = ! exists('s:envHome')      ? $HOME       : s:envHome
 let s:envUser      = ! exists('s:envUser')      ? $USER       : s:envUser
-let s:statuslineSwitch = ! exists('s:statuslineSwitch') ? 1   : s:statuslineSwitch
+let s:statuslineSwitch = ! exists('s:statuslineSwitch') ? 0   : s:statuslineSwitch
 let s:swapFilePath = ! exists('s:swapFilePath') ? ''          : s:swapFilePath
 let s:deinDir      = ! exists('s:deinDir')      ? s:envHome . '/.vim/dein.vim' : s:deinDir
 
-if has('gui_running')
-    let s:tablineRight = ! exists('s:tablineRight') ? s:GetTablineRight() : s:tablineRight
-else
-    let s:tablineRight = ''
-endif
+"if has('gui_running')
+"    let s:tablineRight = ! exists('s:tablineRight') ? s:GetTablineRight() : s:tablineRight
+"else
+"    let s:tablineRight = ''
+"endif
 "}}}
 
 " Common {{{
@@ -310,11 +310,12 @@ function! s:TabpageLabelUpdate(tabNumber) abort "{{{
 endfunction "}}}
 
 function! KazuakiMTabLineUpdate() abort "{{{
-    if has('gui_running') && 60 < abs(localtime() - s:currentTime)
-        let s:currentTime  = localtime()
-        let s:tablineRight = s:GetTablineRight()
-    endif
-    return join(map(range(1, tabpagenr('$')), 's:TabpageLabelUpdate(v:val)'), '|') . '%#TabLineFill#%T%=%#TabLineSel# ' . getcwd() . ' ' . s:tablineRight
+    return join(map(range(1, tabpagenr('$')), 's:TabpageLabelUpdate(v:val)'), '|') . '%#TabLineFill#%T'
+    "if has('gui_running') && 60 < abs(localtime() - s:currentTime)
+    "    let s:currentTime  = localtime()
+    "    let s:tablineRight = s:GetTablineRight()
+    "endif
+    "return join(map(range(1, tabpagenr('$')), 's:TabpageLabelUpdate(v:val)'), '|') . '%#TabLineFill#%T%=%#TabLineSel# ' . getcwd() . ' ' . s:tablineRight
 endfunction "}}}
 
 " Basic
