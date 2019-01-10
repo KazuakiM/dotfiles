@@ -149,6 +149,11 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 if [ -d $XDG_CONFIG_HOME/npm/bin ]; then
     localPath="$XDG_CONFIG_HOME/npm/bin:$localPath"
 fi
+if [ -d $BREW_PREFIX/opt/nvm ]; then
+    export NVM_DIR="${XDG_CONFIG_HOME}/nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                    # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
 #}}}
 #Ruby {{{
 export GEM_HOME="$XDG_DATA_HOME/gem"

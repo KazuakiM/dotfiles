@@ -26,6 +26,7 @@
 .config/npm/bin/
 .config/npm/lib/node_modules/
 .config/npm/share/
+.config/nvm/
 .config/subversion/
 .config/travisci/
 .config/wireshark/
