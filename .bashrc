@@ -305,6 +305,10 @@ case "${OSTYPE}" in
         if [ -d $BREW_PREFIX/opt/sqlite/bin ]; then
             localPath="$BREW_PREFIX/opt/sqlite/bin:$localPath"
         fi
+        #yarn
+        if [ -d $HOME/.yarn/bin ]; then
+            localPath="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$localPath"
+        fi
         #git diff-highlight
         if [ -d $BREW_PREFIX/share/git-core/contrib/diff-highlight ]; then
             localPath="$BREW_PREFIX/share/git-core/contrib/diff-highlight:$localPath"

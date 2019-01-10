@@ -7,6 +7,7 @@
 .cache/gem/
 .cache/npm/
 .cache/vagrant/
+.cache/yarn/
 .config/atom/home/
 .config/atom/resource/
 .config/configstore/
@@ -33,6 +34,8 @@
 .ctags.d/_.ctags
 .lib/perl/
 .local/share/gem/
+.local/share/recently-used.xbel
+.local/share/yarn/
 .log/bash/
 .log/filezilla/
 .log/fluentd/

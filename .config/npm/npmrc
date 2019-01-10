@@ -1,15 +1,6 @@
-##
-# $ npm config list
-#
-# Ref.
-#  http://qiita.com/inuscript/items/86dbfd26abe6905756c0
-#  https://docs.npmjs.com/misc/config
-#
 also=development
 cache=~/.cache/npm
-#engine-strict=true
 init-module=~/.config/npm/npm-init.js
-prefix=~/.config/npm
 progress=false
 save=true
 save-dev=true
