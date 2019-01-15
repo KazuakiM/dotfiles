@@ -90,6 +90,7 @@ if type docker >/dev/null 2>&1; then
     alias dcr="docker run -d -i -t --privileged --name \"\$@\""
     alias dcs="docker start                            \"\$@\""
     alias dce="docker stop                             \"\$@\""
+    alias drm="docker rm                               \"\$@\""
 fi
 
 if type tmux >/dev/null 2>&1; then
