@@ -26,6 +26,7 @@
 .config/java/
 .config/npm/bin/
 .config/npm/lib/node_modules/
+.config/npm/npmrc
 .config/npm/share/
 .config/nvm/
 .config/subversion/
