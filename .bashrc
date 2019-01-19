@@ -238,6 +238,10 @@ case "${OSTYPE}" in
         if [ -d $BREW_PREFIX/opt/curl/bin ]; then
             localPath="$BREW_PREFIX/opt/curl/bin:$localPath"
         fi
+        #brew --prefix curl-openssl
+        if [ -d $BREW_PREFIX/opt/curl-openssl/bin ]; then
+            localPath="$BREW_PREFIX//opt/curl-openssl/bin:$localPath"
+        fi
         #brew --prefix gnu-tar
         if [ -d $BREW_PREFIX/opt/gnu-tar/libexec/gnubin ]; then
             localPath="$BREW_PREFIX/opt/gnu-tar/libexec/gnubin:$localPath"
