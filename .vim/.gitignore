@@ -1,7 +1,6 @@
 # Regularly update & git NG files. {{{
 /backup/*
 /dein.vim/*
-/neocomplete.vim/*
 /neosnippet.vim/*
 /swap/*
 /tags/*

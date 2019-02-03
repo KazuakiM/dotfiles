@@ -10,10 +10,10 @@
     bra  = branch --all
     co   = checkout
     cm   = commit --message
-    df   = diff --ignore-space-at-eol --ignore-blank-lines --ignore-all-space
+    df   = diff --ignore-blank-lines --ignore-all-space
     dff  = difftool
-    dfm  = diff master --ignore-space-at-eol --ignore-blank-lines --ignore-all-space
-    dfs  = diff master --ignore-space-at-eol --ignore-blank-lines --ignore-all-space --stat
+    dfm  = diff master --ignore-blank-lines --ignore-all-space
+    dfs  = diff master --ignore-blank-lines --ignore-all-space --stat
     pr   = "!f(){ git checkout master && git pull && git fetch -f origin pull/$1/head:pr-$1 && git checkout pr-$1 && git rebase master; };f"
     lg   = log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset'
     llg  = !git log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset' origin/master..`git rev-parse --abbrev-ref HEAD`
@@ -32,6 +32,7 @@
     ui = auto
 [diff]
     algorithm           = histogram
+    colorMovedWS        = ignore-all-space
     compactionHeuristic = true
     tool                = vimdiff
 [difftool "vimdiff"]
@@ -58,4 +59,6 @@
 [user]
     name = KazuakiM
     email = kazuaki_mabuchi_to_go@hotmail.co.jp
+[log]
+    date = iso
 # vim:ft=gitconfig

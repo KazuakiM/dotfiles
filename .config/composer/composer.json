@@ -3,7 +3,8 @@
         "hirak/prestissimo": "^0.3",
         "jetbrains/phpstorm-stubs": "dev-master",
         "friendsofphp/php-cs-fixer": "^2.8",
-        "phpunit/phpunit": "^6.5"
+        "phpunit/phpunit": "^6.5",
+        "felixfbecker/language-server": "^5.4"
     },
     "require-dev": {
     }

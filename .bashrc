@@ -253,6 +253,7 @@ case "${OSTYPE}" in
         #brew --prefix go
         if [ -d $BREW_PREFIX/opt/go ]; then
             export GOROOT="$BREW_PREFIX/opt/go/libexec"
+            export GO111MODULE="on"
             localPath="$GOROOT/bin:$localPath"
 
             if [ -d $HOME/go ]; then
@@ -330,12 +331,10 @@ case "${OSTYPE}" in
         ## git pull {{{
         gitPullVariable=''
         gitPullVariable="$gitPullVariable echo 'dotfiles' && cd $HOME/work/dotfiles/ && git fetch --prune && git pull;"
-        if [ -n "$GOPATH" ] ; then
-            gitPullVariable="$gitPullVariable echo 'go'   && cd $GOPATH && go get -u all;"
-        fi
-        gitPullVariable="$gitPullVariable echo 'composer' && cd $HOME   && composer self-update && composer global update;"
-        gitPullVariable="$gitPullVariable echo 'npm'      && cd $HOME   && npm i -g npm && npm update -g;"
-        gitPullVariable="$gitPullVariable echo 'homebrew' && cd $HOME   && brew update && brew upgrade && brew cleanup && brew doctor && brew cask doctor;"
+        gitPullVariable="$gitPullVariable echo 'go'       && cd $HOME/work/dotfiles/go/src/KazuakiM/dotfiles/ && go get -m -u;"
+        gitPullVariable="$gitPullVariable echo 'composer' && cd $HOME && composer self-update && composer global update;"
+        gitPullVariable="$gitPullVariable echo 'npm'      && cd $HOME && npm i -g npm && npm update -g;"
+        gitPullVariable="$gitPullVariable echo 'homebrew' && cd $HOME && brew update && brew upgrade && brew cleanup && brew doctor && brew cask doctor;"
         gitPullVariable="$gitPullVariable cd;"
         alias UP=$gitPullVariable
         #}}}

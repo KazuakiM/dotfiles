@@ -139,14 +139,6 @@ function! KazuakiMGoDoc(cw) abort "{{{
     return matchstr(l:prefix, '\zs\k\+\ze\.$') . ' ' . a:cw
 endfunction "}}}
 
-function! s:RefMapping() abort "{{{
-    if &filetype is# 'go'
-        nmap <silent>K :<C-u>call<Space>go#doc#Open("new", "split", KazuakiMGoDoc(expand('<cword>')))<CR>
-    else
-        nmap <silent>K <Plug>(ref-keyword)
-    endif
-endfunction "}}}
-
 function! s:FileTypeSyntaxOn() abort "{{{
     filetype plugin indent on
     syntax enable
@@ -199,8 +191,6 @@ function! s:BufEnter() abort "{{{
     elseif s:syntaxToggle ==# 1
         call s:FileTypeSyntaxOn()
     endif
-
-    call s:RefMapping()
 endfunction "}}}
 
 function! s:BufReadPost() abort "{{{
@@ -236,7 +226,6 @@ function! s:VimEnter() abort "{{{
     " Forcibly update
     set ambiwidth=double showtabline=2
     call s:CheckString()
-    call s:RefMapping()
 
     if &l:diff
         wincmd h
@@ -251,7 +240,6 @@ endfunction "}}}
 function! s:WinEnter() abort "{{{
     checktime
     call s:CheckString()
-    call s:RefMapping()
 endfunction "}}}
 
 autocmd MyAutoCmd BufEnter             * call s:BufEnter()
@@ -269,33 +257,6 @@ autocmd MyAutoCmd WinEnter             * call s:WinEnter()
 
 autocmd MyAutoCmd BufNewFile,BufRead $HOME/.config/composer/vendor/*.php               setlocal tags=$HOME/.vim/tags/global.tags
 autocmd MyAutoCmd BufNewFile,BufRead $HOME/work/dotfiles/.config/composer/vendor/*.php setlocal tags=$HOME/.vim/tags/global.tags
-
-function! KazuakiMStatuslineSyntax() abort "{{{
-    let l:ret = ale#statusline#Status()
-    if 0 < len(l:ret)
-        highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta guibg=Magenta
-    else
-        highlight StatusLine cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Grey guibg=Grey
-    endif
-    return l:ret
-endfunction "}}}
-
-function! KazuakiMStatuslinePaste() abort "{{{
-    if &paste is# 1
-        return '[paste]'
-    endif
-    return ''
-endfunction "}}}
-
-function! KazuakiMStatuslineSwitch() abort "{{{
-    if s:statuslineSwitch ==# 1
-        set statusline=\ %t%{KazuakiMStatuslinePaste()}%m%r%h%w%q\ %{KazuakiMStatuslineSyntax()}%<%=%l/%L\ 
-        let s:statuslineSwitch = 0
-    else
-        set statusline=\ %t%{KazuakiMStatuslinePaste()}%m%r%h%w%q\ %{KazuakiMStatuslineSyntax()}%<%=%F\ \|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ \|\ %l/%L\ 
-        let s:statuslineSwitch = 1
-    endif
-endfunction "}}}
 
 " http://d.hatena.ne.jp/thinca/20111204/1322932585
 function! s:TabpageLabelUpdate(tabNumber) abort "{{{
@@ -333,6 +294,7 @@ set matchpairs+=<:> matchtime=1 mouse=
 set nobomb noequalalways nofixendofline nogdefault noimcmdline noimdisable noruler notitle nowrap number
 set pumheight=8
 set scrolloff=999 shellslash shiftwidth=4 shortmess+=a shortmess+=I showbreak=> showcmd showmatch smartcase smartindent smarttab softtabstop=4 swapfile switchbuf=usetab
+set statusline=\ %t%m%r%h%w%q\ %<%=%F\ \|\ %Y\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ \|\ %l/%L\ 
 set synmaxcol=350
 set tabline=%!KazuakiMTabLineUpdate() tabstop=4 titleold= ttyfast t_vb=
 set undodir=$HOME/.vim/undo undofile updatecount=30 updatetime=1000
@@ -354,8 +316,6 @@ xnoremap Y y`>
 "  Fold
 nnoremap zx :foldopen<CR>
 "  Line
-noremap 0 $
-noremap 1 ^
 nnoremap Y y$
 inoremap <C-u> <C-g>u<C-u>
 inoremap <C-w> <C-g>u<C-w>
@@ -452,8 +412,8 @@ nnoremap <SID>[vim]p :<C-u>echo<Space>substitute(&runtimepath,<Space>',',<Space>
 " VimDiff {{{
 if &l:diff
     set cursorline
-    "set clipboard+=autoselect,unnamed cursorline
-    set statusline=\ %t\ %{KazuakiMStatuslinePaste()}\ %m\ %r\ %h\ %w\ %q%=%l/%L\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
+    set clipboard+=autoselect,unnamed cursorline
+    set statusline=\ %t%m%r%h%w%q%=%l/%L\ \|\ %{&fileformat}\ \|\ %{&fileencoding}\ 
     nnoremap <C-k> [c
     nnoremap <C-j> ]c
     nnoremap <C-h> do
@@ -462,7 +422,6 @@ if &l:diff
     finish
 else
     set nocursorline
-    call KazuakiMStatuslineSwitch()
 
     autocmd MyAutoCmd InsertLeave * syntax clear neosnippetConcealExpandSnippets
 endif
@@ -471,84 +430,57 @@ endif
 " dein.vim {{{
 let g:dein#install_process_timeout = 600
 if dein#load_state(s:deinDir)
+    " 'prabirshrestha/asyncomplete-gocode.vim': {},
     call dein#begin(s:deinDir)
-    "Not support yet.
-    "'jodosha/vim-godebug': {'on_ft': 'go'},
     call dein#load_dict({
-    \    'fatih/vim-go':                 {'on_ft': 'go'},
-    \    'fuenor/qfixgrep':              {},
-    \    'gcmt/wildfire.vim':            {},
-    \    'glidenote/memolist.vim':       {},
-    \    'junegunn/vim-easy-align':      {},
-    \    'previm/previm':                {'on_ft': 'markdown'},
-    \    'KazuakiM/neosnippet-snippets': {'on_i': 1},
-    \    'KazuakiM/vim-qfstatusline':    {},
-    \    'KazuakiM/vim-sqlfix':          {},
-    \    'koron/codic-vim':              {},
-    \    'Kuniwak/vint':                 {'on_ft': 'vim'},
-    \    'lervag/vimtex':                {'on_ft': 'tex'},
-    \    'LeafCage/yankround.vim':       {},
-    \    'mojako/ref-sources.vim':       {},
-    \    'plasticboy/vim-markdown':      {'on_ft': 'markdown'},
-    \    'rhysd/clever-f.vim':           {},
-    \    'Shougo/dein.vim':              {},
-    \    'Shougo/neocomplete.vim':       {'on_i': 1},
-    \    'Shougo/neoinclude.vim':        {'on_i': 1},
-    \    'Shougo/neosnippet.vim':        {'on_i': 1},
-    \    'Shougo/vimproc.vim':           {'build': 'make'},
-    \    'Shougo/denite.nvim':           {},
-    \    'sjl/gundo.vim':                {'on_i': 1},
-    \    'StanAngeloff/php.vim':         {'on_ft': 'php'},
-    \    't9md/vim-quickhl':             {},
-    \    'thinca/vim-prettyprint':       {'on_ft': 'vim'},
-    \    'thinca/vim-quickrun':          {},
-    \    'thinca/vim-qfreplace':         {},
-    \    'thinca/vim-ref':               {},
-    \    'tpope/vim-surround':           {},
-    \    'tyru/open-browser.vim':        {},
-    \    'vim-scripts/matchit.zip':      {},
-    \    'w0rp/ale':                     {},
-    \    'Yggdroot/indentLine':          {},
-    \    'hail2u/vim-css3-syntax':       {'lazy':1},
-    \    'mattn/emmet-vim':              {'lazy':1},
-    \    'mustardamus/jqapi':            {'lazy':1},
-    \    'pangloss/vim-javascript':      {'lazy':1},
-    \    'thinca/vim-themis':            {'lazy':1},
-    \    'tokuhirom/jsref':              {'lazy':1},
-    \    'vim-jp/vimdoc-ja':             {'lazy':1},
-    \    'vim-jp/vital.vim':             {'lazy':1},
-    \    'KazuakiM/vim-ibm-bluemix':     {'lazy':1},
-    \    'KazuakiM/vim-ms-translator':   {'lazy':1},
-    \    'KazuakiM/vim-qfsigns':         {'lazy':1},
-    \    'KazuakiM/vim-regexper':        {'lazy':1},
-    \    'KazuakiM/vim-snippets':        {'lazy':1},
+    \    'fuenor/qfixgrep':                            {},
+    \    'gcmt/wildfire.vim':                          {},
+    \    'glidenote/memolist.vim':                     {},
+    \    'junegunn/vim-easy-align':                    {},
+    \    'previm/previm':                              {'on_ft': 'markdown'},
+    \    'KazuakiM/neosnippet-snippets':               {},
+    \    'KazuakiM/vim-sqlfix':                        {},
+    \    'koron/codic-vim':                            {},
+    \    'lervag/vimtex':                              {'on_ft': 'tex'},
+    \    'LeafCage/yankround.vim':                     {},
+    \    'plasticboy/vim-markdown':                    {'on_ft': 'markdown'},
+    \    'prabirshrestha/async.vim':                   {},
+    \    'prabirshrestha/asyncomplete.vim':            {},
+    \    'prabirshrestha/asyncomplete-file.vim':       {},
+    \    'prabirshrestha/asyncomplete-lsp.vim':        {},
+    \    'prabirshrestha/asyncomplete-neosnippet.vim': {},
+    \    'prabirshrestha/vim-lsp':                     {},
+    \    'rhysd/clever-f.vim':                         {},
+    \    'Shougo/dein.vim':                            {},
+    \    'Shougo/denite.nvim':                         {},
+    \    'Shougo/neosnippet.vim':                      {},
+    \    'Shougo/vimproc.vim':                         {'build': 'make'},
+    \    'sjl/gundo.vim':                              {'on_i': 1},
+    \    'StanAngeloff/php.vim':                       {'on_ft': 'php'},
+    \    't9md/vim-quickhl':                           {},
+    \    'thinca/vim-quickrun':                        {},
+    \    'thinca/vim-qfreplace':                       {},
+    \    'tpope/vim-surround':                         {},
+    \    'tyru/open-browser.vim':                      {},
+    \    'vim-scripts/matchit.zip':                    {},
+    \    'Yggdroot/indentLine':                        {},
+    \    'hail2u/vim-css3-syntax':                     {'lazy':1},
+    \    'mattn/emmet-vim':                            {'lazy':1},
+    \    'pangloss/vim-javascript':                    {'lazy':1},
+    \    'thinca/vim-themis':                          {'lazy':1},
+    \    'vim-jp/vimdoc-ja':                           {'lazy':1},
+    \    'vim-jp/vital.vim':                           {'lazy':1},
+    \    'Shougo/deoplete.nvim':                       {'on_ft': 'go'},
+    \    'roxma/nvim-yarp':                            {'on_ft': 'go'},
+    \    'roxma/vim-hug-neovim-rpc':                   {'on_ft': 'go'},
+    \    'fatih/vim-go':                               {'on_ft': 'go'},
     \})
     call dein#end()
     call dein#save_state()
 endif
+
 filetype plugin indent on
 syntax enable
-
-" vim-go {{{
-let g:go_doc_keywordprg_enabled = 0
-let g:go_fmt_autosave = 1
-let g:go_fmt_command = 'goimports'
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_arguments = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_types = 1
-let g:go_highlight_variable_assignments = 1
-let g:go_highlight_variable_declarations = 1
-let g:go_info_mode = 'gocode'
-let g:go_jump_to_error = 0
-let g:go_snippet_engine = 'neosnippet'
-"MEMO:I think ale is better than vim-go. Because vim-go checks all project-files.
-"let g:go_metalinter_autosave = 1
-nnoremap <expr><Subleader>fi ':GoImport ' . expand('<cword>')
-"}}}
 
 " qfixgrep {{{
 let g:disable_MyGrep     = 1
@@ -759,37 +691,12 @@ let g:quickhl_manual_colors = [
 \]
 "}}}
 
-"vim-ibm-bluemix {{{
-"nmap <Subleader>tt <C-o>:call<Space>ibm_bluemix#execute()<CR>
-"nmap <Subleader>tk <C-o>:call<Space>ibm_bluemix#execute('')<Left><Left>
-"let g:ibm_bluemix#config = {
-"\    'source': 'ja',
-"\    'target': 'en',
-"\}
-"}}}
-
 " vim-sqlfix {{{
 let g:sqlfix#Config = {'direcotry_path': s:envHome . '/.vim/vim-sqlfix'}
 "}}}
 
 " previm {{{
 nnoremap <silent> <Leader>pre :<C-u>PrevimOpen<CR>
-"}}}
-
-" vim-ref {{{
-let g:ref_no_default_key_mappings = 1
-let g:ref_cache_dir               = s:envHome . '/.vim/vim-ref/cache'
-let g:ref_detect_filetype         = {
-\    'css':        'phpmanual',
-\    'html':       ['phpmanual',  'javascript', 'jquery'],
-\    'javascript': ['javascript', 'jquery'],
-\    'php':        ['phpmanual',  'javascript', 'jquery']
-\}
-let g:ref_javascript_doc_path = s:envHome . '/.vim/dein.vim/repos/github.com/tokuhirom/jsref/htdocs'
-let g:ref_jquery_doc_path     = s:envHome . '/.vim/dein.vim/repos/github.com/mustardamus/jqapi'
-let g:ref_phpmanual_path      = s:envHome . '/.vim/vim-ref/php-chunked-xhtml'
-let g:ref_use_cache           = 1
-let g:ref_use_vimproc         = 1
 "}}}
 
 " open-browser.vim {{{
@@ -816,105 +723,95 @@ nnoremap <expr><Neoleader>r ':' . line('.') . 's/<C-r>a/<C-r>b/gc<C-b>'
 nmap cs <Plug>Csurround
 "}}}
 
-" neosnippet-snippets
-" neosnippet.vim
-" neoinclude.vim
-" neocomplete.vim {{{
-imap <silent><expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-" neosnippet.vim
-smap <silent><expr><TAB>  neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-nmap <silent><expr><TAB>  neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-imap <silent><expr><C-x>  KazuakiMNeoCompleteCr()
-imap <silent><expr><CR>   KazuakiMNeoCompleteCr()
-nmap <silent><S-TAB> <ESC>a<C-r>=neosnippet#commands#_clear_markers()<CR>
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS>  neocomplete#smart_close_popup()."\<C-h>"
-"neocomplete.vim
-let g:neocomplete#auto_completion_start_length = 3
-let g:neocomplete#data_directory               = s:envHome .'/.vim/neocomplete.vim'
-let g:neocomplete#delimiter_patterns           = {
-\    'javascript': ['.'],
-\    'php':        ['->', '::', '\'],
-\    'ruby':       ['::']
-\}
-let g:neocomplete#enable_at_startup         = 1
-let g:neocomplete#enable_auto_close_preview = 1
-let g:neocomplete#enable_auto_delimiter     = 1
-let g:neocomplete#enable_auto_select        = 0
-let g:neocomplete#enable_fuzzy_completion   = 0
-let g:neocomplete#enable_smart_case         = 1
-let g:neocomplete#keyword_patterns          = {'_': '\h\w*'}
-let g:neocomplete#lock_buffer_name_pattern  = '\.log\|.*quickrun.*\|.jax'
-let g:neocomplete#max_keyword_width         = 30
-let g:neocomplete#max_list                  = 8
-let g:neocomplete#min_keyword_length        = 3
-let g:neocomplete#sources                   = {
-\    '_':          ['neosnippet', 'file',               'buffer'],
-\    'css':        ['neosnippet',         'dictionary', 'buffer'],
-\    'go':         ['neosnippet', 'file', 'omni',       'buffer'],
-\    'html':       ['neosnippet', 'file', 'dictionary', 'buffer'],
-\    'javascript': ['neosnippet', 'file', 'dictionary', 'buffer'],
-\    'php':        ['neosnippet', 'file', 'dictionary', 'buffer']
-\}
-let g:neocomplete#sources#buffer#cache_limit_size  = 50000
-let g:neocomplete#sources#buffer#disabled_pattern  = '\.log\|\.jax'
-let g:neocomplete#sources#buffer#max_keyword_width = 30
-let g:neocomplete#sources#dictionary#dictionaries  = {
-\    '_':          '',
-\    'css':        s:envHome . '/.vim/dict/css.dict',
-\    'html':       s:envHome . '/.vim/dict/html.dict',
-\    'javascript': s:envHome . '/.vim/dict/javascript.dict',
-\    'php':        s:envHome . '/.vim/dict/php.dict'
-\}
-let g:neocomplete#sources#omni#input_patterns = {'go': '\h\w\.\w*'}
-let g:neocomplete#use_vimproc = 1
-"neoinclude.vim
-let g:neoinclude#exts          = {'php': ['php', 'inc', 'tpl']}
-let g:neoinclude#max_processes = 5
-"neosnippet.vim
-let g:neosnippet#data_directory                = s:envHome . '/.vim/neosnippet.vim'
-let g:neosnippet#disable_runtime_snippets      = {'_' : 1}
-let g:neosnippet#enable_snipmate_compatibility = 1
-let g:neosnippet#snippets_directory            = s:envHome . '/.vim/dein.vim/repos/github.com/KazuakiM/neosnippet-snippets/neosnippets'
-function! KazuakiMNeoCompleteCr() abort "{{{
-    if pumvisible() is# 0
-        return "\<CR>X\<C-h>"
-    elseif neosnippet#expandable_or_jumpable()
-        return "\<Plug>(neosnippet_expand_or_jump)"
-    endif
-    return "\<Left>\<Right>"
-endfunction "}}}
-"}}}
+inoremap <silent><expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+snoremap <silent><expr><TAB> neosnippet#expandable_or_jumpable() ? neosnippet#mappings#expand_or_jump_impl() : "\<TAB>"
+inoremap <silent><expr><CR> neosnippet#expandable_or_jumpable() ? neosnippet#mappings#expand_or_jump_impl() : "\<CR>"
 
-" ale {{{
-let g:ale_echo_cursor               = 0
-let g:ale_emit_conflict_warnings    = 0
-let g:ale_go_gometalinter_options   = '--fast --enable=megacheck --enable=errcheck --disable=gotype --disable=gocyclo --disable=gas'
-let g:ale_history_enabled           = 0
-let g:ale_history_log_output        = 0
-let g:ale_javascript_eslint_options = '--format compact --max-warnings 1 --no-color --no-ignore --quiet'
-let g:ale_linters                   = {
-\    'go':         ['gometalinter'],
-\    'javascript': ['eslint'],
-\    'php':        ['php']
-\}
-let g:ale_lint_on_enter            = 0
-let g:ale_lint_on_filetype_changed = 0
-let g:ale_lint_on_text_changed     = 'never'
-let g:ale_max_buffer_history_size = 0
-let g:ale_pattern_options         = {
-\    '\.min.js$': {'ale_enabled': 0}
-\}
-let g:ale_pattern_options_enabled        = 1
-let g:ale_set_highlights                 = 1
-let g:ale_set_signs                      = 1
-let g:ale_sign_error                     = '.'
-let g:ale_sign_warning                   = '.'
-let g:ale_warn_about_trailing_whitespace = 0
-nmap <silent> <Subleader>N <Plug>(ale_previous)
-nmap <silent> <Subleader>n <Plug>(ale_next)
-nmap <silent> <Subleader>a <Plug>(ale_toggle)
-"}}}
+if &filetype is# 'go'
+    let g:asyncomplete_loaded = 1
+    let g:lsp_auto_enable = 0
+
+    "deoplete.nvim
+    "nvim-yarp
+    "vim-hug-neovim-rpc
+    "vim-go
+    let g:deoplete#enable_at_startup = 1
+else
+    let g:deoplete#enable_at_startup = 0
+
+    " asyncomplete-neosnippet.vim
+    " neosnippet-snippets
+    " neosnippet.vim
+    " asyncomplete-file.vim
+    " asyncomplete-gocode.vim
+    " asyncomplete-lsp.vim
+    " vim-lsp
+    " asyncomplete.vim {{{
+    "let g:lsp_log_verbose = 1
+    "let g:lsp_log_file = expand('/private/tmp/vim-lsp.log')
+    let g:lsp_preview_keep_focus = 0
+    nmap <silent> <Subleader>N <Plug>(lsp-previous-error)
+    nmap <silent> <Subleader>n <Plug>(lsp-next-error)
+    nmap <silent> <Subleader>b :<C-u>call<Space>kazuakim#LspDocumentDiagnostics()<CR>
+    nmap <silent> K <Plug>(lsp-hover)
+    augroup MyAsyncomplete
+        autocmd!
+        autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+        \   'name': 'neosnippet',
+        \   'completor': function('asyncomplete#sources#neosnippet#completor'),
+        \   'whitelist': ['*'],
+        \ }))
+
+        autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+        \   'name': 'file',
+        \   'completor': function('asyncomplete#sources#file#completor'),
+        \   'priority': 10,
+        \   'whitelist': ['*'],
+        \ }))
+
+        "autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#gocode#get_source_options({
+        "\   'name': 'gocode',
+        "\   'config': {
+        "\       'gocode_path': expand(s:envHome . '/go/bin/gocode')
+        "\   },
+        "\   'completor': function('asyncomplete#sources#gocode#completor'),
+        "\   'whitelist': ['go'],
+        "\ }))
+
+        autocmd User lsp_setup call lsp#register_server({
+        \   'name': 'php',
+        \   'cmd': {server_info->['php', s:envHome . '/.config/composer/vendor/felixfbecker/language-server/bin/php-language-server.php']},
+        \   'whitelist': ['php'],
+        \ })
+        autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'javascript',
+        \ 'cmd': {server_info->['typescript-language-server', '--stdio']},
+        \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
+        \ 'whitelist': ['javascript'],
+        \ })
+
+        "MEMO gopls is official tool. But iffy...
+        "autocmd User lsp_setup call lsp#register_server({
+        "\   'name': 'go',
+        "\   'cmd': {server_info->['gopls', '-mode', 'stdio', '-logfile', '/private/tmp/gopls.log']},
+        "\   'whitelist': ['go'],
+        "\ })
+        "MEMO Require go modules...
+        "autocmd User lsp_setup call lsp#register_server({
+        "\   'name': 'go',
+        "\   'cmd': {server_info->['bingo', '-mode', 'stdio', '-format-style', 'goimports', '-trace', '-logfile', '/private/tmp/bingo.log']},
+        "\   'whitelist': ['go'],
+        "\ })
+        "MEMO: Common language server for Golang. not required PHP.
+        "autocmd User lsp_setup call lsp#register_server({
+        "\   'name': 'efm-langserver',
+        "\   'cmd': {server_info->['efm-langserver', '-c=/Users/mabuchikazuaki/.config/efm-langserver/config.yaml', '-log=/private/tmp/efm-langserver.log']},
+        "\   'whitelist': ['go'],
+        "\ })
+    augroup END
+    "}}}
+endif
 
 " gundo.vim {{{
 nnoremap cu :<C-u>call<Space>kazuakim#ClearUndo()<CR>
@@ -1045,7 +942,6 @@ autocmd MyAutoCmd FileType php             let b:match_words = s:match_words
 
 " Function {{{
 nnoremap <F1> :<C-u>echo<Space>"\tFunction Key Help\nF1:Help(here!)\nF2:StatusLine\nF3:DataBase"<CR>
-nnoremap <F2> :<C-u>call<Space>KazuakiMStatuslineSwitch()<CR>
 nnoremap <F3> :<C-u>call<Space>kazuakim#DatabaseSwitch()<CR>
 "}}}
 
