@@ -5,7 +5,9 @@
 .cache/eslint/
 .cache/fontconfig/
 .cache/gem/
+.cache/neosnippet/
 .cache/npm/
+.cache/typescript/
 .cache/vagrant/
 .cache/yarn/
 .config/atom/home/

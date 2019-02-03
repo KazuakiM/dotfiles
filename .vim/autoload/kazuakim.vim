@@ -168,6 +168,13 @@ function! kazuakim#ClearUndo() abort "{{{
 endfunction "}}}
 "}}}
 
+" vim-lsp {{{
+function! kazuakim#LspDocumentDiagnostics() abort "{{{
+    let g:QFix_PreviewEnable = 0
+    LspDocumentDiagnostics
+endfunction "}}}
+"}}}
+
 " Database Switch (.vimrc.local) "{{{
 function! kazuakim#DatabaseSwitch() abort "{{{
     let b:databaseIndex = ! exists('b:databaseIndex') ? 0 : b:databaseIndex + 1
