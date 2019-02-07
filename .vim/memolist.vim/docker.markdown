@@ -30,6 +30,13 @@ Docker
 Preferences > File sharing  
 Add ```/srv/xxx```
 
+# login
+
+```bash
+$ docker login
+ID/PW
+```
+
 # pull
 
 ```bash
