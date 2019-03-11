@@ -33,6 +33,7 @@ highlight PmenuSel     cterm=NONE           gui=NONE           ctermfg=Magenta  
 highlight PreProc      cterm=NONE           gui=NONE           ctermfg=Magenta   guifg=Magenta   ctermbg=NONE     guibg=NONE
 highlight Question     cterm=NONE           gui=NONE           ctermfg=Green     guifg=Green     ctermbg=NONE     guibg=NONE
 highlight Search       cterm=NONE           gui=NONE           ctermfg=Grey      guifg=Grey      ctermbg=Blue     guibg=Blue
+highlight SignColumn   cterm=NONE           gui=NONE           ctermfg=Grey      guifg=Grey      ctermbg=Black    guibg=Black
 highlight Special      cterm=NONE           gui=NONE           ctermfg=Magenta   guifg=Magenta   ctermbg=NONE     guibg=NONE
 highlight SpecialKey   cterm=NONE           gui=NONE           ctermfg=DarkGreen guifg=DarkGreen ctermbg=NONE     guibg=NONE
 highlight SpellBad     cterm=NONE           gui=NONE           ctermfg=Red       guifg=Red       ctermbg=White    guibg=White
