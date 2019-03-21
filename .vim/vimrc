@@ -460,6 +460,7 @@ if dein#load_state(s:deinDir)
     \    't9md/vim-quickhl':                           {},
     \    'thinca/vim-quickrun':                        {},
     \    'thinca/vim-qfreplace':                       {},
+    \    'thinca/vim-ref':                             {'on_ft': 'php'},
     \    'tpope/vim-surround':                         {},
     \    'tyru/open-browser.vim':                      {},
     \    'vim-scripts/matchit.zip':                    {},
@@ -648,6 +649,16 @@ let g:vitalizer#vital_dir = s:envHome . '/.vim/dein.vim/repos/github.com/vim-jp/
 
 " vim-qfreplace {{{
 nnoremap <Leader>qr :<C-u>Qfreplace<CR>
+"}}}
+
+" vim-ref {{{
+nmap <Leader>k <Plug>(ref-keyword)
+let g:ref_cache_dir               = s:envHome . '/.vim/vim-ref/cache'
+let g:ref_no_default_key_mappings = 1
+let g:ref_detect_filetype         = {
+\    'php': ['phpmanual'],
+\}
+let g:ref_phpmanual_path = s:envHome . '/.vim/vim-ref/php-chunked-xhtml'
 "}}}
 
 " vim-easy-align {{{
