@@ -5,6 +5,7 @@
 /swap/*
 /tags/*
 /undo/*
+/vim-ref/php-chunked-xhtml/*
 /vim-sqlfix/*
 /vim-tags/*
 /viminfo/*
