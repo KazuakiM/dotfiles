@@ -253,7 +253,7 @@ case "${OSTYPE}" in
         #brew --prefix go
         if [ -d $BREW_PREFIX/opt/go ]; then
             export GOROOT="$BREW_PREFIX/opt/go/libexec"
-            export GO111MODULE="on"
+            export GO111MODULE="off"
             localPath="$GOROOT/bin:$localPath"
 
             if [ -d $HOME/go ]; then
