@@ -460,7 +460,6 @@ if dein#load_state(s:deinDir)
     \    't9md/vim-quickhl':                           {},
     \    'thinca/vim-quickrun':                        {},
     \    'thinca/vim-qfreplace':                       {},
-    \    'thinca/vim-ref':                             {'on_ft': 'php'},
     \    'tpope/vim-surround':                         {},
     \    'tyru/open-browser.vim':                      {},
     \    'vim-scripts/matchit.zip':                    {},
@@ -651,16 +650,6 @@ let g:vitalizer#vital_dir = s:envHome . '/.vim/dein.vim/repos/github.com/vim-jp/
 nnoremap <Leader>qr :<C-u>Qfreplace<CR>
 "}}}
 
-" vim-ref {{{
-nmap <Leader>k <Plug>(ref-keyword)
-let g:ref_cache_dir               = s:envHome . '/.vim/vim-ref/cache'
-let g:ref_no_default_key_mappings = 1
-let g:ref_detect_filetype         = {
-\    'php': ['phpmanual'],
-\}
-let g:ref_phpmanual_path = s:envHome . '/.vim/vim-ref/php-chunked-xhtml'
-"}}}
-
 " vim-easy-align {{{
 vnoremap <silent> <Leader>a :EasyAlign<CR>
 let g:easy_align_delimiters = {
@@ -738,7 +727,6 @@ inoremap <silent><expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <silent><expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 snoremap <silent><expr><TAB> neosnippet#expandable_or_jumpable() ? neosnippet#mappings#expand_or_jump_impl() : "\<TAB>"
 inoremap <silent><expr><CR> neosnippet#expandable_or_jumpable() ? neosnippet#mappings#expand_or_jump_impl() : "\<CR>"
-
 if &filetype is# 'go'
     let g:asyncomplete_loaded = 1
     let g:lsp_auto_enable = 0
@@ -791,9 +779,10 @@ else
         "\ }))
 
         autocmd User lsp_setup call lsp#register_server({
-        \   'name': 'php',
-        \   'cmd': {server_info->['php', s:envHome . '/.config/composer/vendor/felixfbecker/language-server/bin/php-language-server.php']},
-        \   'whitelist': ['php'],
+        \ 'name': 'php',
+        \ 'cmd': {server_info->['node', expand('/usr/local/lib/node_modules/intelephense/lib/intelephense.js'), '--stdio']},
+        \ 'initialization_options': {'storagePath': s:envHome . '.cache/intelephense'},
+        \ 'whitelist': ['php'],
         \ })
         autocmd User lsp_setup call lsp#register_server({
         \ 'name': 'javascript',
