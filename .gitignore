@@ -5,6 +5,7 @@
 .cache/eslint/
 .cache/fontconfig/
 .cache/gem/
+.cache/intelephense/
 .cache/neosnippet/
 .cache/npm/
 .cache/typescript/
