@@ -130,15 +130,6 @@ function! s:CheckString() abort "{{{
     let w:m2 = matchadd('KazuakiMTodo',        'FIXME\|MEMO\|NOTE\|TODO\|XXX')
 endfunction "}}}
 
-function! KazuakiMGoDoc(cw) abort "{{{
-    let l:line = getline('.')
-    let l:cword_start_pos = searchpos('\V' . escape(a:cw, '\'), 'bcW', line('.'))
-    let l:prefix_end_index = l:cword_start_pos[1] - 2
-    let l:prefix = l:prefix_end_index >= 0 ? l:line[:l:prefix_end_index] : ''
-
-    return matchstr(l:prefix, '\zs\k\+\ze\.$') . ' ' . a:cw
-endfunction "}}}
-
 function! s:FileTypeSyntaxOn() abort "{{{
     filetype plugin indent on
     syntax enable
@@ -168,11 +159,6 @@ function! s:BufEnter() abort "{{{
         call remote_send('VIM', '<ESC>:tabnew '.expand('%:p').'<CR>')
         call remote_foreground('VIM')
         quit
-    endif
-
-    " Move current file(/directory) path
-    if &filetype !=# 'go'
-        execute 'lcd '. fnameescape(expand('%:p:h'))
     endif
 
     " Forcibly update
@@ -378,25 +364,25 @@ let g:ftplugin_sql_statements     = 1
 let g:omni_sql_no_default_maps    = 1
 " disable plugin
 let g:did_install_default_menus = 1 "$VIMRUNTIME/menu.vim
-let g:loaded_2html_plugin       = 1 "$VIMRUNTIME/plugin/tohtml.vim
 let g:loaded_getscript          = 1 "$VIMRUNTIME/autoload/getscript.vim
+let g:loaded_netrw              = 1 "$VIMRUNTIME/autoload/netrw.vim
+let g:loaded_netrwFileHandlers  = 1 "$VIMRUNTIME/autoload/netrwFileHandlers.vim
+let g:loaded_netrwSettings      = 1 "$VIMRUNTIME/autoload/netrwSettings.vim
+let g:loaded_sql_completion     = 1 "$VIMRUNTIME/autoload/sqlcomplete.vim
+let g:loaded_syntax_completion  = 1 "$VIMRUNTIME/autoload/syntaxcomplete.vim
+let g:loaded_tar                = 1 "$VIMRUNTIME/autoload/tar.vim
+let g:loaded_vimball            = 1 "$VIMRUNTIME/autoload/vimball.vim
+let g:loaded_zip                = 1 "$VIMRUNTIME/autoload/zip.vim
 let g:loaded_getscriptPlugin    = 1 "$VIMRUNTIME/plugin/getscriptPlugin.vim
 let g:loaded_gzip               = 1 "$VIMRUNTIME/plugin/gzip.vim
 let g:loaded_logiPat            = 1 "$VIMRUNTIME/plugin/logiPat.vim
 let g:loaded_matchparen         = 1 "$VIMRUNTIME/plugin/matchparen.vim
-let g:loaded_netrw              = 1 "$VIMRUNTIME/autoload/netrw.vim
-let g:loaded_netrwFileHandlers  = 1 "$VIMRUNTIME/autoload/netrwFileHandlers.vim
 let g:loaded_netrwPlugin        = 1 "$VIMRUNTIME/plugin/netrwPlugin.vim
-let g:loaded_netrwSettings      = 1 "$VIMRUNTIME/autoload/netrwSettings.vim
 let g:loaded_rrhelper           = 1 "$VIMRUNTIME/plugin/rrhelper.vim
 let g:loaded_spellfile_plugin   = 1 "$VIMRUNTIME/plugin/spellfile.vim
-let g:loaded_sql_completion     = 1 "$VIMRUNTIME/autoload/sqlcomplete.vim
-let g:loaded_syntax_completion  = 1 "$VIMRUNTIME/autoload/syntaxcomplete.vim
-let g:loaded_tar                = 1 "$VIMRUNTIME/autoload/tar.vim
 let g:loaded_tarPlugin          = 1 "$VIMRUNTIME/plugin/tarPlugin.vim
-let g:loaded_vimball            = 1 "$VIMRUNTIME/autoload/vimball.vim
+let g:loaded_2html_plugin       = 1 "$VIMRUNTIME/plugin/tohtml.vim
 let g:loaded_vimballPlugin      = 1 "$VIMRUNTIME/plugin/vimballPlugin.vim
-let g:loaded_zip                = 1 "$VIMRUNTIME/autoload/zip.vim
 let g:loaded_zipPlugin          = 1 "$VIMRUNTIME/plugin/zipPlugin.vim
 " Vim
 nnoremap <SID>[vim] <Nop>
@@ -574,12 +560,11 @@ let g:quickrun_config = {
 \    'go': {
 \        'command':                         'go',
 \        'cmdopt':                          'run',
-\        'exec':                            '%c %o %s:p:t %a',
+\        'exec':                            '%c %o %s:p',
 \        'outputter':                       'buffer',
 \        'outputter/buffer/close_on_empty': 0,
 \        'outputter/buffer/into':           0,
 \        'outputter/buffer/split':          ':botright 7sp',
-\        'tempfile':                        '%{tempname()}.go'
 \    },
 \    'json': {
 \        'command':               'python',
@@ -727,98 +712,91 @@ inoremap <silent><expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <silent><expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 snoremap <silent><expr><TAB> neosnippet#expandable_or_jumpable() ? neosnippet#mappings#expand_or_jump_impl() : "\<TAB>"
 inoremap <silent><expr><CR> neosnippet#expandable_or_jumpable() ? neosnippet#mappings#expand_or_jump_impl() : "\<CR>"
-if &filetype is# 'go'
-    let g:asyncomplete_loaded = 1
-    let g:lsp_auto_enable = 0
 
-    "deoplete.nvim
-    "nvim-yarp
-    "vim-hug-neovim-rpc
-    "vim-go
-    let g:deoplete#enable_at_startup = 1
-    let g:go_fmt_command = 'goimports'
-    let g:go_def_mode = 'godef'
-    let g:go_highlight_functions = 1
-    let g:go_highlight_methods = 1
-    let g:go_highlight_structs = 1
-    let g:go_highlight_operators = 1
-    let g:go_highlight_build_constraints = 1
-else
-    let g:deoplete#enable_at_startup = 0
+" asyncomplete-neosnippet.vim
+" neosnippet-snippets
+" neosnippet.vim
+" asyncomplete-file.vim
+" asyncomplete-gocode.vim
+" asyncomplete-lsp.vim
+" vim-lsp
+" asyncomplete.vim {{{
+"let g:lsp_log_verbose = 1
+"let g:lsp_log_file = expand('/private/tmp/vim-lsp.log')
+let g:lsp_preview_keep_focus = 0
+nmap <silent> <Subleader>N <Plug>(lsp-previous-error)
+nmap <silent> <Subleader>n <Plug>(lsp-next-error)
+nmap <silent> <Subleader>b :<C-u>call<Space>kazuakim#LspDocumentDiagnostics()<CR>
+nmap <silent> K <Plug>(lsp-hover)
+augroup MyAsyncomplete
+    autocmd!
+    autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+    \   'name': 'neosnippet',
+    \   'completor': function('asyncomplete#sources#neosnippet#completor'),
+    \   'whitelist': ['*'],
+    \ }))
 
-    " asyncomplete-neosnippet.vim
-    " neosnippet-snippets
-    " neosnippet.vim
-    " asyncomplete-file.vim
-    " asyncomplete-gocode.vim
-    " asyncomplete-lsp.vim
-    " vim-lsp
-    " asyncomplete.vim {{{
-    "let g:lsp_log_verbose = 1
-    "let g:lsp_log_file = expand('/private/tmp/vim-lsp.log')
-    let g:lsp_preview_keep_focus = 0
-    nmap <silent> <Subleader>N <Plug>(lsp-previous-error)
-    nmap <silent> <Subleader>n <Plug>(lsp-next-error)
-    nmap <silent> <Subleader>b :<C-u>call<Space>kazuakim#LspDocumentDiagnostics()<CR>
-    nmap <silent> K <Plug>(lsp-hover)
-    augroup MyAsyncomplete
-        autocmd!
-        autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
-        \   'name': 'neosnippet',
-        \   'completor': function('asyncomplete#sources#neosnippet#completor'),
-        \   'whitelist': ['*'],
-        \ }))
+    autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+    \   'name': 'file',
+    \   'completor': function('asyncomplete#sources#file#completor'),
+    \   'priority': 10,
+    \   'whitelist': ['*'],
+    \ }))
 
-        autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-        \   'name': 'file',
-        \   'completor': function('asyncomplete#sources#file#completor'),
-        \   'priority': 10,
-        \   'whitelist': ['*'],
-        \ }))
+    "autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#gocode#get_source_options({
+    "\   'name': 'gocode',
+    "\   'config': {
+    "\       'gocode_path': expand(s:envHome . '/go/bin/gocode')
+    "\   },
+    "\   'completor': function('asyncomplete#sources#gocode#completor'),
+    "\   'whitelist': ['go'],
+    "\ }))
 
-        "autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#gocode#get_source_options({
-        "\   'name': 'gocode',
-        "\   'config': {
-        "\       'gocode_path': expand(s:envHome . '/go/bin/gocode')
-        "\   },
-        "\   'completor': function('asyncomplete#sources#gocode#completor'),
-        "\   'whitelist': ['go'],
-        "\ }))
+    autocmd User lsp_setup call lsp#register_server({
+    \ 'name': 'php',
+    \ 'cmd': {server_info->['node', expand('/usr/local/lib/node_modules/intelephense/lib/intelephense.js'), '--stdio']},
+    \ 'initialization_options': {'storagePath': s:envHome . '.cache/intelephense'},
+    \ 'whitelist': ['php'],
+    \ })
+    autocmd User lsp_setup call lsp#register_server({
+    \ 'name': 'javascript',
+    \ 'cmd': {server_info->['typescript-language-server', '--stdio']},
+    \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
+    \ 'whitelist': ['javascript'],
+    \ })
 
-        autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'php',
-        \ 'cmd': {server_info->['node', expand('/usr/local/lib/node_modules/intelephense/lib/intelephense.js'), '--stdio']},
-        \ 'initialization_options': {'storagePath': s:envHome . '.cache/intelephense'},
-        \ 'whitelist': ['php'],
-        \ })
-        autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'javascript',
-        \ 'cmd': {server_info->['typescript-language-server', '--stdio']},
-        \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
-        \ 'whitelist': ['javascript'],
-        \ })
+    "MEMO gopls is official tool. But iffy...
+    "autocmd User lsp_setup call lsp#register_server({
+    "\   'name': 'go',
+    "\   'cmd': {server_info->['gopls', '-mode', 'stdio', '-logfile', '/private/tmp/gopls.log']},
+    "\   'whitelist': ['go'],
+    "\ })
+    "MEMO Require go modules...
+    "autocmd User lsp_setup call lsp#register_server({
+    "\   'name': 'go',
+    "\   'cmd': {server_info->['bingo', '-mode', 'stdio', '-format-style', 'goimports', '-trace', '-logfile', '/private/tmp/bingo.log']},
+    "\   'whitelist': ['go'],
+    "\ })
+    "MEMO: Common language server for Golang. not required PHP.
+    "autocmd User lsp_setup call lsp#register_server({
+    "\   'name': 'efm-langserver',
+    "\   'cmd': {server_info->['efm-langserver', '-c=/Users/mabuchikazuaki/.config/efm-langserver/config.yaml', '-log=/private/tmp/efm-langserver.log']},
+    "\   'whitelist': ['go'],
+    "\ })
+augroup END
+"}}}
 
-        "MEMO gopls is official tool. But iffy...
-        "autocmd User lsp_setup call lsp#register_server({
-        "\   'name': 'go',
-        "\   'cmd': {server_info->['gopls', '-mode', 'stdio', '-logfile', '/private/tmp/gopls.log']},
-        "\   'whitelist': ['go'],
-        "\ })
-        "MEMO Require go modules...
-        "autocmd User lsp_setup call lsp#register_server({
-        "\   'name': 'go',
-        "\   'cmd': {server_info->['bingo', '-mode', 'stdio', '-format-style', 'goimports', '-trace', '-logfile', '/private/tmp/bingo.log']},
-        "\   'whitelist': ['go'],
-        "\ })
-        "MEMO: Common language server for Golang. not required PHP.
-        "autocmd User lsp_setup call lsp#register_server({
-        "\   'name': 'efm-langserver',
-        "\   'cmd': {server_info->['efm-langserver', '-c=/Users/mabuchikazuaki/.config/efm-langserver/config.yaml', '-log=/private/tmp/efm-langserver.log']},
-        "\   'whitelist': ['go'],
-        "\ })
-    augroup END
-    "}}}
-endif
+"deoplete.nvim
+"nvim-yarp
+"vim-hug-neovim-rpc
+"vim-go
+let g:go_fmt_command = 'goimports'
+let g:go_def_mode = 'godef'
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 
 " gundo.vim {{{
 nnoremap cu :<C-u>call<Space>kazuakim#ClearUndo()<CR>
@@ -937,6 +915,7 @@ let s:match_words_html_list = [['<article', '</article>'], ['<div', '</div>'], [
 let s:match_words = s:GetMatchWords()
 
 autocmd MyAutoCmd BufNewFile,BufRead *.coffee    setlocal filetype=coffee
+autocmd MyAutoCmd BufNewFile,BufRead *.go        let g:deoplete#enable_at_startup = 1
 autocmd MyAutoCmd BufNewFile,BufRead *.tpl       setlocal filetype=php
 autocmd MyAutoCmd BufNewFile,BufRead *.plantuml  setlocal filetype=plantuml
 autocmd MyAutoCmd BufNewFile,BufRead *.snip*     setlocal filetype=snippets
