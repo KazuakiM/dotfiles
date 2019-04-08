@@ -161,6 +161,9 @@ function! s:BufEnter() abort "{{{
         quit
     endif
 
+    " Move current file(/directory) path
+    execute 'lcd '. fnameescape(expand('%:p:h'))
+
     " Forcibly update
     set formatoptions-=c formatoptions-=b formatoptions+=j formatoptions-=t formatoptions-=v textwidth=0
 
@@ -437,6 +440,8 @@ if dein#load_state(s:deinDir)
     \    'prabirshrestha/asyncomplete-neosnippet.vim': {},
     \    'prabirshrestha/vim-lsp':                     {},
     \    'rhysd/clever-f.vim':                         {},
+    \    'roxma/nvim-yarp':                            {},
+    \    'roxma/vim-hug-neovim-rpc':                   {},
     \    'Shougo/dein.vim':                            {},
     \    'Shougo/denite.nvim':                         {},
     \    'Shougo/neosnippet.vim':                      {},
@@ -457,8 +462,6 @@ if dein#load_state(s:deinDir)
     \    'vim-jp/vimdoc-ja':                           {'lazy':1},
     \    'vim-jp/vital.vim':                           {'lazy':1},
     \    'Shougo/deoplete.nvim':                       {'on_ft': 'go'},
-    \    'roxma/nvim-yarp':                            {'on_ft': 'go'},
-    \    'roxma/vim-hug-neovim-rpc':                   {'on_ft': 'go'},
     \    'fatih/vim-go':                               {'on_ft': 'go'},
     \})
     call dein#end()
