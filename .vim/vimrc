@@ -526,9 +526,9 @@ call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--
 nnoremap <SID>[unite]f :<C-u>call<Space>KazuakiMDeniteFileRecGit()<CR>
 function! KazuakiMDeniteFileRecGit() abort "{{{
     if finddir('.git', ';') != ''
-        execute 'Denite file_rec/git:' . kazuakim#Path2ProjectDirectory('%') . ' -default-action=tabopen'
+        execute 'Denite file/rec:' . kazuakim#Path2ProjectDirectory('%') . ' -default-action=tabopen'
     else
-        Denite file_rec -default-action=tabopen
+        Denite file/rec -default-action=tabopen
     endif
 endfunction "}}}
 
