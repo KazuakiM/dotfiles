@@ -72,7 +72,7 @@ function! kazuakim#TagJumper() abort "{{{
     if &filetype is# 'php'
         call s:KazuakimPhpTagJump(l:cw, l:tli)
     elseif &filetype is# 'go'
-        call go#def#Jump("tab")
+        call go#def#Jump('tab', 0)
     else
         execute 'tab stselect ' . l:cw
     endif
