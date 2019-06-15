@@ -9,6 +9,12 @@
 redis
 ===
 
+Config file
+```
+redis-server $HOME/.config/redis/redis.conf
+redis-cli shutdown
+```
+
 HMSET
 ```bash
 $ redis-cli HMSET sample 2 "35,720" 3 "380,720" 10 "5,720" 6 "3,720"
