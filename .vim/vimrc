@@ -127,7 +127,7 @@ endif
 
 function! s:CheckString() abort "{{{
     let w:m1 = matchadd('KazuakiMCheckString', '\t\|\r\|\r\n\|\s\+$\|　')
-    let w:m2 = matchadd('KazuakiMTodo',        'FIXME\|MEMO\|NOTE\|TODO\|XXX')
+    let w:m2 = matchadd('KazuakiMTodo',        'FIXME\|MEMO\|NOTE\|TODO\|XXX\|WARNING\|WARN')
 endfunction "}}}
 
 function! s:FileTypeSyntaxOn() abort "{{{
