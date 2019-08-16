@@ -253,12 +253,18 @@ case "${OSTYPE}" in
         #brew --prefix go
         if [ -d $BREW_PREFIX/opt/go ]; then
             export GOROOT="$BREW_PREFIX/opt/go/libexec"
-            export GO111MODULE="off"
+            export GO111MODULE="on"
             localPath="$GOROOT/bin:$localPath"
 
             if [ -d $HOME/go ]; then
                 export GOPATH="$HOME/go"
                 localPath="$GOPATH/bin:$localPath"
+            fi
+
+            #goenv
+            if [ -d $HOME/.goenv ]; then
+                export GOENV_ROOT="$HOME/.goenv"
+                localPath="$GOENV_ROOT/bin:$localPath"
             fi
         fi
         #brew cask google-cloud-sdk
@@ -320,6 +326,9 @@ case "${OSTYPE}" in
             localPath="$BREW_PREFIX/share/git-core/contrib/diff-highlight:$localPath"
         fi
         export PATH=$localPath$PATH
+        if type goenv >/dev/null 2>&1; then
+            eval "$(goenv init -)"
+        fi
 
         # ssh-agent {{{
         if [ -z "$SSH_AUTH_SOCK" ] ; then

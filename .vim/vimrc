@@ -419,11 +419,10 @@ endif
 " dein.vim {{{
 let g:dein#install_process_timeout = 600
 if dein#load_state(s:deinDir)
-    " 'prabirshrestha/asyncomplete-gocode.vim': {},
+    "\    'gcmt/wildfire.vim':                          {},
     call dein#begin(s:deinDir)
     call dein#load_dict({
     \    'fuenor/qfixgrep':                            {},
-    \    'gcmt/wildfire.vim':                          {},
     \    'glidenote/memolist.vim':                     {},
     \    'junegunn/vim-easy-align':                    {},
     \    'previm/previm':                              {'on_ft': 'markdown'},
@@ -461,7 +460,6 @@ if dein#load_state(s:deinDir)
     \    'thinca/vim-themis':                          {'lazy':1},
     \    'vim-jp/vimdoc-ja':                           {'lazy':1},
     \    'vim-jp/vital.vim':                           {'lazy':1},
-    \    'Shougo/deoplete.nvim':                       {'on_ft': 'go'},
     \    'fatih/vim-go':                               {'on_ft': 'go'},
     \})
     call dein#end()
@@ -481,11 +479,11 @@ nnoremap <expr><Leader>greh ':grep! '. expand('<cword>') .' '. expand('%:p')
 "MEMO:tabnew <C-w>gf
 "}}}
 
-" wildfire.vim {{{
-let g:wildfire_fuel_map  = '<Enter>'
-let g:wildfire_objects   = ["i'", 'i"', 'i`', 'i,', 'i)', 'i}', 'i]', 'i>', 'ip', 'it']
-let g:wildfire_water_map = '<BS>'
-"}}}
+"" wildfire.vim {{{
+"let g:wildfire_fuel_map  = '<Enter>'
+"let g:wildfire_objects   = ["i'", 'i"', 'i`', 'i,', 'i)', 'i}', 'i]', 'i>', 'ip', 'it']
+"let g:wildfire_water_map = '<BS>'
+""}}}
 
 " vim-ms-translator {{{
 "nnoremap <Leader>jj :<C-u>Mstranslator<CR>
@@ -516,12 +514,12 @@ nnoremap <expr><Leader>dic ':Codic ' . expand('<cword>')
 " memolist.vim {{{
 nnoremap <SID>[unite] <Nop>
 nmap <Leader>u <SID>[unite]
-call denite#custom#alias('source', 'file_rec/git',      'file_rec')
-call denite#custom#alias('source', 'file_rec/memolist', 'file_rec')
+call denite#custom#alias('source', 'file/rec/git',      'file/rec')
+call denite#custom#alias('source', 'file/rec/memolist', 'file/rec')
 call denite#custom#option('default', 'prompt', '>')
-call denite#custom#map('insert', 'jj',    '<denite:enter_mode:normal>')
-call denite#custom#map('insert', "<C-j>", '<denite:move_to_next_line>')
-call denite#custom#map('insert', "<C-k>", '<denite:move_to_previous_line>')
+call denite#custom#map('_', 'jj',    '<denite:enter_mode:normal>')
+call denite#custom#map('_', "<C-j>", '<denite:move_to_next_line>')
+call denite#custom#map('_', "<C-k>", '<denite:move_to_previous_line>')
 call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
 nnoremap <SID>[unite]f :<C-u>call<Space>KazuakiMDeniteFileRecGit()<CR>
 function! KazuakiMDeniteFileRecGit() abort "{{{
@@ -567,7 +565,7 @@ let g:quickrun_config = {
 \        'outputter':                       'buffer',
 \        'outputter/buffer/close_on_empty': 0,
 \        'outputter/buffer/into':           0,
-\        'outputter/buffer/split':          ':botright 7sp',
+\        'outputter/buffer/split':          ':botright 15sp',
 \    },
 \    'json': {
 \        'command':               'python',
@@ -720,7 +718,6 @@ inoremap <silent><expr><CR> neosnippet#expandable_or_jumpable() ? neosnippet#map
 " neosnippet-snippets
 " neosnippet.vim
 " asyncomplete-file.vim
-" asyncomplete-gocode.vim
 " asyncomplete-lsp.vim
 " vim-lsp
 " asyncomplete.vim {{{
@@ -769,17 +766,11 @@ augroup MyAsyncomplete
     \ })
 
     "MEMO gopls is official tool. But iffy...
-    "autocmd User lsp_setup call lsp#register_server({
-    "\   'name': 'go',
-    "\   'cmd': {server_info->['gopls', '-mode', 'stdio', '-logfile', '/private/tmp/gopls.log']},
-    "\   'whitelist': ['go'],
-    "\ })
-    "MEMO Require go modules...
-    "autocmd User lsp_setup call lsp#register_server({
-    "\   'name': 'go',
-    "\   'cmd': {server_info->['bingo', '-mode', 'stdio', '-format-style', 'goimports', '-trace', '-logfile', '/private/tmp/bingo.log']},
-    "\   'whitelist': ['go'],
-    "\ })
+    autocmd User lsp_setup call lsp#register_server({
+    \   'name': 'go',
+    \   'cmd': {server_info->['gopls']},
+    \   'whitelist': ['go'],
+    \ })
     "MEMO: Common language server for Golang. not required PHP.
     "autocmd User lsp_setup call lsp#register_server({
     "\   'name': 'efm-langserver',
@@ -794,7 +785,8 @@ augroup END
 "vim-hug-neovim-rpc
 "vim-go
 let g:go_fmt_command = 'goimports'
-let g:go_def_mode = 'godef'
+let g:go_def_mode = 'gopls'
+let g:go_info_mode = 'gopls'
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
@@ -925,6 +917,7 @@ autocmd MyAutoCmd BufNewFile,BufRead *.snip*     setlocal filetype=snippets
 autocmd MyAutoCmd BufNewFile,BufRead *.tex       setlocal filetype=tex
 autocmd MyAutoCmd BufNewFile,BufRead *.vim*      setlocal filetype=vim
 autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe} setlocal filetype=xxd
+autocmd MyAutoCmd FileType go              setlocal omnifunc=lsp#complete
 autocmd MyAutoCmd FileType html,js,php,xml syntax sync minlines=4000
 autocmd MyAutoCmd FileType php             let b:match_words = s:match_words
 "}}}
