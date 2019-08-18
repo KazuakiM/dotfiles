@@ -514,14 +514,16 @@ nnoremap <expr><Leader>dic ':Codic ' . expand('<cword>')
 " memolist.vim {{{
 nnoremap <SID>[unite] <Nop>
 nmap <Leader>u <SID>[unite]
-call denite#custom#alias('source', 'file/rec/git',      'file/rec')
-call denite#custom#alias('source', 'file/rec/memolist', 'file/rec')
-call denite#custom#option('default', 'prompt', '>')
-call denite#custom#map('_', 'jj',    '<denite:enter_mode:normal>')
-call denite#custom#map('_', "<C-j>", '<denite:move_to_next_line>')
-call denite#custom#map('_', "<C-k>", '<denite:move_to_previous_line>')
-call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
+" Define mappings
 nnoremap <SID>[unite]f :<C-u>call<Space>KazuakiMDeniteFileRecGit()<CR>
+function! s:DeniteMySettings() abort "{{{
+  nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> <ESC><ESC> denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
+endfunction "}}}
 function! KazuakiMDeniteFileRecGit() abort "{{{
     if finddir('.git', ';') != ''
         execute 'Denite file/rec:' . kazuakim#Path2ProjectDirectory('%') . ' -default-action=tabopen'
@@ -539,7 +541,7 @@ let g:memolist_filename_prefix_none = 1
 let g:memolist_template_dir_path    = s:envHome .'/.vim/memolist.vim'
 let g:memolist_denite               = 1
 let g:memolist_denite_option        = '-default-action=tabopen'
-let g:memolist_denite_source        = 'file_rec/memolist'
+let g:memolist_denite_source        = 'file/rec'
 "}}}
 
 " vim-quickrun {{{
@@ -917,6 +919,7 @@ autocmd MyAutoCmd BufNewFile,BufRead *.snip*     setlocal filetype=snippets
 autocmd MyAutoCmd BufNewFile,BufRead *.tex       setlocal filetype=tex
 autocmd MyAutoCmd BufNewFile,BufRead *.vim*      setlocal filetype=vim
 autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe} setlocal filetype=xxd
+autocmd MyAutoCmd FileType denite          call s:DeniteMySettings()
 autocmd MyAutoCmd FileType go              setlocal omnifunc=lsp#complete
 autocmd MyAutoCmd FileType html,js,php,xml syntax sync minlines=4000
 autocmd MyAutoCmd FileType php             let b:match_words = s:match_words
