@@ -423,6 +423,7 @@ if dein#load_state(s:deinDir)
     call dein#begin(s:deinDir)
     call dein#load_dict({
     \    'fuenor/qfixgrep':                            {},
+    \    'gcmt/wildfire.vim':                          {},
     \    'glidenote/memolist.vim':                     {},
     \    'junegunn/vim-easy-align':                    {},
     \    'previm/previm':                              {'on_ft': 'markdown'},
