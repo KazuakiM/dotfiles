@@ -1,0 +1,6 @@
+daemonize no
+pidfile $HOME/.cache/redis/redis.pid
+port 6379
+loglevel notice
+logfile $HOME/.log/redis/redis.log
+dir $HOME/.cache/redis/
