@@ -603,8 +603,9 @@ let g:quickrun_config = {
 \        'outputter': 'buffer'
 \    },
 \    'phpunit': {
-\        'command':   'phpunit',
-\        'exec':      '%c %s',
+\        'command':   'php',
+\        'cmdopt':    kazuakim#Path2ProjectDirectory('%') . '/vendor/bin/phpunit --configuration ' . kazuakim#Path2ProjectDirectory('%') . '/phpunit.xml',
+\        'exec':      '%c %o %s',
 \        'outputter': 'buffer'
 \    },
 \    'plantuml': {
