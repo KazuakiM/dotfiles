@@ -317,7 +317,7 @@ nnoremap - <C-w>-
 nnoremap > <C-w>>
 nnoremap < <C-w><
 "  Cursor
-nnoremap ga %
+nmap ga %
 noremap <Down>  <C-f>
 noremap <Up>    <C-b>
 noremap <Right> $
