@@ -1,6 +1,21 @@
 # .zshrc
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 
+autoload -U compinit
+compinit
+zstyle ':completion::complete:*' use-cache true
+zstyle ':completion:*:default' menu select=1
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+autoload colors
+zstyle ':completion:*' list-colors "${LS_COLORS}"
+zstyle ':completion:*' insert-tab false
+
+setopt correct
+
+autoload predict-on
+predict-on
+
 # Get the aliases and functions {{{
 if [ -f ~/.bashrc.win ]; then
     . ~/.bashrc.win
@@ -403,3 +418,5 @@ case "${OSTYPE}" in
         ;;
 esac
 #}}}
+
+typeset -U path cdpath fpath manpath
