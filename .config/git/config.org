@@ -29,6 +29,8 @@
     precomposeunicode = true
     excludesfile      =  ~/.config/git/gitignore_global
     ignorecase        = false
+[credential]
+    helper = osxkeychain
 [color]
     ui = auto
 [diff]
