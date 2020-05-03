@@ -132,12 +132,6 @@ export COMPOSER_HOME="$XDG_CONFIG_HOME/composer"
 export PHAN_ALLOW_XDEBUG=1
 if [ -d $XDG_CONFIG_HOME/composer/vendor/bin ]; then
     localPath="$XDG_CONFIG_HOME/composer/vendor/bin:$localPath"
-    if [ -d $XDG_CONFIG_HOME/composer/phan/vendor/bin ]; then
-        localPath="$XDG_CONFIG_HOME/composer/phan/vendor/bin:$localPath"
-    fi
-    if [ -d $XDG_CONFIG_HOME/composer/phpDocumentor/vendor/bin ]; then
-        localPath="$XDG_CONFIG_HOME/composer/phpDocumentor/vendor/bin:$localPath"
-    fi
 fi
 if [ -f $LOCAL_PREFIX/bin/composer.phar ]; then
     alias composer="php -d memory_limit=1G $LOCAL_PREFIX/bin/composer.phar"
@@ -226,6 +220,10 @@ case "${OSTYPE}" in
         #    #eval "$(perl -I$HOME/.lib/perl -Mlocal::lib)";
         #fi
 
+        #brew --prefix ansible@2.8
+        if [ -d $BREW_PREFIX/opt/ansible@2.8/bin ]; then
+            localPath="$BREW_PREFIX/opt/ansible@2.8/bin:$localPath"
+        fi
         #brew --prefix apr
         if [ -d $BREW_PREFIX/opt/apr/bin ]; then
             localPath="$BREW_PREFIX/opt/apr/bin:$localPath"
@@ -240,7 +238,7 @@ case "${OSTYPE}" in
         fi
         #brew --prefix curl-openssl
         if [ -d $BREW_PREFIX/opt/curl-openssl/bin ]; then
-            localPath="$BREW_PREFIX//opt/curl-openssl/bin:$localPath"
+            localPath="$BREW_PREFIX/opt/curl-openssl/bin:$localPath"
         fi
         #brew --prefix gnu-tar
         if [ -d $BREW_PREFIX/opt/gnu-tar/libexec/gnubin ]; then
@@ -296,18 +294,13 @@ case "${OSTYPE}" in
         if [ -d $BREW_PREFIX/opt/openldap/bin ]; then
             localPath="$BREW_PREFIX/opt/openldap/bin:$BREW_PREFIX/opt/openldap/sbin:$localPath"
         fi
-        #brew --prefix openssl
-        if [ -d $BREW_PREFIX/opt/openssl/bin ]; then
-            localPath="$BREW_PREFIX/opt/openssl/bin:$localPath"
-        fi
         #brew --prefix openssl@1.1
         if [ -d $BREW_PREFIX/opt/openssl@1.1/bin ]; then
             localPath="$BREW_PREFIX/opt/openssl@1.1/bin:$localPath"
         fi
-        #brew --prefix php@7.2
-        if [ -d $BREW_PREFIX/opt/php@7.2/bin ]; then
-            localPath="$BREW_PREFIX/opt/php@7.2/bin:$localPath"
-            localPath="$BREW_PREFIX/opt/php@7.2/sbin:$localPath"
+        #brew --prefix php@7.3
+        if [ -d $BREW_PREFIX/opt/php@7.3/bin ]; then
+            localPath="$BREW_PREFIX/opt/php@7.3/bin:$BREW_PREFIX/opt/php@7.3/sbin:$localPath"
         fi
         #brew --prefix python
         if [ -d $BREW_PREFIX/opt/python/libexec/bin ]; then

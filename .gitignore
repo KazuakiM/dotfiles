@@ -41,6 +41,7 @@
 .config/wireshark/
 .ctags.d/_.ctags
 .lib/perl/
+.local/share/direnv/
 .local/share/gem/
 .local/share/karabiner/
 .local/share/recently-used.xbel
