@@ -1,6 +1,27 @@
 # .zshrc
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 
+# Get the aliases and functions {{{
+if [ -f ~/.bashrc.win ]; then
+    . ~/.bashrc.win
+elif [ -f ~/.bashrc.local ]; then
+    . ~/.bashrc.local
+fi
+#}}}
+
+#User specific environment and startup programs {{{
+export LD_LIBRARY_PATH='/usr/local/lib'
+export LANG=ja_JP.UTF-8
+export LOCAL_PREFIX=/usr/local
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_LOG_HOME="$HOME/.log"
+cd
+clear
+#}}}
+
+#zsh {{{
 # Vi mode
 bindkey '^]'   vi-find-next-char
 bindkey '^[^]' vi-find-prev-char
@@ -16,27 +37,8 @@ setopt correct
 #zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 #zstyle ':completion:*' list-colors "${LS_COLORS}"
 #zstyle ':completion:*' insert-tab false
-
-
-
-# Get the aliases and functions {{{
-if [ -f ~/.bashrc.win ]; then
-    . ~/.bashrc.win
-elif [ -f ~/.bashrc.local ]; then
-    . ~/.bashrc.local
-fi
 #}}}
-#User specific environment and startup programs {{{
-export LD_LIBRARY_PATH='/usr/local/lib'
-export LANG=ja_JP.UTF-8
-export LOCAL_PREFIX=/usr/local
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_LOG_HOME="$HOME/.log"
-cd
-clear
-#}}}
+
 #Common {{{
 #shopt -s cdspell
 #export HISTFILE="$XDG_LOG_HOME/bash/bash_history"

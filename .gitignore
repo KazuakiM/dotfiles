@@ -39,6 +39,8 @@
 .config/subversion/
 .config/travisci/
 .config/wireshark/
+.config/zsh/.zcompdump
+.config/zsh/.zsh_history
 .ctags.d/_.ctags
 .lib/perl/
 .local/share/direnv/
