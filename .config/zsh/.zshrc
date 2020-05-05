@@ -290,8 +290,8 @@ case "${OSTYPE}" in
         fi
         #brew cask google-cloud-sdk
         if [ -d $BREW_PREFIX/Caskroom/google-cloud-sdk ]; then
-            source "$BREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
-            source "$BREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
+            source "$BREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+            source "$BREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
         fi
         #brew --prefix icu4c
         if [ -d $BREW_PREFIX/opt/icu4c/bin ]; then
