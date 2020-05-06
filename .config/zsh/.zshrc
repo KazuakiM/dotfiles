@@ -131,6 +131,7 @@ export ATOM_DEV_RESOURCE_PATH="$XDG_CONFIG_HOME/atom/resource"
 export ATOM_HOME="$XDG_CONFIG_HOME/atom/home"
 #}}}
 #MySQL {{{
+export MYSQL_HOME="$XDG_CONFIG_HOME/mysql/my.cnf"
 export MYSQL_HISTFILE="$XDG_LOG_HOME/mysql/mysql_history"
 #}}}
 #Redis {{{
