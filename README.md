@@ -288,7 +288,6 @@ iThunes
 $ cd $HOME
 $ ln -sf $HOME/work/dotfiles/.cache               $HOME/.cache
 $ ln -sf $HOME/work/dotfiles/.config              $HOME/.config
-$ ln -sf $HOME/work/dotfiles/.ctags.d             $HOME/.ctags.d
 $ ln -sf $HOME/work/dotfiles/.curlrc              $HOME/.curlrc
 $ ln -sf $HOME/work/dotfiles/.config/docker       $HOME/.docker
 $ cd $HOME/.config/git && ln -sf config.org          config
