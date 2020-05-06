@@ -1,6 +1,0 @@
---exclude=*min.js
---input-encoding=UTF-8
---langmap=JavaScript:+.html.json.php
---langmap=PHP:+.inc.php.tpl
---pattern-length-limit=300
---recurse=yes

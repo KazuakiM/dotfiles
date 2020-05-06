@@ -17,7 +17,7 @@
 .config/atom/resource/
 .config/configstore/
 .config/composer/
-.config/ctags/
+.config/ctags/_.ctags
 .config/direnv/
 .config/docker/
 .config/doxygen/
