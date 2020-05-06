@@ -41,6 +41,7 @@
 .config/wireshark/
 .config/zsh/.zcompdump
 .config/zsh/.zsh_history
+.config/zsh/zshrc.local
 .ctags.d/_.ctags
 .lib/perl/
 .local/share/direnv/

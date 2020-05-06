@@ -1,14 +1,6 @@
 # .zshrc
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 
-# Get the aliases and functions {{{
-if [ -f ~/.bashrc.win ]; then
-    . ~/.bashrc.win
-elif [ -f ~/.bashrc.local ]; then
-    . ~/.bashrc.local
-fi
-#}}}
-
 #User specific environment and startup programs {{{
 export LD_LIBRARY_PATH='/usr/local/lib'
 export LANG=ja_JP.UTF-8
@@ -41,7 +33,6 @@ setopt correct
 
 #Common {{{
 #shopt -s cdspell
-#export HISTFILE="$XDG_LOG_HOME/bash/bash_history"
 alias cl='clear'
 alias lc='clear'
 alias cp='cp -i -p'
@@ -171,11 +162,6 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 if [ -d $XDG_CONFIG_HOME/npm/bin ]; then
     localPath="$XDG_CONFIG_HOME/npm/bin:$localPath"
 fi
-if [ -d $BREW_PREFIX/opt/nvm ]; then
-    export NVM_DIR="${XDG_CONFIG_HOME}/nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                    # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-fi
 #}}}
 #Ruby {{{
 export GEM_HOME="$XDG_DATA_HOME/gem"
@@ -232,13 +218,8 @@ case "${OSTYPE}" in
         fi
         #direnv
         if type direnv >/dev/null 2>&1; then
-            eval "$(direnv hook bash)";
+            eval "$(direnv hook zsh)"
         fi
-
-        ##brew --prefix bash-completion@2
-        #if [ -f $BREW_PREFIX/share/bash-completion/bash_completion ]; then
-        #    . $BREW_PREFIX/share/bash-completion/bash_completion
-        #fi
 
         ##brew --prefix perl
         #if [ -d $BREW_PREFIX/opt/perl/bin ]; then
@@ -368,6 +349,11 @@ case "${OSTYPE}" in
         gitPullVariable="$gitPullVariable cd;"
         alias UP=$gitPullVariable
         #}}}
+
+        # Get the aliases and functions {{{
+        source $XDG_CONFIG_HOME/zsh/zshrc.local
+        #}}}
+
         #}}}
         ;;
     linux*)
@@ -392,32 +378,6 @@ case "${OSTYPE}" in
         if type rbenv >/dev/null 2>&1; then
             export RBENV_ROOT=$LOCAL_PREFIX/rbenv
             eval "$(rbenv init -)";
-        fi
-        #}}}
-        # PHP7.1 {{{
-        if [ -d /opt/remi/php71 ]; then
-            source /opt/remi/php71/enable
-        fi
-        #}}}
-        ;;
-    cygwin)
-        # command {{{
-        alias l='ls  -Ak  --color=auto'
-        alias ls='ls -Ak  --color=auto'
-        alias sl='ls -Ak  --color=auto'
-        alias ll='ls -Akl --color=auto'
-        alias vi="$HOME/src/vimStarter.sh"
-        alias vim="$HOME/src/vimStarter.sh"
-        alias gvim="$HOME/src/vimStarter.sh"
-        #}}}
-        # ssh-agent {{{
-        if [ -f $HOME/.ssh/.ssh-agent ]; then
-            . $HOME/.ssh/.ssh-agent > /dev/null
-        fi
-        if [ -z "$SSH_AGENT_PID" -o -z "`/usr/bin/ps -a|/usr/bin/egrep \"^[ ]+$SSH_AGENT_PID\"`" ]; then
-            /usr/bin/ssh-agent > $HOME/.ssh/.ssh-agent
-            . $HOME/.ssh/.ssh-agent > /dev/null
-            ssh-add $HOME/.ssh/id_rsa
         fi
         #}}}
         ;;

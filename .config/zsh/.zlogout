@@ -1,1 +1,1 @@
-../../.bash_logout
+clear

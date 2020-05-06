@@ -2,6 +2,12 @@
 #export HOMEBREW_GITHUB_API_TOKEN=
 #}}}
 
+# Service {{{
+#alias START='  mysql.server start   & sudo apachectl start   & redis-server                     & sudo postfix start'
+#alias STOP='   mysql.server stop    & sudo apachectl stop    & redis-cli shutdown               & sudo postfix stop'
+#alias RESTART='mysql.server restart & sudo apachectl restart & redis-cli shutdown; redis-server & sudo postfix reload'
+#}}}
+
 #ssh {{{
 ssh() {
     if [[ -n $(printenv TMUX) ]] ; then
@@ -23,6 +29,8 @@ ssh() {
 }
 #}}}
 
+export BREW_PREFIX=`brew --prefix`
+
 ## Application Directory {{{
 #alias APP='cd $HOME/sample'
 #}}}
@@ -34,19 +42,19 @@ ssh() {
 #}}}
 
 ## ctags {{{
-tagsPhpCmd='ctags --languages=php --exclude=tests'
-tagsPhpTestCmd='ctags --languages=php'
-tagsJsCmd='ctags --languages=js'
-tagsGoCmd='ctags --languages=go'
-tagsVariable=''
-tagsVariable="$tagsVariable cd $HOME/.config/composer/vendor;   $tagsPhpCmd     -f $HOME/.vim/tags/composer.tags    $HOME/.config/composer/vendor;"
-tagsVariable="$tagsVariable cd $BREW_PREFIX/opt/go/libexec/src; $tagsGoCmd      -f $HOME/.vim/tags/go_src.tags      $BREW_PREFIX/opt/go/libexec/src;"
-tagsVariable="$tagsVariable cd $HOME/go/src;                    $tagsGoCmd      -f $HOME/.vim/tags/go_global.tags   $HOME/go/src;"
+#tagsPhpCmd='    ctags --languages=php --exclude=tests'
+#tagsPhpTestCmd='ctags --languages=php'
+#tagsJsCmd='     ctags --languages=js'
+#tagsGoCmd='     ctags --languages=go'
+#tagsVariable=''
+#tagsVariable="$tagsVariable cd $HOME/.config/composer/vendor;   $tagsPhpCmd     -f $HOME/.vim/tags/composer.tags    $HOME/.config/composer/vendor;"
+#tagsVariable="$tagsVariable cd $BREW_PREFIX/opt/go/libexec/src; $tagsGoCmd      -f $HOME/.vim/tags/go_src.tags      $BREW_PREFIX/opt/go/libexec/src;"
+#tagsVariable="$tagsVariable cd $HOME/go/src;                    $tagsGoCmd      -f $HOME/.vim/tags/go_global.tags   $HOME/go/src;"
 #tagsVariable="$tagsVariable cd $HOME/sample1;                  $tagsPhpCmd     -f $HOME/.vim/tags/sample1.tags     $HOME/sample1;"
 #tagsVariable="$tagsVariable cd $HOME/sample1;                  $tagsPhpTestCmd -f $HOME/.vim/tags/sample1Test.tags $HOME/sample1;"
 #tagsVariable="$tagsVariable cd $HOME/sample1;                  $tagsGoCmd      -f $HOME/.vim/tags/sample.tags      $HOME/sample1;"
-tagsVariable="$tagsVariable cd;"
-alias TAGS=$tagsVariable
+#tagsVariable="$tagsVariable cd;"
+#alias TAGS=$tagsVariable
 #}}}
 
 ## git pull {{{
@@ -56,9 +64,4 @@ alias TAGS=$tagsVariable
 #alias PULL=$gitPullVariable
 #}}}
 
-## git status {{{
-#gitStatusVariable=''
-#gitStatusVariable="$gitStatusValiale echo 'Sample';cd $HOME/sample;git stat;"
-#gitStatusVariable="$gitStatusValiale cd;"
-#alias STAT=$gitStatusVariable
-#}}}
+#alias FULLUP="$gitPullVariable $tagsVariable"
