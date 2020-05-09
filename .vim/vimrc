@@ -426,12 +426,12 @@ if dein#load_state(s:deinDir)
     \    'gcmt/wildfire.vim':                          {},
     \    'glidenote/memolist.vim':                     {},
     \    'junegunn/vim-easy-align':                    {},
-    \    'previm/previm':                              {'on_ft': 'markdown'},
     \    'KazuakiM/neosnippet-snippets':               {},
     \    'KazuakiM/vim-sqlfix':                        {},
     \    'koron/codic-vim':                            {},
-    \    'lervag/vimtex':                              {'on_ft': 'tex'},
     \    'LeafCage/yankround.vim':                     {},
+    \    'lervag/vimtex':                              {'on_ft': 'tex'},
+    \    'pearofducks/ansible-vim':                    {},
     \    'plasticboy/vim-markdown':                    {'on_ft': 'markdown'},
     \    'prabirshrestha/async.vim':                   {},
     \    'prabirshrestha/asyncomplete.vim':            {},
@@ -439,6 +439,7 @@ if dein#load_state(s:deinDir)
     \    'prabirshrestha/asyncomplete-lsp.vim':        {},
     \    'prabirshrestha/asyncomplete-neosnippet.vim': {},
     \    'prabirshrestha/vim-lsp':                     {},
+    \    'previm/previm':                              {'on_ft': 'markdown'},
     \    'rhysd/clever-f.vim':                         {},
     \    'roxma/nvim-yarp':                            {},
     \    'roxma/vim-hug-neovim-rpc':                   {},
@@ -501,6 +502,13 @@ nmap <C-n> <Plug>(yankround-next)
 let g:yankround_dir                 = s:envHome . '/.vim/yankround.vim'
 let g:yankround_region_hl_groupname = 'YankRoundRegion'
 let g:yankround_use_region_hl       = 1
+"}}}
+
+" ansible-vim {{{
+augroup ansible_vim_fthosts
+  autocmd!
+  autocmd BufNewFile,BufRead hosts setfiletype yaml.ansible
+augroup END
 "}}}
 
 " indentLine {{{
@@ -904,14 +912,15 @@ let s:match_words_html_list = [['<article', '</article>'], ['<div', '</div>'], [
 \    ['<td', '</td>'], ['<thead', '</thead>'], ['<th', '</th>'], ['<tr', '</tr>'], ['<ul', '</ul>']]
 let s:match_words = s:GetMatchWords()
 
-autocmd MyAutoCmd BufNewFile,BufRead *.coffee    setlocal filetype=coffee
-autocmd MyAutoCmd BufNewFile,BufRead *.go        let g:deoplete#enable_at_startup = 1
-autocmd MyAutoCmd BufNewFile,BufRead *.tpl       setlocal filetype=php
-autocmd MyAutoCmd BufNewFile,BufRead *.plantuml  setlocal filetype=plantuml
-autocmd MyAutoCmd BufNewFile,BufRead *.snip*     setlocal filetype=snippets
-autocmd MyAutoCmd BufNewFile,BufRead *.tex       setlocal filetype=tex
-autocmd MyAutoCmd BufNewFile,BufRead *.vim*      setlocal filetype=vim
-autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe} setlocal filetype=xxd
+autocmd MyAutoCmd BufNewFile,BufRead *.go              let g:deoplete#enable_at_startup = 1
+autocmd MyAutoCmd BufNewFile,BufRead *.coffee          setlocal filetype=coffee
+autocmd MyAutoCmd BufNewFile,BufRead *.tpl             setlocal filetype=php
+autocmd MyAutoCmd BufNewFile,BufRead *.plantuml        setlocal filetype=plantuml
+autocmd MyAutoCmd BufNewFile,BufRead *.snip*           setlocal filetype=snippets
+autocmd MyAutoCmd BufNewFile,BufRead *.tex             setlocal filetype=tex
+autocmd MyAutoCmd BufNewFile,BufRead *.vim*            setlocal filetype=vim
+autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}       setlocal filetype=xxd
+autocmd MyAutoCmd BufNewFile,BufRead */playbooks/*.yml setlocal filetype=yaml.ansible
 autocmd MyAutoCmd FileType denite          call s:DeniteMySettings()
 autocmd MyAutoCmd FileType go              setlocal omnifunc=lsp#complete
 autocmd MyAutoCmd FileType html,js,php,xml syntax sync minlines=4000
