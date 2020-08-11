@@ -32,7 +32,7 @@ $ tmux lsc
 
 デタッチ
 ```
-Prefix > Ctrl-u
+Prefix > Ctrl-q
 ```
 
 アタッチ
