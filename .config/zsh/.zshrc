@@ -152,7 +152,8 @@ fi
 #node.js {{{
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export NVM_DIR="$XDG_CONFIG_HOME/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && nvm use --delete-prefix v12.18.3 --silent # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+nvm use --delete-prefix v12.16.1 --silent
 if [ -d $XDG_CONFIG_HOME/npm/bin ]; then
     localPath="$XDG_CONFIG_HOME/npm/bin:$localPath"
 fi
