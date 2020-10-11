@@ -149,15 +149,6 @@ else
     curl -sS https://getcomposer.org/installer | php -- --install-dir=$LOCAL_PREFIX/bin
 fi
 #}}}
-#node.js {{{
-export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
-export NVM_DIR="$XDG_CONFIG_HOME/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-nvm use --delete-prefix v12.16.1 --silent
-if [ -d $XDG_CONFIG_HOME/npm/bin ]; then
-    localPath="$XDG_CONFIG_HOME/npm/bin:$localPath"
-fi
-#}}}
 #Ruby {{{
 export GEM_HOME="$XDG_DATA_HOME/gem"
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
@@ -296,6 +287,12 @@ case "${OSTYPE}" in
         #brew --prefix ncurses
         if [ -d $BREW_PREFIX/opt/ncurses/bin ]; then
             localPath="$BREW_PREFIX/opt/ncurses/bin:$localPath"
+        fi
+        #brew --prefix nvm
+        if [ -d $BREW_PREFIX/opt/nvm ]; then
+            export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+            export NVM_DIR="$XDG_CONFIG_HOME/nvm"
+            [ -s "$BREW_PREFIX/opt/nvm/nvm.sh" ] && . "$BREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
         fi
         #brew --prefix openldap
         if [ -d $BREW_PREFIX/opt/openldap/bin ]; then
