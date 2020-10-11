@@ -264,6 +264,10 @@ case "${OSTYPE}" in
                 localPath="$GOENV_ROOT/bin:$localPath"
             fi
         fi
+        #brew --prefix grep
+        if [ -d $BREW_PREFIX/opt/grep/libexec/gnubin ]; then
+            localPath="$BREW_PREFIX/opt/grep/libexec/gnubin:$localPath"
+        fi
         #brew cask google-cloud-sdk
         if [ -d $BREW_PREFIX/Caskroom/google-cloud-sdk ]; then
             source "$BREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
