@@ -1,4 +1,3 @@
-# .zshrc
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 
 #User specific environment and startup programs {{{
@@ -293,7 +292,7 @@ case "${OSTYPE}" in
             export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
             export NVM_DIR="$XDG_CONFIG_HOME/nvm"
             [ -s "$BREW_PREFIX/opt/nvm/nvm.sh" ] && . "$BREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
-            nvm use --delete-prefix v14.13.1 --silent
+            nvm use --delete-prefix v14.15.4 --silent
         fi
         #brew --prefix openldap
         if [ -d $BREW_PREFIX/opt/openldap/bin ]; then
@@ -343,9 +342,7 @@ case "${OSTYPE}" in
         ## git pull {{{
         gitPullVariable=''
         gitPullVariable="$gitPullVariable echo 'dotfiles' && cd $HOME/work/dotfiles/ && git fetch --prune && git pull;"
-        gitPullVariable="$gitPullVariable echo 'go'       && cd $HOME/work/dotfiles/go/src/KazuakiM/dotfiles/ && go get -m -u;"
         gitPullVariable="$gitPullVariable echo 'composer' && cd $HOME && composer self-update && composer global update;"
-        gitPullVariable="$gitPullVariable echo 'npm'      && cd $HOME && npm i -g npm && npm update -g;"
         gitPullVariable="$gitPullVariable echo 'homebrew' && cd $HOME && brew update && brew upgrade && brew cleanup && brew doctor && brew cask doctor;"
         gitPullVariable="$gitPullVariable cd;"
         alias UP=$gitPullVariable
@@ -386,3 +383,5 @@ esac
 #}}}
 
 typeset -U path cdpath fpath manpath
+
+test -e "${ZDOTDIR}/.iterm2_shell_integration.zsh" && source "${ZDOTDIR}/.iterm2_shell_integration.zsh"
