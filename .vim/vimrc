@@ -432,6 +432,7 @@ if dein#load_state(s:deinDir)
     \    'koron/codic-vim':                            {},
     \    'LeafCage/yankround.vim':                     {},
     \    'lervag/vimtex':                              {'on_ft': 'tex'},
+    \    'mattn/vim-lsp-settings':                     {},
     \    'pearofducks/ansible-vim':                    {},
     \    'plasticboy/vim-markdown':                    {'on_ft': 'markdown'},
     \    'prabirshrestha/async.vim':                   {},
@@ -741,53 +742,54 @@ nmap <silent> <Subleader>N <Plug>(lsp-previous-error)
 nmap <silent> <Subleader>n <Plug>(lsp-next-error)
 nmap <silent> <Subleader>b :<C-u>call<Space>kazuakim#LspDocumentDiagnostics()<CR>
 nmap <silent> K <Plug>(lsp-hover)
-augroup MyAsyncomplete
-    autocmd!
-    autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
-    \   'name': 'neosnippet',
-    \   'completor': function('asyncomplete#sources#neosnippet#completor'),
-    \   'whitelist': ['*'],
-    \ }))
-
-    autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-    \   'name': 'file',
-    \   'completor': function('asyncomplete#sources#file#completor'),
-    \   'priority': 10,
-    \   'whitelist': ['*'],
-    \ }))
-
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'php',
-    \ 'cmd': {server_info->['node', expand('/usr/local/lib/node_modules/intelephense/lib/intelephense.js'), '--stdio']},
-    \ 'initialization_options': {'storagePath': s:envHome . '.cache/intelephense'},
-    \ 'whitelist': ['php'],
-    \ })
-    autocmd User lsp_setup call lsp#register_server({
-    \ 'name': 'javascript',
-    \ 'cmd': {server_info->['typescript-language-server', '--stdio']},
-    \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
-    \ 'whitelist': ['javascript'],
-    \ })
-    autocmd User lsp_setup call lsp#register_server({
-    \   'name': 'go',
-    \   'cmd': {server_info->['gopls', '-mode', 'stdio']},
-    \   'whitelist': ['go'],
-    \ })
-
-    "MEMO: Common language server for Golang. not required PHP.
-    "autocmd User lsp_setup call lsp#register_server({
-    "\   'name': 'efm-langserver',
-    "\   'cmd': {server_info->['efm-langserver', '-c=/Users/mabuchikazuaki/.config/efm-langserver/config.yaml', '-log=/private/tmp/efm-langserver.log']},
-    "\   'whitelist': ['go'],
-    "\ })
-augroup END
+"augroup MyAsyncomplete
+"    autocmd!
+"    autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+"    \   'name': 'neosnippet',
+"    \   'completor': function('asyncomplete#sources#neosnippet#completor'),
+"    \   'whitelist': ['*'],
+"    \ }))
+"
+"    autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+"    \   'name': 'file',
+"    \   'completor': function('asyncomplete#sources#file#completor'),
+"    \   'priority': 10,
+"    \   'whitelist': ['*'],
+"    \ }))
+"
+"    autocmd User lsp_setup call lsp#register_server({
+"    \ 'name': 'php',
+"    \ 'cmd': {server_info->['node', expand('/usr/local/lib/node_modules/intelephense/lib/intelephense.js'), '--stdio']},
+"    \ 'initialization_options': {'storagePath': s:envHome . '.cache/intelephense'},
+"    \ 'whitelist': ['php'],
+"    \ })
+"    autocmd User lsp_setup call lsp#register_server({
+"    \ 'name': 'javascript',
+"    \ 'cmd': {server_info->['typescript-language-server', '--stdio']},
+"    \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
+"    \ 'whitelist': ['javascript'],
+"    \ })
+"    autocmd User lsp_setup call lsp#register_server({
+"    \   'name': 'go',
+"    \   'cmd': {server_info->['gopls', '-mode', 'stdio']},
+"    \   'whitelist': ['go'],
+"    \ })
+"
+"    "MEMO: Common language server for Golang. not required PHP.
+"    "autocmd User lsp_setup call lsp#register_server({
+"    "\   'name': 'efm-langserver',
+"    "\   'cmd': {server_info->['efm-langserver', '-c=/Users/mabuchikazuaki/.config/efm-langserver/config.yaml', '-log=/private/tmp/efm-langserver.log']},
+"    "\   'whitelist': ['go'],
+"    "\ })
+"augroup END
 "}}}
 
 "deoplete.nvim
 "nvim-yarp
 "vim-hug-neovim-rpc
 "vim-go
-let g:python3_host_prog = '/usr/local/opt/python/libexec/bin/python'
+"let g:python_host_prog = '/usr/local/opt/python@3/bin/python3'
+"let g:python3_host_prog = '/usr/local/opt/python@3/bin/python3'
 let g:go_fmt_command = 'goimports'
 let g:go_def_mode = 'gopls'
 let g:go_info_mode = 'gopls'

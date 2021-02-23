@@ -302,26 +302,18 @@ case "${OSTYPE}" in
         if [ -d $BREW_PREFIX/opt/openssl/bin ]; then
             localPath="$BREW_PREFIX/opt/openssl/bin:$localPath"
         fi
-        #brew --prefix openssl@1.1
-        if [ -d $BREW_PREFIX/opt/openssl@1.1/bin ]; then
-            localPath="$BREW_PREFIX/opt/openssl@1.1/bin:$localPath"
+        #brew --prefix php@7.3
+        if [ -d $BREW_PREFIX/opt/php@7.3/bin ]; then
+            localPath="$BREW_PREFIX/opt/php@7.3/bin:$localPath"
+            localPath="$BREW_PREFIX/opt/php@7.3/sbin:$localPath"
         fi
-        #brew --prefix php@7.2
-        if [ -d $BREW_PREFIX/opt/php@7.2/bin ]; then
-            localPath="$BREW_PREFIX/opt/php@7.2/bin:$localPath"
-            localPath="$BREW_PREFIX/opt/php@7.2/sbin:$localPath"
-        fi
-        #brew --prefix python
-        if [ -d $BREW_PREFIX/opt/python/libexec/bin ]; then
-            localPath="$BREW_PREFIX/opt/python/libexec/bin:$localPath"
+        #brew --prefix python3
+        if [ -d $BREW_PREFIX/opt/python@3/bin ]; then
+            localPath="$BREW_PREFIX/opt/python@3/bin:$localPath"
         fi
         #brew --prefix sqlite
         if [ -d $BREW_PREFIX/opt/sqlite/bin ]; then
             localPath="$BREW_PREFIX/opt/sqlite/bin:$localPath"
-        fi
-        #yarn
-        if [ -d $HOME/.yarn/bin ]; then
-            localPath="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$localPath"
         fi
         #git diff-highlight
         if [ -d $BREW_PREFIX/share/git-core/contrib/diff-highlight ]; then
