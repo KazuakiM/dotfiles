@@ -417,6 +417,10 @@ else
 endif
 "}}}
 
+" Python3 {{{
+let g:python3_host_prog = '/usr/local/opt/python@3/bin/python3'
+"}}}
+
 " dein.vim {{{
 let g:dein#install_process_timeout = 600
 if dein#load_state(s:deinDir)
@@ -732,7 +736,7 @@ inoremap <silent><expr><CR> neosnippet#expandable_or_jumpable() ? neosnippet#map
 " neosnippet-snippets
 " neosnippet.vim
 " asyncomplete-file.vim {{{
-"let g:lsp_log_verbose = 1
+"let g:lsp_log_verbose = 2
 "let g:lsp_log_file = expand('/private/tmp/vim-lsp.log')
 let g:lsp_preview_keep_focus = 0
 nmap <silent> <Subleader>N <Plug>(lsp-previous-error)
@@ -760,7 +764,6 @@ augroup END
 "nvim-yarp
 "vim-hug-neovim-rpc
 "vim-go
-let g:python3_host_prog = '/usr/local/opt/python@3/bin/python3'
 let g:go_fmt_command = 'goimports'
 let g:go_def_mode = 'gopls'
 let g:go_info_mode = 'gopls'

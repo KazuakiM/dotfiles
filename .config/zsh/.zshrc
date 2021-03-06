@@ -308,8 +308,10 @@ case "${OSTYPE}" in
             localPath="$BREW_PREFIX/opt/php@7.3/sbin:$localPath"
         fi
         #brew --prefix python3
-        if [ -d $BREW_PREFIX/opt/python@3/bin ]; then
-            localPath="$BREW_PREFIX/opt/python@3/bin:$localPath"
+        python3dir="$BREW_PREFIX/opt/python@3"
+        if [ -d $python3dir/bin ]; then
+            localPath="$python3dir/bin:$localPath"
+            export PYTHON_DLL="$python3dir/Frameworks/Python.framework/Python"
         fi
         #brew --prefix sqlite
         if [ -d $BREW_PREFIX/opt/sqlite/bin ]; then
