@@ -41,6 +41,8 @@
 .config/subversion/
 .config/travisci/
 .config/wireshark/
+.config/zsh/.iterm2/
+.config/zsh/.iterm2_shell_integration.zsh
 .config/zsh/.zcompcache
 .config/zsh/.zcompdump
 .config/zsh/.zsh_history
@@ -50,8 +52,11 @@
 .local/share/gem/
 .local/share/karabiner/
 .local/share/recently-used.xbel
+.local/share/vim-lsp-settings/
 .local/share/yarn/
+.log/api/
 .log/bash/
+.log/errpath/
 .log/filezilla/
 .log/fluentd/
 .log/httpd/

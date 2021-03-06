@@ -788,8 +788,7 @@ nmap <silent> K <Plug>(lsp-hover)
 "nvim-yarp
 "vim-hug-neovim-rpc
 "vim-go
-"let g:python_host_prog = '/usr/local/opt/python@3/bin/python3'
-"let g:python3_host_prog = '/usr/local/opt/python@3/bin/python3'
+let g:python3_host_prog = '/usr/local/opt/python@3/bin/python3'
 let g:go_fmt_command = 'goimports'
 let g:go_def_mode = 'gopls'
 let g:go_info_mode = 'gopls'
