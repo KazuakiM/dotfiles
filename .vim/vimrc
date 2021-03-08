@@ -417,10 +417,6 @@ else
 endif
 "}}}
 
-" Python3 {{{
-let g:python3_host_prog = '/usr/local/opt/python@3/bin/python3'
-"}}}
-
 " dein.vim {{{
 let g:dein#install_process_timeout = 600
 if dein#load_state(s:deinDir)
