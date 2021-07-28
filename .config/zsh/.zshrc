@@ -143,7 +143,7 @@ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export COMPOSER_HOME="$XDG_CONFIG_HOME/composer"
 export PHAN_ALLOW_XDEBUG=1
 if [ -f $LOCAL_PREFIX/bin/composer.phar ]; then
-    alias composer="php -d memory_limit=1G $LOCAL_PREFIX/bin/composer.phar"
+    alias composer="php -d memory_limit=2G $LOCAL_PREFIX/bin/composer.phar"
 else
     curl -sS https://getcomposer.org/installer | php -- --install-dir=$LOCAL_PREFIX/bin
 fi
@@ -292,7 +292,7 @@ case "${OSTYPE}" in
             export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
             export NVM_DIR="$XDG_CONFIG_HOME/nvm"
             [ -s "$BREW_PREFIX/opt/nvm/nvm.sh" ] && . "$BREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
-            nvm use --delete-prefix v14.15.5 --silent
+            nvm use --delete-prefix v11.15.0 --silent
         fi
         #brew --prefix openldap
         if [ -d $BREW_PREFIX/opt/openldap/bin ]; then
