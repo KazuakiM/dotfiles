@@ -140,6 +140,10 @@ $ docker rm 8541933cccdc
 $ docker ps -a
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                          PORTS               NAMES
 c5457d36f253        centos              "/bin/bash"         38 minutes ago      Exited (1) About a minute ago                       exsample
+
+$ docker rm `docker ps -a -q`
+$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                          PORTS               NAMES
 ```
 
 * Image
@@ -153,6 +157,10 @@ $ docker rmi abcdefg12345
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 centos              latest              3bee3060bfc8        6 days ago          193 MB
+
+$ docker rmi `docker images -a -q`
+$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 ```
 
 ref: http://qiita.com/tifa2chan/items/e9aa408244687a63a0ae
