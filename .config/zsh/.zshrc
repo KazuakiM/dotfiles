@@ -136,9 +136,6 @@ export MYSQL_HISTFILE="$XDG_LOG_HOME/mysql/mysql_history"
 #Redis {{{
 export REDISCLI_HISTFILE="$XDG_LOG_HOME/redis/rediscli_history"
 #}}}
-#Java {{{
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-#}}}
 #PHP {{{
 export COMPOSER_HOME="$XDG_CONFIG_HOME/composer"
 export PHAN_ALLOW_XDEBUG=1
@@ -226,8 +223,9 @@ case "${OSTYPE}" in
             localPath="$BREW_PREFIX/opt/curl/bin:$localPath"
         fi
         #brew --prefix openjdk
-        if [ -d $BREW_PREFIX/opt/openjdk/bin ]; then
-            localPath="$BREW_PREFIX/opt/openjdk/bin:$localPath"
+        if [ -d $BREW_PREFIX/opt/openjdk@11/bin ]; then
+            localPath="$BREW_PREFIX/opt/openjdk@11/bin:$localPath"
+            export JAVA_HOME=`/usr/libexec/java_home -v 11`
         fi
         #brew --prefix curl-openssl
         if [ -d $BREW_PREFIX/opt/curl-openssl/bin ]; then
@@ -256,7 +254,7 @@ case "${OSTYPE}" in
             if [ -d $HOME/.goenv ]; then
                 export GOENV_ROOT="$HOME/.goenv"
                 localPath="$GOENV_ROOT/bin:$localPath"
-            fi
+           fi
         fi
         #brew --prefix grep
         if [ -d $BREW_PREFIX/opt/grep/libexec/gnubin ]; then
