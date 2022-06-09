@@ -290,7 +290,7 @@ case "${OSTYPE}" in
             export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
             export NVM_DIR="$XDG_CONFIG_HOME/nvm"
             [ -s "$BREW_PREFIX/opt/nvm/nvm.sh" ] && . "$BREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
-            nvm use --delete-prefix v11.15.0 --silent
+            nvm use --delete-prefix v16.15.0 --silent
         fi
         #brew --prefix openldap
         if [ -d $BREW_PREFIX/opt/openldap/bin ]; then

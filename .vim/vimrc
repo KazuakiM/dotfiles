@@ -581,7 +581,7 @@ let g:quickrun_config = {
 \        'outputter/buffer/split':          ':botright 15sp',
 \    },
 \    'json': {
-\        'command':               'python',
+\        'command':               'python3',
 \        'cmdopt':                '-m json.tool',
 \        'exec':                  '%c %o %s:p',
 \        'outputter':             'buffer',

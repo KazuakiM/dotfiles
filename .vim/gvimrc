@@ -21,20 +21,11 @@ inoremap <silent> <Esc> <Esc>`^
 "
 " OS type {{{
 "  Window
+let s:KazuakiMFont = 13
 function! KazuakiMSetFont(font) abort "{{{
     let s:KazuakiMFont += a:font
-
-    if has("win32") || has ("win64")
-        execute 'set guifont=Source_Code_Pro:h' . s:KazuakiMFont . ':cANSI'
-    else
-        execute 'set guifont=Ricty\ Diminished\ Discord\ Regular:h' . s:KazuakiMFont . ' macmeta'
-    endif
+    execute 'set guifont=Ricty\ Diminished\ Discord\ Regular:h' . s:KazuakiMFont . '\ macmeta'
 endfunction "}}}
-if has("win32") || has ("win64")
-    let s:KazuakiMFont = 12
-else
-    let s:KazuakiMFont = 16
-endif
 call KazuakiMSetFont(0)
 
 nnoremap <S-Down>  :<C-u>call KazuakiMSetFont(-1)<CR>
