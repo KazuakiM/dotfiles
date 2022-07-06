@@ -271,7 +271,7 @@ endfunction "}}}
 " Basic
 set autoindent autoread
 set backspace=indent,eol,start backup backupdir=$HOME/.vim/backup belloff=all breakindentopt=shift:0
-set clipboard+=autoselect,unnamed cmdheight=1 concealcursor=i conceallevel=2 completeopt=longest,menu cursorlineopt=both
+set clipboard+=autoselect,unnamed cmdheight=2 concealcursor=i conceallevel=2 completeopt=longest,menu cursorlineopt=both
 set diffopt=filler,context:5,iblank,iwhite,iwhiteall,iwhiteeol,horizontal,algorithm:histogram directory=$HOME/.vim/swap display=lastline
 set expandtab
 set fillchars+=diff:* foldmethod=marker
@@ -893,7 +893,7 @@ autocmd MyAutoCmd BufNewFile,BufRead *.snip*           setlocal filetype=snippet
 autocmd MyAutoCmd BufNewFile,BufRead *.tex             setlocal filetype=tex
 autocmd MyAutoCmd BufNewFile,BufRead *.vim*            setlocal filetype=vim
 autocmd MyAutoCmd BufNewFile,BufRead *.{bin,exe}       setlocal filetype=xxd
-autocmd MyAutoCmd BufNewFile,BufRead */playbooks/*.yml setlocal filetype=yaml.ansible
+autocmd MyAutoCmd BufNewFile,BufRead *                 setlocal cmdheight=2
 autocmd MyAutoCmd FileType denite          call s:DeniteMySettings()
 autocmd MyAutoCmd FileType go              setlocal omnifunc=lsp#complete
 autocmd MyAutoCmd FileType html,js,php,xml syntax sync minlines=4000

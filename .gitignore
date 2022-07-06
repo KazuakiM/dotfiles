@@ -10,6 +10,7 @@
 .cache/neosnippet/
 .cache/npm/
 .cache/redis/
+.cache/tooling/
 .cache/typescript/
 .cache/vagrant/
 .cache/yarn/
