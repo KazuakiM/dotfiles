@@ -44,6 +44,10 @@
     cmd = /usr/local/bin/vimdiff -O $LOCAL $REMOTE
 [grep]
     #https://git-scm.com/docs/git-grep
+[init]
+    defaultBranch = master
+[log]
+    date = iso
 [merge]
     ff   = true
     tool = vimdiff
@@ -66,6 +70,4 @@
 [user]
     name = KazuakiM
     email = kazuaki_mabuchi_to_go@hotmail.co.jp
-[log]
-    date = iso
 # vim:ft=gitconfig
