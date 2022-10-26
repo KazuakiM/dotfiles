@@ -44,9 +44,9 @@ highlight StatusLine   cterm=NONE           gui=NONE           ctermfg=Black    
 highlight StatusLineNC cterm=NONE           gui=NONE           ctermfg=White        guifg=White        ctermbg=DarkGrey guibg=DarkBlue
 highlight TabLine      cterm=NONE           gui=NONE           ctermfg=White        guifg=White        ctermbg=Black    guibg=Black
 highlight TabLineSel   cterm=NONE           gui=NONE           ctermfg=Black        guifg=Black        ctermbg=Cyan     guibg=Cyan
-highlight Title        cterm=NONE           gui=NONE           ctermfg=Magenta      guifg=Magenta      ctermbg=NONE     guibg=NONE
+highlight Title        cterm=NONE           gui=NONE           ctermfg=LightMagenta guifg=LightMagenta ctermbg=NONE     guibg=NONE
 highlight Type         cterm=NONE           gui=NONE           ctermfg=Green        guifg=Green        ctermbg=NONE     guibg=NONE
-highlight Underlined   cterm=underline      gui=underline      ctermfg=Magenta      guifg=Magenta      ctermbg=NONE     guibg=NONE
+highlight Underlined   cterm=underline      gui=underline      ctermfg=LightMagenta guifg=LightMagenta ctermbg=NONE     guibg=NONE
 highlight VertSplit    cterm=reverse        gui=reverse
 highlight Visual       cterm=NONE           gui=NONE           ctermfg=Yellow       guifg=Yellow       ctermbg=DarkGrey guibg=DarkGrey
 highlight VisualNOS    cterm=bold,underline gui=bold,underline
