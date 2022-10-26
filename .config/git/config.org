@@ -35,6 +35,15 @@
     helper = osxkeychain
 [color]
     ui = auto
+[color "diff"]
+    old = yellow
+    #frag = cyan
+    #meta = white bold
+    #new  = green
+[color "status"]
+    changed = yellow
+    #deleted   = red
+    #untracked = magenta
 [diff]
     algorithm           = histogram
     colorMovedWS        = ignore-all-space
