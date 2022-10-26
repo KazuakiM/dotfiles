@@ -43,7 +43,7 @@
 [color "status"]
     changed = yellow
     #deleted   = red
-    #untracked = magenta
+    untracked = yellow
 [diff]
     algorithm           = histogram
     colorMovedWS        = ignore-all-space
