@@ -17,9 +17,9 @@
     gp   = grep --ignore-case
     pr   = "!f(){ git checkout master && git pull && git fetch -f origin pull/$1/head:pr-$1 && git checkout pr-$1 && git rebase master; };f"
     pr2  = "!f(){ git checkout main   && git pull && git fetch -f origin pull/$1/head:pr-$1 && git checkout pr-$1 && git rebase main;   };f"
-    lg   = log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset'
-    llg  = !git log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset' origin/master..`git rev-parse --abbrev-ref HEAD`
-    lllg = log --follow --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset'
+    lg   = log          --abbrev-commit --date=relative --graph --pretty=format:'%C(bold cyan)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset'
+    llg  = !git log --abbrev-commit --date=relative --graph --pretty=format:'%C(bold cyan)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset' origin/master..`git rev-parse --abbrev-ref HEAD`
+    lllg = log --follow --abbrev-commit --date=relative --graph --pretty=format:'%C(bold cyan)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset'
     llllg= log --pretty=format:'%Cgreen%cI%Creset,%Cred%h%Creset,%C(bold cyan)%an%Creset,%s,%C(yellow)%d%Creset'
     rbi  = !git rebase --interactive $(git merge-base master HEAD)
     st   = status
