@@ -40,6 +40,9 @@
     #frag = cyan
     #meta = white bold
     #new  = green
+[color "grep"]
+    match = yellow
+    filename = cyan
 [color "status"]
     changed = yellow
     #deleted   = red
@@ -52,7 +55,7 @@
 [difftool "vimdiff"]
     cmd = /usr/local/bin/vimdiff -O $LOCAL $REMOTE
 [grep]
-    #https://git-scm.com/docs/git-grep
+    lineNumber = true
 [init]
     defaultBranch = master
 [log]
