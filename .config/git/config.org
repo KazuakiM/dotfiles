@@ -42,7 +42,7 @@
     #new  = green
 [color "grep"]
     match = yellow
-    filename = cyan
+    filename = green
 [color "status"]
     changed = yellow
     #deleted   = red
