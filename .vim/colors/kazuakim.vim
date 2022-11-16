@@ -7,8 +7,8 @@ endif
 let g:colors_name = 'kazuakim'
 " color terminal definitions {{{
 highlight Normal       cterm=NONE           gui=NONE           ctermfg=White        guifg=White        ctermbg=Black    guibg=Black
-highlight Comment      cterm=NONE           gui=NONE           ctermfg=LightRed     guifg=LightRed     ctermbg=NONE     guibg=NONE
-highlight Constant     cterm=NONE           gui=NONE           ctermfg=LightRed     guifg=LightRed     ctermbg=NONE     guibg=NONE
+highlight Comment      cterm=NONE           gui=NONE           ctermfg=Yellow       guifg=Yellow       ctermbg=NONE     guibg=NONE
+highlight Constant     cterm=NONE           gui=NONE           ctermfg=Yellow       guifg=Yellow       ctermbg=NONE     guibg=NONE
 highlight Cursor       cterm=NONE           gui=NONE           ctermfg=NONE         guifg=Black        ctermbg=NONE     guibg=White
 highlight CursorColumn cterm=NONE           gui=NONE           ctermfg=Black        guifg=Black        ctermbg=Grey     guibg=Grey
 highlight CursorLine   cterm=underline      gui=underline      ctermfg=NONE         guifg=NONE         ctermbg=NONE     guibg=NONE

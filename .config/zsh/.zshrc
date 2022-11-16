@@ -198,6 +198,11 @@ case "${OSTYPE}" in
             export RBENV_ROOT=$BREW_PREFIX/bin
             eval "$(rbenv init -)";
         fi
+        #pyenv
+        if type pyenv >/dev/null 2>&1; then
+            export PYENV_ROOT=$BREW_PREFIX/bin
+            eval "$(pyenv init -)";
+        fi
         #direnv
         if type direnv >/dev/null 2>&1; then
             eval "$(direnv hook zsh)"
@@ -290,7 +295,7 @@ case "${OSTYPE}" in
             export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
             export NVM_DIR="$XDG_CONFIG_HOME/nvm"
             [ -s "$BREW_PREFIX/opt/nvm/nvm.sh" ] && . "$BREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
-            nvm use --delete-prefix v16.15.0 --silent
+            nvm use --delete-prefix v18.12.1 --silent
         fi
         #brew --prefix openldap
         if [ -d $BREW_PREFIX/opt/openldap/bin ]; then
