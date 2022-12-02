@@ -419,6 +419,7 @@ endif
 
 " dein.vim {{{
 let g:dein#install_process_timeout = 600
+let g:python3_host_prog = '/usr/local/opt/python@3/bin/python3'
 if dein#load_state(s:deinDir)
     "\    'gcmt/wildfire.vim':                          {},
     call dein#begin(s:deinDir)
@@ -581,11 +582,12 @@ let g:quickrun_config = {
 \        'outputter/buffer/split':          ':botright 15sp',
 \    },
 \    'json': {
-\        'command':               'python3',
-\        'cmdopt':                '-m json.tool',
-\        'exec':                  '%c %o %s:p',
-\        'outputter':             'buffer',
-\        'outputter/buffer/into': 1
+\        'command':                  'python3',
+\        'cmdopt':                   '-m json.tool',
+\        'exec':                     '%c %o %s:p',
+\        'outputter':                'buffer',
+\        'outputter/buffer/bufname': '/tmp/quickrun',
+\        'outputter/buffer/into':    1,
 \    },
 \    'php': {
 \        'command':                             'php',

@@ -305,11 +305,6 @@ case "${OSTYPE}" in
         if [ -d $BREW_PREFIX/opt/openssl/bin ]; then
             localPath="$BREW_PREFIX/opt/openssl/bin:$localPath"
         fi
-        #brew --prefix php@7.3
-        if [ -d $BREW_PREFIX/opt/php@7.3/bin ]; then
-            localPath="$BREW_PREFIX/opt/php@7.3/bin:$localPath"
-            localPath="$BREW_PREFIX/opt/php@7.3/sbin:$localPath"
-        fi
         #brew --prefix python3
         python3dir="$BREW_PREFIX/opt/python@3"
         if [ -d $python3dir/bin ]; then
