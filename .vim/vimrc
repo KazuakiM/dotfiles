@@ -671,7 +671,6 @@ nmap <Subleader>m <Plug>(quickhl-manual-this)
 nmap <Subleader>M <Plug>(quickhl-manual-reset)
 let g:quickhl_manual_colors = [
 \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Green        guibg=Green',
-\    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Magenta      guibg=Magenta',
 \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Cyan         guibg=Cyan',
 \    'cterm=NONE gui=NONE ctermfg=White guifg=White ctermbg=Brown        guibg=Brown',
 \    'cterm=NONE gui=NONE ctermfg=Black guifg=Black ctermbg=Grey         guibg=Grey',
