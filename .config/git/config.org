@@ -76,7 +76,8 @@
     log  = diff-highlight | less
     show = diff-highlight | less
 [push]
-    default = simple
+    default            = simple
+    useForceIfIncludes = true
 [rerere]
     enabled = true
 [user]
