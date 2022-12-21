@@ -33,6 +33,12 @@
     ignorecase        = false
 [credential]
     helper = osxkeychain
+
+# @url https://git-scm.com/docs/git-config#Documentation/git-config.txt-color
+#   読める
+#     normal, black, green, yellow, cyan, white, default
+#   読めない
+#     red, blue, magenta
 [color]
     ui = auto
 [color "diff"]
@@ -44,8 +50,10 @@
     match = yellow
     filename = green
 [color "status"]
-    changed = yellow
-    #deleted   = red
+    changed   = yellow
+    deleted   = yellow
+    nobranch  = yellow
+    unmerged  = cyan
     untracked = yellow
 [diff]
     algorithm           = histogram
