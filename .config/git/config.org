@@ -49,12 +49,16 @@
 [color "grep"]
     match = yellow
     filename = green
+[color "push"]
+    error = cyan
 [color "status"]
     changed   = yellow
     deleted   = yellow
     nobranch  = yellow
     unmerged  = cyan
     untracked = yellow
+[color "transport"]
+    rejected = yellow
 [diff]
     algorithm           = histogram
     colorMovedWS        = ignore-all-space
