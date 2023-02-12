@@ -63,7 +63,7 @@ fi
 #}}}
 #grep {{{
 export GREP_OPTIONS='--color=auto -i -I'
-export GREP_COLOR='1;33'
+export GREP_COLOR='mt=1;33'
 alias grep="grep $GREP_OPTIONS"
 unset GREP_OPTIONS
 #}}}
@@ -161,6 +161,9 @@ export GRADLE_USER_HOME="$XDG_CONFIG_HOME/gradle"
 #}}}
 #GnuPG {{{
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
+#}}}
+#Docker {{{
+export BUILDKIT_COLORS="run=123,20,245:error=yellow:cancel=blue:warning=white"
 #}}}
 #MPlayer {{{
 export MPLAYER_HOME="$XDG_CONFIG_HOME/mplayer"
