@@ -733,13 +733,13 @@ inoremap <silent><expr><CR> neosnippet#expandable_or_jumpable() ? neosnippet#map
 " neosnippet-snippets
 " neosnippet.vim
 " asyncomplete-file.vim {{{
-"let g:lsp_log_verbose = 2
-"let g:lsp_log_file = expand('/private/tmp/vim-lsp.log')
-let g:lsp_preview_keep_focus = 0
+let g:lsp_diagnostics_highlights_enabled = 0
+let g:lsp_diagnostics_virtual_text_enabled = 0
 nmap <silent> <Subleader>N <Plug>(lsp-previous-error)
 nmap <silent> <Subleader>n <Plug>(lsp-next-error)
 nmap <silent> <Subleader>b :<C-u>call<Space>kazuakim#LspDocumentDiagnostics()<CR>
 nmap <silent> K <Plug>(lsp-hover)
+nmap <silent> J :<C-u>LspNextDiagnostic<CR>
 augroup MyAsyncomplete
     autocmd!
     autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
