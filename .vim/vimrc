@@ -421,7 +421,6 @@ endif
 let g:dein#install_process_timeout = 600
 let g:python3_host_prog = '/usr/local/opt/python@3.11/bin/python3.11'
 if dein#load_state(s:deinDir)
-    "\    'gcmt/wildfire.vim':                          {},
     call dein#begin(s:deinDir)
     call dein#load_dict({
     \    'fuenor/qfixgrep':                            {},
@@ -432,10 +431,8 @@ if dein#load_state(s:deinDir)
     \    'KazuakiM/vim-sqlfix':                        {},
     \    'koron/codic-vim':                            {},
     \    'LeafCage/yankround.vim':                     {},
-    \    'lervag/vimtex':                              {'on_ft': 'tex'},
     \    'mattn/vim-lsp-settings':                     {},
     \    'pearofducks/ansible-vim':                    {},
-    \    'plasticboy/vim-markdown':                    {'on_ft': 'markdown'},
     \    'prabirshrestha/async.vim':                   {},
     \    'prabirshrestha/asyncomplete.vim':            {},
     \    'prabirshrestha/asyncomplete-file.vim':       {},
@@ -446,12 +443,12 @@ if dein#load_state(s:deinDir)
     \    'rhysd/clever-f.vim':                         {},
     \    'roxma/nvim-yarp':                            {},
     \    'roxma/vim-hug-neovim-rpc':                   {},
+    \    'sheerun/vim-polyglot':                       {'on_ft': 'typescript'},
     \    'Shougo/dein.vim':                            {},
     \    'Shougo/denite.nvim':                         {},
     \    'Shougo/neosnippet.vim':                      {},
     \    'Shougo/vimproc.vim':                         {'build': 'make'},
     \    'sjl/gundo.vim':                              {'on_i': 1},
-    \    'StanAngeloff/php.vim':                       {'on_ft': 'php'},
     \    't9md/vim-quickhl':                           {},
     \    'thinca/vim-quickrun':                        {},
     \    'thinca/vim-qfreplace':                       {},
@@ -573,13 +570,12 @@ let g:quickrun_config = {
 \        'runner':                              'job'
 \    },
 \    'go': {
-\        'command':                         'go',
-\        'cmdopt':                          'run',
-\        'exec':                            '%c %o %s:p',
-\        'outputter':                       'buffer',
-\        'outputter/buffer/close_on_empty': 0,
-\        'outputter/buffer/into':           0,
-\        'outputter/buffer/split':          ':botright 15sp',
+\        'command':                  'go',
+\        'cmdopt':                   'run',
+\        'exec':                     '%c %o %s:p',
+\        'outputter':                'buffer',
+\        'outputter/buffer/bufname': '/tmp/quickrun',
+\        'outputter/buffer/into':    1,
 \    },
 \    'json': {
 \        'command':                  'python3',
@@ -616,7 +612,7 @@ let g:quickrun_config = {
 \    },
 \    'phpunit': {
 \        'command':   'php',
-\        'cmdopt':    kazuakim#Path2ProjectDirectory('%') . '/vendor/bin/phpunit --configuration ' . kazuakim#Path2ProjectDirectory('%') . '/phpunit.xml',
+\        'cmdopt':    kazuakim#Path2ProjectDirectory('%') . '/vendor/bin/phpunit --configuration ' . kazuakim#Path2ProjectDirectory('%') . '/phpunit.xml.dist',
 \        'exec':      '%c %o %s',
 \        'outputter': 'buffer'
 \    },

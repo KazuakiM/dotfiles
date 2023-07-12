@@ -318,6 +318,11 @@ case "${OSTYPE}" in
         if [ -d $BREW_PREFIX/opt/sqlite/bin ]; then
             localPath="$BREW_PREFIX/opt/sqlite/bin:$localPath"
         fi
+        #brew --prefix tfenv
+        if [ -d $BREW_PREFIX/opt/tfenv/bin ]; then
+            export TF_CLI_ARGS_plan=30
+            export TF_CLI_ARGS_apply=30
+        fi
         #git diff-highlight
         if [ -d $BREW_PREFIX/share/git-core/contrib/diff-highlight ]; then
             localPath="$BREW_PREFIX/share/git-core/contrib/diff-highlight:$localPath"
