@@ -419,13 +419,14 @@ endif
 
 " dein.vim {{{
 let g:dein#install_process_timeout = 600
-let g:python3_host_prog = '/usr/local/opt/python@3.11/bin/python3.11'
+let g:python3_host_prog = '/usr/local/opt/python@3.12/bin/python3.12'
 if dein#load_state(s:deinDir)
     call dein#begin(s:deinDir)
     call dein#load_dict({
     \    'fuenor/qfixgrep':                            {},
     \    'gcmt/wildfire.vim':                          {},
     \    'glidenote/memolist.vim':                     {},
+    \    'hashivim/vim-terraform':                     {'on_ft': 'terraform'},
     \    'junegunn/vim-easy-align':                    {},
     \    'KazuakiM/neosnippet-snippets':               {},
     \    'KazuakiM/vim-sqlfix':                        {},

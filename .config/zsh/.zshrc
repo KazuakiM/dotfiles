@@ -164,6 +164,7 @@ export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 #}}}
 #Docker {{{
 export BUILDKIT_COLORS="run=123,20,245:error=yellow:cancel=blue:warning=white"
+export DOCKER_STORAGE_OPTIONS=" --storage-opt dm.basesize=300G"
 #}}}
 #MPlayer {{{
 export MPLAYER_HOME="$XDG_CONFIG_HOME/mplayer"
@@ -233,7 +234,7 @@ case "${OSTYPE}" in
         #brew --prefix openjdk
         if [ -d $BREW_PREFIX/opt/openjdk@11/bin ]; then
             localPath="$BREW_PREFIX/opt/openjdk@11/bin:$localPath"
-            export JAVA_HOME=`/usr/libexec/java_home -v 11`
+            export JAVA_HOME="$BREW_PREFIX/opt/openjdk@11/libexec/openjdk.jdk/Contents/Home"
         fi
         #brew --prefix curl-openssl
         if [ -d $BREW_PREFIX/opt/curl-openssl/bin ]; then
@@ -319,10 +320,10 @@ case "${OSTYPE}" in
             localPath="$BREW_PREFIX/opt/sqlite/bin:$localPath"
         fi
         #brew --prefix tfenv
-        if [ -d $BREW_PREFIX/opt/tfenv/bin ]; then
-            export TF_CLI_ARGS_plan=30
-            export TF_CLI_ARGS_apply=30
-        fi
+        #if [ -d $BREW_PREFIX/opt/tfenv/bin ]; then
+        #    export TF_CLI_ARGS_plan=20
+        #    export TF_CLI_ARGS_apply=20
+        #fi
         #git diff-highlight
         if [ -d $BREW_PREFIX/share/git-core/contrib/diff-highlight ]; then
             localPath="$BREW_PREFIX/share/git-core/contrib/diff-highlight:$localPath"
