@@ -1,3 +1,6 @@
+#homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export BREW_PREFIX=`brew --prefix`
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 
 #User specific environment and startup programs {{{
@@ -94,31 +97,6 @@ man() {
 #export PS1="\[\e[1;36m\]\u \$ \[\e[1;0m\]"
 export PROMPT='%F{cyan}%n%f $ '
 #}}}
-#docker, tmux or screen {{{
-if type docker >/dev/null 2>&1; then
-    alias dcl="docker ps -a"
-    alias dca="docker attach                           \"\$@\""
-    alias dcr="docker run -d -i -t --privileged --name \"\$@\""
-    alias dcs="docker start                            \"\$@\""
-    alias dce="docker stop                             \"\$@\""
-    alias drm="docker rm                               \"\$@\""
-fi
-
-if type tmux >/dev/null 2>&1; then
-    alias tm="sh $HOME/work/dotfiles/src/tmuxStarter.sh"
-    alias tml="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf list-sessions"
-    alias tma="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf attach -d       \"\$@\""
-    alias tmd="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf detach -s       \"\$@\""
-    alias tmk="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf kill-session -t \"\$@\""
-fi
-if type screen >/dev/null 2>&1; then
-    alias sc='screen'
-    alias scl='screen -ls'
-    alias sca='screen -r "$@"'
-    alias scd='screen -d "$@"'
-    export SCREENRC="$XDG_CONFIG_HOME/screen/screenrc"
-fi
-#}}}
 #Subversion {{{
 export SUBVERSION_HOME="$XDG_CONFIG_HOME/subversion"
 #}}}
@@ -140,9 +118,7 @@ export REDISCLI_HISTFILE="$XDG_LOG_HOME/redis/rediscli_history"
 export COMPOSER_HOME="$XDG_CONFIG_HOME/composer"
 export PHAN_ALLOW_XDEBUG=1
 if [ -f $LOCAL_PREFIX/bin/composer.phar ]; then
-    alias composer="php -d memory_limit=2G $LOCAL_PREFIX/bin/composer.phar"
-else
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=$LOCAL_PREFIX/bin
+    alias composer="php -d memory_limit=2G $LOCAL_PREFIX/bin/composer"
 fi
 #}}}
 #Ruby {{{
@@ -175,7 +151,6 @@ export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 #OS Type {{{
 case "${OSTYPE}" in
     darwin*)
-        export BREW_PREFIX=`brew --prefix`
         #command {{{
         alias l='ls  -AGh'
         alias ll='ls -AGhl'
@@ -232,9 +207,9 @@ case "${OSTYPE}" in
             localPath="$BREW_PREFIX/opt/curl/bin:$localPath"
         fi
         #brew --prefix openjdk
-        if [ -d $BREW_PREFIX/opt/openjdk@11/bin ]; then
-            localPath="$BREW_PREFIX/opt/openjdk@11/bin:$localPath"
-            export JAVA_HOME="$BREW_PREFIX/opt/openjdk@11/libexec/openjdk.jdk/Contents/Home"
+        if [ -d $BREW_PREFIX/opt/openjdk@21/bin ]; then
+            localPath="$BREW_PREFIX/opt/openjdk@21/bin:$localPath"
+            export JAVA_HOME="$BREW_PREFIX/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home"
         fi
         #brew --prefix curl-openssl
         if [ -d $BREW_PREFIX/opt/curl-openssl/bin ]; then
@@ -299,7 +274,7 @@ case "${OSTYPE}" in
             export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
             export NVM_DIR="$XDG_CONFIG_HOME/nvm"
             [ -s "$BREW_PREFIX/opt/nvm/nvm.sh" ] && . "$BREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
-            nvm use --delete-prefix v18.12.1 --silent
+            nvm use --delete-prefix v20.14.0 --silent
         fi
         #brew --prefix openldap
         if [ -d $BREW_PREFIX/opt/openldap/bin ]; then
@@ -324,6 +299,13 @@ case "${OSTYPE}" in
         #    export TF_CLI_ARGS_plan=20
         #    export TF_CLI_ARGS_apply=20
         #fi
+        if [ -z `tmux ls 2>/dev/null` ] ; then
+            alias tm="sh $HOME/work/dotfiles/src/tmuxStarter.sh"
+            alias tml="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf list-sessions"
+            alias tma="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf attach -d       \"\$@\""
+            alias tmd="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf detach -s       \"\$@\""
+            alias tmk="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf kill-session -t \"\$@\""
+        fi
         #git diff-highlight
         if [ -d $BREW_PREFIX/share/git-core/contrib/diff-highlight ]; then
             localPath="$BREW_PREFIX/share/git-core/contrib/diff-highlight:$localPath"

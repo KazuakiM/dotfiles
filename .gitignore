@@ -25,6 +25,7 @@
 .config/filezilla/
 .config/fluentd/
 .config/gcloud/
+.config/gh/
 .config/git/
 .config/gnupg/
 .config/google/
@@ -56,6 +57,7 @@
 .local/share/recently-used.xbel
 .local/share/vim-lsp-settings/
 .local/share/yarn/
+.local/state/
 .log/api/
 .log/bash/
 .log/errpath/
