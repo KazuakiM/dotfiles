@@ -67,7 +67,7 @@
     compactionHeuristic = true
     tool                = vimdiff
 [difftool "vimdiff"]
-    cmd = /usr/local/bin/vimdiff -O $LOCAL $REMOTE
+    cmd = /opt/homebrew/bin/vimdiff -O $LOCAL $REMOTE
 [grep]
     lineNumber = true
 [init]
@@ -82,7 +82,7 @@
 [mergetool]
     keepBackup = true
 [mergetool "vimdiff"]
-    cmd = /usr/local/bin/vimdiff -O $LOCAL $REMOTE
+    cmd = /opt/homebrew/bin/vimdiff -O $LOCAL $REMOTE
 [pull]
     rebase = true
 [pager]
