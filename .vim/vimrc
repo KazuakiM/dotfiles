@@ -419,7 +419,7 @@ endif
 
 " dein.vim {{{
 let g:dein#install_process_timeout = 600
-let g:python3_host_prog = '/usr/local/opt/python@3.12/bin/python3.12'
+let g:python3_host_prog = '/opt/homebrew/bin/python3.12'
 if dein#load_state(s:deinDir)
     call dein#begin(s:deinDir)
     call dein#load_dict({
