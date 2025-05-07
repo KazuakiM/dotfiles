@@ -1,9 +1,0 @@
-{
-    "require": {
-        "jetbrains/phpstorm-stubs": "dev-master",
-        "friendsofphp/php-cs-fixer": "^2.8",
-        "phpunit/phpunit": "^6.5"
-    },
-    "require-dev": {
-    }
-}
