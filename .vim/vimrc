@@ -418,8 +418,17 @@ endif
 "}}}
 
 " dein.vim {{{
+" Set dein base path (required)
+let s:dein_base = s:envHome . '/.cache/dein/'
+
+" Set dein source path (required)
+let s:dein_src = s:dein_base . 'repos/github.com/Shougo/dein.vim'
+
+" Set dein runtime path (required)
+execute 'set runtimepath+=' .. s:dein_src
+
 let g:dein#install_process_timeout = 600
-let g:python3_host_prog = '/opt/homebrew/bin/python3.12'
+let g:python3_host_prog = '/opt/homebrew/bin/python3.13'
 if dein#load_state(s:deinDir)
     call dein#begin(s:deinDir)
     call dein#load_dict({
