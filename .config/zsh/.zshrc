@@ -271,7 +271,6 @@ if [ -d $BREW_PREFIX/opt/nvm ]; then
     export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
     export NVM_DIR="$XDG_CONFIG_HOME/nvm"
     [ -s "$BREW_PREFIX/opt/nvm/nvm.sh" ] && . "$BREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
-    nvm use --delete-prefix v20.14.0 --silent
 fi
 #brew --prefix openldap
 if [ -d $BREW_PREFIX/opt/openldap/bin ]; then
@@ -298,6 +297,7 @@ fi
 #fi
 if [ -d  $BREW_PREFIX/opt/tmux ] ; then
     alias tm="sh $HOME/work/dotfiles/src/tmuxStarter.sh"
+    alias tmn="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf"
     alias tml="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf list-sessions"
     alias tma="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf attach -d       \"\$@\""
     alias tmd="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf detach -s       \"\$@\""

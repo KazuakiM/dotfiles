@@ -5,3 +5,4 @@ progress=false
 save=true
 save-dev=true
 save-exact=true
+ignore-scripts=true
