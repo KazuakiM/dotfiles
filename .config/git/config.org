@@ -14,16 +14,17 @@
     cm   = commit --message
     df   = diff --ignore-blank-lines --ignore-all-space
     dff  = difftool
-    dfm  = diff master --ignore-blank-lines --ignore-all-space
-    dfs  = diff master --ignore-blank-lines --ignore-all-space --stat
+    dfm  = diff main --ignore-blank-lines --ignore-all-space
+    dfs  = diff main --ignore-blank-lines --ignore-all-space --stat
     gp   = grep --ignore-case
-    pr   = "!f(){ git checkout master && git pull && git fetch -f origin pull/$1/head:pr-$1 && git checkout pr-$1 && git rebase master; };f"
+    is   = "!f(){ git checkout main && git pull && branch -b 'feature/#$1-add-login' && git checkout  'feature/#$1-add-login'; };f"
+    pr   = "!f(){ git checkout main && git pull && git fetch -f origin pull/$1/head:pr-$1 && git checkout pr-$1 && git rebase main; };f"
     puf  = push --force-with-lease --force-if-includes
     lg   = log          --abbrev-commit --date=relative --graph --pretty=format:'%C(bold cyan)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset'
-    llg  = !git log     --abbrev-commit --date=relative --graph --pretty=format:'%C(bold cyan)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset' origin/master..`git rev-parse --abbrev-ref HEAD`
+    llg  = !git log     --abbrev-commit --date=relative --graph --pretty=format:'%C(bold cyan)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset' origin/main..`git rev-parse --abbrev-ref HEAD`
     lllg = log --follow --abbrev-commit --date=relative --graph --pretty=format:'%C(bold cyan)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset'
     llllg= log --pretty=format:'%Cgreen%cI%Creset,%Cred%h%Creset,%C(bold cyan)%an%Creset,%s,%C(yellow)%d%Creset'
-    rbi  = !git rebase --interactive $(git merge-base master HEAD)
+    rbi  = !git rebase --interactive $(git merge-base main HEAD)
     st   = status
 [branch]
     autosetuprebase = always
@@ -71,7 +72,7 @@
 [grep]
     lineNumber = true
 [init]
-    defaultBranch = master
+    defaultBranch = main
 [log]
     date = iso
 [merge]
@@ -97,9 +98,13 @@
 [user]
     name = KazuakiM
     email = kazuaki_mabuchi_to_go@hotmail.co.jp
-# vim:ft=gitconfig
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[credential "https://github.com"]
+    helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+    helper = !/opt/homebrew/bin/gh auth git-credential
+# vim:ft=gitconfig
