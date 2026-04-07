@@ -17,7 +17,7 @@
     dfm  = diff main --ignore-blank-lines --ignore-all-space
     dfs  = diff main --ignore-blank-lines --ignore-all-space --stat
     gp   = grep --ignore-case
-    is   = "!f(){ git checkout main && git pull && branch -b 'feature/#$1-add-login' && git checkout  'feature/#$1-add-login'; };f"
+    is   = "!f(){ git checkout main && git pull && git checkout -b \"feature/#$1\"; };f"
     pr   = "!f(){ git checkout main && git pull && git fetch -f origin pull/$1/head:pr-$1 && git checkout pr-$1 && git rebase main; };f"
     puf  = push --force-with-lease --force-if-includes
     lg   = log          --abbrev-commit --date=relative --graph --pretty=format:'%C(bold cyan)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset'
