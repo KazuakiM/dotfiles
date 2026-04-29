@@ -64,4 +64,100 @@ export BREW_PREFIX=`brew --prefix`
 #alias PULL=$gitPullVariable
 #}}}
 
-#alias FULLUP="$gitPullVariable $tagsVariable"
+# Claude Worktree
+appdir=""
+
+cw() {
+  local num=${1:?"Usage: cw <issue-number>"}
+  local branch="feature/$num"
+  local wtdir="$appdir/.worktrees/$num"
+
+  git -C "$appdir" fetch origin && \
+  git -C "$appdir" worktree add "$wtdir" -b "$branch" origin/main && \
+  cd "$wtdir" && \
+  claude
+}
+
+cwr() {
+  local num=${1:?"Usage: cwr <issue-number>"}
+  local wtdir="$appdir/.worktrees/$num"
+
+  if [[ ! -d "$wtdir" ]]; then
+    echo "cwr: worktree $num not found. Run: cw $num"
+    return 1
+  fi
+
+  cd "$wtdir" && claude
+}
+
+cwl() {
+  git -C "$appdir" worktree list
+}
+
+cwd() {
+  local arg=${1:?"Usage: cwd <issue-or-pr-number> | cwd pr-<pr-number>"}
+  local wtdir branch label force_flag
+
+  if [[ "$arg" == pr-* ]]; then
+    wtdir="$appdir/.worktrees/$arg"
+    branch="$arg"
+    label="$arg"
+    force_flag="-D"
+  else
+    local wtdir_issue="$appdir/.worktrees/$arg"
+    local wtdir_pr="$appdir/.worktrees/pr-$arg"
+
+    if [[ -d "$wtdir_issue" && -d "$wtdir_pr" ]]; then
+      echo "cwd: $arg と pr-$arg の worktree が両方存在します。明示してください: cwd pr-$arg"
+      return 1
+    elif [[ -d "$wtdir_pr" ]]; then
+      wtdir="$wtdir_pr"; branch="pr-$arg"; label="pr-$arg"; force_flag="-D"
+    elif [[ -d "$wtdir_issue" ]]; then
+      wtdir="$wtdir_issue"; branch="feature/repos/$arg"; label="$arg"; force_flag="-d"
+    else
+      echo "cwd: worktree が見つかりません ($arg / pr-$arg のどちらにも存在しない)"
+      return 1
+    fi
+  fi
+
+  if [[ ! -d "$wtdir" ]]; then
+    echo "cwd: worktree が見つかりません: $wtdir"
+    return 1
+  fi
+
+  git -C "$appdir" worktree remove --force "$wtdir" || return 1
+
+  if git -C "$appdir" show-ref --verify --quiet "refs/heads/$branch"; then
+    if ! git -C "$appdir" branch "$force_flag" "$branch"; then
+      echo "cwd: ブランチ $branch を削除できませんでした (未マージ作業がある可能性)。"
+      echo "      強制削除する場合: git -C \"$appdir\" branch -D $branch"
+      return 1
+    fi
+  fi
+
+  echo "cwd: worktree and branch for $label removed."
+}
+
+cwp() {
+  local num=${1:?"Usage: cwp <pr-number>"}
+  local branch="pr-$num"
+  local wtdir="$appdir/.worktrees/pr-$num"
+
+  if [[ -d "$wtdir" ]]; then
+    git -C "$wtdir" fetch origin && \
+    git -C "$wtdir" fetch -f origin "pull/$num/head" && \
+    git -C "$wtdir" reset --hard FETCH_HEAD || return 1
+  else
+    git -C "$appdir" fetch origin && \
+    git -C "$appdir" fetch -f origin "pull/$num/head:$branch" && \
+    git -C "$appdir" worktree add "$wtdir" "$branch" || return 1
+  fi
+
+  git -C "$wtdir" rebase origin/main || {
+    echo "cwp: rebase でコンフリクトが発生しました。$wtdir で解決してください。"
+    cd "$wtdir"
+    return 1
+  }
+
+  cd "$wtdir" && claude
+}
