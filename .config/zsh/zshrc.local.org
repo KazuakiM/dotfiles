@@ -65,6 +65,24 @@ export BREW_PREFIX=`brew --prefix`
 #}}}
 
 # Claude Worktree
+_cw_set_pane_title() {
+  local type=$1 num=$2
+  [[ -z "$TMUX" ]] && return 0
+  local title
+  if [[ "$type" == "issue" ]]; then
+    title=$(gh -R KazuakiM/xxxxxxxxx issue view "$num" --json title -q .title 2>/dev/null)
+  else
+    title=$(gh -R KazuakiM/xxxxxxxxx pr view "$num" --json title -q .title 2>/dev/null)
+  fi
+  if [[ -n "$title" ]]; then
+    local label="[${type}#${num}] ${title}"
+    # Claude 起動で pane_title が上書きされるため、独自 user option に保持して
+    # tmux.conf の pane-border-format から優先表示する
+    tmux set-option -p @cw_title "$label"
+    tmux select-pane -T "$label"
+  fi
+}
+
 appdir=""
 
 cw() {
@@ -74,6 +92,7 @@ cw() {
 
   git -C "$appdir" fetch origin && \
   git -C "$appdir" worktree add "$wtdir" -b "$branch" origin/main && \
+  _cw_set_pane_title issue "$num"
   cd "$wtdir" && \
   claude
 }
@@ -87,6 +106,7 @@ cwr() {
     return 1
   fi
 
+  _cw_set_pane_title issue "$num"
   cd "$wtdir" && claude
 }
 
@@ -159,5 +179,6 @@ cwp() {
     return 1
   }
 
+  _cw_set_pane_title pr "$num"
   cd "$wtdir" && claude
 }
