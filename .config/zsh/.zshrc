@@ -1,7 +1,15 @@
 #homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
-export BREW_PREFIX=`brew --prefix`
-export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
+if [ -z "$BREW_PREFIX" ] || [ ! -x "$BREW_PREFIX/bin/brew" ]; then
+    if [ -x /opt/homebrew/bin/brew ]; then
+        BREW_PREFIX=/opt/homebrew
+    elif [ -x /usr/local/bin/brew ]; then
+        BREW_PREFIX=/usr/local
+    else
+        BREW_PREFIX=/opt/homebrew
+    fi
+fi
+export BREW_PREFIX
+export PATH="$BREW_PREFIX/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$BREW_PREFIX/sbin:/opt/homebrew/sbin:/usr/local/sbin:/usr/sbin:/sbin"
 
 #User specific environment and startup programs {{{
 export LD_LIBRARY_PATH='/usr/local/lib'
@@ -21,7 +29,7 @@ bindkey '^]'   vi-find-next-char
 bindkey '^[^]' vi-find-prev-char
 
 # 補完
-autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit -C -d "$ZDOTDIR/.zcompdump"
 #autoload predict-on  && predict-on
 autoload colors
 setopt correct
@@ -60,7 +68,7 @@ alias FIND='find -L ./ '${findIgnore}' -o -type f -print0 | xargs -0 grep --colo
 alias find='find -L'
 #}}}
 #htop {{{
-if type htop >/dev/null 2>&1; then
+if command -v htop >/dev/null 2>&1; then
     alias top='sudo htop'
 fi
 #}}}
@@ -170,17 +178,34 @@ if [ -d $BREW_PREFIX/opt/macvim/bin ]; then
     alias vi=$BREW_PREFIX/opt/macvim/bin/gvim
 fi
 #rbenv
-if type rbenv >/dev/null 2>&1; then
+if command -v rbenv >/dev/null 2>&1; then
     export RBENV_ROOT=$BREW_PREFIX/bin
-    eval "$(rbenv init -)";
+    _load_rbenv() {
+        unset -f rbenv ruby gem bundle rake rails _load_rbenv
+        eval "$(command rbenv init -)"
+    }
+    rbenv()  { _load_rbenv; rbenv "$@"; }
+    ruby()   { _load_rbenv; ruby "$@"; }
+    gem()    { _load_rbenv; gem "$@"; }
+    bundle() { _load_rbenv; bundle "$@"; }
+    rake()   { _load_rbenv; rake "$@"; }
+    rails()  { _load_rbenv; rails "$@"; }
 fi
 #pyenv
-if type pyenv >/dev/null 2>&1; then
+if command -v pyenv >/dev/null 2>&1; then
     export PYENV_ROOT=$BREW_PREFIX/bin
-    eval "$(pyenv init -)";
+    _load_pyenv() {
+        unset -f pyenv python python3 pip pip3 _load_pyenv
+        eval "$(command pyenv init -)"
+    }
+    pyenv()   { _load_pyenv; pyenv "$@"; }
+    python()  { _load_pyenv; python "$@"; }
+    python3() { _load_pyenv; python3 "$@"; }
+    pip()     { _load_pyenv; pip "$@"; }
+    pip3()    { _load_pyenv; pip3 "$@"; }
 fi
 #direnv
-if type direnv >/dev/null 2>&1; then
+if command -v direnv >/dev/null 2>&1; then
     eval "$(direnv hook zsh)"
 fi
 
@@ -235,6 +260,12 @@ if [ -d $BREW_PREFIX/opt/go ]; then
     if [ -d $HOME/.goenv ]; then
         export GOENV_ROOT="$HOME/.goenv"
         localPath="$GOENV_ROOT/bin:$localPath"
+        _load_goenv() {
+            unset -f go goenv _load_goenv
+            eval "$(command goenv init -)"
+        }
+        go()    { _load_goenv; go "$@"; }
+        goenv() { _load_goenv; goenv "$@"; }
    fi
 fi
 #brew --prefix grep
@@ -243,8 +274,7 @@ if [ -d $BREW_PREFIX/opt/grep/libexec/gnubin ]; then
 fi
 #brew cask google-cloud-sdk
 if [ -d $BREW_PREFIX/Caskroom/google-cloud-sdk ]; then
-    source "$BREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-    source "$BREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+    localPath="$BREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin:$localPath"
 fi
 #brew --prefix icu4c
 if [ -d $BREW_PREFIX/opt/icu4c/bin ]; then
@@ -270,7 +300,14 @@ fi
 if [ -d $BREW_PREFIX/opt/nvm ]; then
     export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
     export NVM_DIR="$XDG_CONFIG_HOME/nvm"
-    [ -s "$BREW_PREFIX/opt/nvm/nvm.sh" ] && . "$BREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
+    _load_nvm() {
+        unset -f node npm npx nvm _load_nvm
+        [ -s "$BREW_PREFIX/opt/nvm/nvm.sh" ] && . "$BREW_PREFIX/opt/nvm/nvm.sh"
+    }
+    node() { _load_nvm; node "$@"; }
+    npm()  { _load_nvm; npm "$@"; }
+    npx()  { _load_nvm; npx "$@"; }
+    nvm()  { _load_nvm; nvm "$@"; }
 fi
 #brew --prefix openldap
 if [ -d $BREW_PREFIX/opt/openldap/bin ]; then
@@ -295,7 +332,7 @@ fi
 #    export TF_CLI_ARGS_plan=20
 #    export TF_CLI_ARGS_apply=20
 #fi
-if [ -d  $BREW_PREFIX/opt/tmux ] ; then
+if command -v tmux >/dev/null 2>&1; then
     alias tm="sh $HOME/work/dotfiles/src/tmuxStarter.sh"
     alias tmn="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf"
     alias tml="tmux -u -f $XDG_CONFIG_HOME/tmux/tmux.conf list-sessions"
@@ -308,16 +345,6 @@ if [ -d $BREW_PREFIX/share/git-core/contrib/diff-highlight ]; then
     localPath="$BREW_PREFIX/share/git-core/contrib/diff-highlight:$localPath"
 fi
 export PATH=$localPath$PATH
-if type goenv >/dev/null 2>&1; then
-    eval "$(goenv init -)"
-fi
-
-# ssh-agent {{{
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-    eval `ssh-agent`
-    ssh-add -K $HOME/.ssh/id_rsa.pub
-fi
-#}}}
 
 ## git pull {{{
 gitPullVariable=''
@@ -334,4 +361,4 @@ source $XDG_CONFIG_HOME/zsh/zshrc.local
 
 typeset -U path cdpath fpath manpath
 
-test -e "${ZDOTDIR}/.iterm2_shell_integration.zsh" && source "${ZDOTDIR}/.iterm2_shell_integration.zsh"
+# iTerm2 shell integration is intentionally not loaded at startup.

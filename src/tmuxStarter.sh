@@ -4,8 +4,8 @@
 #
 # @author kazuakiM
 #--------------------------------
-if [ -z `tmux ls 2>/dev/null` ] ; then
-    tmux -u -f $HOME/.config/tmux/tmux.conf
+if tmux has-session 2>/dev/null; then
+    tmux -u -f "$HOME/.config/tmux/tmux.conf" attach
 else
-    tmux -u -f $HOME/.config/tmux/tmux.conf attach
+    tmux -u -f "$HOME/.config/tmux/tmux.conf"
 fi
