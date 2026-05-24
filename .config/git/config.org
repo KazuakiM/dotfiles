@@ -104,7 +104,7 @@
     process = git-lfs filter-process
     required = true
 [credential "https://github.com"]
-    helper = !/opt/homebrew/bin/gh auth git-credential
+    helper = !/usr/local/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-    helper = !/opt/homebrew/bin/gh auth git-credential
+    helper = !/usr/local/bin/gh auth git-credential
 # vim:ft=gitconfig
