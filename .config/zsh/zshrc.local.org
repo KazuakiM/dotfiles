@@ -1,5 +1,16 @@
 ## GitHub {{{
-#export HOMEBREW_GITHUB_API_TOKEN=
+export GH_TOKEN="$(security find-generic-password -a "$USER" -s "github-token" -w 2>/dev/null)"
+export GITHUB_TOKEN="$GH_TOKEN"
+
+_load_homebrew_github_api_token() {
+  [[ -n "$HOMEBREW_GITHUB_API_TOKEN" ]] && return 0
+  export HOMEBREW_GITHUB_API_TOKEN="$(security find-generic-password -a "$USER" -s HOMEBREW_GITHUB_API_TOKEN -w 2>/dev/null)"
+}
+
+brew() {
+  _load_homebrew_github_api_token
+  command brew "$@"
+}
 #}}}
 
 # Service {{{
@@ -51,17 +62,88 @@ _cw_set_pane_title() {
 }
 
 appdir=""
+_cw_devcontainer_label() {
+  local type=${1:?"Usage: _cw_devcontainer_label <issue|pr> <number>"}
+  local num=${2:?"Usage: _cw_devcontainer_label <issue|pr> <number>"}
+  echo "${type}-${num}"
+}
+
+_cw_require_devcontainer() {
+  if ! command -v docker >/dev/null 2>&1; then
+    echo "cw: docker が見つかりません。Docker Desktop などを起動し、docker CLI を PATH に追加してください。"
+    return 1
+  fi
+
+  if ! command -v devcontainer >/dev/null 2>&1; then
+    echo "cw: devcontainer CLI が見つかりません。Node.js を用意してから次を実行してください:"
+    echo "    npm install -g @devcontainers/cli"
+    return 1
+  fi
+}
+
+_cw_codex() {
+  local wtdir=${1:?"Usage: _cw_codex <worktree-dir> <label>"}
+  local label=${2:?"Usage: _cw_codex <worktree-dir> <label>"}
+  local config="$appdir/.devcontainer/worktree/devcontainer.json"
+
+  if [[ ! -d "$wtdir" ]]; then
+    echo "cw: worktree が見つかりません: $wtdir"
+    return 1
+  fi
+
+  if [[ ! -f "$config" ]]; then
+    echo "cw: Dev Container 設定が見つかりません: $config"
+    return 1
+  fi
+
+  _cw_require_devcontainer || return 1
+
+  MARKET_JOURNAL_APPDIR="$appdir" devcontainer up \
+    --workspace-folder "$wtdir" \
+    --config "$config" \
+    --id-label "market-journal.repo=market-journal" \
+    --id-label "market-journal.worktree=$label" || return 1
+
+  MARKET_JOURNAL_APPDIR="$appdir" devcontainer exec \
+    --workspace-folder "$wtdir" \
+    --config "$config" \
+    --id-label "market-journal.repo=market-journal" \
+    --id-label "market-journal.worktree=$label" \
+    /bin/bash -lc "cd '$wtdir' && exec codex --cd '$wtdir' --dangerously-bypass-approvals-and-sandbox"
+}
+
+_cw_remove_devcontainer() {
+  local label=${1:?"Usage: _cw_remove_devcontainer <label>"}
+  local ids output
+
+  command -v docker >/dev/null 2>&1 || return 0
+
+  output=$(docker ps -aq \
+    --filter "label=market-journal.repo=market-journal" \
+    --filter "label=market-journal.worktree=$label" 2>/dev/null) || {
+    echo "cw: docker に接続できないため devcontainer 削除をスキップします: $label"
+    return 0
+  }
+
+  [[ -n "$output" ]] || return 0
+  ids=("${(@f)output}")
+
+  if (( ${#ids[@]} > 0 )); then
+    docker rm -f "${ids[@]}" >/dev/null || return 1
+  fi
+}
+
 
 cw() {
   local num=${1:?"Usage: cw <issue-number>"}
   local branch="feature/$num"
   local wtdir="$appdir/.worktrees/$num"
+  local label="$(_cw_devcontainer_label issue "$num")"
 
   git -C "$appdir" fetch origin && \
   git -C "$appdir" worktree add "$wtdir" -b "$branch" origin/main && \
   _cw_set_pane_title issue "$num"
-  cd "$wtdir" && \
-  claude
+  cd "$wtdir" && _cw_codex "$wtdir" "$label"
 }
 
 cwr() {
@@ -74,7 +156,7 @@ cwr() {
   fi
 
   _cw_set_pane_title issue "$num"
-  cd "$wtdir" && claude
+  cd "$wtdir" && _cw_codex "$wtdir" "$(_cw_devcontainer_label issue "$num")"
 }
 
 cwl() {
@@ -100,7 +182,7 @@ cwd() {
     elif [[ -d "$wtdir_pr" ]]; then
       wtdir="$wtdir_pr"; branch="pr-$arg"; label="pr-$arg"; force_flag="-D"
     elif [[ -d "$wtdir_issue" ]]; then
-      wtdir="$wtdir_issue"; branch="feature/repos/$arg"; label="$arg"; force_flag="-d"
+      wtdir="$wtdir_issue"; branch="feature/$arg"; label="$arg"; force_flag="-d"
     else
       echo "cwd: worktree が見つかりません ($arg / pr-$arg のどちらにも存在しない)"
       return 1
@@ -110,6 +192,12 @@ cwd() {
   if [[ ! -d "$wtdir" ]]; then
     echo "cwd: worktree が見つかりません: $wtdir"
     return 1
+  fi
+
+  if [[ "$label" == pr-* ]]; then
+    _cw_remove_devcontainer "$(_cw_devcontainer_label pr "${label#pr-}")" || return 1
+  else
+    _cw_remove_devcontainer "$(_cw_devcontainer_label issue "$label")" || return 1
   fi
 
   git -C "$appdir" worktree remove --force "$wtdir" || return 1
@@ -147,7 +235,7 @@ cwp() {
   }
 
   _cw_set_pane_title pr "$num"
-  cd "$wtdir" && claude
+  cd "$wtdir" && _cw_codex "$wtdir" "$(_cw_devcontainer_label pr "$num")"
 }
 
 cwj() {
