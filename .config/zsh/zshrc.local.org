@@ -74,6 +74,11 @@ _cw_require_devcontainer() {
     return 1
   fi
 
+  if ! docker ps >/dev/null 2>&1; then
+    echo "cw: docker に接続できません。Docker Desktop を起動または再インストールしてから再実行してください。"
+    return 1
+  fi
+
   if ! command -v node >/dev/null 2>&1; then
     echo "cw: Node.js が見つかりません。Node.js 18 以上を有効にしてから devcontainer CLI を使ってください。"
     return 1
