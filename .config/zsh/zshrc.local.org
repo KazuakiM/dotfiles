@@ -74,6 +74,18 @@ _cw_require_devcontainer() {
     return 1
   fi
 
+  if ! command -v node >/dev/null 2>&1; then
+    echo "cw: Node.js が見つかりません。Node.js 18 以上を有効にしてから devcontainer CLI を使ってください。"
+    return 1
+  fi
+
+  if ! node -e 'require("crypto").randomUUID()' >/dev/null 2>&1; then
+    echo "cw: 現在の Node.js は devcontainer CLI には古すぎます: $(node -v 2>/dev/null)"
+    echo "    Node.js 18 以上を有効にしてから @devcontainers/cli を入れ直してください:"
+    echo "    nvm install 20 && nvm use 20 && npm install -g @devcontainers/cli"
+    return 1
+  fi
+
   if ! command -v devcontainer >/dev/null 2>&1; then
     echo "cw: devcontainer CLI が見つかりません。Node.js を用意してから次を実行してください:"
     echo "    npm install -g @devcontainers/cli"
@@ -139,6 +151,8 @@ cw() {
   local branch="feature/$num"
   local wtdir="$appdir/.worktrees/$num"
   local label="$(_cw_devcontainer_label issue "$num")"
+
+  _cw_require_devcontainer || return 1
 
   git -C "$appdir" fetch origin && \
   git -C "$appdir" worktree add "$wtdir" -b "$branch" origin/main && \
@@ -217,6 +231,8 @@ cwp() {
   local num=${1:?"Usage: cwp <pr-number>"}
   local branch="pr-$num"
   local wtdir="$appdir/.worktrees/pr-$num"
+
+  _cw_require_devcontainer || return 1
 
   if [[ -d "$wtdir" ]]; then
     git -C "$wtdir" fetch origin && \
