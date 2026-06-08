@@ -4,6 +4,7 @@
 .cache
 .config/atom/home/
 .config/atom/resource/
+.config/cagent/
 .config/configstore/
 .config/composer/
 .config/ctags/_.ctags

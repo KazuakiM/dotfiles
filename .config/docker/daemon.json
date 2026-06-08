@@ -1,5 +1,10 @@
 {
-  "debug" : true,
-  "experimental" : true
+  "builder": {
+    "gc": {
+      "defaultKeepStorage": "20GB",
+      "enabled": true
+    }
+  },
+  "debug": true,
+  "experimental": true
 }
-
